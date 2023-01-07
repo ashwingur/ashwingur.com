@@ -13,18 +13,21 @@ const Navbar = () => {
         <Link
           href="/#home"
           className="hover:bg-blue-100 px-2 py-1 transition rounded-md"
+          scroll={false}
         >
           <li>Home</li>
         </Link>
         <Link
           href="/#projects"
           className="hover:bg-blue-100 px-2 py-1 transition rounded-md"
+          scroll={false}
         >
           <li>Projects</li>
         </Link>
         <Link
           href="/#contact"
           className="hover:bg-blue-100 px-2 py-1 transition rounded-md"
+          scroll={false}
         >
           <li>Contact</li>
         </Link>
