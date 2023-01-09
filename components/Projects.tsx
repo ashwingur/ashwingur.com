@@ -8,9 +8,9 @@ const Projects = () => {
   ));
 
   return (
-    <div id="projects" className="h-screen pt-20">
+    <div id="projects" className="pt-20 flex flex-col items-center ">
       <h1 className="text-center">Projects</h1>
-      {projectCards}
+      <div className="grid grid-cols-1 lg:grid-cols-2">{projectCards}</div>
     </div>
   );
 };
