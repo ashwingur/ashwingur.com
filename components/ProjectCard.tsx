@@ -38,8 +38,6 @@ const ProjectCard = ({
     </div>
   ));
 
-  console.log(`Otehr links is ${JSON.stringify(links)}`);
-
   return (
     <div className="flex flex-col justify-center rounded-2xl bg-white max-w-lg shadow-xl relative m-8 hover:bg-gray-100 hover:shadow-2xl">
       <div className="w-full h-72 relative">
