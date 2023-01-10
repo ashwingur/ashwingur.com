@@ -4,31 +4,53 @@
     "title": "Countries of the World Quizzer",
     "image": "/assets/countries_of_the_world.png",
     "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options.",
-    "github": "https://github.com/ashwingur/countries-website",
-    "stack": ["React"]
+    "stack": ["React"],
+    "links": [
+      { "display": "Website", "url": "https://countries-website.pages.dev/" },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/countries-website"
+      }
+    ]
   },
   {
     "id": 2,
     "title": "Chip-8 Emulator",
     "image": "https://raw.githubusercontent.com/ashwingur/chip8_emulator/master/CONNECT4_gameplay.gif",
     "description": "Chip-8 Emulator in written Rust which uses the sdl2 library to render the screen. Follows the specifications outlined in the Chip-8 Technical Reference. It contains many roms that can be played",
-    "github": "https://github.com/ashwingur/chip8_emulator",
-    "stack": ["Rust"]
+    "stack": ["Rust"],
+    "links": [
+      { "display": "Website", "url": "https://countries-website.pages.dev/" },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/chip8_emulator"
+      }
+    ]
   },
   {
     "id": 3,
     "title": "Turret-Spinner",
     "image": "/assets/turret_spinner.png",
     "description": "2D Endless Survival Game created in Unity",
-    "github": "https://github.com/ashwingur/Turret-Spinner",
-    "stack": ["Unity", "C#"]
+    "stack": ["Unity", "C#"],
+    "links": [
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/Turret-Spinner"
+      }
+    ]
   },
   {
     "id": 4,
     "title": "Snake",
     "image": "https://raw.githubusercontent.com/ashwingur/Snake-Game/master/snake_example.gif",
     "description": "Snake Game created in Rust using sdl2.",
-    "github": "https://github.com/ashwingur/Snake-Game",
-    "stack": ["Rust"]
+    "stack": ["Rust"],
+    "links": [
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/Snake-Game"
+      }
+    ]
   }
 ]
