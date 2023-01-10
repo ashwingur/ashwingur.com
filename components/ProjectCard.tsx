@@ -25,13 +25,16 @@ const ProjectCard = ({
   links,
 }: ProjectProps) => {
   const stack_items = stack.map((item, index) => (
-    <div key={index} className="bg-gray-200 p-2 rounded-md">
+    <div key={index} className="bg-gray-200 dark:bg-gray-600 p-2 rounded-md">
       {item}
     </div>
   ));
 
   const link_items = links?.map((item, index) => (
-    <div key={index} className="bg-blue-200 p-2 rounded-md hover:bg-blue-400">
+    <div
+      key={index}
+      className="bg-blue-200 dark:bg-blue-800 p-2 rounded-md hover:bg-blue-400 dark:hover:bg-blue-600"
+    >
       <a href={item.url} target="_blank" rel="noreferrer">
         {item.display}
       </a>
@@ -39,7 +42,7 @@ const ProjectCard = ({
   ));
 
   return (
-    <div className="flex flex-col justify-center rounded-2xl bg-white max-w-lg shadow-xl relative m-8 hover:bg-gray-100 hover:shadow-2xl">
+    <div className="flex flex-col justify-center rounded-2xl bg-white dark:bg-gray-900 max-w-lg shadow-xl relative m-8 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-2xl">
       <div className="w-full h-72 relative">
         <Image
           alt="Mountains"

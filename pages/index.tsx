@@ -1,11 +1,36 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import Navbar from "../components/Navbar";
 import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  // Switching between dark and light themes
+  const { systemTheme, theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  // useEffect only runs on the client so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  function toggleTheme() {
+    if (currentTheme === "dark") {
+      setTheme("light");
+      return "light";
+    } else {
+      setTheme("dark");
+      return "dark";
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -15,7 +40,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <Navbar
+        toggleTheme={toggleTheme}
+        initialTheme={currentTheme === undefined ? "light" : currentTheme}
+      />
+
       <div>
         <HomeSection />
         <Projects />
