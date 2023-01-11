@@ -4,7 +4,7 @@
     "title": "Countries of the World Quizzer",
     "image": "/assets/countries_of_the_world.png",
     "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options.",
-    "stack": ["React"],
+    "stack": ["React", "CSS"],
     "links": [
       { "display": "Website", "url": "https://countries-website.pages.dev/" },
       {
@@ -31,7 +31,7 @@
     "title": "Turret-Spinner",
     "image": "/assets/turret_spinner.png",
     "description": "2D Endless Survival Game created in Unity",
-    "stack": ["Unity", "C#"],
+    "stack": ["Unity", "C#", "GIMP"],
     "links": [
       {
         "display": "GitHub",

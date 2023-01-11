@@ -5,6 +5,7 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Other from "../components/Other";
 
 export default function Home() {
   // Switching between dark and light themes
@@ -48,6 +49,7 @@ export default function Home() {
       <div>
         <HomeSection />
         <Projects />
+        <Other />
         <Contact />
       </div>
     </div>
