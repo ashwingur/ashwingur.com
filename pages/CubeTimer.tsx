@@ -9,10 +9,28 @@ enum Move {
   B,
 }
 
+enum ColourScheme {
+  White,
+  Green,
+  Yellow,
+  Blue,
+  Orange,
+  Red,
+}
+
 interface Notation {
   move: Move;
   prime: boolean;
   amount: number;
+}
+
+interface _3x3 {
+  up: ColourScheme[];
+  front: ColourScheme[];
+  down: ColourScheme[];
+  back: ColourScheme[];
+  left: ColourScheme[];
+  right: ColourScheme[];
 }
 
 // Only does 3x3 for now
@@ -77,6 +95,172 @@ function pick_move(prev_move: Move | undefined) {
   }
 }
 
+function visualise_scramble(scramble: Notation[]) {
+  // scramble = [
+  //   { move: Move.R, prime: false, amount: 1 },
+  //   { move: Move.U, prime: false, amount: 1 },
+  //   { move: Move.R, prime: true, amount: 1 },
+  //   { move: Move.U, prime: true, amount: 1 },
+  // ];
+  // We have 6 arrays of 9 to represent the 6 sides with 3x3 faces
+  let up: ColourScheme[] = Array(9).fill(ColourScheme.White);
+  let front: ColourScheme[] = Array(9).fill(ColourScheme.Green);
+  let down: ColourScheme[] = Array(9).fill(ColourScheme.Yellow);
+  let back: ColourScheme[] = Array(9).fill(ColourScheme.Blue);
+  let left: ColourScheme[] = Array(9).fill(ColourScheme.Orange);
+  let right: ColourScheme[] = Array(9).fill(ColourScheme.Red);
+  let cube: _3x3 = {
+    up,
+    front,
+    down,
+    back,
+    left,
+    right,
+  };
+
+  scramble.forEach((item) => {
+    let { move, prime, amount } = item;
+    if (prime) {
+      amount = 3; // Treat prime move as just moving clockwise 3 times
+    }
+    for (let i = 0; i < amount; i++) {
+      const temp_cube = JSON.parse(JSON.stringify(cube));
+      // 0 1 2
+      // 3 4 5
+      // 6 7 8
+      if (move == Move.U) {
+        // console.log("before: " + JSON.stringify(temp_cube));
+        let new_up: ColourScheme[] = [
+          temp_cube.up[6],
+          temp_cube.up[3],
+          temp_cube.up[0],
+          temp_cube.up[7],
+          temp_cube.up[4],
+          temp_cube.up[1],
+          temp_cube.up[8],
+          temp_cube.up[5],
+          temp_cube.up[2],
+        ];
+        cube.up = new_up;
+
+        cube.front[0] = temp_cube.right[0];
+        cube.front[1] = temp_cube.right[1];
+        cube.front[2] = temp_cube.right[2];
+
+        cube.left[0] = temp_cube.front[0];
+        cube.left[1] = temp_cube.front[1];
+        cube.left[2] = temp_cube.front[2];
+
+        cube.back[0] = temp_cube.left[0];
+        cube.back[1] = temp_cube.left[1];
+        cube.back[2] = temp_cube.left[2];
+
+        cube.right[0] = temp_cube.back[0];
+        cube.right[1] = temp_cube.back[1];
+        cube.right[2] = temp_cube.back[2];
+
+        // console.log("after: " + JSON.stringify(temp_cube));
+      } else if (move == Move.R) {
+        let new_right: ColourScheme[] = [
+          temp_cube.right[6],
+          temp_cube.right[3],
+          temp_cube.right[0],
+          temp_cube.right[7],
+          temp_cube.right[4],
+          temp_cube.right[1],
+          temp_cube.right[8],
+          temp_cube.right[5],
+          temp_cube.right[2],
+        ];
+        cube.right = new_right;
+
+        cube.front[2] = temp_cube.down[2];
+        cube.front[5] = temp_cube.down[5];
+        cube.front[8] = temp_cube.down[8];
+
+        cube.up[2] = temp_cube.front[2];
+        cube.up[5] = temp_cube.front[5];
+        cube.up[8] = temp_cube.front[8];
+
+        cube.back[0] = temp_cube.up[8];
+        cube.back[3] = temp_cube.up[5];
+        cube.back[6] = temp_cube.up[2];
+
+        cube.down[2] = temp_cube.back[6];
+        cube.down[5] = temp_cube.back[3];
+        cube.down[8] = temp_cube.back[0];
+      }
+    }
+  });
+
+  return _3x3_to_jsx(cube);
+}
+
+function _3x3_to_jsx(cube: _3x3) {
+  let up = cube.up.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+  let down = cube.down.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+  let front = cube.front.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+  let back = cube.back.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+  let left = cube.left.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+  let right = cube.right.map((x, index) => {
+    return <div className={colour_to_classname(x)} key={index}></div>;
+  });
+
+  return (
+    <div className="grid mx-72 grid-cols-4 gap-1 gap">
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">{up}</div>
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+        {left}
+      </div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+        {front}
+      </div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+        {right}
+      </div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+        {back}
+      </div>
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+        {down}
+      </div>
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-36 h-36"></div>
+    </div>
+  );
+}
+
+function colour_to_classname(colour: ColourScheme) {
+  switch (colour) {
+    case ColourScheme.White:
+      return "bg-white";
+    case ColourScheme.Green:
+      return "bg-green-600";
+    case ColourScheme.Yellow:
+      return "bg-yellow-400";
+    case ColourScheme.Blue:
+      return "bg-blue-600";
+    case ColourScheme.Orange:
+      return "bg-orange-400";
+    case ColourScheme.Red:
+      return "bg-red-600";
+  }
+}
+
 const CubeTimer = () => {
   const [scramble, setScramble] = useState<Notation[]>([]);
   //   let scramble = scramble_to_jsx(generate_scramble(21));
@@ -89,7 +273,7 @@ const CubeTimer = () => {
       <h1 className="text-center my-4">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button
-          className="bg-green-200 hover:bg-green-400 p-2 rounded-lg mx-auto transition"
+          className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
           onClick={() => {
             setScramble(generate_scramble(23));
           }}
@@ -98,6 +282,7 @@ const CubeTimer = () => {
         </button>
       </div>
       <div className="flex justify-center">{scramble_to_jsx(scramble)}</div>
+      {visualise_scramble(scramble)}
     </div>
   );
 };
