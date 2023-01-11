@@ -81,12 +81,22 @@ const CubeTimer = () => {
   const [scramble, setScramble] = useState<Notation[]>([]);
   //   let scramble = scramble_to_jsx(generate_scramble(21));
   useEffect(() => {
-    setScramble(generate_scramble(21));
+    setScramble(generate_scramble(23));
   }, []);
 
   return (
     <div>
       <h1 className="text-center my-4">Cube Timer</h1>
+      <div className="flex justify-center my-8  delay-150">
+        <button
+          className="bg-green-200 hover:bg-green-400 p-2 rounded-lg mx-auto transition"
+          onClick={() => {
+            setScramble(generate_scramble(23));
+          }}
+        >
+          Generate New Scramble
+        </button>
+      </div>
       <div className="flex justify-center">{scramble_to_jsx(scramble)}</div>
     </div>
   );
