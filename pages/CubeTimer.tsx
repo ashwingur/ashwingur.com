@@ -56,16 +56,16 @@ function scramble_to_jsx(scramble: Notation[]) {
   return scramble.map((item, index) => {
     if (item.amount == 2) {
       return (
-        <span className="mx-2 text-xl" key={index}>
+        <div className="mx-2 text-xl" key={index}>
           {Move[item.move]}2
-        </span>
+        </div>
       );
     } else {
       return (
-        <span className="mx-2 text-xl" key={index}>
+        <div className="mx-2 text-xl" key={index}>
           {Move[item.move]}
           {item.prime ? "'" : ""}
-        </span>
+        </div>
       );
     }
   });
@@ -331,29 +331,31 @@ function _3x3_to_jsx(cube: _3x3) {
   });
 
   return (
-    <div className="grid grid-cols-4 gap-1 w-[37rem] mx-auto">
-      <div className="grid grid-cols-3 w-36 h-36"></div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">{up}</div>
-      <div className="grid grid-cols-3 w-36 h-36"></div>
-      <div className="grid grid-cols-3 w-36 h-36"></div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+    <div className="grid grid-cols-4 gap-1 w-[17rem] sm:w-[37rem] mx-auto">
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
+        {up}
+      </div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
         {left}
       </div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
         {front}
       </div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
         {right}
       </div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
         {back}
       </div>
-      <div className="grid grid-cols-3 w-36 h-36"></div>
-      <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36 bg-black gap-1 p-1">
         {down}
       </div>
-      <div className="grid grid-cols-3 w-36 h-36"></div>
-      <div className="grid grid-cols-3 w-36 h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
+      <div className="grid grid-cols-3 w-[4rem] h-[4rem] sm:w-36 sm:h-36"></div>
     </div>
   );
 }
@@ -403,7 +405,7 @@ const CubeTimer = () => {
           Generate New Scramble
         </button>
       </div>
-      <div className="flex justify-center mb-4">
+      <div className="flex mb-4 row flex-wrap mx-auto justify-center">
         {scramble_to_jsx(scramble)}
       </div>
       {visualise_scramble(scramble)}
