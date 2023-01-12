@@ -331,7 +331,7 @@ function _3x3_to_jsx(cube: _3x3) {
   });
 
   return (
-    <div className="grid grid-cols-4 gap-1 gap">
+    <div className="grid grid-cols-4 gap-1 w-[37rem] mx-auto">
       <div className="grid grid-cols-3 w-36 h-36"></div>
       <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">{up}</div>
       <div className="grid grid-cols-3 w-36 h-36"></div>
@@ -377,14 +377,13 @@ function colour_to_classname(colour: ColourScheme) {
 
 const CubeTimer = () => {
   const [scramble, setScramble] = useState<Notation[]>([]);
-  //   let scramble = scramble_to_jsx(generate_scramble(21));
   useEffect(() => {
     setScramble(generate_scramble(23));
   }, []);
 
   return (
     <div
-      className="w-screen h-screen outline-none"
+      className="w-screen h-screen outline-none py-2 px-4"
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key == " ") {
@@ -404,7 +403,9 @@ const CubeTimer = () => {
           Generate New Scramble
         </button>
       </div>
-      <div className="flex justify-center">{scramble_to_jsx(scramble)}</div>
+      <div className="flex justify-center mb-4">
+        {scramble_to_jsx(scramble)}
+      </div>
       {visualise_scramble(scramble)}
     </div>
   );
