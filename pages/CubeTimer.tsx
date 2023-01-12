@@ -331,7 +331,7 @@ function _3x3_to_jsx(cube: _3x3) {
   });
 
   return (
-    <div className="grid mx-72 grid-cols-4 gap-1 gap">
+    <div className="grid grid-cols-4 gap-1 gap">
       <div className="grid grid-cols-3 w-36 h-36"></div>
       <div className="grid grid-cols-3 w-36 h-36 bg-black gap-1 p-1">{up}</div>
       <div className="grid grid-cols-3 w-36 h-36"></div>
@@ -383,8 +383,17 @@ const CubeTimer = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center my-4">Cube Timer</h1>
+    <div
+      className="w-screen h-screen outline-none"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key == " ") {
+          console.log("key pressed");
+          setScramble(generate_scramble(23));
+        }
+      }}
+    >
+      <h1 className="text-center">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button
           className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
