@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { json } from "stream/consumers";
 
 enum Move {
   U,
@@ -63,7 +64,7 @@ function scramble_to_jsx(scramble: Notation[]) {
       return (
         <span className="mx-2 text-xl" key={index}>
           {Move[item.move]}
-          {"'"}
+          {item.prime ? "'" : ""}
         </span>
       );
     }
@@ -97,10 +98,7 @@ function pick_move(prev_move: Move | undefined) {
 
 function visualise_scramble(scramble: Notation[]) {
   // scramble = [
-  //   { move: Move.R, prime: false, amount: 1 },
-  //   { move: Move.U, prime: false, amount: 1 },
-  //   { move: Move.R, prime: true, amount: 1 },
-  //   { move: Move.U, prime: true, amount: 1 },
+  //   { move: Move.F, prime: false, amount: 2 },
   // ];
   // We have 6 arrays of 9 to represent the 6 sides with 3x3 faces
   let up: ColourScheme[] = Array(9).fill(ColourScheme.White);
@@ -120,7 +118,7 @@ function visualise_scramble(scramble: Notation[]) {
 
   scramble.forEach((item) => {
     let { move, prime, amount } = item;
-    if (prime) {
+    if (prime && amount != 2) {
       amount = 3; // Treat prime move as just moving clockwise 3 times
     }
     for (let i = 0; i < amount; i++) {
@@ -189,6 +187,122 @@ function visualise_scramble(scramble: Notation[]) {
         cube.down[2] = temp_cube.back[6];
         cube.down[5] = temp_cube.back[3];
         cube.down[8] = temp_cube.back[0];
+      } else if (move == Move.L) {
+        let new_left: ColourScheme[] = [
+          temp_cube.left[6],
+          temp_cube.left[3],
+          temp_cube.left[0],
+          temp_cube.left[7],
+          temp_cube.left[4],
+          temp_cube.left[1],
+          temp_cube.left[8],
+          temp_cube.left[5],
+          temp_cube.left[2],
+        ];
+        cube.left = new_left;
+
+        cube.front[0] = temp_cube.up[0];
+        cube.front[3] = temp_cube.up[3];
+        cube.front[6] = temp_cube.up[6];
+
+        cube.up[0] = temp_cube.back[8];
+        cube.up[3] = temp_cube.back[5];
+        cube.up[6] = temp_cube.back[2];
+
+        cube.back[2] = temp_cube.down[6];
+        cube.back[5] = temp_cube.down[3];
+        cube.back[8] = temp_cube.down[0];
+
+        cube.down[0] = temp_cube.front[0];
+        cube.down[3] = temp_cube.front[3];
+        cube.down[6] = temp_cube.front[6];
+      } else if (move == Move.D) {
+        let new_down: ColourScheme[] = [
+          temp_cube.down[6],
+          temp_cube.down[3],
+          temp_cube.down[0],
+          temp_cube.down[7],
+          temp_cube.down[4],
+          temp_cube.down[1],
+          temp_cube.down[8],
+          temp_cube.down[5],
+          temp_cube.down[2],
+        ];
+        cube.down = new_down;
+
+        cube.front[6] = temp_cube.left[6];
+        cube.front[7] = temp_cube.left[7];
+        cube.front[8] = temp_cube.left[8];
+
+        cube.left[6] = temp_cube.back[6];
+        cube.left[7] = temp_cube.back[7];
+        cube.left[8] = temp_cube.back[8];
+
+        cube.back[6] = temp_cube.right[6];
+        cube.back[7] = temp_cube.right[7];
+        cube.back[8] = temp_cube.right[8];
+
+        cube.right[6] = temp_cube.front[6];
+        cube.right[7] = temp_cube.front[7];
+        cube.right[8] = temp_cube.front[8];
+      } else if (move == Move.F) {
+        let new_front: ColourScheme[] = [
+          temp_cube.front[6],
+          temp_cube.front[3],
+          temp_cube.front[0],
+          temp_cube.front[7],
+          temp_cube.front[4],
+          temp_cube.front[1],
+          temp_cube.front[8],
+          temp_cube.front[5],
+          temp_cube.front[2],
+        ];
+        cube.front = new_front;
+
+        cube.up[6] = temp_cube.left[8];
+        cube.up[7] = temp_cube.left[5];
+        cube.up[8] = temp_cube.left[2];
+
+        cube.left[2] = temp_cube.down[0];
+        cube.left[5] = temp_cube.down[1];
+        cube.left[8] = temp_cube.down[2];
+
+        cube.down[0] = temp_cube.right[6];
+        cube.down[1] = temp_cube.right[3];
+        cube.down[2] = temp_cube.right[0];
+
+        cube.right[0] = temp_cube.up[6];
+        cube.right[3] = temp_cube.up[7];
+        cube.right[6] = temp_cube.up[8];
+      } else if (move == Move.B) {
+        let new_back: ColourScheme[] = [
+          temp_cube.back[6],
+          temp_cube.back[3],
+          temp_cube.back[0],
+          temp_cube.back[7],
+          temp_cube.back[4],
+          temp_cube.back[1],
+          temp_cube.back[8],
+          temp_cube.back[5],
+          temp_cube.back[2],
+        ];
+        cube.back = new_back;
+
+        cube.up[0] = temp_cube.right[2];
+        cube.up[1] = temp_cube.right[5];
+        cube.up[2] = temp_cube.right[8];
+
+        cube.left[0] = temp_cube.up[2];
+        cube.left[3] = temp_cube.up[1];
+        cube.left[6] = temp_cube.up[0];
+
+        cube.down[6] = temp_cube.left[0];
+        cube.down[7] = temp_cube.left[3];
+        cube.down[8] = temp_cube.left[6];
+
+        cube.right[2] = temp_cube.down[8];
+        cube.right[5] = temp_cube.down[7];
+        cube.right[8] = temp_cube.down[6];
       }
     }
   });
@@ -275,7 +389,7 @@ const CubeTimer = () => {
         <button
           className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
           onClick={() => {
-            setScramble(generate_scramble(23));
+            setScramble(generate_scramble(3));
           }}
         >
           Generate New Scramble
