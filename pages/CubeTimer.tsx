@@ -389,7 +389,7 @@ const CubeTimer = () => {
         <button
           className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
           onClick={() => {
-            setScramble(generate_scramble(3));
+            setScramble(generate_scramble(23));
           }}
         >
           Generate New Scramble
