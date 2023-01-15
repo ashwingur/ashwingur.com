@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { json } from "stream/consumers";
-import { setInterval } from "timers";
+import { clearInterval, setInterval } from "timers";
 import CubeTimerNavbar from "../components/CubeTimerNavbar";
 import Stopwatch, { StopwatchTime } from "../components/Stopwatch";
 
@@ -383,38 +383,61 @@ function colour_to_classname(colour: ColourScheme) {
 const CubeTimer = () => {
   const [scramble, setScramble] = useState<Notation[]>([]);
   const [timer, setTimer] = useState<StopwatchTime>({ mm: 0, ss: 0, ms: 0 });
-  const [timerInterval, setTimerInterval] = useState();
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [justFinished, setJustFinished] = useState(false);
+  const [timerInterval, setTimerInterval] = useState<
+    NodeJS.Timer | undefined
+  >();
 
   useEffect(() => {
     setScramble(generate_scramble(23));
   }, []);
 
-  function start_timer() {
-    setTimer({ mm: 0, ss: 0, ms: 0 });
-    timer_tick();
+  function increment_timer() {
+    setTimer((prevTime) => {
+      let { mm, ss, ms }: StopwatchTime = prevTime;
+      if (ms < 990) {
+        ms += 10;
+      } else {
+        ms = 0;
+        ss += 1;
+        if (ss >= 59) {
+          ss = 0;
+          mm += 1;
+        }
+      }
+      return { mm, ss, ms };
+    });
   }
 
-  useEffect(() => {
-    start_timer();
-  }, []);
-
-  function timer_tick() {
+  function start_timer() {
+    setTimer({ mm: 0, ss: 0, ms: 0 });
     const interval = setInterval(() => {
-      setTimer((prevTime) => {
-        let { mm, ss, ms }: StopwatchTime = prevTime;
-        if (ms < 990) {
-          ms += 10;
-        } else {
-          ms = 0;
-          ss += 1;
-          if (ss >= 59) {
-            ss = 0;
-            mm += 1;
-          }
-        }
-        return { mm, ss, ms };
-      });
+      increment_timer();
     }, 10);
+    setTimerInterval(interval);
+  }
+
+  function stop_timer() {
+    clearInterval(timerInterval);
+  }
+
+  function handle_spacebar_down() {
+    if (timerRunning) {
+      stop_timer();
+      setTimerRunning(false);
+      setScramble(generate_scramble(23));
+      setJustFinished(true);
+    } else {
+      setJustFinished(false);
+    }
+  }
+
+  function handle_spacebar_up() {
+    if (!timerRunning && !justFinished) {
+      start_timer();
+      setTimerRunning(true);
+    }
   }
 
   return (
@@ -423,8 +446,12 @@ const CubeTimer = () => {
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key == " ") {
-          console.log("key pressed");
-          setScramble(generate_scramble(23));
+          handle_spacebar_down();
+        }
+      }}
+      onKeyUp={(event) => {
+        if ((event.key = " ")) {
+          handle_spacebar_up();
         }
       }}
     >
