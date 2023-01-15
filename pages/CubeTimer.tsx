@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { json } from "stream/consumers";
+import { setInterval } from "timers";
+import CubeTimerNavbar from "../components/CubeTimerNavbar";
+import Stopwatch, { StopwatchTime } from "../components/Stopwatch";
 
 enum Move {
   U,
@@ -379,13 +382,45 @@ function colour_to_classname(colour: ColourScheme) {
 
 const CubeTimer = () => {
   const [scramble, setScramble] = useState<Notation[]>([]);
+  const [timer, setTimer] = useState<StopwatchTime>({ mm: 0, ss: 0, ms: 0 });
+  const [timerInterval, setTimerInterval] = useState();
+
   useEffect(() => {
     setScramble(generate_scramble(23));
   }, []);
 
+  function start_timer() {
+    setTimer({ mm: 0, ss: 0, ms: 0 });
+    timer_tick();
+  }
+
+  useEffect(() => {
+    start_timer();
+  }, []);
+
+  function timer_tick() {
+    const interval = setInterval(() => {
+      setTimer((prevTime) => {
+        let { mm, ss, ms }: StopwatchTime = prevTime;
+        if (ms < 990) {
+          ms += 10;
+        } else {
+          ms = 0;
+          if (ss < 59) {
+            ss += 1;
+          } else {
+            ss = 0;
+            mm += 1;
+          }
+        }
+        return { mm, ss, ms };
+      });
+    }, 10);
+  }
+
   return (
     <div
-      className="w-screen h-screen outline-none py-2 px-4"
+      className="w-screen h-screen outline-none"
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key == " ") {
@@ -394,7 +429,8 @@ const CubeTimer = () => {
         }
       }}
     >
-      <h1 className="text-center">Cube Timer</h1>
+      <CubeTimerNavbar />
+      <h1 className="text-center mt-4">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button
           className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
@@ -408,6 +444,7 @@ const CubeTimer = () => {
       <div className="flex mb-4 row flex-wrap mx-auto justify-center">
         {scramble_to_jsx(scramble)}
       </div>
+      <Stopwatch mm={timer.mm} ss={timer.ss} ms={timer.ms} />
       {visualise_scramble(scramble)}
     </div>
   );

@@ -1,13 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import TypewriterComponent from "typewriter-effect";
 
 const HomeSection = () => {
   return (
-    <div id="home" className="h-screen pt-20">
-      <h1 className="text-center">Home</h1>
-      <p className="text-center mt-8">
-        Hi, I'm Ashwin Gur. I'm currently studying Mechatronics Engineering and
-        Computer Science at the University of Sydney.
+    <div id="home" className="pt-24">
+      <div className="text-2xl md:text-2xl lg:text-6xl font-mono text-center">
+        <TypewriterComponent
+          onInit={(typewriter) => {
+            typewriter.typeString("> Hello, I'm Ashwin Gur").start();
+          }}
+        />
+      </div>
+      <p className="text-center text-lg mt-8 mx-4">
+        I am studying Bachelor of Mechatronics Engineering (Major: Space
+        Engineering) and Bachelor of Science (Major: Computer Science) at The
+        University of Sydney.
       </p>
     </div>
   );

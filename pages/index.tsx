@@ -6,6 +6,7 @@ import Contact from "../components/Contact";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Other from "../components/Other";
+import Footer from "../components/Footer";
 
 export default function Home() {
   // Switching between dark and light themes
@@ -52,6 +53,7 @@ export default function Home() {
         <Other />
         <Contact />
       </div>
+      <Footer></Footer>
     </div>
   );
 }

@@ -87,9 +87,17 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               ? "absolute left-0 top-0 w-[75%] h-full bg-slate-50 dark:bg-slate-800 ease-in duration-500 z-50"
               : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50"
           }
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           <div className="flex justify-between items-center mx-8 py-4 border-b">
-            <Link href="/">
+            <Link
+              href="/"
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
+            >
               <Image src="/logo.png" alt="logo" width="80" height="80" />
             </Link>
             <MdOutlineClose
@@ -105,6 +113,9 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               href="/#home"
               className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
             >
               <li>Home</li>
             </Link>
@@ -112,6 +123,9 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               href="/#projects"
               className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
             >
               <li>Projects</li>
             </Link>
@@ -119,6 +133,9 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               href="/#other"
               className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
             >
               <li>Other</li>
             </Link>
@@ -126,6 +143,9 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               href="/#contact"
               className="hover:bg-blue-100  dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
             >
               <li>Contact</li>
             </Link>
