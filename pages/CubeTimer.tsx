@@ -414,7 +414,7 @@ const CubeTimer = () => {
         }
         return { mm, ss, ms };
       });
-    }, 20);
+    }, 10);
   }
 
   return (
