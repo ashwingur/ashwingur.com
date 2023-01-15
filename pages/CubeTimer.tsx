@@ -473,7 +473,7 @@ const CubeTimer = () => {
           Generate New Scramble
         </button>
       </div>
-      <div className="flex mb-4 row flex-wrap mx-auto justify-center">
+      <div className="flex mb-4 row flex-wrap mx-auto px-4 justify-center">
         {scramble_to_jsx(scramble)}
       </div>
       <Stopwatch mm={timer.mm} ss={timer.ss} ms={timer.ms} />
