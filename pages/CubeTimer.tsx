@@ -454,6 +454,12 @@ const CubeTimer = () => {
           handle_spacebar_up();
         }
       }}
+      onTouchStart={(event) => {
+        handle_spacebar_down();
+      }}
+      onTouchEnd={(event) => {
+        handle_spacebar_up();
+      }}
     >
       <CubeTimerNavbar />
       <h1 className="text-center mt-4">Cube Timer</h1>
