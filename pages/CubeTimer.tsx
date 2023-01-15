@@ -406,9 +406,8 @@ const CubeTimer = () => {
           ms += 10;
         } else {
           ms = 0;
-          if (ss < 59) {
-            ss += 1;
-          } else {
+          ss += 1;
+          if (ss >= 59) {
             ss = 0;
             mm += 1;
           }
