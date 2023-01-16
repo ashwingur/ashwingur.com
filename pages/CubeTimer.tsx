@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { json } from "stream/consumers";
 import { clearInterval, setInterval } from "timers";
 import CubeTimerNavbar from "../components/CubeTimerNavbar";
-import Stopwatch, { StopwatchTime } from "../components/Stopwatch";
+import Stopwatch, {
+  StopwatchTime,
+  StopwatchInterface,
+  StopwatchState,
+} from "../components/Stopwatch";
 
 enum Move {
   U,
@@ -130,7 +133,6 @@ function visualise_scramble(scramble: Notation[]) {
       // 3 4 5
       // 6 7 8
       if (move == Move.U) {
-        // console.log("before: " + JSON.stringify(temp_cube));
         let new_up: ColourScheme[] = [
           temp_cube.up[6],
           temp_cube.up[3],
@@ -159,8 +161,6 @@ function visualise_scramble(scramble: Notation[]) {
         cube.right[0] = temp_cube.back[0];
         cube.right[1] = temp_cube.back[1];
         cube.right[2] = temp_cube.back[2];
-
-        // console.log("after: " + JSON.stringify(temp_cube));
       } else if (move == Move.R) {
         let new_right: ColourScheme[] = [
           temp_cube.right[6],
@@ -388,10 +388,26 @@ const CubeTimer = () => {
   const [timerInterval, setTimerInterval] = useState<
     NodeJS.Timer | undefined
   >();
+  // Will set to true if the space has been held down long enough for the timer to start.
+  const [heldDown, setHeldDown] = useState(false);
+  const [holdTimeout, setHoldTimeout] = useState<NodeJS.Timeout | undefined>();
+  const [timerState, setTimerState] = useState<StopwatchState>(
+    StopwatchState.default
+  );
 
   useEffect(() => {
     setScramble(generate_scramble(23));
   }, []);
+
+  useEffect(() => {
+    if (heldDown && !timerRunning) {
+      setTimerState(StopwatchState.ready);
+    } else if (holdTimeout != undefined) {
+      setTimerState(StopwatchState.holding);
+    } else {
+      setTimerState(StopwatchState.default);
+    }
+  }, [holdTimeout, heldDown, timerRunning]);
 
   function increment_timer() {
     setTimer((prevTime) => {
@@ -411,6 +427,7 @@ const CubeTimer = () => {
   }
 
   function start_timer() {
+    // Starts the timer by running a function on loop every 10ms and incrementing the time state during that
     setTimer({ mm: 0, ss: 0, ms: 0 });
     const interval = setInterval(() => {
       increment_timer();
@@ -419,13 +436,24 @@ const CubeTimer = () => {
   }
 
   function stop_timer() {
+    // Stop the interval function from running thus preventing the time to increase
     clearInterval(timerInterval);
   }
 
   function handle_spacebar_down() {
+    // If the timer is running when space is pressed then stop it. Set a just finished variable to true and generate a new scramble.
+    // If it is not running then set just finished to false so that the timer can be started again when space is released a 2nd time.
+
+    if (holdTimeout == undefined) {
+      const timeout = setTimeout(() => {
+        setHeldDown(true);
+      }, 550);
+      setHoldTimeout(timeout);
+    }
+
     if (timerRunning) {
       stop_timer();
-      setTimerRunning(false);
+      // setTimerRunning(false);
       setScramble(generate_scramble(23));
       setJustFinished(true);
     } else {
@@ -434,10 +462,15 @@ const CubeTimer = () => {
   }
 
   function handle_spacebar_up() {
-    if (!timerRunning && !justFinished) {
+    if (!timerRunning && !justFinished && heldDown) {
       start_timer();
       setTimerRunning(true);
+    } else {
+      setTimerRunning(false);
     }
+    setHeldDown(false);
+    clearTimeout(holdTimeout);
+    setHoldTimeout(undefined);
   }
 
   return (
@@ -454,12 +487,8 @@ const CubeTimer = () => {
           handle_spacebar_up();
         }
       }}
-      onTouchStart={(event) => {
-        handle_spacebar_down();
-      }}
-      onTouchEnd={(event) => {
-        handle_spacebar_up();
-      }}
+      onTouchStart={handle_spacebar_down}
+      onTouchEnd={handle_spacebar_up}
     >
       <CubeTimerNavbar />
       <h1 className="text-center mt-4">Cube Timer</h1>
@@ -482,7 +511,11 @@ const CubeTimer = () => {
       <div className="flex mb-4 row flex-wrap mx-auto px-4 justify-center">
         {scramble_to_jsx(scramble)}
       </div>
-      <Stopwatch mm={timer.mm} ss={timer.ss} ms={timer.ms} />
+      {/* <Stopwatch  stopwatchTime={mm={timer.mm} ss={timer.ss} ms={timer.ms}}  /> */}
+      <Stopwatch
+        stopwatchTime={{ mm: timer.mm, ss: timer.ss, ms: timer.ms }}
+        state={timerState}
+      />
       {visualise_scramble(scramble)}
     </div>
   );
