@@ -466,8 +466,14 @@ const CubeTimer = () => {
       <div className="flex justify-center my-8  delay-150">
         <button
           className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
-          onClick={() => {
+          onClick={(e) => {
             setScramble(generate_scramble(23));
+          }}
+          onTouchStart={(event) => {
+            event.stopPropagation();
+          }}
+          onTouchEnd={(event) => {
+            event.stopPropagation();
           }}
         >
           Generate New Scramble
