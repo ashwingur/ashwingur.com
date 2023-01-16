@@ -444,10 +444,11 @@ const CubeTimer = () => {
     // If the timer is running when space is pressed then stop it. Set a just finished variable to true and generate a new scramble.
     // If it is not running then set just finished to false so that the timer can be started again when space is released a 2nd time.
 
+    // Timer should be held down at least 0.3 seconds
     if (holdTimeout == undefined) {
       const timeout = setTimeout(() => {
         setHeldDown(true);
-      }, 550);
+      }, 350);
       setHoldTimeout(timeout);
     }
 
