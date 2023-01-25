@@ -25,9 +25,13 @@ const PusherTest = () => {
 
   const poke = () => {
     let random_msg = (Math.random() + 1).toString(36).substr(2, 5); // Random string
-    axios.post("/api/pusher", {
-      message: random_msg,
-    });
+    try {
+      axios.post("/api/pusher", {
+        message: random_msg,
+      });
+    } catch (err) {
+      console.log(err);
+    }
     setMessages((prev) => [...prev, "MINE: " + random_msg]);
   };
 

@@ -21,5 +21,5 @@ export default async function handler(req, res) {
     message: message,
   });
 
-  res.json({ message: "completed" });
+  res.status(200).json({ message: "completed" });
 }
