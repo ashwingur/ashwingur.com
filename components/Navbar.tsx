@@ -76,7 +76,7 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
       <div
         className={
           mobileNavMenu
-            ? "fixed w-full h-screen bg-black/70 top-0 left-0 z-50"
+            ? "fixed w-full h-screen bg-black/70 top-0 left-0 z-50 transition-all"
             : "z-50"
         }
         onClick={() => setMobileNavMenu(false)}
