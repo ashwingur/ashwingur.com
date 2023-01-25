@@ -3,7 +3,7 @@ import React from "react";
 
 const Other = () => {
   return (
-    <div id="other" className="h-screen pt-20 flex flex-col">
+    <div id="other" className="pt-20 flex flex-col">
       <h1 className="text-center">Other</h1>
       <Link
         href="/CubeTimer"
