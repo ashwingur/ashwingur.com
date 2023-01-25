@@ -5,19 +5,16 @@ import React, { useEffect, useState } from "react";
 const PusherTest = () => {
   const [messages, setMessages] = useState<String[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const pusher = new Pusher("71a7b422dcc29a66021c", {
+    cluster: "ap4",
+  });
 
   useEffect(() => {
-    let pusher = new Pusher("71a7b422dcc29a66021c", {
-      cluster: "ap4",
-    });
-
     let channel = pusher.subscribe("my-channel");
-    console.log("subscribned");
+    console.log("subscribed");
     channel.bind("my-event", function (data: any) {
       setMessages((prev) => [...prev, data.message]);
     });
-
-    // axios.post("/api/pusher", { message: "TEST MESSAGE" });
 
     return () => {
       pusher.unsubscribe("my-channel");
