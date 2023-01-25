@@ -36,7 +36,7 @@ const PusherTest = () => {
         console.log("response: " + JSON.stringify(response.data))
       )
       .catch((error) => console.log("error: " + error));
-    setMessages((prev) => [...prev, "MINE: " + random_msg]);
+    // setMessages((prev) => [...prev, "MINE: " + random_msg]);
     setCurrentMessage("");
   };
 
