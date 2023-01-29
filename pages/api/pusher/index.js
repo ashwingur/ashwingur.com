@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       message: message,
     })
     .then((response) => {
-      res.status(200).json({ message: JSON.stringify(response) });
+      res.status(200).json({ message: message });
     });
 
   // res.status(200).json({ message: "completed" });
