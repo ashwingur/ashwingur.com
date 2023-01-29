@@ -20,6 +20,7 @@ const PusherTest = () => {
     let channel = pusher.subscribe("my-channel");
     console.log("subscribed");
     channel.bind("my-event", function (data: any) {
+      console.log("received data from pusher: " + JSON.stringify(data));
       setMessages((prev) => [...prev, data.message]);
       scrollToBottom();
     });
