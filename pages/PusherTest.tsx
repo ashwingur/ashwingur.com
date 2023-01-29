@@ -5,11 +5,12 @@ import React, { useEffect, useState } from "react";
 const PusherTest = () => {
   const [messages, setMessages] = useState<String[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
-  const pusher = new Pusher("71a7b422dcc29a66021c", {
-    cluster: "ap4",
-  });
 
   useEffect(() => {
+    const pusher = new Pusher("71a7b422dcc29a66021c", {
+      cluster: "ap4",
+    });
+
     let channel = pusher.subscribe("my-channel");
     console.log("subscribed");
     channel.bind("my-event", function (data: any) {
@@ -33,7 +34,6 @@ const PusherTest = () => {
         console.log("response: " + JSON.stringify(response.data))
       )
       .catch((error) => console.log("error: " + error));
-    // setMessages((prev) => [...prev, "MINE: " + random_msg]);
     setCurrentMessage("");
   };
 

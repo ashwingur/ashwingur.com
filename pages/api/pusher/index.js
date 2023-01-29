@@ -17,9 +17,13 @@ export default async function handler(req, res) {
 
   console.log(req.body);
 
-  pusher.trigger("my-channel", "my-event", {
-    message: message,
-  });
+  await pusher
+    .trigger("my-channel", "my-event", {
+      message: message,
+    })
+    .then((response) => {
+      res.status(200).json({ message: JSON.stringify(response) });
+    });
 
-  res.status(200).json({ message: "completed" });
+  // res.status(200).json({ message: "completed" });
 }
