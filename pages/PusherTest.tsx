@@ -59,11 +59,28 @@ const PusherTest = () => {
   };
 
   const all_messages = messages.map((msg, index) => (
-    <div key={index}>{msg}</div>
+    <div
+      className="bg-white my-2 rounded-full px-4 mx-2 py-2 inline-block"
+      key={index}
+    >
+      {msg}
+    </div>
   ));
 
   return (
-    <div>
+    <div
+      className="h-screen"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key == "Enter") {
+          if (loggedIn) {
+            poke();
+          } else {
+            enter_username();
+          }
+        }
+      }}
+    >
       {!loggedIn && (
         <div className="flex h-screen">
           <div className="m-auto flex flex-col items-center justify-center">
@@ -84,11 +101,11 @@ const PusherTest = () => {
         </div>
       )}
       {loggedIn && (
-        <div>
+        <div className="h-5/6">
           <h2 className="text-center">Hello, {username}</h2>
-          <div className="h-[80%] bg-white">
+          <div className="h-5/6 m-8 overflow-y-scroll flex flex-col">
             {/* Chat */}
-            <div>test</div>
+            {all_messages}
           </div>
           {/* Chat input */}
           <div className="flex justify-center gap-4 h items-center bottom-0 fixed w-screen">
