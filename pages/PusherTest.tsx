@@ -86,8 +86,17 @@ const PusherTest = () => {
   };
 
   const all_messages = messages.map((msg_data: MessageData, index) => (
-    <div key={index} className={uuid == msg_data.uuid ? "ml-auto" : "my-2"}>
-      <div className="flex gap-4 px-4">
+    <div
+      key={index}
+      className={uuid == msg_data.uuid ? "ml-auto my-2" : "my-2"}
+    >
+      <div
+        className={
+          uuid == msg_data.uuid
+            ? "flex gap-4 px-4 justify-end"
+            : "flex gap-4 px-4"
+        }
+      >
         <div className="text-purple-500">{msg_data.username}</div>
         <div className="text-gray-300">{msg_data.timestamp}</div>
       </div>
