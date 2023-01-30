@@ -15,7 +15,7 @@ const Other = () => {
         href="/PusherTest"
         className="bg-blue-200 dark:bg-blue-700 hover:bg-blue-400 dark:hover:bg-blue-600 rounded-md p-2 font-bold mx-auto my-4"
       >
-        <button>Pusher Test</button>
+        <button>Diskord</button>
       </Link>
     </div>
   );
