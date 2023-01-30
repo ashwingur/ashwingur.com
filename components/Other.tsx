@@ -12,7 +12,7 @@ const Other = () => {
         <button>Cube Timer</button>
       </Link>
       <Link
-        href="/PusherTest"
+        href="/Diskord"
         className="bg-blue-200 dark:bg-blue-700 hover:bg-blue-400 dark:hover:bg-blue-600 rounded-md p-2 font-bold mx-auto my-4"
       >
         <button>Diskord</button>
