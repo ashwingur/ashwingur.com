@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/pusher/index.js"
+    "pages/api/pusher/index.ts"
   ],
   "exclude": ["node_modules"]
 }

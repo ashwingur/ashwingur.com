@@ -2,15 +2,24 @@ import axios from "axios";
 import Pusher from "pusher-js";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
+import { v4 as uuidv4 } from "uuid";
+
+export interface MessageData {
+  message: string;
+  username: string;
+  uuid: string;
+  timestamp: string;
+}
 
 const PusherTest = () => {
-  const [messages, setMessages] = useState<String[]>([]);
+  const [messages, setMessages] = useState<MessageData[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [uuid, setUuid] = useState(uuidv4());
 
   useEffect(() => {
     const pusher = new Pusher("71a7b422dcc29a66021c", {
@@ -19,10 +28,13 @@ const PusherTest = () => {
 
     let channel = pusher.subscribe("my-channel");
     console.log("subscribed");
-    channel.bind("my-event", function (data: any) {
-      console.log("received data from pusher: " + JSON.stringify(data));
-      setMessages((prev) => [...prev, data.message]);
-      scrollToBottom();
+    channel.bind("my-event", function (data: MessageData) {
+      // console.log("received data from pusher: " + JSON.stringify(data));
+      setMessages((prev) => [...prev, data]);
+      // Scroll into view after the message has been given time to render
+      setTimeout(() => {
+        scrollToBottom();
+      }, 300);
     });
 
     return () => {
@@ -31,22 +43,25 @@ const PusherTest = () => {
     };
   }, []);
 
-  const poke = () => {
+  const send_message = () => {
     if (currentMessage.replace(/\s/g, "").length == 0) {
       return;
     }
-    let random_msg = currentMessage; // Random string
+
+    const message_content: MessageData = {
+      message: currentMessage,
+      username: username,
+      uuid: uuid,
+      timestamp: new Date().toLocaleTimeString(),
+    };
 
     axios
-      .post("/api/pusher", {
-        message: random_msg,
-      })
+      .post("/api/pusher", message_content)
       .then((response) =>
         console.log("response: " + JSON.stringify(response.data))
       )
       .catch((error) => console.log("error: " + error));
     setCurrentMessage("");
-    scrollToBottom();
   };
 
   const handle_input_change = (event: any) => {
@@ -58,24 +73,27 @@ const PusherTest = () => {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView();
   };
 
   const enter_username = () => {
     if (username.replace(/\s/g, "").length > 0) {
-      // Not purely whitespace, allow it
+      // Allowed to login if the person is not purely whitespace
       setLoggedIn(true);
     } else {
       setUsername("");
     }
   };
 
-  const all_messages = messages.map((msg, index) => (
-    <div
-      className="bg-white dark:bg-gray-900 my-2 rounded-full px-4 mx-2 py-2 inline-block"
-      key={index}
-    >
-      {msg}
+  const all_messages = messages.map((msg_data: MessageData, index) => (
+    <div key={index} className={uuid == msg_data.uuid ? "ml-auto" : "my-2"}>
+      <div className="flex gap-4 px-4">
+        <div className="text-purple-500">{msg_data.username}</div>
+        <div className="text-gray-300">{msg_data.timestamp}</div>
+      </div>
+      <div className="bg-white dark:bg-gray-900 rounded-full px-4 py-2 inline-block">
+        {msg_data.message}
+      </div>
     </div>
   ));
 
@@ -86,7 +104,7 @@ const PusherTest = () => {
       onKeyDown={(event) => {
         if (event.key == "Enter") {
           if (loggedIn) {
-            poke();
+            send_message();
           } else {
             enter_username();
           }
@@ -129,7 +147,7 @@ const PusherTest = () => {
             />
             <button
               className="bg-purple-500 px-4 py-2 my-16 rounded-lg hover:bg-purple-700 transition-all"
-              onClick={poke}
+              onClick={send_message}
             >
               <div className="flex items-center gap-2">
                 <span>Send</span>
