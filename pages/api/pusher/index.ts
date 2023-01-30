@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Pusher from "pusher";
-import { MessageData } from "../../PusherTest";
+import { MessageData } from "../../Diskord";
 
 // export const pusher = new Pusher({
 //   appId: process.env.appId,
