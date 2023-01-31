@@ -38,7 +38,7 @@ const gameStateToJSX = (
   onCellClick: (index: number) => void
 ) => {
   return (
-    <div className="grid grid-cols-3 bg-black gap-1 mx-auto mt-24 w-[246px]">
+    <div className="grid grid-cols-3 bg-black dark:bg-slate-500 gap-1 mx-auto mt-24 w-[246px]">
       {gamestate.board.map((cell: Cell, index) => {
         return (
           <div
@@ -60,19 +60,17 @@ const cellToJSX = (cell: Cell) => {
   switch (cell) {
     case Cell.Blank:
       return (
-        <div className="bg-slate-100 text-center h-20 w-20  hover:bg-slate-200 transition-all">
-          {" "}
-        </div>
+        <div className="bg-slate-100 dark:bg-gray-900 text-center h-20 w-20 hover:bg-slate-200 dark:hover:bg-gray-700 transition-all"></div>
       );
     case Cell.O:
       return (
-        <div className="bg-slate-100 text-center h-20 w-20 flex">
+        <div className="bg-slate-100 dark:bg-gray-900 text-center h-20 w-20 flex">
           <BsCircle className="m-auto" size={50} />
         </div>
       );
     case Cell.X:
       return (
-        <div className="bg-slate-100 text-center h-20 w-20  flex">
+        <div className="bg-slate-100 dark:bg-gray-900 text-center h-20 w-20 flex">
           <RxCross1 className="m-auto" size={50} />
         </div>
       );
@@ -86,6 +84,7 @@ const TicTacToe = () => {
   const [pusher, setPusher] = useState<Pusher>();
   const [localGameState, setLocalGameState] = useState(newGameState(false));
   const [gameInProgress, setGameinProgress] = useState(false);
+  const [gameWinner, setGameWinner] = useState(Cell.Blank); // Blank means no winner, X means host won
 
   useEffect(() => {
     const pusher_ = new Pusher("71a7b422dcc29a66021c", {
@@ -97,6 +96,18 @@ const TicTacToe = () => {
   const room_input_change = (event: any) => {
     setRoomName(event.target.value);
   };
+
+  useEffect(() => {
+    // Check for win
+    const x_check = checkWinner(Cell.X, localGameState);
+    if (x_check == Cell.Blank) {
+      setGameWinner(checkWinner(Cell.O, localGameState));
+      console.log("o check is : " + checkWinner(Cell.O, localGameState));
+    } else {
+      setGameWinner(x_check);
+    }
+    console.log("x check is : " + x_check);
+  }, [localGameState]);
 
   const postTurn = (roomName: string, gameState: GameState) => {
     axios
@@ -176,10 +187,56 @@ const TicTacToe = () => {
 
   const onCellClick = (index: number) => {
     console.log("clicked cell numer " + index);
-    if (localGameState.isHostTurn && isHost) {
-      updateBoard(Cell.X, index);
-    } else if (!localGameState.isHostTurn && !isHost) {
-      updateBoard(Cell.O, index);
+    if (gameWinner == Cell.Blank) {
+      // No winner yet, so a move can be made
+      if (localGameState.isHostTurn && isHost) {
+        updateBoard(Cell.X, index);
+      } else if (!localGameState.isHostTurn && !isHost) {
+        updateBoard(Cell.O, index);
+      }
+    }
+  };
+
+  const checkWinner = (cell: Cell, gameState: GameState): Cell => {
+    for (let i = 0; i < 3; i++) {
+      if (
+        gameState.board[3 * i] == cell &&
+        gameState.board[3 * i + 1] == cell &&
+        gameState.board[3 * i + 2] == cell
+      ) {
+        return cell;
+      }
+      if (
+        gameState.board[i] == cell &&
+        gameState.board[i + 3] == cell &&
+        gameState.board[i + 6] == cell
+      ) {
+        return cell;
+      }
+    }
+    if (
+      (gameState.board[0] == cell &&
+        gameState.board[4] == cell &&
+        gameState.board[8] == cell) ||
+      (gameState.board[2] == cell &&
+        gameState.board[4] == cell &&
+        gameState.board[6] == cell)
+    ) {
+      return cell;
+    }
+    return Cell.Blank;
+  };
+
+  const winningMessage = () => {
+    if (gameWinner == Cell.Blank) {
+      return <div />;
+    } else if (
+      (gameWinner == Cell.X && isHost) ||
+      (gameWinner == Cell.O && !isHost)
+    ) {
+      return <p className="text-center text-2xl my-4">You Win!</p>;
+    } else {
+      return <p className="text-center text-2xl my-4">You Lose!</p>;
     }
   };
 
@@ -188,7 +245,7 @@ const TicTacToe = () => {
       {inLobby && (
         <div className="flex flex-col h-screen">
           <h1 className="text-center py-2">Tic Tac Toe</h1>
-          <div className=" m-auto flex flex-col items-center gap-2 justify-center">
+          <div className=" m-auto flex flex-col items-center gap-4 justify-center">
             <input
               className="border-2 w-60 rounded-2xl py-1 px-4"
               placeholder="Create/Join Room Code"
@@ -222,19 +279,26 @@ const TicTacToe = () => {
           {gameStateToJSX(localGameState, onCellClick)}
         </div>
       )}
-      <p
-        className={
-          "text-center text-2xl font-bold " +
-          (localGameState.isHostTurn == isHost
-            ? "text-green-700"
-            : "text-red-700")
-        }
-      >
-        {gameInProgress &&
-          (localGameState.isHostTurn == isHost
+      {gameInProgress && gameWinner == Cell.Blank && (
+        <p
+          className={
+            "text-center text-2xl font-bold my-4 " +
+            (localGameState.isHostTurn == isHost
+              ? "text-green-700"
+              : "text-red-700")
+          }
+        >
+          {localGameState.isHostTurn == isHost
             ? "Your Turn"
-            : "Opponent's Turn")}
-      </p>
+            : "Opponent's Turn"}
+        </p>
+      )}
+      {!gameInProgress && (
+        <p className="text-center text-2xl my-4">
+          Waiting for an opponent to join room {`"${roomName}"`}
+        </p>
+      )}
+      {winningMessage()}
     </div>
   );
 };
