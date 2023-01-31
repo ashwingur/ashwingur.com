@@ -1,7 +1,8 @@
 import axios from "axios";
 import Pusher from "pusher-js";
-import Callback from "pusher-js/types/src/core/events/callback";
 import React, { useEffect, useState } from "react";
+import { RxCross1 } from "react-icons/rx";
+import { BsCircle } from "react-icons/bs";
 
 // Host Creates Game and Subscribes to the Channel
 // Guest Subscribes to the channel, and then posts that they joined
@@ -21,10 +22,14 @@ enum Cell {
   O,
 }
 
-const newGameState = (): GameState => {
+const newGameState = (randomiseFirstPlayer: boolean): GameState => {
+  let isHostTurn = true;
+  if (randomiseFirstPlayer) {
+    isHostTurn = Math.random() < 0.5;
+  }
   return {
     board: Array(9).fill(Cell.Blank),
-    isHostTurn: true,
+    isHostTurn,
   };
 };
 
@@ -33,7 +38,7 @@ const gameStateToJSX = (
   onCellClick: (index: number) => void
 ) => {
   return (
-    <div className="grid grid-cols-3 bg-black gap-1 m-16">
+    <div className="grid grid-cols-3 bg-black gap-1 m-16 w-[246px]">
       {gamestate.board.map((cell: Cell, index) => {
         return (
           <div
@@ -54,11 +59,23 @@ const gameStateToJSX = (
 const cellToJSX = (cell: Cell) => {
   switch (cell) {
     case Cell.Blank:
-      return <div className="bg-white text-center h-20"> </div>;
+      return (
+        <div className="bg-slate-100 text-center h-20 w-20  hover:bg-slate-200 transition-all">
+          {" "}
+        </div>
+      );
     case Cell.O:
-      return <div className="bg-white text-center h-20"> O </div>;
+      return (
+        <div className="bg-slate-100 text-center h-20 w-20 flex">
+          <BsCircle className="m-auto" />
+        </div>
+      );
     case Cell.X:
-      return <div className="bg-white text-center h-20"> X </div>;
+      return (
+        <div className="bg-slate-100 text-center h-20 w-20  flex">
+          <RxCross1 className="m-auto" />
+        </div>
+      );
   }
 };
 
@@ -67,7 +84,7 @@ const TicTacToe = () => {
   const [isHost, setIsHost] = useState(true);
   const [roomName, setRoomName] = useState("");
   const [pusher, setPusher] = useState<Pusher>();
-  const [localGameState, setLocalGameState] = useState(newGameState);
+  const [localGameState, setLocalGameState] = useState(newGameState(false));
 
   useEffect(() => {
     const pusher_ = new Pusher("71a7b422dcc29a66021c", {
@@ -78,6 +95,31 @@ const TicTacToe = () => {
 
   const room_input_change = (event: any) => {
     setRoomName(event.target.value);
+  };
+
+  const postTurn = (roomName: string, gameState: GameState) => {
+    axios
+      .post("/api/pusher/tictactoe/turn", {
+        roomName,
+        gameState,
+      })
+      .then((response) =>
+        console.log("tictactoe turn response:" + JSON.stringify(response.data))
+      )
+      .catch((error) => console.log("turn error: " + error));
+  };
+
+  const updateBoard = (cellType: Cell, index: number) => {
+    if (localGameState.board[index] == Cell.Blank) {
+      const updatedGameState: GameState = {
+        board: [...localGameState.board],
+        isHostTurn: !localGameState.isHostTurn,
+      };
+      updatedGameState.board[index] = cellType;
+      console.log("updated game board is: " + JSON.stringify(updatedGameState));
+      setLocalGameState(updatedGameState);
+      postTurn(roomName, updatedGameState);
+    }
   };
 
   const createGame = () => {
@@ -94,20 +136,9 @@ const TicTacToe = () => {
     channel?.bind("guest-joined", (data: any) => {
       console.log("Guest has joined");
       // Guest has now joined, so we can start the game
-      // Initialise gamestate
 
-      // Later on add randomisation on who starts first
-      axios
-        .post("/api/pusher/tictactoe/turn", {
-          roomName: roomName,
-          gameState: newGameState(),
-        })
-        .then((response) =>
-          console.log(
-            "tictactoe turn response:" + JSON.stringify(response.data)
-          )
-        )
-        .catch((error) => console.log("turn error: " + error));
+      // Initialise the first game state and send it to both players
+      postTurn(roomName, newGameState(true));
     });
   };
 
@@ -139,41 +170,9 @@ const TicTacToe = () => {
   const onCellClick = (index: number) => {
     console.log("clicked cell numer " + index);
     if (localGameState.isHostTurn && isHost) {
-      const updatedGameState: GameState = {
-        board: [...localGameState.board],
-        isHostTurn: !localGameState.isHostTurn,
-      };
-      updatedGameState.board[index] = Cell.X;
-      setLocalGameState(updatedGameState);
-      axios
-        .post("/api/pusher/tictactoe/turn", {
-          roomName,
-          gameState: updatedGameState,
-        })
-        .then((response) =>
-          console.log(
-            "tictactoe turn response:" + JSON.stringify(response.data)
-          )
-        )
-        .catch((error) => console.log("turn error: " + error));
+      updateBoard(Cell.X, index);
     } else if (!localGameState.isHostTurn && !isHost) {
-      const updatedGameState: GameState = {
-        board: [...localGameState.board],
-        isHostTurn: !localGameState.isHostTurn,
-      };
-      updatedGameState.board[index] = Cell.O;
-      setLocalGameState(updatedGameState);
-      axios
-        .post("/api/pusher/tictactoe/turn", {
-          roomName,
-          gameState: updatedGameState,
-        })
-        .then((response) =>
-          console.log(
-            "tictactoe turn response:" + JSON.stringify(response.data)
-          )
-        )
-        .catch((error) => console.log("turn error: " + error));
+      updateBoard(Cell.O, index);
     }
   };
 
@@ -216,6 +215,16 @@ const TicTacToe = () => {
           {gameStateToJSX(localGameState, onCellClick)}
         </div>
       )}
+      <p
+        className={
+          "text-center text-2xl font-bold " +
+          (localGameState.isHostTurn == isHost
+            ? "text-green-700"
+            : "text-red-700")
+        }
+      >
+        {localGameState.isHostTurn == isHost ? "Your Turn" : "Opponent's Turn"}
+      </p>
     </div>
   );
 };
