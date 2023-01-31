@@ -153,10 +153,10 @@ const PusherTest = () => {
       )}
       {loggedIn && (
         <div className="h-5/6">
-          <h2 className="text-center">Hello, {username}</h2>
+          <h2 className="text-center my-2">Hello, {username}</h2>
           <p className="text-center">
             <span className="text-green-600 font-bold">{liveUserCount} </span>{" "}
-            user{liveUserCount == 0 ? "" : "s"} online
+            user{liveUserCount == 1 ? "" : "s"} online
           </p>
           <div className="h-5/6 m-8 overflow-y-scroll flex flex-col">
             {/* Chat */}

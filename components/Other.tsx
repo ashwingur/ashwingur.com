@@ -17,6 +17,12 @@ const Other = () => {
       >
         <button>Diskord</button>
       </Link>
+      <Link
+        href="/TicTacToe"
+        className="bg-blue-200 dark:bg-blue-700 hover:bg-blue-400 dark:hover:bg-blue-600 rounded-md p-2 font-bold mx-auto my-4"
+      >
+        <button>Tic Tac Toe</button>
+      </Link>
     </div>
   );
 };
