@@ -1,5 +1,6 @@
 import axios from "axios";
 import Pusher from "pusher-js";
+import Callback from "pusher-js/types/src/core/events/callback";
 import React, { useEffect, useState } from "react";
 
 // Host Creates Game and Subscribes to the Channel
@@ -27,7 +28,39 @@ const newGameState = (): GameState => {
   };
 };
 
-const gameStateToJSX = (gamestate: GameState) => {};
+const gameStateToJSX = (
+  gamestate: GameState,
+  onCellClick: (index: number) => void
+) => {
+  return (
+    <div className="grid grid-cols-3 bg-black gap-1 m-16">
+      {gamestate.board.map((cell: Cell, index) => {
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              onCellClick(index);
+            }}
+            className="cursor-pointer hover:bg-yellow-500"
+          >
+            {cellToJSX(cell)}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const cellToJSX = (cell: Cell) => {
+  switch (cell) {
+    case Cell.Blank:
+      return <div className="bg-white text-center h-20"> </div>;
+    case Cell.O:
+      return <div className="bg-white text-center h-20"> O </div>;
+    case Cell.X:
+      return <div className="bg-white text-center h-20"> X </div>;
+  }
+};
 
 const TicTacToe = () => {
   const [inLobby, setInLobby] = useState(true);
@@ -55,6 +88,7 @@ const TicTacToe = () => {
 
     channel?.bind("turn", (data: GameState) => {
       console.log("turn received: " + JSON.stringify(data));
+      setLocalGameState(data);
     });
 
     channel?.bind("guest-joined", (data: any) => {
@@ -65,8 +99,8 @@ const TicTacToe = () => {
       // Later on add randomisation on who starts first
       axios
         .post("/api/pusher/tictactoe/turn", {
-          roomName,
-          gameState: newGameState,
+          roomName: roomName,
+          gameState: newGameState(),
         })
         .then((response) =>
           console.log(
@@ -85,6 +119,7 @@ const TicTacToe = () => {
 
     channel?.bind("turn", (data: GameState) => {
       console.log("turn received: " + JSON.stringify(data));
+      setLocalGameState(data);
     });
 
     axios
@@ -99,6 +134,47 @@ const TicTacToe = () => {
     pusher?.unsubscribe(roomName);
     setInLobby(true);
     setRoomName("");
+  };
+
+  const onCellClick = (index: number) => {
+    console.log("clicked cell numer " + index);
+    if (localGameState.isHostTurn && isHost) {
+      const updatedGameState: GameState = {
+        board: [...localGameState.board],
+        isHostTurn: !localGameState.isHostTurn,
+      };
+      updatedGameState.board[index] = Cell.X;
+      setLocalGameState(updatedGameState);
+      axios
+        .post("/api/pusher/tictactoe/turn", {
+          roomName,
+          gameState: updatedGameState,
+        })
+        .then((response) =>
+          console.log(
+            "tictactoe turn response:" + JSON.stringify(response.data)
+          )
+        )
+        .catch((error) => console.log("turn error: " + error));
+    } else if (!localGameState.isHostTurn && !isHost) {
+      const updatedGameState: GameState = {
+        board: [...localGameState.board],
+        isHostTurn: !localGameState.isHostTurn,
+      };
+      updatedGameState.board[index] = Cell.O;
+      setLocalGameState(updatedGameState);
+      axios
+        .post("/api/pusher/tictactoe/turn", {
+          roomName,
+          gameState: updatedGameState,
+        })
+        .then((response) =>
+          console.log(
+            "tictactoe turn response:" + JSON.stringify(response.data)
+          )
+        )
+        .catch((error) => console.log("turn error: " + error));
+    }
   };
 
   return (
@@ -137,6 +213,7 @@ const TicTacToe = () => {
           >
             Back
           </button>
+          {gameStateToJSX(localGameState, onCellClick)}
         </div>
       )}
     </div>
