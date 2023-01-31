@@ -21,14 +21,16 @@ const PusherTest = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [uuid, setUuid] = useState(uuidv4());
 
+  const [liveUserCount, setLiverUserCount] = useState(0);
+
   useEffect(() => {
     const pusher = new Pusher("71a7b422dcc29a66021c", {
       cluster: "ap4",
     });
 
-    let channel = pusher.subscribe("my-channel");
+    let channel = pusher.subscribe("diskord");
     console.log("subscribed");
-    channel.bind("my-event", function (data: MessageData) {
+    channel.bind("chat-send", function (data: MessageData) {
       // console.log("received data from pusher: " + JSON.stringify(data));
       setMessages((prev) => [...prev, data]);
       // Scroll into view after the message has been given time to render
@@ -37,8 +39,14 @@ const PusherTest = () => {
       }, 300);
     });
 
+    // Live user count
+    channel.bind("pusher:subscription_count", (data: any) => {
+      console.log("user count is : " + JSON.stringify(data));
+      setLiverUserCount(data.subscription_count);
+    });
+
     return () => {
-      pusher.unsubscribe("my-channel");
+      pusher.unsubscribe("diskord");
       console.log("unsubscribed");
     };
   }, []);
@@ -132,7 +140,7 @@ const PusherTest = () => {
               value={username}
               onChange={update_username}
               maxLength={30}
-              placeholder="username"
+              placeholder="Username"
             />
             <button
               className="bg-purple-500 text-gray-100 py-2 px-4 rounded-full my-4 hover:bg-purple-700"
@@ -146,6 +154,10 @@ const PusherTest = () => {
       {loggedIn && (
         <div className="h-5/6">
           <h2 className="text-center">Hello, {username}</h2>
+          <p className="text-center">
+            <span className="text-green-600 font-bold">{liveUserCount} </span>{" "}
+            users online
+          </p>
           <div className="h-5/6 m-8 overflow-y-scroll flex flex-col">
             {/* Chat */}
             {all_messages}
@@ -154,7 +166,7 @@ const PusherTest = () => {
           {/* Chat input */}
           <div className="flex justify-center gap-4 h items-center bottom-0 fixed w-screen px-4">
             <input
-              className="border-2 w-72 md:w-[80%] rounded-full py-1 px-4"
+              className="border-2 w-64 md:w-[80%] rounded-full py-1 px-4"
               value={currentMessage}
               onChange={handle_input_change}
             />

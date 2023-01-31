@@ -24,7 +24,7 @@ export default async function handler(
 ) {
   const msg_data: MessageData = req.body;
 
-  await pusher.trigger("my-channel", "my-event", msg_data).then((response) => {
+  await pusher.trigger("diskord", "chat-send", msg_data).then((response) => {
     res.status(200).json(msg_data);
   });
 }
