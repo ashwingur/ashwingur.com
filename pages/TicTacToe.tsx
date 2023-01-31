@@ -38,7 +38,7 @@ const gameStateToJSX = (
   onCellClick: (index: number) => void
 ) => {
   return (
-    <div className="grid grid-cols-3 bg-black gap-1 m-16 w-[246px]">
+    <div className="grid grid-cols-3 bg-black gap-1 mx-auto mt-24 w-[246px]">
       {gamestate.board.map((cell: Cell, index) => {
         return (
           <div
@@ -67,13 +67,13 @@ const cellToJSX = (cell: Cell) => {
     case Cell.O:
       return (
         <div className="bg-slate-100 text-center h-20 w-20 flex">
-          <BsCircle className="m-auto" />
+          <BsCircle className="m-auto" size={50} />
         </div>
       );
     case Cell.X:
       return (
         <div className="bg-slate-100 text-center h-20 w-20  flex">
-          <RxCross1 className="m-auto" />
+          <RxCross1 className="m-auto" size={50} />
         </div>
       );
   }
@@ -85,6 +85,7 @@ const TicTacToe = () => {
   const [roomName, setRoomName] = useState("");
   const [pusher, setPusher] = useState<Pusher>();
   const [localGameState, setLocalGameState] = useState(newGameState(false));
+  const [gameInProgress, setGameinProgress] = useState(false);
 
   useEffect(() => {
     const pusher_ = new Pusher("71a7b422dcc29a66021c", {
@@ -133,12 +134,13 @@ const TicTacToe = () => {
       setLocalGameState(data);
     });
 
-    channel?.bind("guest-joined", (data: any) => {
+    channel?.bind("guest-joined", () => {
       console.log("Guest has joined");
       // Guest has now joined, so we can start the game
 
       // Initialise the first game state and send it to both players
       postTurn(roomName, newGameState(true));
+      setGameinProgress(true);
     });
   };
 
@@ -155,9 +157,12 @@ const TicTacToe = () => {
 
     axios
       .post("/api/pusher/tictactoe/join", { roomName })
-      .then((response) =>
-        console.log("join tictactoe response: " + JSON.stringify(response.data))
-      )
+      .then((response) => {
+        console.log(
+          "join tictactoe response: " + JSON.stringify(response.data)
+        );
+        setGameinProgress(true);
+      })
       .catch((error) => console.log("error: " + error));
   };
 
@@ -165,6 +170,8 @@ const TicTacToe = () => {
     pusher?.unsubscribe(roomName);
     setInLobby(true);
     setRoomName("");
+    setLocalGameState(newGameState(false));
+    setGameinProgress(false);
   };
 
   const onCellClick = (index: number) => {
@@ -207,7 +214,7 @@ const TicTacToe = () => {
       {!inLobby && (
         <div>
           <button
-            className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32"
+            className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32 ml-4 mt-4"
             onClick={backToLobby}
           >
             Back
@@ -223,7 +230,10 @@ const TicTacToe = () => {
             : "text-red-700")
         }
       >
-        {localGameState.isHostTurn == isHost ? "Your Turn" : "Opponent's Turn"}
+        {gameInProgress &&
+          (localGameState.isHostTurn == isHost
+            ? "Your Turn"
+            : "Opponent's Turn")}
       </p>
     </div>
   );
