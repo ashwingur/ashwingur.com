@@ -234,9 +234,9 @@ const TicTacToe = () => {
       (gameWinner == Cell.X && isHost) ||
       (gameWinner == Cell.O && !isHost)
     ) {
-      return <p className="text-center text-2xl my-4">You Win!</p>;
+      return <p className="text-center text-4xl my-4">You Win!</p>;
     } else {
-      return <p className="text-center text-2xl my-4">You Lose!</p>;
+      return <p className="text-center text-4xl my-4">You Lose!</p>;
     }
   };
 
