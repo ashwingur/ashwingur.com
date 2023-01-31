@@ -156,7 +156,7 @@ const PusherTest = () => {
           <h2 className="text-center">Hello, {username}</h2>
           <p className="text-center">
             <span className="text-green-600 font-bold">{liveUserCount} </span>{" "}
-            users online
+            user{liveUserCount == 0 ? "" : "s"} online
           </p>
           <div className="h-5/6 m-8 overflow-y-scroll flex flex-col">
             {/* Chat */}
