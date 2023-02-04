@@ -31,7 +31,7 @@ const ToggleThemeButton = () => {
     <button
       className=" hover:bg-blue-100 dark:hover:bg-black p-2 rounded-md"
       onClick={() => {
-        setTheme(toggleTheme());
+        toggleTheme();
       }}
     >
       {currentTheme === "light" ? <MdDarkMode /> : <MdLightMode />}
