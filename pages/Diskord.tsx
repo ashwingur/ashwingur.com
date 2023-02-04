@@ -25,8 +25,8 @@ const PusherTest = () => {
   const [liveUserCount, setLiverUserCount] = useState(0);
 
   useEffect(() => {
-    const pusher = new Pusher("71a7b422dcc29a66021c", {
-      cluster: "ap4",
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
     });
 
     let channel = pusher.subscribe("diskord");

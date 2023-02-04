@@ -20,10 +20,8 @@ const ToggleThemeButton = () => {
   function toggleTheme() {
     if (currentTheme === "dark") {
       setTheme("light");
-      return "light";
     } else {
       setTheme("dark");
-      return "dark";
     }
   }
 
