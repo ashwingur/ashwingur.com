@@ -4,14 +4,6 @@ import { MessageData } from "../../Diskord";
 
 // PUSHER DISKORD Messages
 
-// export const pusher = new Pusher({
-//   appId: process.env.appId,
-//   key: process.env.key,
-//   secret: process.env.secret,
-//   cluster: process.env.cluster,
-//   useTLS: true,
-// });
-
 export const pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID!,
   key: process.env.NEXT_PUBLIC_PUSHER_KEY!,
