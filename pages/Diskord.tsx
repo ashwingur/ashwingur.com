@@ -113,7 +113,7 @@ const PusherTest = () => {
         <div className="text-purple-500">{msg_data.username}</div>
         <div className="text-gray-300">{msg_data.timestamp}</div>
       </div>
-      <div className="bg-white dark:bg-gray-900 rounded-2xl px-4 py-2 inline-block max-w-[80%] md:max-w-4xl my-1">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl px-4 py-2 inline-block max-w-[80%] md:max-w-4xl my-1 break-words">
         {msg_data.message}
       </div>
     </div>

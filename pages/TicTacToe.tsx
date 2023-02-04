@@ -88,8 +88,8 @@ const TicTacToe = () => {
   const [gameWinner, setGameWinner] = useState(Cell.Blank); // Blank means no winner, X means host won
 
   useEffect(() => {
-    const pusher_ = new Pusher("71a7b422dcc29a66021c", {
-      cluster: "ap4",
+    const pusher_ = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
     });
     setPusher(pusher_);
   }, []);
