@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Pusher from "pusher";
 import { MessageData } from "../../Diskord";
 
+// PUSHER DISKORD Messages
+
 // export const pusher = new Pusher({
 //   appId: process.env.appId,
 //   key: process.env.key,
@@ -11,7 +13,7 @@ import { MessageData } from "../../Diskord";
 // });
 
 export const pusher = new Pusher({
-  appId: "1543144",
+  appId: process.env.PUSHER_APP_ID!,
   key: "71a7b422dcc29a66021c",
   secret: "ce37a27071f6e188e2dc",
   cluster: "ap4",
