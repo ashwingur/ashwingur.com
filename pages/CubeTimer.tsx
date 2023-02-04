@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { clearInterval, setInterval } from "timers";
-import CubeTimerNavbar from "../components/CubeTimerNavbar";
+import BasicNavbar from "../components/BasicNavbar";
 import Stopwatch, {
   StopwatchTime,
   StopwatchInterface,
@@ -491,7 +491,7 @@ const CubeTimer = () => {
       onTouchStart={handle_spacebar_down}
       onTouchEnd={handle_spacebar_up}
     >
-      <CubeTimerNavbar />
+      <BasicNavbar absolute={false} />
       <h1 className="text-center mt-4">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button
@@ -512,7 +512,7 @@ const CubeTimer = () => {
       <div className="flex mb-4 row flex-wrap mx-auto px-4 justify-center">
         {scramble_to_jsx(scramble)}
       </div>
-      {/* <Stopwatch  stopwatchTime={mm={timer.mm} ss={timer.ss} ms={timer.ms}}  /> */}
+
       <Stopwatch
         stopwatchTime={{ mm: timer.mm, ss: timer.ss, ms: timer.ms }}
         state={timerState}

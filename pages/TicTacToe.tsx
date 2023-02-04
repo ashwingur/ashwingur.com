@@ -3,6 +3,7 @@ import Pusher from "pusher-js";
 import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { BsCircle } from "react-icons/bs";
+import BasicNavbar from "../components/BasicNavbar";
 
 // Host Creates Game and Subscribes to the Channel
 // Guest Subscribes to the channel, and then posts that they joined
@@ -102,11 +103,9 @@ const TicTacToe = () => {
     const x_check = checkWinner(Cell.X, localGameState);
     if (x_check == Cell.Blank) {
       setGameWinner(checkWinner(Cell.O, localGameState));
-      console.log("o check is : " + checkWinner(Cell.O, localGameState));
     } else {
       setGameWinner(x_check);
     }
-    console.log("x check is : " + x_check);
   }, [localGameState]);
 
   const postTurn = (roomName: string, gameState: GameState) => {
@@ -115,9 +114,7 @@ const TicTacToe = () => {
         roomName,
         gameState,
       })
-      .then((response) =>
-        console.log("tictactoe turn response:" + JSON.stringify(response.data))
-      )
+      .then((response) => {})
       .catch((error) => console.log("turn error: " + error));
   };
 
@@ -128,7 +125,6 @@ const TicTacToe = () => {
         isHostTurn: !localGameState.isHostTurn,
       };
       updatedGameState.board[index] = cellType;
-      console.log("updated game board is: " + JSON.stringify(updatedGameState));
       setLocalGameState(updatedGameState);
       postTurn(roomName, updatedGameState);
     }
@@ -138,15 +134,12 @@ const TicTacToe = () => {
     setIsHost(true);
     setInLobby(false);
     const channel = pusher?.subscribe(roomName);
-    console.log("Host subscribed to: " + roomName);
 
     channel?.bind("turn", (data: GameState) => {
-      console.log("turn received: " + JSON.stringify(data));
       setLocalGameState(data);
     });
 
     channel?.bind("guest-joined", () => {
-      console.log("Guest has joined");
       // Guest has now joined, so we can start the game
 
       // Initialise the first game state and send it to both players
@@ -159,19 +152,14 @@ const TicTacToe = () => {
     setIsHost(false);
     setInLobby(false);
     const channel = pusher?.subscribe(roomName);
-    console.log("Guest subscribed to: " + roomName);
 
     channel?.bind("turn", (data: GameState) => {
-      console.log("turn received: " + JSON.stringify(data));
       setLocalGameState(data);
     });
 
     axios
       .post("/api/pusher/tictactoe/join", { roomName })
       .then((response) => {
-        console.log(
-          "join tictactoe response: " + JSON.stringify(response.data)
-        );
         setGameinProgress(true);
       })
       .catch((error) => console.log("error: " + error));
@@ -186,7 +174,6 @@ const TicTacToe = () => {
   };
 
   const onCellClick = (index: number) => {
-    console.log("clicked cell numer " + index);
     if (gameWinner == Cell.Blank) {
       // No winner yet, so a move can be made
       if (localGameState.isHostTurn && isHost) {
@@ -244,6 +231,7 @@ const TicTacToe = () => {
     <div>
       {inLobby && (
         <div className="flex flex-col h-screen">
+          <BasicNavbar absolute={false} />
           <h1 className="text-center py-2">Tic Tac Toe</h1>
           <div className=" m-auto flex flex-col items-center gap-4 justify-center">
             <input
@@ -270,6 +258,7 @@ const TicTacToe = () => {
       )}
       {!inLobby && (
         <div>
+          <BasicNavbar absolute={false} />
           <button
             className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32 ml-4 mt-4"
             onClick={backToLobby}
@@ -293,7 +282,7 @@ const TicTacToe = () => {
             : "Opponent's Turn"}
         </p>
       )}
-      {!gameInProgress && (
+      {!gameInProgress && !inLobby && (
         <p className="text-center text-2xl my-4">
           Waiting for an opponent to join room {`"${roomName}"`}
         </p>

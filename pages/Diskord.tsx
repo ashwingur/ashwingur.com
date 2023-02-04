@@ -3,6 +3,7 @@ import Pusher from "pusher-js";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
+import BasicNavbar from "../components/BasicNavbar";
 
 export interface MessageData {
   message: string;
@@ -132,6 +133,7 @@ const PusherTest = () => {
         }
       }}
     >
+      <BasicNavbar absolute={false} />
       {!loggedIn && (
         <div className="flex h-screen">
           <div className="m-auto flex flex-col items-center justify-center">

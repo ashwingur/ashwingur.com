@@ -7,19 +7,14 @@ import {
   MdOutlineMenu,
   MdOutlineClose,
 } from "react-icons/md";
+import ToggleThemeButton from "./ToggleThemeButton";
 
-interface NavProps {
-  toggleTheme(): any;
-  initialTheme: string;
-}
-
-const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
-  let [currentTheme, setTheme] = useState(initialTheme);
+const Navbar = () => {
   let [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
 
   return (
     <div>
-      <div className="flex fixed w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/30 dark:bg-white/10 z-50">
+      <div className="flex fixed w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/50 dark:bg-white/10 z-50">
         <Link href="/">
           <Image src="/logo.png" alt="logo" width="80" height="80" />
         </Link>
@@ -53,14 +48,7 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
             <li>Contact</li>
           </Link>
           <li>
-            <button
-              className=" hover:bg-blue-100 dark:hover:bg-black p-2 rounded-md"
-              onClick={() => {
-                setTheme(toggleTheme());
-              }}
-            >
-              {currentTheme === "light" ? <MdDarkMode /> : <MdLightMode />}
-            </button>
+            <ToggleThemeButton />
           </li>
         </ul>
         <div
@@ -150,14 +138,7 @@ const Navbar = ({ toggleTheme, initialTheme }: NavProps) => {
               <li>Contact</li>
             </Link>
             <li>
-              <button
-                className=" hover:bg-blue-100 dark:hover:bg-black p-2 rounded-md my-2"
-                onClick={() => {
-                  setTheme(toggleTheme());
-                }}
-              >
-                {currentTheme === "light" ? <MdDarkMode /> : <MdLightMode />}
-              </button>
+              <ToggleThemeButton />
             </li>
           </ul>
         </div>
