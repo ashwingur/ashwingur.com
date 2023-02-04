@@ -5,7 +5,7 @@ import BasicNavbar from "../components/BasicNavbar";
 
 // My profile: #YLPGLJOV
 
-// Model from the documentation
+// Model from the  documentation
 interface Player {
   role: string;
   warPreference: string;
