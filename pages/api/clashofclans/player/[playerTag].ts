@@ -14,13 +14,23 @@ export default async function handler(
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
 
-  axios
-    .get("https://cocproxy.royaleapi.dev/v1/players/%23YLPGLJOV", {
+  const { playerTag } = req.query;
+
+  await axios
+    .get(`https://cocproxy.royaleapi.dev/v1/players/%23${playerTag}`, {
       headers: {
         Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
       },
     })
     .then((response) => {
+      // console.log("is this running?");
+      console.log(`Response: ${response}`);
       res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      console.log(`Error: ${error}`);
+      res
+        .status(500)
+        .json({ error: "something went wrong: " + JSON.stringify(error) });
     });
 }
