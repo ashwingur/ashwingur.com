@@ -6,13 +6,12 @@ html {
   scroll-behavior: smooth;
 }
 
-@layer base {
-  @font-face {
-    font-family: "Clash-Regular";
-    font-weight: 400;
-    src: url("/fonts/ClashRoyale/TTF/Clash-Regular.ttf");
-  }
+@font-face {
+  font-family: "Clash-Regular";
+  src: url("/fonts/ClashRoyale/TTF/Clash-Regular.ttf");
+}
 
+@layer base {
   body {
     @apply bg-slate-50 dark:bg-slate-800 dark:text-gray-200;
   }
