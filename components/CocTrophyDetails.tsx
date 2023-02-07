@@ -8,7 +8,7 @@ interface CocTrophyDetailsProps {
 
 const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
   return (
-    <div className="font-clash clash-font-style pb-10 md:pb-0">
+    <div className="font-clash clash-font-style pb-10 md:pb-0 ml-4 md:ml-0">
       <div className="flex items-center relative">
         <Image
           alt={player.league.name}
