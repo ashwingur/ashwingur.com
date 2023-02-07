@@ -8,7 +8,18 @@ html {
 
 @font-face {
   font-family: "Clash-Regular";
+  font-weight: 400;
   src: url("/fonts/ClashRoyale/TTF/Clash-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Clash-Regular";
+  font-weight: 100;
+  src: url("/fonts/ClashRoyale/TTF/Clash-Light.ttf");
+}
+
+.clash-font-style {
+  @apply text-white [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
 @layer base {

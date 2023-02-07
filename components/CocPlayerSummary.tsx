@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { Player } from "../shared/interfaces/coc.interface";
 
@@ -6,18 +7,47 @@ interface CocPlayerSummaryProps {
 }
 
 const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
+  const labels = player.labels.map((label, index) => {
+    return (
+      <Image
+        key={index}
+        alt={label.name}
+        src={label.iconUrls.medium}
+        width={30}
+        height={30}
+      />
+    );
+  });
+
   return (
-    <div>
-      <div className="flex items-center gap-4 font-clash text-white [text-shadow:_0_2px_2px_black,_0_2px_2px_black,_0_2px_2px_black,_0_2px_2px_black,_0_2px_2px_black]">
-        {player.expLevel}
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex items-center gap-4 font-clash clash-font-style">
+        <div className="bg-[#4eb3e3] p-2 rounded-md border-2 border-black">
+          {player.expLevel}
+        </div>
         <div>
-          <div>{player.name}</div>
-          <div>{player.tag}</div>
-          <div>{player.role}</div>
+          <div className="text-xl">{player.name}</div>
+          <div className="text-gray-300 font-thin text-sm">{player.tag}</div>
+          <div className="text-sm">{mapPlayerRole(player.role)}</div>
         </div>
       </div>
+      <div className="flex gap-4">{labels}</div>
     </div>
   );
+};
+
+const mapPlayerRole = (role: string) => {
+  switch (role) {
+    case "leader":
+      return "Leader";
+    case "coLeader":
+      return "Co-leader";
+    case "admin":
+      return "Elder";
+    case "member":
+      return "Member";
+  }
+  return "";
 };
 
 export default CocPlayerSummary;

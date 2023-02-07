@@ -4,10 +4,13 @@ import BasicNavbar from "../components/BasicNavbar";
 import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { Player } from "../shared/interfaces/coc.interface";
 import CocPlayerSummary from "../components/CocPlayerSummary";
+import CocPlayerClan from "../components/CocPlayerClan";
 
 // https://coc.guide/troop
 
 // My profile: #YLPGLJOV
+// Cardo: #2JJQU28GR
+// Shao: QGG8LL0JJ
 
 interface Tags {
   playerTag: string;
@@ -67,7 +70,7 @@ const ClashOfClans = () => {
       {/* {JSON.stringify(playerData)} */}
       <h2 className="text-center my-2">Clash of Clans</h2>
       {/* Input Fields */}
-      <div className="flex justify-center gap-8 my-8">
+      <div className="flex flex-col items-center md:flex-row justify-center gap-8 my-8">
         <div className="flex items-center">
           <BiHash size={25} />
           <input
@@ -106,8 +109,13 @@ const ClashOfClans = () => {
           </button>
         </div>
       </div>
-      <div className="bg-gradient-to-b from-blue-100 to-blue-400">
-        {playerData && <CocPlayerSummary player={playerData} />}
+      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b]">
+        {playerData && (
+          <div className="flex flex-col sm:flex-row sm:justify-around items-center">
+            <CocPlayerSummary player={playerData} />
+            <CocPlayerClan player={playerData} />
+          </div>
+        )}
       </div>
     </div>
   );
