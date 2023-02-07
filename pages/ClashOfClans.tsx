@@ -5,6 +5,7 @@ import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { Player } from "../shared/interfaces/coc.interface";
 import CocPlayerSummary from "../components/CocPlayerSummary";
 import CocPlayerClan from "../components/CocPlayerClan";
+import CocTrophyDetails from "../components/CocTrophyDetails";
 
 // https://coc.guide/troop
 
@@ -111,9 +112,10 @@ const ClashOfClans = () => {
       </div>
       <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b]">
         {playerData && (
-          <div className="flex flex-col sm:flex-row sm:justify-around items-center">
+          <div className="flex flex-col md:flex-row md:justify-around items-center">
             <CocPlayerSummary player={playerData} />
             <CocPlayerClan player={playerData} />
+            <CocTrophyDetails player={playerData} />
           </div>
         )}
       </div>
