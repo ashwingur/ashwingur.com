@@ -9,6 +9,7 @@ interface CocPlayerClanProps {
 const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
   return (
     <div className="font-clash text-white clash-font-style py-4">
+      <div>{player.clan}</div>
       <div>{player.clan.name}</div>
       <Image
         alt={player.clan.name}

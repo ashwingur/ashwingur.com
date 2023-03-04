@@ -120,7 +120,10 @@ const ClashOfClans = () => {
           <div>
             <div className="flex flex-col md:flex-row md:justify-around items-center">
               <CocPlayerSummary player={playerData} />
-              <CocPlayerClan player={playerData} />
+              {playerData.hasOwnProperty("clan") && (
+                <CocPlayerClan player={playerData} />
+              )}
+
               <CocTrophyDetails player={playerData} />
             </div>
             <CocPlayerArmy player={playerData} />
