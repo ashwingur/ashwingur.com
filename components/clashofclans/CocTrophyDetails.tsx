@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "../shared/interfaces/coc.interface";
+import { Player } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 
 interface CocTrophyDetailsProps {

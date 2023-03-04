@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "../shared/interfaces/coc.interface";
+import { Player } from "../../shared/interfaces/coc.interface";
 
 interface CocPlayerProfileProps {
   player: Player;

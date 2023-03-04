@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import BasicNavbar from "../components/BasicNavbar";
 import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { Player } from "../shared/interfaces/coc.interface";
-import CocPlayerSummary from "../components/CocPlayerSummary";
-import CocPlayerClan from "../components/CocPlayerClan";
-import CocTrophyDetails from "../components/CocTrophyDetails";
+import CocPlayerSummary from "../components/clashofclans/CocPlayerSummary";
+import CocPlayerClan from "../components/clashofclans/CocPlayerClan";
+import CocTrophyDetails from "../components/clashofclans/CocTrophyDetails";
+import CocPlayerArmy from "../components/clashofclans/CocPlayerArmy";
 
-// https://coc.guide/troop
+// https://coc.guide/troop for the icons
 
 // My profile: #YLPGLJOV
 // Cardo: #2JJQU28GR
@@ -112,10 +113,13 @@ const ClashOfClans = () => {
       </div>
       <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b]">
         {playerData && (
-          <div className="flex flex-col md:flex-row md:justify-around items-center">
-            <CocPlayerSummary player={playerData} />
-            <CocPlayerClan player={playerData} />
-            <CocTrophyDetails player={playerData} />
+          <div>
+            <div className="flex flex-col md:flex-row md:justify-around items-center">
+              <CocPlayerSummary player={playerData} />
+              <CocPlayerClan player={playerData} />
+              <CocTrophyDetails player={playerData} />
+            </div>
+            <CocPlayerArmy player={playerData} />
           </div>
         )}
       </div>

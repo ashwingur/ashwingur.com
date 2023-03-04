@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { Player } from "../shared/interfaces/coc.interface";
+import { Player } from "../../shared/interfaces/coc.interface";
 
 interface CocPlayerSummaryProps {
   player: Player;
