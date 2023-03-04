@@ -8,6 +8,7 @@ import CocPlayerClan from "../components/clashofclans/CocPlayerClan";
 import CocTrophyDetails from "../components/clashofclans/CocTrophyDetails";
 import CocPlayerArmy from "../components/clashofclans/CocPlayerArmy";
 import CocPlayerTownHall from "../components/clashofclans/CocPlayerTownHall";
+import CocNavBar from "../components/clashofclans/CocNavBar";
 
 // https://coc.guide/troop for the icons
 
@@ -67,69 +68,10 @@ const ClashOfClans = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
-      <div className="fixed w-screen z-10">
-        <BasicNavbar absolute={false} />
-      </div>
-      {/* {JSON.stringify(playerData)} */}
+      <CocNavBar />
       <h2 className="text-center pt-20 clash-font-style font-thin">
         Clash of Clans
       </h2>
-      {/* Input Fields */}
-      <div className="flex flex-col items-center md:flex-row justify-center gap-8 my-8">
-        <div className="flex items-center">
-          <BiHash size={25} />
-          <input
-            className="border-2 w-60 rounded-sm py-1 px-2"
-            placeholder="PLAYER TAG"
-            value={inputFieldTags.playerTag}
-            onChange={updateTagInput}
-            name="playerTag"
-          />
-          <button
-            onClick={() => {
-              setPlayerTag(inputFieldTags.playerTag);
-            }}
-            className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
-          >
-            <BiSearchAlt2 size={30} />
-          </button>
-        </div>
-
-        <div className="flex items-center">
-          <BiHash size={25} />
-          <input
-            className="border-2 w-60 rounded-sm py-1 px-2"
-            placeholder="CLAN TAG"
-            value={inputFieldTags.clanTag}
-            onChange={updateTagInput}
-            name="clanTag"
-          />
-          <button
-            onClick={() => {
-              setClanTag(inputFieldTags.playerTag);
-            }}
-            className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
-          >
-            <BiSearchAlt2 size={30} />
-          </button>
-        </div>
-      </div>
-      <div>
-        {playerData && (
-          <div>
-            <div className="flex flex-col md:flex-row md:justify-around items-center">
-              <CocPlayerSummary player={playerData} />
-              <CocPlayerTownHall player={playerData} />
-              {playerData.hasOwnProperty("clan") && (
-                <CocPlayerClan player={playerData} />
-              )}
-
-              <CocTrophyDetails player={playerData} />
-            </div>
-            <CocPlayerArmy player={playerData} />
-          </div>
-        )}
-      </div>
     </div>
   );
 };

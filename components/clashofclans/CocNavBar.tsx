@@ -79,7 +79,7 @@ const CocNavBar = () => {
           <BiHash size={25} />
           <input
             className="border-2 w-60 rounded-sm py-1 px-2"
-            placeholder="CLAN TAG"
+            placeholder="(TODO) CLAN TAG"
             value={inputFieldTags.clanTag}
             onChange={updateTagInput}
             name="clanTag"

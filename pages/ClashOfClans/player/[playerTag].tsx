@@ -41,7 +41,7 @@ const PlayerPage = () => {
       <CocNavBar />
       {/* {JSON.stringify(playerData)} */}
       <h2 className="text-center pt-20 clash-font-style font-thin">
-        Clash of Clans
+        Player Search
       </h2>
 
       <div>
