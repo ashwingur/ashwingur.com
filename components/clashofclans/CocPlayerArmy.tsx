@@ -6,11 +6,16 @@ interface CocPlayerArmyProps {
   player: Player;
 }
 
+interface ArmyItemsCategoryProps {
+  items: PlayerItemLevel[];
+  category: string;
+}
+
 const ArmyItemIcon = ({ name, level, maxLevel }: PlayerItemLevel) => {
   const icon_name: string = name.replaceAll(" ", "_");
   console.log(`og: ${name}, icon: ${icon_name}`);
   return (
-    <div className="border-black border-2 inline-block rounded-md relative">
+    <div className="border-black border-2 inline-block rounded-md relative font-clash font-thin">
       <Image
         src={`/assets/coc/troops/icons/${icon_name}.png`}
         alt={name}
@@ -29,18 +34,39 @@ const ArmyItemIcon = ({ name, level, maxLevel }: PlayerItemLevel) => {
   );
 };
 
-const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
-  const player_troops = player.troops.map((item, index) => (
-    <div key={index} className="font-clash font-thin">
-      <ArmyItemIcon {...item} />
-    </div>
+const ArmyItemsCategory = ({ items, category }: ArmyItemsCategoryProps) => {
+  const items_elements = items.map((item, index) => (
+    <ArmyItemIcon key={index} {...item} />
   ));
 
   return (
-    <div className="">
-      <div className="flex flex-row flex-wrap gap-1 px-4 md:px-8">
-        {player_troops}
+    <div className="bg-[#5d6b96] p-4 mx-4 md:mx-8 rounded-lg my-4">
+      <div className=" clash-font-style text-xl mb-4">{category}</div>
+      <div className="flex flex-row flex-wrap gap-1 ">{items_elements}</div>
+    </div>
+  );
+};
+
+const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
+  const player_troops = player.troops.map((item, index) => (
+    <ArmyItemIcon key={index} {...item} />
+  ));
+
+  const player_spells = player.spells.map((item, index) => (
+    <ArmyItemIcon key={index} {...item} />
+  ));
+
+  return (
+    <div>
+      <div className="bg-[#5d6b96] p-4 mx-4 md:mx-8 rounded-lg">
+        <div className=" clash-font-style text-xl mb-4">Home Troops</div>
+        <div className="flex flex-row flex-wrap gap-1 ">{player_troops}</div>
       </div>
+      <div className="bg-[#5d6b96] p-4 mx-4 md:mx-8 rounded-lg my-4">
+        <div className=" clash-font-style text-xl mb-4">Spells</div>
+        <div className="flex flex-row flex-wrap gap-1 ">{player_spells}</div>
+      </div>
+      <ArmyItemsCategory items={player.heroes} category="Heroes" />
     </div>
   );
 };

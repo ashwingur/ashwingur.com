@@ -19,7 +19,7 @@ html {
 }
 
 .clash-font-style {
-  @apply text-white [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
+  @apply text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
 @layer base {

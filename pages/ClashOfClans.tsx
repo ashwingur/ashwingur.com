@@ -67,10 +67,12 @@ const ClashOfClans = () => {
   };
 
   return (
-    <div>
-      <BasicNavbar absolute={false} />
+    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
+      <div className="fixed w-screen z-10">
+        <BasicNavbar absolute={false} />
+      </div>
       {/* {JSON.stringify(playerData)} */}
-      <h2 className="text-center my-2">Clash of Clans</h2>
+      <h2 className="text-center pt-20">Clash of Clans</h2>
       {/* Input Fields */}
       <div className="flex flex-col items-center md:flex-row justify-center gap-8 my-8">
         <div className="flex items-center">
@@ -111,7 +113,7 @@ const ClashOfClans = () => {
           </button>
         </div>
       </div>
-      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b]">
+      <div>
         {playerData && (
           <div>
             <div className="flex flex-col md:flex-row md:justify-around items-center">
