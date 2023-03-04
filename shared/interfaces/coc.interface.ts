@@ -1,7 +1,8 @@
 export interface Player {
   tag: string;
   name: string;
-  townHallLevel: string;
+  townHallLevel: number;
+  townHallWeaponLevel: number;
   expLevel: number;
   trophies: number;
   bestTrophies: number;

@@ -8,13 +8,21 @@ interface CocPlayerTownHallProps {
 
 const CocPlayerTownHall = ({ player }: CocPlayerTownHallProps) => {
   return (
-    <div className="my-4">
+    <div className="my-4 flex flex-col items-center">
+      <div className="clash-font-style mb-2">
+        Town Hall {player.townHallLevel}
+      </div>
       <Image
         src={`/assets/coc/townhalls/${player.townHallLevel}.png`}
-        width={100}
-        height={100}
+        width={90}
+        height={90}
         alt={`Townhall level ${player.townHallLevel}`}
       />
+      {player.hasOwnProperty("townHallWeaponLevel") && (
+        <div className="clash-font-style mb-2">
+          Weapon Level {player.townHallWeaponLevel}
+        </div>
+      )}
     </div>
   );
 };
