@@ -7,6 +7,7 @@ import CocPlayerSummary from "../components/clashofclans/CocPlayerSummary";
 import CocPlayerClan from "../components/clashofclans/CocPlayerClan";
 import CocTrophyDetails from "../components/clashofclans/CocTrophyDetails";
 import CocPlayerArmy from "../components/clashofclans/CocPlayerArmy";
+import CocPlayerTownHall from "../components/clashofclans/CocPlayerTownHall";
 
 // https://coc.guide/troop for the icons
 
@@ -35,7 +36,6 @@ const ClashOfClans = () => {
   });
 
   const searchForPlayer = (playerTag: string) => {
-    console.log("sending player tag " + playerTag);
     axios
       .get(`/api/clashofclans/player/${playerTag}`)
       .then((response) => {
@@ -50,7 +50,6 @@ const ClashOfClans = () => {
     setInputFieldTags((prevValue: Tags) => {
       return { ...prevValue, [name]: value };
     });
-    console.log(inputFieldTags);
   };
 
   const setPlayerTag = (value: string) => {
@@ -120,6 +119,7 @@ const ClashOfClans = () => {
           <div>
             <div className="flex flex-col md:flex-row md:justify-around items-center">
               <CocPlayerSummary player={playerData} />
+              <CocPlayerTownHall player={playerData} />
               {playerData.hasOwnProperty("clan") && (
                 <CocPlayerClan player={playerData} />
               )}
