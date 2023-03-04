@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BiHash } from "react-icons/bi";
 import BasicNavbar from "../../../components/BasicNavbar";
+import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import CocPlayerArmy from "../../../components/clashofclans/CocPlayerArmy";
 import CocPlayerClan from "../../../components/clashofclans/CocPlayerClan";
 import CocPlayerSummary from "../../../components/clashofclans/CocPlayerSummary";
@@ -34,9 +35,10 @@ const PlayerPage = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
-      <div className="fixed w-screen z-10">
+      {/* <div className="fixed w-screen z-10">
         <BasicNavbar absolute={false} />
-      </div>
+      </div> */}
+      <CocNavBar />
       {/* {JSON.stringify(playerData)} */}
       <h2 className="text-center pt-20 clash-font-style font-thin">
         Clash of Clans
