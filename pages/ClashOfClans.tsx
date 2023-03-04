@@ -72,7 +72,9 @@ const ClashOfClans = () => {
         <BasicNavbar absolute={false} />
       </div>
       {/* {JSON.stringify(playerData)} */}
-      <h2 className="text-center pt-20">Clash of Clans</h2>
+      <h2 className="text-center pt-20 clash-font-style font-thin">
+        Clash of Clans
+      </h2>
       {/* Input Fields */}
       <div className="flex flex-col items-center md:flex-row justify-center gap-8 my-8">
         <div className="flex items-center">
