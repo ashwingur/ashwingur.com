@@ -50,6 +50,7 @@ const ClanPage = () => {
               <CocClanSummary clan={clanData} />
               <CocClanDetails clan={clanData} />
             </div>
+
             <div className="mx-4 my-4">{clanMembers}</div>
           </div>
         )}

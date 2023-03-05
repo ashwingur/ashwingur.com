@@ -50,6 +50,9 @@ const ArmyItemsCategory = ({
   category,
   showLevel,
 }: ArmyItemsCategoryProps) => {
+  if (items.length == 0) {
+    return <></>;
+  }
   const items_elements = items.map((item, index) => (
     <ArmyItemIcon key={index} playerItemLevel={item} showLevel={showLevel} />
   ));
