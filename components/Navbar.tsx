@@ -10,7 +10,7 @@ import {
 import ToggleThemeButton from "./ToggleThemeButton";
 
 const Navbar = () => {
-  let [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
+  const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
 
   return (
     <div>

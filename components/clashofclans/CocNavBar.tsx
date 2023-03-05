@@ -4,6 +4,7 @@ import Image from "next/image";
 import ToggleThemeButton from "../ToggleThemeButton";
 import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { MdOutlineMenu } from "react-icons/md";
 
 interface Tags {
   playerTag: string;
@@ -12,6 +13,7 @@ interface Tags {
 
 const CocNavBar = () => {
   const router = useRouter();
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   // The current value of the input fields
   const [inputFieldTags, setInputFieldTags] = useState<Tags>({
@@ -46,55 +48,129 @@ const CocNavBar = () => {
   };
 
   return (
-    <div
-      className={
-        "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/30 dark:bg-white/10 z-50 fixed"
-      }
-    >
-      <Link href="/">
-        <Image src="/logo.png" alt="logo" width="80" height="80" />
-      </Link>
-      {/* Input Fields */}
-      <div className="flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
-        <div className="flex items-center">
-          <BiHash size={25} />
-          <input
-            className="border-2 w-60 rounded-sm py-1 px-2 uppercase"
-            placeholder="PLAYER TAG"
-            value={inputFieldTags.playerTag}
-            onChange={updateTagInput}
-            name="playerTag"
-          />
-          <button
-            onClick={() => {
-              setPlayerTag(inputFieldTags.playerTag);
-            }}
-            className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
-          >
-            <BiSearchAlt2 size={30} />
-          </button>
-        </div>
+    <div>
+      <div className="flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/30 dark:bg-white/10 z-50 fixed">
+        <Link href="/">
+          <Image src="/logo.png" alt="logo" width="80" height="80" />
+        </Link>
+        {/* Input Fields */}
+        <div className="hidden md:flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
+          <div className="flex items-center">
+            <BiHash size={25} />
+            <input
+              className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
+              placeholder="PLAYER TAG"
+              value={inputFieldTags.playerTag}
+              onChange={updateTagInput}
+              name="playerTag"
+            />
+            <button
+              onClick={() => {
+                setPlayerTag(inputFieldTags.playerTag);
+              }}
+              className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
+            >
+              <BiSearchAlt2 size={30} />
+            </button>
+          </div>
 
-        <div className="flex items-center">
-          <BiHash size={25} />
-          <input
-            className="border-2 w-60 rounded-sm py-1 px-2 uppercase"
-            placeholder="CLAN TAG"
-            value={inputFieldTags.clanTag}
-            onChange={updateTagInput}
-            name="clanTag"
-          />
-          <button
-            onClick={() => {
-              setClanTag(inputFieldTags.clanTag);
-            }}
-            className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
-          >
-            <BiSearchAlt2 size={30} />
-          </button>
+          <div className="flex items-center">
+            <BiHash size={25} />
+            <input
+              className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
+              placeholder="CLAN TAG"
+              value={inputFieldTags.clanTag}
+              onChange={updateTagInput}
+              name="clanTag"
+            />
+            <button
+              onClick={() => {
+                setClanTag(inputFieldTags.clanTag);
+              }}
+              className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
+            >
+              <BiSearchAlt2 size={30} />
+            </button>
+          </div>
+        </div>
+        <div className="hidden md:block">
+          <ToggleThemeButton />
+        </div>
+        <div
+          className="cursor-pointer md:hidden"
+          onClick={() => {
+            setShowMobileNav(true);
+          }}
+        >
+          <MdOutlineMenu size={25} />
         </div>
       </div>
-      <ToggleThemeButton />
+      {/* MOBILE NAV MENU */}
+      <div
+        className={
+          showMobileNav
+            ? "fixed w-full h-screen bg-black/70 top-0 left-0 z-50 transition-all"
+            : "z-50"
+        }
+        onClick={() => setShowMobileNav(false)}
+      >
+        <div
+          className={
+            showMobileNav
+              ? "absolute left-0 top-0 w-[75%] h-full bg-slate-50 dark:bg-slate-800 ease-in duration-500 z-50"
+              : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50"
+          }
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {/* Input Fields */}
+          <div className="flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
+            <div className="flex items-center mt-8">
+              <BiHash size={25} />
+              <input
+                className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
+                placeholder="PLAYER TAG"
+                value={inputFieldTags.playerTag}
+                onChange={updateTagInput}
+                name="playerTag"
+              />
+              <button
+                onClick={() => {
+                  setPlayerTag(inputFieldTags.playerTag);
+                  setShowMobileNav(false);
+                }}
+                className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
+              >
+                <BiSearchAlt2 size={30} />
+              </button>
+            </div>
+
+            <div className="flex items-center">
+              <BiHash size={25} />
+              <input
+                className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
+                placeholder="CLAN TAG"
+                value={inputFieldTags.clanTag}
+                onChange={updateTagInput}
+                name="clanTag"
+              />
+              <button
+                onClick={() => {
+                  setClanTag(inputFieldTags.clanTag);
+                  setShowMobileNav(false);
+                }}
+                className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
+              >
+                <BiSearchAlt2 size={30} />
+              </button>
+            </div>
+            <div className="">
+              <ToggleThemeButton />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
