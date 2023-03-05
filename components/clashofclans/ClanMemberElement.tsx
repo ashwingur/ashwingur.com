@@ -16,10 +16,10 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
 
   return (
     <div
-      className="bg-gray-200 flex flex-col md:flex-row justify-between my-2 px-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 transition-all"
+      className="bg-gray-200 flex flex-col md:flex-row justify-between my-2 px-2 py-2 md:py-0 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 transition-all"
       onClick={clanMemberClick}
     >
-      <div className="flex">
+      <div className="flex mx-auto md:mx-0">
         <div className="relative w-12 h-12 md:w-16 md:h-16">
           <Image
             alt={clanMember.league.name}
@@ -32,7 +32,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
             style={{ objectFit: "cover" }}
           />
         </div>
-        <div className="w-[1px] my-1 mx-2 bg-gray-400" />
+        <div className="w-[1px] my-1 mx-2 md:bg-gray-400" />
         <div>
           <div className="text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
             {clanMember.name}
