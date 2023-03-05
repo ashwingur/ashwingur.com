@@ -16,7 +16,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
 
   return (
     <div
-      className="bg-gray-50 flex my-2 cursor-pointer"
+      className="bg-gray-100 flex my-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:py-1 transition-all"
       onClick={clanMemberClick}
     >
       <div className="flex">
@@ -32,9 +32,15 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
             style={{ objectFit: "cover" }}
           />
         </div>
+        <div className="w-[1px] my-1 mx-2 bg-gray-400"></div>
         <div>
-          <div>{clanMember.name}</div>
-          <div>{mapPlayerRole(clanMember.role)}</div>
+          <div className="text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
+            {clanMember.name}
+          </div>
+
+          <div className="text-slate-700 font-coc font-thin">
+            {mapPlayerRole(clanMember.role)}
+          </div>
         </div>
       </div>
       <div></div>
