@@ -16,7 +16,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
 
   return (
     <div
-      className="bg-gray-200 flex justify-between my-2 px-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:py-1 transition-all"
+      className="bg-gray-200 flex flex-col md:flex-row justify-between my-2 px-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 transition-all"
       onClick={clanMemberClick}
     >
       <div className="flex">
@@ -32,7 +32,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
             style={{ objectFit: "cover" }}
           />
         </div>
-        <div className="w-[1px] my-1 mx-2 bg-gray-400"></div>
+        <div className="w-[1px] my-1 mx-2 bg-gray-400" />
         <div>
           <div className="text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
             {clanMember.name}
@@ -43,13 +43,25 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center">
-        <div>
-          <div>Troops donated:</div>
-          <div>{clanMember.donations}</div>
+      <div className="flex flex-col justify-center items-center md:flex-row gap-2 md:gap-0">
+        <div className="flex flex-col items-center px-8">
+          <div className="font-coc font-thin text-slate-700">
+            Troops donated:
+          </div>
+          <div className="font-coc font-thin bg-white w-full text-center rounded-md">
+            {clanMember.donations}
+          </div>
+        </div>
+        <div className="flex flex-col items-center mx-8">
+          <div className="font-coc font-thin text-slate-700">
+            Troops received:
+          </div>
+          <div className="font-coc font-thin bg-white w-full text-center rounded-md">
+            {clanMember.donationsReceived}
+          </div>
         </div>
 
-        <div className="flex items-center border-2 border-white rounded-md px-4 bg-gradient-to-b from-yellow-100 to-yellow-300">
+        <div className="flex items-center border-2 border-white rounded-md px-4 bg-gradient-to-b from-yellow-100 to-yellow-300 w-28">
           <div className="mr-2 text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
             {clanMember.trophies}
           </div>
