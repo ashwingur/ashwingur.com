@@ -110,7 +110,7 @@ export interface Clan {
   memberList: ClanMember[];
   labels: Label[];
   requiredVersusTrophies: number;
-  requiredTownHallLevel: number;
+  requiredTownhallLevel: number;
   clanCapital: ClanCapital;
 }
 

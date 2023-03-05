@@ -34,6 +34,10 @@ html {
   @apply text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
+.coc-font-style {
+  @apply text-white font-coc font-thin [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
+}
+
 @layer base {
   body {
     @apply bg-slate-50 dark:bg-slate-800 dark:text-gray-200;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import CocClanDetails from "../../../components/clashofclans/CocClanDetails";
 import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import { Clan } from "../../../shared/interfaces/coc.interface";
@@ -39,8 +40,9 @@ const ClanPage = () => {
       <div>
         {clanData && (
           <div>
-            <div>
+            <div className="flex flex-col md:flex-row md:justify-around items-center">
               <CocClanSummary clan={clanData} />
+              <CocClanDetails clan={clanData} />
             </div>
           </div>
         )}
