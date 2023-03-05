@@ -35,7 +35,9 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
         <div>
           <div className="text-xl text-yellow-100">{clan.name}</div>
           <div className="font-thin font-coc text-lg">{clan.tag}</div>
-          <div className="text-lg font-thin font-coc">{clan.description}</div>
+          <div className="text-lg font-thin font-coc w-48 lg:w-96">
+            {clan.description}
+          </div>
         </div>
       </div>
       <div className="flex gap-4">{labels}</div>

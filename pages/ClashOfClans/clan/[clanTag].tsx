@@ -40,7 +40,7 @@ const ClanPage = () => {
       <div>
         {clanData && (
           <div>
-            <div className="flex flex-col md:flex-row md:justify-around items-center">
+            <div className="flex flex-col gap-4 md:flex-row md:justify-around items-center bg-[#787b60] mx-4 p-4 mt-4 rounded-lg border-2 border-black">
               <CocClanSummary clan={clanData} />
               <CocClanDetails clan={clanData} />
             </div>
