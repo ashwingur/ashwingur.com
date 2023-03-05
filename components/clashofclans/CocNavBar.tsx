@@ -35,7 +35,6 @@ const CocNavBar = () => {
     setTags((prevValue: Tags) => {
       return { ...prevValue, playerTag: value };
     });
-    // searchForPlayer(value);
     router.push(`/ClashOfClans/player/${value}`);
   };
 
@@ -43,6 +42,7 @@ const CocNavBar = () => {
     setTags((prevValue: Tags) => {
       return { ...prevValue, clanTag: value };
     });
+    router.push(`/ClashOfClans/clan/${value}`);
   };
 
   return (
@@ -55,11 +55,11 @@ const CocNavBar = () => {
         <Image src="/logo.png" alt="logo" width="80" height="80" />
       </Link>
       {/* Input Fields */}
-      <div className="flex flex-col items-center md:flex-row justify-center gap-8">
+      <div className="flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
         <div className="flex items-center">
           <BiHash size={25} />
           <input
-            className="border-2 w-60 rounded-sm py-1 px-2"
+            className="border-2 w-60 rounded-sm py-1 px-2 uppercase"
             placeholder="PLAYER TAG"
             value={inputFieldTags.playerTag}
             onChange={updateTagInput}
@@ -78,15 +78,15 @@ const CocNavBar = () => {
         <div className="flex items-center">
           <BiHash size={25} />
           <input
-            className="border-2 w-60 rounded-sm py-1 px-2"
-            placeholder="(TODO) CLAN TAG"
+            className="border-2 w-60 rounded-sm py-1 px-2 uppercase"
+            placeholder="CLAN TAG"
             value={inputFieldTags.clanTag}
             onChange={updateTagInput}
             name="clanTag"
           />
           <button
             onClick={() => {
-              setClanTag(inputFieldTags.playerTag);
+              setClanTag(inputFieldTags.clanTag);
             }}
             className="bg-black p-1 rounded-lg ml-2 text-yellow-500 hover:text-red-600 transition-all"
           >

@@ -27,8 +27,8 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
         </div>
         <div>
           <div className="text-xl">{player.name}</div>
-          <div className="text-gray-300 font-thin text-sm">{player.tag}</div>
-          <div className="text-sm">{mapPlayerRole(player.role)}</div>
+          <div className="text-gray-300 font-thin font-coc">{player.tag}</div>
+          <div className="font-coc font-thin">{mapPlayerRole(player.role)}</div>
         </div>
       </div>
       <div className="flex gap-4">{labels}</div>

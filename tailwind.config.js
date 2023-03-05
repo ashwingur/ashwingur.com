@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         clash: ["Clash-Regular", "sans-serif"],
+        coc: ["Coc", "sans-serif"],
       },
     },
   },

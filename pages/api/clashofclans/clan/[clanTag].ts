@@ -14,10 +14,10 @@ export default async function handler(
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
 
-  const { playerTag } = req.query;
+  const { clanTag } = req.query;
 
   await axios
-    .get(`https://cocproxy.royaleapi.dev/v1/players/%23${playerTag}`, {
+    .get(`https://cocproxy.royaleapi.dev/v1/clans/%23${clanTag}`, {
       headers: {
         Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
       },

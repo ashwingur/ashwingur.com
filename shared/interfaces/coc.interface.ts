@@ -91,7 +91,11 @@ export interface Clan {
   description: string;
   location: Location;
   isFamilyFriendly: boolean;
-  badgeUrls: string[];
+  badgeUrls: {
+    small: string;
+    large: string;
+    medium: string;
+  };
   clanLevel: number;
   clanPoints: number;
   clanVersusPoints: number;

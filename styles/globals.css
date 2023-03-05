@@ -18,6 +18,18 @@ html {
   src: url("/fonts/ClashRoyale/TTF/Clash-Light.ttf");
 }
 
+@font-face {
+  font-family: "Coc";
+  font-weight: 400;
+  src: url("/fonts/Coc/coc-thick.ttf");
+}
+
+@font-face {
+  font-family: "Coc";
+  font-weight: 100;
+  src: url("/fonts/Coc/coc-thin.ttf");
+}
+
 .clash-font-style {
   @apply text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
