@@ -16,7 +16,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
 
   return (
     <div
-      className="bg-gray-100 flex my-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:py-1 transition-all"
+      className="bg-gray-200 flex justify-between my-2 px-2 cursor-pointer rounded-lg border-gray-800 border-2 hover:py-1 transition-all"
       onClick={clanMemberClick}
     >
       <div className="flex">
@@ -43,7 +43,24 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div className="flex items-center">
+        <div>
+          <div>Troops donated:</div>
+          <div>{clanMember.donations}</div>
+        </div>
+
+        <div className="flex items-center border-2 border-white rounded-md px-4 bg-gradient-to-b from-yellow-100 to-yellow-300">
+          <div className="mr-2 text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
+            {clanMember.trophies}
+          </div>
+          <Image
+            alt="trophy"
+            src={"/assets/coc/cocTrophy.webp"}
+            width={24}
+            height={24}
+          />
+        </div>
+      </div>
     </div>
   );
 };
