@@ -48,7 +48,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           <div className="font-coc font-thin text-slate-700">
             Troops donated:
           </div>
-          <div className="font-coc font-thin bg-white w-full text-center rounded-md">
+          <div className="font-coc font-thin bg-white w-full text-center rounded-md dark:text-black">
             {clanMember.donations}
           </div>
         </div>
@@ -56,7 +56,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           <div className="font-coc font-thin text-slate-700">
             Troops received:
           </div>
-          <div className="font-coc font-thin bg-white w-full text-center rounded-md">
+          <div className="font-coc font-thin bg-white w-full text-center rounded-md dark:text-black">
             {clanMember.donationsReceived}
           </div>
         </div>
