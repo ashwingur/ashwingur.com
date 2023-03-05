@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { SpinningCircles } from "react-loading-icons";
 import ClanMemberElement from "../../../components/clashofclans/ClanMemberElement";
 import CocClanDetails from "../../../components/clashofclans/CocClanDetails";
 import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
@@ -52,6 +53,7 @@ const ClanPage = () => {
             <div className="mx-4 my-4">{clanMembers}</div>
           </div>
         )}
+        {!clanData && <SpinningCircles className="mx-auto mt-8" />}
       </div>
     </div>
   );

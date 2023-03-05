@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { SpinningCircles } from "react-loading-icons";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import CocPlayerArmy from "../../../components/clashofclans/CocPlayerArmy";
 import CocPlayerClan from "../../../components/clashofclans/CocPlayerClan";
@@ -53,6 +54,7 @@ const PlayerPage = () => {
             <CocPlayerArmy player={playerData} />
           </div>
         )}
+        {!playerData && <SpinningCircles className="mx-auto mt-8" />}
       </div>
     </div>
   );
