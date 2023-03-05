@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ClanMemberElement from "../../../components/clashofclans/ClanMemberElement";
 import CocClanDetails from "../../../components/clashofclans/CocClanDetails";
 import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
@@ -19,6 +20,10 @@ const ClanPage = () => {
       searchForClan(clanTag);
     }
   }, [clanTag]);
+
+  const clanMembers = clanData?.memberList.map((item, index) => (
+    <ClanMemberElement key={index} clanMember={item} />
+  ));
 
   const searchForClan = (clanTag: string) => {
     axios
@@ -44,6 +49,7 @@ const ClanPage = () => {
               <CocClanSummary clan={clanData} />
               <CocClanDetails clan={clanData} />
             </div>
+            <div className="mx-4 my-4">{clanMembers}</div>
           </div>
         )}
       </div>
