@@ -99,6 +99,7 @@ export interface Clan {
   clanLevel: number;
   clanPoints: number;
   clanVersusPoints: number;
+  clanCapitalPoints: number;
   capitalLeague: CapitalLeague;
   requiredTrophies: number;
   warFrequency: string;

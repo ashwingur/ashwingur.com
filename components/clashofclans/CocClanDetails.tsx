@@ -99,6 +99,11 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
         <div>{clan.warWinStreak}</div>
       </div>
       <HorizontalBar />
+      <div className="flex justify-between">
+        <div>Members:</div>
+        <div>{clan.members} / 50</div>
+      </div>
+      <HorizontalBar />
     </div>
   );
 };
