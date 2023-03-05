@@ -110,15 +110,15 @@ const CocNavBar = () => {
         className={
           showMobileNav
             ? "fixed w-full h-screen bg-black/70 top-0 left-0 z-50 transition-all"
-            : "z-50"
+            : "z-50 bg-black"
         }
         onClick={() => setShowMobileNav(false)}
       >
         <div
           className={
             showMobileNav
-              ? "absolute left-0 top-0 w-[75%] h-full bg-slate-50 dark:bg-slate-800 ease-in duration-500 z-50"
-              : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50"
+              ? "absolute left-0 top-0 w-[75%] h-full bg-gradient-to-b from-[#8c94ac] to-[#6c779b] ease-in duration-500 z-50"
+              : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50 bg-white"
           }
           onClick={(e) => {
             e.stopPropagation();
