@@ -8,7 +8,7 @@ interface CocTrophyDetailsProps {
 
 const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
   return (
-    <div className="font-clash clash-font-style pb-10 md:pb-0 ml-4 md:ml-0">
+    <div className="font-clash clash-font-style pb-10 md:pb-0 md:ml-0">
       {player.hasOwnProperty("league") == true ? (
         <div className="flex items-center relative">
           <Image
@@ -16,7 +16,7 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
             src={player.league.iconUrls.medium}
             width={140}
             height={140}
-            className="absolute left-[-65px]"
+            className="absolute left-[-45px] md:left-[-65px]"
           />
           <div className="flex flex-col items-center bg-gradient-to-r from-black">
             <div className="pl-20 py-1">{player.league.name}</div>
