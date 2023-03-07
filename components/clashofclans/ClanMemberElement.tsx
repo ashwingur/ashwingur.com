@@ -20,7 +20,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
       onClick={clanMemberClick}
     >
       <div className="flex mx-auto md:mx-0 md:py-1">
-        <div className="self-center text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
+        <div className="self-center md:w-6 text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
           {clanMember.clanRank}.
         </div>
         <div className="w-[1px] my-1 mx-2 md:bg-gray-400" />
