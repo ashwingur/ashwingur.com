@@ -14,9 +14,9 @@
       "medium": "https://api-assets.clashofclans.com/badges/200/cncSgf85ULZMTP2RoXb3tGoRNa4KItSl8ugziOCuTCA.png"
     },
     "clanLevel": 3,
-    "attacks": 6,
-    "stars": 9,
-    "destructionPercentage": 34.3,
+    "attacks": 8,
+    "stars": 14,
+    "destructionPercentage": 53.2,
     "members": [
       {
         "tag": "#J8YCGJ0G",
@@ -110,6 +110,24 @@
         "name": "<[danz]>",
         "townhallLevel": 14,
         "mapPosition": 1,
+        "attacks": [
+          {
+            "attackerTag": "#YUQ9RGUG",
+            "defenderTag": "#LUG0PQ8YV",
+            "stars": 2,
+            "destructionPercentage": 89,
+            "order": 9,
+            "duration": 109
+          },
+          {
+            "attackerTag": "#YUQ9RGUG",
+            "defenderTag": "#QJ2J09JL9",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 10,
+            "duration": 74
+          }
+        ],
         "opponentAttacks": 0
       },
       {
@@ -226,14 +244,30 @@
         "name": "anomaly",
         "townhallLevel": 14,
         "mapPosition": 1,
-        "opponentAttacks": 0
+        "opponentAttacks": 1,
+        "bestOpponentAttack": {
+          "attackerTag": "#YUQ9RGUG",
+          "defenderTag": "#LUG0PQ8YV",
+          "stars": 2,
+          "destructionPercentage": 89,
+          "order": 9,
+          "duration": 109
+        }
       },
       {
         "tag": "#QJ2J09JL9",
         "name": "VileJaqueline",
         "townhallLevel": 11,
         "mapPosition": 5,
-        "opponentAttacks": 0
+        "opponentAttacks": 1,
+        "bestOpponentAttack": {
+          "attackerTag": "#YUQ9RGUG",
+          "defenderTag": "#QJ2J09JL9",
+          "stars": 3,
+          "destructionPercentage": 100,
+          "order": 10,
+          "duration": 74
+        }
       },
       {
         "tag": "#92ULRLGV",

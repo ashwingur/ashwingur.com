@@ -43,7 +43,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
   );
 
   return (
-    <div className="flex gap-4 my-4">
+    <div className="flex gap-4 my-4 border-2 border-white rounded-lg p-2 bg-black/30">
       {myClanStatus}
       {otherClanStatus}
     </div>

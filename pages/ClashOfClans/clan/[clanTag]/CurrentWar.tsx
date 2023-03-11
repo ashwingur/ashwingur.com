@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { SpinningCircles } from "react-loading-icons";
 import CocNavBar from "../../../../components/clashofclans/CocNavBar";
 import CocWarMembers from "../../../../components/clashofclans/CocWarMembers";
 import CocWarStatus from "../../../../components/clashofclans/CocWarStatus";
@@ -38,6 +39,7 @@ const CurrentWar = () => {
           <CocWarMembers clanWar={clanWar} />
         </div>
       )}
+      {!clanWar && <SpinningCircles className="mx-auto mt-8" />}
     </div>
   );
 };
