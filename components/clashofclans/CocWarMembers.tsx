@@ -1,11 +1,8 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import {
-  ClanMember,
-  ClanWar,
-  ClanWarMember,
-} from "../../shared/interfaces/coc.interface";
+import { ClanWar, ClanWarMember } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
-import CocButton from "./CocButton";
+import { NextRouter, useRouter } from "next/router";
+import CocSmallButton from "./CocSmallButton";
 
 const blackStar = "/assets/coc/stars/war_black_star.png";
 const silverStar = "/assets/coc/stars/war_silver_star.png";
@@ -23,6 +20,7 @@ interface OpponentMemberPopupProps {
   member: ClanWarMember;
   allyList: ClanWarMember[];
   setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>;
+  router: NextRouter;
 }
 
 const WarMembersList = (
@@ -96,6 +94,7 @@ const OpponentMemberPopup = ({
   member,
   allyList,
   setSelectedMember,
+  router,
 }: OpponentMemberPopupProps) => {
   const attacksRemaining = member.hasOwnProperty("attacks")
     ? 2 - member.attacks.length
@@ -175,11 +174,24 @@ const OpponentMemberPopup = ({
           </div>
         </div>
       )}
+      <div className="h-16 flex items-center">
+        <CocSmallButton
+          className="w-36 hover:w-32"
+          text={"Profile"}
+          innerColour="bg-blue-500"
+          middleColour="bg-blue-600"
+          outerColour="bg-blue-700"
+          onClick={() => {
+            router.push(`/ClashOfClans/player/${member.tag.slice(1)}`);
+          }}
+        />
+      </div>
     </div>
   );
 };
 
 const CocWarMembers = ({ clanWar }: CocWarMembersProps) => {
+  const router = useRouter();
   const [selectedMember, setSelectedMember] = useState<ClanWarMember>();
 
   const alliesList = WarMembersList(clanWar.clan.members, setSelectedMember);
@@ -197,6 +209,7 @@ const CocWarMembers = ({ clanWar }: CocWarMembersProps) => {
             member={selectedMember}
             allyList={clanWar.clan.members}
             setSelectedMember={setSelectedMember}
+            router={router}
           />
         )}
       </div>
