@@ -32,11 +32,13 @@ export interface PlayerClan {
   tag: string;
   name: string;
   clanLevel: 3;
-  badgeUrls: {
-    small: string;
-    large: string;
-    medium: string;
-  };
+  badgeUrls: BadgeUrls;
+}
+
+export interface BadgeUrls {
+  small: string;
+  large: string;
+  medium: string;
 }
 
 export interface PlayerLeague {
@@ -91,11 +93,7 @@ export interface Clan {
   description: string;
   location: Location;
   isFamilyFriendly: boolean;
-  badgeUrls: {
-    small: string;
-    large: string;
-    medium: string;
-  };
+  badgeUrls: BadgeUrls;
   clanLevel: number;
   clanPoints: number;
   clanVersusPoints: number;
@@ -156,4 +154,45 @@ export interface Location {
   name: string;
   isCountry: boolean;
   countryCode: string;
+}
+
+export interface ClanWar {
+  state: string;
+  teamSize: number;
+  attacksPerMember: number;
+  preparationStartTime: string;
+  startTime: string;
+  endTime: string;
+  clan: WarClan;
+  opponent: WarClan;
+}
+
+export interface WarClan {
+  tag: string;
+  name: string;
+  badgeUrls: BadgeUrls;
+  clanLevel: number;
+  attacks: number;
+  stars: number;
+  destructionPercentage: number;
+  members: ClanWarMember[];
+}
+
+export interface ClanWarMember {
+  tag: string;
+  name: string;
+  townhallLevel: number;
+  mapPosition: number;
+  opponentAttacks: number;
+  bestOpponentAttack: ClanWarAttack;
+  attacks: ClanWarAttack[];
+}
+
+export interface ClanWarAttack {
+  order: number;
+  attackerTag: string;
+  defenderTag: string;
+  stars: number;
+  destructionPercentage: number;
+  duration: number;
 }

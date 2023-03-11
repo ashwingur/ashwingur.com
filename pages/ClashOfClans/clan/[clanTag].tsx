@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import ClanCapitalDetails from "../../../components/clashofclans/ClanCapitalDetails";
 import ClanMemberElement from "../../../components/clashofclans/ClanMemberElement";
+import CocButton from "../../../components/clashofclans/CocButton";
 import CocClanDetails from "../../../components/clashofclans/CocClanDetails";
 import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
@@ -50,6 +51,18 @@ const ClanPage = () => {
             <div className="flex flex-col gap-4 md:flex-row md:justify-around items-center bg-[#787b60] mx-4 p-4 mt-4 rounded-lg border-2 border-black">
               <CocClanSummary clan={clanData} />
               <CocClanDetails clan={clanData} />
+            </div>
+            <div className="h-16 flex items-center">
+              <CocButton
+                className="w-80 hover:w-72 mx-auto mt-4"
+                text={"Current War"}
+                innerColour="bg-green-500"
+                middleColour="bg-green-600"
+                outerColour="bg-green-700"
+                onClick={() => {
+                  router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
+                }}
+              />
             </div>
             <ClanCapitalDetails clan={clanData} />
             <div className="mx-4 my-4">{clanMembers}</div>
