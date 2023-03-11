@@ -1,5 +1,6 @@
 import React from "react";
 import { ClanWar, ClanWarMember } from "../../shared/interfaces/coc.interface";
+import Image from "next/image";
 
 interface CocWarMembersProps {
   clanWar: ClanWar;
@@ -21,6 +22,14 @@ const WarMemberElement = ({ member }: WarMemberProps) => {
     <div className="coc-font-style">
       <div className="text-stone-300">
         {member.mapPosition}. {member.name}
+      </div>
+      <div className="relative w-12 h-12 md:w-16 md:h-16">
+        <Image
+          src={`/assets/coc/townhalls/${member.townhallLevel}.png`}
+          alt={`Townhall level ${member.townhallLevel}`}
+          fill
+          style={{ objectFit: "contain" }}
+        />
       </div>
     </div>
   );

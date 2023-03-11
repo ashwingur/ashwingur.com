@@ -31,7 +31,7 @@ const HallLevelCard = ({ district }: DistrictHallCardProps) => {
               : `/assets/coc/clancapital/district-hall-${district.districtHallLevel}.png`
           }
           fill
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="coc-font-style">

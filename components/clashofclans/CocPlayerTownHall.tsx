@@ -14,9 +14,9 @@ const CocPlayerTownHall = ({ player }: CocPlayerTownHallProps) => {
       </div>
       <Image
         src={`/assets/coc/townhalls/${player.townHallLevel}.png`}
+        alt={`Townhall level ${player.townHallLevel}`}
         width={90}
         height={90}
-        alt={`Townhall level ${player.townHallLevel}`}
       />
       {player.hasOwnProperty("townHallWeaponLevel") && (
         <div className="clash-font-style mb-2">
