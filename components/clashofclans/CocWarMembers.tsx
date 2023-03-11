@@ -99,6 +99,13 @@ const OpponentMemberPopup = ({
   const attacksRemaining = member.hasOwnProperty("attacks")
     ? 2 - member.attacks.length
     : 2;
+
+  const bestAttackMember = allyList.find(
+    (ally) =>
+      member.opponentAttacks > 0 &&
+      ally.tag === member.bestOpponentAttack.attackerTag
+  );
+
   return (
     <div className="border-2 border-white rounded-lg p-2 bg-black/60 clash-font-style flex flex-col items-center">
       <button
@@ -127,15 +134,8 @@ const OpponentMemberPopup = ({
           <div className="flex items-center flex-col">
             <div className="coc-font-style flex gap-8">
               <div>
-                <span>{member.bestOpponentAttack.order}. </span>
-                <span>
-                  {
-                    allyList.find(
-                      (ally) =>
-                        ally.tag === member.bestOpponentAttack.attackerTag
-                    )?.name
-                  }
-                </span>
+                <span>{bestAttackMember?.mapPosition}. </span>
+                <span>{bestAttackMember?.name}</span>
               </div>
               <div>{member.bestOpponentAttack.destructionPercentage}%</div>
             </div>
