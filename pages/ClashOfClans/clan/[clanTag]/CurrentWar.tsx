@@ -33,7 +33,7 @@ const CurrentWar = () => {
       <CocNavBar />
       <h2 className="text-center pt-20 clash-font-style font-thin">Clan War</h2>
       {clanWar && (
-        <div className="flex flex-col items-center m-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#c7a97f] to-[#f9ddaf]">
+        <div className="flex flex-col items-center m-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
           <CocWarStatus clanWar={clanWar} />
           <CocWarMembers clanWar={clanWar} />
         </div>

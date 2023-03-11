@@ -18,8 +18,8 @@ const WarMembersList = (members: ClanWarMember[]) => {
 
 const WarMemberElement = ({ member }: WarMemberProps) => {
   return (
-    <div>
-      <div>
+    <div className="coc-font-style">
+      <div className="text-stone-300">
         {member.mapPosition}. {member.name}
       </div>
     </div>
