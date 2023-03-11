@@ -29,11 +29,11 @@ const CurrentWar = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen">
+    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
       <CocNavBar />
       <h2 className="text-center pt-20 clash-font-style font-thin">Clan War</h2>
       {clanWar && (
-        <div className="flex flex-col items-center m-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
+        <div className="flex flex-col items-center my-4 mx-2 md:mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
           <CocWarStatus clanWar={clanWar} />
           <CocWarMembers clanWar={clanWar} />
         </div>
