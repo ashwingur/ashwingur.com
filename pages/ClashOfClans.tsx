@@ -1,22 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BasicNavbar from "../components/BasicNavbar";
-import { BiHash, BiSearchAlt2 } from "react-icons/bi";
-import { Player } from "../shared/interfaces/coc.interface";
-import CocPlayerSummary from "../components/clashofclans/CocPlayerSummary";
-import CocPlayerClan from "../components/clashofclans/CocPlayerClan";
-import CocTrophyDetails from "../components/clashofclans/CocTrophyDetails";
-import CocPlayerArmy from "../components/clashofclans/CocPlayerArmy";
-import CocPlayerTownHall from "../components/clashofclans/CocPlayerTownHall";
 import CocNavBar from "../components/clashofclans/CocNavBar";
 import CocButton from "../components/clashofclans/CocButton";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 // https://coc.guide/troop for the icons
 
 // My profile: #YLPGLJOV
-// Cardo: #2JJQU28GR
-// Shao: QGG8LL0JJ
 
 interface Tags {
   playerTag: string;
@@ -62,6 +52,14 @@ const ClashOfClans = () => {
             }}
           />
         </div>
+      </div>
+      <div className="w-72 h-72 md:w-96 md:h-96 relative mx-auto my-8">
+        <Image
+          src={`/assets/coc/ElectroBarb.png`}
+          alt={`Electrobarb`}
+          fill
+          style={{ objectFit: "contain" }}
+        />
       </div>
     </div>
   );
