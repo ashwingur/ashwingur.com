@@ -20,7 +20,7 @@ const ClanStatus = (
       <Link href={`/ClashOfClans/clan/${tag.substring(1)}`}>
         <div className="text-yellow-100">{name}</div>
       </Link>
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <div className="w-6 h-6 relative md:w-8 md:h-8">
           <Image
             src={`/assets/coc/stars/silver_star.png`}

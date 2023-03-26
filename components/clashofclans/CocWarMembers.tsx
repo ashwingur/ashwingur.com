@@ -6,6 +6,7 @@ import CocSmallButton from "./CocSmallButton";
 
 const blackStar = "/assets/coc/stars/war_black_star.png";
 const silverStar = "/assets/coc/stars/war_silver_star.png";
+const miniBarb = "/assets/coc/miniBarb.png";
 
 interface CocWarMembersProps {
   clanWar: ClanWar;
@@ -40,9 +41,13 @@ const WarMembersList = (
 };
 
 const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
+  const attacksRemaining = member.hasOwnProperty("attacks")
+    ? 2 - member.attacks.length
+    : 2;
+
   return (
     <div
-      className="coc-font-style flex flex-col pb-8 px-2 pt-2 items-center hover:cursor-pointer hover:bg-black/20 transition-all"
+      className="coc-font-style flex flex-col pb-8 px-2 pt-2 rounded-md items-center hover:cursor-pointer hover:bg-black/20 transition-all"
       onClick={() => setSelectedMember(member)}
     >
       {member.opponentAttacks > 0 ? (
@@ -85,6 +90,28 @@ const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
           fill
           style={{ objectFit: "contain" }}
         />
+      </div>
+      <div className="flex h-8 md:h-12 mt-1">
+        {attacksRemaining > 0 && (
+          <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
+            <Image
+              src={miniBarb}
+              style={{ objectFit: "contain" }}
+              fill
+              alt={"attacks remaining"}
+            />
+          </div>
+        )}
+        {attacksRemaining > 1 && (
+          <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
+            <Image
+              src={miniBarb}
+              style={{ objectFit: "contain" }}
+              fill
+              alt={"attacks remaining"}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -200,7 +227,7 @@ const CocWarMembers = ({ clanWar }: CocWarMembersProps) => {
     setSelectedMember
   );
   return (
-    <div className="flex gap-4 md:gap-28 lg:gap-48 mb-4">
+    <div className="flex gap-4 md:gap-28 lg:gap-48 mb-4 mt-2">
       <div>{alliesList}</div>
       <div>{opponentList}</div>
       <div className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-4 w-4/5 md:w-2/3 lg:w-1/2">
