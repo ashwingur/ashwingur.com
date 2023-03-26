@@ -196,3 +196,26 @@ export interface ClanWarAttack {
   destructionPercentage: number;
   duration: number;
 }
+
+export interface LeagueGroup {
+  state: string;
+  season: string;
+  clans: ClanWarLeagueCLan[];
+  rounds: ClanWarLeagueRound[];
+}
+
+export interface ClanWarLeagueCLan {
+  tag: string;
+  clanLevel: number;
+  name: string;
+  members: ClanWarLeagueClanMember[];
+}
+export interface ClanWarLeagueClanMember {
+  tag: string;
+  townHallLevel: number;
+  name: string;
+}
+
+export interface ClanWarLeagueRound {
+  warTags: String[];
+}

@@ -16,9 +16,9 @@ interface WarMemberProps {
   setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>;
 }
 
-interface OpponentMemberPopupProps {
+interface MemberPopupProps {
   member: ClanWarMember;
-  allyList: ClanWarMember[];
+  memberList: ClanWarMember[];
   setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>;
   router: NextRouter;
 }
@@ -92,10 +92,10 @@ const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
 
 const OpponentMemberPopup = ({
   member,
-  allyList,
+  memberList: allyList,
   setSelectedMember,
   router,
-}: OpponentMemberPopupProps) => {
+}: MemberPopupProps) => {
   const attacksRemaining = member.hasOwnProperty("attacks")
     ? 2 - member.attacks.length
     : 2;
@@ -207,7 +207,7 @@ const CocWarMembers = ({ clanWar }: CocWarMembersProps) => {
         {selectedMember && (
           <OpponentMemberPopup
             member={selectedMember}
-            allyList={clanWar.clan.members}
+            memberList={clanWar.clan.members.concat(clanWar.opponent.members)}
             setSelectedMember={setSelectedMember}
             router={router}
           />

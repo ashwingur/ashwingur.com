@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
@@ -52,17 +53,37 @@ const ClanPage = () => {
               <CocClanSummary clan={clanData} />
               <CocClanDetails clan={clanData} />
             </div>
-            <div className="h-16 flex items-center">
-              <CocButton
-                className="w-80 hover:w-72 mx-auto mt-4"
-                text={"Current War"}
-                innerColour="bg-green-500"
-                middleColour="bg-green-600"
-                outerColour="bg-green-700"
-                onClick={() => {
-                  router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
-                }}
-              />
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+              <Link
+                href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
+                className="h-16 w-80 flex items-center justify-center"
+              >
+                <CocButton
+                  className="w-80 hover:w-72 mx-auto mt-4"
+                  text={"Current War"}
+                  innerColour="bg-green-500"
+                  middleColour="bg-green-600"
+                  outerColour="bg-green-700"
+                  onClick={() => {
+                    router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
+                  }}
+                />
+              </Link>
+              <Link
+                href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
+                className="h-16 w-80 flex items-center justify-center"
+              >
+                <CocButton
+                  className="w-80 hover:w-72 mx-auto mt-4"
+                  text={"Clan War League"}
+                  innerColour="bg-green-500"
+                  middleColour="bg-green-600"
+                  outerColour="bg-green-700"
+                  onClick={() => {
+                    router.push(`/ClashOfClans/clan/${clanTag}/ClanWarLeague`);
+                  }}
+                />
+              </Link>
             </div>
             <ClanCapitalDetails clan={clanData} />
             <div className="mx-4 my-4">{clanMembers}</div>
