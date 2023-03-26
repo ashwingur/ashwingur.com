@@ -34,17 +34,20 @@ const CocNavBar = () => {
   };
 
   const setPlayerTag = (value: string) => {
+    const tag = value.replace("#", "");
     setTags((prevValue: Tags) => {
-      return { ...prevValue, playerTag: value };
+      return { ...prevValue, playerTag: tag };
     });
-    router.push(`/ClashOfClans/player/${value}`);
+    router.push(`/ClashOfClans/player/${tag}`);
   };
 
   const setClanTag = (value: string) => {
+    const tag = value.replace("#", "");
+    console.log("tag is " + tag);
     setTags((prevValue: Tags) => {
-      return { ...prevValue, clanTag: value };
+      return { ...prevValue, clanTag: tag };
     });
-    router.push(`/ClashOfClans/clan/${value}`);
+    router.push(`/ClashOfClans/clan/${tag}`);
   };
 
   return (
@@ -56,7 +59,6 @@ const CocNavBar = () => {
         {/* Input Fields */}
         <div className="hidden md:flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
           <div className="flex items-center">
-            <BiHash size={25} />
             <input
               className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
               placeholder="PLAYER TAG"
@@ -75,7 +77,6 @@ const CocNavBar = () => {
           </div>
 
           <div className="flex items-center">
-            <BiHash size={25} />
             <input
               className="border-2 w-40 rounded-sm py-1 px-2 uppercase"
               placeholder="CLAN TAG"
@@ -94,6 +95,13 @@ const CocNavBar = () => {
           </div>
         </div>
         <div className="hidden md:block">
+          <Link
+            href="/ClashOfClans"
+            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md mr-4"
+            scroll={false}
+          >
+            Home
+          </Link>
           <ToggleThemeButton />
         </div>
         <div
@@ -165,6 +173,13 @@ const CocNavBar = () => {
                 <BiSearchAlt2 size={30} />
               </button>
             </div>
+            <Link
+              href="/ClashOfClans"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition-all rounded-md"
+              scroll={false}
+            >
+              Home
+            </Link>
             <div className="">
               <ToggleThemeButton />
             </div>
