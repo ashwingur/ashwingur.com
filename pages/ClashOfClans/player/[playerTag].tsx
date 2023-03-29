@@ -52,7 +52,12 @@ const PlayerPage = () => {
 
               <CocTrophyDetails player={playerData} />
             </div>
-            <CocPlayerArmy player={playerData} />
+            <div className="border-2 border-black rounded-lg mx-4 mb-4 bg-indigo-900">
+              <h2 className="text-center clash-font-style font-thin text-3xl mt-4">
+                Army
+              </h2>
+              <CocPlayerArmy player={playerData} />
+            </div>
             <CocPlayerAchievements player={playerData} />
           </div>
         )}
