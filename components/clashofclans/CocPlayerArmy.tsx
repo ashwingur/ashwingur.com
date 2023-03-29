@@ -58,8 +58,8 @@ const ArmyItemsCategory = ({
   ));
 
   return (
-    <div className="bg-[#5d6b96] p-4 mx-4 md:mx-8 rounded-lg my-4">
-      <div className=" clash-font-style text-xl mb-4">{category}</div>
+    <div className="bg-[#5d6b96] p-4 mx-4 md:mx-8 rounded-lg my-4 border-2 border-black">
+      <div className="clash-font-style text-xl mb-4">{category}</div>
       <div className="flex flex-row flex-wrap gap-1 ">{items_elements}</div>
     </div>
   );

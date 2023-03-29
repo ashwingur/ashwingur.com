@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
+import CocPlayerAchievements from "../../../components/clashofclans/CocPlayerAchievements";
 import CocPlayerArmy from "../../../components/clashofclans/CocPlayerArmy";
 import CocPlayerClan from "../../../components/clashofclans/CocPlayerClan";
 import CocPlayerSummary from "../../../components/clashofclans/CocPlayerSummary";
@@ -52,6 +53,7 @@ const PlayerPage = () => {
               <CocTrophyDetails player={playerData} />
             </div>
             <CocPlayerArmy player={playerData} />
+            <CocPlayerAchievements player={playerData} />
           </div>
         )}
         {!playerData && <SpinningCircles className="mx-auto mt-8" />}

@@ -16,7 +16,7 @@ const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
 
   return (
     <div
-      className="font-clash text-white clash-font-style py-4 cursor-pointer"
+      className="font-clash text-white clash-font-style py-4 cursor-pointer hover:bg-black/20 rounded-md my-1 px-2 transition-all"
       onClick={clanMemberClick}
     >
       <div>{player.clan.name}</div>
