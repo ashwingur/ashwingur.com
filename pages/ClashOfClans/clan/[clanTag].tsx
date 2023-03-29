@@ -70,7 +70,7 @@ const ClanPage = () => {
                 />
               </Link>
               <Link
-                href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
+                href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
                 className="h-16 w-80 flex items-center justify-center"
               >
                 <CocButton
@@ -79,9 +79,7 @@ const ClanPage = () => {
                   innerColour="bg-green-500"
                   middleColour="bg-green-600"
                   outerColour="bg-green-700"
-                  onClick={() => {
-                    router.push(`/ClashOfClans/clan/${clanTag}/ClanWarLeague`);
-                  }}
+                  onClick={() => {}}
                 />
               </Link>
             </div>
