@@ -23,10 +23,11 @@ const ClashOfClans = () => {
         <h2 className="text-center pt-20 clash-font-style font-thin">
           Clash of Clans
         </h2>
-        <p className="text-center coc-font-style m-8 text-2xl">
+        <p className="text-center coc-font-style m-8 md:w-[60%] text-xl md:text-2xl">
           Welcome to the Clash of Clans page. Search any player or clan by their
           tag in the navigation bar. This site uses the official Clash of Clans
-          API to provide up to date data. Below are some quick links:
+          API to provide up to date data. Below are some quick links to my
+          profile and clan:
         </p>
         <div className="h-16 flex items-center mb-4">
           <CocButton
