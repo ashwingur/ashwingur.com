@@ -8,6 +8,8 @@ import {
 } from "../../../../shared/interfaces/coc.interface";
 import testLeague from "../../../../data/leaguegroup.json";
 import Link from "next/link";
+import axios from "axios";
+import { SpinningCircles } from "react-loading-icons";
 
 export interface RoundProps {
   round: ClanWarLeagueRound;
@@ -26,7 +28,11 @@ const LeagueClan = (clan: ClanWarLeagueCLan) => {
 };
 
 const ClanWarLeague = () => {
+  const router = useRouter();
+  const { clanTag } = router.query;
+
   const [leagueGroup, setLeagueGroup] = useState<LeagueGroup>();
+  const [errorMessage, setErrorMessage] = useState<String>();
 
   const clans = leagueGroup?.clans.map((item, index) => {
     return (
@@ -41,8 +47,29 @@ const ClanWarLeague = () => {
   });
 
   useEffect(() => {
-    setLeagueGroup(testLeague);
-  }, [leagueGroup]);
+    // setLeagueGroup(testLeague);
+    if (typeof clanTag === "string") {
+      getClanWarLeague(clanTag);
+    }
+  }, [clanTag]);
+
+  const getClanWarLeague = (clanTag: string) => {
+    axios
+      .get(`/api/clashofclans/clan/${clanTag}/clanwarleague`)
+      .then((response) => {
+        const clanWarData: LeagueGroup = response.data;
+        setLeagueGroup(clanWarData);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setErrorMessage(
+            "Clan does not have a public war log or there is no active clan war league season at the moment"
+          );
+        } else {
+          setErrorMessage("Unable to fetch clan war league data");
+        }
+      });
+  };
 
   const Round = ({ round, round_number }: RoundProps) => {
     const tags = round.warTags.map((tag, i) => {
@@ -94,6 +121,14 @@ const ClanWarLeague = () => {
             </div>
           </div>
         </div>
+      )}
+      {!(leagueGroup || errorMessage) && (
+        <SpinningCircles className="mx-auto mt-8" />
+      )}
+      {!leagueGroup && errorMessage && (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          {errorMessage}
+        </p>
       )}
     </div>
   );

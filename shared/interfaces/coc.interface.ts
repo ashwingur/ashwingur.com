@@ -219,3 +219,9 @@ export interface ClanWarLeagueClanMember {
 export interface ClanWarLeagueRound {
   warTags: String[];
 }
+
+export interface ClientError {
+  reason: string;
+  message: string;
+  type: string;
+}
