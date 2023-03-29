@@ -61,7 +61,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.clan.stars,
     clanWar.clan.attacks,
-    clanWar.attacksPerMember
+    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1
   );
 
   const otherClanStatus = ClanStatus(
@@ -70,7 +70,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.opponent.stars,
     clanWar.opponent.attacks,
-    clanWar.attacksPerMember
+    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1
   );
 
   return (
