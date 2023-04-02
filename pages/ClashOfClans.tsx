@@ -3,6 +3,7 @@ import CocNavBar from "../components/clashofclans/CocNavBar";
 import CocButton from "../components/clashofclans/CocButton";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 
 // https://coc.guide/troop for the icons
 
@@ -30,28 +31,28 @@ const ClashOfClans = () => {
           profile and clan:
         </p>
         <div className="h-16 flex items-center mb-4">
-          <CocButton
-            className="w-80 hover:w-72"
-            text={"Unknown Virus"}
-            innerColour="bg-orange-500"
-            middleColour="bg-orange-600"
-            outerColour="bg-orange-700"
-            onClick={() => {
-              router.push(`/ClashOfClans/player/YLPGLJOV`);
-            }}
-          />
+          <Link href={"/ClashOfClans/player/YLPGLJOV"}>
+            <CocButton
+              className="w-80 hover:w-72"
+              text={"Unknown Virus"}
+              innerColour="bg-orange-500"
+              middleColour="bg-orange-600"
+              outerColour="bg-orange-700"
+              onClick={() => {}}
+            />
+          </Link>
         </div>
         <div className="h-16 flex items-center">
-          <CocButton
-            className="w-80 hover:w-72"
-            text={"TheOrganisation"}
-            innerColour="bg-green-500"
-            middleColour="bg-green-600"
-            outerColour="bg-green-700"
-            onClick={() => {
-              router.push(`/ClashOfClans/clan/220QP2GGU`);
-            }}
-          />
+          <Link href={"/ClashOfClans/clan/220QP2GGU"}>
+            <CocButton
+              className="w-80 hover:w-72"
+              text={"TheOrganisation"}
+              innerColour="bg-green-500"
+              middleColour="bg-green-600"
+              outerColour="bg-green-700"
+              onClick={() => {}}
+            />
+          </Link>
         </div>
       </div>
       <div className="w-72 h-72 md:w-96 md:h-96 relative mx-auto my-8">

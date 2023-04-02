@@ -6,10 +6,10 @@ import {
   ClanWarLeagueRound,
   LeagueGroup,
 } from "../../../../shared/interfaces/coc.interface";
-import testLeague from "../../../../data/leaguegroup.json";
 import Link from "next/link";
 import axios from "axios";
 import { SpinningCircles } from "react-loading-icons";
+import { useQuery } from "react-query";
 
 export interface RoundProps {
   round: ClanWarLeagueRound;
@@ -27,14 +27,77 @@ const LeagueClan = (clan: ClanWarLeagueCLan) => {
   );
 };
 
+const Round = ({ round, round_number }: RoundProps) => {
+  const tags = round.warTags.map((tag, i) => {
+    if (tag === "#0") {
+      return (
+        <div key={i} className="py-1">
+          Not available
+        </div>
+      );
+    } else {
+      return (
+        <Link
+          className="hover:bg-[#4a044e] py-1 px-4 rounded-md transition-all"
+          key={i}
+          href={`/ClashOfClans/clanwarleague/${tag.substring(1)}`}
+        >
+          {tag}
+        </Link>
+      );
+    }
+  });
+
+  return (
+    <div className="flex flex-col clash-font-style items-center border-2 border-black rounded-md py-2 bg-purple-900/70">
+      <div className="text-2xl text-yellow-100">{round_number}</div>
+      <div className="coc-font-style flex flex-col">{tags}</div>
+    </div>
+  );
+};
+
+const fetchLeague = (clanTag: string) =>
+  axios
+    .get(`/api/clashofclans/clan/${clanTag}/clanwarleague`)
+    .then(({ data }) => data);
+
 const ClanWarLeague = () => {
   const router = useRouter();
-  const { clanTag } = router.query;
+  const clanTag =
+    typeof router.query?.clanTag === "string" ? router.query.clanTag : "";
 
-  const [leagueGroup, setLeagueGroup] = useState<LeagueGroup>();
-  const [errorMessage, setErrorMessage] = useState<String>();
+  const { isLoading, error, data } = useQuery<LeagueGroup>({
+    queryKey: ["leagueGroup", clanTag],
+    queryFn: () => fetchLeague(clanTag),
+    enabled: clanTag !== "",
+  });
 
-  const clans = leagueGroup?.clans.map((item, index) => {
+  if (isLoading || data === undefined)
+    return (
+      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
+        <CocNavBar />
+        <h2 className="text-center pt-20 clash-font-style font-thin">
+          Clan War League
+        </h2>
+
+        <SpinningCircles className="mx-auto mt-8" />
+      </div>
+    );
+
+  if (error instanceof Error)
+    return (
+      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
+        <CocNavBar />
+        <h2 className="text-center pt-20 clash-font-style font-thin">
+          Clan War League
+        </h2>
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Unable to fetch clan war league data: {error.message}
+        </p>
+      </div>
+    );
+
+  const clans = data.clans.map((item, index) => {
     return (
       <LeagueClan
         key={index}
@@ -46,61 +109,7 @@ const ClanWarLeague = () => {
     );
   });
 
-  useEffect(() => {
-    // setLeagueGroup(testLeague);
-    if (typeof clanTag === "string") {
-      getClanWarLeague(clanTag);
-    }
-  }, [clanTag]);
-
-  const getClanWarLeague = (clanTag: string) => {
-    axios
-      .get(`/api/clashofclans/clan/${clanTag}/clanwarleague`)
-      .then((response) => {
-        const clanWarData: LeagueGroup = response.data;
-        setLeagueGroup(clanWarData);
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          setErrorMessage(
-            "Clan does not have a public war log or there is no active clan war league season at the moment"
-          );
-        } else {
-          setErrorMessage("Unable to fetch clan war league data");
-        }
-      });
-  };
-
-  const Round = ({ round, round_number }: RoundProps) => {
-    const tags = round.warTags.map((tag, i) => {
-      if (tag === "#0") {
-        return (
-          <div key={i} className="py-1">
-            Not available
-          </div>
-        );
-      } else {
-        return (
-          <Link
-            className="hover:bg-[#4a044e] py-1 px-4 rounded-md transition-all"
-            key={i}
-            href={`/ClashOfClans/clanwarleague/${tag.substring(1)}`}
-          >
-            {tag}
-          </Link>
-        );
-      }
-    });
-
-    return (
-      <div className="flex flex-col clash-font-style items-center border-2 border-black rounded-md py-2 bg-purple-900/70">
-        <div className="text-2xl text-yellow-100">{round_number}</div>
-        <div className="coc-font-style flex flex-col">{tags}</div>
-      </div>
-    );
-  };
-
-  const rounds = leagueGroup?.rounds.map((item, index) => {
+  const rounds = data.rounds.map((item, index) => {
     return <Round key={index} round={item} round_number={index + 1} />;
   });
 
@@ -110,12 +119,12 @@ const ClanWarLeague = () => {
       <h2 className="text-center pt-20 clash-font-style font-thin">
         Clan War League
       </h2>
-      {leagueGroup && (
+      {
         <div>
           <div className="flex flex-col my-4 mx-2 pb-4 md:mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
             <div className="self-center clash-font-style my-2">
               <span className="text-yellow-100 text-2xl">
-                Season {leagueGroup.season}
+                Season {data.season}
               </span>
             </div>
             <div className="flex flex-col gap-4 mx-2">{clans}</div>
@@ -129,15 +138,7 @@ const ClanWarLeague = () => {
             </div>
           </div>
         </div>
-      )}
-      {!(leagueGroup || errorMessage) && (
-        <SpinningCircles className="mx-auto mt-8" />
-      )}
-      {!leagueGroup && errorMessage && (
-        <p className="text-center coc-font-style m-8 text-2xl">
-          {errorMessage}
-        </p>
-      )}
+      }
     </div>
   );
 };
