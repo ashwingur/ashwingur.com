@@ -6,42 +6,58 @@ import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import CocWarMembers from "../../../components/clashofclans/CocWarMembers";
 import CocWarStatus from "../../../components/clashofclans/CocWarStatus";
 import { ClanWar } from "../../../shared/interfaces/coc.interface";
+import { useQuery } from "react-query";
+import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
+
+const title = "Clan League War";
+
+const fetchWar = (warTag: string) =>
+  axios
+    .get(`/api/clashofclans/clanwarleague/${warTag}`)
+    .then(({ data }) => data);
 
 const ClanWar = () => {
   const router = useRouter();
-  const { warTag } = router.query;
+  const warTag =
+    typeof router.query?.warTag === "string" ? router.query.warTag : "";
 
-  const [clanWar, setClanWar] = useState<ClanWar>();
+  const { isLoading, error, data } = useQuery<ClanWar>({
+    queryKey: ["player", warTag],
+    queryFn: () => fetchWar(warTag),
+    enabled: router.isReady,
+  });
 
-  useEffect(() => {
-    if (typeof warTag === "string") {
-      getWar(warTag);
-    }
-  }, [warTag]);
+  if (error instanceof Error)
+    return CocLoadingOrError({
+      heading: title,
+      info: (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Unable to fetch clan war league data: {error.message}
+        </p>
+      ),
+    });
 
-  const getWar = (warTag: string) => {
-    axios
-      .get(`/api/clashofclans/clanwarleague/${warTag}`)
-      .then((response) => {
-        const clanWarData: ClanWar = response.data;
-        setClanWar(clanWarData);
-      })
-      .catch((error) => console.log("Clan fetch error: " + error));
-  };
+  if (isLoading || data === undefined)
+    return CocLoadingOrError({
+      heading: title,
+      info: <SpinningCircles className="mx-auto mt-8" />,
+    });
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
       <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">
-        Clan League War
-      </h2>
-      {clanWar && (
+      <h2 className="text-center pt-20 clash-font-style font-thin">{title}</h2>
+      {data.state !== "notInWar" && (
         <div className="flex flex-col items-center my-4 mx-2 md:mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
-          <CocWarStatus clanWar={clanWar} />
-          <CocWarMembers clanWar={clanWar} />
+          <CocWarStatus clanWar={data} />
+          <CocWarMembers clanWar={data} />
         </div>
       )}
-      {!clanWar && <SpinningCircles className="mx-auto mt-8" />}
+      {data.state === "notInWar" && (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Clan is currently not in a war
+        </p>
+      )}
     </div>
   );
 };
