@@ -11,19 +11,12 @@ import CocPlayerTownHall from "../../../components/clashofclans/CocPlayerTownHal
 import CocTrophyDetails from "../../../components/clashofclans/CocTrophyDetails";
 import { Player } from "../../../shared/interfaces/coc.interface";
 import { useQuery } from "react-query";
+import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
+
+const title = "Player";
 
 const fetchPlayer = (playerTag: string) =>
   axios.get(`/api/clashofclans/player/${playerTag}`).then(({ data }) => data);
-
-const LoadingOrError = (info: JSX.Element) => {
-  return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
-      <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">Player</h2>
-      {info}
-    </div>
-  );
-};
 
 const PlayerPage = () => {
   const router = useRouter();
@@ -37,14 +30,20 @@ const PlayerPage = () => {
   });
 
   if (error instanceof Error)
-    return LoadingOrError(
-      <p className="text-center coc-font-style m-8 text-2xl">
-        Unable to fetch clan war league data: {error.message}
-      </p>
-    );
+    return CocLoadingOrError({
+      heading: title,
+      info: (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Unable to fetch clan war data: {error.message}
+        </p>
+      ),
+    });
 
   if (isLoading || data === undefined)
-    return LoadingOrError(<SpinningCircles className="mx-auto mt-8" />);
+    return CocLoadingOrError({
+      heading: title,
+      info: <SpinningCircles className="mx-auto mt-8" />,
+    });
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">

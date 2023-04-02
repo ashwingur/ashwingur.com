@@ -11,27 +11,19 @@ import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import { Clan } from "../../../shared/interfaces/coc.interface";
 import { useQuery } from "react-query";
+import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
 
 // Example clan ID: #220qp2ggu
 
+const title = "Clan";
+
 const fetchClan = (clanTag: string) =>
   axios.get(`/api/clashofclans/clan/${clanTag}`).then(({ data }) => data);
-
-const LoadingOrError = (info: JSX.Element) => {
-  return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
-      <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">Clan</h2>
-      {info}
-    </div>
-  );
-};
 
 const ClanPage = () => {
   const router = useRouter();
   const clanTag =
     typeof router.query?.clanTag === "string" ? router.query.clanTag : "";
-  const [clanData, setClanData] = useState<Clan>();
 
   const { isLoading, error, data } = useQuery<Clan>({
     queryKey: ["clan", clanTag],
@@ -40,14 +32,20 @@ const ClanPage = () => {
   });
 
   if (error instanceof Error)
-    return LoadingOrError(
-      <p className="text-center coc-font-style m-8 text-2xl">
-        Unable to fetch clan data: {error.message}
-      </p>
-    );
+    return CocLoadingOrError({
+      heading: title,
+      info: (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Unable to fetch clan data: {error.message}
+        </p>
+      ),
+    });
 
   if (isLoading || data === undefined)
-    return LoadingOrError(<SpinningCircles className="mx-auto mt-8" />);
+    return CocLoadingOrError({
+      heading: title,
+      info: <SpinningCircles className="mx-auto mt-8" />,
+    });
 
   const clanMembers = data.memberList.map((item, index) => (
     <ClanMemberElement key={index} clanMember={item} />
@@ -56,7 +54,7 @@ const ClanPage = () => {
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
       <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">Clan</h2>
+      <h2 className="text-center pt-20 clash-font-style font-thin">{title}</h2>
 
       <div>
         <div>

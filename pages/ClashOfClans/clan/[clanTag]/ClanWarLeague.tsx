@@ -10,11 +10,14 @@ import Link from "next/link";
 import axios from "axios";
 import { SpinningCircles } from "react-loading-icons";
 import { useQuery } from "react-query";
+import CocLoadingOrError from "../../../../components/clashofclans/CocLoadingOrError";
 
 export interface RoundProps {
   round: ClanWarLeagueRound;
   round_number: number;
 }
+
+const title = "Clan War League";
 
 const LeagueClan = (clan: ClanWarLeagueCLan) => {
   return (
@@ -61,18 +64,6 @@ const fetchLeague = (clanTag: string) =>
     .get(`/api/clashofclans/clan/${clanTag}/clanwarleague`)
     .then(({ data }) => data);
 
-const LoadingOrError = (info: JSX.Element) => {
-  return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
-      <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">
-        Clan War League
-      </h2>
-      {info}
-    </div>
-  );
-};
-
 const ClanWarLeague = () => {
   const router = useRouter();
   const clanTag =
@@ -85,14 +76,20 @@ const ClanWarLeague = () => {
   });
 
   if (error instanceof Error)
-    return LoadingOrError(
-      <p className="text-center coc-font-style m-8 text-2xl">
-        Unable to fetch clan war league data: {error.message}
-      </p>
-    );
+    return CocLoadingOrError({
+      heading: title,
+      info: (
+        <p className="text-center coc-font-style m-8 text-2xl">
+          Unable to fetch clan war league data: {error.message}
+        </p>
+      ),
+    });
 
   if (isLoading || data === undefined)
-    return LoadingOrError(<SpinningCircles className="mx-auto mt-8" />);
+    return CocLoadingOrError({
+      heading: title,
+      info: <SpinningCircles className="mx-auto mt-8" />,
+    });
 
   const clans = data.clans.map((item, index) => {
     return (
