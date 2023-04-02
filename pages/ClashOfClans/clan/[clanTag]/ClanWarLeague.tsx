@@ -81,7 +81,7 @@ const ClanWarLeague = () => {
   const { isLoading, error, data } = useQuery<LeagueGroup>({
     queryKey: ["leagueGroup", clanTag],
     queryFn: () => fetchLeague(clanTag),
-    enabled: clanTag !== "",
+    enabled: router.isReady,
   });
 
   if (error instanceof Error)

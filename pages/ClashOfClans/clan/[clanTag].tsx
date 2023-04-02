@@ -10,84 +10,95 @@ import CocClanDetails from "../../../components/clashofclans/CocClanDetails";
 import CocClanSummary from "../../../components/clashofclans/CocClanSummary";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import { Clan } from "../../../shared/interfaces/coc.interface";
+import { useQuery } from "react-query";
 
 // Example clan ID: #220qp2ggu
 
+const fetchClan = (clanTag: string) =>
+  axios.get(`/api/clashofclans/clan/${clanTag}`).then(({ data }) => data);
+
+const LoadingOrError = (info: JSX.Element) => {
+  return (
+    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
+      <CocNavBar />
+      <h2 className="text-center pt-20 clash-font-style font-thin">Clan</h2>
+      {info}
+    </div>
+  );
+};
+
 const ClanPage = () => {
   const router = useRouter();
-  const { clanTag } = router.query;
-
+  const clanTag =
+    typeof router.query?.clanTag === "string" ? router.query.clanTag : "";
   const [clanData, setClanData] = useState<Clan>();
 
-  useEffect(() => {
-    if (typeof clanTag === "string") {
-      searchForClan(clanTag);
-    }
-  }, [clanTag]);
+  const { isLoading, error, data } = useQuery<Clan>({
+    queryKey: ["clan", clanTag],
+    queryFn: () => fetchClan(clanTag),
+    enabled: router.isReady, // Only run when router data is available on hydration
+  });
 
-  const clanMembers = clanData?.memberList.map((item, index) => (
+  if (error instanceof Error)
+    return LoadingOrError(
+      <p className="text-center coc-font-style m-8 text-2xl">
+        Unable to fetch clan war league data: {error.message}
+      </p>
+    );
+
+  if (isLoading || data === undefined)
+    return LoadingOrError(<SpinningCircles className="mx-auto mt-8" />);
+
+  const clanMembers = data.memberList.map((item, index) => (
     <ClanMemberElement key={index} clanMember={item} />
   ));
-
-  const searchForClan = (clanTag: string) => {
-    axios
-      .get(`/api/clashofclans/clan/${clanTag}`)
-      .then((response) => {
-        const clan: Clan = response.data;
-        setClanData(clan);
-      })
-      .catch((error) => console.log("Clan fetch error: " + error));
-  };
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
       <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">
-        Clan Search
-      </h2>
+      <h2 className="text-center pt-20 clash-font-style font-thin">Clan</h2>
 
       <div>
-        {clanData && (
-          <div>
-            <div className="flex flex-col gap-4 md:flex-row md:justify-around items-center bg-[#787b60] mx-4 p-4 mt-4 rounded-lg border-2 border-black">
-              <CocClanSummary clan={clanData} />
-              <CocClanDetails clan={clanData} />
-            </div>
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
-              <Link
-                href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
-                className="h-16 w-80 flex items-center justify-center"
-              >
-                <CocButton
-                  className="w-80 hover:w-72 mx-auto mt-4"
-                  text={"Current War"}
-                  innerColour="bg-green-500"
-                  middleColour="bg-green-600"
-                  outerColour="bg-green-700"
-                  onClick={() => {
-                    router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
-                  }}
-                />
-              </Link>
-              <Link
-                href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-                className="h-16 w-80 flex items-center justify-center"
-              >
-                <CocButton
-                  className="w-80 hover:w-72 mx-auto mt-4"
-                  text={"Clan War League"}
-                  innerColour="bg-green-500"
-                  middleColour="bg-green-600"
-                  outerColour="bg-green-700"
-                  onClick={() => {}}
-                />
-              </Link>
-            </div>
-            <ClanCapitalDetails clan={clanData} />
-            <div className="mx-4 my-4">{clanMembers}</div>
+        <div>
+          <div className="flex flex-col gap-4 md:flex-row md:justify-around items-center bg-[#787b60] mx-4 p-4 mt-4 rounded-lg border-2 border-black">
+            <CocClanSummary clan={data} />
+            <CocClanDetails clan={data} />
           </div>
-        )}
-        {!clanData && <SpinningCircles className="mx-auto mt-8" />}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+            <Link
+              href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
+              className="h-16 w-80 flex items-center justify-center"
+            >
+              <CocButton
+                className="w-80 hover:w-72 mx-auto mt-4"
+                text={"Current War"}
+                innerColour="bg-green-500"
+                middleColour="bg-green-600"
+                outerColour="bg-green-700"
+                onClick={() => {
+                  router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
+                }}
+              />
+            </Link>
+            <Link
+              href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
+              className="h-16 w-80 flex items-center justify-center"
+            >
+              <CocButton
+                className="w-80 hover:w-72 mx-auto mt-4"
+                text={"Clan War League"}
+                innerColour="bg-green-500"
+                middleColour="bg-green-600"
+                outerColour="bg-green-700"
+                onClick={() => {}}
+              />
+            </Link>
+          </div>
+          <ClanCapitalDetails clan={data} />
+          <div className="mx-4 my-4">{clanMembers}</div>
+        </div>
+
+        {!data && <SpinningCircles className="mx-auto mt-8" />}
       </div>
     </div>
   );
