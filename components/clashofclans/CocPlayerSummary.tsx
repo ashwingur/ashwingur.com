@@ -15,6 +15,7 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
         src={label.iconUrls.medium}
         width={30}
         height={30}
+        priority={true}
       />
     );
   });

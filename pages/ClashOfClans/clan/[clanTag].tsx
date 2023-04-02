@@ -42,7 +42,7 @@ const ClanPage = () => {
   if (error instanceof Error)
     return LoadingOrError(
       <p className="text-center coc-font-style m-8 text-2xl">
-        Unable to fetch clan war league data: {error.message}
+        Unable to fetch clan data: {error.message}
       </p>
     );
 

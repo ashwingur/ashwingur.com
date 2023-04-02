@@ -17,6 +17,7 @@ const CocPlayerTownHall = ({ player }: CocPlayerTownHallProps) => {
         alt={`Townhall level ${player.townHallLevel}`}
         width={90}
         height={90}
+        priority={true}
       />
       {player.hasOwnProperty("townHallWeaponLevel") && (
         <div className="clash-font-style mb-2">
