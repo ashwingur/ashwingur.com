@@ -61,6 +61,18 @@ const fetchLeague = (clanTag: string) =>
     .get(`/api/clashofclans/clan/${clanTag}/clanwarleague`)
     .then(({ data }) => data);
 
+const LoadingOrError = (info: JSX.Element) => {
+  return (
+    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
+      <CocNavBar />
+      <h2 className="text-center pt-20 clash-font-style font-thin">
+        Clan War League
+      </h2>
+      {info}
+    </div>
+  );
+};
+
 const ClanWarLeague = () => {
   const router = useRouter();
   const clanTag =
@@ -72,30 +84,15 @@ const ClanWarLeague = () => {
     enabled: clanTag !== "",
   });
 
-  if (isLoading || data === undefined)
-    return (
-      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
-        <CocNavBar />
-        <h2 className="text-center pt-20 clash-font-style font-thin">
-          Clan War League
-        </h2>
-
-        <SpinningCircles className="mx-auto mt-8" />
-      </div>
-    );
-
   if (error instanceof Error)
-    return (
-      <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4">
-        <CocNavBar />
-        <h2 className="text-center pt-20 clash-font-style font-thin">
-          Clan War League
-        </h2>
-        <p className="text-center coc-font-style m-8 text-2xl">
-          Unable to fetch clan war league data: {error.message}
-        </p>
-      </div>
+    return LoadingOrError(
+      <p className="text-center coc-font-style m-8 text-2xl">
+        Unable to fetch clan war league data: {error.message}
+      </p>
     );
+
+  if (isLoading || data === undefined)
+    return LoadingOrError(<SpinningCircles className="mx-auto mt-8" />);
 
   const clans = data.clans.map((item, index) => {
     return (
