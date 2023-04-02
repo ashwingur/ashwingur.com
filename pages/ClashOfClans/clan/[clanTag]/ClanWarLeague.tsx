@@ -73,15 +73,23 @@ const ClanWarLeague = () => {
 
   const Round = ({ round, round_number }: RoundProps) => {
     const tags = round.warTags.map((tag, i) => {
-      return (
-        <Link
-          className="hover:bg-[#4a044e] py-1 px-4 rounded-md transition-all"
-          key={i}
-          href={`/ClashOfClans/clanwarleague/${tag.substring(1)}`}
-        >
-          {tag}
-        </Link>
-      );
+      if (tag === "#0") {
+        return (
+          <div key={i} className="py-1">
+            Not available
+          </div>
+        );
+      } else {
+        return (
+          <Link
+            className="hover:bg-[#4a044e] py-1 px-4 rounded-md transition-all"
+            key={i}
+            href={`/ClashOfClans/clanwarleague/${tag.substring(1)}`}
+          >
+            {tag}
+          </Link>
+        );
+      }
     });
 
     return (

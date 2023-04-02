@@ -3,6 +3,7 @@ import { ClanWar, ClanWarMember } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { NextRouter, useRouter } from "next/router";
 import CocSmallButton from "./CocSmallButton";
+import Link from "next/link";
 
 const blackStar = "/assets/coc/stars/war_black_star.png";
 const silverStar = "/assets/coc/stars/war_silver_star.png";
@@ -117,7 +118,7 @@ const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
   );
 };
 
-const OpponentMemberPopup = ({
+const MemberPopup = ({
   member,
   memberList: allyList,
   setSelectedMember,
@@ -202,16 +203,16 @@ const OpponentMemberPopup = ({
         </div>
       )}
       <div className="h-16 flex items-center">
-        <CocSmallButton
-          className="w-36 hover:w-32"
-          text={"Profile"}
-          innerColour="bg-blue-500"
-          middleColour="bg-blue-600"
-          outerColour="bg-blue-700"
-          onClick={() => {
-            router.push(`/ClashOfClans/player/${member.tag.slice(1)}`);
-          }}
-        />
+        <Link href={`/ClashOfClans/player/${member.tag.slice(1)}`}>
+          <CocSmallButton
+            className="w-36 hover:w-32"
+            text={"Profile"}
+            innerColour="bg-blue-500"
+            middleColour="bg-blue-600"
+            outerColour="bg-blue-700"
+            onClick={() => {}}
+          />
+        </Link>
       </div>
     </div>
   );
@@ -232,7 +233,7 @@ const CocWarMembers = ({ clanWar }: CocWarMembersProps) => {
       <div>{opponentList}</div>
       <div className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-4 w-4/5 md:w-2/3 lg:w-1/2">
         {selectedMember && (
-          <OpponentMemberPopup
+          <MemberPopup
             member={selectedMember}
             memberList={clanWar.clan.members.concat(clanWar.opponent.members)}
             setSelectedMember={setSelectedMember}
