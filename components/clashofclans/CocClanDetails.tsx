@@ -49,11 +49,15 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           </div>
         </div>
       </div>
-      <HorizontalBar />
-      <div className="flex justify-between">
-        <div>Clan Location:</div>
-        <div>{clan.location.name}</div>
-      </div>
+      {clan.hasOwnProperty("location") && (
+        <div>
+          <HorizontalBar />
+          <div className="flex justify-between">
+            <div>Clan Location:</div>
+            <div>{clan.location.name}</div>
+          </div>
+        </div>
+      )}
       <HorizontalBar />
       <div className="flex justify-between">
         <div>Type:</div>
