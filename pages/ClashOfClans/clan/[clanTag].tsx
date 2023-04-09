@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SpinningCircles } from "react-loading-icons";
 import ClanCapitalDetails from "../../../components/clashofclans/ClanCapitalDetails";
 import ClanMemberElement from "../../../components/clashofclans/ClanMemberElement";

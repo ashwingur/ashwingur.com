@@ -50,7 +50,7 @@ const ClanWar = () => {
       {data.state !== "notInWar" && (
         <div className="flex flex-col items-center my-4 mx-2 md:mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#7d643c] to-[#9f815e]">
           <CocWarStatus clanWar={data} />
-          <CocWarMembers clanWar={data} />
+          <CocWarMembers clanWar={data} clanWarLeague={true} />
         </div>
       )}
       {data.state === "notInWar" && (
