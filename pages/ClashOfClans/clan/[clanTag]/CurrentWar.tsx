@@ -55,7 +55,7 @@ const CurrentWar = () => {
       )}
       {data.state === "notInWar" && (
         <p className="text-center coc-font-style m-8 text-2xl">
-          Clan is currently not in a war
+          Clan is not currently in a war
         </p>
       )}
     </div>
