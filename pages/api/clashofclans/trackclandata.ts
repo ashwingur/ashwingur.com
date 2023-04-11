@@ -54,9 +54,7 @@ export default async function handler(
         const user = await CocUser.findOne({ id: playerData.tag });
         user.data.push({ time: Date.now(), player: playerData });
         user.save();
-        console.log("saved");
       } else {
-        console.log("doesnt exist");
         CocUser.create({
           id: playerData.tag,
           data: [{ time: Date.now(), player: playerData }],
@@ -64,12 +62,10 @@ export default async function handler(
       }
     });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        success: "false",
-        error: "something went wrong: " + JSON.stringify(error),
-      });
+    return res.status(500).json({
+      success: "false",
+      error: "something went wrong: " + JSON.stringify(error),
+    });
   }
 
   res.status(200).json({ success: "true" });
