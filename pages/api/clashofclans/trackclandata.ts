@@ -53,9 +53,9 @@ export default async function handler(
       if (await CocUser.exists({ id: playerData.tag })) {
         const user = await CocUser.findOne({ id: playerData.tag });
         user.data.push({ time: Date.now(), player: playerData });
-        user.save();
+        await user.save();
       } else {
-        CocUser.create({
+        await CocUser.create({
           id: playerData.tag,
           data: [{ time: Date.now(), player: playerData }],
         });
