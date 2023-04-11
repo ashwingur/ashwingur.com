@@ -20,8 +20,8 @@ export default async function handler(
   });
 
   const clanTag = "220QP2GGU";
-  mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@ashwingur.dslbe5g.mongodb.net/clash_of_clans`
+  await mongoose.connect(
+    process.env.MONGODB_URI == undefined ? "" : process.env.MONGODB_URI
   );
 
   // Get the clan users
