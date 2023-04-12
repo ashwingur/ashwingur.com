@@ -33,7 +33,7 @@ export default async function handler(
       .json({ success: "false", error: JSON.stringify(error) });
   }
 
-  const usersUpdated: { tag: string; name: string }[] = [];
+  const usersUpdated: { tag: string; name: string; status: string }[] = [];
 
   // Get the clan users
   try {
@@ -67,11 +67,20 @@ export default async function handler(
             const user = await CocUser.findOne({ id: playerData.tag });
             user.data.push({ time: Date.now(), player: playerData });
             await user.save();
-            usersUpdated.push({ tag: playerData.tag, name: playerData.name });
+            usersUpdated.push({
+              tag: playerData.tag,
+              name: playerData.name,
+              status: "updated",
+            });
           } else {
             CocUser.create({
               id: playerData.tag,
               data: [{ time: Date.now(), player: playerData }],
+            });
+            usersUpdated.push({
+              tag: playerData.tag,
+              name: playerData.name,
+              status: "created",
             });
           }
         }
