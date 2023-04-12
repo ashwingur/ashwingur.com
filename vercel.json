@@ -1,8 +1,3 @@
 {
-  "crons": [
-    {
-      "path": "/api/clashofclans/trackclandata",
-      "schedule": "0 16 * * *"
-    }
-  ]
+  "crons": []
 }
