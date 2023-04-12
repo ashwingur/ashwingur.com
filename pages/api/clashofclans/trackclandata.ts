@@ -22,7 +22,7 @@ export default async function handler(
   const clanTag = "220QP2GGU";
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI == undefined ? "" : process.env.MONGODB_URI
+      process.env.MONGODB == undefined ? "" : process.env.MONGODB
     );
   } catch (error) {
     console.log(`Error connecting to mongodb: ${error}`);
@@ -64,7 +64,7 @@ export default async function handler(
           if (await CocUser.exists({ id: playerData.tag })) {
             const user = await CocUser.findOne({ id: playerData.tag });
             user.data.push({ time: Date.now(), player: playerData });
-            user.save();
+            await user.save();
             testData.push({ tag: playerData.tag, name: playerData.name });
           } else {
             CocUser.create({
@@ -103,7 +103,7 @@ export default async function handler(
     // }
     //
 
-    res.status(200).json({
+    return res.status(200).json({
       success: "true",
       testData: testData,
     });
