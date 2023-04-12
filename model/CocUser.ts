@@ -6,7 +6,7 @@ interface IData {
   player: Player;
 }
 
-interface ICocUser {
+export interface ICocUser {
   id: string;
   data: IData[];
 }

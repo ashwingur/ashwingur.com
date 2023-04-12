@@ -34,7 +34,7 @@ export default async function handler(
   }
 
   // Get the player data
-  CocUser.findOne({ id: `#${playerTag}` })
+  await CocUser.findOne({ id: `#${playerTag}` })
     .then((response) => {
       res.status(200).json(response);
     })
