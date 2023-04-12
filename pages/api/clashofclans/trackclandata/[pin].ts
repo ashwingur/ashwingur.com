@@ -21,6 +21,7 @@ export default async function handler(
   console.log(pin);
   console.log(process.env.CLANTRACK_PIN);
 
+  // Minor security check to prevent spamming
   if (pin !== process.env.CLANTRACK_PIN) {
     return res.status(403).json({ success: "false", error: "Invalid pin" });
   }
