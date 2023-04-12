@@ -33,7 +33,7 @@ export default async function handler(
       .json({ success: "false", error: JSON.stringify(error) });
   }
 
-  const testData: { tag: string; name: string }[] = [];
+  const usersUpdated: { tag: string; name: string }[] = [];
 
   // Get the clan users
   try {
@@ -46,9 +46,10 @@ export default async function handler(
       }
     );
     const clanData = clanResponse.data;
-    const playerTags = clanData.memberList
-      // .slice(0, 1)
-      .map((player) => player.tag.replace("#", ""));
+    const playerTags = clanData.memberList.map((player) =>
+      player.tag.replace("#", "")
+    );
+    // Now get all the clan members data and update
     await axios
       .all(
         playerTags.map((tag) =>
@@ -60,16 +61,13 @@ export default async function handler(
         )
       )
       .then(async (responses: AxiosResponse<Player>[]) => {
-        // console.log(
-        //   responses.forEach((response) => console.log(response.data))
-        // );
         for (const response of responses) {
           const playerData = response.data;
           if (await CocUser.exists({ id: playerData.tag })) {
             const user = await CocUser.findOne({ id: playerData.tag });
             user.data.push({ time: Date.now(), player: playerData });
             await user.save();
-            testData.push({ tag: playerData.tag, name: playerData.name });
+            usersUpdated.push({ tag: playerData.tag, name: playerData.name });
           } else {
             CocUser.create({
               id: playerData.tag,
@@ -79,37 +77,9 @@ export default async function handler(
         }
       });
 
-    // Now go through each member and query them
-    // for (const player of clanData.memberList) {
-    //   const playerResponse: AxiosResponse<Player> = await axios.get(
-    //     `https://cocproxy.royaleapi.dev/v1/players/%23${player.tag.replace(
-    //       "#",
-    //       ""
-    //     )}`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
-    //       },
-    //     }
-    //   );
-    //   const playerData = playerResponse.data;
-    //   if (await CocUser.exists({ id: playerData.tag })) {
-    //     const user = await CocUser.findOne({ id: playerData.tag });
-    //     user.data.push({ time: Date.now(), player: playerData });
-    //     await user.save();
-    //     testData.push({ tag: playerData.tag, name: playerData.name });
-    //   } else {
-    //     await CocUser.create({
-    //       id: playerData.tag,
-    //       data: [{ time: Date.now(), player: playerData }],
-    //     });
-    //   }
-    // }
-    //
-
     return res.status(200).json({
       success: "true",
-      testData: testData,
+      users_updated: usersUpdated,
     });
   } catch (error) {
     return res.status(500).json({
