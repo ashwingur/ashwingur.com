@@ -47,7 +47,7 @@ export default async function handler(
     );
     const clanData = clanResponse.data;
     const playerTags = clanData.memberList
-      .slice(0, 1)
+      // .slice(0, 1)
       .map((player) => player.tag.replace("#", ""));
     await axios
       .all(
