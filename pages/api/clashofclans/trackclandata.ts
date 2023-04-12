@@ -42,39 +42,68 @@ export default async function handler(
       }
     );
     const clanData = clanResponse.data;
+    const playerTags = clanData.memberList.map((player) =>
+      player.tag.replace("#", "")
+    );
+    await axios
+      .all(
+        playerTags.map((tag) =>
+          axios.get(`https://cocproxy.royaleapi.dev/v1/players/%23${tag}`, {
+            headers: {
+              Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
+            },
+          })
+        )
+      )
+      .then(async (responses: AxiosResponse<Player>[]) => {
+        console.log(
+          responses.forEach((response) => console.log(response.data))
+        );
+        for (const response of responses) {
+          const playerData = response.data;
+          if (await CocUser.exists({ id: playerData.tag })) {
+            const user = await CocUser.findOne({ id: playerData.tag });
+            user.data.push({ time: Date.now(), player: playerData });
+            await user.save();
+            testData.push({ tag: playerData.tag, name: playerData.name });
+          } else {
+            await CocUser.create({
+              id: playerData.tag,
+              data: [{ time: Date.now(), player: playerData }],
+            });
+          }
+        }
+      });
 
     // Now go through each member and query them
-    for (const player of clanData.memberList) {
-      const playerResponse: AxiosResponse<Player> = await axios.get(
-        `https://cocproxy.royaleapi.dev/v1/players/%23${player.tag.replace(
-          "#",
-          ""
-        )}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
-          },
-        }
-      );
-      const playerData = playerResponse.data;
-      if (await CocUser.exists({ id: playerData.tag })) {
-        const user = await CocUser.findOne({ id: playerData.tag });
-        user.data.push({ time: Date.now(), player: playerData });
-        await user.save();
-        testData.push({ tag: playerData.tag, name: playerData.name });
-      } else {
-        await CocUser.create({
-          id: playerData.tag,
-          data: [{ time: Date.now(), player: playerData }],
-        });
-      }
-    }
+    // for (const player of clanData.memberList) {
+    //   const playerResponse: AxiosResponse<Player> = await axios.get(
+    //     `https://cocproxy.royaleapi.dev/v1/players/%23${player.tag.replace(
+    //       "#",
+    //       ""
+    //     )}`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${process.env.COC_BEARER_TOKEN}`,
+    //       },
+    //     }
+    //   );
+    //   const playerData = playerResponse.data;
+    //   if (await CocUser.exists({ id: playerData.tag })) {
+    //     const user = await CocUser.findOne({ id: playerData.tag });
+    //     user.data.push({ time: Date.now(), player: playerData });
+    //     await user.save();
+    //     testData.push({ tag: playerData.tag, name: playerData.name });
+    //   } else {
+    //     await CocUser.create({
+    //       id: playerData.tag,
+    //       data: [{ time: Date.now(), player: playerData }],
+    //     });
+    //   }
+    // }
 
-    console.log("testdata:" + testData);
     res.status(200).json({
       success: "true",
-      test: testData,
-      updatedUsers: "is this wokring",
     });
   } catch (error) {
     return res.status(500).json({
