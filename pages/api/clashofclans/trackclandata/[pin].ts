@@ -18,8 +18,6 @@ export default async function handler(
   });
 
   const { pin } = req.query;
-  console.log(pin);
-  console.log(process.env.CLANTRACK_PIN);
 
   // Minor security check to prevent spamming
   if (pin !== process.env.CLANTRACK_PIN) {
