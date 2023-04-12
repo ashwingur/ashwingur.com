@@ -60,9 +60,36 @@ export default async function handler(
           })
         )
       )
-      .then(async (responses: AxiosResponse<Player>[]) => {
+      .then(async (responses) => {
         for (const response of responses) {
           const playerData = response.data;
+
+          // Deleting uncessary objects
+          delete playerData.clan;
+          delete playerData.league;
+          delete playerData.playerHouse;
+          delete playerData.labels;
+          for (const achievement of playerData.achievements) {
+            delete achievement.target;
+            delete achievement.stars;
+            delete achievement.info;
+            delete achievement.completionInfo;
+            delete achievement.village;
+          }
+          for (const troop of playerData.troops) {
+            delete troop.maxLevel;
+            delete troop.village;
+            delete troop.superTroopIsActive;
+          }
+          for (const hero of playerData.heroes) {
+            delete hero.maxLevel;
+            delete hero.village;
+          }
+          for (const spell of playerData.spells) {
+            delete spell.maxLevel;
+            delete spell.village;
+          }
+
           if (await CocUser.exists({ id: playerData.tag })) {
             const user = await CocUser.findOne({ id: playerData.tag });
             user.data.push({ time: Date.now(), player: playerData });
