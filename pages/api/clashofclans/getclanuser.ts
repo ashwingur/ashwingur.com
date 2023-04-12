@@ -22,7 +22,7 @@ export default async function handler(
   const playerTag = "#YUQ9RGUG";
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI == undefined ? "" : process.env.MONGODB_URI
+      process.env.MONGODB == undefined ? "" : process.env.MONGODB
     );
   } catch (error) {
     console.log(`Error connecting to mongodb: ${error}`);
