@@ -2,10 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 import mongoose from "mongoose";
-import CocUser from "../../../model/CocUser";
-// const CocUser = require("../../../model/CocUser");
-import PlayerDataExample from "../../../data/player.json";
-import { Clan, Player } from "../../../shared/interfaces/coc.interface";
+import CocUser from "../../../../model/CocUser";
+import { Clan } from "../../../../shared/interfaces/coc.interface";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,6 +16,14 @@ export default async function handler(
     origin: "*",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
   });
+
+  const { pin } = req.query;
+  console.log(pin);
+  console.log(process.env.CLANTRACK_PIN);
+
+  if (pin !== process.env.CLANTRACK_PIN) {
+    return res.status(403).json({ success: "false", error: "Invalid pin" });
+  }
 
   const clanTag = "220QP2GGU";
   try {
