@@ -42,9 +42,9 @@ export default async function handler(
       }
     );
     const clanData = clanResponse.data;
-    const playerTags = clanData.memberList.map((player) =>
-      player.tag.replace("#", "")
-    );
+    const playerTags = clanData.memberList
+      .slice(0, 1)
+      .map((player) => player.tag.replace("#", ""));
     await axios
       .all(
         playerTags.map((tag) =>
@@ -56,9 +56,9 @@ export default async function handler(
         )
       )
       .then(async (responses: AxiosResponse<Player>[]) => {
-        console.log(
-          responses.forEach((response) => console.log(response.data))
-        );
+        // console.log(
+        //   responses.forEach((response) => console.log(response.data))
+        // );
         for (const response of responses) {
           const playerData = response.data;
           if (await CocUser.exists({ id: playerData.tag })) {
