@@ -64,10 +64,10 @@ export default async function handler(
           if (await CocUser.exists({ id: playerData.tag })) {
             const user = await CocUser.findOne({ id: playerData.tag });
             user.data.push({ time: Date.now(), player: playerData });
-            await user.save();
+            user.save();
             testData.push({ tag: playerData.tag, name: playerData.name });
           } else {
-            await CocUser.create({
+            CocUser.create({
               id: playerData.tag,
               data: [{ time: Date.now(), player: playerData }],
             });
@@ -101,6 +101,7 @@ export default async function handler(
     //     });
     //   }
     // }
+    //
 
     res.status(200).json({
       success: "true",
