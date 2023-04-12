@@ -29,7 +29,7 @@ export default async function handler(
     return res.status(500).json({ success: "false", error: error });
   }
 
-  const testData = [];
+  const testData: { tag: string; name: string }[] = [];
 
   // Get the clan users
   try {
@@ -104,6 +104,7 @@ export default async function handler(
 
     res.status(200).json({
       success: "true",
+      testData: testData,
     });
   } catch (error) {
     return res.status(500).json({
