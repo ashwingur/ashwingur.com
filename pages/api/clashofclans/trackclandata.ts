@@ -20,9 +20,14 @@ export default async function handler(
   });
 
   const clanTag = "220QP2GGU";
-  await mongoose.connect(
-    process.env.MONGODB_URI == undefined ? "" : process.env.MONGODB_URI
-  );
+  try {
+    await mongoose.connect(
+      process.env.MONGODB_URI == undefined ? "" : process.env.MONGODB_URI
+    );
+  } catch (error) {
+    console.log(`Error connecting to mongodb: ${error}`);
+    return res.status(500).json({ success: "false", error: error });
+  }
 
   // Get the clan users
   try {
