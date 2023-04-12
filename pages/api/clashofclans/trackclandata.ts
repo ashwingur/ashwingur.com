@@ -25,8 +25,12 @@ export default async function handler(
       process.env.MONGODB == undefined ? "" : process.env.MONGODB
     );
   } catch (error) {
-    console.log(`Error connecting to mongodb: ${error}`);
-    return res.status(500).json({ success: "false", error: error });
+    console.log(
+      `Error connecting to mongodb: ${error}, connection string: ${process.env.MONGODB}`
+    );
+    return res
+      .status(500)
+      .json({ success: "false", error: JSON.stringify(error) });
   }
 
   const testData: { tag: string; name: string }[] = [];
