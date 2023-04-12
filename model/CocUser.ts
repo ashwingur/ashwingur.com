@@ -1,6 +1,5 @@
 import mongoose, { Schema, InferSchemaType } from "mongoose";
 import { Player } from "../shared/interfaces/coc.interface";
-import { CompressedPlayer } from "../shared/interfaces/coc_mongodb.interface";
 
 interface IData {
   time: number;
