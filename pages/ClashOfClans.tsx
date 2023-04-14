@@ -38,11 +38,10 @@ const ClashOfClans = () => {
               innerColour="bg-orange-500"
               middleColour="bg-orange-600"
               outerColour="bg-orange-700"
-              onClick={() => {}}
             />
           </Link>
         </div>
-        <div className="h-16 flex items-center">
+        <div className="h-16 flex items-center mb-4">
           <Link href={"/ClashOfClans/clan/220QP2GGU"}>
             <CocButton
               className="w-80 hover:w-72"
@@ -50,7 +49,17 @@ const ClashOfClans = () => {
               innerColour="bg-green-500"
               middleColour="bg-green-600"
               outerColour="bg-green-700"
-              onClick={() => {}}
+            />
+          </Link>
+        </div>
+        <div className="h-16 flex items-center">
+          <Link href={"/ClashOfClans/Progress"}>
+            <CocButton
+              className="w-80 hover:w-72"
+              text={"Progress (Beta)"}
+              innerColour="bg-blue-500"
+              middleColour="bg-blue-600"
+              outerColour="bg-blue-700"
             />
           </Link>
         </div>

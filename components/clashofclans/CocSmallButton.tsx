@@ -2,7 +2,7 @@ import React from "react";
 
 interface CocButtonProps {
   text: String;
-  onClick: () => void;
+  onClick?: () => void;
   outerColour: string;
   middleColour: string;
   innerColour: string;
