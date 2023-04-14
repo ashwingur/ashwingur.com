@@ -12,10 +12,15 @@ import {
   LineChart,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
 import moment from "moment";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 interface ChartProps {
   data: ChartData[];
@@ -34,55 +39,17 @@ interface NumericCategoryProps {
   valueKey: string;
 }
 
-interface NumericCategoryItem {
-  nameKey: string;
-  valueKey: string;
-}
-
 const fetchHistory = (playerTag: String) =>
   axios
     .get(`/api/clashofclans/player/${playerTag}/history`)
     .then(({ data }) => data);
-
-const Chart = (chartProps: ChartProps) => {
-  return (
-    <ResponsiveContainer width="80%" height={500}>
-      <LineChart data={chartProps.data}>
-        <Line type="monotone" dataKey="y" stroke="white" strokeWidth={5} />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="time"
-          name="Time"
-          stroke="white"
-          tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
-          dy={10}
-        />
-        <YAxis
-          width={100}
-          dx={-4}
-          tickFormatter={(tick) => {
-            return tick.toLocaleString();
-          }}
-          domain={[
-            (dataMin: number) =>
-              dataMin - 0.2 * dataMin < 0
-                ? 0
-                : Math.floor(dataMin - 0.2 * dataMin),
-            (dataMax: number) => Math.ceil(dataMax * 1.2),
-          ]}
-          stroke="white"
-        />
-        <Tooltip />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-};
 
 const PlayerTag = () => {
   const router = useRouter();
   const playerTag =
     typeof router.query?.playerTag === "string" ? router.query.playerTag : "";
   const [displayedChartData, setDisplayedChartData] = useState<ChartData[]>([]);
+  const [selectedStatistic, setSelectedStatistic] = useState("");
 
   const { isLoading, error, data } = useQuery<ICocUser>({
     queryKey: ["playerHistory", playerTag],
@@ -113,6 +80,58 @@ const PlayerTag = () => {
     });
   }
 
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: TooltipProps<ValueType, NameType>) => {
+    if (active) {
+      return (
+        <div className="bg-gradient-to-b from-[#293968] to-[#637ac6] text-white p-2 rounded-md flex flex-col items-center">
+          <p className="label text-lg">{moment(label).format("DD-MM-YY")}</p>
+          <p>{payload?.[0].value?.toLocaleString()}</p>
+          <p className="desc">{selectedStatistic}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const Chart = (chartProps: ChartProps) => {
+    return (
+      <ResponsiveContainer width="80%" height={500}>
+        <LineChart data={chartProps.data}>
+          <Line type="monotone" dataKey="y" stroke="white" strokeWidth={5} />
+          <CartesianGrid stroke="#ccc" />
+          <XAxis
+            dataKey="time"
+            name="Time"
+            stroke="white"
+            tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
+            dy={10}
+          />
+          <YAxis
+            width={100}
+            dx={-4}
+            tickFormatter={(tick) => {
+              return tick.toLocaleString();
+            }}
+            domain={[
+              (dataMin: number) =>
+                dataMin - 0.2 * dataMin < 0
+                  ? 0
+                  : Math.floor(dataMin - 0.2 * dataMin),
+              (dataMax: number) => Math.ceil(dataMax * 1.2),
+            ]}
+            stroke="white"
+          />
+          <Tooltip content={CustomTooltip} />
+        </LineChart>
+      </ResponsiveContainer>
+    );
+  };
+
   const NumericCategory = (numericCategoryProps: NumericCategoryProps) => {
     const nameKeys = numericCategoryProps.names.map((name, index) => {
       return (
@@ -129,6 +148,7 @@ const PlayerTag = () => {
     });
     const itemClick = (index: number) => {
       const clickedName = numericCategoryProps.names[index];
+      setSelectedStatistic(clickedName);
       setDisplayedChartData(
         data.data.map((item) => {
           const categoryArray = (item.player as any)[
