@@ -48,7 +48,7 @@ const Chart = (chartProps: ChartProps) => {
   return (
     <ResponsiveContainer width="80%" height={500}>
       <LineChart data={chartProps.data}>
-        <Line type="monotone" dataKey="y" stroke="#ccc" strokeWidth={3} />
+        <Line type="monotone" dataKey="y" stroke="white" strokeWidth={5} />
         <CartesianGrid stroke="#ccc" />
         <XAxis
           dataKey="time"
@@ -59,6 +59,7 @@ const Chart = (chartProps: ChartProps) => {
         />
         <YAxis
           width={100}
+          dx={-4}
           tickFormatter={(tick) => {
             return tick.toLocaleString();
           }}
