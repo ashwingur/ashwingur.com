@@ -163,7 +163,7 @@ const PlayerTag = () => {
         Player Progress: {data.data[0].player.name}
       </h2>
       <div className="flex flex-col items-center">
-        <Chart data={displayedChartData} />
+        {displayedChartData.length > 0 && <Chart data={displayedChartData} />}
         <NumericCategory
           heading={"Achievements"}
           names={achievementNames}
