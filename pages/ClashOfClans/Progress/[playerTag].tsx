@@ -56,7 +56,16 @@ const Chart = (chartProps: ChartProps) => {
           stroke="white"
           tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
         />
-        <YAxis domain={["dataMin - 100", "dataMax + 100"]} stroke="white" />
+        <YAxis
+          domain={[
+            (dataMin: number) =>
+              dataMin - 0.2 * dataMin < 0
+                ? 0
+                : Math.floor(dataMin - 0.2 * dataMin),
+            (dataMax: number) => Math.ceil(dataMax * 1.2),
+          ]}
+          stroke="white"
+        />
         <Tooltip />
       </LineChart>
     </ResponsiveContainer>
@@ -137,6 +146,15 @@ const PlayerTag = () => {
   const achievementNames: string[] = data.data[0].player.achievements.map(
     (item) => item.name
   );
+  const heroNames: string[] = data.data[0].player.heroes.map(
+    (item) => item.name
+  );
+  const troopNames: string[] = data.data[0].player.troops.map(
+    (item) => item.name
+  );
+  const spellNames: string[] = data.data[0].player.spells.map(
+    (item) => item.name
+  );
 
   return (
     <div className="bg-clash">
@@ -152,6 +170,27 @@ const PlayerTag = () => {
           categoryKey={"achievements"}
           nameKey={"name"}
           valueKey={"value"}
+        />
+        <NumericCategory
+          heading={"Heroes"}
+          names={heroNames}
+          categoryKey={"heroes"}
+          nameKey={"name"}
+          valueKey={"level"}
+        />
+        <NumericCategory
+          heading={"Troops"}
+          names={troopNames}
+          categoryKey={"troops"}
+          nameKey={"name"}
+          valueKey={"level"}
+        />
+        <NumericCategory
+          heading={"Spells"}
+          names={spellNames}
+          categoryKey={"spells"}
+          nameKey={"name"}
+          valueKey={"level"}
         />
       </div>
     </div>
