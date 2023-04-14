@@ -55,8 +55,13 @@ const Chart = (chartProps: ChartProps) => {
           name="Time"
           stroke="white"
           tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
+          dy={10}
         />
         <YAxis
+          width={100}
+          tickFormatter={(tick) => {
+            return tick.toLocaleString();
+          }}
           domain={[
             (dataMin: number) =>
               dataMin - 0.2 * dataMin < 0
@@ -162,7 +167,7 @@ const PlayerTag = () => {
       <h2 className="coc-title pt-20 mb-4">
         Player Progress: {data.data[0].player.name}
       </h2>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-4">
         {displayedChartData.length > 0 && <Chart data={displayedChartData} />}
         <NumericCategory
           heading={"Achievements"}
