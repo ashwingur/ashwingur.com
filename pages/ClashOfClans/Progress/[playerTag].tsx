@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -24,6 +24,19 @@ interface ChartProps {
 interface ChartData {
   time: number;
   y: number;
+}
+
+interface NumericCategoryProps {
+  heading: string;
+  categoryKey: string;
+  names: string[];
+  nameKey: string;
+  valueKey: string;
+}
+
+interface NumericCategoryItem {
+  nameKey: string;
+  valueKey: string;
 }
 
 const fetchHistory = (playerTag: String) =>
@@ -54,6 +67,7 @@ const PlayerTag = () => {
   const router = useRouter();
   const playerTag =
     typeof router.query?.playerTag === "string" ? router.query.playerTag : "";
+  const [displayedChartData, setDisplayedChartData] = useState<ChartData[]>([]);
 
   const { isLoading, error, data } = useQuery<ICocUser>({
     queryKey: ["playerHistory", playerTag],
@@ -77,28 +91,68 @@ const PlayerTag = () => {
       info: <SpinningCircles className="mx-auto mt-8" />,
     });
 
-  if (data === null) {
+  if (data === null || data.data.length == 0) {
     return CocLoadingOrError({
       heading: "",
       info: <p className="text-center coc-font-style m-8 text-2xl">No data</p>,
     });
   }
 
-  const chartData: ChartData[] = data.data.map((item) => {
-    return {
-      time: item.time,
-      y: item.player.trophies,
+  const NumericCategory = (numericCategoryProps: NumericCategoryProps) => {
+    const nameKeys = numericCategoryProps.names.map((name, index) => {
+      return (
+        <div
+          className="hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all"
+          key={index}
+          onClick={() => {
+            itemClick(index);
+          }}
+        >
+          {name}
+        </div>
+      );
+    });
+    const itemClick = (index: number) => {
+      const clickedName = numericCategoryProps.names[index];
+      setDisplayedChartData(
+        data.data.map((item) => {
+          const categoryArray = (item.player as any)[
+            numericCategoryProps.categoryKey
+          ] as Array<any>;
+          const yValue = categoryArray.find(
+            (o) => o[numericCategoryProps.nameKey] === clickedName
+          )[numericCategoryProps.valueKey];
+          return { time: item.time, y: yValue };
+        })
+      );
     };
-  });
+    return (
+      <div className="coc-font-style flex flex-col items-center px-4">
+        <div className="text-3xl">{numericCategoryProps.heading}</div>
+        <div className="flex flex-wrap gap-4">{nameKeys}</div>
+      </div>
+    );
+  };
 
-  console.log(chartData);
+  const achievementNames: string[] = data.data[0].player.achievements.map(
+    (item) => item.name
+  );
 
   return (
     <div className="bg-clash">
       <CocNavBar />
-      <h2 className="coc-title pt-20 mb-4">{data.data[0].player.name}</h2>
+      <h2 className="coc-title pt-20 mb-4">
+        Player Progress: {data.data[0].player.name}
+      </h2>
       <div className="flex flex-col items-center">
-        <Chart data={chartData} />
+        <Chart data={displayedChartData} />
+        <NumericCategory
+          heading={"Achievements"}
+          names={achievementNames}
+          categoryKey={"achievements"}
+          nameKey={"name"}
+          valueKey={"value"}
+        />
       </div>
     </div>
   );
