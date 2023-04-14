@@ -35,13 +35,20 @@ export default async function handler(
 
   // Get the player data
   await CocUser.findOne({ id: `#${playerTag}` })
-    .then((response) => {
-      res.status(200).json(response);
+    .then((player) => {
+      if (player === null) {
+        return res
+          .status(404)
+          .json({ success: "false", error: "User is not being tracked" });
+      }
+
+      res.status(200).json(player);
     })
     .catch((error: any) => {
       console.log(`Error: ${error}`);
-      res
-        .status(500)
-        .json({ error: "something went wrong: " + JSON.stringify(error) });
+      res.status(500).json({
+        success: "false",
+        error: "Unable to find user: " + JSON.stringify(error),
+      });
     });
 }
