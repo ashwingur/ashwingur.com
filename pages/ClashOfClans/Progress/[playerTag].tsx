@@ -229,7 +229,9 @@ const PlayerTag = () => {
     });
 
     const itemClick = (key: string) => {
-      setSelectedStatistic(key);
+      const result = key.replace(/([A-Z])/g, " $1");
+      const displayResult = result.charAt(0).toUpperCase() + result.slice(1);
+      setSelectedStatistic(displayResult);
       setDisplayedChartData(
         data.data.map((item) => {
           const yValue = (item.player as any)[key];
