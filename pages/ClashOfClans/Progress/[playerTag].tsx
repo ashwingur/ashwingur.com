@@ -103,6 +103,7 @@ const PlayerTag = () => {
   const ProgressChart = (chartProps: ChartProps) => {
     const max = Math.max(...chartProps.data.map((o) => o.y));
     const min = Math.min(...chartProps.data.map((o) => o.y));
+    const tickDigits = max.toString().length;
     const delta = max - min + 1;
     return (
       <ResponsiveContainer width="80%" height={500}>
@@ -122,7 +123,7 @@ const PlayerTag = () => {
             dy={10}
           />
           <YAxis
-            width={100}
+            width={tickDigits >= 8 ? 110 : 80}
             dx={-4}
             allowDecimals={false}
             tickFormatter={(tick) => {
@@ -131,7 +132,7 @@ const PlayerTag = () => {
             domain={[
               (dataMin: number) =>
                 dataMin - delta < 0 ? 0 : Math.floor(dataMin - 0.2 * delta),
-              (dataMax: number) => dataMax + 0.2 * delta,
+              (dataMax: number) => Math.ceil(dataMax + 0.2 * delta),
             ]}
             stroke="white"
           />
