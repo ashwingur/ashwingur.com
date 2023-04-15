@@ -23,7 +23,6 @@ export default async function handler(
       },
     })
     .then((response) => {
-      console.log(`Response: ${response}`);
       res.status(200).json(response.data);
     })
     .catch((error) => {
