@@ -10,8 +10,6 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   TooltipProps,
@@ -39,7 +37,31 @@ interface NumericCategoryProps {
   names: string[];
   nameKey: string;
   valueKey: string;
+  className?: string;
 }
+
+interface RootCategoryProps {
+  heading: string;
+  nameKeys: string[];
+  className?: string;
+}
+
+const rootCategoryKeys = [
+  "townHallLevel",
+  "expLevel",
+  "trophies",
+  "bestTrophies",
+  "warStars",
+  "attackWins",
+  "defenseWins",
+  "builderHallLevel",
+  "versusTrophies",
+  "bestVersusTrophies",
+  "versusBattleWins",
+  "donations",
+  "donationsReceived",
+  "clanCapitalContributions",
+];
 
 const fetchHistory = (playerTag: String) =>
   axios
@@ -154,7 +176,7 @@ const PlayerTag = () => {
     const nameKeys = numericCategoryProps.names.map((name, index) => {
       return (
         <div
-          className="hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all"
+          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all`}
           key={index}
           onClick={() => {
             itemClick(index);
@@ -180,8 +202,51 @@ const PlayerTag = () => {
       );
     };
     return (
-      <div className="coc-font-style flex flex-col items-center px-4">
+      <div
+        className={`${numericCategoryProps.className} coc-font-style flex flex-col items-center px-4`}
+      >
         <div className="text-3xl">{numericCategoryProps.heading}</div>
+        <div className="flex flex-wrap gap-4">{nameKeys}</div>
+      </div>
+    );
+  };
+
+  const RootCategory = (rootCategoryProps: RootCategoryProps) => {
+    const nameKeys = rootCategoryProps.nameKeys.map((item, index) => {
+      const result = item.replace(/([A-Z])/g, " $1");
+      const displayResult = result.charAt(0).toUpperCase() + result.slice(1);
+      return (
+        <div
+          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all`}
+          key={index}
+          onClick={() => {
+            itemClick(item);
+          }}
+        >
+          {displayResult}
+        </div>
+      );
+    });
+
+    const itemClick = (key: string) => {
+      setSelectedStatistic(key);
+      setDisplayedChartData(
+        data.data.map((item) => {
+          const yValue = (item.player as any)[key];
+          if (yValue == null) {
+            return { time: item.time, y: 0 };
+          }
+
+          return { time: item.time, y: yValue };
+        })
+      );
+    };
+
+    return (
+      <div
+        className={`${rootCategoryProps.className} coc-font-style flex flex-col items-center px-4`}
+      >
+        <div className="text-3xl">{rootCategoryProps.heading}</div>
         <div className="flex flex-wrap gap-4">{nameKeys}</div>
       </div>
     );
@@ -203,19 +268,22 @@ const PlayerTag = () => {
   return (
     <div className="bg-clash">
       <CocNavBar />
-      <h2 className="coc-title pt-20 mb-4">
-        Player Progress: {data.data[0].player.name}
-      </h2>
+      <h2 className="coc-title pt-20 mb-4">{data.data[0].player.name}</h2>
+      <h3 className="clash-font-style text-2xl font-thin text-center mb-1">
+        {selectedStatistic}
+      </h3>
       <div className="flex flex-col items-center gap-4">
         {displayedChartData.length > 0 && (
           <ProgressChart data={displayedChartData} />
         )}
+        <RootCategory heading="General" nameKeys={rootCategoryKeys} />
         <NumericCategory
           heading={"Achievements"}
           names={achievementNames}
           categoryKey={"achievements"}
           nameKey={"name"}
           valueKey={"value"}
+          className="mt-4"
         />
         <NumericCategory
           heading={"Heroes"}
