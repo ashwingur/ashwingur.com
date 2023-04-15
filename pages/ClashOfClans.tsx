@@ -56,7 +56,7 @@ const ClashOfClans = () => {
           <Link href={"/ClashOfClans/Progress"}>
             <CocButton
               className="w-80 hover:w-72"
-              text={"Progress (Beta)"}
+              text={"Progress"}
               innerColour="bg-blue-500"
               middleColour="bg-blue-600"
               outerColour="bg-blue-700"
