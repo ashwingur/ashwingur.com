@@ -7,6 +7,8 @@ import { ICocUser } from "../../../model/CocUser";
 import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
 import { SpinningCircles } from "react-loading-icons";
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
   Line,
   LineChart,
@@ -98,11 +100,19 @@ const PlayerTag = () => {
     return null;
   };
 
-  const Chart = (chartProps: ChartProps) => {
+  const ProgressChart = (chartProps: ChartProps) => {
+    const max = Math.max(...chartProps.data.map((o) => o.y));
+    const min = Math.min(...chartProps.data.map((o) => o.y));
+    const delta = max - min + 1;
     return (
       <ResponsiveContainer width="80%" height={500}>
-        <LineChart data={chartProps.data}>
-          <Line type="monotone" dataKey="y" stroke="white" strokeWidth={5} />
+        <AreaChart data={chartProps.data}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="white" stopOpacity={0.7} />
+              <stop offset="95%" stopColor="white" stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
           <CartesianGrid stroke="#ccc" />
           <XAxis
             dataKey="time"
@@ -114,20 +124,27 @@ const PlayerTag = () => {
           <YAxis
             width={100}
             dx={-4}
+            allowDecimals={false}
             tickFormatter={(tick) => {
               return tick.toLocaleString();
             }}
             domain={[
               (dataMin: number) =>
-                dataMin - 0.2 * dataMin < 0
-                  ? 0
-                  : Math.floor(dataMin - 0.2 * dataMin),
-              (dataMax: number) => Math.ceil(dataMax * 1.2),
+                dataMin - delta < 0 ? 0 : Math.floor(dataMin - 0.2 * delta),
+              (dataMax: number) => dataMax + 0.2 * delta,
             ]}
             stroke="white"
           />
           <Tooltip content={CustomTooltip} />
-        </LineChart>
+          <Area
+            type="monotone"
+            dataKey="y"
+            stroke="white"
+            strokeWidth={5}
+            fillOpacity={1}
+            fill="url(#colorUv)"
+          />
+        </AreaChart>
       </ResponsiveContainer>
     );
   };
@@ -189,7 +206,9 @@ const PlayerTag = () => {
         Player Progress: {data.data[0].player.name}
       </h2>
       <div className="flex flex-col items-center gap-4">
-        {displayedChartData.length > 0 && <Chart data={displayedChartData} />}
+        {displayedChartData.length > 0 && (
+          <ProgressChart data={displayedChartData} />
+        )}
         <NumericCategory
           heading={"Achievements"}
           names={achievementNames}
