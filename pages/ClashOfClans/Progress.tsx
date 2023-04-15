@@ -33,21 +33,23 @@ const AvailablePlayers = () => {
     return <SpinningCircles className="mx-auto mt-8" />;
   }
 
-  const members = data.memberList.map((player, index) => (
-    <Link
-      key={index}
-      href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
-      className="flex items-center justify-center h-16"
-    >
-      <CocButton
-        text={player.name}
-        className="w-80 hover:w-72"
-        innerColour="bg-orange-500"
-        middleColour="bg-orange-600"
-        outerColour="bg-orange-700"
-      />
-    </Link>
-  ));
+  const members = data.memberList
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((player, index) => (
+      <Link
+        key={index}
+        href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
+        className="flex items-center justify-center h-16"
+      >
+        <CocButton
+          text={player.name}
+          className="w-80 hover:w-72"
+          innerColour="bg-orange-500"
+          middleColour="bg-orange-600"
+          outerColour="bg-orange-700"
+        />
+      </Link>
+    ));
 
   return (
     <div>
