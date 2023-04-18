@@ -12,6 +12,8 @@ import CocTrophyDetails from "../../../components/clashofclans/CocTrophyDetails"
 import { Player } from "../../../shared/interfaces/coc.interface";
 import { useQuery } from "react-query";
 import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
+import Link from "next/link";
+import CocButton from "../../../components/clashofclans/CocButton";
 
 const title = "Player";
 
@@ -52,7 +54,20 @@ const PlayerPage = () => {
         Player
       </h2>
 
-      <div>
+      <div className="flex flex-col">
+        {data.clan.name === "TheOrganisation" && (
+          <div className="h-16 flex items-center mx-auto mt-4">
+            <Link href={`/ClashOfClans/Progress/${playerTag}`}>
+              <CocButton
+                className="w-80 hover:w-72"
+                text={"Progress"}
+                innerColour="bg-blue-500"
+                middleColour="bg-blue-600"
+                outerColour="bg-blue-700"
+              />
+            </Link>
+          </div>
+        )}
         <div>
           <div className="flex flex-col md:flex-row md:justify-around items-center rounded-lg border-2 border-black m-4 pt-2 md:pt-0 bg-[#695d96]">
             <CocPlayerSummary player={data} />

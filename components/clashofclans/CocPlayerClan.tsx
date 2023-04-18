@@ -17,7 +17,7 @@ const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
 
   return (
     <Link
-      className="font-clash text-white clash-font-style py-4 hover:bg-black/20 rounded-md my-1 px-2 transition-all"
+      className="font-clash text-white clash-font-style flex flex-col items-center py-4 hover:bg-black/20 rounded-md my-1 px-2 transition-all"
       href={`/ClashOfClans/clan/${player.clan.tag.substring(1)}`}
     >
       <div>{player.clan.name}</div>

@@ -21,6 +21,8 @@ import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import Link from "next/link";
+import CocButton from "../../../components/clashofclans/CocButton";
 
 interface ChartProps {
   data: ChartData[];
@@ -292,10 +294,22 @@ const ProgressPage = () => {
   return (
     <div className="bg-clash">
       <CocNavBar />
-      <h2 className="coc-title pt-20 mb-4">{data.data[0].player.name}</h2>
-      <h3 className="clash-font-style text-2xl font-thin text-center mb-1">
-        {selectedStatistic}
-      </h3>
+      <div className="flex flex-col items-center">
+        <div className="h-16 flex items-center pt-28">
+          <Link href={`/ClashOfClans/player/${playerTag}`}>
+            <CocButton
+              className="w-80 hover:w-72"
+              text={data.data[0].player.name}
+              innerColour="bg-orange-500"
+              middleColour="bg-orange-600"
+              outerColour="bg-orange-700"
+            />
+          </Link>
+        </div>
+        <h2 className="clash-font-style text-2xl font-thin text-center mb-1 mt-12">
+          {selectedStatistic}
+        </h2>
+      </div>
       <div className="flex flex-col items-center gap-4 mx-4">
         {displayedChartData.length > 0 && (
           <ProgressChart data={displayedChartData} />

@@ -41,7 +41,7 @@ const ClashOfClans = () => {
           profile and clan:
         </p>
         <div className="h-16 flex items-center mb-4">
-          <Link href={"/ClashOfClans/player/YLPGLJOV"}>
+          <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
             <CocButton
               className="w-80 hover:w-72"
               text={"Unknown Virus"}
