@@ -128,7 +128,11 @@ const PlayerTag = () => {
     const tickDigits = max.toString().length;
     const delta = max - min + 1;
     return (
-      <ResponsiveContainer width="80%" height={500}>
+      <ResponsiveContainer
+        width="95%"
+        height={500}
+        className={"clash-font-style font-thin"}
+      >
         <AreaChart data={chartProps.data}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -136,13 +140,15 @@ const PlayerTag = () => {
               <stop offset="95%" stopColor="white" stopOpacity={0.1} />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#ccc" />
+          <CartesianGrid stroke="white" strokeDasharray="6" />
           <XAxis
             dataKey="time"
             name="Time"
             stroke="white"
             tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
-            dy={10}
+            height={100}
+            angle={40}
+            dy={30}
           />
           <YAxis
             width={tickDigits >= 8 ? 110 : 80}
@@ -176,7 +182,7 @@ const PlayerTag = () => {
     const nameKeys = numericCategoryProps.names.map((name, index) => {
       return (
         <div
-          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all`}
+          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all md:text-lg`}
           key={index}
           onClick={() => {
             itemClick(index);
@@ -203,7 +209,7 @@ const PlayerTag = () => {
     };
     return (
       <div
-        className={`${numericCategoryProps.className} coc-font-style flex flex-col items-center px-4`}
+        className={`${numericCategoryProps.className} coc-font-style flex flex-col items-center px-4 py-2 border-black border-2 rounded-md w-full`}
       >
         <div className="text-3xl">{numericCategoryProps.heading}</div>
         <div className="flex flex-wrap gap-4">{nameKeys}</div>
@@ -217,7 +223,7 @@ const PlayerTag = () => {
       const displayResult = result.charAt(0).toUpperCase() + result.slice(1);
       return (
         <div
-          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all`}
+          className={`hover:cursor-pointer hover:bg-black p-2 rounded-md transition-all md:text-lg`}
           key={index}
           onClick={() => {
             itemClick(item);
@@ -246,7 +252,7 @@ const PlayerTag = () => {
 
     return (
       <div
-        className={`${rootCategoryProps.className} coc-font-style flex flex-col items-center px-4`}
+        className={`${rootCategoryProps.className} coc-font-style flex flex-col items-center px-4 py-2 border-black border-2 rounded-md w-full`}
       >
         <div className="text-3xl">{rootCategoryProps.heading}</div>
         <div className="flex flex-wrap gap-4">{nameKeys}</div>
@@ -274,18 +280,22 @@ const PlayerTag = () => {
       <h3 className="clash-font-style text-2xl font-thin text-center mb-1">
         {selectedStatistic}
       </h3>
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 mx-4">
         {displayedChartData.length > 0 && (
           <ProgressChart data={displayedChartData} />
         )}
-        <RootCategory heading="General" nameKeys={rootCategoryKeys} />
+        <RootCategory
+          heading="General"
+          nameKeys={rootCategoryKeys}
+          className="bg-cyan-800"
+        />
         <NumericCategory
           heading={"Achievements"}
           names={achievementNames}
           categoryKey={"achievements"}
           nameKey={"name"}
           valueKey={"value"}
-          className="mt-4"
+          className="mt-4 bg-[#465172]"
         />
         <NumericCategory
           heading={"Heroes"}
@@ -293,6 +303,7 @@ const PlayerTag = () => {
           categoryKey={"heroes"}
           nameKey={"name"}
           valueKey={"level"}
+          className="bg-orange-700"
         />
         <NumericCategory
           heading={"Troops"}
@@ -300,6 +311,7 @@ const PlayerTag = () => {
           categoryKey={"troops"}
           nameKey={"name"}
           valueKey={"level"}
+          className="bg-sky-700"
         />
         <NumericCategory
           heading={"Spells"}
@@ -307,6 +319,7 @@ const PlayerTag = () => {
           categoryKey={"spells"}
           nameKey={"name"}
           valueKey={"level"}
+          className="bg-rose-800"
         />
       </div>
     </div>
