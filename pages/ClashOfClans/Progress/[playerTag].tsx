@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -63,18 +63,26 @@ const rootCategoryKeys = [
   "clanCapitalContributions",
 ];
 
-const fetchHistory = (playerTag: String) =>
-  axios
-    .get(`/api/clashofclans/player/${playerTag}/history`)
-    .then(({ data }) => data);
-
-const PlayerTag = () => {
+const ProgressPage = () => {
   const router = useRouter();
   const playerTag =
     typeof router.query?.playerTag === "string" ? router.query.playerTag : "";
   const [displayedChartData, setDisplayedChartData] = useState<ChartData[]>([]);
   const [selectedStatistic, setSelectedStatistic] = useState("");
 
+  const fetchHistory = (playerTag: String) =>
+    axios
+      .get(`/api/clashofclans/player/${playerTag}/history`)
+      .then(({ data }) => {
+        // Setting an initial display value so users see a trophy graph when first entering page
+        setDisplayedChartData(
+          (data as ICocUser).data.map((item) => {
+            return { time: item.time, y: item.player.trophies };
+          })
+        );
+        setSelectedStatistic("Trophies");
+        return data;
+      });
   const { isLoading, error, data } = useQuery<ICocUser>({
     queryKey: ["playerHistory", playerTag],
     queryFn: () => fetchHistory(playerTag),
@@ -326,4 +334,4 @@ const PlayerTag = () => {
   );
 };
 
-export default PlayerTag;
+export default ProgressPage;
