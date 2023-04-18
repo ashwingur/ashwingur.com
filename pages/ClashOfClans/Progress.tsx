@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { Clan } from "../../shared/interfaces/coc.interface";
 import TheOrginization from "../../data/TheOrganization.json";
 import { SpinningCircles } from "react-loading-icons";
-import { Members } from "pusher-js";
 import CocButton from "../../components/clashofclans/CocButton";
 import Link from "next/link";
 

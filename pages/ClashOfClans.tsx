@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CocNavBar from "../components/clashofclans/CocNavBar";
 import CocButton from "../components/clashofclans/CocButton";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 // https://coc.guide/troop for the icons
 
@@ -14,8 +15,17 @@ interface Tags {
   clanTag: string;
 }
 
+const theOrganisationTag = "220QP2GGU";
+
+const fetchTheOrganisation = () =>
+  axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);
+
 const ClashOfClans = () => {
-  const router = useRouter();
+  //  Caching TheOrganisation clan since it is more frequently accessed
+  useQuery({
+    queryKey: ["clan", theOrganisationTag],
+    queryFn: () => fetchTheOrganisation(),
+  });
 
   return (
     <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
