@@ -12,13 +12,13 @@ import Link from "next/link";
 const title = "Progress Tracker";
 const clanTag = "220QP2GGU";
 
-const fetchClan = (clanTag: string) =>
+const fetchClan = () =>
   axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);
 
 const AvailablePlayers = () => {
   const { isLoading, error, data } = useQuery<Clan>({
     queryKey: ["clan", clanTag],
-    queryFn: () => fetchClan(clanTag),
+    queryFn: () => fetchClan(),
     initialData: TheOrginization as Clan,
   });
 

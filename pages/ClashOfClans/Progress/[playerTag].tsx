@@ -194,6 +194,7 @@ const ProgressPage = () => {
           key={index}
           onClick={() => {
             itemClick(index);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           }}
         >
           {name}
@@ -235,6 +236,7 @@ const ProgressPage = () => {
           key={index}
           onClick={() => {
             itemClick(item);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           }}
         >
           {displayResult}
