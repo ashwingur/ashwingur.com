@@ -135,6 +135,12 @@ const ProgressPage = () => {
     const min = Math.min(...chartProps.data.map((o) => o.y));
     const tickDigits = max.toString().length;
     const delta = max - min + 1;
+    let yLabelWidth = 80;
+    if (tickDigits >= 8) {
+      yLabelWidth = 140;
+    } else if (tickDigits >= 5) {
+      yLabelWidth = 100;
+    }
     return (
       <ResponsiveContainer
         width="95%"
@@ -159,7 +165,7 @@ const ProgressPage = () => {
             dy={30}
           />
           <YAxis
-            width={tickDigits >= 8 ? 110 : 80}
+            width={yLabelWidth}
             dx={-4}
             allowDecimals={false}
             tickFormatter={(tick) => {
