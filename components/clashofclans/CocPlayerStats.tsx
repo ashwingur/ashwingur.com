@@ -39,7 +39,7 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
         />
         <Stat
           name={"Clan Capital Contributions"}
-          value={player.clanCapitalContributions.toString()}
+          value={player.clanCapitalContributions.toLocaleString()}
         />
       </div>
     </div>
