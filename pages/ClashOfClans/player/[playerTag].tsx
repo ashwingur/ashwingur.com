@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
 import Link from "next/link";
 import CocButton from "../../../components/clashofclans/CocButton";
+import CocPlayerStats from "../../../components/clashofclans/CocPlayerStats";
 
 const title = "Player";
 
@@ -76,6 +77,7 @@ const PlayerPage = () => {
 
             <CocTrophyDetails player={data} />
           </div>
+          <CocPlayerStats player={data} />
           <div className="border-2 border-black rounded-lg mx-4 mb-4 bg-indigo-900">
             <h2 className="text-center clash-font-style font-thin text-3xl mt-4">
               Army
