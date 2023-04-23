@@ -10,6 +10,10 @@ const HorizontalBar = () => {
   );
 };
 
+const Gap = () => {
+  return <div className="h-8"></div>;
+};
+
 const Stat = ({ name, value }: { name: string; value: string }) => {
   return (
     <div className="coc-font-style text-lg w-72 md:w-96 flex flex-col">
@@ -37,9 +41,30 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
           name={"Best Versus Trophies"}
           value={player.bestVersusTrophies.toString()}
         />
+        <Gap />
         <Stat
           name={"Clan Capital Contributions"}
           value={player.clanCapitalContributions.toLocaleString()}
+        />
+        <Stat name={"War Stars"} value={player.warStars.toString()} />
+        <Gap />
+        <Stat name={"Donations"} value={player.donations.toString()} />
+        <Stat
+          name={"Donations Received"}
+          value={player.donationsReceived.toString()}
+        />
+        <Gap />
+        <Stat name={"Attack Wins"} value={player.attackWins.toString()} />
+        <Stat name={"Defense Wins"} value={player.defenseWins.toString()} />
+        <Stat
+          name={"Versus Battle Wins"}
+          value={player.versusBattleWins.toString()}
+        />
+        <Gap />
+        <Stat name={"Townhall Level"} value={player.townHallLevel.toString()} />
+        <Stat
+          name={"Builderhall Level"}
+          value={player.builderHallLevel.toString()}
         />
       </div>
     </div>
