@@ -1,23 +1,17 @@
 import React from "react";
 import { ClanMember } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface ClanMemberElementProps {
   clanMember: ClanMember;
 }
 
 const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
-  const router = useRouter();
-
-  const clanMemberClick = () => {
-    router.push(`/ClashOfClans/player/${clanMember.tag.substring(1)}`);
-  };
-
   return (
-    <div
+    <Link
       className="bg-gray-200 flex flex-col md:flex-row justify-between my-2 px-2 py-2 md:py-0 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 transition-all"
-      onClick={clanMemberClick}
+      href={`/ClashOfClans/player/${clanMember.tag.substring(1)}`}
     >
       <div className="flex mx-auto md:mx-0 md:py-1">
         <div className="self-center md:w-6 text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
@@ -77,7 +71,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
