@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -89,6 +89,7 @@ const ProgressPage = () => {
     queryKey: ["playerHistory", playerTag],
     queryFn: () => fetchHistory(playerTag),
     enabled: router.isReady,
+    staleTime: 1000 * 60 * 10,
   });
 
   if (error instanceof Error)
