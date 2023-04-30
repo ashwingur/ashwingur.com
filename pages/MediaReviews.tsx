@@ -43,7 +43,7 @@ const MediaReviews = () => {
     return (
       <button
         className={
-          "text-2xl p-4 rounded-lg transition-all " +
+          "md:text-2xl p-4 rounded-lg transition-all " +
           (selectedTab == index ? " bg-white dark:bg-black" : "")
         }
         key={index}
@@ -77,7 +77,9 @@ const MediaReviews = () => {
     <div>
       <Navbar fixed={true} />
       <h1 className="text-center mt-20">Media Reviews</h1>
-      <div className="flex gap-6 justify-center my-4">{tabs}</div>
+      <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
+        {tabs}
+      </div>
       <div className="flex flex-col items-center px-4">{reviews}</div>
     </div>
   );
