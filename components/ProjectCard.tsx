@@ -31,7 +31,7 @@ const ProjectCard = ({
   const link_items = links?.map((item, index) => (
     <div
       key={index}
-      className="bg-blue-200 dark:bg-blue-800 p-2 rounded-md hover:bg-blue-400 dark:hover:bg-blue-600 transition-all"
+      className="bg-blue-200 dark:bg-[#2e1065] p-2 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
     >
       <a href={item.url} target="_blank" rel="noreferrer">
         {item.display}
