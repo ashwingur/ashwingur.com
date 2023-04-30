@@ -48,7 +48,7 @@ html {
 
 @layer base {
   body {
-    @apply bg-slate-50 dark:bg-slate-800 dark:text-gray-200;
+    @apply bg-gradient-to-r from-green-300 via-amber-100 to-orange-200 dark:from-slate-900 dark:via-emerald-900 dark:to-slate-900 dark:text-gray-200;
   }
 
   h1,
