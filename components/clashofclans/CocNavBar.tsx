@@ -5,6 +5,8 @@ import ToggleThemeButton from "../ToggleThemeButton";
 import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { MdOutlineMenu } from "react-icons/md";
+import CocButton from "./CocButton";
+import CocSmallButton from "./CocSmallButton";
 
 interface Tags {
   playerTag: string;
@@ -126,7 +128,7 @@ const CocNavBar = () => {
           className={
             showMobileNav
               ? "absolute left-0 top-0 w-[75%] h-full bg-gradient-to-b from-[#8c94ac] to-[#6c779b] ease-in duration-500 z-50"
-              : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50 bg-white"
+              : "fixed left-[-100%] top-0 h-full p-10 ease-in duration-500 z-50 bg-gradient-to-b from-[#8c94ac] to-[#6c779b]"
           }
           onClick={(e) => {
             e.stopPropagation();
@@ -173,13 +175,20 @@ const CocNavBar = () => {
                 <BiSearchAlt2 size={30} />
               </button>
             </div>
-            <Link
-              href="/ClashOfClans"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition-all rounded-md"
-              scroll={false}
-            >
-              Home
-            </Link>
+            <div className="h-16 flex items-center">
+              <Link href={"/ClashOfClans"}>
+                <CocButton
+                  className="w-40 hover:w-32"
+                  text={"Home"}
+                  innerColour="bg-blue-500"
+                  middleColour="bg-blue-600"
+                  outerColour="bg-blue-700"
+                  onClick={() => {
+                    setShowMobileNav(false);
+                  }}
+                />
+              </Link>
+            </div>
             <div className="">
               <ToggleThemeButton />
             </div>

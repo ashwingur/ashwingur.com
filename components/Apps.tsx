@@ -6,6 +6,18 @@ const Apps = () => {
     <div id="apps" className="pt-20 flex flex-col">
       <h1 className="text-center mb-4">Apps</h1>
       <Link
+        href="/ClashOfClans"
+        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-md py-3 px-4 font-bold mx-auto my-4 transition-all"
+      >
+        <button>Clash of Clans</button>
+      </Link>
+      <Link
+        href="/MediaReviews"
+        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-md py-3 px-4 font-bold mx-auto my-4 transition-all"
+      >
+        <button>Media Reviews</button>
+      </Link>
+      <Link
         href="/CubeTimer"
         className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-md py-3 px-4 font-bold mx-auto my-4 transition-all"
       >
@@ -22,12 +34,6 @@ const Apps = () => {
         className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-md py-3 px-4 font-bold mx-auto my-4 transition-all"
       >
         <button>Tic Tac Toe</button>
-      </Link>
-      <Link
-        href="/ClashOfClans"
-        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-md py-3 px-4 font-bold mx-auto my-4 transition-all"
-      >
-        <button>Clash of Clans</button>
       </Link>
     </div>
   );
