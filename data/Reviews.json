@@ -1,0 +1,14 @@
+[
+  {
+    "type": "book",
+    "name": "Harry Potter Series",
+    "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate dui nec efficitur. Curabitur et eros eleifend, dictum mi sodales, interdum turpis. Donec sapien eros, aliquam et aliquet non, aliquam a elit. Pellentesque suscipit ullamcorper mauris at pretium. Proin placerat sagittis vehicula. Maecenas ut posuere lorem.Etiam porta leo velit, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor. Phasellus aliquet neque nibh, mattis sodales tellus vehicula nec. Proin cursus blandit nisl sed sollicitudin. Donec mollis tristique metus ut elementum. Praesent imperdiet, est vel molestie mattis, tellus metus dignissim neque, sit amet semper nisl nibh sed ante. Phasellus accumsan, erat at posuere iaculis, tellus dui lacinia ex, in bibendum metus turpis a massa. Sed tellus elit, congue vitae massa quis, fermentum dignissim ligula. Aenean dapibus nec dui eget vulputate. Duis fringilla consequat sem molestie consectetur. Aenean lobortis sem et nisl pulvinar, non suscipit lectus luctus.",
+    "rating": 9,
+    "reviewSubItems": [
+      {
+        "name": "Harry Potter and the Philosopher's Stone",
+        "rating": 8
+      }
+    ]
+  }
+]
