@@ -54,7 +54,7 @@ const CocNavBar = () => {
     <div>
       <div className="flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/30 dark:bg-white/10 z-50 fixed">
         <Link href="/">
-          <Image src="/logo.png" alt="logo" width="80" height="80" />
+          <Image src="/logo.png" alt="logo" width="30" height="30" />
         </Link>
         {/* Input Fields */}
         <div className="hidden md:flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
@@ -100,7 +100,7 @@ const CocNavBar = () => {
             className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md mr-4"
             scroll={false}
           >
-            Home
+            Clash Home
           </Link>
           <ToggleThemeButton />
         </div>

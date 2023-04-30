@@ -16,7 +16,7 @@ const BasicNavbar = ({ absolute }: BasicNavbarProps) => {
       }
     >
       <Link href="/">
-        <Image src="/logo.png" alt="logo" width="80" height="80" />
+        <Image src="/logo.png" alt="logo" width="30" height="30" />
       </Link>
       <ToggleThemeButton />
     </div>
