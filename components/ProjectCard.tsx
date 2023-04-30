@@ -41,7 +41,7 @@ const ProjectCard = ({
 
   return (
     <div className="flex flex-col justify-center rounded-2xl bg-stone-100 dark:bg-gradient-to-b dark:from-zinc-900 dark:to-slate-900 max-w-lg shadow-xl relative m-8 p-4">
-      <div className="w-full h-72 relative">
+      <div className="w-full h-36 md:h-72 relative">
         <Image
           alt="Mountains"
           src={image}
