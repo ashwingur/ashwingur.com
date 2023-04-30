@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 
 interface ProjectProps {
-  id: number;
   title: string;
   image: string;
   description: string;
@@ -17,7 +16,6 @@ interface Link {
 }
 
 const ProjectCard = ({
-  id,
   title,
   image,
   description,
@@ -33,7 +31,7 @@ const ProjectCard = ({
   const link_items = links?.map((item, index) => (
     <div
       key={index}
-      className="bg-blue-200 dark:bg-blue-800 p-2 rounded-md hover:bg-blue-400 dark:hover:bg-blue-600"
+      className="bg-blue-200 dark:bg-blue-800 p-2 rounded-md hover:bg-blue-400 dark:hover:bg-blue-600 transition-all"
     >
       <a href={item.url} target="_blank" rel="noreferrer">
         {item.display}
@@ -42,7 +40,7 @@ const ProjectCard = ({
   ));
 
   return (
-    <div className="flex flex-col justify-center rounded-2xl bg-white dark:bg-gray-900 max-w-lg shadow-xl relative m-8">
+    <div className="flex flex-col justify-center rounded-2xl bg-white dark:bg-gray-900 max-w-lg shadow-xl relative m-8 p-4">
       <div className="w-full h-72 relative">
         <Image
           alt="Mountains"
@@ -52,16 +50,16 @@ const ProjectCard = ({
         />
       </div>
 
-      <div className="px-8 md:py-4">
+      <div className="px-4 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
         <p>{description}</p>
         <h3 className="mt-4 text-xl">Languages and Frameworks</h3>
-        <div className="flex gap-4 my-2">{stack_items}</div>
+        <div className="flex gap-4 my-2 flex-wrap">{stack_items}</div>
 
         {links != undefined && (
           <div>
             <h3 className="mt-4 text-xl">Links</h3>
-            <div className="flex gap-4 my-2">{link_items}</div>
+            <div className="flex gap-4 my-2 flex-wrap">{link_items}</div>
           </div>
         )}
       </div>

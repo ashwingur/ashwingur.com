@@ -1,8 +1,83 @@
 [
   {
-    "id": 1,
+    "title": "Cube Timer",
+    "image": "/assets/projects/cube_timer.png",
+    "description": "3x3 Rubiks Cube timer that provides randomly generated scrambles with a preview. The timer mimics the offical stackmat timer design where the timer must be held down for a moment before it can start.",
+    "stack": ["Next.js", "Tailwind CSS", "TypeScript", "React"],
+    "links": [
+      {
+        "display": "Page",
+        "url": "/CubeTimer"
+      },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/ashwingur-portfolio-website/blob/main/pages/CubeTimer.tsx"
+      }
+    ]
+  },
+  {
+    "title": "Diskord",
+    "image": "/assets/projects/diskord.png",
+    "description": "Public chatroom that anyone can join with a username. Uses Pusher websocket connections to relay messages between the clients.",
+    "stack": ["Next.js", "Tailwind CSS", "TypeScript", "React", "Pusher"],
+    "links": [
+      {
+        "display": "Page",
+        "url": "/Diskord"
+      },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/ashwingur-portfolio-website/blob/main/pages/Diskord.tsx"
+      }
+    ]
+  },
+  {
+    "title": "Tic Tac Toe",
+    "image": "/assets/projects/tictactoe.png",
+    "description": "Online multiplayer Tic Tac Toe game. Users are able to host a game with any chosen room name and can get someone to join that room with the room name. Responsive design for mobile and dark mode support.",
+    "stack": ["Next.js", "Tailwind CSS", "TypeScript", "React", "Pusher"],
+    "links": [
+      {
+        "display": "Page",
+        "url": "/TicTacToe"
+      },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/ashwingur-portfolio-website/blob/main/pages/TicTacToe.tsx"
+      }
+    ]
+  },
+  {
+    "title": "Turret-Spinner",
+    "image": "/assets/projects/turret_spinner.png",
+    "description": "2D Endless Survival Game created in Unity",
+    "stack": ["Unity", "C#", "GIMP"],
+    "links": [
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/Turret-Spinner"
+      },
+      {
+        "display": "Gameplay Video",
+        "url": "https://www.youtube.com/watch?v=9UvweIp-2q4&ab_channel=AshwinGur"
+      }
+    ]
+  },
+  {
+    "title": "Snake",
+    "image": "https://raw.githubusercontent.com/ashwingur/Snake-Game/master/snake_example.gif",
+    "description": "Snake Game created in Rust using sdl2.",
+    "stack": ["Rust"],
+    "links": [
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/Snake-Game"
+      }
+    ]
+  },
+  {
     "title": "Countries of the World Quizzer",
-    "image": "/assets/countries_of_the_world.png",
+    "image": "/assets/projects/countries_of_the_world.png",
     "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options.",
     "stack": ["React", "CSS"],
     "links": [
@@ -14,7 +89,6 @@
     ]
   },
   {
-    "id": 2,
     "title": "Chip-8 Emulator",
     "image": "https://raw.githubusercontent.com/ashwingur/chip8_emulator/master/CONNECT4_gameplay.gif",
     "description": "Chip-8 Emulator in written Rust which uses the sdl2 library to render the screen. Follows the specifications outlined in the Chip-8 Technical Reference. It contains many roms that can be played",
@@ -23,32 +97,6 @@
       {
         "display": "GitHub",
         "url": "https://github.com/ashwingur/chip8_emulator"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Turret-Spinner",
-    "image": "/assets/turret_spinner.png",
-    "description": "2D Endless Survival Game created in Unity",
-    "stack": ["Unity", "C#", "GIMP"],
-    "links": [
-      {
-        "display": "GitHub",
-        "url": "https://github.com/ashwingur/Turret-Spinner"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "title": "Snake",
-    "image": "https://raw.githubusercontent.com/ashwingur/Snake-Game/master/snake_example.gif",
-    "description": "Snake Game created in Rust using sdl2.",
-    "stack": ["Rust"],
-    "links": [
-      {
-        "display": "GitHub",
-        "url": "https://github.com/ashwingur/Snake-Game"
       }
     ]
   }
