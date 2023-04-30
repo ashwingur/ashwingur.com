@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
-const Other = () => {
+const Apps = () => {
   return (
-    <div id="other" className="pt-20 flex flex-col">
-      <h1 className="text-center">Other</h1>
+    <div id="apps" className="pt-20 flex flex-col">
+      <h1 className="text-center mb-4">Apps</h1>
       <Link
         href="/CubeTimer"
         className="bg-blue-200 dark:bg-blue-700 hover:bg-blue-400 dark:hover:bg-blue-600 rounded-md p-2 font-bold mx-auto my-4"
@@ -33,4 +33,4 @@ const Other = () => {
   );
 };
 
-export default Other;
+export default Apps;

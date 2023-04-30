@@ -10,6 +10,7 @@ module.exports = {
       fontFamily: {
         clash: ["Clash-Regular", "sans-serif"],
         coc: ["Coc", "sans-serif"],
+        sans: ["var(--font-inter)"],
       },
     },
   },

@@ -4,7 +4,7 @@ import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import { useTheme } from "next-themes";
-import Other from "../components/Other";
+import Apps from "../components/Apps";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
       <div>
         <HomeSection />
         <Projects />
-        <Other />
+        <Apps />
         <Contact />
       </div>
       <Footer></Footer>

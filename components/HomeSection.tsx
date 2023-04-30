@@ -52,7 +52,7 @@ const HomeSection = () => {
           className="hover:bg-blue-100 dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
         >
           <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
-            Resume (to be updated)
+            Resume
           </span>
           <IoDocumentText size={50} />
         </Link>

@@ -42,7 +42,7 @@ const ProjectCard = ({
   ));
 
   return (
-    <div className="flex flex-col justify-center rounded-2xl bg-white dark:bg-gray-900 max-w-lg shadow-xl relative m-8 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-2xl">
+    <div className="flex flex-col justify-center rounded-2xl bg-white dark:bg-gray-900 max-w-lg shadow-xl relative m-8">
       <div className="w-full h-72 relative">
         <Image
           alt="Mountains"
@@ -52,7 +52,7 @@ const ProjectCard = ({
         />
       </div>
 
-      <div className="p-8">
+      <div className="px-8 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
         <p>{description}</p>
         <h3 className="mt-4 text-xl">Languages and Frameworks</h3>

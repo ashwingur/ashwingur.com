@@ -34,11 +34,11 @@ const Navbar = () => {
             <li>Projects</li>
           </Link>
           <Link
-            href="/#other"
+            href="/#apps"
             className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
             scroll={false}
           >
-            <li>Other</li>
+            <li>Apps</li>
           </Link>
           <Link
             href="/#contact"
