@@ -71,7 +71,7 @@ const MediaReviews = () => {
             key={index}
             className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <div className="font-bold text-xl">{subItem.name}</div>
               <div>{subItem.rating}/10</div>
             </div>
@@ -95,7 +95,7 @@ const MediaReviews = () => {
           key={index}
           className="bg-slate-50 dark:bg-slate-900 p-4 md:p-8 w-full md:w-4/6 lg:w-1/2 rounded-lg"
         >
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <div className="font-bold text-2xl">{item.name}</div>
             <div>{item.rating}/10</div>
           </div>
