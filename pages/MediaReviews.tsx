@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Reviews from "../data/Reviews.json";
+import Image from "next/image";
 
 interface ReviewItem {
   type: string;
   name: string;
   image?: string;
-  review?: string;
+  review?: string[];
   rating: number;
   reviewSubItems?: ReviewSubItem[];
 }
@@ -14,7 +15,7 @@ interface ReviewItem {
 interface ReviewSubItem {
   name: string;
   image?: string;
-  review?: string;
+  review?: string[];
   rating: number;
 }
 
@@ -57,17 +58,59 @@ const MediaReviews = () => {
   });
 
   const reviews = Reviews.filter((item) => item.type == filterType).map(
-    (item, index) => {
+    (item: ReviewItem, index) => {
+      const reviewParagraphs = item.review?.map((para, index) => {
+        return <p key={index}>{para}</p>;
+      });
+      const subReviews = item.reviewSubItems?.map((subItem, index) => {
+        const subReviewParagraphs = subItem.review?.map((c, index) => {
+          return <p key={index}>{c}</p>;
+        });
+        return (
+          <div
+            key={index}
+            className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
+          >
+            <div className="flex justify-between">
+              <div className="font-bold text-xl">{subItem.name}</div>
+              <div>{subItem.rating}/10</div>
+            </div>
+            {subItem.image !== undefined && (
+              <div className="w-full h-36 md:h-72 relative my-4">
+                <Image
+                  alt="Cover Image"
+                  src={subItem.image}
+                  fill={true}
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            )}
+            <div className="flex flex-col gap-2">{subReviewParagraphs}</div>
+          </div>
+        );
+      });
+
       return (
         <div
           key={index}
-          className="bg-slate-50 dark:bg-slate-900 p-4 w-full md:w-4/6 lg:w-1/2 rounded-lg"
+          className="bg-slate-50 dark:bg-slate-900 p-4 md:p-8 w-full md:w-4/6 lg:w-1/2 rounded-lg"
         >
           <div className="flex justify-between">
-            <div className="font-bold">{item.name}</div>
+            <div className="font-bold text-2xl">{item.name}</div>
             <div>{item.rating}/10</div>
           </div>
-          <div>{item.review}</div>
+          {item.image !== undefined && (
+            <div className="w-full h-36 md:h-72 relative my-4">
+              <Image
+                alt="Cover Image"
+                src={item.image}
+                fill={true}
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          )}
+          <div className="flex flex-col gap-2">{reviewParagraphs}</div>
+          <div className="flex flex-col p-4 gap-4">{subReviews}</div>
         </div>
       );
     }
@@ -80,7 +123,9 @@ const MediaReviews = () => {
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
         {tabs}
       </div>
-      <div className="flex flex-col items-center px-4">{reviews}</div>
+      <div className="flex flex-col gap-8 items-center px-4 mb-12">
+        {reviews}
+      </div>
     </div>
   );
 };
