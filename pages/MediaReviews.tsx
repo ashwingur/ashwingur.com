@@ -8,7 +8,7 @@ interface ReviewItem {
   name: string;
   image?: string;
   review?: string[];
-  rating: number;
+  rating?: number;
   reviewSubItems?: ReviewSubItem[];
 }
 
@@ -16,7 +16,7 @@ interface ReviewSubItem {
   name: string;
   image?: string;
   review?: string[];
-  rating: number;
+  rating?: number;
 }
 
 const categories = ["Books", "Shows", "Movies", "Games"];
@@ -89,13 +89,15 @@ const MediaReviews = () => {
           >
             <div className="flex justify-between items-center">
               <div className="font-bold text-xl w-4/5">{subItem.name}</div>
-              <div
-                className={`rounded-full w-8 h-8 flex ${ratingColour(
-                  subItem.rating
-                )}`}
-              >
-                <p className="m-auto font-bold">{subItem.rating}</p>
-              </div>
+              {subItem.rating && (
+                <div
+                  className={`rounded-full w-8 h-8 flex ${ratingColour(
+                    subItem.rating
+                  )}`}
+                >
+                  <p className="m-auto font-bold">{subItem.rating}</p>
+                </div>
+              )}
             </div>
             {subItem.image !== undefined && (
               <div className="w-full h-36 md:h-72 relative my-4">
@@ -117,15 +119,17 @@ const MediaReviews = () => {
           key={index}
           className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade"
         >
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mb-2">
             <div className="font-bold text-2xl w-4/5">{item.name}</div>
-            <div
-              className={`rounded-full text-2xl w-12 h-12 flex ${ratingColour(
-                item.rating
-              )}`}
-            >
-              <p className="m-auto font-bold">{item.rating}</p>
-            </div>
+            {item.rating && (
+              <div
+                className={`rounded-full text-2xl w-12 h-12 flex ${ratingColour(
+                  item.rating
+                )}`}
+              >
+                <p className="m-auto font-bold">{item.rating}</p>
+              </div>
+            )}
           </div>
           {item.image !== undefined && (
             <div className="w-full h-36 md:h-72 relative my-4">

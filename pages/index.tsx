@@ -44,7 +44,7 @@ export default function Home() {
         <Projects />
         <Apps />
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

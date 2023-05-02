@@ -3,29 +3,45 @@
     "type": "book",
     "name": "Harry Potter Series",
     "image": "/assets/reviews/harry_potter_book.webp",
-    "review": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate dui nec efficitur. Curabitur et eros eleifend, dictum mi sodales, interdum turpis. Donec sapien eros, aliquam et aliquet non, aliquam a elit. Pellentesque suscipit ullamcorper mauris at pretium. Proin placerat sagittis vehicula. Maecenas ut posuere lorem.Etiam porta leo velit, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-      " Phasellus aliquet neque nibh, mattis sodales tellus vehicula nec. Proin cursus blandit nisl sed sollicitudin. Donec mollis tristique metus ut elementum. Praesent imperdiet, est vel molestie mattis, tellus metus dignissim neque, sit amet semper nisl nibh sed ante. Phasellus accumsan, erat at posuere iaculis, tellus dui lacinia ex, in bibendum metus turpis a massa. Sed tellus elit, congue vitae massa quis, fermentum dignissim ligula. Aenean dapibus nec dui eget vulputate. Duis fringilla consequat sem molestie consectetur. Aenean lobortis sem et nisl pulvinar, non suscipit lectus luctus."
-    ],
-    "rating": 9,
+    "rating": 9.5,
+    "review": [],
+
     "reviewSubItems": [
       {
         "name": "Harry Potter and the Philosopher's Stone",
         "image": "/assets/reviews/philosophers_stone.jpg",
-        "rating": 8,
-        "review": [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate t, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-          " Phasellus aliquet neque nibh, mascipit lectus luctus."
-        ]
+        "review": []
       },
       {
         "name": "Harry Potter and the Chamber of Secrets",
         "image": "/assets/reviews/chamber_of_secrets.jpg",
-        "rating": 7,
-        "review": [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate t, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-          " Phasellus aliquet neque nibh, mascipit lectus luctus."
-        ]
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Prisoner of Azkaban",
+        "image": "/assets/reviews/prisoner_of_azkaban.jpg",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Goblet of Fire",
+        "image": "/assets/reviews/goblet_of_fire.jpg",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Order of the Phoenix",
+        "image": "/assets/reviews/order_of_phoenix.jpg",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Half-Blood Prince",
+        "image": "/assets/reviews/half_blood_prince.jpg",
+
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Deathly Hallows",
+        "image": "/assets/reviews/deathly_hallows.jpg",
+        "review": []
       }
     ]
   },
@@ -33,85 +49,632 @@
     "type": "book",
     "name": "A Song of Ice and Fire",
     "image": "/assets/reviews/asoiaf.webp",
-    "review": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate dui nec efficitur. Curabitur et eros eleifend, dictum mi sodales, interdum turpis. Donec sapien eros, aliquam et aliquet non, aliquam a elit. Pellentesque suscipit ullamcorper mauris at pretium. Proin placerat sagittis vehicula. Maecenas ut posuere lorem.Etiam porta leo velit, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-      " Phasellus aliquet neque nibh, mattis sodales tellus vehicula nec. Proin cursus blandit nisl sed sollicitudin. Donec mollis tristique metus ut elementum. Praesent imperdiet, est vel molestie mattis, tellus metus dignissim neque, sit amet semper nisl nibh sed ante. Phasellus accumsan, erat at posuere iaculis, tellus dui lacinia ex, in bibendum metus turpis a massa. Sed tellus elit, congue vitae massa quis, fermentum dignissim ligula. Aenean dapibus nec dui eget vulputate. Duis fringilla consequat sem molestie consectetur. Aenean lobortis sem et nisl pulvinar, non suscipit lectus luctus."
-    ],
-    "rating": 9,
+    "rating": 9.5,
+    "review": [],
+
     "reviewSubItems": [
       {
         "name": "A Game of Thrones",
         "image": "/assets/reviews/a_game_of_thrones.jpg",
-        "rating": 8,
-        "review": [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate t, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-          " Phasellus aliquet neque nibh, mascipit lectus luctus."
-        ]
+        "review": []
       },
       {
         "name": "A Clash of Kings",
         "image": "/assets/reviews/a_clash_of_kings.jpg",
-        "rating": 7,
-        "review": [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sem urna, finibus et semper ac, aliquam in ligula. Mauris mollis vulputate t, a consectetur massa posuere eget. Aenean facilisis, augue at semper semper, risus mi pulvinar justo, ac venenatis diam odio sit amet tortor.",
-          " Phasellus aliquet neque nibh, mascipit lectus luctus."
-        ]
+        "review": []
+      },
+      {
+        "name": "A Storm of Swords",
+        "image": "/assets/reviews/storm_of_swords.jpg",
+        "review": []
+      },
+      {
+        "name": "A Feast for Crows",
+        "image": "/assets/reviews/feast_for_crows.jpg",
+        "review": []
+      },
+      {
+        "name": "A Dance with Dragons",
+        "image": "/assets/reviews/dance_with_dragons.jpg",
+        "review": []
       }
     ]
   },
   {
     "type": "book",
-    "name": "The Heroes of Olympus",
-    "rating": 7
+    "name": "The Heroes of Olympus"
   },
   {
     "type": "book",
-    "name": "Trials of Apollo",
-    "rating": 6
+    "name": "Trials of Apollo"
   },
   {
     "type": "book",
-    "name": "The Kane Chronicles",
-    "rating": 5
+    "name": "The Kane Chronicles"
   },
   {
     "type": "book",
-    "name": "Magnus Chase and the Gods of Asgard",
-    "rating": 4
+    "name": "Magnus Chase and the Gods of Asgard"
   },
   {
     "type": "book",
-    "name": "The Inheritance Cycle",
-    "rating": 3
+    "name": "The Inheritance Cycle"
   },
   {
     "type": "book",
-    "name": "Fire and Blood",
-    "rating": 2
+    "name": "Fire and Blood"
   },
   {
     "type": "book",
-    "name": "A Knight of the Seven Kingdoms",
-    "rating": 1
+    "name": "A Knight of the Seven Kingdoms"
   },
   {
     "type": "book",
-    "name": "Dune Chronicles",
-    "rating": 10
+    "name": "Dune Chronicles"
   },
   {
     "type": "book",
     "name": "Different Seasons",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/different_seasons.jpg",
+    "review": [
+      "This was my first time reading something by Stephen King. It is a collection of short stories that seemed like a good read in a short amount of time. I was surprised to learn that the movie Shawshank Redemption is based off a novella in this book. I was not able to get through the 3rd story which was 'The Body' and that was where I left this book. OVerall the stories I did get through were excellent and engaging."
+    ],
+    "reviewSubItems": [
+      {
+        "name": "Rita Hayworth and Shawshank Redemption",
+        "rating": 10,
+        "review": [
+          "A short but entertaining read which kept me engaged the whole way through. But I have to admit, the movie tells the story in the best way possible with a perfect cast even though the adaptation to the book is almost identical"
+        ]
+      },
+      {
+        "name": "Apt Pupil",
+        "rating": 9,
+        "review": [
+          "This was a surprisingly great story with a plot I did not expect at all. It started off pretty slow, but after some more interactions between the 2 main characters the story really kicks off. It's interesting to see how the relationship between the school kid and former Nazi devolves further and further into insanity. It reaches the point where both characters recognise the conflict they have but continue to commit more unspeakable acts until there is no turning back."
+        ]
+      }
+    ]
   },
   {
     "type": "movie",
-    "name": "Avatar",
-    "rating": 9
+    "name": "Avatar"
   },
   {
     "type": "movie",
     "name": "Interstellar",
-    "rating": 9
+    "rating": 10
+  },
+  {
+    "type": "movie",
+    "name": "Tenet"
+  },
+  {
+    "type": "movie",
+    "name": "Inception"
+  },
+  {
+    "type": "movie",
+    "name": "Harry Potter"
+  },
+  {
+    "type": "movie",
+    "name": "Eragon"
+  },
+  {
+    "type": "movie",
+    "name": "Top Gun: Maverick"
+  },
+  {
+    "type": "movie",
+    "name": "Avatar"
+  },
+  {
+    "type": "movie",
+    "name": "The Da Vinci Code"
+  },
+  {
+    "type": "movie",
+    "name": "A Man Called Otto"
+  },
+  {
+    "type": "movie",
+    "name": "The Post"
+  },
+  {
+    "type": "movie",
+    "name": "The Terminal"
+  },
+  {
+    "type": "movie",
+    "name": "Cast Away"
+  },
+  {
+    "type": "movie",
+    "name": "The Matrix"
+  },
+  {
+    "type": "movie",
+    "name": "The Dark Knight Trilogy"
+  },
+
+  {
+    "type": "movie",
+    "name": "John Wick"
+  },
+  {
+    "type": "movie",
+    "name": "Shutter Island"
+  },
+  {
+    "type": "movie",
+    "name": "Shawshank Redemption"
+  },
+  {
+    "type": "movie",
+    "name": "Pirates of the Caribbean"
+  },
+  {
+    "type": "movie",
+    "name": "Gladiator"
+  },
+  {
+    "type": "movie",
+    "name": "Logan"
+  },
+  {
+    "type": "movie",
+    "name": "Noah"
+  },
+  {
+    "type": "movie",
+    "name": "The Water Diviner"
+  },
+  {
+    "type": "movie",
+    "name": "1917"
+  },
+  {
+    "type": "Hacksaw Ridge",
+    "name": "The Matrix"
+  },
+  {
+    "type": "movie",
+    "name": "Saving Private Ryan"
+  },
+  {
+    "type": "movie",
+    "name": "The Matrix"
+  },
+  {
+    "type": "movie",
+    "name": "The Last Kingdom: Seven Kings Must Die"
+  },
+  {
+    "type": "movie",
+    "name": "Shazam"
+  },
+  {
+    "type": "movie",
+    "name": "Man of Steel"
+  },
+  {
+    "type": "movie",
+    "name": "The Batman"
+  },
+  {
+    "type": "movie",
+    "name": "Black Adam"
+  },
+  {
+    "type": "movie",
+    "name": "Batman v Superman: Dawn of Justice"
+  },
+  {
+    "type": "movie",
+    "name": "Justice League"
+  },
+  {
+    "type": "movie",
+    "name": "Zack Snyder's Justice League"
+  },
+  {
+    "type": "movie",
+    "name": "Forrest Gump"
+  },
+  {
+    "type": "movie",
+    "name": "Aquaman"
+  },
+  {
+    "type": "movie",
+    "name": "Catch Me If You Can"
+  },
+  {
+    "type": "movie",
+    "name": "Miss Peregrine's Home for Peculiar Children"
+  },
+  {
+    "type": "movie",
+    "name": "You've Got Mail"
+  },
+  {
+    "type": "movie",
+    "name": "Wonder Woman"
+  },
+  {
+    "type": "movie",
+    "name": "Puss in Boots",
+    "reviewSubItems": [
+      {
+        "name": "Puss in Boots"
+      },
+      { "name": "Puss in Boots: The Last Wish" }
+    ]
+  },
+  {
+    "type": "movie",
+    "name": "Passengers"
+  },
+  {
+    "type": "movie",
+    "name": "The Last Kingdom: Seven Kings Must Die"
+  },
+  {
+    "type": "movie",
+    "name": "The Hunger Games"
+  },
+  {
+    "type": "movie",
+    "name": "Star Wars original trilogy"
+  },
+  {
+    "type": "movie",
+    "name": "Star Wars prequel trilogy"
+  },
+  {
+    "type": "movie",
+    "name": "Star Wars sequel trilogy"
+  },
+  {
+    "type": "movie",
+    "name": "Rogue One: A Star Wars Story"
+  },
+  {
+    "type": "movie",
+    "name": "Solo: A Star Wars Story"
+  },
+  {
+    "type": "movie",
+    "name": "Fantastic Beasts"
+  },
+  {
+    "type": "movie",
+    "name": "The Prestige"
+  },
+  {
+    "type": "movie",
+    "name": "Dunkirk"
+  },
+  {
+    "type": "movie",
+    "name": "The Pale Blue Eye"
+  },
+  {
+    "type": "movie",
+    "name": "Equilibrium"
+  },
+  {
+    "type": "movie",
+    "name": "Ford v Ferrari"
+  },
+  {
+    "type": "movie",
+    "name": "Thor"
+  },
+  {
+    "type": "movie",
+    "name": "Guardians of the Galaxy"
+  },
+  {
+    "type": "movie",
+    "name": "Get Out"
+  },
+  {
+    "type": "movie",
+    "name": "A Beautiful Mind"
+  },
+  {
+    "type": "movie",
+    "name": "Stillwater"
+  },
+  {
+    "type": "movie",
+    "name": "The Martian"
+  },
+  {
+    "type": "movie",
+    "name": "Gravity"
+  },
+  {
+    "type": "movie",
+    "name": "Elysium"
+  },
+  {
+    "type": "movie",
+    "name": "We Bought a Zoo"
+  },
+  {
+    "type": "movie",
+    "name": "Good Will Hunting"
+  },
+  {
+    "type": "movie",
+    "name": "Unhinged"
+  },
+  {
+    "type": "movie",
+    "name": "Edge of Tomorrow"
+  },
+  {
+    "type": "movie",
+    "name": "Jumanji"
+  },
+  {
+    "type": "movie",
+    "name": ""
+  },
+  {
+    "type": "movie",
+    "name": "Jungle Cruise"
+  },
+  {
+    "type": "book",
+    "name": "Diary of a Wimpty Kid"
+  },
+  {
+    "type": "book",
+    "name": "Archie Comics"
+  },
+  {
+    "type": "movie",
+    "name": "City of Ember"
+  },
+  {
+    "type": "movie",
+    "name": "The Last Samurai"
+  },
+  {
+    "type": "movie",
+    "name": "Charlie and the Chocolate Factory"
+  },
+  {
+    "type": "movie",
+    "name": "After Earth"
+  },
+  {
+    "type": "movie",
+    "name": "The Karate Kid"
+  },
+  {
+    "type": "movie",
+    "name": "Aladdin"
+  },
+  {
+    "type": "movie",
+    "name": "Suicide Squad"
+  },
+  {
+    "type": "movie",
+    "name": "Oblivion"
+  },
+  {
+    "type": "movie",
+    "name": "Night at the Museum"
+  },
+  {
+    "type": "movie",
+    "name": "Sweet Home Alabama"
+  },
+  {
+    "type": "movie",
+    "name": "Legally Blonde"
+  },
+  {
+    "type": "movie",
+    "name": "Megamind"
+  },
+  {
+    "type": "movie",
+    "name": "Coco"
+  },
+  {
+    "type": "movie",
+    "name": "Moana"
+  },
+  {
+    "type": "movie",
+    "name": "Hidden Figures"
+  },
+  {
+    "type": "movie",
+    "name": "The Help"
+  },
+  {
+    "type": "movie",
+    "name": "The Book of Eli"
+  },
+  {
+    "type": "movie",
+    "name": "The Avengers"
+  },
+  {
+    "type": "movie",
+    "name": "Fight Club"
+  },
+  {
+    "type": "show",
+    "name": "Game of Thrones"
+  },
+  {
+    "type": "show",
+    "name": "House of the Dragon"
+  },
+  {
+    "type": "show",
+    "name": "Dark"
+  },
+  {
+    "type": "show",
+    "name": "The Flash"
+  },
+  {
+    "type": "show",
+    "name": "Manifest"
+  },
+  {
+    "type": "show",
+    "name": "Arcane"
+  },
+  {
+    "type": "show",
+    "name": "Love Death + Robots"
+  },
+  {
+    "type": "show",
+    "name": "The Witcher"
+  },
+  {
+    "type": "show",
+    "name": "The Mandalorian"
+  },
+  {
+    "type": "show",
+    "name": "The Book of Boba Fett"
+  },
+  {
+    "type": "show",
+    "name": "The Boys"
+  },
+  {
+    "type": "show",
+    "name": "Invincible"
+  },
+  {
+    "type": "show",
+    "name": "Merlin"
+  },
+  {
+    "type": "game",
+    "name": "Hogwarts Legacy"
+  },
+  {
+    "type": "game",
+    "name": "Minecraft"
+  },
+  {
+    "type": "game",
+    "name": "The Legend of Zelda: Breath of the Wild"
+  },
+  {
+    "type": "game",
+    "name": "Stardew Valley"
+  },
+  {
+    "type": "game",
+    "name": "Clash of Clans"
+  },
+  {
+    "type": "game",
+    "name": "Clash Royale"
+  },
+  {
+    "type": "game",
+    "name": "Brawl Stars"
+  },
+  {
+    "type": "game",
+    "name": "Jetpack Joyride"
+  },
+  {
+    "type": "game",
+    "name": "Galaxy on Fire"
+  },
+  {
+    "type": "game",
+    "name": "Project Zomboid"
+  },
+  {
+    "type": "game",
+    "name": "Mario Kart"
+  },
+  {
+    "type": "game",
+    "name": "James Cameron's Avatar: The Game"
+  },
+  {
+    "type": "game",
+    "name": "Wii Sports"
+  },
+  {
+    "type": "game",
+    "name": "Mario & Sonic at the Olympic Games (Wii)"
+  },
+  {
+    "type": "game",
+    "name": "Pokemon Heartgold"
+  },
+  {
+    "type": "game",
+    "name": "Pokemon Emerald"
+  },
+  {
+    "type": "game",
+    "name": "Super Mario Odyssey"
+  },
+  {
+    "type": "game",
+    "name": "Super Mario 3D World + Bowser's Fury"
+  },
+  {
+    "type": "game",
+    "name": "New Super Mario Bros. Wii"
+  },
+  {
+    "type": "game",
+    "name": "Cuphead"
+  },
+  {
+    "type": "game",
+    "name": "War Tortoise"
+  },
+  {
+    "type": "game",
+    "name": "Burrito Bison"
+  },
+  {
+    "type": "game",
+    "name": "Kingdom Rush"
+  },
+  {
+    "type": "game",
+    "name": "Nitrome Must Die"
+  },
+  {
+    "type": "game",
+    "name": "Twinshot"
+  },
+  {
+    "type": "game",
+    "name": "Mutiny"
+  },
+  {
+    "type": "game",
+    "name": "Flipside"
+  },
+  {
+    "type": "game",
+    "name": "Elden Ring"
   }
 ]
