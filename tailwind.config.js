@@ -12,6 +12,15 @@ module.exports = {
         coc: ["Coc", "sans-serif"],
         sans: ["var(--font-inter)"],
       },
+      animation: {
+        fade: "fadeIn 1s ease-in-out",
+      },
+      keyframes: (theme) => ({
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 100 },
+        },
+      }),
     },
   },
   plugins: [],

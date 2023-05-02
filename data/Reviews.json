@@ -62,42 +62,42 @@
   {
     "type": "book",
     "name": "The Heroes of Olympus",
-    "rating": 9
+    "rating": 7
   },
   {
     "type": "book",
     "name": "Trials of Apollo",
-    "rating": 9
+    "rating": 6
   },
   {
     "type": "book",
     "name": "The Kane Chronicles",
-    "rating": 9
+    "rating": 5
   },
   {
     "type": "book",
     "name": "Magnus Chase and the Gods of Asgard",
-    "rating": 9
+    "rating": 4
   },
   {
     "type": "book",
     "name": "The Inheritance Cycle",
-    "rating": 9
+    "rating": 3
   },
   {
     "type": "book",
     "name": "Fire and Blood",
-    "rating": 9
+    "rating": 2
   },
   {
     "type": "book",
     "name": "A Knight of the Seven Kingdoms",
-    "rating": 9
+    "rating": 1
   },
   {
     "type": "book",
     "name": "Dune Chronicles",
-    "rating": 9
+    "rating": 10
   },
   {
     "type": "book",
