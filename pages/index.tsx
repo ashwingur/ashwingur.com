@@ -39,11 +39,10 @@ export default function Home() {
 
       <Navbar fixed={true} />
 
-      <div>
+      <div className="mb-8">
         <HomeSection />
         <Projects />
         <Apps />
-        <Contact />
       </div>
       <Footer></Footer>
     </div>

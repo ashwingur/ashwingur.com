@@ -50,7 +50,7 @@ const ProjectCard = ({
         />
       </div>
 
-      <div className="px-4 md:py-4">
+      <div className="px-4 pt-2 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
         <p>{description}</p>
         <h3 className="mt-4 text-xl">Languages and Frameworks</h3>

@@ -40,13 +40,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           >
             <li>Apps</li>
           </Link>
-          <Link
-            href="/#contact"
-            className="hover:bg-blue-100  dark:hover:bg-black px-2 py-1 transition rounded-md"
-            scroll={false}
-          >
-            <li>Contact</li>
-          </Link>
+
           <li>
             <ToggleThemeButton />
           </li>
@@ -127,16 +121,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             >
               <li>Apps</li>
             </Link>
-            <Link
-              href="/#contact"
-              className="hover:bg-blue-100  dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
-              scroll={false}
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
-            >
-              <li>Contact</li>
-            </Link>
+
             <li>
               <ToggleThemeButton />
             </li>
