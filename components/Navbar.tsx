@@ -66,7 +66,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <div
           className={
             mobileNavMenu
-              ? "absolute left-0 top-0 w-[75%] h-full bg-gradient-to-r from-lime-100 to-orange-100 dark:bg-gradient-to-r dark:from-emerald-900 dark:to-slate-900 ease-in duration-500 z-50"
+              ? "absolute left-0 top-0 w-[75%] h-full bg-gradient-to-r from-lime-100 to-orange-100 dark:bg-gradient-to-r dark:from-slate-900 dark:to-emerald-900 ease-in duration-500 z-50"
               : "fixed left-[-100%] w-[75%] top-0 h-full p-10 ease-in duration-500 z-50 bg-gradient-to-r from-lime-100 to-orange-100 dark:bg-gradient-to-r dark:from-emerald-900 dark:to-slate-900"
           }
           onClick={(e) => {
