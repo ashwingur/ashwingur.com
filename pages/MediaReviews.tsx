@@ -97,9 +97,9 @@ const MediaReviews = () => {
         }
       }
       if (sortAtoZ) {
-        return -r1.name.localeCompare(r2.name);
-      } else {
         return r1.name.localeCompare(r2.name);
+      } else {
+        return -r1.name.localeCompare(r2.name);
       }
     })
     .map((item: ReviewItem, index) => {
@@ -197,7 +197,7 @@ const MediaReviews = () => {
         >
           <div>A-Z</div>
           {sortAtoZ !== null &&
-            (sortAtoZ ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />)}
+            (sortAtoZ ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />)}
         </button>
         <button
           className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-20 md:w-32 transition-all"
