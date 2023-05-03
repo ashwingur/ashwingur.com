@@ -183,14 +183,6 @@ const MediaReviews = () => {
       <h1 className="text-center mt-20">Media Reviews</h1>
       <div className="flex justify-center gap-2">
         <button
-          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
-          onClick={() => {
-            setShowImages(!showImages);
-          }}
-        >
-          {showImages ? "Hide Images" : "Show Images"}
-        </button>
-        <button
           className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-16 md:w-32 transition-all"
           onClick={() => {
             if (sortAtoZ === null) {
@@ -227,6 +219,14 @@ const MediaReviews = () => {
             ) : (
               <AiOutlineArrowUp />
             ))}
+        </button>
+        <button
+          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
+          onClick={() => {
+            setShowImages(!showImages);
+          }}
+        >
+          {showImages ? "Hide Images" : "Show Images"}
         </button>
       </div>
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
