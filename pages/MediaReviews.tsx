@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Reviews from "../data/Reviews.json";
 import Image from "next/image";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 interface ReviewItem {
   type: string;
@@ -55,6 +56,11 @@ const ratingColour = (rating: number): string => {
 const MediaReviews = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const filterType = filterTabIndex(selectedTab);
+  const [showImages, setShowImages] = useState(true);
+  const [sortAtoZ, setSortAtoZ] = useState<null | boolean>(true);
+  const [sortRatingDescending, setSortRatingDescending] = useState<
+    null | boolean
+  >(null);
 
   const tabs = categories.map((item, index) => {
     return (
@@ -73,8 +79,30 @@ const MediaReviews = () => {
     );
   });
 
-  const reviews = Reviews.filter((item) => item.type == filterType).map(
-    (item: ReviewItem, index) => {
+  const reviews = Reviews.filter((item) => item.type == filterType)
+    .sort((r1, r2) => {
+      if (sortRatingDescending !== null) {
+        if (!r1.rating && !r2.rating) {
+          return 0;
+        }
+        if (!r1.rating) {
+          return 1;
+        } else if (!r2.rating) {
+          return -1;
+        }
+        if (sortRatingDescending) {
+          return r2.rating - r1.rating || r1.name.localeCompare(r2.name); // If there's a rating tie, just sort aphabetically
+        } else {
+          return r1.rating - r2.rating || r1.name.localeCompare(r2.name);
+        }
+      }
+      if (sortAtoZ) {
+        return -r1.name.localeCompare(r2.name);
+      } else {
+        return r1.name.localeCompare(r2.name);
+      }
+    })
+    .map((item: ReviewItem, index) => {
       const reviewParagraphs = item.review?.map((para, index) => {
         return <p key={index}>{para}</p>;
       });
@@ -87,7 +115,7 @@ const MediaReviews = () => {
             key={index}
             className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
           >
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-4">
               <div className="font-bold text-xl w-4/5">{subItem.name}</div>
               {subItem.rating && (
                 <div
@@ -99,8 +127,8 @@ const MediaReviews = () => {
                 </div>
               )}
             </div>
-            {subItem.image !== undefined && (
-              <div className="w-full h-36 md:h-72 relative my-4">
+            {subItem.image !== undefined && showImages && (
+              <div className={"w-full h-36 md:h-72 relative my-4 "}>
                 <Image
                   alt="Cover Image"
                   src={subItem.image}
@@ -120,10 +148,10 @@ const MediaReviews = () => {
           className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade"
         >
           <div className="flex justify-between items-center mb-2">
-            <div className="font-bold text-2xl w-4/5">{item.name}</div>
+            <div className="font-bold text-2xl w-4/5 ml-2">{item.name}</div>
             {item.rating && (
               <div
-                className={`rounded-full text-2xl w-12 h-12 flex ${ratingColour(
+                className={`rounded-full text-2xl w-14 h-14 flex ${ratingColour(
                   item.rating
                 )}`}
               >
@@ -131,7 +159,7 @@ const MediaReviews = () => {
               </div>
             )}
           </div>
-          {item.image !== undefined && (
+          {item.image !== undefined && showImages && (
             <div className="w-full h-36 md:h-72 relative my-4">
               <Image
                 alt="Cover Image"
@@ -147,13 +175,60 @@ const MediaReviews = () => {
           </div>
         </div>
       );
-    }
-  );
+    });
 
   return (
     <div>
       <Navbar fixed={true} />
       <h1 className="text-center mt-20">Media Reviews</h1>
+      <div className="flex justify-center gap-2">
+        <button
+          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
+          onClick={() => {
+            setShowImages(!showImages);
+          }}
+        >
+          {showImages ? "Hide Images" : "Show Images"}
+        </button>
+        <button
+          className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-16 md:w-32 transition-all"
+          onClick={() => {
+            if (sortAtoZ === null) {
+              setSortAtoZ(true);
+            } else if (sortAtoZ === true) {
+              setSortAtoZ(false);
+            } else {
+              setSortAtoZ(null);
+            }
+            setSortRatingDescending(null);
+          }}
+        >
+          <div>A-Z</div>
+          {sortAtoZ !== null &&
+            (sortAtoZ ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />)}
+        </button>
+        <button
+          className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-20 md:w-32 transition-all"
+          onClick={() => {
+            if (sortRatingDescending === null) {
+              setSortRatingDescending(true);
+            } else if (sortRatingDescending === true) {
+              setSortRatingDescending(false);
+            } else {
+              setSortRatingDescending(null);
+            }
+            setSortAtoZ(null);
+          }}
+        >
+          <div>Rating</div>
+          {sortRatingDescending !== null &&
+            (sortRatingDescending ? (
+              <AiOutlineArrowDown />
+            ) : (
+              <AiOutlineArrowUp />
+            ))}
+        </button>
+      </div>
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
         {tabs}
       </div>

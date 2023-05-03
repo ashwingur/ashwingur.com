@@ -431,7 +431,7 @@
   },
   {
     "type": "book",
-    "name": "Diary of a Wimpty Kid"
+    "name": "Diary of a Wimpy Kid"
   },
   {
     "type": "book",
@@ -684,5 +684,9 @@
   {
     "type": "game",
     "name": "Mario Party Superstars"
+  },
+  {
+    "type": "game",
+    "name": "Monster Ranch"
   }
 ]
