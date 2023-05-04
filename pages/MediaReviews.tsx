@@ -46,7 +46,7 @@ const ratingColour = (rating: number): string => {
     return "bg-amber-500 dark:bg-amber-700";
   } else if (rating <= 7) {
     return "bg-yellow-500 dark:bg-yellow-600";
-  } else if (rating <= 9) {
+  } else if (rating < 10) {
     return "bg-lime-500 dark:bg-lime-700";
   } else {
     return "bg-lime-400 dark:bg-lime-600";
