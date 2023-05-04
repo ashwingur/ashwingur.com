@@ -58,9 +58,7 @@ const MediaReviews = () => {
   const filterType = filterTabIndex(selectedTab);
   const [showImages, setShowImages] = useState(true);
   const [sortAtoZ, setSortAtoZ] = useState<null | boolean>(true);
-  const [sortRatingDescending, setSortRatingDescending] = useState<
-    null | boolean
-  >(null);
+  const [sortRatingDescending, setSortRatingDescending] = useState<null | boolean>(null);
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
   useEffect(() => {
@@ -70,7 +68,6 @@ const MediaReviews = () => {
       setShowImages(showImages === "false" ? false : true);
     }
     setPreferencesLoaded(true);
-    console.log("Show images: " + showImages)
   }, []);
 
   const tabs = categories.map((item, index) => {
@@ -102,7 +99,7 @@ const MediaReviews = () => {
           return -1;
         }
         if (sortRatingDescending) {
-          return r2.rating - r1.rating; // If there's a rating tie, just sort aphabetically
+          return r2.rating - r1.rating;
         } else {
           return r1.rating - r2.rating;
         }
@@ -234,8 +231,8 @@ const MediaReviews = () => {
         <button
           className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
           onClick={() => {
+            localStorage.setItem("showImages", showImages ? "false" : "true");
             setShowImages(!showImages);
-            localStorage.setItem("showImages", showImages ? "true" : "false");
           }}
         >
           {preferencesLoaded && (showImages ? "Hide Images" : "Show Images")}
