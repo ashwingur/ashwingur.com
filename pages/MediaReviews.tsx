@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Reviews from "../data/Reviews.json";
 import Image from "next/image";
@@ -61,13 +61,24 @@ const MediaReviews = () => {
   const [sortRatingDescending, setSortRatingDescending] = useState<
     null | boolean
   >(null);
+  const [preferencesLoaded, setPreferencesLoaded] = useState(false);
+
+  useEffect(() => {
+    // Retrieving from local storage if the preference was set
+    const showImages = localStorage.getItem("showImages");
+    if (showImages) {
+      setShowImages(showImages === "false" ? false : true);
+    }
+    setPreferencesLoaded(true);
+    console.log("Show images: " + showImages)
+  }, []);
 
   const tabs = categories.map((item, index) => {
     return (
       <button
         className={
-          "md:text-2xl px-4 pb-1 relative before:content-[''] before:absolute before:mt-2 before:block before:w-full before:h-[3px] before:bottom-0 before:-translate-x-1/2 before:left-1/2 before:bg-black dark:before:bg-slate-50 before:scale-x-0 before:transition before:ease-in-out before:duration-300" +
-          (selectedTab == index ? " before:scale-x-100" : "")
+          "md:text-2xl px-4 pb-1 relative before:content-[''] before:absolute before:mt-2 before:block before:w-full before:h-[3px] before:bottom-0 before:-translate-x-1/2 before:left-1/2 before:bg-black dark:before:bg-slate-50 before:transition before:ease-in-out before:duration-300" +
+          (selectedTab == index ? " before:scale-x-100" : " before:scale-x-0")
         }
         key={index}
         onClick={() => {
@@ -224,9 +235,10 @@ const MediaReviews = () => {
           className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
           onClick={() => {
             setShowImages(!showImages);
+            localStorage.setItem("showImages", showImages ? "true" : "false");
           }}
         >
-          {showImages ? "Hide Images" : "Show Images"}
+          {preferencesLoaded && (showImages ? "Hide Images" : "Show Images")}
         </button>
       </div>
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
