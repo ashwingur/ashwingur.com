@@ -83,7 +83,11 @@
   },
   {
     "type": "book",
-    "name": "Trials of Apollo"
+    "name": "Trials of Apollo",
+    "rating": 7,
+    "review": [
+      "The first 3 books were decent. It's set after the Heroes of Olympus events so there's plenty of references and interactions with characters we already know about. I think those were the best part of the series. The concept of a god becoming an immortal and losing all his powers was interesting, however I didn't find the character of Apollo that likeable. The same goes with the other Protagonist, but I do give credit for putting a demigod of Demeter in the spotlight which some really unique plant abilities which we didn't see in previous series. He was quite annoying at times by being a little too incompetent. I wasn't interested enough to read the last book but the cameos from characters we already know about were the best, such as Percy and Leo and how they're going on with life after the huge events in the Heroes of Olympus series."
+    ]
   },
   {
     "type": "book",
@@ -694,5 +698,13 @@
   {
     "type": "game",
     "name": "Monster Ranch"
+  },
+  {
+    "type": "book",
+    "name": "Percy Jackson and the Olympians",
+    "rating": 9,
+    "review": [
+      "The OG series that started it all. This series has amazing re-readability and is also easy to read because of the more casual and less serious tone of the main protagonist. Percy Jackson is an extremely likeable character that is easy to root for because of his traits to help his friends and persevere."
+    ]
   }
 ]
