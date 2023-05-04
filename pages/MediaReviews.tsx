@@ -82,18 +82,18 @@ const MediaReviews = () => {
   const reviews = Reviews.filter((item) => item.type == filterType)
     .sort((r1, r2) => {
       if (sortRatingDescending !== null) {
-        if (!r1.rating && !r2.rating) {
+        if (r1.rating === undefined && r2.rating === undefined) {
           return 0;
         }
-        if (!r1.rating) {
+        if (r1.rating === undefined) {
           return 1;
-        } else if (!r2.rating) {
+        } else if (r2.rating === undefined) {
           return -1;
         }
         if (sortRatingDescending) {
-          return r2.rating - r1.rating || r1.name.localeCompare(r2.name); // If there's a rating tie, just sort aphabetically
+          return r2.rating - r1.rating; // If there's a rating tie, just sort aphabetically
         } else {
-          return r1.rating - r2.rating || r1.name.localeCompare(r2.name);
+          return r1.rating - r2.rating;
         }
       }
       if (sortAtoZ) {
@@ -190,7 +190,7 @@ const MediaReviews = () => {
             } else if (sortAtoZ === true) {
               setSortAtoZ(false);
             } else {
-              setSortAtoZ(null);
+              setSortAtoZ(true);
             }
             setSortRatingDescending(null);
           }}
@@ -207,7 +207,7 @@ const MediaReviews = () => {
             } else if (sortRatingDescending === true) {
               setSortRatingDescending(false);
             } else {
-              setSortRatingDescending(null);
+              setSortRatingDescending(true);
             }
             setSortAtoZ(null);
           }}
