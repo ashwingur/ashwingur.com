@@ -185,10 +185,6 @@
   },
   {
     "type": "movie",
-    "name": "Avatar"
-  },
-  {
-    "type": "movie",
     "name": "The Da Vinci Code"
   },
   {
@@ -252,16 +248,12 @@
     "name": "1917"
   },
   {
-    "type": "Hacksaw Ridge",
-    "name": "The Matrix"
+    "type": "movie",
+    "name": "Hacksaw Ridge"
   },
   {
     "type": "movie",
     "name": "Saving Private Ryan"
-  },
-  {
-    "type": "movie",
-    "name": "The Matrix"
   },
   {
     "type": "movie",

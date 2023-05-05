@@ -261,7 +261,7 @@ const MediaReviews = () => {
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
         {tabs}
       </div>
-      <div className="w-72 md:w-96 mx-auto my-4">
+      <div className="w-full max-w px-4 md:w-96 lg:w-[30rem] mx-auto my-4">
         <Combobox value={selectedSearch} onChange={setSelectedSearch}>
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
             <Combobox.Input
@@ -278,12 +278,16 @@ const MediaReviews = () => {
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
-          <Combobox.Options className="absolute bg-white dark:bg-black w-72 md:w-96 rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1">
+          <Combobox.Options className="absolute bg-white dark:bg-zinc-900 w-72 md:w-96 rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg">
             {filteredReviewSearches.map((review) => (
               <Combobox.Option
                 key={review.name}
                 value={review.name}
-                className="px-4 cursor-pointer py-2"
+                className={({ active }) =>
+                  `px-4 cursor-pointer py-2 ${
+                    active ? "bg-green-600 dark:bg-[#3b0764] text-white" : ""
+                  }`
+                }
               >
                 {review.name}
               </Combobox.Option>
