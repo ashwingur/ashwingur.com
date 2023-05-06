@@ -67,8 +67,8 @@ const MediaReviews = () => {
     null | boolean
   >(null);
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedSearch, setSelectedSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // The text that is currently typed in, doesn't have to be a valid name
+  const [selectedSearch, setSelectedSearch] = useState(""); // The name of an actual item in the list
 
   useEffect(() => {
     // Retrieving from local storage if the preference was set
@@ -166,7 +166,7 @@ const MediaReviews = () => {
     return (
       <div
         key={index}
-        className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade"
+        className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade shadow-sm"
       >
         <div className="flex justify-between items-center mb-2">
           <div className="font-bold text-2xl w-4/5 ml-2">{item.name}</div>
@@ -261,9 +261,9 @@ const MediaReviews = () => {
       <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
         {tabs}
       </div>
-      <div className="w-full max-w px-4 md:w-96 lg:w-[30rem] mx-auto my-4">
+      <div className="w-72 md:w-96 lg:w-[30rem] mx-auto my-4">
         <Combobox value={selectedSearch} onChange={setSelectedSearch}>
-          <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
+          <div className="relative cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
             <Combobox.Input
               onChange={(event) => {
                 setSearchQuery(event.target.value);
@@ -278,7 +278,7 @@ const MediaReviews = () => {
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
-          <Combobox.Options className="absolute bg-white dark:bg-zinc-900 w-72 md:w-96 rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg">
+          <Combobox.Options className="absolute mx-auto bg-white dark:bg-zinc-900 w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg">
             {filteredReviewSearches.map((review) => (
               <Combobox.Option
                 key={review.name}
