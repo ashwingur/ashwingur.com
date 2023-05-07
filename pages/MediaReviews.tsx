@@ -169,7 +169,7 @@ const MediaReviews = () => {
         className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade shadow-sm"
       >
         <div className="flex justify-between items-center mb-2">
-          <div className="font-bold text-2xl w-4/5 ml-2">{item.name}</div>
+          <div className="font-bold text-2xl w-4/5">{item.name}</div>
           {item.rating && (
             <div
               className={`rounded-full text-2xl w-14 h-14 flex ${ratingColour(

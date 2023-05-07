@@ -218,9 +218,18 @@ const ProgressPage = () => {
           const categoryArray = (item.player as any)[
             numericCategoryProps.categoryKey
           ] as Array<any>;
-          const yValue = categoryArray.find(
+          console.log(
+            categoryArray.find(
+              (o) => o[numericCategoryProps.nameKey] === clickedName
+            )
+          );
+          const numericItem = categoryArray.find(
             (o) => o[numericCategoryProps.nameKey] === clickedName
-          )[numericCategoryProps.valueKey];
+          ); // If not undefined returns something like {name: 'Royal Champion', level: 2}
+          if (numericItem === undefined) {
+            return { time: item.time, y: 0 };
+          }
+          const yValue = numericItem[numericCategoryProps.valueKey];
           return { time: item.time, y: yValue };
         })
       );
@@ -279,18 +288,18 @@ const ProgressPage = () => {
     );
   };
 
-  const achievementNames: string[] = data.data[0].player.achievements.map(
+  const achievementNames: string[] = data.data[
+    data.data.length - 1
+  ].player.achievements.map((item) => item.name);
+  const heroNames: string[] = data.data[data.data.length - 1].player.heroes.map(
     (item) => item.name
   );
-  const heroNames: string[] = data.data[0].player.heroes.map(
-    (item) => item.name
-  );
-  const troopNames: string[] = data.data[0].player.troops.map(
-    (item) => item.name
-  );
-  const spellNames: string[] = data.data[0].player.spells.map(
-    (item) => item.name
-  );
+  const troopNames: string[] = data.data[
+    data.data.length - 1
+  ].player.troops.map((item) => item.name);
+  const spellNames: string[] = data.data[
+    data.data.length - 1
+  ].player.spells.map((item) => item.name);
 
   return (
     <div className="bg-clash">
