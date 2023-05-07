@@ -8,6 +8,8 @@ import {
   AiOutlineDown,
 } from "react-icons/ai";
 import { Combobox } from "@headlessui/react";
+import { BsFillArrowUpSquareFill } from "react-icons/bs";
+import { IoMdArrowRoundUp } from "react-icons/io";
 
 interface ReviewItem {
   type: string;
@@ -69,6 +71,12 @@ const MediaReviews = () => {
   const [preferencesLoaded, setPreferencesLoaded] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); // The text that is currently typed in, doesn't have to be a valid name
   const [selectedSearch, setSelectedSearch] = useState(""); // The name of an actual item in the list
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
 
   useEffect(() => {
     // Retrieving from local storage if the preference was set
@@ -77,6 +85,11 @@ const MediaReviews = () => {
       setShowImages(showImages === "false" ? false : true);
     }
     setPreferencesLoaded(true);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const tabs = categories.map((item, index) => {
@@ -206,7 +219,7 @@ const MediaReviews = () => {
         });
 
   return (
-    <div>
+    <div className="">
       <Navbar fixed={true} />
       <h1 className="text-center mt-20">Media Reviews</h1>
       <div className="flex justify-center gap-2">
@@ -265,6 +278,7 @@ const MediaReviews = () => {
         <Combobox value={selectedSearch} onChange={setSelectedSearch}>
           <div className="relative cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
             <Combobox.Input
+              placeholder="Search"
               onChange={(event) => {
                 setSearchQuery(event.target.value);
                 if (event.target.value === "") {
@@ -278,7 +292,7 @@ const MediaReviews = () => {
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
-          <Combobox.Options className="absolute mx-auto bg-white dark:bg-zinc-900 w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg">
+          <Combobox.Options className="absolute mx-auto bg-white dark:bg-zinc-900 w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg z-50">
             {filteredReviewSearches.map((review) => (
               <Combobox.Option
                 key={review.name}
@@ -298,6 +312,20 @@ const MediaReviews = () => {
       <div className="flex flex-col gap-8 items-center px-4 mb-12">
         {reviewElements}
       </div>
+
+      <button
+        className={
+          "fixed bottom-0 right-0 mr-2 mb-2 md:mb-4 md:mr-4 transition-all rounded-full bg-black text-white dark:text-slate-200 hover:text-6xl dark:bg-green-900" +
+          (scrollPosition === 0
+            ? " scale-0"
+            : " scale-100 hover:scale-110 md:hover:scale-125")
+        }
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+      >
+        <IoMdArrowRoundUp className="text-5xl" />
+      </button>
     </div>
   );
 };

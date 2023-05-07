@@ -3,43 +3,50 @@
     "type": "book",
     "name": "Harry Potter Series",
     "image": "/assets/reviews/harry_potter_book.webp",
-    "rating": 9.5,
+    "rating": 9,
     "review": [],
     "reviewSubItems": [
       {
         "name": "Harry Potter and the Philosopher's Stone",
         "image": "/assets/reviews/philosophers_stone.jpg",
-        "review": []
+        "review": [],
+        "rating": 7
       },
       {
         "name": "Harry Potter and the Chamber of Secrets",
         "image": "/assets/reviews/chamber_of_secrets.jpg",
-        "review": []
+        "review": [],
+        "rating": 7
       },
       {
         "name": "Harry Potter and the Prisoner of Azkaban",
         "image": "/assets/reviews/prisoner_of_azkaban.jpg",
-        "review": []
+        "review": [],
+        "rating": 7.5
       },
       {
         "name": "Harry Potter and the Goblet of Fire",
         "image": "/assets/reviews/goblet_of_fire.jpg",
-        "review": []
+        "review": [],
+        "rating": 8.5
       },
       {
         "name": "Harry Potter and the Order of the Phoenix",
         "image": "/assets/reviews/order_of_phoenix.jpg",
-        "review": []
+        "review": [],
+        "rating": 8.5
       },
       {
         "name": "Harry Potter and the Half-Blood Prince",
         "image": "/assets/reviews/half_blood_prince.jpg",
-        "review": []
+        "review": [],
+        "rating": 9
       },
       {
         "name": "Harry Potter and the Deathly Hallows",
         "image": "/assets/reviews/deathly_hallows.jpg",
-        "review": []
+        "review": [],
+        "rating": 9.5
       }
     ]
   },
@@ -111,7 +118,11 @@
   },
   {
     "type": "book",
-    "name": "The Inheritance Cycle"
+    "name": "The Inheritance Cycle",
+    "rating": 9,
+    "review": [
+      "This book is definitely one of the personal favourites for me because i've read it multiple times. Although I wouldn't say the book has really complex plots, it is really enjoyable to read as the character and world building is still really great. Sometimes good versus evil is enough to be entertaining. The main protagonists and other point of view characters are all really likeable and unique in their pesonalities. I also like the focus on how all the races view the world very differently, especially the political and cultural behaviours. I felt like I had gone on one enormous journey and grown alongside the characters as they overcame their struggles and weaknesses."
+    ]
   },
   {
     "type": "book",
@@ -127,7 +138,12 @@
   },
   {
     "type": "book",
-    "name": "Dune Chronicles"
+    "name": "Dune Chronicles",
+    "rating": 7.9,
+    "review": [
+      "I discovered the book series after watching the movie which I really enjoyed. It's cool to have read something that really inspired a lot of people media today such as Star Wars. This is definitely a very challenging read that tackles some really fundamental human experiences in a complex way. I did find myself a lot of the time having to re-read paragraphs to really try and understand what was happening and sometimes I was not able to figure it out. But I think this may have also been part of the author's intention, to not explain every single bit of lore in the world but provide enough information to picture the world for ourselves.",
+      "After the first book is where it got extremely difficult to follow the plot and plans of all the different characters. I had to search online for summaries and explanations just to understand the basic premise. I wasn't able to finish the 3rd book which is where I left the series due to the sheer challenge of understanding it. The first book was the best as I could still follow along, but I'm not giving it as high of a rating because of how difficult it is to read."
+    ]
   },
   {
     "type": "book",
@@ -161,7 +177,11 @@
   {
     "type": "movie",
     "name": "Interstellar",
-    "rating": 10
+    "rating": 10,
+    "image": "/assets/reviews/interstellar.jpg",
+    "review": [
+      "By far the best movie i've ever watched and was lucky enough to have viewed it on IMAX for the first time. I really enjoy the sci-fi genre and coupling that with an emotionally deep story was amazing. What really makes the movie in my opinion is the score by Hans Zimmer, it makes every moment infinitely more immersive and intense. It took me a couple of watches to realise that the focus of the story is actually on the love between a father and daughter surpassing time and space. I believe this is what gives the movie lots of rewatchability and meaning. This does not however retract from the overall plot of the story which is embarking on a quest to save humanity."
+    ]
   },
   {
     "type": "movie",
@@ -189,7 +209,11 @@
   },
   {
     "type": "movie",
-    "name": "A Man Called Otto"
+    "name": "A Man Called Otto",
+    "rating": 7.5,
+    "review": [
+      "Fairly simple but wholesome movie. The relationships between the characters is the best part. I wouldn't rewatch it but definitely a worthwhile first watch."
+    ]
   },
   {
     "type": "movie",
@@ -433,7 +457,11 @@
   },
   {
     "type": "book",
-    "name": "Diary of a Wimpy Kid"
+    "name": "Diary of a Wimpy Kid",
+    "rating": 9,
+    "review": [
+      "This is definitely more for a younger audience which is when I used to read these books a lot. But I always enjoyed them because of how short and easy they were with great illustrations. It's also interesting to notice how my view of Greg changed as I grew older. I used to root for Greg a lot because of how he portrayed himself always being in the right and that everything that happened to him was unjust and unfair. But later on you realise he's quite an unrealiable narrator and sociopath. Especially in how he treats and views others even if they're just being reasonable."
+    ]
   },
   {
     "type": "book",
@@ -725,8 +753,19 @@
     "type": "movie",
     "name": "Bullet Train",
     "rating": 7,
+    "image": "/assets/reviews/bullet_train.jpg",
     "review": [
       "I went in without any prior knowledge so I was expecting a more serious movie based on the first few minutes but the movie turned out to be quite fun. It had some emotional moments but for the most part the humour was funny and didn't take itself too seriously. There was also a lot of appearances from famous actors which I wasn't expecting. The CGI isn't too good at times but was enough to keep the immersion. Overall it's a good watch if you're not looking for a serious or deep movie to pass the time."
     ]
+  },
+  {
+    "type": "movie",
+    "name": "John Carter",
+    "rating": 7
+  },
+  {
+    "type": "movie",
+    "name": "Gulliver's Travels",
+    "rating": 7
   }
 ]
