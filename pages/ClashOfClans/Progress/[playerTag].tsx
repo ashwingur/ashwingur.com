@@ -218,11 +218,6 @@ const ProgressPage = () => {
           const categoryArray = (item.player as any)[
             numericCategoryProps.categoryKey
           ] as Array<any>;
-          console.log(
-            categoryArray.find(
-              (o) => o[numericCategoryProps.nameKey] === clickedName
-            )
-          );
           const numericItem = categoryArray.find(
             (o) => o[numericCategoryProps.nameKey] === clickedName
           ); // If not undefined returns something like {name: 'Royal Champion', level: 2}
