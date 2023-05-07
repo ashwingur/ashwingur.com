@@ -720,5 +720,13 @@
         "rating": 9.5
       }
     ]
+  },
+  {
+    "type": "movie",
+    "name": "Bullet Train",
+    "rating": 7,
+    "review": [
+      "I went in without any prior knowledge so I was expecting a more serious movie based on the first few minutes but the movie turned out to be quite fun. It had some emotional moments but for the most part the humour was funny and didn't take itself too seriously. There was also a lot of appearances from famous actors which I wasn't expecting. The CGI isn't too good at times but was enough to keep the immersion. Overall it's a good watch if you're not looking for a serious or deep movie to pass the time."
+    ]
   }
 ]
