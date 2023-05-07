@@ -8,7 +8,6 @@ import {
   AiOutlineDown,
 } from "react-icons/ai";
 import { Combobox } from "@headlessui/react";
-import { BsFillArrowUpSquareFill } from "react-icons/bs";
 import { IoMdArrowRoundUp } from "react-icons/io";
 
 interface ReviewItem {
