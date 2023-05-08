@@ -465,7 +465,11 @@
   },
   {
     "type": "book",
-    "name": "Archie Comics"
+    "name": "Archie Comics",
+    "rating": 8,
+    "review": [
+      "Fun comics to read and pass the time. They're pretty light hearted and original. It also doesn't matter which order you read it in because they're mostly self-contained so they can be enjoyed by anyone."
+    ]
   },
   {
     "type": "movie",
@@ -473,23 +477,28 @@
   },
   {
     "type": "movie",
-    "name": "The Last Samurai"
+    "name": "The Last Samurai",
+    "rating": 8
   },
   {
     "type": "movie",
-    "name": "Charlie and the Chocolate Factory"
+    "name": "Charlie and the Chocolate Factory",
+    "rating": 8
   },
   {
     "type": "movie",
-    "name": "After Earth"
+    "name": "After Earth",
+    "rating": 6
   },
   {
     "type": "movie",
-    "name": "The Karate Kid"
+    "name": "The Karate Kid",
+    "rating": 9
   },
   {
     "type": "movie",
-    "name": "Aladdin"
+    "name": "Aladdin (2019)",
+    "rating": 7.7
   },
   {
     "type": "movie",
@@ -497,7 +506,8 @@
   },
   {
     "type": "movie",
-    "name": "Oblivion"
+    "name": "Oblivion",
+    "rating": 7.9
   },
   {
     "type": "movie",
@@ -505,35 +515,43 @@
   },
   {
     "type": "movie",
-    "name": "Sweet Home Alabama"
+    "name": "Sweet Home Alabama",
+    "rating": 8.9
   },
   {
     "type": "movie",
-    "name": "Legally Blonde"
+    "name": "Legally Blonde",
+    "rating": 8.8
   },
   {
     "type": "movie",
-    "name": "Megamind"
+    "name": "Megamind",
+    "rating": 8
   },
   {
     "type": "movie",
-    "name": "Coco"
+    "name": "Coco",
+    "rating": 9.5
   },
   {
     "type": "movie",
-    "name": "Moana"
+    "name": "Moana",
+    "rating": 8.1
   },
   {
     "type": "movie",
-    "name": "Hidden Figures"
+    "name": "Hidden Figures",
+    "rating": 8.9
   },
   {
     "type": "movie",
-    "name": "The Help"
+    "name": "The Help",
+    "rating": 9
   },
   {
     "type": "movie",
-    "name": "The Book of Eli"
+    "name": "The Book of Eli",
+    "rating": 7.2
   },
   {
     "type": "movie",
@@ -541,15 +559,24 @@
   },
   {
     "type": "movie",
-    "name": "Fight Club"
+    "name": "Fight Club",
+    "rating": 9
   },
   {
     "type": "show",
-    "name": "Game of Thrones"
+    "name": "Game of Thrones",
+    "rating": 8.9,
+    "review": [
+      "This could have been a 10/10 show if the quality of the later seasons was as good as seasons 1-4. Those earlier seasons were very well adapted despite the extreme complexities of the plots in the books. They did of course have to cut down on details in order to keep the seasons of a reasonable length. Season 4 was definitely the peak. I think it starts going downhill when the showrunners diverged from the book content or ran out of books. The characters became very 1-dimensional and often lost all the development they had gone through. Jaime is a great example of this."
+    ]
   },
   {
     "type": "show",
-    "name": "House of the Dragon"
+    "name": "House of the Dragon",
+    "rating": 9.6,
+    "review": [
+      "Only 1 season has come out but I really enjoyed the show, being a big fan of the book. It's interesting to see just how much life and details they brought into the characters who were mainly just depicted from a more 'historical' view. The performance of Viserys was definitely the highlight of the season. I am looking forward to future seasons if they can keep the same level of quality as this first season."
+    ]
   },
   {
     "type": "show",
