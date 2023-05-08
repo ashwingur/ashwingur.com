@@ -49,7 +49,7 @@ const PlayerPage = () => {
     });
 
   return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
+    <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
       <h2 className="text-center pt-20 clash-font-style font-thin mb-4 md:mb-0">
         Player

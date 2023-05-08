@@ -31,19 +31,19 @@ html {
 }
 
 .clash-font-style {
-  @apply text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
+  @apply text-white dark:text-slate-100 font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
 .bg-clash {
-  @apply bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-4;
+  @apply bg-gradient-to-b from-[#8c94ac] to-[#6c779b] dark:from-[#424652] dark:to-[#262a38] min-h-screen pb-4;
 }
 
 .coc-title {
-  @apply text-center clash-font-style font-thin text-3xl;
+  @apply text-center dark:text-slate-100 clash-font-style font-thin text-3xl;
 }
 
 .coc-font-style {
-  @apply text-white font-coc font-thin [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
+  @apply text-white dark:text-slate-100 font-coc font-thin [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
 @layer base {

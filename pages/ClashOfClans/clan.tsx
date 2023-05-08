@@ -6,7 +6,7 @@ const Clan = () => {
   useEffect(() => {
     router.push("/ClashOfClans");
   });
-  return <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b]" />;
+  return <div className="bg-clash" />;
 };
 
 export default Clan;

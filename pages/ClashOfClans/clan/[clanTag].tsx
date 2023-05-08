@@ -52,7 +52,7 @@ const ClanPage = () => {
   ));
 
   return (
-    <div className="bg-gradient-to-b from-[#8c94ac] to-[#6c779b] min-h-screen pb-8">
+    <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
       <h2 className="text-center pt-20 clash-font-style font-thin">{title}</h2>
 
@@ -88,7 +88,7 @@ const ClanPage = () => {
                 innerColour="bg-green-500"
                 middleColour="bg-green-600"
                 outerColour="bg-green-700"
-                onClick={() => {}}
+                onClick={() => { }}
               />
             </Link>
           </div>
