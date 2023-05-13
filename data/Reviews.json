@@ -112,6 +112,7 @@
     "type": "book",
     "name": "Magnus Chase and the Gods of Asgard",
     "rating": 6.5,
+    "image": "/assets/reviews/magnus_chase.jpg",
     "review": [
       "Likewise with The Kane Chronicles, it does just wasn't as engaging as the Percy Jackson serie and felt inferior in most aspects. The world building and Valhalla is still really interesting but it wasn't enough to get me to read the entire series."
     ]
@@ -126,12 +127,14 @@
   },
   {
     "type": "book",
-    "name": "Fire and Blood"
+    "name": "Fire and Blood",
+    "image": "/assets/reviews/fire_and_blood.webp"
   },
   {
     "type": "book",
     "name": "A Knight of the Seven Kingdoms",
     "rating": 10,
+    "image": "/assets/reviews/knight_of_the_seven_kingdoms.jpg",
     "review": [
       "A prequel to the main ASOIAF series, this book consists of 3 novellas about the adventures of 2 characters. The great thing is that this book does well as a standalone series, while only being set in the Game of Thrones universe. It's great to see characters dealing with more 'local' problems rather than being overshadowed by a greater plot that will affect the entirity of Westeros. However, there is still plenty of references to famous houses and events that readers will know from the other books which also adds to the immersion in the world. It's also considerably smaller and less dense than the ASOIAF books which also makes it an easy read that takes less time to digest the plot. There is honestly nothing I can really fault with this novel which is why I'm giving it a 10."
     ]
@@ -140,6 +143,7 @@
     "type": "book",
     "name": "Dune Chronicles",
     "rating": 7.9,
+    "image": "/assets/reviews/dune_chronicles.jpg",
     "review": [
       "I discovered the book series after watching the movie which I really enjoyed. It's cool to have read something that really inspired a lot of people media today such as Star Wars. This is definitely a very challenging read that tackles some really fundamental human experiences in a complex way. I did find myself a lot of the time having to re-read paragraphs to really try and understand what was happening and sometimes I was not able to figure it out. But I think this may have also been part of the author's intention, to not explain every single bit of lore in the world but provide enough information to picture the world for ourselves.",
       "After the first book is where it got extremely difficult to follow the plot and plans of all the different characters. I had to search online for summaries and explanations just to understand the basic premise. I wasn't able to finish the 3rd book which is where I left the series due to the sheer challenge of understanding it. The first book was the best as I could still follow along, but I'm not giving it as high of a rating because of how difficult it is to read."
@@ -458,6 +462,7 @@
   {
     "type": "book",
     "name": "Diary of a Wimpy Kid",
+    "image": "/assets/reviews/wimpy_kid.jpg",
     "rating": 9,
     "review": [
       "This is definitely more for a younger audience which is when I used to read these books a lot. But I always enjoyed them because of how short and easy they were with great illustrations. It's also interesting to notice how my view of Greg changed as I grew older. I used to root for Greg a lot because of how he portrayed himself always being in the right and that everything that happened to him was unjust and unfair. But later on you realise he's quite an unrealiable narrator and sociopath. Especially in how he treats and views others even if they're just being reasonable."
@@ -467,6 +472,7 @@
     "type": "book",
     "name": "Archie Comics",
     "rating": 8,
+    "image": "/assets/reviews/archie_comic.jpg",
     "review": [
       "Fun comics to read and pass the time. They're pretty light hearted and original. It also doesn't matter which order you read it in because they're mostly self-contained so they can be enjoyed by anyone."
     ]
@@ -756,23 +762,28 @@
     "reviewSubItems": [
       {
         "name": "The Lightning Thief",
-        "rating": 9.5
+        "rating": 9.5,
+        "image": "/assets/reviews/lightning_thief.jpg"
       },
       {
         "name": "The Sea of Monsters",
-        "rating": 7.5
+        "rating": 7.5,
+        "image": "/assets/reviews/sea_of_monsters.jpg"
       },
       {
         "name": "The Titan's Curse",
-        "rating": 8.5
+        "rating": 8.5,
+        "image": "/assets/reviews/titans_curse.jpg"
       },
       {
         "name": "The Battle of the Labyrinth",
-        "rating": 9
+        "rating": 9,
+        "image": "/assets/reviews/battle_of_the_labyrinth.jpg"
       },
       {
         "name": "The Last Olympian",
-        "rating": 9.5
+        "rating": 9.5,
+        "image": "/assets/reviews/last_olympian.jpg"
       }
     ]
   },
@@ -794,5 +805,14 @@
     "type": "movie",
     "name": "Gulliver's Travels",
     "rating": 7
+  },
+  {
+    "type": "book",
+    "name": "The Kingkiller Chronicle",
+    "rating": 9.7,
+    "reviewSubItems": [
+      { "name": "The Name of the Wind" },
+      { "name": "The Wise Man's Fear" }
+    ]
   }
 ]

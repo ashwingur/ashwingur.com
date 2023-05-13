@@ -70,7 +70,7 @@ const PlayerPage = () => {
           </div>
         )}
         <div>
-          <div className="flex flex-col md:flex-row md:justify-around items-center rounded-lg border-2 border-black m-4 pt-2 md:pt-0 bg-[#695d96]">
+          <div className="flex flex-col md:flex-row md:justify-around items-center rounded-lg border-2 border-black m-4 pt-2 md:pt-0 bg-[#695d96] dark:bg-[#473e63]">
             <CocPlayerSummary player={data} />
             <CocPlayerTownHall player={data} />
             {data.hasOwnProperty("clan") && <CocPlayerClan player={data} />}

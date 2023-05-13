@@ -28,7 +28,7 @@ const Stat = ({ name, value }: { name: string; value: string }) => {
 
 const CocPlayerStats = ({ player }: { player: Player }) => {
   return (
-    <div className=" border-black border-2 m-4 rounded-lg bg-[#695d96] flex flex-col items-center py-4">
+    <div className=" border-black border-2 m-4 rounded-lg bg-[#695d96] dark:bg-[#473e63] flex flex-col items-center py-4">
       <h2 className="text-center clash-font-style font-thin text-3xl">Stats</h2>
       <div className="coc-font-style text-lg w-72 md:w-96">
         <Stat name={"Trophies"} value={player.trophies.toString()} />

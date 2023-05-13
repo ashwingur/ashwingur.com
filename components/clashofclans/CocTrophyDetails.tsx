@@ -11,13 +11,14 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
     <div className="font-clash clash-font-style pb-10 md:pb-0 md:ml-0">
       {player.hasOwnProperty("league") == true ? (
         <div className="flex items-center relative">
-          <Image
-            alt={player.league.name}
-            src={player.league.iconUrls.medium}
-            width={140}
-            height={140}
-            className="absolute left-[-45px] md:left-[-65px]"
-          />
+          <div className="absolute w-32 md:w-36 h-32 md:h-36 left-[-45px] md:left-[-68px] bottom-[-20px]">
+            <Image
+              alt={player.league.name}
+              src={player.league.iconUrls.medium}
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
           <div className="flex flex-col items-center bg-gradient-to-r from-black">
             <div className="pl-20 py-1">{player.league.name}</div>
             <div className="flex items-center bg-gradient-to-r from-[#931ae7] to-[rgba(0, 0, 0, 0)] pl-20 pr-10 py-1">

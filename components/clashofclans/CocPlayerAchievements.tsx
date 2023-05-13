@@ -124,7 +124,7 @@ const CocPlayerAchievements = ({ player }: CocPlayerAchievementProps) => {
     .map((item, index) => <Achievement achievement={item} key={index} />);
 
   return (
-    <div className="bg-[#5d6b96] border-2 border-black rounded-md mx-4 p-4">
+    <div className="bg-[#5d6b96] dark:bg-[#344063] border-2 border-black rounded-md mx-4 p-4">
       <h2 className="text-center clash-font-style font-thin text-3xl">
         Achievements
       </h2>
