@@ -70,9 +70,9 @@ const ClanPage = () => {
               <CocButton
                 className="w-80 hover:w-72 mx-auto mt-4"
                 text={"Current War"}
-                innerColour="bg-green-500"
-                middleColour="bg-green-600"
-                outerColour="bg-green-700"
+                innerColour="bg-green-500 dark:bg-green-600"
+                middleColour="bg-green-600 dark:bg-green-700"
+                outerColour="bg-green-700 dark:bg-green-900"
                 onClick={() => {
                   router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
                 }}
@@ -85,10 +85,10 @@ const ClanPage = () => {
               <CocButton
                 className="w-80 hover:w-72 mx-auto mt-4"
                 text={"Clan War League"}
-                innerColour="bg-green-500"
-                middleColour="bg-green-600"
-                outerColour="bg-green-700"
-                onClick={() => { }}
+                innerColour="bg-green-500 dark:bg-green-600"
+                middleColour="bg-green-600 dark:bg-green-700"
+                outerColour="bg-green-700 dark:bg-green-900"
+                onClick={() => {}}
               />
             </Link>
           </div>

@@ -45,9 +45,9 @@ const ClashOfClans = () => {
             <CocButton
               className="w-80 hover:w-72"
               text={"Unknown Virus"}
-              innerColour="bg-orange-500"
-              middleColour="bg-orange-600"
-              outerColour="bg-orange-700"
+              innerColour="bg-orange-500 dark:bg-orange-600"
+              middleColour="bg-orange-600 dark:bg-orange-700"
+              outerColour="bg-orange-700 dark:bg-orange-900"
             />
           </Link>
         </div>
@@ -56,9 +56,9 @@ const ClashOfClans = () => {
             <CocButton
               className="w-80 hover:w-72"
               text={"TheOrganisation"}
-              innerColour="bg-green-500"
-              middleColour="bg-green-600"
-              outerColour="bg-green-700"
+              innerColour="bg-green-500 dark:bg-green-600"
+              middleColour="bg-green-600 dark:bg-green-700"
+              outerColour="bg-green-700 dark:bg-green-900"
             />
           </Link>
         </div>
@@ -67,9 +67,9 @@ const ClashOfClans = () => {
             <CocButton
               className="w-80 hover:w-72"
               text={"Progress"}
-              innerColour="bg-blue-500"
-              middleColour="bg-blue-600"
-              outerColour="bg-blue-700"
+              innerColour="bg-blue-500 dark:bg-blue-600"
+              middleColour="bg-blue-600 dark:bg-blue-700"
+              outerColour="bg-blue-700 dark:bg-blue-900"
             />
           </Link>
         </div>

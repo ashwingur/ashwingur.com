@@ -10,7 +10,7 @@ interface ClanMemberElementProps {
 const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
   return (
     <Link
-      className="bg-gray-200 flex flex-col md:flex-row justify-between my-2 px-2 py-2 md:py-0 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 transition-all"
+      className="bg-gray-200 dark:bg-gray-400 flex flex-col md:flex-row justify-between my-2 px-2 py-2 md:py-0 cursor-pointer rounded-lg border-gray-800 border-2 hover:bg-gray-300 dark:hover:bg-gray-300 transition-all"
       href={`/ClashOfClans/player/${clanMember.tag.substring(1)}`}
     >
       <div className="flex mx-auto md:mx-0 md:py-1">
@@ -46,7 +46,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           <div className="font-coc font-thin text-slate-700">
             Troops donated:
           </div>
-          <div className="font-coc font-thin bg-white w-full text-center rounded-md dark:text-black">
+          <div className="font-coc font-thin bg-white dark:bg-slate-800 w-full text-center rounded-md">
             {clanMember.donations}
           </div>
         </div>
@@ -54,12 +54,12 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           <div className="font-coc font-thin text-slate-700">
             Troops received:
           </div>
-          <div className="font-coc font-thin bg-white w-full text-center rounded-md dark:text-black">
+          <div className="font-coc font-thin bg-white dark:bg-slate-800 w-full text-center rounded-md">
             {clanMember.donationsReceived}
           </div>
         </div>
 
-        <div className="flex items-center border-2 border-white rounded-md px-4 bg-gradient-to-b from-yellow-100 to-yellow-300 w-28">
+        <div className="flex items-center border-2 border-white dark:border-gray-300 rounded-md px-4 bg-gradient-to-b from-yellow-100 to-yellow-300 dark:from-yellow-500 dark:to-yellow-700 w-28">
           <div className="mr-2 text-white font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
             {clanMember.trophies}
           </div>

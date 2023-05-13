@@ -22,7 +22,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
       ? 100
       : Math.floor((100 * achievement.value) / achievement.target);
   return (
-    <div className="bg-gradient-to-b from-[#d7dbda] to-[#b2b8b7] border-2 border-black rounded-md flex flex-col md:flex-row justify-between px-4 items-center">
+    <div className="bg-gradient-to-b from-[#d7dbda] to-[#b2b8b7] dark:from-[#8d9191] dark:to-[#4a4f4e] border-2 border-black rounded-md flex flex-col md:flex-row justify-between px-4 items-center">
       <div className="flex flex-col md:flex-row gap-1 md:gap-4 items-center">
         <div className="flex items-center">
           {achievement.stars < 1 && (
@@ -96,12 +96,12 @@ const Achievement = ({ achievement }: AchievementProps) => {
         </div>
       </div>
       <div className="pl-4 mt-2 md:mt-0">
-        <div className="w-60 bg-[#58504d] rounded-lg h-6 mb-4 border-2 relative border-[#6b6565]">
+        <div className="w-60 bg-[#58504d] rounded-lg h-6 mb-4 border-2 relative border-[#6b6565] dark:border-gray-600">
           <div
-            className="bg-[#33a800] h-5 rounded-md"
+            className="bg-[#33a800] dark:bg-[#51c021] h-5 rounded-md"
             style={{ width: `${completionPercentage}%` }}
           >
-            <div className="h-[60%] w-full bg-[#90d838] rounded-t-lg"></div>
+            <div className="h-[60%] w-full bg-[#90d838] dark:bg-[#88cf30] rounded-t-lg"></div>
           </div>
           <div className="absolute top-0 flex items-center w-full h-full justify-center coc-font-style">
             <span className="[text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
