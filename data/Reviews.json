@@ -89,13 +89,14 @@
     "name": "The Heroes of Olympus",
     "rating": 9,
     "review": [
-      "This was actually my first time entering the Percy Jackson universe as I was gifted the first 2 books by a friend. I hadn't read the"
+      "This was actually my first time entering the Percy Jackson universe as I was gifted the first 2 books by a friend. I hadn't read the og Percy Jackson series which all of these books were based on."
     ]
   },
   {
     "type": "book",
     "name": "Trials of Apollo",
     "rating": 7,
+    "image": "/assets/reviews/trials_of_apollo.jpg",
     "review": [
       "The first 3 books were decent. It's set after the Heroes of Olympus events so there's plenty of references and interactions with characters we already know about. I think those were the best part of the series. The concept of a god becoming an immortal and losing all his powers was interesting, however I didn't find the character of Apollo that likeable. The same goes with the other Protagonist, but I do give credit for putting a demigod of Demeter in the spotlight which some really unique plant abilities which we didn't see in previous series. He was quite annoying at times by being a little too incompetent. I wasn't interested enough to read the last book but the cameos from characters we already know about were the best, such as Percy and Leo and how they're going on with life after the huge events in the Heroes of Olympus series."
     ]
@@ -104,6 +105,7 @@
     "type": "book",
     "name": "The Kane Chronicles",
     "rating": 5,
+    "image": "/assets/reviews/kane_chronicles.jpg",
     "review": [
       "This series didn't get me hooked like Percy Jackson did. Although I don't think the series is bad by any means, it just felt like a copy of Percy Jackson but under a different mythological universe where there's an unsuspecting hero that suddenly gets placed into an unfamiliar world and is responsible for major events."
     ]
@@ -123,6 +125,12 @@
     "rating": 9,
     "review": [
       "This book is definitely one of the personal favourites for me because i've read it multiple times. Although I wouldn't say the book has really complex plots, it is really enjoyable to read as the character and world building is still really great. Sometimes good versus evil is enough to be entertaining. The main protagonists and other point of view characters are all really likeable and unique in their pesonalities. I also like the focus on how all the races view the world very differently, especially the political and cultural behaviours. I felt like I had gone on one enormous journey and grown alongside the characters as they overcame their struggles and weaknesses."
+    ],
+    "reviewSubItems": [
+      { "name": "Eragon", "image": "/assets/reviews/eragon.webp" },
+      { "name": "Eldest", "image": "/assets/reviews/eldest.webp" },
+      { "name": "Brisingr", "image": "/assets/reviews/brisingr.jpg" },
+      { "name": "Inheritance", "image": "/assets/reviews/inheritance.jpg" }
     ]
   },
   {
@@ -572,6 +580,7 @@
     "type": "show",
     "name": "Game of Thrones",
     "rating": 8.9,
+    "image": "/assets/reviews/game_of_thrones.jpg",
     "review": [
       "This could have been a 10/10 show if the quality of the later seasons was as good as seasons 1-4. Those earlier seasons were very well adapted despite the extreme complexities of the plots in the books. They did of course have to cut down on details in order to keep the seasons of a reasonable length. Season 4 was definitely the peak. I think it starts going downhill when the showrunners diverged from the book content or ran out of books. The characters became very 1-dimensional and often lost all the development they had gone through. Jaime is a great example of this."
     ]
@@ -580,53 +589,76 @@
     "type": "show",
     "name": "House of the Dragon",
     "rating": 9.6,
+    "image": "/assets/reviews/house_of_the_dragon.jpg",
     "review": [
       "Only 1 season has come out but I really enjoyed the show, being a big fan of the book. It's interesting to see just how much life and details they brought into the characters who were mainly just depicted from a more 'historical' view. The performance of Viserys was definitely the highlight of the season. I am looking forward to future seasons if they can keep the same level of quality as this first season."
     ]
   },
   {
     "type": "show",
-    "name": "Dark"
+    "name": "Dark",
+    "rating": 9,
+    "image": "/assets/reviews/dark.jpg"
   },
   {
     "type": "show",
-    "name": "The Flash"
+    "name": "The Flash",
+    "rating": 6.1,
+    "image": "/assets/reviews/the_flash.jpeg"
   },
   {
     "type": "show",
-    "name": "Manifest"
+    "name": "Manifest",
+    "rating": 3,
+    "image": "/assets/reviews/manifest.jpg"
   },
   {
     "type": "show",
-    "name": "Arcane"
+    "name": "Arcane",
+    "rating": 9.9,
+    "image": "/assets/reviews/arcane.jpg"
   },
   {
     "type": "show",
-    "name": "Love Death + Robots"
+    "name": "Love Death + Robots",
+    "rating": 8.5,
+    "image": "/assets/reviews/love_death_robots.jpg"
   },
   {
     "type": "show",
-    "name": "The Witcher"
+    "name": "The Witcher",
+    "rating": 7,
+    "image": "/assets/reviews/the_witcher.jpg"
   },
   {
     "type": "show",
-    "name": "The Mandalorian"
+    "name": "The Mandalorian",
+    "rating": 8,
+    "image": "/assets/reviews/the_mandalorian.jpg"
   },
   {
     "type": "show",
-    "name": "The Book of Boba Fett"
+    "name": "The Book of Boba Fett",
+    "rating": 6.5,
+    "image": "/assets/reviews/book_of_boba_fett.jpg"
   },
   {
     "type": "show",
-    "name": "The Boys"
+    "name": "The Boys",
+    "rating": 9.2,
+    "image": "/assets/reviews/the_boys.jpg"
   },
   {
     "type": "show",
-    "name": "Invincible"
+    "name": "Invincible",
+    "rating": 9,
+    "image": "/assets/reviews/invincible.jpg"
   },
   {
     "type": "show",
-    "name": "Merlin"
+    "name": "Merlin",
+    "rating": 8,
+    "image": "/assets/reviews/merlin.jpg"
   },
   {
     "type": "game",
@@ -811,8 +843,20 @@
     "name": "The Kingkiller Chronicle",
     "rating": 9.7,
     "reviewSubItems": [
-      { "name": "The Name of the Wind" },
-      { "name": "The Wise Man's Fear" }
+      {
+        "name": "The Name of the Wind",
+        "image": "/assets/reviews/name_of_the_wind.jpg"
+      },
+      {
+        "name": "The Wise Man's Fear",
+        "image": "/assets/reviews/wise_mans_fear.jpg"
+      }
     ]
+  },
+  {
+    "type": "show",
+    "name": "Obi-Wan Kenobi",
+    "rating": 6,
+    "image": "/assets/reviews/obi_wan_kenobi.jpg"
   }
 ]
