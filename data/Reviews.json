@@ -184,7 +184,8 @@
   },
   {
     "type": "movie",
-    "name": "Avatar"
+    "name": "Avatar",
+    "image": "/assets/reviews/avatar.jpg"
   },
   {
     "type": "movie",
@@ -209,7 +210,8 @@
   },
   {
     "type": "movie",
-    "name": "Eragon"
+    "name": "Eragon",
+    "image": "/assets/reviews/eragon_movie.webp"
   },
   {
     "type": "movie",
@@ -223,6 +225,7 @@
     "type": "movie",
     "name": "A Man Called Otto",
     "rating": 7.5,
+    "image": "/assets/reviews/man_called_otto.jpg",
     "review": [
       "Fairly simple but wholesome movie. The relationships between the characters is the best part. I wouldn't rewatch it but definitely a worthwhile first watch."
     ]
@@ -237,7 +240,8 @@
   },
   {
     "type": "movie",
-    "name": "Cast Away"
+    "name": "Cast Away",
+    "image": "/assets/reviews/cast_away.jpg"
   },
   {
     "type": "movie",
@@ -281,7 +285,12 @@
   },
   {
     "type": "movie",
-    "name": "1917"
+    "name": "1917",
+    "review": [
+      "The cinematography works so well with the story. The effect of one long shot makes the movie very immersive as we can feel all the action happening in real time, rather than having time jumps that is usually the case in other war movies."
+    ],
+    "rating": 9,
+    "image": "/assets/reviews/1917.webp"
   },
   {
     "type": "movie",
@@ -309,11 +318,13 @@
   },
   {
     "type": "movie",
-    "name": "Black Adam"
+    "name": "Black Adam",
+    "image": "/assets/reviews/black_adam.jpg"
   },
   {
     "type": "movie",
-    "name": "Batman v Superman: Dawn of Justice"
+    "name": "Batman v Superman: Dawn of Justice",
+    "image": "/assets/reviews/batman_v_superman.jpg"
   },
   {
     "type": "movie",
@@ -325,15 +336,18 @@
   },
   {
     "type": "movie",
-    "name": "Forrest Gump"
+    "name": "Forrest Gump",
+    "image": "/assets/reviews/forrest_gump.jpg"
   },
   {
     "type": "movie",
-    "name": "Aquaman"
+    "name": "Aquaman",
+    "image": "/assets/reviews/aquaman.png"
   },
   {
     "type": "movie",
-    "name": "Catch Me If You Can"
+    "name": "Catch Me If You Can",
+    "image": "/assets/reviews/catch_me_if_you_can.webp"
   },
   {
     "type": "movie",
@@ -389,7 +403,8 @@
   },
   {
     "type": "movie",
-    "name": "Fantastic Beasts"
+    "name": "Fantastic Beasts",
+    "image": "/assets/reviews/fantastic_beasts.webp"
   },
   {
     "type": "movie",
@@ -397,7 +412,8 @@
   },
   {
     "type": "movie",
-    "name": "Dunkirk"
+    "name": "Dunkirk",
+    "image": "/assets/reviews/dunkirk.jpg"
   },
   {
     "type": "movie",
@@ -405,11 +421,13 @@
   },
   {
     "type": "movie",
-    "name": "Equilibrium"
+    "name": "Equilibrium",
+    "image": "/assets/reviews/equilibrium.webp"
   },
   {
     "type": "movie",
-    "name": "Ford v Ferrari"
+    "name": "Ford v Ferrari",
+    "image": "/assets/reviews/ford_v_ferrari.jpeg"
   },
   {
     "type": "movie",
@@ -425,7 +443,8 @@
   },
   {
     "type": "movie",
-    "name": "A Beautiful Mind"
+    "name": "A Beautiful Mind",
+    "image": "/assets/reviews/beautiful_mind.jpg"
   },
   {
     "type": "movie",
@@ -441,7 +460,8 @@
   },
   {
     "type": "movie",
-    "name": "Elysium"
+    "name": "Elysium",
+    "image": "/assets/reviews/elysium.jpg"
   },
   {
     "type": "movie",
@@ -457,7 +477,8 @@
   },
   {
     "type": "movie",
-    "name": "Edge of Tomorrow"
+    "name": "Edge of Tomorrow",
+    "image": "/assets/reviews/edge_of_tomorrow.jpg"
   },
   {
     "type": "movie",
@@ -487,7 +508,8 @@
   },
   {
     "type": "movie",
-    "name": "City of Ember"
+    "name": "City of Ember",
+    "image": "/assets/reviews/city_of_ember.jpg"
   },
   {
     "type": "movie",
@@ -497,12 +519,14 @@
   {
     "type": "movie",
     "name": "Charlie and the Chocolate Factory",
+    "image": "/assets/reviews/chocolate_factory.jpg",
     "rating": 8
   },
   {
     "type": "movie",
     "name": "After Earth",
-    "rating": 6
+    "rating": 6,
+    "image": "/assets/reviews/after_earth.jpg"
   },
   {
     "type": "movie",
@@ -512,7 +536,8 @@
   {
     "type": "movie",
     "name": "Aladdin (2019)",
-    "rating": 7.7
+    "rating": 7.7,
+    "image": "/assets/reviews/aladdin.webp"
   },
   {
     "type": "movie",
@@ -545,7 +570,8 @@
   {
     "type": "movie",
     "name": "Coco",
-    "rating": 9.5
+    "rating": 9.5,
+    "image": "/assets/reviews/coco.jpeg"
   },
   {
     "type": "movie",
@@ -574,7 +600,8 @@
   {
     "type": "movie",
     "name": "Fight Club",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/fight_club.jpg"
   },
   {
     "type": "show",
