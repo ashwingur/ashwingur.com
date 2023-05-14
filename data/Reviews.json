@@ -202,11 +202,13 @@
   },
   {
     "type": "movie",
-    "name": "Inception"
+    "name": "Inception",
+    "image": "/assets/reviews/inception.jpg"
   },
   {
     "type": "movie",
-    "name": "Harry Potter"
+    "name": "Harry Potter",
+    "image": "/assets/reviews/harry_potter.webp"
   },
   {
     "type": "movie",
@@ -253,7 +255,8 @@
   },
   {
     "type": "movie",
-    "name": "John Wick"
+    "name": "John Wick",
+    "image": "/assets/reviews/john_wick.jpg"
   },
   {
     "type": "movie",
@@ -269,7 +272,8 @@
   },
   {
     "type": "movie",
-    "name": "Gladiator"
+    "name": "Gladiator",
+    "image": "/assets/reviews/gladiator.jpg"
   },
   {
     "type": "movie",
@@ -294,7 +298,8 @@
   },
   {
     "type": "movie",
-    "name": "Hacksaw Ridge"
+    "name": "Hacksaw Ridge",
+    "image": "/assets/reviews/hacksaw_ridge.jpg"
   },
   {
     "type": "movie",
@@ -435,11 +440,13 @@
   },
   {
     "type": "movie",
-    "name": "Guardians of the Galaxy"
+    "name": "Guardians of the Galaxy",
+    "image": "/assets/reviews/guardians_of_the_galaxy.jpg"
   },
   {
     "type": "movie",
-    "name": "Get Out"
+    "name": "Get Out",
+    "image": "/assets/reviews/get_out.jpg"
   },
   {
     "type": "movie",
@@ -456,7 +463,8 @@
   },
   {
     "type": "movie",
-    "name": "Gravity"
+    "name": "Gravity",
+    "image": "/assets/reviews/gravity.webp"
   },
   {
     "type": "movie",
@@ -469,7 +477,8 @@
   },
   {
     "type": "movie",
-    "name": "Good Will Hunting"
+    "name": "Good Will Hunting",
+    "image": "/assets/reviews/good_will_hunting.jpg"
   },
   {
     "type": "movie",
@@ -581,7 +590,8 @@
   {
     "type": "movie",
     "name": "Hidden Figures",
-    "rating": 8.9
+    "rating": 8.9,
+    "image": "/assets/reviews/hidden_figures.jpg"
   },
   {
     "type": "movie",
@@ -858,12 +868,14 @@
   {
     "type": "movie",
     "name": "John Carter",
-    "rating": 7
+    "rating": 7,
+    "image": "/assets/reviews/john_carter.jpeg"
   },
   {
     "type": "movie",
     "name": "Gulliver's Travels",
-    "rating": 7
+    "rating": 7,
+    "image": "/assets/reviews/gullivers_travel.jpg"
   },
   {
     "type": "book",
