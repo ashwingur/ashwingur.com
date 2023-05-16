@@ -937,7 +937,6 @@
   {
     "type": "movie",
     "name": "300",
-
     "image": "/assets/reviews/300.webp"
   },
   {
@@ -960,5 +959,10 @@
     "name": "Obi-Wan Kenobi",
     "rating": 6,
     "image": "/assets/reviews/obi_wan_kenobi.jpg"
+  },
+  {
+    "type": "movie",
+    "name": "Ghostbusters",
+    "image": "/assets/reviews/ghostbusters.webp"
   }
 ]
