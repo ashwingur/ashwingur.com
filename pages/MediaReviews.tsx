@@ -221,6 +221,10 @@ const MediaReviews = () => {
     <div className="">
       <Navbar fixed={true} />
       <h1 className="text-center mt-20">Media Reviews</h1>
+      <p className="text-center mx-4">
+        A nonexhaustive list of all the media I have consumed over the years and
+        my (highly subjective) reviews of them.
+      </p>
       <div className="flex justify-center gap-2">
         <button
           className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-16 md:w-32 transition-all"

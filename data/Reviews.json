@@ -198,7 +198,8 @@
   },
   {
     "type": "movie",
-    "name": "Tenet"
+    "name": "Tenet",
+    "image": "/assets/reviews/tenet.jpg"
   },
   {
     "type": "movie",
@@ -221,7 +222,8 @@
   },
   {
     "type": "movie",
-    "name": "The Da Vinci Code"
+    "name": "The Da Vinci Code",
+    "image": "/assets/reviews/the_da_vinci_code.jpg"
   },
   {
     "type": "movie",
@@ -234,7 +236,8 @@
   },
   {
     "type": "movie",
-    "name": "The Post"
+    "name": "The Post",
+    "image": "/assets/reviews/the_post.jpg"
   },
   {
     "type": "movie",
@@ -247,11 +250,13 @@
   },
   {
     "type": "movie",
-    "name": "The Matrix"
+    "name": "The Matrix",
+    "image": "/assets/reviews/the_matrix.webp"
   },
   {
     "type": "movie",
-    "name": "The Dark Knight Trilogy"
+    "name": "The Dark Knight Trilogy",
+    "image": "/assets/reviews/dark_knight_trilogy.jpg"
   },
   {
     "type": "movie",
@@ -260,15 +265,18 @@
   },
   {
     "type": "movie",
-    "name": "Shutter Island"
+    "name": "Shutter Island",
+    "image": "/assets/reviews/shutter_island.jpg"
   },
   {
     "type": "movie",
-    "name": "Shawshank Redemption"
+    "name": "Shawshank Redemption",
+    "image": "/assets/reviews/shawshank_redemption.jpg"
   },
   {
     "type": "movie",
-    "name": "Pirates of the Caribbean"
+    "name": "Pirates of the Caribbean",
+    "image": "/assets/reviews/pirates_of_the_carribean.jpg"
   },
   {
     "type": "movie",
@@ -277,11 +285,13 @@
   },
   {
     "type": "movie",
-    "name": "Logan"
+    "name": "Logan",
+    "image": "/assets/reviews/logan.jpeg"
   },
   {
     "type": "movie",
-    "name": "Noah"
+    "name": "Noah",
+    "image": "/assets/reviews/noah.jpg"
   },
   {
     "type": "movie",
@@ -303,23 +313,28 @@
   },
   {
     "type": "movie",
-    "name": "Saving Private Ryan"
+    "name": "Saving Private Ryan",
+    "image": "/assets/reviews/saving_private_ryan.jpg"
   },
   {
     "type": "movie",
-    "name": "The Last Kingdom: Seven Kings Must Die"
+    "name": "The Last Kingdom: Seven Kings Must Die",
+    "image": "/assets/reviews/the_last_kingdom.jpg"
   },
   {
     "type": "movie",
-    "name": "Shazam"
+    "name": "Shazam",
+    "image": "/assets/reviews/shazam.webp"
   },
   {
     "type": "movie",
-    "name": "Man of Steel"
+    "name": "Man of Steel",
+    "image": "/assets/reviews/man_of_steel.jpg"
   },
   {
     "type": "movie",
-    "name": "The Batman"
+    "name": "The Batman",
+    "image": "/assets/reviews/the_batman.jpg"
   },
   {
     "type": "movie",
@@ -333,7 +348,8 @@
   },
   {
     "type": "movie",
-    "name": "Justice League"
+    "name": "Justice League",
+    "image": "/assets/reviews/justice_league.webp"
   },
   {
     "type": "movie",
@@ -356,7 +372,8 @@
   },
   {
     "type": "movie",
-    "name": "Miss Peregrine's Home for Peculiar Children"
+    "name": "Miss Peregrine's Home for Peculiar Children",
+    "image": "/assets/reviews/miss_peregrine.jpg"
   },
   {
     "type": "movie",
@@ -369,6 +386,7 @@
   {
     "type": "movie",
     "name": "Puss in Boots",
+    "image": "/assets/reviews/puss_in_boots.jpg",
     "reviewSubItems": [
       {
         "name": "Puss in Boots"
@@ -380,31 +398,38 @@
   },
   {
     "type": "movie",
-    "name": "Passengers"
+    "name": "Passengers",
+    "image": "/assets/reviews/passengers.jpg"
   },
   {
     "type": "movie",
-    "name": "The Hunger Games"
+    "name": "The Hunger Games",
+    "image": "/assets/reviews/the_hunger_games.jpg"
   },
   {
     "type": "movie",
-    "name": "Star Wars original trilogy"
+    "name": "Star Wars original trilogy",
+    "image": "/assets/reviews/star_wars_original.webp"
   },
   {
     "type": "movie",
-    "name": "Star Wars prequel trilogy"
+    "name": "Star Wars prequel trilogy",
+    "image": "/assets/reviews/star_wars_prequel.webp"
   },
   {
     "type": "movie",
-    "name": "Star Wars sequel trilogy"
+    "name": "Star Wars sequel trilogy",
+    "image": "/assets/reviews/star_wars_sequel.jpeg"
   },
   {
     "type": "movie",
-    "name": "Rogue One: A Star Wars Story"
+    "name": "Rogue One: A Star Wars Story",
+    "image": "/assets/reviews/rogue_one.jpg"
   },
   {
     "type": "movie",
-    "name": "Solo: A Star Wars Story"
+    "name": "Solo: A Star Wars Story",
+    "image": "/assets/reviews/solo.jpg"
   },
   {
     "type": "movie",
@@ -422,7 +447,8 @@
   },
   {
     "type": "movie",
-    "name": "The Pale Blue Eye"
+    "name": "The Pale Blue Eye",
+    "image": "/assets/reviews/pale_blue_eye.jpg"
   },
   {
     "type": "movie",
@@ -455,11 +481,13 @@
   },
   {
     "type": "movie",
-    "name": "Stillwater"
+    "name": "Stillwater",
+    "image": "/assets/reviews/stillwater.jpg"
   },
   {
     "type": "movie",
-    "name": "The Martian"
+    "name": "The Martian",
+    "image": "/assets/reviews/the_martian.jpg"
   },
   {
     "type": "movie",
@@ -491,11 +519,18 @@
   },
   {
     "type": "movie",
-    "name": "Jumanji"
+    "name": "Jumanji",
+    "image": "/assets/reviews/jumanji.png",
+    "reviewSubItems": [
+      { "name": "Jumanji" },
+      { "name": "Jumanji: Welcome to the Jungle" },
+      { "name": "Jumanji: The Next Level" }
+    ]
   },
   {
     "type": "movie",
-    "name": "Jungle Cruise"
+    "name": "Jungle Cruise",
+    "image": "/assets/reviews/jungle_cruise.jpg"
   },
   {
     "type": "book",
@@ -523,7 +558,8 @@
   {
     "type": "movie",
     "name": "The Last Samurai",
-    "rating": 8
+    "rating": 8,
+    "image": "/assets/reviews/the_last_samurai.jpg"
   },
   {
     "type": "movie",
@@ -540,7 +576,8 @@
   {
     "type": "movie",
     "name": "The Karate Kid",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/the_karate_kid.jpg"
   },
   {
     "type": "movie",
@@ -550,30 +587,36 @@
   },
   {
     "type": "movie",
-    "name": "Suicide Squad"
+    "name": "Suicide Squad",
+    "image": "/assets/reviews/suicide_squad.webp"
   },
   {
     "type": "movie",
     "name": "Oblivion",
+    "image": "/assets/reviews/oblivion.jpg",
     "rating": 7.9
   },
   {
     "type": "movie",
-    "name": "Night at the Museum"
+    "name": "Night at the Museum",
+    "image": "/assets/reviews/night_at_the_museum.jpg"
   },
   {
     "type": "movie",
     "name": "Sweet Home Alabama",
-    "rating": 8.9
+    "rating": 8.9,
+    "image": "/assets/reviews/sweet_home_alabama.jpg"
   },
   {
     "type": "movie",
     "name": "Legally Blonde",
+    "image": "/assets/reviews/legally_blonde.jpg",
     "rating": 8.8
   },
   {
     "type": "movie",
     "name": "Megamind",
+    "image": "/assets/reviews/megamind.webp",
     "rating": 8
   },
   {
@@ -585,7 +628,8 @@
   {
     "type": "movie",
     "name": "Moana",
-    "rating": 8.1
+    "rating": 8.1,
+    "image": "/assets/reviews/moana.webp"
   },
   {
     "type": "movie",
@@ -596,16 +640,19 @@
   {
     "type": "movie",
     "name": "The Help",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/the_help.jpg"
   },
   {
     "type": "movie",
     "name": "The Book of Eli",
-    "rating": 7.2
+    "rating": 7.2,
+    "image": "/assets/reviews/the_book_of_eli.jpg"
   },
   {
     "type": "movie",
-    "name": "The Avengers"
+    "name": "The Avengers",
+    "image": "/assets/reviews/avengers.jpg"
   },
   {
     "type": "movie",
