@@ -218,7 +218,8 @@
   },
   {
     "type": "movie",
-    "name": "Top Gun: Maverick"
+    "name": "Top Gun: Maverick",
+    "image": "/assets/reviews/top_gun_maverick.webp"
   },
   {
     "type": "movie",
@@ -241,7 +242,8 @@
   },
   {
     "type": "movie",
-    "name": "The Terminal"
+    "name": "The Terminal",
+    "image": "/assets/reviews/the_terminal.jpg"
   },
   {
     "type": "movie",
@@ -295,7 +297,8 @@
   },
   {
     "type": "movie",
-    "name": "The Water Diviner"
+    "name": "The Water Diviner",
+    "image": "/assets/reviews/the_water_diviner.jpg"
   },
   {
     "type": "movie",
@@ -353,7 +356,8 @@
   },
   {
     "type": "movie",
-    "name": "Zack Snyder's Justice League"
+    "name": "Zack Snyder's Justice League",
+    "image": "/assets/reviews/snyders_justice_league.webp"
   },
   {
     "type": "movie",
@@ -377,11 +381,13 @@
   },
   {
     "type": "movie",
-    "name": "You've Got Mail"
+    "name": "You've Got Mail",
+    "image": "/assets/reviews/youve_got_mail.webp"
   },
   {
     "type": "movie",
-    "name": "Wonder Woman"
+    "name": "Wonder Woman",
+    "image": "/assets/reviews/wonder_woman.webp"
   },
   {
     "type": "movie",
@@ -438,7 +444,8 @@
   },
   {
     "type": "movie",
-    "name": "The Prestige"
+    "name": "The Prestige",
+    "image": "/assets/reviews/the_prestige.jpg"
   },
   {
     "type": "movie",
@@ -462,7 +469,8 @@
   },
   {
     "type": "movie",
-    "name": "Thor"
+    "name": "Thor",
+    "image": "/assets/reviews/thor.webp"
   },
   {
     "type": "movie",
@@ -501,7 +509,8 @@
   },
   {
     "type": "movie",
-    "name": "We Bought a Zoo"
+    "name": "We Bought a Zoo",
+    "image": "/assets/reviews/we_bought_a_zoo.jpg"
   },
   {
     "type": "movie",
@@ -510,7 +519,8 @@
   },
   {
     "type": "movie",
-    "name": "Unhinged"
+    "name": "Unhinged",
+    "image": "/assets/reviews/unhinged.webp"
   },
   {
     "type": "movie",
@@ -923,6 +933,12 @@
     "name": "Gulliver's Travels",
     "rating": 7,
     "image": "/assets/reviews/gullivers_travel.jpg"
+  },
+  {
+    "type": "movie",
+    "name": "300",
+
+    "image": "/assets/reviews/300.webp"
   },
   {
     "type": "book",
