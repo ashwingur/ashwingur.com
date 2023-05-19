@@ -59,9 +59,6 @@ const rootCategoryKeys = [
   "builderHallLevel",
   "builderBaseTrophies",
   "bestBuilderBaseTrophies",
-  // "versusTrophies",
-  // "bestVersusTrophies",
-  // "versusBattleWins",
   "donations",
   "donationsReceived",
   "clanCapitalContributions",
@@ -302,17 +299,31 @@ const ProgressPage = () => {
     <div className="bg-clash">
       <CocNavBar />
       <div className="flex flex-col items-center">
-        <div className="h-16 flex items-center pt-28">
-          <Link href={`/ClashOfClans/player/${playerTag}`}>
-            <CocButton
-              className="w-80 hover:w-72"
-              text={data.data[0].player.name}
-              innerColour="bg-orange-500"
-              middleColour="bg-orange-600"
-              outerColour="bg-orange-700"
-            />
-          </Link>
+        <div className="flex flex-col md:flex-row pt-28 gap-4 items-center mx-auto">
+          <div className="h-16 flex items-center">
+            <Link href={"/ClashOfClans/Progress"}>
+              <CocButton
+                className="w-80 hover:w-72"
+                text={"Progress"}
+                innerColour="bg-blue-500 dark:bg-blue-600"
+                middleColour="bg-blue-600 dark:bg-blue-700"
+                outerColour="bg-blue-700 dark:bg-blue-900"
+              />
+            </Link>
+          </div>
+          <div className="h-16 flex items-center">
+            <Link href={`/ClashOfClans/player/${playerTag}`}>
+              <CocButton
+                className="w-80 hover:w-72"
+                text={data.data[0].player.name}
+                innerColour="bg-orange-500"
+                middleColour="bg-orange-600"
+                outerColour="bg-orange-700"
+              />
+            </Link>
+          </div>
         </div>
+
         <h2 className="clash-font-style text-2xl font-thin text-center mb-1 mt-12">
           {selectedStatistic}
         </h2>
