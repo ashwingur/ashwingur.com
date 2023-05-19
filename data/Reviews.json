@@ -972,5 +972,14 @@
   {
     "type": "movie",
     "name": "How to Train Your Dragon"
+  },
+  {
+    "type": "movie",
+    "name": "Shrek"
+  },
+  {
+    "type": "movie",
+    "name": "Whiplash",
+    "rating": 9.1
   }
 ]

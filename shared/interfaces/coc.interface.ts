@@ -10,9 +10,11 @@ export interface Player {
   attackWins: number;
   defenseWins: number;
   builderHallLevel: number;
-  versusTrophies: number;
+  builderBaseTrophies: number;
+  bestBuilderBaseTrophies: number;
+  versusTrophies: number; // Soon to be deprecated
   bestVersusTrophies: number;
-  versusBattleWins: number;
+  versusBattleWins: number; // Soon to be deprecated
   role: string;
   warPreference: string;
   donations: number;
@@ -20,6 +22,7 @@ export interface Player {
   clanCapitalContributions: number;
   clan: PlayerClan;
   league: PlayerLeague;
+  builderBaseLeague: BuilderBaseLeague;
   achievements: PlayerAchievement[];
   versusBattleWinCount: number;
   labels: Label[];
@@ -96,7 +99,8 @@ export interface Clan {
   badgeUrls: BadgeUrls;
   clanLevel: number;
   clanPoints: number;
-  clanVersusPoints: number;
+  clanVersusPoints: number; // To be deprecated
+  clanBuilderBasePoints: number;
   clanCapitalPoints: number;
   capitalLeague: CapitalLeague;
   requiredTrophies: number;
@@ -108,7 +112,8 @@ export interface Clan {
   members: number;
   memberList: ClanMember[];
   labels: Label[];
-  requiredVersusTrophies: number;
+  requiredVersusTrophies: number; // To be deprecated
+  requiredBuilderBaseTrophies: number;
   requiredTownhallLevel: number;
   clanCapital: ClanCapital;
 }
@@ -145,6 +150,11 @@ export interface WarLeague {
 }
 
 export interface CapitalLeague {
+  id: number;
+  name: string;
+}
+
+export interface BuilderBaseLeague {
   id: number;
   name: string;
 }

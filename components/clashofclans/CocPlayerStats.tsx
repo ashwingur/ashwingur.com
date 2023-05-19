@@ -16,10 +16,10 @@ const Gap = () => {
 
 const Stat = ({ name, value }: { name: string; value: string }) => {
   return (
-    <div className="coc-font-style text-lg w-72 md:w-96 flex flex-col">
+    <div className="coc-font-style text-lg w-72 md:w-96 lg:w-[30rem] flex flex-col">
       <div className="flex justify-between">
-        <div>{name}</div>
-        <div>{value}</div>
+        <div className="flex flex-wrap">{name}</div>
+        <div className="w-20 md:w-24 lg:w-36 text-right">{value}</div>
       </div>
       <HorizontalBar />
     </div>
@@ -30,16 +30,16 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
   return (
     <div className=" border-black border-2 m-4 rounded-lg bg-[#695d96] dark:bg-[#473e63] flex flex-col items-center py-4">
       <h2 className="text-center clash-font-style font-thin text-3xl">Stats</h2>
-      <div className="coc-font-style text-lg w-72 md:w-96">
+      <div className="coc-font-style text-lg w-72 md:w-96 lg:w-[30rem]">
         <Stat name={"Trophies"} value={player.trophies.toString()} />
         <Stat name={"Best Trophies"} value={player.bestTrophies.toString()} />
         <Stat
-          name={"Versus Trophies"}
-          value={player.versusTrophies.toString()}
+          name={"Builder Base Trophies"}
+          value={player.builderBaseTrophies.toString()}
         />
         <Stat
-          name={"Best Versus Trophies"}
-          value={player.bestVersusTrophies.toString()}
+          name={"Best Builder Base Trophies"}
+          value={player.bestBuilderBaseTrophies.toString()}
         />
         <Gap />
         <Stat
@@ -56,15 +56,17 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
         <Gap />
         <Stat name={"Attack Wins"} value={player.attackWins.toString()} />
         <Stat name={"Defense Wins"} value={player.defenseWins.toString()} />
-        <Stat
-          name={"Versus Battle Wins"}
-          value={player.versusBattleWins.toString()}
-        />
         <Gap />
         <Stat name={"Townhall Level"} value={player.townHallLevel.toString()} />
         <Stat
           name={"Builderhall Level"}
           value={player.builderHallLevel.toString()}
+        />
+        <Gap />
+        <Stat name={"League"} value={player.league.name.toString()} />
+        <Stat
+          name={"Builder Base League"}
+          value={player.builderBaseLeague.name.toString()}
         />
       </div>
     </div>
