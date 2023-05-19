@@ -77,7 +77,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
             />
           </div>
           <div className="flex gap-2 justify-between mt-1">
-            {clan.requiredVersusTrophies}
+            {clan.requiredBuilderBaseTrophies}
             <Image
               alt="trophy"
               src={"/assets/coc/versusTrophy.png"}

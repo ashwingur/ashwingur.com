@@ -18,7 +18,7 @@ const AvailablePlayers = () => {
   const { isLoading, error, data } = useQuery<Clan>({
     queryKey: ["clan", clanTag],
     queryFn: () => fetchClan(),
-    initialData: TheOrginization as Clan,
+    // initialData: TheOrginization as Clan,
   });
 
   if (error instanceof Error) {
@@ -43,9 +43,9 @@ const AvailablePlayers = () => {
         <CocButton
           text={player.name}
           className="w-80 hover:w-72"
-          innerColour="bg-orange-500"
-          middleColour="bg-orange-600"
-          outerColour="bg-orange-700"
+          innerColour="bg-orange-500 dark:bg-orange-600"
+          middleColour="bg-orange-600 dark:bg-orange-700"
+          outerColour="bg-orange-700 dark:bg-orange-900"
         />
       </Link>
     ));
