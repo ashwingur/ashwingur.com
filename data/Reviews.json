@@ -153,7 +153,7 @@
   {
     "type": "book",
     "name": "A Knight of the Seven Kingdoms",
-    "rating": 10,
+    "rating": 9.6,
     "image": "/assets/reviews/knight_of_the_seven_kingdoms.jpg",
     "review": [
       "A prequel to the main ASOIAF series, this book consists of 3 novellas about the adventures of 2 characters. The great thing is that this book does well as a standalone series, while only being set in the Game of Thrones universe. It's great to see characters dealing with more 'local' problems rather than being overshadowed by a greater plot that will affect the entirity of Westeros. However, there is still plenty of references to famous houses and events that readers will know from the other books which also adds to the immersion in the world. It's also considerably smaller and less dense than the ASOIAF books which also makes it an easy read that takes less time to digest the plot. There is honestly nothing I can really fault with this novel which is why I'm giving it a 10."
@@ -230,34 +230,47 @@
     "type": "movie",
     "name": "Harry Potter",
     "image": "/assets/reviews/harry_potter.webp",
+    "rating": 9.5,
     "reviewSubItems": [
       {
         "name": "Harry Potter and the Sorcerer's Stone",
-        "review": []
+        "review": [],
+        "rating": 8
       },
       {
         "name": "Harry Potter and the Chamber of Secrets",
-        "review": []
+        "review": [],
+        "rating": 7
+      },
+      {
+        "name": "Harry Potter and the Prisoner of Azkaban",
+        "review": [],
+        "rating": 7
       },
       {
         "name": "Harry Potter and the Goblet of Fire",
-        "review": []
+        "review": [],
+        "rating": 8.3
       },
       {
         "name": "Harry Potter and the Order of Phoenix",
-        "review": []
+        "review": [],
+        "rating": 8.5
       },
       {
         "name": "Harry Potter and the Half-Blood Prince",
-        "review": []
+        "review": [],
+        "rating": 9
       },
       {
         "name": "Harry Potter and the Deathly Hallows Part 1",
-        "review": []
+        "review": [],
+        "rating": 9
       },
       {
         "name": "Harry Potter and the Deathly Hallows Part 2",
-        "review": []
+        "review": [],
+        "rating": 9
       }
     ]
   },
@@ -819,71 +832,122 @@
   },
   {
     "type": "game",
-    "name": "Hogwarts Legacy"
+    "name": "Hogwarts Legacy",
+    "rating": 8
   },
   {
     "type": "game",
-    "name": "Minecraft"
+    "name": "Minecraft",
+    "rating": 9.9,
+    "review": [
+      "One of the best games i've ever played, because you can do whatever you want in it and build whatever you want. The first version I ever played was the early pocket edition version. Although this was much more limited in features it was really fun playing LAN multiplayer. I later got the PC Java version on which i've had the most fun ever. Playing on a multiplayer server with friends is the best part of this game. Being able to build bases together and share resources. There are so many complex mechanics and an entire automation system which has infinite potential."
+    ]
   },
   {
     "type": "game",
-    "name": "The Legend of Zelda: Breath of the Wild"
+    "name": "The Legend of Zelda: Breath of the Wild",
+    "rating": 9
   },
   {
     "type": "game",
-    "name": "Stardew Valley"
+    "name": "Stardew Valley",
+    "rating": 9.5
   },
   {
     "type": "game",
-    "name": "Clash of Clans"
+    "name": "Clash of Clans",
+    "rating": 9
   },
   {
     "type": "game",
-    "name": "Clash Royale"
+    "name": "Clash Royale",
+    "rating": 8
   },
   {
     "type": "game",
-    "name": "Brawl Stars"
+    "name": "Brawl Stars",
+    "rating": 8.5
   },
   {
     "type": "game",
-    "name": "Jetpack Joyride"
+    "name": "Jetpack Joyride",
+    "rating": 8
   },
   {
     "type": "game",
-    "name": "Galaxy on Fire"
+    "name": "Galaxy on Fire",
+    "rating": 9.2
   },
   {
     "type": "game",
-    "name": "Project Zomboid"
+    "name": "Project Zomboid",
+    "rating": 6,
+    "review": [
+      "Objectively this game is definitely great with the survival mechanics and depth, but it's not the type of game I'd enjoy."
+    ]
   },
   {
     "type": "game",
-    "name": "Mario Kart"
+    "name": "Mario Kart",
+    "rating": 9.5,
+    "reviewSubItems": [
+      {
+        "name": "Mario Kart DS",
+        "rating": 9.8,
+        "review": [
+          "This was my first ever Mario Kart game so it has high nostalgia value. I played plenty of local multiplayer battles and the skill cap with the game could get quite high with the drifting mechanics."
+        ]
+      },
+      {
+        "name": "Mario Kart Wii",
+        "rating": 9.5,
+        "review": [
+          "The hardest Mario Kart game i've played. I think this is due to the lower precision of the Wii remote which relies on tilting to steer. This leads for some really funny multiplayer moments where you can go from first to last right before the finish line. Overall, I like the maps on this the best."
+        ]
+      },
+      {
+        "name": "Mario Kart 8",
+        "rating": 9,
+        "review": [
+          "The best looking Mario Kart game. The underwater and hover sections of races are great and the maps are fun. There is also a steering assist mode for beginners which makes steering easier."
+        ]
+      }
+    ]
   },
   {
     "type": "game",
-    "name": "James Cameron's Avatar: The Game"
+    "name": "James Cameron's Avatar: The Game",
+    "rating": 7
   },
   {
     "type": "game",
-    "name": "Wii Sports"
+    "name": "Wii Sports",
+    "rating": 7
   },
   {
     "type": "game",
-    "name": "Mario & Sonic at the Olympic Games (Wii)"
+    "name": "Mario & Sonic at the Olympic Games (Wii)",
+    "rating": 6
   },
   {
     "type": "game",
-    "name": "Pokemon Heartgold"
+    "name": "Pokemon Heartgold",
+    "rating": 8.8,
+    "review": [
+      "The first ever pokemon game that I played, so that also made it my favourite. I really enjoyed the Jhoto region and taking the journey across it. My favourite part is definitely Golden Rod city and the Pokéathlon Dome which I spent a lot of time at."
+    ]
   },
   {
     "type": "game",
-    "name": "Pokemon Emerald"
+    "name": "Pokemon Emerald",
+    "rating": 8,
+    "review": ["I played this on a GBA Emulator and it was also a great pokemon game, although I still find Pokemon Heartgold to be the best."]
   },
   {
     "type": "game",
-    "name": "Super Mario Odyssey"
+    "name": "Super Mario Odyssey",
+    "rating": 9,
+    "review": ["I've been wanting to play this for a long time as I only recently got the Switch console in 2023. This game definitely lives up to the hype. The wide variety of different worlds is amazing. The cappy mechanic is really fun and allows for some neat parkour tricks which can get you to places that don't seem reachable."]
   },
   {
     "type": "game",
@@ -1004,8 +1068,8 @@
   },
   {
     "type": "book",
-    "name": "The Kingkiller Chronicle",
-    "rating": 9.7,
+    "name": "The Kingkiller Chronicles",
+    "rating": 9.8,
     "reviewSubItems": [
       {
         "name": "The Name of the Wind",

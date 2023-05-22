@@ -224,7 +224,7 @@ const MediaReviews = () => {
       <h1 className="text-center mt-20">Media Reviews</h1>
       <p className="text-center mx-4">
         A nonexhaustive list of all the media I have consumed over the years and
-        my (highly subjective) reviews of them.
+        my (highly subjective) reviews of them. May contain spoilers.
       </p>
       <div className="flex justify-center gap-2">
         <button
