@@ -127,10 +127,22 @@
       "This book is definitely one of the personal favourites for me because i've read it multiple times. Although I wouldn't say the book has really complex plots, it is really enjoyable to read as the character and world building is still really great. Sometimes good versus evil is enough to be entertaining. The main protagonists and other point of view characters are all really likeable and unique in their pesonalities. I also like the focus on how all the races view the world very differently, especially the political and cultural behaviours. I felt like I had gone on one enormous journey and grown alongside the characters as they overcame their struggles and weaknesses."
     ],
     "reviewSubItems": [
-      { "name": "Eragon", "image": "/assets/reviews/eragon.webp" },
-      { "name": "Eldest", "image": "/assets/reviews/eldest.webp" },
-      { "name": "Brisingr", "image": "/assets/reviews/brisingr.jpg" },
-      { "name": "Inheritance", "image": "/assets/reviews/inheritance.jpg" }
+      {
+        "name": "Eragon",
+        "image": "/assets/reviews/eragon.webp"
+      },
+      {
+        "name": "Eldest",
+        "image": "/assets/reviews/eldest.webp"
+      },
+      {
+        "name": "Brisingr",
+        "image": "/assets/reviews/brisingr.jpg"
+      },
+      {
+        "name": "Inheritance",
+        "image": "/assets/reviews/inheritance.jpg"
+      }
     ]
   },
   {
@@ -201,17 +213,53 @@
     "name": "Tenet",
     "image": "/assets/reviews/tenet.jpg",
     "rating": 9,
-    "review": ["Extremely mind boggling movie by Nolan, which makes the plot of Inception seem very simple. Even after multiple watches I am still trying to understand parts of the plot. However the thought required to understand the movies makes it extremely enganging. I especially like the protagonist of the movie, whose name we also don't know and goes by 'The Protagonist'. The action scenes were amazing because I could never have visualised how a fight between 2 beings going in the opposite direction of time could work."]
+    "review": [
+      "Extremely mind boggling movie by Nolan, which makes the plot of Inception seem very simple. Even after multiple watches I am still trying to understand parts of the plot. However the thought required to understand the movies makes it extremely enganging. I especially like the protagonist of the movie, whose name we also don't know and goes by 'The Protagonist'. The action scenes were amazing because I could never have visualised how a fight between 2 beings going in the opposite direction of time could work."
+    ]
   },
   {
     "type": "movie",
     "name": "Inception",
-    "image": "/assets/reviews/inception.jpg"
+    "image": "/assets/reviews/inception.jpg",
+    "rating": 9.6,
+    "review": [
+      "Amazingly complex plot that still somehow seems believable and emotional at the end. The soundtrack is also great."
+    ]
   },
   {
     "type": "movie",
     "name": "Harry Potter",
-    "image": "/assets/reviews/harry_potter.webp"
+    "image": "/assets/reviews/harry_potter.webp",
+    "reviewSubItems": [
+      {
+        "name": "Harry Potter and the Sorcerer's Stone",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Chamber of Secrets",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Goblet of Fire",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Order of Phoenix",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Half-Blood Prince",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Deathly Hallows Part 1",
+        "review": []
+      },
+      {
+        "name": "Harry Potter and the Deathly Hallows Part 2",
+        "review": []
+      }
+    ]
   },
   {
     "type": "movie",
@@ -489,7 +537,9 @@
     "name": "A Beautiful Mind",
     "image": "/assets/reviews/beautiful_mind.jpg",
     "rating": 8,
-    "review": ["This was an enjoyable movie to watch, and I went in without any knowledge of what it would be about. So the plot twist that happens in the middle of movie took me by complete surprise and made me question just how much of the narrative was a hallucination by the Protagonist. It's interesting to see how the mental issues are illustrated and the way it affects the main character and the people around him."]
+    "review": [
+      "This was an enjoyable movie to watch, and I went in without any knowledge of what it would be about. So the plot twist that happens in the middle of movie took me by complete surprise and made me question just how much of the narrative was a hallucination by the Protagonist. It's interesting to see how the mental issues are illustrated and the way it affects the main character and the people around him."
+    ]
   },
   {
     "type": "movie",
@@ -536,9 +586,15 @@
     "name": "Jumanji",
     "image": "/assets/reviews/jumanji.png",
     "reviewSubItems": [
-      { "name": "Jumanji" },
-      { "name": "Jumanji: Welcome to the Jungle" },
-      { "name": "Jumanji: The Next Level" }
+      {
+        "name": "Jumanji"
+      },
+      {
+        "name": "Jumanji: Welcome to the Jungle"
+      },
+      {
+        "name": "Jumanji: The Next Level"
+      }
     ]
   },
   {
@@ -591,7 +647,9 @@
     "type": "movie",
     "name": "The Karate Kid",
     "rating": 9,
-    "review": ["Really great series overall with likeable characters that you can root for. The characters are also engaging, especially the main character who has a lot of flaws that he slowly overcomes."],
+    "review": [
+      "Really great series overall with likeable characters that you can root for. The characters are also engaging, especially the main character who has a lot of flaws that he slowly overcomes."
+    ],
     "image": "/assets/reviews/the_karate_kid.jpg"
   },
   {
