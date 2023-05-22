@@ -210,7 +210,7 @@ const MediaReviews = () => {
       </div>
     );
   });
-  
+
   const filteredReviewSearches =
     searchQuery === ""
       ? reviews
@@ -279,7 +279,7 @@ const MediaReviews = () => {
         {tabs}
       </div>
       <div className="w-72 md:w-96 lg:w-[30rem] mx-auto my-4">
-        <Combobox value={selectedSearch} onChange={setSelectedSearch}>
+        <Combobox value={selectedSearch} onChange={(val) => { setSearchQuery(val); setSelectedSearch(val) }}>
           <div className="relative cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
             <Combobox.Input
               placeholder="Search"
@@ -297,7 +297,7 @@ const MediaReviews = () => {
               setSearchQuery("");
               setSelectedSearch("")
             }}>
-              <AiOutlineClose className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all"/>
+              <AiOutlineClose className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
             </button>}
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />

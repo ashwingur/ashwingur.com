@@ -199,7 +199,9 @@
   {
     "type": "movie",
     "name": "Tenet",
-    "image": "/assets/reviews/tenet.jpg"
+    "image": "/assets/reviews/tenet.jpg",
+    "rating": 9,
+    "review": ["Extremely mind boggling movie by Nolan, which makes the plot of Inception seem very simple. Even after multiple watches I am still trying to understand parts of the plot. However the thought required to understand the movies makes it extremely enganging. I especially like the protagonist of the movie, whose name we also don't know and goes by 'The Protagonist'. The action scenes were amazing because I could never have visualised how a fight between 2 beings going in the opposite direction of time could work."]
   },
   {
     "type": "movie",
@@ -984,5 +986,10 @@
     "type": "movie",
     "name": "Whiplash",
     "rating": 9.1
+  },
+  {
+    "type": "movie",
+    "name": "Ram Setu",
+    "rating": 8
   }
 ]
