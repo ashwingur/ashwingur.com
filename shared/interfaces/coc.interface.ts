@@ -21,8 +21,8 @@ export interface Player {
   donationsReceived: number;
   clanCapitalContributions: number;
   clan: PlayerClan;
-  league: PlayerLeague;
-  builderBaseLeague: BuilderBaseLeague;
+  league?: PlayerLeague;
+  builderBaseLeague?: BuilderBaseLeague;
   achievements: PlayerAchievement[];
   versusBattleWinCount: number;
   labels: Label[];
