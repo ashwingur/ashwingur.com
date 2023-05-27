@@ -1114,11 +1114,13 @@
   },
   {
     "type": "movie",
-    "name": "Shrek"
+    "name": "Shrek",
+    "image": "/assets/reviews/shrek.jpg"
   },
   {
     "type": "movie",
     "name": "Whiplash",
+    "image": "/assets/reviews/whiplash.webp",
     "rating": 9.1
   },
   {
@@ -1133,6 +1135,7 @@
   {
     "type": "movie",
     "name": "Ram Setu",
-    "rating": 8
+    "rating": 8,
+    "image": "/assets/reviews/ram_setu.jpg"
   }
 ]
