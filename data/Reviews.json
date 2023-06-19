@@ -1114,4 +1114,17 @@
     "name": "Ram Setu",
     "rating": 8
   }
+  ,
+  {
+    "type": "movie",
+    "name": "Memento",
+    "rating": 9,
+    "review": ["Finally go around to watching this Nolan movie and I wasn't disappointed. It's a really creative concept that starts off confusing but makes more sense as the movie progresses. It's interesting to see how a movie can be told in a reverse yet still linear order. Furthermore the characters who we initially believe to be the most suspicious end up being less suspicious as we go back in time which shows how the supposed protagonist spirals into a loop of feeding himself misinformation. The plot twist involving Sammy Jenkins also reminded me of Shutter Island, and how we the viewers also fall into the lies the unrealiable main character has created."]
+  },
+  {
+    "type": "game",
+    "name": "Diablo IV",
+    "rating": 9,
+    "review": ["My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events."]
+  }
 ]
