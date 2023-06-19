@@ -9,7 +9,7 @@ interface CocTrophyDetailsProps {
 const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
   return (
     <div className="font-clash clash-font-style pb-10 md:pb-0 md:ml-0">
-      {player.hasOwnProperty("league") == true ? (
+      {player.league !== undefined ? (
         <div className="flex items-center relative">
           <div className="absolute w-32 md:w-36 h-32 md:h-36 left-[-45px] md:left-[-68px] bottom-[-20px]">
             <Image

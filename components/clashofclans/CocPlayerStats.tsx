@@ -63,10 +63,17 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
           value={player.builderHallLevel.toString()}
         />
         <Gap />
-        <Stat name={"League"} value={player.league.name.toString()} />
+        <Stat
+          name={"League"}
+          value={player.league === undefined ? "N/A" : player.league?.name}
+        />
         <Stat
           name={"Builder Base League"}
-          value={player.builderBaseLeague.name.toString()}
+          value={
+            player.builderBaseLeague === undefined
+              ? "N/A"
+              : player.builderBaseLeague?.name
+          }
         />
       </div>
     </div>

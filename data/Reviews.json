@@ -197,7 +197,15 @@
   {
     "type": "movie",
     "name": "Avatar",
-    "image": "/assets/reviews/avatar.jpg"
+    "image": "/assets/reviews/avatar.jpg",
+    "reviewSubItems": [
+      {
+        "name": "Avatar"
+      },
+      {
+        "name": "Avatar: The Way of the Water"
+      }
+    ]
   },
   {
     "type": "movie",
@@ -941,13 +949,17 @@
     "type": "game",
     "name": "Pokemon Emerald",
     "rating": 8,
-    "review": ["I played this on a GBA Emulator and it was also a great pokemon game, although I still find Pokemon Heartgold to be the best."]
+    "review": [
+      "I played this on a GBA Emulator and it was also a great pokemon game, although I still find Pokemon Heartgold to be the best."
+    ]
   },
   {
     "type": "game",
     "name": "Super Mario Odyssey",
     "rating": 9,
-    "review": ["I've been wanting to play this for a long time as I only recently got the Switch console in 2023. This game definitely lives up to the hype. The wide variety of different worlds is amazing. The cappy mechanic is really fun and allows for some neat parkour tricks which can get you to places that don't seem reachable."]
+    "review": [
+      "I've been wanting to play this for a long time as I only recently got the Switch console in 2023. This game definitely lives up to the hype. The wide variety of different worlds is amazing. The cappy mechanic is really fun and allows for some neat parkour tricks which can get you to places that don't seem reachable."
+    ]
   },
   {
     "type": "game",
@@ -1102,19 +1114,30 @@
   },
   {
     "type": "movie",
-    "name": "Shrek"
+    "name": "Shrek",
+    "image": "/assets/reviews/shrek.jpg"
   },
   {
     "type": "movie",
     "name": "Whiplash",
+    "image": "/assets/reviews/whiplash.webp",
     "rating": 9.1
   },
   {
     "type": "movie",
+    "name": "Air",
+    "rating": 8.5,
+    "image": "/assets/reviews/air.jpg",
+    "review": [
+      "Really solid and entertaining movie. Although the plot was pretty simple and contained, the performances and humour between the characters was amazing, especially Matt Damon's performance."
+    ]
+  },
+  {
+    "type": "movie",
     "name": "Ram Setu",
-    "rating": 8
-  }
-  ,
+    "rating": 8,
+    "image": "/assets/reviews/ram_setu.jpg"
+  },
   {
     "type": "movie",
     "name": "Memento",
