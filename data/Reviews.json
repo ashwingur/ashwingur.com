@@ -292,16 +292,28 @@
   {
     "type": "movie",
     "name": "Eragon",
+    "rating": 4,
+    "review": [
+      "Not very memorable and does 0 justice to the books and story. All the races look human so there is no immersion on that part. There was a future TV show announced which I am extremely hyped for."
+    ],
     "image": "/assets/reviews/eragon_movie.webp"
   },
   {
     "type": "movie",
     "name": "Top Gun: Maverick",
+    "rating": 9,
+    "review": [
+      "A simple yet extremely engaging plot with very immersive action. There was no point in this movie that was boring."
+    ],
     "image": "/assets/reviews/top_gun_maverick.webp"
   },
   {
     "type": "movie",
     "name": "The Da Vinci Code",
+    "rating": 9,
+    "review": [
+      "Always great watching a Tom Hanks movie. The puzzle solving and mystery in this movie (which is assume is based off the book that I haven't read) is really engaging."
+    ],
     "image": "/assets/reviews/the_da_vinci_code.jpg"
   },
   {
@@ -321,11 +333,13 @@
   {
     "type": "movie",
     "name": "The Terminal",
+    "rating": 7.5,
     "image": "/assets/reviews/the_terminal.jpg"
   },
   {
     "type": "movie",
     "name": "Cast Away",
+    "rating": 7,
     "image": "/assets/reviews/cast_away.jpg"
   },
   {
