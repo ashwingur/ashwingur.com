@@ -1127,7 +1127,25 @@
   },
   {
     "type": "movie",
-    "name": "Back to the Future"
+    "name": "Back to the Future",
+    "rating": 9,
+    "review": [
+      "Such an amazing classic that is really rewatchable. The main characters are super likeable and the plot is very fun to follow and fits in with the slightly exaggerated acting of Marty and Doc. The theme music is also very iconic."
+    ],
+    "reviewSubItems": [
+      {
+        "name": "Back to the Future",
+        "rating": 9.5
+      },
+      {
+        "name": "Back to the Future II",
+        "rating": 8
+      },
+      {
+        "name": "Back to the Future III",
+        "rating": 9
+      }
+    ]
   },
   {
     "type": "movie",
@@ -1187,7 +1205,11 @@
         ]
       },
       {
-        "name": "Across the Spider-Verse"
+        "name": "Across the Spider-Verse",
+        "rating": 9.8,
+        "review": [
+          "Even better than the first movie. Every scene felt really deep and there was a lot of emotional moments that was complemented very well with the art style. It's cool to see how so many art styles can be used in a single movie but still remain very coherent. My favourite scene in the movie was the elevator scene."
+        ]
       }
     ]
   }
