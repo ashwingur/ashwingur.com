@@ -148,7 +148,8 @@
   {
     "type": "book",
     "name": "Fire and Blood",
-    "image": "/assets/reviews/fire_and_blood.webp"
+    "image": "/assets/reviews/fire_and_blood.webp",
+    "rating": 9
   },
   {
     "type": "book",
