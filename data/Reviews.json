@@ -682,7 +682,7 @@
   {
     "type": "movie",
     "name": "After Earth",
-    "rating": 5,
+    "rating": 4.5,
     "image": "/assets/reviews/after_earth.jpg"
   },
   {
@@ -738,7 +738,10 @@
     "type": "movie",
     "name": "Coco",
     "rating": 9.5,
-    "image": "/assets/reviews/coco.jpeg"
+    "image": "/assets/reviews/coco.jpeg",
+    "review": [
+      "I would say this is my favourite Disney animated film. The music and story was really awesome and how they depicted the world of the dead. The story is also very deep and the ending gets emotional."
+    ]
   },
   {
     "type": "movie",
@@ -766,8 +769,27 @@
   },
   {
     "type": "movie",
-    "name": "The Avengers",
-    "image": "/assets/reviews/avengers.jpg"
+    "name": "Avengers",
+    "image": "/assets/reviews/avengers.jpg",
+    "rating": 8.5,
+    "reviewSubItems": [
+      {
+        "name": "The Avengers",
+        "rating": 8
+      },
+      {
+        "name": "Avengers: Age of Ultron",
+        "rating": 7.8
+      },
+      {
+        "name": "Avengers: Infinity War",
+        "rating": 9
+      },
+      {
+        "name": "Avengers: Endgame",
+        "rating": 8.5
+      }
+    ]
   },
   {
     "type": "movie",
@@ -984,31 +1006,58 @@
   },
   {
     "type": "game",
-    "name": "Super Mario 3D World + Bowser's Fury"
+    "name": "Super Mario 3D World + Bowser's Fury",
+    "rating": 8,
+    "review": [
+      "I haven't finished the entire game but it's fun to play as a couch co-op game. Compared to the 2D titles however, it is definitely more challenging in terms of being precise with jumping and where the character will land due to the isometric view."
+    ]
   },
   {
     "type": "game",
-    "name": "New Super Mario Bros. Wii"
+    "name": "New Super Mario Bros. Wii",
+    "rating": 9,
+    "review": [
+      "My first every Mario 2D platformer game. It was really challenging at first but it was also very fun to play. Although I still haven't completely finished the game and final boss, it holds nostalgic value."
+    ]
   },
   {
     "type": "game",
-    "name": "Cuphead"
+    "name": "Cuphead",
+    "rating": 9,
+    "review": [
+      "The artstyle, animation, music and dialogue in this game is 10/10. The fact that every character was hand drawn frame by frame is incredible and also makes it look very organic with the rubber hose style. The gameplay is definitely extremely challenging and it can take a very high amount of replays to understand the attack patterns of bosses and be able to defeat them. I unfortunately did not have the patience to finish this game which is a shame because I miss out on a lot of art and characters from later levels."
+    ]
   },
   {
     "type": "game",
-    "name": "War Tortoise"
+    "name": "War Tortoise",
+    "rating": 7,
+    "review": [
+      "Interesting take on the tower defence genre with heaps of different weapon types and troops you can get. It's fun to play for a few hours but eventually it gets pretty repeitive, and there are a lot of ads due to it being a free to play mobile game."
+    ]
   },
   {
     "type": "game",
-    "name": "Burrito Bison"
+    "name": "Burrito Bison",
+    "rating": 8,
+    "review": [
+      "Great singleplayer game to pass the time. It's cool to unlock new upgrades and notice your distance increase in every run and eventually unlock new levels. Finsihing the main game is fun, but the end game content does get boring after a while so there's not much to do after that"
+    ]
   },
   {
     "type": "game",
-    "name": "Kingdom Rush"
+    "name": "Kingdom Rush",
+    "rating": 7.5,
+    "review": [
+      "Fun tower defence game to play in school. I personally did not find much replay value in the game and it also sucks that some heroes can only be obtained through real world money instead of the in game currency."
+    ]
   },
   {
     "type": "game",
-    "name": "Nitrome Must Die"
+    "name": "Nitrome Must Die",
+    "review": [
+      "Holds a lot of nostalgic value. Great arcade style game that's really great with local co-op. The only downside is that progress does not seem to save in multiplayer so you have to start from the beginning every time."
+    ]
   },
   {
     "type": "game",
@@ -1117,8 +1166,11 @@
   {
     "type": "show",
     "name": "Obi-Wan Kenobi",
-    "rating": 6,
-    "image": "/assets/reviews/obi_wan_kenobi.jpg"
+    "rating": 5,
+    "image": "/assets/reviews/obi_wan_kenobi.jpg",
+    "review": [
+      "Wasn't as engaging as I'd hoped for it to be. Since the events take place between the prequel and sequel we know that none of the characters we know from those movies can die. This makes them have a lot of plot armour and reduces the stakes of what can really happen. They're only able to kill off other side characters that were contained within the series."
+    ]
   },
   {
     "type": "movie",
