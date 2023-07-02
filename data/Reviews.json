@@ -1265,5 +1265,21 @@
         ]
       }
     ]
+  },
+  {
+    "type": "movie",
+    "name": "Dream House",
+    "rating": 6.7,
+    "review": [
+      "Pretty good movie with the plot twist that happens and makes you question everything. The acting is great. However the ending felt a little bit unsatisfying and rushed."
+    ]
+  },
+  {
+    "type": "movie",
+    "name": "Soul",
+    "rating": 9.1,
+    "review": [
+      "Emotional and engaging movie. It had me deeply invested in the characters and the Jazz music was great."
+    ]
   }
 ]
