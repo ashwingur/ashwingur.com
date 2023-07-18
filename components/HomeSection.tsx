@@ -26,7 +26,7 @@ const HomeSection = () => {
           href="https://github.com/ashwingur"
           target="_blank"
           rel="noreferrer"
-          className="hover:bg-blue-100 dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
+          className="hover:bg-white dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
         >
           <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
             Github
@@ -37,7 +37,7 @@ const HomeSection = () => {
           href="https://www.linkedin.com/in/ashwingur/?originalSubdomain=au"
           target="_blank"
           rel="noreferrer"
-          className="hover:bg-blue-100 dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
+          className="hover:bg-white dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
         >
           <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
             LinkedIn
@@ -49,7 +49,7 @@ const HomeSection = () => {
           href="/Resume.pdf"
           target="_blank"
           rel="noreferrer"
-          className="hover:bg-blue-100 dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
+          className="hover:bg-white dark:hover:bg-black p-2 transition rounded-md group relative flex justify-center"
         >
           <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
             Resume

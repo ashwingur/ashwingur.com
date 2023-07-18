@@ -465,6 +465,10 @@
   {
     "type": "movie",
     "name": "Catch Me If You Can",
+    "rating": 9.6,
+    "review": [
+      "Very entertaining movie that I was surprised to find out was actually based on a true story. This movie is very much the definition of 'fake it till you make it'."
+    ],
     "image": "/assets/reviews/catch_me_if_you_can.webp"
   },
   {
@@ -1185,6 +1189,7 @@
     "review": [
       "Such an amazing classic that is really rewatchable. The main characters are super likeable and the plot is very fun to follow and fits in with the slightly exaggerated acting of Marty and Doc. The theme music is also very iconic."
     ],
+    "image": "/assets/reviews/back_to_the_future.jpg",
     "reviewSubItems": [
       {
         "name": "Back to the Future",
@@ -1202,7 +1207,8 @@
   },
   {
     "type": "movie",
-    "name": "How to Train Your Dragon"
+    "name": "How to Train Your Dragon",
+    "image": "/assets/reviews/how_to_train_your_dragon.jpg"
   },
   {
     "type": "movie",
@@ -1232,11 +1238,8 @@
   },
   {
     "type": "movie",
-    "name": "Soul"
-  },
-  {
-    "type": "movie",
-    "name": "Indiana Jones"
+    "name": "Indiana Jones",
+    "image": "/assets/reviews/indiana_jones.jpg"
   },
   {
     "type": "movie",
@@ -1244,7 +1247,8 @@
     "rating": 9,
     "review": [
       "Finally go around to watching this Nolan movie and I wasn't disappointed. It's a really creative concept that starts off confusing but makes more sense as the movie progresses. It's interesting to see how a movie can be told in a reverse yet still linear order. Furthermore the characters who we initially believe to be the most suspicious end up being less suspicious as we go back in time which shows how the supposed protagonist spirals into a loop of feeding himself misinformation. The plot twist involving Sammy Jenkins also reminded me of Shutter Island, and how we the viewers also fall into the lies the unrealiable main character has created."
-    ]
+    ],
+    "image": "/assets/reviews/memento.jpg"
   },
   {
     "type": "game",
@@ -1280,7 +1284,8 @@
     "rating": 6.7,
     "review": [
       "Pretty good movie with the plot twist that happens and makes you question everything. The acting is great. However the ending felt a little bit unsatisfying and rushed."
-    ]
+    ],
+    "image": "/assets/reviews/dream_house.jpg"
   },
   {
     "type": "movie",
@@ -1288,6 +1293,30 @@
     "rating": 9.1,
     "review": [
       "Emotional and engaging movie. It had me deeply invested in the characters and the Jazz music was great."
-    ]
+    ],
+    "image": "/assets/reviews/soul.jpg"
+  },
+
+  {
+    "type": "movie",
+    "name": "Meet the Parents",
+    "rating": 8,
+    "review": ["Funny movie where I laughed at many points."],
+    "image": "/assets/reviews/meet_the_parents.jpg"
+  },
+  {
+    "type": "movie",
+    "name": "Father of the Bride",
+    "rating": 8,
+    "review": ["Entertaining movie with some funny moments."],
+    "image": "/assets/reviews/father_of_the_bride.jpg"
+  },
+  {
+    "type": "book",
+    "name": "American Prometheus",
+    "review": [
+      "(Still reading book and it's quite a long book) This is my first time reading a biography, which I was inspired to read after seeing the Oppenheimer movie trailer. So far, it is a very detailed book that feels almost like a third person story of a fictional character. Since it is about a theoretical physicist in the early 20th century there are many references to otehr famous scientists that I have heard of through my years of schooling such as Rutherford, Born, Bohr, Einstein, Thompson etc."
+    ],
+    "image": "/assets/reviews/American_Prometheus.jpg"
   }
 ]
