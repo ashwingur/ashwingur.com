@@ -1314,9 +1314,28 @@
   {
     "type": "book",
     "name": "American Prometheus",
+    "rating": 9,
     "review": [
       "(Still reading book and it's quite a long book) This is my first time reading a biography, which I was inspired to read after seeing the Oppenheimer movie trailer. So far, it is a very detailed book that feels almost like a third person story of a fictional character. Since it is about a theoretical physicist in the early 20th century there are many references to otehr famous scientists that I have heard of through my years of schooling such as Rutherford, Born, Bohr, Einstein, Thompson etc."
     ],
     "image": "/assets/reviews/American_Prometheus.jpg"
+  },
+  {
+    "type": "movie",
+    "name": "American Psycho",
+    "rating": 9,
+    "review": [
+      "This was on my to-watch list for quite a while after seeing all the meme templates from this movie. The movie felt more and more disturbing as it went on until the eventual climax. I think there's 2 main interpretations of this movie which make some sense. The first is that all of the crimes committed is just a hallucination of Patrick's mind and the notebook in his office is the only indicator of his thoughts that others can see. However I think the 2nd scenario is more plausible where everyone knows about the murders which do occur. However, everyone is too preoccupied with their own lives, problems and reputation to deal with it so they purposely ignore Patrick's Behaviour. Overall this movie definitely left a lasting impression and is worth a watch (although probably not if you want something that's relaxing)."
+    ],
+    "image": "/assets/reviews/american_psycho.webp"
+  },
+  {
+    "type": "movie",
+    "name": "Oppenheimer",
+    "rating": 9.7,
+    "review": [
+      "I was looking forward to this movie ever since the first trailer and seeing snippets of the amazing cinematography and cast. Saw it on release day and those 3 hours went by very fast. This movie is very much focused on the perspective of Oppenheimer rather than the atomic bomb being the main focus. Almost all the scenes were dialogue heavy and involved many different characters and figures of history. These interactions were extremely engaging and it was cool to see it from the perspective of Oppenheimer which involved many of his visions/hallucinations. My only regret is not being able to watch this in 70mm IMAX projection as the Sydney one is still under construction. A minor issue I had was not being able to understand the dialogue sometimes due to the background music, however this didn't impact the experience too much as it was not that frequent."
+    ],
+    "image": "/assets/reviews/oppenheimer.webp"
   }
 ]
