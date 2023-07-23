@@ -572,7 +572,13 @@
   {
     "type": "movie",
     "name": "Guardians of the Galaxy",
-    "image": "/assets/reviews/guardians_of_the_galaxy.jpg"
+    "image": "/assets/reviews/guardians_of_the_galaxy.jpg",
+    "rating": 9.2,
+    "reviewSubItems": [
+      { "name": "Guardians of the Galaxy", "rating": 9.5 },
+      { "name": "Guardians of the Galaxy Vol. 2", "rating": 9 },
+      { "name": "Guardians of the Galaxy Vol. 3", "rating": 9.5 }
+    ]
   },
   {
     "type": "movie",
@@ -1337,5 +1343,20 @@
       "I was looking forward to this movie ever since the first trailer and seeing snippets of the amazing cinematography and cast. Saw it on release day and those 3 hours went by very fast. This movie is very much focused on the perspective of Oppenheimer rather than the atomic bomb being the main focus. Almost all the scenes were dialogue heavy and involved many different characters and figures of history. These interactions were extremely engaging and it was cool to see it from the perspective of Oppenheimer which involved many of his visions/hallucinations. My only regret is not being able to watch this in 70mm IMAX projection as the Sydney one is still under construction. A minor issue I had was not being able to understand the dialogue sometimes due to the background music, however this didn't impact the experience too much as it was not that frequent."
     ],
     "image": "/assets/reviews/oppenheimer.webp"
+  },
+  {
+    "type": "movie",
+    "name": "Maze Runner",
+    "rating": 7.7
+  },
+  {
+    "type": "movie",
+    "name": "Bajirao Mastani",
+    "rating": 8.8
+  },
+  {
+    "type": "movie",
+    "name": "3 Idiots",
+    "rating": 9.3
   }
 ]
