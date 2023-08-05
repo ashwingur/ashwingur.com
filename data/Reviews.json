@@ -1358,5 +1358,16 @@
     "type": "movie",
     "name": "3 Idiots",
     "rating": 9.3
+  },
+  {
+    "type": "movie",
+    "name": "Shaun of the Dead",
+    "rating": 7.9
+  },
+  {
+    "type": "movie",
+    "name": "Luca",
+    "rating": 8.9,
+    "review": ["Surprisingly underrated and really enjoyed it when I saw it."]
   }
 ]
