@@ -575,9 +575,18 @@
     "image": "/assets/reviews/guardians_of_the_galaxy.jpg",
     "rating": 9.2,
     "reviewSubItems": [
-      { "name": "Guardians of the Galaxy", "rating": 9.5 },
-      { "name": "Guardians of the Galaxy Vol. 2", "rating": 9 },
-      { "name": "Guardians of the Galaxy Vol. 3", "rating": 9.5 }
+      {
+        "name": "Guardians of the Galaxy",
+        "rating": 9.5
+      },
+      {
+        "name": "Guardians of the Galaxy Vol. 2",
+        "rating": 9
+      },
+      {
+        "name": "Guardians of the Galaxy Vol. 3",
+        "rating": 9.5
+      }
     ]
   },
   {
@@ -1302,19 +1311,22 @@
     ],
     "image": "/assets/reviews/soul.jpg"
   },
-
   {
     "type": "movie",
     "name": "Meet the Parents",
     "rating": 8,
-    "review": ["Funny movie where I laughed at many points."],
+    "review": [
+      "Funny movie where I laughed at many points."
+    ],
     "image": "/assets/reviews/meet_the_parents.jpg"
   },
   {
     "type": "movie",
     "name": "Father of the Bride",
     "rating": 8,
-    "review": ["Entertaining movie with some funny moments."],
+    "review": [
+      "Entertaining movie with some funny moments."
+    ],
     "image": "/assets/reviews/father_of_the_bride.jpg"
   },
   {
@@ -1368,6 +1380,35 @@
     "type": "movie",
     "name": "Luca",
     "rating": 8.9,
-    "review": ["Surprisingly underrated and really enjoyed it when I saw it."]
+    "review": [
+      "Surprisingly underrated and really enjoyed it when I saw it."
+    ]
+  },
+  {
+    "type": "book",
+    "name": "Mistborn",
+    "rating": 9.7,
+    "date": {
+      "year": 2023,
+      "month": 8
+    },
+    "reviewSubItems": [
+      {
+        "name": "The Final Empire",
+        "rating": 9.7,
+        "review": [
+          "This was my first experience with Brandon Sanderson's writing and I can confidently say that this book had me very engrossed from the start. The world building in this book was very solid and the mysteriousness of the world makes me want to find out more. It's set in quite an unusual premise where the 'Dark Lord' actually won. It combines this with a Master-Apprentice, heist plot which was very unique from what I've read before.",
+          "Compared to other fantasy books i've read before such as George RR Martin's ASOIAF I felt that this book was much less dense with detail and as such was 'easier' to get through (which isn't to say that it lacks depth). The right amount of information was given without boring the user and many promises that are setup throughout the book payoff quite quickly so there is a constant sense of progression.",
+          "I believe that the well thought out magic system in this book, both Allomancy and Feruchemy makes the action scenes very intense and provides a lot of explanation on way the world works. The diversity of the abilities and differences between Mistings and Mistborns."
+        ]
+      },
+      {
+        "name": "The Well of Ascension",
+        "rating": 9.7,
+        "review": [
+          "[Still Reading]"
+        ]
+      }
+    ]
   }
 ]
