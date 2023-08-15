@@ -27,18 +27,18 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             <li>Home</li>
           </Link>
           <Link
-            href="/#projects"
-            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
-            scroll={false}
-          >
-            <li>Projects</li>
-          </Link>
-          <Link
             href="/#apps"
             className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
             scroll={false}
           >
             <li>Apps</li>
+          </Link>
+          <Link
+            href="/#projects"
+            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            scroll={false}
+          >
+            <li>Projects</li>
           </Link>
 
           <li>
@@ -102,16 +102,6 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
               <li>Home</li>
             </Link>
             <Link
-              href="/#projects"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
-              scroll={false}
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
-            >
-              <li>Projects</li>
-            </Link>
-            <Link
               href="/#apps"
               className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
@@ -120,6 +110,16 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
               }}
             >
               <li>Apps</li>
+            </Link>
+            <Link
+              href="/#projects"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
+              scroll={false}
+              onClick={() => {
+                setMobileNavMenu(false);
+              }}
+            >
+              <li>Projects</li>
             </Link>
 
             <li>
