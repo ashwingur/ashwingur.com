@@ -6,16 +6,16 @@ const Apps = () => {
     <div id="apps" className="pt-20 flex flex-col">
       <h1 className="text-center mb-4">Apps</h1>
       <Link
-        href="/ClashOfClans"
-        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
-      >
-        <button>Clash of Clans</button>
-      </Link>
-      <Link
         href="/MediaReviews"
         className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
       >
         <button>Media Reviews</button>
+      </Link>
+      <Link
+        href="/ClashOfClans"
+        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
+      >
+        <button>Clash of Clans</button>
       </Link>
       <Link
         href="/CubeTimer"
