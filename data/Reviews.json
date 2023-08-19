@@ -1315,18 +1315,14 @@
     "type": "movie",
     "name": "Meet the Parents",
     "rating": 8,
-    "review": [
-      "Funny movie where I laughed at many points."
-    ],
+    "review": ["Funny movie where I laughed at many points."],
     "image": "/assets/reviews/meet_the_parents.jpg"
   },
   {
     "type": "movie",
     "name": "Father of the Bride",
     "rating": 8,
-    "review": [
-      "Entertaining movie with some funny moments."
-    ],
+    "review": ["Entertaining movie with some funny moments."],
     "image": "/assets/reviews/father_of_the_bride.jpg"
   },
   {
@@ -1380,9 +1376,7 @@
     "type": "movie",
     "name": "Luca",
     "rating": 8.9,
-    "review": [
-      "Surprisingly underrated and really enjoyed it when I saw it."
-    ]
+    "review": ["Surprisingly underrated and really enjoyed it when I saw it."]
   },
   {
     "type": "book",
@@ -1409,9 +1403,11 @@
         "name": "The Well of Ascension",
         "rating": 9.7,
         "review": [
-          "[Still Reading] Spoilers from the earlier book.",
+          "Spoilers from the earlier book.",
           "This book is very different from the first. Due to it primarily taking place in Luthadel only, it's much more politically oriented as it explores the aftermath of the Lord Ruler's death and how there is now a vacuum of power to be claimed. We see how trying to be the most honourable and honest king leads to further conflict in Luthadel as politics get in the way of actual leadership against the marching armies. It is great to see Elend's character explored in much more detail here and how unique his relationship with Vin is when both appear to be completely incompatible. Seeing how this relationship becomes strained later on in the book adds much more depth as Vin feels very alone without another fellow Mistborn who understands her well (until we learn more about Zane).",
-          "Another huge plot point that I like is the fact that the Lord Ruler was not the biggest obstacle that the crew had faced and overcome. The real threat is the mysterious mist that threatens to destroy the world that the Lord Ruler was somehow holding back. This reminded me heavily of ASOIAF where there is lots of war and conflict between the seven kingdoms whilst the true threat to all of mankind beyond the wall is building. It is similar here where multiple kings are trying to claim the crown and capital whilst the mist is getting stronger by the day and already killing outskirt villages."
+          "Another huge plot point that I like is the fact that the Lord Ruler was not the biggest obstacle that the crew had faced and overcome. The real threat is the mysterious mist that threatens to destroy the world that the Lord Ruler was somehow holding back. This reminded me heavily of ASOIAF where there is lots of war and conflict between the seven kingdoms whilst the true threat to all of mankind beyond the wall is building. It is similar here where multiple kings are trying to claim the crown and capital whilst the mist is getting stronger by the day and already killing outskirt villages.",
+          "The spy subplot had quite an unexpected yet satisfying payoff which also came out of nowhere. Like Vin, I was completely convinced that one of the crew members was indeed the spy and I had never suspected that it would be OreSeur himself based on the way he had begun assisting Vin towards the end of the book up to the fact that he betrays The Contract.",
+          "Overall, I believe that whilst this book contained less action and pace compared to the first book it sets up the characters and conflict well going into the third book which I plan to read immediately after this."
         ]
       }
     ]
