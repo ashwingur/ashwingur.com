@@ -18,6 +18,7 @@ interface ReviewItem {
   review?: string[];
   rating?: number;
   reviewSubItems?: ReviewSubItem[];
+  date?: ReviewDate;
 }
 
 interface ReviewSubItem {
@@ -25,6 +26,12 @@ interface ReviewSubItem {
   image?: string;
   review?: string[];
   rating?: number;
+  date?: ReviewDate;
+}
+
+interface ReviewDate {
+  year?: number;
+  month?: number;
 }
 
 const categories = ["Books", "Shows", "Movies", "Games"];
@@ -112,7 +119,10 @@ const MediaReviews = () => {
   const reviews = Reviews.filter(
     (item) =>
       item.type == filterType &&
-      (selectedSearch === "" ? true : item.name === selectedSearch || item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      (selectedSearch === ""
+        ? true
+        : item.name === selectedSearch ||
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()))
   ).sort((r1, r2) => {
     if (sortRatingDescending !== null) {
       if (r1.rating === undefined && r2.rating === undefined) {
@@ -215,8 +225,8 @@ const MediaReviews = () => {
     searchQuery === ""
       ? reviews
       : reviews.filter((review) => {
-        return review.name.toLowerCase().includes(searchQuery.toLowerCase());
-      });
+          return review.name.toLowerCase().includes(searchQuery.toLowerCase());
+        });
 
   return (
     <div className="">
@@ -279,7 +289,13 @@ const MediaReviews = () => {
         {tabs}
       </div>
       <div className="w-72 md:w-96 lg:w-[30rem] mx-auto my-4">
-        <Combobox value={selectedSearch} onChange={(val) => { setSearchQuery(val); setSelectedSearch(val) }}>
+        <Combobox
+          value={selectedSearch}
+          onChange={(val) => {
+            setSearchQuery(val);
+            setSelectedSearch(val);
+          }}
+        >
           <div className="relative cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
             <Combobox.Input
               placeholder="Search"
@@ -293,12 +309,17 @@ const MediaReviews = () => {
               displayValue={(review: string) => review}
               className="dark:bg-zinc-900 w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none"
             />
-            {(searchQuery !== "" || selectedSearch !== "") && <button className="absolute inset-y-0 right-8" onClick={() => {
-              setSearchQuery("");
-              setSelectedSearch("")
-            }}>
-              <AiOutlineClose className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
-            </button>}
+            {(searchQuery !== "" || selectedSearch !== "") && (
+              <button
+                className="absolute inset-y-0 right-8"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedSearch("");
+                }}
+              >
+                <AiOutlineClose className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
+              </button>
+            )}
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
@@ -309,7 +330,8 @@ const MediaReviews = () => {
                 key={review.name}
                 value={review.name}
                 className={({ active }) =>
-                  `px-4 cursor-pointer py-2 ${active ? "bg-green-600 dark:bg-[#3b0764] text-white" : ""
+                  `px-4 cursor-pointer py-2 ${
+                    active ? "bg-green-600 dark:bg-[#3b0764] text-white" : ""
                   }`
                 }
               >
