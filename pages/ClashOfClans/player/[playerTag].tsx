@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SpinningCircles } from "react-loading-icons";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import CocPlayerAchievements from "../../../components/clashofclans/CocPlayerAchievements";
