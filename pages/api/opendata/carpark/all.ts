@@ -16,7 +16,10 @@ export default async function handler(
       },
     })
     .then(async (response) => {
-      const parkingIDs = Object.keys(response.data);
+      // Filtering out 1-5 as those are only historical data about tallawong, kellyville, bella vista, hills showground and cherrybrook
+      const parkingIDs = Object.keys(response.data).filter(
+        (e) => Number(e) > 5
+      );
       const parkingPromises = parkingIDs.map((id) =>
         axios.get<ParkingFacility>(
           `https://api.transport.nsw.gov.au/v1/carpark?facility=${id}`,
