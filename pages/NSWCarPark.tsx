@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 const fetchParkingIDs = (
   setLastFetchTime: Dispatch<SetStateAction<string>>
 ) => {
-  setLastFetchTime(new Date().toLocaleTimeString());
+  setLastFetchTime(new Date().toLocaleTimeString().toLocaleUpperCase());
   return axios.get("/api/opendata/carpark/all").then(({ data }) => data);
 };
 
