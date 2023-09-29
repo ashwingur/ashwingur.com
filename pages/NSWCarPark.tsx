@@ -9,7 +9,11 @@ const fetchParkingIDs = (
   setLastFetchTime: Dispatch<SetStateAction<string>>
 ) => {
   setLastFetchTime(new Date().toLocaleTimeString().toLocaleUpperCase());
-  return axios.get("/api/opendata/carpark/all").then(({ data }) => data);
+  return axios
+    .get<ParkingFacility[]>("/api/opendata/carpark/all")
+    .then(({ data }) =>
+      data.sort((a, b) => a.facility_name.localeCompare(b.facility_name))
+    );
 };
 
 interface ParkingBoxProps {
