@@ -3,9 +3,14 @@ import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { ParkingFacility } from "../shared/interfaces/parking.interface";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const fetchParkingIDs = () =>
-  axios.get("/api/opendata/carpark/all").then(({ data }) => data);
+const fetchParkingIDs = (
+  setLastFetchTime: Dispatch<SetStateAction<string>>
+) => {
+  setLastFetchTime(new Date().toLocaleTimeString());
+  return axios.get("/api/opendata/carpark/all").then(({ data }) => data);
+};
 
 interface ParkingBoxProps {
   facility: ParkingFacility;
@@ -77,9 +82,12 @@ const LoadingIcon = ({ className }: { className?: string }) => {
 
 const NSWCarPark = () => {
   const router = useRouter();
+  const [lastFetchTime, setLastFetchTime] = useState<string>("");
   const { isLoading, error, data } = useQuery<ParkingFacility[]>({
-    queryFn: () => fetchParkingIDs(),
+    queryFn: () => fetchParkingIDs(setLastFetchTime),
     enabled: router.isReady,
+    staleTime: 60000,
+    refetchInterval: 60000,
   });
 
   if (error instanceof Error) return <LoadingState />;
@@ -94,6 +102,7 @@ const NSWCarPark = () => {
     <div className="">
       <Navbar fixed={true} />
       <h1 className="text-center pt-20 pb-4">NSW Live Car Park Data</h1>
+      <p className="text-center mb-4">Last update: {lastFetchTime}</p>
       <div className="grid grid-cols-1 gap-4 mx-4 md:mx-16 md:grid-cols-2 sm:grid-cols-1 pb-8">
         {parkingBoxes}
       </div>
