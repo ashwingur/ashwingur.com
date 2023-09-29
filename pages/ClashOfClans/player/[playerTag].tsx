@@ -41,7 +41,6 @@ const PlayerPage = () => {
         </p>
       ),
     });
-
   if (isLoading || data === undefined)
     return CocLoadingOrError({
       heading: title,

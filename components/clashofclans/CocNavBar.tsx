@@ -6,7 +6,6 @@ import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { MdOutlineMenu } from "react-icons/md";
 import CocButton from "./CocButton";
-import CocSmallButton from "./CocSmallButton";
 
 interface Tags {
   playerTag: string;
