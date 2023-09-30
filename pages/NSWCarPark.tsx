@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { ParkingFacility } from "../shared/interfaces/parking.interface";
 import { Dispatch, SetStateAction, useState } from "react";
+import Link from "next/link";
 
 const fetchParkingIDs = (
   setLastFetchTime: Dispatch<SetStateAction<string>>
@@ -106,7 +107,19 @@ const NSWCarPark = () => {
     <div className="">
       <Navbar fixed={true} />
       <h1 className="text-center pt-20 pb-4">NSW Live Car Park Data</h1>
-      <p className="text-center mb-4">Last update: {lastFetchTime}</p>
+      <p className="text-center">Last update: {lastFetchTime}</p>
+      <p className="text-center text-sm italic mb-4">
+        Data sourced from{" "}
+        <a
+          className="text-blue-700 dark:text-blue-300"
+          href="https://opendata.transport.nsw.gov.au/dataset/car-park-api"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Transport Opendata
+        </a>
+        . The API does not guarantee the values to be accurate at all times.
+      </p>
       <div className="grid grid-cols-1 gap-4 mx-4 md:mx-16 md:grid-cols-2 sm:grid-cols-1 pb-8">
         {parkingBoxes}
       </div>
