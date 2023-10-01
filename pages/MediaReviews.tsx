@@ -149,15 +149,14 @@ const MediaReviews = () => {
 
   const reviews = Reviews.filter(
     (item) =>
-      (item.type == filterType &&
-        (selectedSearch === ""
-          ? true
-          : item.name === selectedSearch ||
-            item.name.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-      item.reviewSubItems?.some(
-        (subReview) =>
-          subReview.name.toLowerCase().includes(searchQuery.toLowerCase()) // If user searches for subReviewItem then also return that parent review
-      )
+      item.type == filterType &&
+      (selectedSearch === ""
+        ? true
+        : item.name === selectedSearch ||
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.reviewSubItems?.some((subReview) =>
+            subReview.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )) // If user searches for subReviewItem then also return that parent review
   ).sort((r1, r2) => {
     if (sortRatingDescending !== null) {
       if (r1.rating === undefined && r2.rating === undefined) {
@@ -181,7 +180,7 @@ const MediaReviews = () => {
     }
   });
 
-  const reviewElements = reviews.map((item: ReviewItem, index) => {
+  const reviewCards = reviews.map((item: ReviewItem, index) => {
     const reviewParagraphs = item.review?.map((para, index) => {
       return <p key={index}>{para}</p>;
     });
@@ -394,7 +393,7 @@ const MediaReviews = () => {
         </Combobox>
       </div>
       <div className="flex flex-col gap-8 items-center px-4 mb-12">
-        {reviewElements}
+        {reviewCards}
       </div>
 
       <button
