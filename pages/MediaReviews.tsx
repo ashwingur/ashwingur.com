@@ -51,6 +51,37 @@ const filterTabIndex = (selectedTab: number): string => {
   }
 };
 
+const monthNumberToString = (month: number): string => {
+  switch (month) {
+    case 1:
+      return "Jan";
+    case 2:
+      return "Feb";
+    case 3:
+      return "Mar";
+    case 4:
+      return "Apr";
+    case 5:
+      return "May";
+    case 6:
+      return "Jun";
+    case 7:
+      return "Jul";
+    case 8:
+      return "Aug";
+    case 9:
+      return "Sep";
+    case 10:
+      return "Nov";
+    case 11:
+      return "Dec";
+    case 12:
+      return "Oct";
+    default:
+      return "";
+  }
+};
+
 const ratingColour = (rating: number): string => {
   if (rating <= 1) {
     return "bg-red-500 dark:bg-red-800";
@@ -160,7 +191,13 @@ const MediaReviews = () => {
           className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
         >
           <div className="flex justify-between items-center mb-4">
-            <div className="font-bold text-xl w-4/5">{subItem.name}</div>
+            <div className="text-xl w-4/5">
+              <div className="font-bold">{subItem.name}</div>
+              <div className="text-sm">
+                {monthNumberToString(subItem.date?.month ?? -1)}{" "}
+                {subItem.date?.year}
+              </div>
+            </div>
             {subItem.rating && (
               <div
                 className={`rounded-full w-8 h-8 flex ${ratingColour(
@@ -192,7 +229,12 @@ const MediaReviews = () => {
         className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade shadow-sm"
       >
         <div className="flex justify-between items-center mb-2">
-          <div className="font-bold text-2xl w-4/5">{item.name}</div>
+          <div className=" w-4/5">
+            <div className="font-bold text-2xl">{item.name}</div>
+            <div className="text-md">
+              {monthNumberToString(item.date?.month ?? -1)} {item.date?.year}
+            </div>
+          </div>
           {item.rating && (
             <div
               className={`rounded-full text-2xl w-14 h-14 flex ${ratingColour(

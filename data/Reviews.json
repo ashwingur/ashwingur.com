@@ -164,6 +164,7 @@
     "type": "book",
     "name": "Dune Chronicles",
     "rating": 7.9,
+    "date": { "year": 2023 },
     "image": "/assets/reviews/dune_chronicles.jpg",
     "review": [
       "I discovered the book series after watching the movie which I really enjoyed. It's cool to have read something that really inspired a lot of people media today such as Star Wars. This is definitely a very challenging read that tackles some really fundamental human experiences in a complex way. I did find myself a lot of the time having to re-read paragraphs to really try and understand what was happening and sometimes I was not able to figure it out. But I think this may have also been part of the author's intention, to not explain every single bit of lore in the world but provide enough information to picture the world for ourselves.",
@@ -1382,14 +1383,15 @@
     "type": "book",
     "name": "Mistborn Era 1",
     "rating": 9.7,
-    "date": {
-      "year": 2023,
-      "month": 8
-    },
+
     "reviewSubItems": [
       {
         "name": "The Final Empire",
         "rating": 9.7,
+        "date": {
+          "year": 2023,
+          "month": 8
+        },
         "image": "/assets/reviews/the_final_empire.jpg",
         "review": [
           "This was my first experience with Brandon Sanderson's writing and I can confidently say that this book had me very engrossed from the start. The world building in this book was very solid and the mysteriousness of the world makes me want to find out more. It's set in quite an unusual premise where the 'Dark Lord' actually won. It combines this with a Master-Apprentice, heist plot which was very unique from what I've read before.",
@@ -1429,7 +1431,7 @@
   {
     "type": "book",
     "name": "Mistborn Era 2",
-    "rating": 8,
+    "rating": 8.7,
     "date": {
       "year": 2023,
       "month": 9
@@ -1445,10 +1447,21 @@
       },
       {
         "name": "Shadows of Self",
-        "rating": 9.5,
+        "rating": 9.1,
         "image": "/assets/reviews/shadows_of_self.jpg",
         "review": [
           "I definitely became more invested into this second era whilst reading this book. I think the big reason is the more direct references to Era 1 which is awesome to see from an outsider's perspective who views the earlier characters as legend. I enjoyed the Kandra making a return, especially TenSoon who I thought had died in the previous era as he removed his spike. MeLaan's character is also awesome and I like that the Kandra are able to embrance their personalities whilst living amongst humans without having masters. The morality of Harmony is also put into question as we realis that Sazed can't simply favour preservation and must keep everything balanced, thus setting up Wax's entire life to be his arm of Ruin. I also enjoyed Marasi's role in this book more as she strugged with her own problems without the constabulary setting but was able to perform well despite this."
+        ]
+      },
+      {
+        "name": "The Bands of Mourning",
+        "rating": 9.3,
+        "image": "/assets/reviews/bands_of_mourning.jpg",
+        "review": [
+          "The Second Era really comes together in this final books with a satisfying ending. There is a lot more interesting back story for Wax's character that explains his motivation for becoming a Lawman.",
+          "One thing that really got my interest was the more detailed look into the potential of allomancy and Feruchemy. The concept of being able to share metal minds with others without being a Feruchemist opens up a numerable amount of possibilities. This is especially the case with the masked humans that we discover to be living on the other side of the planet this entire time. Their developed technology and world views introduces a fresh perspective to the series that I enjoyed, even though it was mostly towards the end of the book.",
+          "Another aspect of this book that was not expecting was the improved characterisation of Steris, who in the previous books just comes off as a mostly generic noblewoman with an affinity to being very organised. However, the events in this book demonstrate the usefulness of her character despite her lack of powers as her level of organisation and contingency plans helped with the team's success. It also creates more chemistry between herself and Wax after being comfortable with herself more than she was in Elendel where she was much more reserved.",
+          "The ending, although I expected them to find the bands of mourning, was still satisfying. It characterised the Lord Ruler as a less evil person because of how he helped the people on the other side of the planet that no one else knew existed. MeLaan is also a likeable character and her abilities as a Kandra make for some versatile solutions to certain problems."
         ]
       }
     ]
