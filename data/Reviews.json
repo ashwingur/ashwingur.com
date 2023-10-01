@@ -155,6 +155,9 @@
     "type": "book",
     "name": "A Knight of the Seven Kingdoms",
     "rating": 9.6,
+    "date": {
+      "year": 2021
+    },
     "image": "/assets/reviews/knight_of_the_seven_kingdoms.jpg",
     "review": [
       "A prequel to the main ASOIAF series, this book consists of 3 novellas about the adventures of 2 characters. The great thing is that this book does well as a standalone series, while only being set in the Game of Thrones universe. It's great to see characters dealing with more 'local' problems rather than being overshadowed by a greater plot that will affect the entirity of Westeros. However, there is still plenty of references to famous houses and events that readers will know from the other books which also adds to the immersion in the world. It's also considerably smaller and less dense than the ASOIAF books which also makes it an easy read that takes less time to digest the plot."
@@ -1173,6 +1176,10 @@
     "type": "book",
     "name": "The Kingkiller Chronicles",
     "rating": 9.8,
+    "date": {
+      "year": 2022,
+      "month": 9
+    },
     "reviewSubItems": [
       {
         "name": "The Name of the Wind",
@@ -1371,7 +1378,11 @@
   {
     "type": "movie",
     "name": "Shaun of the Dead",
-    "rating": 7.9
+    "rating": 7.9,
+    "date": {
+      "year": 2023,
+      "month": 7
+    }
   },
   {
     "type": "movie",
@@ -1383,15 +1394,14 @@
     "type": "book",
     "name": "Mistborn Era 1",
     "rating": 9.7,
-
+    "date": {
+      "year": 2023,
+      "month": 8
+    },
     "reviewSubItems": [
       {
         "name": "The Final Empire",
         "rating": 9.7,
-        "date": {
-          "year": 2023,
-          "month": 8
-        },
         "image": "/assets/reviews/the_final_empire.jpg",
         "review": [
           "This was my first experience with Brandon Sanderson's writing and I can confidently say that this book had me very engrossed from the start. The world building in this book was very solid and the mysteriousness of the world makes me want to find out more. It's set in quite an unusual premise where the 'Dark Lord' actually won. It combines this with a Master-Apprentice, heist plot which was very unique from what I've read before.",
@@ -1434,13 +1444,17 @@
     "rating": 8.7,
     "date": {
       "year": 2023,
-      "month": 9
+      "month": 8
     },
     "reviewSubItems": [
       {
         "name": "The Alloy of Law",
         "rating": 8,
         "image": "/assets/reviews/alloy_of_law.webp",
+        "date": {
+          "year": 2023,
+          "month": 8
+        },
         "review": [
           "Set after the events of Era 1, it introduces a very different world that is alike to the late 1800s with the emergence of electricity. This book is much shorter and features some new characters that do not appear to be related to any previous characters. It's cool to see how the events of the previous era have become a sort of mythology and legend and how the church of Survivor has become a very popular religion. The story feels completely new with a wild west element however the concepts of allomancy and feruchemy are still highly relevant but used in a more creative way as we didn't see anyone other than the Lord Ruler usig them combined together. There is also no more Mistborn which I think is good as it balances out how strong they really were and make the stakes seem higher."
         ]
@@ -1449,6 +1463,10 @@
         "name": "Shadows of Self",
         "rating": 9.1,
         "image": "/assets/reviews/shadows_of_self.jpg",
+        "date": {
+          "year": 2023,
+          "month": 9
+        },
         "review": [
           "I definitely became more invested into this second era whilst reading this book. I think the big reason is the more direct references to Era 1 which is awesome to see from an outsider's perspective who views the earlier characters as legend. I enjoyed the Kandra making a return, especially TenSoon who I thought had died in the previous era as he removed his spike. MeLaan's character is also awesome and I like that the Kandra are able to embrance their personalities whilst living amongst humans without having masters. The morality of Harmony is also put into question as we realis that Sazed can't simply favour preservation and must keep everything balanced, thus setting up Wax's entire life to be his arm of Ruin. I also enjoyed Marasi's role in this book more as she strugged with her own problems without the constabulary setting but was able to perform well despite this."
         ]
@@ -1456,6 +1474,10 @@
       {
         "name": "The Bands of Mourning",
         "rating": 9.3,
+        "date": {
+          "year": 2023,
+          "month": 9
+        },
         "image": "/assets/reviews/bands_of_mourning.jpg",
         "review": [
           "The Second Era really comes together in this final books with a satisfying ending. There is a lot more interesting back story for Wax's character that explains his motivation for becoming a Lawman.",
@@ -1470,8 +1492,33 @@
     "type": "movie",
     "name": "Nope",
     "rating": 7.2,
+    "date": { "year": 2023, "month": 9 },
     "review": [
       "An unusual movie but kept me interested the whole way through. I was trying to understand what was actually happening but just accepted that I didn't know how to explain the occurences and simply just enjoyed it"
     ]
+  },
+  {
+    "type": "book",
+    "name": "Mistborn: Secret History",
+    "rating": 8.9,
+    "date": {
+      "year": 2023,
+      "month": 9
+    },
+    "review": [
+      "Now this is where the so called Cosmere really lifts off. I was definitely not expecting Kelsier to still be 'alive', and it was definitely a risky choice for Sanderson to 'revive' a dead character. However in this case I think it went very well. The book takes place parallel to the first Era until the very end. I think it's interesting to see how the Survivor's religion which I had known to be 'false' as I had witnessed Kelsier's death actually turned out to be right about the Survivor still being out there in the mists. More insight was given to the divine gods controlling the planet and their motivations. I especially liked the twists that Kelsier had to pull off to trick Ruin in the end, which was very fitting for his character. The landscape is also very unique, I imagined it as a sort of celestial mirror world. The final moments between Kelsier, Vin and Elend was awesome and it did help give more context to the conclusions of Era 1 and allow for some more interaction with the likeable characters.",
+      "Overall, this book is the first I've read from Sanderson that really delves into his Cosmere and I can't wait to see how it's expanded upon in other books."
+    ],
+    "image": "/assets/reviews/secret_history.jpg"
+  },
+  {
+    "type": "book",
+    "name": "Elantris",
+    "date": {
+      "year": 2023,
+      "month": 9
+    },
+    "review": ["[Still Reading]"],
+    "image": "/assets/reviews/elantris.jpg"
   }
 ]
