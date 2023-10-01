@@ -149,11 +149,15 @@ const MediaReviews = () => {
 
   const reviews = Reviews.filter(
     (item) =>
-      item.type == filterType &&
-      (selectedSearch === ""
-        ? true
-        : item.name === selectedSearch ||
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      (item.type == filterType &&
+        (selectedSearch === ""
+          ? true
+          : item.name === selectedSearch ||
+            item.name.toLowerCase().includes(searchQuery.toLowerCase()))) ||
+      item.reviewSubItems?.some(
+        (subReview) =>
+          subReview.name.toLowerCase().includes(searchQuery.toLowerCase()) // If user searches for subReviewItem then also return that parent review
+      )
   ).sort((r1, r2) => {
     if (sortRatingDescending !== null) {
       if (r1.rating === undefined && r2.rating === undefined) {
@@ -263,11 +267,17 @@ const MediaReviews = () => {
     );
   });
 
-  const filteredReviewSearches =
+  const filteredReviewSearches = // The list of searches that appear in the dropdown bar
     searchQuery === ""
       ? reviews
       : reviews.filter((review) => {
-          return review.name.toLowerCase().includes(searchQuery.toLowerCase());
+          let nameInSubReview = review.reviewSubItems?.some((subReview) =>
+            subReview.name.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          let nameInReview = review.name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+          return nameInReview || nameInSubReview;
         });
 
   return (
