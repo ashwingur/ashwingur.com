@@ -1511,7 +1511,7 @@
   {
     "type": "book",
     "name": "Mistborn: Secret History",
-    "rating": 8.9,
+    "rating": 8.5,
     "date": {
       "year": 2023,
       "month": 9
@@ -1525,6 +1525,7 @@
   {
     "type": "book",
     "name": "Elantris",
+    "rating": 8,
     "date": {
       "year": 2023,
       "month": 10
