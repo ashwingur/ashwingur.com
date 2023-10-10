@@ -167,7 +167,9 @@
     "type": "book",
     "name": "Dune Chronicles",
     "rating": 7.9,
-    "date": { "year": 2023 },
+    "date": {
+      "year": 2023
+    },
     "image": "/assets/reviews/dune_chronicles.jpg",
     "review": [
       "I discovered the book series after watching the movie which I really enjoyed. It's cool to have read something that really inspired a lot of people media today such as Star Wars. This is definitely a very challenging read that tackles some really fundamental human experiences in a complex way. I did find myself a lot of the time having to re-read paragraphs to really try and understand what was happening and sometimes I was not able to figure it out. But I think this may have also been part of the author's intention, to not explain every single bit of lore in the world but provide enough information to picture the world for ourselves.",
@@ -1323,14 +1325,18 @@
     "type": "movie",
     "name": "Meet the Parents",
     "rating": 8,
-    "review": ["Funny movie where I laughed at many points."],
+    "review": [
+      "Funny movie where I laughed at many points."
+    ],
     "image": "/assets/reviews/meet_the_parents.jpg"
   },
   {
     "type": "movie",
     "name": "Father of the Bride",
     "rating": 8,
-    "review": ["Entertaining movie with some funny moments."],
+    "review": [
+      "Entertaining movie with some funny moments."
+    ],
     "image": "/assets/reviews/father_of_the_bride.jpg"
   },
   {
@@ -1388,7 +1394,9 @@
     "type": "movie",
     "name": "Luca",
     "rating": 8.9,
-    "review": ["Surprisingly underrated and really enjoyed it when I saw it."]
+    "review": [
+      "Surprisingly underrated and really enjoyed it when I saw it."
+    ]
   },
   {
     "type": "book",
@@ -1492,7 +1500,10 @@
     "type": "movie",
     "name": "Nope",
     "rating": 7.2,
-    "date": { "year": 2023, "month": 9 },
+    "date": {
+      "year": 2023,
+      "month": 9
+    },
     "review": [
       "An unusual movie but kept me interested the whole way through. I was trying to understand what was actually happening but just accepted that I didn't know how to explain the occurences and simply just enjoyed it"
     ]
@@ -1518,7 +1529,22 @@
       "year": 2023,
       "month": 10
     },
-    "review": ["[Still Reading]"],
+    "review": [
+      "After absolutely blasting through the Mistborn books I decided to read this one as I saw it was Brandon Sanderson's first ever published book and is also set in the cosmere. I will say it is evident that this was Sanderson's first novel as it feels a bit more rough when comapred to the Mistborn series which says a lot about his improved writing style. Despite this however, I saw myself enjoying the book quite a lot.",
+      "The characters and plot was mostly simple when compared to Mistborn, but I was still rooting for the characters such as Sarene and Raoden which were very likeable. The premise of the story was very interesting and I loved the concept of using religious means to completely takeover another country instead of the use of bloodshed. I initially didn't look forward to Hrathen's POV chapters but he soon became one of my favourite characters due to the depth of his characterisation that involved a lot of internal conflict. I liked that he knew deep down his methodology has become more logical and less about fanatical faith. This conflict was a great contrast to Dilaf who eventually turned out to be the true antagonist which also led to Hrathen's redemption.",
+      "The magic system is quite different from Mistborn and had me curious about its potential. Picturing the scenes of the magic being used was fun to imagine and seemed very epic, especially in the last 100 pages when the Sanderlanche occurs. The roughness of the writing will make me give it a lower review than I would normally, but I still highly recommend reading this book if you did enjoy Mistborn. I am looking forward to reading the sequel books as those are more recent and I am curious to see where Sanderson goes with the plot. (Also noticed the Hoid reference)."
+    ],
     "image": "/assets/reviews/elantris.jpg"
+  },
+  {
+    "type": "book",
+    "name": "Warbreaker",
+    "date": {
+      "year": 2023,
+      "month": 10
+    },
+    "review": [
+      "[Still Reading]"
+    ]
   }
 ]
