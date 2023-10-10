@@ -23,13 +23,17 @@ interface ParkingBoxProps {
 
 const ParkingBox = ({ facility }: ParkingBoxProps) => {
   let backgroundColour = "bg-green-400 dark:bg-green-800";
+  // Sometimes there are are more occupied than parking spots in the api, cap it at max spots
+  const occupied = Number(facility.occupancy.total > facility.spots ? facility.spots : facility.occupancy.total);
+
   const percentageOccupied =
-    Number(facility.occupancy.total) / Number(facility.spots);
+    occupied / Number(facility.spots);
   if (percentageOccupied >= 0.9) {
     backgroundColour = "bg-red-400 dark:bg-red-800";
   } else if (percentageOccupied >= 0.5) {
     backgroundColour = "bg-orange-300 dark:bg-amber-700";
   }
+
 
   return (
     <div
@@ -38,13 +42,13 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
       <div>
         <div className="font-bold">{facility.facility_name}</div>
         <div>
-          Occupied: {facility.occupancy.total}/{facility.spots} (
+          Occupied: {occupied}/{facility.spots} (
           {Math.round(percentageOccupied * 100)}%)
         </div>
       </div>
       <div className="flex flex-col items-center">
         <div className="text-2xl">
-          {Number(facility.spots) - Number(facility.occupancy.total)}
+          {Number(facility.spots) - occupied}
         </div>
         <div className="text-sm">Available</div>
       </div>
