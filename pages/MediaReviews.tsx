@@ -258,8 +258,8 @@ const MediaReviews = () => {
             />
           </div>
         )}
-        <div className="flex flex-col gap-2">{reviewParagraphs}</div>
-        <div className="flex flex-col py-4 md:p-4 gap-4 md:gap-8">
+        <div className="flex flex-col gap-6">{reviewParagraphs}</div>
+        <div className="flex flex-col py-4 md:p-4 gap-6 md:gap-8">
           {subReviews}
         </div>
       </div>
