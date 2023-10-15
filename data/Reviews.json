@@ -1615,6 +1615,10 @@
   {
     "type": "game",
     "name": "Hades",
+    "date": {
+      "year": 2023,
+      "month": 9
+    },
     "rating": 7.9,
     "image": "/assets/reviews/hades.jpg"
   },
