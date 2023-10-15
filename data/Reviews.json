@@ -675,7 +675,7 @@
     "type": "book",
     "name": "Diary of a Wimpy Kid",
     "image": "/assets/reviews/wimpy_kid.jpg",
-    "rating": 9,
+    "rating": 8,
     "review": [
       "This is definitely more for a younger audience which is when I used to read these books a lot. But I always enjoyed them because of how short and easy they were with great illustrations. It's also interesting to notice how my view of Greg changed as I grew older. I used to root for Greg a lot because of how he portrayed himself always being in the right and that everything that happened to him was unjust and unfair. But later on you realise he's quite an unrealiable narrator and sociopath. Especially in how he treats and views others even if they're just being reasonable."
     ]
@@ -924,27 +924,32 @@
   {
     "type": "game",
     "name": "The Legend of Zelda: Breath of the Wild",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/botw.jpg"
   },
   {
     "type": "game",
     "name": "Stardew Valley",
-    "rating": 9.5
+    "rating": 9.5,
+    "image": "/assets/reviews/stardew_valley.jpg"
   },
   {
     "type": "game",
     "name": "Clash of Clans",
-    "rating": 9
+    "rating": 9,
+    "image": "/assets/reviews/coc.webp"
   },
   {
     "type": "game",
     "name": "Clash Royale",
-    "rating": 8
+    "rating": 8,
+    "image": "/assets/reviews/clash_royale.webp"
   },
   {
     "type": "game",
     "name": "Brawl Stars",
-    "rating": 8.5
+    "rating": 8.5,
+    "image": "/assets/reviews/brawl_stars.jpg"
   },
   {
     "type": "game",
@@ -961,8 +966,9 @@
     "name": "Project Zomboid",
     "rating": 6,
     "review": [
-      "Objectively this game is definitely great with the survival mechanics and depth, but it's not the type of game I'd enjoy."
-    ]
+      "From an objective standpoint, I can see how great this game is with how in depth the game and survival mechanics are. However I found that this style of gameplay was not for me."
+    ],
+    "image": "/assets/reviews/project_zomboid.jpg"
   },
   {
     "type": "game",
@@ -1000,7 +1006,8 @@
   {
     "type": "game",
     "name": "Wii Sports",
-    "rating": 7
+    "rating": 7,
+    "image": "/assets/reviews/wii_sports.jpg"
   },
   {
     "type": "game",
@@ -1013,7 +1020,8 @@
     "rating": 8.8,
     "review": [
       "The first ever pokemon game that I played, so that also made it my favourite. I really enjoyed the Jhoto region and taking the journey across it. My favourite part is definitely Golden Rod city and the Pokéathlon Dome which I spent a lot of time at."
-    ]
+    ],
+    "image": "/assets/reviews/pokemon_heartgold.jpg"
   },
   {
     "type": "game",
@@ -1021,7 +1029,8 @@
     "rating": 8,
     "review": [
       "I played this on a GBA Emulator and it was also a great pokemon game, although I still find Pokemon Heartgold to be the best."
-    ]
+    ],
+    "image": "/assets/reviews/pokemon_emerald.jpg"
   },
   {
     "type": "game",
@@ -1029,7 +1038,8 @@
     "rating": 9,
     "review": [
       "I've been wanting to play this for a long time as I only recently got the Switch console in 2023. This game definitely lives up to the hype. The wide variety of different worlds is amazing. The cappy mechanic is really fun and allows for some neat parkour tricks which can get you to places that don't seem reachable."
-    ]
+    ],
+    "image": "/assets/reviews/super_mario_odyssey.jpg"
   },
   {
     "type": "game",
@@ -1037,7 +1047,8 @@
     "rating": 8,
     "review": [
       "I haven't finished the entire game but it's fun to play as a couch co-op game. Compared to the 2D titles however, it is definitely more challenging in terms of being precise with jumping and where the character will land due to the isometric view."
-    ]
+    ],
+    "image": "/assets/reviews/super_mario_3d_world.jpg"
   },
   {
     "type": "game",
@@ -1045,12 +1056,14 @@
     "rating": 9,
     "review": [
       "My first every Mario 2D platformer game. It was really challenging at first but it was also very fun to play. Although I still haven't completely finished the game and final boss, it holds nostalgic value."
-    ]
+    ],
+    "image": "/assets/reviews/super_mario_bros_wii.jpg"
   },
   {
     "type": "game",
     "name": "Cuphead",
     "rating": 9,
+    "image": "/assets/reviews/cuphead.gif",
     "review": [
       "The artstyle, animation, music and dialogue in this game is 10/10. The fact that every character was hand drawn frame by frame is incredible and also makes it look very organic with the rubber hose style. The gameplay is definitely extremely challenging and it can take a very high amount of replays to understand the attack patterns of bosses and be able to defeat them. I unfortunately did not have the patience to finish this game which is a shame because I miss out on a lot of art and characters from later levels."
     ]
@@ -1061,12 +1074,14 @@
     "rating": 7,
     "review": [
       "Interesting take on the tower defence genre with heaps of different weapon types and troops you can get. It's fun to play for a few hours but eventually it gets pretty repeitive, and there are a lot of ads due to it being a free to play mobile game."
-    ]
+    ],
+    "image": "/assets/reviews/war_tortoise.jpg"
   },
   {
     "type": "game",
     "name": "Burrito Bison",
     "rating": 8,
+    "image": "/assets/reviews/burrito_bison.jpg",
     "review": [
       "Great singleplayer game to pass the time. It's cool to unlock new upgrades and notice your distance increase in every run and eventually unlock new levels. Finsihing the main game is fun, but the end game content does get boring after a while so there's not much to do after that"
     ]
@@ -1084,35 +1099,44 @@
     "name": "Nitrome Must Die",
     "review": [
       "Holds a lot of nostalgic value. Great arcade style game that's really great with local co-op. The only downside is that progress does not seem to save in multiplayer so you have to start from the beginning every time."
-    ]
+    ],
+    "image": "/assets/reviews/nitrome_must_die.jpg"
   },
   {
     "type": "game",
-    "name": "Twinshot"
+    "name": "Twinshot",
+    "image": "/assets/reviews/twinshot.jpg"
   },
   {
     "type": "game",
-    "name": "Mutiny"
+    "name": "Mutiny",
+    "image": "/assets/reviews/mutiny.jpg"
   },
   {
     "type": "game",
-    "name": "Flipside"
+    "name": "Flipside",
+    "image": "/assets/reviews/flipside.jpg"
   },
   {
     "type": "game",
-    "name": "Elden Ring"
+    "name": "Elden Ring",
+    "image": "/assets/reviews/elden_ring.jpg"
   },
   {
     "type": "game",
-    "name": "TORN"
+    "name": "TORN",
+    "rating": 10,
+    "image": "/assets/reviews/torn.png"
   },
   {
     "type": "game",
-    "name": "Mario Party Superstars"
+    "name": "Mario Party Superstars",
+    "image": "/assets/reviews/mario_party_superstars.jpg"
   },
   {
     "type": "game",
-    "name": "Monster Ranch"
+    "name": "Monster Ranch",
+    "image": "/assets/reviews/monster_ranch.webp"
   },
   {
     "type": "book",
@@ -1280,6 +1304,7 @@
     "type": "game",
     "name": "Diablo IV",
     "rating": 9,
+    "image": "/assets/reviews/diablo4.jpg",
     "review": [
       "My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events."
     ]
@@ -1287,6 +1312,7 @@
   {
     "type": "movie",
     "name": "Spider-Man",
+    "image": "/assets/reviews/spiderverse.jpg",
     "reviewSubItems": [
       {
         "name": "Into the Spider-Verse",
@@ -1366,17 +1392,20 @@
   {
     "type": "movie",
     "name": "Maze Runner",
-    "rating": 7.7
+    "rating": 7.7,
+    "image": "/assets/reviews/mazerunner.jpg"
   },
   {
     "type": "movie",
     "name": "Bajirao Mastani",
-    "rating": 8.8
+    "rating": 8.8,
+    "image": "/assets/reviews/bajirao_mastani.webp"
   },
   {
     "type": "movie",
     "name": "3 Idiots",
-    "rating": 9.3
+    "rating": 9.3,
+    "image": "/assets/reviews/3_idiots.jpg"
   },
   {
     "type": "movie",
@@ -1391,7 +1420,8 @@
     "type": "movie",
     "name": "Luca",
     "rating": 8.9,
-    "review": ["Surprisingly underrated and really enjoyed it when I saw it."]
+    "review": ["Surprisingly underrated and really enjoyed it when I saw it."],
+    "image": "/assets/reviews/luca.jpg"
   },
   {
     "type": "book",
@@ -1499,6 +1529,7 @@
       "year": 2023,
       "month": 9
     },
+    "image": "/assets/reviews/nope.jpg",
     "review": [
       "An unusual movie but kept me interested the whole way through. I was trying to understand what was actually happening but just accepted that I didn't know how to explain the occurences and simply just enjoyed it"
     ]
@@ -1562,5 +1593,13 @@
     },
     "review": ["[Still Reading]"],
     "image": "/assets/reviews/children_of_time.jpg"
+  },
+  {
+    "type": "movie",
+    "name": "Bladerunner 2049",
+    "date": {
+      "year": 2021
+    },
+    "image": "/assets/reviews/bladerunner2049.webp"
   }
 ]
