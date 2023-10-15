@@ -1617,5 +1617,11 @@
     "name": "Hades",
     "rating": 7.9,
     "image": "/assets/reviews/hades.jpg"
+  },
+  {
+    "type": "game",
+    "name": "Civilization VI",
+    "rating": 7,
+    "image": "/assets/reviews/civ_6.jpg"
   }
 ]
