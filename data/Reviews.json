@@ -911,7 +911,8 @@
   {
     "type": "game",
     "name": "Hogwarts Legacy",
-    "rating": 8
+    "rating": 8,
+    "image": "/assets/reviews/hogwarts_legacy.webp"
   },
   {
     "type": "game",
@@ -919,7 +920,8 @@
     "rating": 9.9,
     "review": [
       "One of the best games i've ever played, because you can do whatever you want in it and build whatever you want. The first version I ever played was the early pocket edition version. Although this was much more limited in features it was really fun playing LAN multiplayer. I later got the PC Java version on which i've had the most fun ever. Playing on a multiplayer server with friends is the best part of this game. Being able to build bases together and share resources. There are so many complex mechanics and an entire automation system which has infinite potential."
-    ]
+    ],
+    "image": "/assets/reviews/minecraft.png"
   },
   {
     "type": "game",
@@ -954,12 +956,14 @@
   {
     "type": "game",
     "name": "Jetpack Joyride",
-    "rating": 8
+    "rating": 8,
+    "image": "/assets/reviews/jetpack_joyride.webp"
   },
   {
     "type": "game",
-    "name": "Galaxy on Fire",
-    "rating": 9.2
+    "name": "Galaxy on Fire 2",
+    "rating": 9.2,
+    "image": "/assets/reviews/galaxy_on_fire.png"
   },
   {
     "type": "game",
@@ -980,28 +984,32 @@
         "rating": 9.8,
         "review": [
           "This was my first ever Mario Kart game so it has high nostalgia value. I played plenty of local multiplayer battles and the skill cap with the game could get quite high with the drifting mechanics."
-        ]
+        ],
+        "image": "/assets/reviews/mario_kart_ds.jpg"
       },
       {
         "name": "Mario Kart Wii",
         "rating": 9.5,
         "review": [
           "The hardest Mario Kart game i've played. I think this is due to the lower precision of the Wii remote which relies on tilting to steer. This leads for some really funny multiplayer moments where you can go from first to last right before the finish line. Overall, I like the maps on this the best."
-        ]
+        ],
+        "image": "/assets/reviews/mario_kart_wii.jpg"
       },
       {
         "name": "Mario Kart 8",
         "rating": 9,
         "review": [
           "The best looking Mario Kart game. The underwater and hover sections of races are great and the maps are fun. There is also a steering assist mode for beginners which makes steering easier."
-        ]
+        ],
+        "image": "/assets/reviews/mario_kart_8.jpg"
       }
     ]
   },
   {
     "type": "game",
     "name": "James Cameron's Avatar: The Game",
-    "rating": 7
+    "rating": 7,
+    "image": "/assets/reviews/avatar_the_game.jpg"
   },
   {
     "type": "game",
@@ -1012,7 +1020,8 @@
   {
     "type": "game",
     "name": "Mario & Sonic at the Olympic Games (Wii)",
-    "rating": 6
+    "rating": 6,
+    "image": "/assets/reviews/mario_and_sonic_at_the_olympic_games.jpg"
   },
   {
     "type": "game",
@@ -1092,7 +1101,8 @@
     "rating": 7.5,
     "review": [
       "Fun tower defence game to play in school. I personally did not find much replay value in the game and it also sucks that some heroes can only be obtained through real world money instead of the in game currency."
-    ]
+    ],
+    "image": "/assets/reviews/kingdom_rush.jpg"
   },
   {
     "type": "game",
@@ -1601,5 +1611,11 @@
       "year": 2021
     },
     "image": "/assets/reviews/bladerunner2049.webp"
+  },
+  {
+    "type": "game",
+    "name": "Hades",
+    "rating": 7.9,
+    "image": "/assets/reviews/hades.jpg"
   }
 ]
