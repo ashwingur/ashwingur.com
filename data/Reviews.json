@@ -1627,5 +1627,14 @@
     "name": "Civilization VI",
     "rating": 7,
     "image": "/assets/reviews/civ_6.jpg"
+  },
+  {
+    "type": "book",
+    "name": "Children of Time",
+    "date": {
+      "year": 2023,
+      "month": 9
+    },
+    "rating": 8.5
   }
 ]
