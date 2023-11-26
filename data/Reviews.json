@@ -1636,8 +1636,44 @@
       "I did find while reading the spider chapters, is that it did get quite exhausting at points due to the alien worldview the spiders have. However this problem was avoided well with the simultaneuous human storyline of the remnant humans in the massive ship, Gilgamesh. I found this storyline quite akin to elements of the movie Passengers, in relation to the scale of the ship and how most humans are in a form of cryogenic sleep. It provided a much needed contrast to the spider perspective. As the last hope of humanity's future, the ship has been spending centuries exploring systems to find a suitable place to inhabit and start anew. However many conflicts arise within the confines of the ship. This first begins when the ship comes within contact of Kern's satellite because her planet is the most suitable for human life. After being forced away by the satellite's superior technology a mutiny follows in which some shuttles desperately attempt to land on the planet that would disrupt Kern's experiement. I like that its primarily from the perspective of Holsten the Classicist who is the most knowledgeable on past history of the human race.",
       "It's after this point in which I get hooked onto the human storyline, where the commander of the ship Guyen, commits to the long term plan of improving the Gilgamesh for its eventual return to Kern's planet because it is the only habitable place nearby that the Gilgamesh can reach. The ship is running well past its expected lifetime and many systems are failing. Entire generations born and die within the confines of the ship, some following Guyen who is viewed as a god. Much of the next conflict stems from Guyen's decision to immortalise himself in the ship's systems so that he can supposedly continue to lead the human race against Kern. This is opposed heavily by the chief engineer Lain, who has the expertise to know that the ships systems cannot handle such an AI existing alongside the existing systems. I did feel sympathetic to Guyen's cause as his motivations were still well founded as he wanted the human species to survive, but his methods were questionable and misinformed. The constant interaction between Holsten and Lain develops well, but I feel that most human interactions occuring in the story feel very impersonal that its hard to get attached to many of the characters, even Holsten.",
       "After this part in the book is where the final climax occurs and it was hard not to keep reading another chapter. I felt myself rooting for both the spiders and humans. I really enjoyed how the spiders made their own version of computers, cameras and satellites that were organically based. Instead of transistors, there were ant colonies that did the computations in a slower but much more adaptable way. I would say it's similar to an FPGA which is very flexible in its capabilities. One cool process was how they managed to 'download' Avrana Kern into a super colony of ants that acted as a large neural network to host her conscience. Another awesome feature was how they used the optical data retrieved from ants as a sort of analog camera. The stark contrast of the spider's behaviour against the humans was very noticetable here, where the humans wanted to completely eradicate the spider life as they have always done with other species. The spider's however had the benefit of the virus that helped them keep the full understanding of past generations in which they saw the mutual benefit of keeping other races/species alive as a net positive gain for the whole species. Humans on the other hand are fast to forget past conflicts which lead to them repeating history over and over again. The spiders are able to create a chemical that rewires the brains of the humans to see them as allies and their creators. And as such the two species are able to live in harmony at the end. But I do question whether the humans were still able to remember who they used to be before their aversion to the spiders was neurologically reprogrammed.",
-
       "I would highly recommend this book to anyone that enjoys science fiction, or even someone who doesn't read science fiction much (such as myself). The first 1/3 of the book does start of quite slow but I do feel it is necessary to build up the world well enough to tell the interesting story and progress that occurs."
     ]
+  },
+  {
+    "type": "book",
+    "name": "The Stormlight Archive",
+    "date": {
+      "year": 2023,
+      "month": 10
+    },
+    "reviewSubItems": [
+      {
+        "name": "The Way of Kings",
+        "date": {
+          "year": 2023,
+          "month": 10
+        },
+        "review": ["Finished Reading. TODO"]
+      },
+      {
+        "name": "The Words of Radiance",
+        "date": {
+          "year": 2023,
+          "month": 11
+        },
+        "rating": 9.5,
+        "review": ["[Still Reading]"]
+      }
+    ]
+  },
+  {
+    "type": "show",
+    "name": "Pantheon",
+    "date": {
+      "year": 2023,
+      "month": 11
+    },
+    "rating": 9,
+    "review": ["S1 Finished. Still watching S2"]
   }
 ]
