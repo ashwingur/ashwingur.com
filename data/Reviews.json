@@ -1362,14 +1362,18 @@
     "type": "movie",
     "name": "Meet the Parents",
     "rating": 8,
-    "review": ["Funny movie where I laughed at many points."],
+    "review": [
+      "Funny movie where I laughed at many points."
+    ],
     "image": "/assets/reviews/meet_the_parents.jpg"
   },
   {
     "type": "movie",
     "name": "Father of the Bride",
     "rating": 8,
-    "review": ["Entertaining movie with some funny moments."],
+    "review": [
+      "Entertaining movie with some funny moments."
+    ],
     "image": "/assets/reviews/father_of_the_bride.jpg"
   },
   {
@@ -1430,7 +1434,9 @@
     "type": "movie",
     "name": "Luca",
     "rating": 8.9,
-    "review": ["Surprisingly underrated and really enjoyed it when I saw it."],
+    "review": [
+      "Surprisingly underrated and really enjoyed it when I saw it."
+    ],
     "image": "/assets/reviews/luca.jpg"
   },
   {
@@ -1653,7 +1659,9 @@
           "year": 2023,
           "month": 10
         },
-        "review": ["Finished Reading. TODO"]
+        "review": [
+          "Finished Reading. TODO"
+        ]
       },
       {
         "name": "The Words of Radiance",
@@ -1662,7 +1670,9 @@
           "month": 11
         },
         "rating": 9.5,
-        "review": ["[Still Reading]"]
+        "review": [
+          "[Still Reading]"
+        ]
       }
     ]
   },
@@ -1674,6 +1684,8 @@
       "month": 11
     },
     "rating": 9,
-    "review": ["S1 Finished. Still watching S2"]
+    "review": [
+      "S1 Finished. Still watching S2."
+    ]
   }
 ]
