@@ -1662,6 +1662,14 @@
           "month": 11
         },
         "rating": 9.5,
+        "review": ["Finished Reading. TODO"]
+      },
+      {
+        "name": "Edgedancer",
+        "date": {
+          "year": 2024,
+          "month": 1
+        },
         "review": ["[Still Reading]"]
       }
     ]
@@ -1675,5 +1683,15 @@
     },
     "rating": 9,
     "review": ["S1 Finished. Still watching S2"]
+  },
+  {
+    "type": "movie",
+    "name": "The Creator",
+    "date": {
+      "year": 2023,
+      "month": 12
+    },
+    "rating": 7,
+    "review": [""]
   }
 ]
