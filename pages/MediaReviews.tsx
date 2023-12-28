@@ -72,11 +72,11 @@ const monthNumberToString = (month: number): string => {
     case 9:
       return "Sep";
     case 10:
-      return "Nov";
-    case 11:
-      return "Dec";
-    case 12:
       return "Oct";
+    case 11:
+      return "Nov";
+    case 12:
+      return "Dec";
     default:
       return "";
   }
