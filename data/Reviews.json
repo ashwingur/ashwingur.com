@@ -1330,13 +1330,22 @@
   },
   {
     "type": "game",
-    "name": "Diablo IV",
-    "rating": 6,
-    "image": "/assets/reviews/diablo4.jpg",
-    "review": [
-      "My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events.",
+    "name": "Diablo",
+    "reviewSubItems": [
+      {
+        "name": "Diablo IV",
+        "rating": 6,
+        "image": "/assets/reviews/diablo4.jpg",
+        "review": [
+          "My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events.",
 
-      "Update: The campaign was the most fun, but afterwarsd the game got quite boring and so I stopped playing."
+          "Update: The campaign was the most fun, but afterwarsd the game got quite boring and so I stopped playing."
+        ]
+      },
+      {
+        "name": "Diablo III",
+        "rating": 6
+      }
     ]
   },
   {
