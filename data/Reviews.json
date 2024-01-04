@@ -514,7 +514,25 @@
   {
     "type": "movie",
     "name": "The Hunger Games",
-    "image": "/assets/reviews/the_hunger_games.jpg"
+    "image": "/assets/reviews/the_hunger_games.jpg",
+    "reviewSubItems": [
+      {
+        "name": "The Hunger Games"
+      },
+      {
+        "name": "The Hunger Games: Catching Fire"
+      },
+      {
+        "name": "The Hunger Games: Mockingjay - Part 1"
+      },
+      {
+        "name": "The Hunger Games: Mockingjay - Part 2"
+      },
+      {
+        "name": "The Hunger Games: The Ballad of Songbirds & Snakes",
+        "date": { "year": 2024, "month": 1 }
+      }
+    ]
   },
   {
     "type": "movie",
@@ -1313,10 +1331,12 @@
   {
     "type": "game",
     "name": "Diablo IV",
-    "rating": 9,
+    "rating": 6,
     "image": "/assets/reviews/diablo4.jpg",
     "review": [
-      "My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events."
+      "My first ever experience with an action rpg and I am finding it really fun. The environment and graphics are amazing and the story is also quite engaging, although slow at the start. The immersion does get broken sometimes due to performance and network issues, however the game is still really enjoyable. For a casual to semi-hardcore gamer there is a lot of content and variety to do which is also made more fun with parties and multiplayer events.",
+
+      "Update: The campaign was the most fun, but afterwarsd the game got quite boring and so I stopped playing."
     ]
   },
   {
@@ -1697,15 +1717,20 @@
   {
     "type": "movie",
     "name": "Godzilla and Kong",
-    "date": {
-      "year": 2023,
-      "month": 12
-    },
     "rating": 7.3,
     "review": [""],
     "reviewSubItems": [
       {
+        "name": "Kong: Skull Island",
+        "image": "/assets/reviews/kong_skull_island.jpg",
+        "date": {
+          "year": 2017
+        },
+        "review": []
+      },
+      {
         "name": "Godzilla: King of the Monsters",
+        "image": "/assets/reviews/godzilla_king_of_monsters.webp",
         "date": {
           "year": 2023,
           "month": 12
@@ -1713,16 +1738,41 @@
         "review": []
       },
       {
-        "name": "Kong: Skull Island",
-        "date": {
-          "year": 2017
-        },
-        "review": []
-      },
-      {
         "name": "Godzilla vs. Kong",
+        "image": "/assets/reviews/godzilla_vs_kong.jpg",
         "review": []
       }
     ]
+  },
+  {
+    "type": "show",
+    "name": "Percy Jackson and the Olympians",
+    "date": {
+      "year": 2024,
+      "month": 1
+    },
+    "rating": 3.9,
+    "review": [""]
+  },
+  {
+    "type": "movie",
+    "name": "The Flash",
+    "date": {
+      "year": 2023,
+      "month": 12
+    },
+    "rating": 3,
+    "review": [
+      "I couldn't even finish this movie. The CGI was just so immersion breaking and the story didn't feel compelling."
+    ]
+  },
+  {
+    "type": "movie",
+    "name": "Luther: The Fallen Sun",
+    "date": {
+      "year": 2023
+    },
+    "rating": 7,
+    "review": [""]
   }
 ]
