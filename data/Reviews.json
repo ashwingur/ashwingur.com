@@ -956,7 +956,7 @@
   {
     "type": "game",
     "name": "Clash of Clans",
-    "rating": 9,
+    "rating": 8,
     "image": "/assets/reviews/coc.webp"
   },
   {
@@ -1760,8 +1760,10 @@
       "year": 2024,
       "month": 1
     },
-    "rating": 3.9,
-    "review": [""]
+    "rating": 6,
+    "review": [
+      "First 3 episodes I did not like at all. The characters just seem very bland and less expressive than what I'd want. However episode 4 was an improvement so I hope the show does get better from here as more time is given to build up the characters."
+    ]
   },
   {
     "type": "movie",
@@ -1790,9 +1792,29 @@
     "date": {
       "year": 2024
     },
-    "rating": 7,
+    "rating": 5.5,
     "review": [
       "I have watched it before but couldn't remember the date or much about the movie at all. The songs however are the most nostalgic and memorable."
     ]
+  },
+  {
+    "type": "movie",
+    "name": "Kingsman",
+    "rating": 8,
+    "review": ["Fun and enjoyable action scenes"],
+    "reviewSubItems": [
+      { "name": "Kingsman: The Secret Service" },
+      { "name": "Kingsman: The Golden Circle" },
+      { "name": "The King's Man", "date": { "month": 1, "year": 2024 } }
+    ]
+  },
+  {
+    "type": "movie",
+    "name": "Glass",
+    "date": {
+      "year": 2021
+    },
+    "rating": 7.5,
+    "review": ["Interesting twist on the superhero formula."]
   }
 ]
