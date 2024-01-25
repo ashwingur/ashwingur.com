@@ -1682,7 +1682,10 @@
           "year": 2023,
           "month": 10
         },
-        "review": ["Finished Reading. TODO"]
+        "rating": 9,
+        "review": [
+          "The first half or so of the book is extremely slow and focuses quite a lot on the worldbuilding. It's also quite difficult to keep track of all the locations and one time POV scenes. However I do think with the scale and complexity of this series and the world building, it's necessary to spend enough time on this part. I found myself enjoying Kaladin's character the most, especially during his struggles and being able to build a close team with his Bridgemen. The final payoff is the best with this, where Kaladin properly manifests his first powers of stormlight which gives him a very good advantage in saving Dalinar. The best part of this book was when he and Daliner met, and when Dalinar gave away his shardblade. I did find Shallan's chapters more boring than I'd liked to, but it did provide a more different worldview and also helped build up the significance of Jasnah."
+        ]
       },
       {
         "name": "The Words of Radiance",
@@ -1690,7 +1693,7 @@
           "year": 2023,
           "month": 11
         },
-        "rating": 9.5,
+        "rating": 9,
         "review": ["Finished Reading. TODO"]
       },
       {
@@ -1699,7 +1702,18 @@
           "year": 2024,
           "month": 1
         },
-        "review": ["[Still Reading]"]
+        "review": [
+          "I found it a decent read. The reason I won't say it was exceptional like the rest of the books is because I didn't find myself liking Lift that much. She was quite unlikeable in her interactions. But her humour and way of talking is quite unique compared to the rest of the characters on Roshar."
+        ]
+      },
+      {
+        "name": "Oathbringer",
+        "date": {
+          "year": 2024,
+          "month": 1
+        },
+        "rating": 9.1,
+        "review": ["Finished Reading. TODO"]
       }
     ]
   },
