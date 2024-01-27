@@ -1713,7 +1713,24 @@
           "month": 1
         },
         "rating": 9.1,
-        "review": ["Finished Reading. TODO"]
+        "review": [
+          "Great book that fleshed out Dalinar's character a lot more where learnt of his backstory and motivations. The Sanderlanche was definitely of a more epic scale, but it did feel a bit confusing at times because there was so much jumping back and forth between multiple characters in the single very long chapter. There was quite a lot of cosmere easter eggs in this book which, some of which were very obvious such as the sword from Warbreaker. There were also many others that did require a bit more attention to detail to pickup (I could not get some of them on my own :(). But knowing this has made me pay a lot more attention to descriptions in future books as the easter eggs can be quite subtle. For example there are characters from other worlds that appear, but they have different names so their identity has to be deduced by the way they talk or their descriptions."
+        ]
+      },
+      {
+        "name": "Dawnshard",
+        "date": {
+          "year": 2024,
+          "month": 1
+        },
+        "rating": 9,
+        "review": [
+          "Enjoyable novella that expands the scope of the Cosmere and intrigued me with the significance of the beings and what their role was in the overall universe."
+        ]
+      },
+      {
+        "name": "Rhythm of War",
+        "review": ["TODO. Still reading"]
       }
     ]
   },
@@ -1834,7 +1851,7 @@
   {
     "type": "movie",
     "name": "Jungle",
-    "rating": 8.5,
+    "rating": 8,
     "review": ["Good Radcliffe movie."]
   }
 ]
