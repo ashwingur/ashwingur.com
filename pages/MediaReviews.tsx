@@ -98,6 +98,20 @@ const ratingColour = (rating: number): string => {
   }
 };
 
+const calculateAverageRating = (data: ReviewItem[]): number => {
+  let total = 0;
+  let count = 0;
+  for (let i = 0; i < data.length; i++) {
+    const rating = data[i].rating;
+    if (rating !== undefined) {
+      total += rating;
+      count++;
+    }
+  }
+
+  return count == 0 ? 0 : total / count;
+};
+
 const MediaReviews = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const filterType = filterTabIndex(selectedTab);
@@ -146,6 +160,10 @@ const MediaReviews = () => {
       </button>
     );
   });
+
+  const categoryFilteredReviews = Reviews.filter(
+    (item) => item.type == filterType
+  ); // All the reviews for the selected tab. We can use this to calculate the average rating of the selected category etc.
 
   const reviews = Reviews.filter(
     (item) =>
@@ -392,10 +410,13 @@ const MediaReviews = () => {
           </Combobox.Options>
         </Combobox>
       </div>
+      <div className="text-center text-lg my-2">
+        Average Rating:{" "}
+        {calculateAverageRating(categoryFilteredReviews).toFixed(1)}
+      </div>
       <div className="flex flex-col gap-8 items-center px-4 mb-12">
         {reviewCards}
       </div>
-
       <button
         className={
           "fixed bottom-0 right-0 mr-2 mb-2 md:mb-4 md:mr-4 transition-all rounded-full bg-black text-white dark:text-slate-200 hover:text-6xl dark:bg-green-900" +
