@@ -1153,7 +1153,7 @@
   {
     "type": "game",
     "name": "TORN",
-    "rating": 10,
+    "rating": 9.9,
     "image": "/assets/reviews/torn.png"
   },
   {
@@ -1675,6 +1675,7 @@
       "year": 2023,
       "month": 10
     },
+    "rating": 8,
     "reviewSubItems": [
       {
         "name": "The Way of Kings",
@@ -1702,6 +1703,7 @@
           "year": 2024,
           "month": 1
         },
+        "rating": 7,
         "review": [
           "I found it a decent read. The reason I won't say it was exceptional like the rest of the books is because I didn't find myself liking Lift that much. She was quite unlikeable in her interactions. But her humour and way of talking is quite unique compared to the rest of the characters on Roshar."
         ]
@@ -1712,7 +1714,7 @@
           "year": 2024,
           "month": 1
         },
-        "rating": 9.1,
+        "rating": 8.5,
         "review": [
           "Great book that fleshed out Dalinar's character a lot more where learnt of his backstory and motivations. The Sanderlanche was definitely of a more epic scale, but it did feel a bit confusing at times because there was so much jumping back and forth between multiple characters in the single very long chapter. There was quite a lot of cosmere easter eggs in this book which, some of which were very obvious such as the sword from Warbreaker. There were also many others that did require a bit more attention to detail to pickup (I could not get some of them on my own :(). But knowing this has made me pay a lot more attention to descriptions in future books as the easter eggs can be quite subtle. For example there are characters from other worlds that appear, but they have different names so their identity has to be deduced by the way they talk or their descriptions."
         ]
@@ -1730,7 +1732,14 @@
       },
       {
         "name": "Rhythm of War",
-        "review": ["TODO. Still reading"]
+        "date": {
+          "year": 2024,
+          "month": 2
+        },
+        "rating": 7.5,
+        "review": [
+          "I liked the deeper insight into the perspectives of the Singers/Listeners. I did not enjoy Shallan in this book, it felt like she didnt really develop at all and went through the same character arc in the previous book. I enjoyed Adolin's scenes a lot and the way he has to prove himself without having any special surgebinding power."
+        ]
       }
     ]
   },
@@ -1873,6 +1882,47 @@
     "rating": 7.5,
     "review": [
       "Acting was great and the movie was suspenseful. The set design was also very good which helped a lot with the immersion."
+    ]
+  },
+  {
+    "type": "movie",
+    "name": "Rebel Moon: Part One - A Child of Fire",
+    "rating": 5.5,
+    "date": {
+      "year": 2024,
+      "month": 2
+    },
+    "review": [
+      "The visuals and settings are great, but the story felt all over the place. It was an average watch."
+    ]
+  },
+  {
+    "type": "book",
+    "name": "Tress of the Emerald Sea",
+    "review": ["Still Reading"]
+  },
+  {
+    "type": "game",
+    "name": "Cyberpunk 2077",
+    "date": {
+      "year": 2024,
+      "month": 2
+    },
+    "rating": 9.5,
+    "review": [
+      "Still Playing through the campaign, but the game is amazing so far. The way there's almost no loading screens makes the game very immersive. The city design is awesome and is very fun to drive around in, I almost never use the fast travel option. Combat is also very satisfying, although I havent tried many different builds yet, there is quite a lot to choose from. I played this many years after the initial release and so I found almost no performance issues or bugs which was amazing."
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Dredge",
+    "date": {
+      "year": 2024,
+      "month": 2
+    },
+    "rating": 7,
+    "review": [
+      "The artstyle and music makes the atmosphere very eeyrie and supernatural. However I found myself not getting as immersed as I wanted to with the gameplay loop."
     ]
   }
 ]
