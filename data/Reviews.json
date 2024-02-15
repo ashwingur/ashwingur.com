@@ -1899,6 +1899,10 @@
   {
     "type": "book",
     "name": "Tress of the Emerald Sea",
+    "date": {
+      "year": 2024,
+      "month": 2
+    },
     "review": ["Still Reading"]
   },
   {
@@ -1924,5 +1928,11 @@
     "review": [
       "The artstyle and music makes the atmosphere very eeyrie and supernatural. However I found myself not getting as immersed as I wanted to with the gameplay loop."
     ]
+  },
+  {
+    "type": "movie",
+    "name": "Onward",
+    "rating": 7.8,
+    "review": ["Kept me entertained, there is some deep moments."]
   }
 ]
