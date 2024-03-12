@@ -1545,7 +1545,7 @@
       },
       {
         "name": "The Bands of Mourning",
-        "rating": 9.3,
+        "rating": 9.2,
         "date": {
           "year": 2023,
           "month": 9
@@ -1556,6 +1556,18 @@
           "One thing that really got my interest was the more detailed look into the potential of allomancy and Feruchemy. The concept of being able to share metal minds with others without being a Feruchemist opens up a numerable amount of possibilities. This is especially the case with the masked humans that we discover to be living on the other side of the planet this entire time. Their developed technology and world views introduces a fresh perspective to the series that I enjoyed, even though it was mostly towards the end of the book.",
           "Another aspect of this book that was not expecting was the improved characterisation of Steris, who in the previous books just comes off as a mostly generic noblewoman with an affinity to being very organised. However, the events in this book demonstrate the usefulness of her character despite her lack of powers as her level of organisation and contingency plans helped with the team's success. It also creates more chemistry between herself and Wax after being comfortable with herself more than she was in Elendel where she was much more reserved.",
           "The ending, although I expected them to find the bands of mourning, was still satisfying. It characterised the Lord Ruler as a less evil person because of how he helped the people on the other side of the planet that no one else knew existed. MeLaan is also a likeable character and her abilities as a Kandra make for some versatile solutions to certain problems."
+        ]
+      },
+      {
+        "name": "The Lost Metal",
+        "rating": 9.3,
+        "date": {
+          "year": 2024,
+          "month": 3
+        },
+        "image": "/assets/reviews/lost_metal.jpg",
+        "review": [
+          "There is quite a big gap between me reading the previous Era 2 books and this book. I did not realise there was a 4th book and assumed Era 2 also ended in a trilogy. However, I think this ended up for the best because there is a large time skip between book 3 and 4. But a bigger reason is because there are a multitude of cosmere references throughout this book that I would have missed had I not read Elantris, Warbreaker and Stormlight Archive. This really enhanced my enjoyment of the book and hyped me up for what is to come. The further development of allomantic technologies takes an already known system and creates many more unique interactions and capabilities with it that still make 'scientific' sense."
         ]
       }
     ]
@@ -1590,7 +1602,7 @@
   {
     "type": "book",
     "name": "Elantris",
-    "rating": 8,
+    "rating": 7,
     "date": {
       "year": 2023,
       "month": 10
@@ -1600,7 +1612,21 @@
       "The characters and plot was mostly simple when compared to Mistborn, but I was still rooting for the characters such as Sarene and Raoden which were very likeable. The premise of the story was very interesting and I loved the concept of using religious means to completely takeover another country instead of the use of bloodshed. I initially didn't look forward to Hrathen's POV chapters but he soon became one of my favourite characters due to the depth of his characterisation that involved a lot of internal conflict. I liked that he knew deep down his methodology has become more logical and less about fanatical faith. This conflict was a great contrast to Dilaf who eventually turned out to be the true antagonist which also led to Hrathen's redemption.",
       "The magic system is quite different from Mistborn and had me curious about its potential. Picturing the scenes of the magic being used was fun to imagine and seemed very epic, especially in the last 100 pages when the Sanderlanche occurs. The roughness of the writing will make me give it a lower review than I would normally, but I still highly recommend reading this book if you did enjoy Mistborn. I am looking forward to reading the sequel books as those are more recent and I am curious to see where Sanderson goes with the plot. (Also noticed the Hoid reference)."
     ],
-    "image": "/assets/reviews/elantris.jpg"
+    "image": "/assets/reviews/elantris.jpg",
+    "reviewSubItems": [
+      {
+        "name": "The Emperor's Soul",
+        "rating": 9,
+        "date": {
+          "year": 2024,
+          "month": 3
+        },
+        "image": "/assets/reviews/emperor_soul.jpg",
+        "review": [
+          "This novella is set on the same planet as Elantris, but there was no overlap needed to follow the narrative. I found this book very introspective and thoughtful. Despite it taking place mostly in a single room, I really enjoyed the character driven plot and explanations of the magic system. It's a lot more artistic and meticulous when compared to Sanderson's other magic systems such as allomancy and surgebinding. Whilst a powerful magical stamp can take years to create, I can see the true potential of this magic system being one of the most powerful ones possible, as the only limit is the forger's research abilities and knowledge. Being able to transform into any person would be a very valuable asset in many situations (Ghostbloods :P). The main character's motivations were nice to understand better, and the concept of manipulating someone through sincerity and honesty."
+        ]
+      }
+    ]
   },
   {
     "type": "book",
@@ -1887,7 +1913,7 @@
   {
     "type": "movie",
     "name": "Rebel Moon: Part One - A Child of Fire",
-    "rating": 5.5,
+    "rating": 5,
     "date": {
       "year": 2024,
       "month": 2
@@ -1899,11 +1925,15 @@
   {
     "type": "book",
     "name": "Tress of the Emerald Sea",
+    "image": "/assets/reviews/tress.jpg",
+    "rating": 7.7,
     "date": {
       "year": 2024,
       "month": 2
     },
-    "review": ["Still Reading"]
+    "review": [
+      "This Cosmere novel by Brandon Sanderson was definitely the most unique I've read in terms of storytelling. It was from the perspective of Hoid, telling another person's story whilst still being a character in the story. The world as always was very unique and the magic system of the world was something unlike any other Cosmere novel I read. It was cool to see how super rapid crystal growth could be manipulated with water to create various contraptions and weapons. Having read a lot of other cosmere novels before this one, I enjoyed the various easter eggs that were presented in the book. Whilst it was by no means a bad book, I wouldn't rate it as high as the mistborn or stormlight archive series that really engrossed me."
+    ]
   },
   {
     "type": "game",
@@ -1934,5 +1964,21 @@
     "name": "Onward",
     "rating": 7.8,
     "review": ["Kept me entertained, there is some deep moments."]
+  },
+  {
+    "type": "movie",
+    "name": "Dune",
+    "rating": 9.9,
+    "reviewSubItems": [
+      { "name": "Dune: Part One", "rating": 9.6 },
+      {
+        "name": "Dune: Part Two",
+        "date": { "month": 3, "year": 2024 },
+        "rating": 9.9,
+        "review": [
+          "Saw this in IMAX and I was absolutely blown away. Every single scene was a masterpiece and the scale was so epic. I did not think Villeneuve could top the first part by such a large margin."
+        ]
+      }
+    ]
   }
 ]
