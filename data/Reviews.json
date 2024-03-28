@@ -1980,5 +1980,29 @@
         ]
       }
     ]
+  },
+  {
+    "type": "show",
+    "name": "Avatar the Last Airbender",
+    "rating": 9,
+    "date": {
+      "year": 2024,
+      "month": 3
+    },
+    "review": [
+      "Great show. It's simple but there is a lot of deeper meaning and lessons to be learnt from each episode. The character growth and arcs are excellent and there was no filler content at all. Every scene was entertaining."
+    ]
+  },
+  {
+    "type": "show",
+    "name": "3 Body Problem",
+    "rating": 8,
+    "date": {
+      "year": 2024,
+      "month": 3
+    },
+    "review": [
+      "Personally really enjoyed the show. I have not read the book, but I read online that the show focuses a lot more on characterisation than the book. I think this worked well with the grand ideas that are being discused, to help keep us grounded to something real and relatable. I think the highlight of the first season was definitely the Sophon reveal, showing just how much power and capabiliteis and other civilization has."
+    ]
   }
 ]
