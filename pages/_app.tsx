@@ -4,7 +4,7 @@ import { ThemeProvider, useTheme } from "next-themes";
 import AppContext from "../components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Analytics } from "@vercel/analytics/react";
-import { Nunito } from "@next/font/google";
+import { Nunito } from "next/font/google";
 
 const queryClient = new QueryClient();
 

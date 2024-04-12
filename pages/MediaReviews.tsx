@@ -98,6 +98,49 @@ const ratingColour = (rating: number): string => {
   }
 };
 
+// Given a review paragraph string, return the tailwindcss class name, and the rest of the string
+const reviewParagraphClassName = (paragraph: string): [string, string] => {
+  let className = "";
+  if (paragraph.indexOf("<center>") !== -1) {
+    className += " mx-4 md:mx-8 lg:mx-12 text-center";
+    paragraph = paragraph.replace("<center>", "");
+  }
+  if (paragraph.indexOf("<end>") !== -1) {
+    className += " mx-4 md:mx-8 lg:mx-12 text-end";
+    paragraph = paragraph.replace("<end>", "");
+  }
+  if (paragraph.indexOf("<justify>") !== -1) {
+    className += " mx-4 md:mx-8 lg:mx-12 text-justify";
+    paragraph = paragraph.replace("<justify>", "");
+  }
+  if (paragraph.indexOf("<italic>") !== -1) {
+    className += " italic";
+    paragraph = paragraph.replace("<italic>", "");
+  }
+  if (paragraph.indexOf("<underline>") !== -1) {
+    className += " underline";
+    paragraph = paragraph.replace("<underline>", "");
+  }
+  if (paragraph.indexOf("<bold>") !== -1) {
+    className += " font-bold";
+    paragraph = paragraph.replace("<bold>", "");
+  }
+  if (paragraph.indexOf("<lg>") !== -1) {
+    className += " text-lg";
+    paragraph = paragraph.replace("<lg>", "");
+  }
+  if (paragraph.indexOf("<xl>") !== -1) {
+    className += " text-xl";
+    paragraph = paragraph.replace("<xl>", "");
+  }
+  if (paragraph.indexOf("<small>") !== -1) {
+    className += " text-sm";
+    paragraph = paragraph.replace("<small>", "");
+  }
+
+  return [className, paragraph];
+};
+
 const calculateAverageRating = (data: ReviewItem[]): number => {
   let total = 0;
   let count = 0;
@@ -199,12 +242,24 @@ const MediaReviews = () => {
   });
 
   const reviewCards = reviews.map((item: ReviewItem, index) => {
-    const reviewParagraphs = item.review?.map((para, index) => {
-      return <p key={index}>{para}</p>;
+    const reviewParagraphs = item.review?.map((mainReviewParagraph, index) => {
+      const [paraClassName, para] =
+        reviewParagraphClassName(mainReviewParagraph);
+      return (
+        <p className={paraClassName} key={index}>
+          {para}
+        </p>
+      );
     });
     const subReviews = item.reviewSubItems?.map((subItem, index) => {
-      const subReviewParagraphs = subItem.review?.map((c, index) => {
-        return <p key={index}>{c}</p>;
+      const subReviewParagraphs = subItem.review?.map((subParagraph, index) => {
+        const [subParaClassName, subPara] =
+          reviewParagraphClassName(subParagraph);
+        return (
+          <p className={subParaClassName} key={index}>
+            {subPara}
+          </p>
+        );
       });
       return (
         <div
@@ -212,7 +267,7 @@ const MediaReviews = () => {
           className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
         >
           <div className="flex justify-between items-center mb-4">
-            <div className="text-xl w-4/5">
+            <div className="text-xl md:text-2xl w-4/5">
               <div className="font-bold">{subItem.name}</div>
               <div className="text-sm">
                 {monthNumberToString(subItem.date?.month ?? -1)}{" "}
@@ -221,11 +276,11 @@ const MediaReviews = () => {
             </div>
             {subItem.rating && (
               <div
-                className={`rounded-full w-8 h-8 flex ${ratingColour(
+                className={`rounded-full w-10 h-10 flex ${ratingColour(
                   subItem.rating
                 )}`}
               >
-                <p className="m-auto font-bold">{subItem.rating}</p>
+                <p className="m-auto font-bold text-xl">{subItem.rating}</p>
               </div>
             )}
           </div>
@@ -239,7 +294,7 @@ const MediaReviews = () => {
               />
             </div>
           )}
-          <div className="flex flex-col gap-2">{subReviewParagraphs}</div>
+          <div className="flex flex-col gap-4">{subReviewParagraphs}</div>
         </div>
       );
     });
@@ -251,7 +306,7 @@ const MediaReviews = () => {
       >
         <div className="flex justify-between items-center mb-2">
           <div className=" w-4/5">
-            <div className="font-bold text-2xl">{item.name}</div>
+            <div className="font-bold text-2xl md:text-3xl">{item.name}</div>
             <div className="text-md">
               {monthNumberToString(item.date?.month ?? -1)} {item.date?.year}
             </div>
