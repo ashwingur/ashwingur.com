@@ -888,13 +888,19 @@
     "type": "show",
     "name": "Love Death + Robots",
     "rating": 8.5,
-    "image": "/assets/reviews/love_death_robots.jpg"
+    "image": "/assets/reviews/love_death_robots.jpg",
+    "review": [
+      "Amazing underrated anthology series that I randomly found on netflix. It consists of many short, standalone episodes each with their unique art styles. My favourite episode was Zima Blue. "
+    ]
   },
   {
     "type": "show",
     "name": "The Witcher",
-    "rating": 7,
-    "image": "/assets/reviews/the_witcher.jpg"
+    "rating": 6,
+    "image": "/assets/reviews/the_witcher.jpg",
+    "review": [
+      "I thoroughly enjoyed season 1 when it was just Geralt going around and fighting monsters. The later seasons felt like such an unfocused mess and there was less Geralt."
+    ]
   },
   {
     "type": "show",
@@ -918,7 +924,10 @@
     "type": "show",
     "name": "Invincible",
     "rating": 9,
-    "image": "/assets/reviews/invincible.jpg"
+    "image": "/assets/reviews/invincible.jpg",
+    "review": [
+      "Overall an excellent show (the wait between seasons is way too long). I found the Omniman plotline to be the most interesting. I wish we could have seen more of him in season 2 but I'm sure there will be a lot more in the future."
+    ]
   },
   {
     "type": "show",
@@ -930,7 +939,10 @@
     "type": "game",
     "name": "Hogwarts Legacy",
     "rating": 8,
-    "image": "/assets/reviews/hogwarts_legacy.webp"
+    "image": "/assets/reviews/hogwarts_legacy.webp",
+    "review": [
+      "The Hogwarts castle and Hogsmeade village are incredible. The beginning and middle of the game was very fun and enjoyable, but I did feel the open world get repetitive after a while with the random locations of interest and enemy types. I also lost interest in the main storyline after a while, but the Sebastian questline was the highlight for me. It felt much more in depth, dark and engaging. Overall I enjoyed my time with the game even if I didn't completely finish it. It sets a good framework for future games if they can improve these aspects of the game. Exploring Hogwarts was definitely the highlight, but I would love to see some consequences with using the dark arts and activities that give house points."
+    ]
   },
   {
     "type": "game",
@@ -963,13 +975,19 @@
     "type": "game",
     "name": "Clash Royale",
     "rating": 8,
-    "image": "/assets/reviews/clash_royale.webp"
+    "image": "/assets/reviews/clash_royale.webp",
+    "review": [
+      "Peak fun during highschool, versing other people and flexing those legendaries. I think the best update was when they released 2v2, I was enjoying ever second of it and it was just pure fun. The game did eventually get stale and progression was very hard at the higher levels so I eventually lost interest. It also seems the game is less popular now after releasing disappointing updates that make it more pay2win."
+    ]
   },
   {
     "type": "game",
     "name": "Brawl Stars",
     "rating": 8.5,
-    "image": "/assets/reviews/brawl_stars.jpg"
+    "image": "/assets/reviews/brawl_stars.jpg",
+    "review": [
+      "Played the game since it was in Beta. Really fun playing with friends and the updates were always something to look forward to. My time with the game is done now but it is continously being improved."
+    ]
   },
   {
     "type": "game",
@@ -981,7 +999,10 @@
     "type": "game",
     "name": "Galaxy on Fire 2",
     "rating": 9.2,
-    "image": "/assets/reviews/galaxy_on_fire.png"
+    "image": "/assets/reviews/galaxy_on_fire.png",
+    "review": [
+      "Really enjoyed playing this game on mobile during the highschool days. I was invested in the stories and really like the space genre. There is a bit of grinding involved to get the best ship and weapons but the payoff was worth it. It's a nice singleplayer experience."
+    ]
   },
   {
     "type": "game",
@@ -1143,18 +1164,29 @@
   {
     "type": "game",
     "name": "Flipside",
-    "image": "/assets/reviews/flipside.jpg"
+    "rating": 8,
+    "image": "/assets/reviews/flipside.jpg",
+    "review": [
+      "Nostalgic nitrome game that I used to play back in primary school. Finished it multiple times."
+    ]
   },
   {
     "type": "game",
     "name": "Elden Ring",
-    "image": "/assets/reviews/elden_ring.jpg"
+    "image": "/assets/reviews/elden_ring.jpg",
+    "rating": 9,
+    "review": [
+      "My first ever souls game experience. Definitely a very challenging game, you have to expect to die many (MANY) times. The world design is incredible and immersive without any of those extremely realistic graphs you see nowadays. The atmosphere does make it seem very lonely at times since there are very few friendly NPCs. I hope to eventually finish the game. It is so massive that there's always some new room or area around the corner which makes you deviate from the main path. "
+    ]
   },
   {
     "type": "game",
     "name": "TORN",
     "rating": 9.9,
-    "image": "/assets/reviews/torn.png"
+    "image": "/assets/reviews/torn.png",
+    "review": [
+      "Text-based MMORPG that I still play to this day. Although the player base is quite niche with around 50,000 active players per day. The social aspect of being in a Faction is great and there are a lot of long term goals you can set. There is no real 'end' to the game, you can always improve. A lot of it revolves around developing methods of income through active and passive means, whilst growing your stats so you can hold up against players from enemy factions. There is also incredible API support for this game, allowing for some cool external tools and scripts to be built to enhance the player experience. There are always many events throughout the year that people spend months preparing for to make the most of."
+    ]
   },
   {
     "type": "game",
@@ -1331,6 +1363,7 @@
   {
     "type": "game",
     "name": "Diablo",
+    "rating": 6,
     "reviewSubItems": [
       {
         "name": "Diablo IV",
@@ -2032,6 +2065,16 @@
     },
     "review": [
       "Personally really enjoyed the show. I have not read the book, but I read online that the show focuses a lot more on characterisation than the book. I think this worked well with the grand ideas that are being discused, to help keep us grounded to something real and relatable. I think the highlight of the first season was definitely the Sophon reveal, showing just how much power and capabiliteis and other civilization has."
+    ]
+  },
+  {
+    "type": "show",
+    "name": "Shogun ",
+    "date": { "year": 2024, "month": 3 },
+    "rating": 9,
+    "image": "/assets/reviews/shogun.webp",
+    "review": [
+      "A gem of a show that I was surprised to find on Disney+. It focuses a lot on dialogue, politics and the actions between characters. There is not a single character in this show that is bad. I would say my favourite character is John Blackthorne and how he begins to understand the ways of Japanese society. Praying he gets his ship back (still a few more episodes till I finish the seaosn). The set design is perfect, and there is never a scene where I fall out of immersion."
     ]
   }
 ]
