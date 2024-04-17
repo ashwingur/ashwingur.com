@@ -2076,5 +2076,18 @@
     "review": [
       "A gem of a show that I was surprised to find on Disney+. It focuses a lot on dialogue, politics and the actions between characters. There is not a single character in this show that is bad. I would say my favourite character is John Blackthorne and how he begins to understand the ways of Japanese society. Praying he gets his ship back (still a few more episodes till I finish the seaosn). The set design is perfect, and there is never a scene where I fall out of immersion."
     ]
+  },
+  {
+    "type": "show",
+    "name": "Fallout",
+    "rating": 9.3,
+    "image": "/assets/reviews/fallout.jpg",
+    "date": {
+      "year": 2024,
+      "month": 4
+    },
+    "review": [
+      "I have not played the Fallout games before (the mobile one doesn't count) but I thoroughly enjoyed this show. The futuristic 1900s style aesthetic was done really well. I was really into all 3 major characters and their subplots. The show doesn't take itself too seriously in terms of violence, but at the same time it can still maintain a serious overall message."
+    ]
   }
 ]
