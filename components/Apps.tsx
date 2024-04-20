@@ -41,6 +41,12 @@ const Apps = () => {
       >
         <button>Tic Tac Toe</button>
       </Link>
+      <Link
+        href="/Dune"
+        className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
+      >
+        <button>Dune</button>
+      </Link>
     </div>
   );
 };
