@@ -5,8 +5,10 @@ import BasicNavbar from "../components/BasicNavbar";
 const sketch: Sketch = (p5: P5CanvasInstance) => {
   let grid: number[][];
   // size of each square
-  let w = 2;
+  let w = 5;
   let cols: number, rows: number;
+  const acceleration = 1.05;
+  const start_speed = 2;
 
   const make2DArray = (rows: number, cols: number) => {
     let arr: number[][] = new Array(rows);
@@ -21,24 +23,25 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
   };
 
   p5.setup = () => {
-    p5.createCanvas(600, 400);
+    p5.createCanvas(1000, 800);
     rows = p5.height / w;
     cols = p5.width / w;
     grid = make2DArray(rows, cols);
+    // p5.frameRate(3);
+    grid[20][10] = start_speed;
+    grid[19][10] = start_speed;
+    grid[18][10] = start_speed;
   };
 
   const withinCols = (x: number) => x >= 0 && x < cols;
   const withinRows = (y: number) => y >= 0 && y < rows;
 
   p5.mouseDragged = () => {
-    console.log("dragged");
-    console.log(p5.mouseX, p5.mouseY);
-
     let mouseCol = p5.floor(p5.mouseX / w);
     let mouseRow = p5.floor(p5.mouseY / w);
 
     if (withinRows(mouseRow) && withinCols(mouseCol))
-      grid[mouseRow][mouseCol] = 1;
+      grid[mouseRow][mouseCol] = start_speed;
   };
 
   p5.draw = () => {
@@ -49,8 +52,9 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
       for (let j = 0; j < cols; j++) {
         p5.noStroke();
         if (grid[i][j] > 0) {
+          //   console.log("square");
           p5.fill(255, 255, 255);
-          let y = i * w;
+          let y = (i + 1) * w;
           let x = j * w;
           p5.square(x, y, w);
         }
@@ -64,15 +68,27 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
         // If it is a grain of sand then have it fall down
         let state = grid[i][j];
         if (state > 0) {
-          // If we are at the bottom most row or there is sand underneath, we can't go down
-          if (i === rows - 1 || grid[i + 1][j] === 1) {
-            next_grid[i][j] = 1;
+          // State represents the velocity if its > 0, go down by that many pixels. if something is already there then go back up to find the nearest unfilled pixel
+          let next_row = Math.floor(i + state);
+
+          if (i + 1 < rows && grid[i + 1][j] > 0) {
+            next_grid[i][j] = state * acceleration;
           } else {
-            next_grid[i + 1][j] = 1;
+            // Search for the next empty spot
+            if (!withinRows(next_row + 1)) {
+              next_row = rows - 2;
+            }
+            for (let d = i; d <= next_row; d++) {
+              if (grid[d + 1][j] > 0 || d == next_row) {
+                next_grid[d][j] = state * acceleration;
+                break;
+              }
+            }
           }
         }
       }
     }
+
     grid = next_grid;
   };
 };
