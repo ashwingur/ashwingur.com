@@ -21,6 +21,12 @@ module.exports = {
           "100%": { opacity: 100 },
         },
       }),
+      gridTemplateColumns: {
+        20: "repeat(20, minmax(0, 1fr))", // Define custom grid with 20 columns
+        64: "repeat(64, minmax(0, 1fr))",
+        128: "repeat(128, minmax(0, 1fr))",
+        256: "repeat(256, minmax(0, 1fr))",
+      },
     },
   },
   plugins: [],
