@@ -5,7 +5,7 @@ import BasicNavbar from "../components/BasicNavbar";
 const sketch: Sketch = (p5: P5CanvasInstance) => {
   let grid: number[][];
   // size of each square
-  let w = 2;
+  let w = 4;
   let cols: number, rows: number;
   const acceleration = 1.05;
   const start_speed = 2;
@@ -34,7 +34,7 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
 
   const generateSand = () => {
     // Generate sand randomly in this matrix
-    let matrix_half = 6;
+    let matrix_half = 4;
 
     let mouseCol = p5.floor(p5.mouseX / w);
     let mouseRow = p5.floor(p5.mouseY / w);
