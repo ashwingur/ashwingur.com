@@ -6,16 +6,14 @@ import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 const Circles = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     let points: Point[] = [];
-    let canvas_width = 1200;
-    let canvas_height = 800;
     let padding = 100;
     let point_gap = 50;
     let time = 0;
     let path_radius_multiplier = 20;
     let direction_scale_multiplier = 5;
-    let diameter_multiplier = 10;
-    let number_of_layers = 10;
-    let speed = 0.3;
+    let diameter_multiplier = 6;
+    let number_of_layers = 15;
+    let speed = 11;
     let hue_multiplier = 100;
     let layer_variance = 100;
 
@@ -40,19 +38,19 @@ const Circles = () => {
         return this.layer * path_radius_multiplier * this.direction;
       }
       diameter(): number {
-        return (this.layer * diameter_multiplier) / (1 + this.mouseDistance());
+        return this.layer * diameter_multiplier;
       }
 
       angle(time: number): number {
-        return this.direction * speed * (time + this.time_offset);
+        return (
+          (this.direction * speed * (time + this.time_offset)) / this.diameter()
+        );
       }
 
       mouseDistance(): number {
-        return (
-          Math.sqrt(
-            Math.pow(this.last_x - p5.mouseX, 2) +
-              Math.pow(this.last_y - p5.mouseY, 2)
-          ) / 1000
+        return Math.sqrt(
+          Math.pow(this.last_x - p5.mouseX, 2) +
+            Math.pow(this.last_y - p5.mouseY, 2)
         );
       }
 
@@ -88,7 +86,7 @@ const Circles = () => {
       points.forEach((point) => {
         p5.fill(point.hue, 40, 70, 0.7);
         const [x, y] = point.position(time);
-        p5.circle(x, y, point.diameter());
+        p5.circle(x, y, point.diameter() - point.mouseDistance() / 70);
       });
     };
   };
