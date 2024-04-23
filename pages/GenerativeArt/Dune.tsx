@@ -1,6 +1,6 @@
-import { P5CanvasInstance, SketchProps, type Sketch } from "@p5-wrapper/react";
+import { P5CanvasInstance, type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import BasicNavbar from "../components/BasicNavbar";
+import BasicNavbar from "../../components/BasicNavbar";
 
 const sketch: Sketch = (p5: P5CanvasInstance) => {
   let grid: number[][];
