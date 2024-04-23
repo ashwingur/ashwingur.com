@@ -45,9 +45,6 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
         }
       }
     }
-
-    // if (withinRows(mouseRow) && withinCols(mouseCol))
-    //   grid[mouseRow][mouseCol] = start_speed;
   };
 
   p5.draw = () => {
