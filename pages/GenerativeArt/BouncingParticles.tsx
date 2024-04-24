@@ -1,10 +1,14 @@
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { Sketch, P5CanvasInstance } from "@p5-wrapper/react";
-import React from "react";
+import React, { useState } from "react";
 import BasicNavbar from "../../components/BasicNavbar";
 import p5 from "p5";
+import { useTheme } from "next-themes";
 
 const BouncingParticles = () => {
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     let particles: Particle[] = [];
     let default_num_particles = 50;
@@ -49,6 +53,7 @@ const BouncingParticles = () => {
     }
 
     p5.setup = () => {
+      console.log(currentTheme);
       p5.createCanvas(p5.windowWidth, p5.windowHeight);
 
       speed_slider = p5.createSlider(1, 100, default_speed, 1);
@@ -68,12 +73,15 @@ const BouncingParticles = () => {
       }
 
       p5.noStroke();
+      // p5.fill(0);
+      currentTheme === "light" ? p5.fill(0) : p5.fill(255);
     };
 
     p5.draw = () => {
       // Have a low alpha value for the blur effect
+      // p5.clear();
       p5.background(0, 10);
-
+      currentTheme === "light" ? p5.background(255, 10) : p5.background(0, 10);
       // Apply a blur for a trail effect
       p5.filter(p5.BLUR, 5);
 
@@ -96,7 +104,7 @@ const BouncingParticles = () => {
   return (
     <div>
       <BasicNavbar absolute={true} />
-      <h1 className="text-white text-center pt-20">Bouncing Particles</h1>
+      <h1 className="text-center pt-20">Bouncing Particles</h1>
       <div className="fixed inset-0 -z-10">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
