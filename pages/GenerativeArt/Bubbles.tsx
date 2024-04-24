@@ -93,7 +93,6 @@ const Circles = () => {
 
   return (
     <div>
-      {" "}
       <BasicNavbar absolute={true} />
       <h1 className="text-center pt-20">Bubbles!</h1>
       <div className="fixed inset-0 -z-10">
