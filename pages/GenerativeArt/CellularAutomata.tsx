@@ -6,10 +6,12 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 const CellularAutomata = () => {
   const [rule, setRule] = useState<number | "">(30);
   const [nPixels, setNPixels] = useState<number | "">(100);
+  const [nLevels, setNLevels] = useState<number | "">(100);
   // Keep this odd for easy centre
   //   const n = 100;
-  const n = nPixels === "" ? 3 : nPixels;
-  console.log(nPixels);
+  const n = nPixels === "" ? 10 : nPixels;
+  const h = nLevels === "" ? 100 : nLevels;
+  console.log(nLevels);
 
   const ruleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -24,10 +26,20 @@ const CellularAutomata = () => {
   const nPixelsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const numericValue = parseInt(value);
-    if (numericValue >= 1 && numericValue <= 10000) {
+    if (numericValue >= 1 && numericValue <= 2000) {
       setNPixels(numericValue);
     } else {
       setNPixels("");
+    }
+  };
+
+  const nLevelsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const numericValue = parseInt(value);
+    if (numericValue >= 1 && numericValue <= 2000) {
+      setNLevels(numericValue);
+    } else {
+      setNLevels("");
     }
   };
 
@@ -54,17 +66,19 @@ const CellularAutomata = () => {
       }
     };
 
+    const pixelSize = (): number => {
+      return width / n;
+    };
+
     p5.setup = () => {
       setPadding();
-      p5.createCanvas(
-        Math.floor((p5.windowWidth - padding) / n) * n,
-        p5.windowHeight
-      );
-
       // Make it so the width divides nicely into the number of pixels per row
       width = Math.floor((p5.windowWidth - padding) / n) * n;
-      height = p5.windowHeight;
-      max_level = height / (width / n);
+      height = h * pixelSize();
+      p5.createCanvas(width, height);
+      console.log(`h is ${h}`);
+
+      max_level = h;
       row = new Array(n).fill(0);
       row[Math.floor(row.length / 2)] = 1;
       rule_array = ruleToArray(rule === "" ? 0 : rule);
@@ -109,9 +123,9 @@ const CellularAutomata = () => {
 
     p5.windowResized = () => {
       // Reset everything
-      p5.resizeCanvas(p5.windowWidth - padding, p5.windowHeight);
       width = Math.floor((p5.windowWidth - padding) / n) * n;
-      height = p5.windowHeight;
+      height = h * pixelSize();
+      p5.resizeCanvas(width, height);
       max_level = height / (width / n);
       level = 0;
       p5.background(255);
@@ -125,7 +139,7 @@ const CellularAutomata = () => {
       <BasicNavbar absolute={true} />
       <h1 className="text-center pt-20">Cellular Automata</h1>
       <div className="flex justify-center items-center mt-4 gap-4">
-        <div>Rule (1-255)</div>
+        <div className="w-24 text-end">Rule (1-255)</div>
         <input
           className="rounded-md py-1 px-2 w-24"
           value={rule}
@@ -133,11 +147,19 @@ const CellularAutomata = () => {
         />
       </div>
       <div className="flex justify-center items-center mt-4 gap-4">
-        <div>Width</div>
+        <div className="w-24 text-end">Width</div>
         <input
           className="rounded-md py-1 px-2 w-24"
           value={nPixels}
           onChange={nPixelsChange}
+        />
+      </div>
+      <div className="flex justify-center items-center mt-4 gap-4">
+        <div className="w-24 text-end">Height</div>
+        <input
+          className="rounded-md py-1 px-2 w-24"
+          value={nLevels}
+          onChange={nLevelsChange}
         />
       </div>
       <div className="flex justify-center mt-4 -z-10">
