@@ -70,13 +70,20 @@ const CellularAutomata = () => {
       return width / n;
     };
 
+    const setHeight = () => {
+      if (h * pixelSize() > 10000) {
+        height = 10000;
+      } else {
+        height = h * pixelSize();
+      }
+    };
+
     p5.setup = () => {
       setPadding();
       // Make it so the width divides nicely into the number of pixels per row
       width = Math.floor((p5.windowWidth - padding) / n) * n;
       height = h * pixelSize();
       p5.createCanvas(width, height);
-      console.log(`h is ${h}`);
 
       max_level = h;
       row = new Array(n).fill(0);
