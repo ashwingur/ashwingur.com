@@ -1,6 +1,6 @@
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { Sketch, P5CanvasInstance } from "@p5-wrapper/react";
-import React, { useState } from "react";
+import React from "react";
 import BasicNavbar from "../../components/BasicNavbar";
 import p5 from "p5";
 import { useTheme } from "next-themes";
@@ -53,7 +53,6 @@ const BouncingParticles = () => {
     }
 
     p5.setup = () => {
-      console.log(currentTheme);
       p5.createCanvas(p5.windowWidth, p5.windowHeight);
 
       speed_slider = p5.createSlider(1, 100, default_speed, 1);
