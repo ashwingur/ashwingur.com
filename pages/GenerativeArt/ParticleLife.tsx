@@ -199,7 +199,7 @@ const ParticleLife = () => {
       p5.createCanvas(width, height);
       const coloursArray = [
         Colour.Red,
-        Colour.Blue,
+        Colour.Orange,
         Colour.Yellow,
         Colour.Green,
         Colour.Blue,
