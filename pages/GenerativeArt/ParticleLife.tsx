@@ -18,9 +18,9 @@ const ParticleLife = () => {
     }
     let particles: Particle[];
     let particleRuleSet: ParticleRuleSet;
-    const n = 100;
+    const n = 300;
     const nColours = 6;
-    const dampingFactor = 0.99;
+    const dampingFactor = 0.95;
     class Particle {
       position: p5.Vector;
       velocity: p5.Vector;
@@ -96,7 +96,7 @@ const ParticleLife = () => {
             if (i === j) {
               this.ruleMatrix[i][j] = 1;
             } else {
-              this.ruleMatrix[i][j] = p5.random(-1, 2);
+              this.ruleMatrix[i][j] = Math.random() * 2 - 1;
             }
           }
         }
@@ -104,7 +104,8 @@ const ParticleLife = () => {
       // Calculate the force to be applied to particle a based on the characteristics of
       // particle b
       forceOnParticle(a: Particle, b: Particle): p5.Vector {
-        const r = a.position.dist(b.position);
+        // const r = a.position.dist(b.position);
+        const { r, directionVector } = this.calculateDistanceAndVector(a, b);
         if (
           r >=
           (this.max_force_distance - this.universal_repulsion_distance) * 2 +
@@ -118,11 +119,7 @@ const ParticleLife = () => {
 
           // COULDNT USE p5.Vector static method for some reason, cause window not defined error???
           // So I'm creating and doing the subtraction myself
-          return p5
-            .createVector(
-              b.position.x - a.position.x,
-              b.position.y - a.position.y
-            )
+          return directionVector
             .normalize()
             .mult(r / this.universal_repulsion_distance - 3);
         } else {
@@ -133,30 +130,76 @@ const ParticleLife = () => {
             (F /
               (this.max_force_distance - this.universal_repulsion_distance)) *
             Math.abs(r - this.max_force_distance);
-          return p5
-            .createVector(
-              b.position.x - a.position.x,
-              b.position.y - a.position.y
-            )
-            .normalize()
-            .mult(force);
+          return directionVector.normalize().mult(force);
         }
-        return p5.createVector(0, 0);
+      }
+
+      calculateDistanceAndVector(a: Particle, b: Particle) {
+        // Calculate straight line distance
+        const r = a.position.dist(b.position);
+
+        // Calculate the wrapped distance in both x and y directions
+        let wrappedDistanceX = p5.abs(b.position.x - a.position.x);
+        if (wrappedDistanceX > width / 2) {
+          wrappedDistanceX = width - wrappedDistanceX;
+        }
+
+        let wrappedDistanceY = p5.abs(b.position.y - a.position.y);
+        if (wrappedDistanceY > height / 2) {
+          wrappedDistanceY = height - wrappedDistanceY;
+        }
+
+        // Create a vector between the points
+        let directionVector = p5.createVector(
+          b.position.x - a.position.x,
+          b.position.y - a.position.y
+        );
+
+        // Adjust vector for wrapping in x direction
+        if (wrappedDistanceX < p5.abs(b.position.x - a.position.x)) {
+          if (b.position.x < a.position.x) {
+            directionVector.x = width - a.position.x + b.position.x;
+          } else {
+            directionVector.x = -width + b.position.x - a.position.x;
+          }
+        }
+
+        // Adjust vector for wrapping in y direction
+        if (wrappedDistanceY < p5.abs(b.position.y - a.position.y)) {
+          if (b.position.y < a.position.y) {
+            directionVector.y = height - a.position.y + b.position.y;
+          } else {
+            directionVector.y = -height + b.position.y - a.position.y;
+          }
+        }
+
+        return { r, directionVector };
       }
     }
     p5.setup = () => {
       p5.createCanvas(width, height);
+      const coloursArray = [
+        Colour.Red,
+        Colour.Blue,
+        Colour.Yellow,
+        // Colour.Green,
+        // Colour.Blue,
+        // Colour.Purple,
+      ];
       particles = new Array();
       for (let i = 0; i < n; i++) {
+        const randomIndex = Math.floor(Math.random() * coloursArray.length);
+        const randomColour = coloursArray[randomIndex] as Colour;
+
         particles.push(
           new Particle(
             p5.random(0, width - 1),
             p5.random(0, height - 1),
-            Colour.Green
+            randomColour
           )
         );
       }
-      particleRuleSet = new ParticleRuleSet(200, 1000);
+      particleRuleSet = new ParticleRuleSet(50, 200);
       p5.noStroke();
       //   p5.frameRate(1);
     };
