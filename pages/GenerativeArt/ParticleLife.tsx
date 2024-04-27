@@ -20,7 +20,13 @@ const ParticleLife = () => {
     let particleRuleSet: ParticleRuleSet;
     const n = 300;
     const nColours = 6;
-    const dampingFactor = 0.95;
+    const dampingFactor = 0.9;
+    const close_repulsion_distance = 50;
+    // Keep this negative
+    const close_repulsion_force = 10;
+    const max_distance_force = 200;
+    const wall_bounce = 3;
+    const speed = 50; // Lower is faster
     class Particle {
       position: p5.Vector;
       velocity: p5.Vector;
@@ -38,21 +44,26 @@ const ParticleLife = () => {
         this.position.add(this.velocity);
         // Check if its gone off the screen, wrap it back around
         if (this.position.x < 0) {
-          this.position.x = width - 1;
-        } else if (this.position.x >= width) {
+          // this.position.x = width - 1;
           this.position.x = 0;
+          this.velocity.x *= -wall_bounce;
+        } else if (this.position.x >= width) {
+          this.position.x = width - 1;
+          this.velocity.x *= -wall_bounce;
         }
         if (this.position.y < 0) {
-          this.position.y = height - 1;
-        } else if (this.position.y >= height) {
           this.position.y = 0;
+          this.velocity.y *= -wall_bounce;
+        } else if (this.position.y >= height) {
+          this.position.y = height - 1;
+          this.velocity.y *= -wall_bounce;
         }
         // Reset acceleration
         this.acceleration.x = 0;
         this.acceleration.y = 0;
       }
       applyForce(force: p5.Vector) {
-        this.acceleration.add(force.div(100));
+        this.acceleration.add(force.div(speed));
       }
       setColour(colour: Colour) {
         switch (colour) {
@@ -92,11 +103,12 @@ const ParticleLife = () => {
         for (let i = 0; i < nColours; i++) {
           this.ruleMatrix.push(Array(nColours));
           for (let j = 0; j < nColours; j++) {
-            // For now make all same colours attracted to each other
             if (i === j) {
-              this.ruleMatrix[i][j] = 1;
+              // this.ruleMatrix[i][j] = 1;
+              this.ruleMatrix[i][j] = Math.random() * 4 - 2;
+              // this.ruleMatrix[i][j] = 0;
             } else {
-              this.ruleMatrix[i][j] = Math.random() * 2 - 1;
+              this.ruleMatrix[i][j] = Math.random() * 4 - 2;
             }
           }
         }
@@ -121,7 +133,9 @@ const ParticleLife = () => {
           // So I'm creating and doing the subtraction myself
           return directionVector
             .normalize()
-            .mult(r / this.universal_repulsion_distance - 3);
+            .mult(
+              r / this.universal_repulsion_distance - close_repulsion_force
+            );
         } else {
           // Look at the rule set for the correct force to apply
           // We use an absolute value cartesian equation
@@ -175,6 +189,11 @@ const ParticleLife = () => {
 
         return { r, directionVector };
       }
+
+      setRuleMatrix(newRules: number[][]) {
+        // Make sure its nColours by nColours
+        this.ruleMatrix = newRules;
+      }
     }
     p5.setup = () => {
       p5.createCanvas(width, height);
@@ -182,9 +201,9 @@ const ParticleLife = () => {
         Colour.Red,
         Colour.Blue,
         Colour.Yellow,
-        // Colour.Green,
-        // Colour.Blue,
-        // Colour.Purple,
+        Colour.Green,
+        Colour.Blue,
+        Colour.Purple,
       ];
       particles = new Array();
       for (let i = 0; i < n; i++) {
@@ -199,10 +218,23 @@ const ParticleLife = () => {
           )
         );
       }
-      particleRuleSet = new ParticleRuleSet(50, 200);
+      particleRuleSet = new ParticleRuleSet(
+        close_repulsion_distance,
+        max_distance_force
+      );
+      particleRuleSet.setRuleMatrix([
+        // R, O, Y, G, B, P
+        [1, 2, 0, 0, -4, 0], // R
+        [0, 1, 2, 0, 0, 0], // O
+        [0, 0, -3, 0, 0, 0], // Y
+        [0, -3, 0, 1, 0, 0], // G
+        [0, 0, 0, 0, 1, 0], // B
+        [2, 0, 0, 0, 0, 1], // P
+      ]);
       p5.noStroke();
-      //   p5.frameRate(1);
+      p5.frameRate(30);
     };
+
     p5.draw = () => {
       p5.background(0);
       for (let i = 0; i < n; i++) {
@@ -219,7 +251,7 @@ const ParticleLife = () => {
         }
         particles[i].update();
         p5.fill(particles[i].p5Colour);
-        p5.circle(particles[i].position.x, particles[i].position.y, 10);
+        p5.circle(particles[i].position.x, particles[i].position.y, 6);
       }
     };
   };
