@@ -1,6 +1,5 @@
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { Sketch, P5CanvasInstance } from "@p5-wrapper/react";
-import React from "react";
 import BasicNavbar from "../../components/BasicNavbar";
 import p5 from "p5";
 import { useTheme } from "next-themes";

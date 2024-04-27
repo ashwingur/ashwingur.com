@@ -7,8 +7,7 @@ const CellularAutomata = () => {
   const [rule, setRule] = useState<number | "">(30);
   const [nPixels, setNPixels] = useState<number | "">(100);
   const [nLevels, setNLevels] = useState<number | "">(100);
-  // Keep this odd for easy centre
-  //   const n = 100;
+
   const n = nPixels === "" ? 10 : nPixels;
   const h = nLevels === "" ? 100 : nLevels;
   console.log(nLevels);
