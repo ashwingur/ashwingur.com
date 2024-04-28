@@ -180,7 +180,54 @@ const ParticleLife = () => {
       p5.frameRate(fps);
     };
 
-    p5.mousePressed = () => {};
+    // p5.mouseDragged = () => {
+    //   for (let i = 0; i < n; i++) {
+    //     // Apply repulsion force from the mouse coords
+    //     let totalForceX = 0;
+    //     let totalForceY = 0;
+    //     let rx = p5.mouseX - positionsX[i];
+    //     let ry = p5.mouseY - positionsY[i];
+
+    //     // Adjust for wrapping around the canvas
+    //     if (Math.abs(rx) > 0.5) {
+    //       rx -= Math.sign(rx);
+    //     }
+    //     if (Math.abs(ry) > 0.5) {
+    //       ry -= Math.sign(ry);
+    //     }
+
+    //     const r = Math.hypot(rx, ry);
+    //     if (r > 0 && r < rMax) {
+    //       const f = force(r / rMax, -1);
+    //       totalForceX += (rx / r) * f;
+    //       totalForceY += (ry / r) * f;
+    //     }
+    //     totalForceX *= rMax * forceFactor;
+    //     totalForceY *= rMax * forceFactor;
+
+    //     velocitiesX[i] *= frictionFactor * 1;
+    //     velocitiesY[i] *= frictionFactor * 1;
+
+    //     velocitiesX[i] += totalForceX * dt;
+    //     velocitiesY[i] += totalForceY * dt;
+
+    //     positionsX[i] += velocitiesX[i] * dt;
+    //     positionsY[i] += velocitiesY[i] * dt;
+
+    //     // Wrap around the canvas if they go out of it
+    //     if (positionsX[i] <= 0) {
+    //       positionsX[i] = 1;
+    //     } else if (positionsX[i] >= 1) {
+    //       positionsX[i] = 0;
+    //     }
+    //     if (positionsY[i] <= 0) {
+    //       positionsY[i] = 1;
+    //     } else if (positionsY[i] >= 1) {
+    //       positionsY[i] = 0;
+    //     }
+    //   }
+    //   console.log("mouse pressed");
+    // };
 
     p5.draw = () => {
       p5.background(0, 1 - trails);
@@ -323,7 +370,7 @@ const ParticleLife = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center my-8 h-5/6">
+      <div className="flex justify-center my-8">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
     </div>
