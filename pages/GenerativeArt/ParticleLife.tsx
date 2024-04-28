@@ -2,7 +2,7 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { P5CanvasInstance, P5WrapperProps, Sketch } from "@p5-wrapper/react";
 import BasicNavbar from "../../components/BasicNavbar";
 import p5 from "p5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const makeRandomMatrix = (numColours: number) => {
   const rows = [];
@@ -41,29 +41,70 @@ const ParticleLife = () => {
   const [n, setN] = useState(1000);
   const fps = 60;
   const dt = 1 / fps;
-  const numColours = 6;
+  const [numColours, setNumColours] = useState(6);
   // Attraction matrix
   const [matrix, setMatrix] = useState(makeRandomMatrix(numColours));
   // Maximum attraction distance (0-1)
   const [rMax, setRMax] = useState(0.2);
-  const [forceFactor, setForceFactor] = useState(2);
+  const [forceFactor, setForceFactor] = useState(4);
   const [frictionHalfLife, setFrictionHalfLife] = useState(0.04);
   const frictionFactor = Math.pow(0.5, dt / frictionHalfLife);
-  const [particleSize, setParticleSize] = useState(4);
+  const [particleSize, setParticleSize] = useState(5);
+  const [trails, setTrails] = useState(0);
+  const [blur, setBlur] = useState(0);
 
-  const colours = new Int32Array(n);
-  const positionsX = new Float32Array(n);
-  const positionsY = new Float32Array(n);
-  const velocitiesX = new Float32Array(n);
-  const velocitiesY = new Float32Array(n);
+  const [colours, setColours] = useState(new Int32Array(n));
+  const [positionsX, setPositionsX] = useState(new Float32Array(n));
+  const [positionsY, setPositionsY] = useState(new Float32Array(n));
+  const [velocitiesX, setVelocitiesX] = useState(new Float32Array(n));
+  const [velocitiesY, setVelocitiesY] = useState(new Float32Array(n));
 
-  for (let i = 0; i < n; i++) {
-    colours[i] = Math.floor(Math.random() * numColours);
-    positionsX[i] = Math.random();
-    positionsY[i] = Math.random();
-    velocitiesX[i] = 0;
-    velocitiesY[i] = 0;
-  }
+  const nChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setN(parseFloat(event.target.value));
+  };
+  const rMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRMax(parseFloat(event.target.value));
+  };
+  const forceFactorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForceFactor(parseFloat(event.target.value));
+  };
+  const frictionHalfLifeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFrictionHalfLife(parseFloat(event.target.value));
+  };
+  const particleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setParticleSize(parseInt(event.target.value));
+  };
+  const numColoursChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNumColours(parseInt(event.target.value));
+    setMatrix(makeRandomMatrix(parseInt(event.target.value)));
+  };
+  const trailsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTrails(parseFloat(event.target.value));
+  };
+  const blurChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBlur(parseInt(event.target.value));
+  };
+
+  useEffect(() => {
+    // I NEED TO PROPERLY UPDATE THE STATE, THIS SHOULD BE FIXED EVEN THOUGHT IT WORKS
+    for (let i = 0; i < n; i++) {
+      colours[i] = Math.floor(Math.random() * numColours);
+      positionsX[i] = Math.random();
+      positionsY[i] = Math.random();
+      velocitiesX[i] = 0;
+      velocitiesY[i] = 0;
+    }
+  }, [
+    n,
+    colours,
+    positionsX,
+    positionsY,
+    velocitiesX,
+    velocitiesY,
+    numColours,
+  ]);
 
   const updateParticles = () => {
     // update velocities
@@ -135,9 +176,12 @@ const ParticleLife = () => {
     p5.mousePressed = () => {};
 
     p5.draw = () => {
-      p5.background(0);
+      p5.background(0, 1 - trails);
 
       updateParticles();
+      if (blur > 0) {
+        p5.filter(p5.BLUR, blur);
+      }
 
       for (let i = 0; i < n; i++) {
         const screenX = positionsX[i] * width;
@@ -152,6 +196,104 @@ const ParticleLife = () => {
     <div>
       <BasicNavbar absolute={true} />
       <h1 className="text-center pt-20">Particle Life</h1>
+      <div className="flex justify-center items-center gap-4 flex-wrap">
+        <button
+          className="text-center p-2 bg-blue-600 text-white rounded-md mt-4"
+          onClick={() => {
+            setMatrix(makeRandomMatrix(numColours));
+          }}
+        >
+          Random Matrix
+        </button>
+        <div>
+          <div>Max force distance ({rMax})</div>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01} // adjust the step size as per your requirement
+            value={rMax}
+            onChange={rMaxChange}
+          />
+        </div>
+        <div>
+          <div>Particles ({n})</div>
+          <input
+            type="range"
+            min={10}
+            max={2000}
+            step={10} // adjust the step size as per your requirement
+            value={n}
+            onChange={nChange}
+          />
+        </div>
+        <div>
+          <div>Colours ({numColours})</div>
+          <input
+            type="range"
+            min={1}
+            max={20}
+            step={1} // adjust the step size as per your requirement
+            value={numColours}
+            onChange={numColoursChange}
+          />
+        </div>
+        <div>
+          <div>Force Factor ({forceFactor})</div>
+          <input
+            type="range"
+            min={0.1}
+            max={20}
+            step={0.1} // adjust the step size as per your requirement
+            value={forceFactor}
+            onChange={forceFactorChange}
+          />
+        </div>
+        <div>
+          <div>Friction Half-life ({frictionHalfLife})</div>
+          <input
+            type="range"
+            min={0.01}
+            max={1}
+            step={0.01} // adjust the step size as per your requirement
+            value={frictionHalfLife}
+            onChange={frictionHalfLifeChange}
+          />
+        </div>
+        <div>
+          <div>Particle Size ({particleSize})</div>
+          <input
+            type="range"
+            min={1}
+            max={50}
+            step={1} // adjust the step size as per your requirement
+            value={particleSize}
+            onChange={particleSizeChange}
+          />
+        </div>
+        <div>
+          <div>Trails ({trails})</div>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01} // adjust the step size as per your requirement
+            value={trails}
+            onChange={trailsChange}
+          />
+        </div>
+        <div>
+          <div>Blur [Requires Trails] ({blur})</div>
+          <input
+            type="range"
+            min={0}
+            max={20}
+            step={1} // adjust the step size as per your requirement
+            value={blur}
+            onChange={blurChange}
+          />
+        </div>
+      </div>
       <div className="flex justify-center mt-8">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
