@@ -52,6 +52,7 @@ const ParticleLife = () => {
   const [particleSize, setParticleSize] = useState(5);
   const [trails, setTrails] = useState(0);
   const [blur, setBlur] = useState(0);
+  const [light, setLight] = useState(50);
 
   const [colours, setColours] = useState(new Int32Array(n));
   const [positionsX, setPositionsX] = useState(new Float32Array(n));
@@ -85,6 +86,9 @@ const ParticleLife = () => {
   };
   const blurChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBlur(parseInt(event.target.value));
+  };
+  const lightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLight(parseInt(event.target.value));
   };
 
   useEffect(() => {
@@ -166,6 +170,9 @@ const ParticleLife = () => {
     p5.setup = () => {
       width = Math.min(width, p5.windowWidth - 10);
       height = Math.min(height, p5.windowHeight - 200);
+      if (width < 800) {
+        setN(500);
+      }
       p5.createCanvas(width, height);
 
       p5.noStroke();
@@ -186,7 +193,7 @@ const ParticleLife = () => {
       for (let i = 0; i < n; i++) {
         const screenX = positionsX[i] * width;
         const screenY = positionsY[i] * height;
-        p5.fill((360 * colours[i]) / numColours, 100, 50);
+        p5.fill((360 * colours[i]) / numColours, 100, light);
         p5.circle(screenX, screenY, particleSize);
       }
     };
@@ -196,105 +203,127 @@ const ParticleLife = () => {
     <div>
       <BasicNavbar absolute={true} />
       <h1 className="text-center pt-20">Particle Life</h1>
-      <div className="flex justify-center items-center gap-4 flex-wrap">
+      <div className="flex flex-col items-center justify-center">
         <button
-          className="text-center p-2 bg-blue-600 text-white rounded-md mt-4"
+          className="text-center p-2 bg-blue-600 text-white rounded-md my-4"
           onClick={() => {
             setMatrix(makeRandomMatrix(numColours));
           }}
         >
           Random Matrix
         </button>
-        <div>
-          <div>Max force distance ({rMax})</div>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01} // adjust the step size as per your requirement
-            value={rMax}
-            onChange={rMaxChange}
-          />
-        </div>
-        <div>
-          <div>Particles ({n})</div>
-          <input
-            type="range"
-            min={10}
-            max={2000}
-            step={10} // adjust the step size as per your requirement
-            value={n}
-            onChange={nChange}
-          />
-        </div>
-        <div>
-          <div>Colours ({numColours})</div>
-          <input
-            type="range"
-            min={1}
-            max={20}
-            step={1} // adjust the step size as per your requirement
-            value={numColours}
-            onChange={numColoursChange}
-          />
-        </div>
-        <div>
-          <div>Force Factor ({forceFactor})</div>
-          <input
-            type="range"
-            min={0.1}
-            max={20}
-            step={0.1} // adjust the step size as per your requirement
-            value={forceFactor}
-            onChange={forceFactorChange}
-          />
-        </div>
-        <div>
-          <div>Friction Half-life ({frictionHalfLife})</div>
-          <input
-            type="range"
-            min={0.01}
-            max={1}
-            step={0.01} // adjust the step size as per your requirement
-            value={frictionHalfLife}
-            onChange={frictionHalfLifeChange}
-          />
-        </div>
-        <div>
-          <div>Particle Size ({particleSize})</div>
-          <input
-            type="range"
-            min={1}
-            max={50}
-            step={1} // adjust the step size as per your requirement
-            value={particleSize}
-            onChange={particleSizeChange}
-          />
-        </div>
-        <div>
-          <div>Trails ({trails})</div>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01} // adjust the step size as per your requirement
-            value={trails}
-            onChange={trailsChange}
-          />
-        </div>
-        <div>
-          <div>Blur [Requires Trails] ({blur})</div>
-          <input
-            type="range"
-            min={0}
-            max={20}
-            step={1} // adjust the step size as per your requirement
-            value={blur}
-            onChange={blurChange}
-          />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
+          <div>
+            <div>Max F distance: {rMax}</div>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={rMax}
+              onChange={rMaxChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Particles: {n}</div>
+            <input
+              type="range"
+              min={10}
+              max={2000}
+              step={10}
+              value={n}
+              onChange={nChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Colours: {numColours}</div>
+            <input
+              type="range"
+              min={1}
+              max={20}
+              step={1}
+              value={numColours}
+              onChange={numColoursChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Force Factor: {forceFactor}</div>
+            <input
+              type="range"
+              min={0.1}
+              max={20}
+              step={0.1}
+              value={forceFactor}
+              onChange={forceFactorChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Friction Half-life: {frictionHalfLife}</div>
+            <input
+              type="range"
+              min={0.01}
+              max={1}
+              step={0.01}
+              value={frictionHalfLife}
+              onChange={frictionHalfLifeChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Particle Size: {particleSize}</div>
+            <input
+              type="range"
+              min={1}
+              max={50}
+              step={1}
+              value={particleSize}
+              onChange={particleSizeChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Trails: {trails}</div>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={trails}
+              onChange={trailsChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Blur [Requires Trails]: {blur}</div>
+            <input
+              type="range"
+              min={0}
+              max={20}
+              step={1}
+              value={blur}
+              onChange={blurChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
+          <div>
+            <div>Light : {light}</div>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={1}
+              value={light}
+              onChange={lightChange}
+              className="appearance-none w-40 h-2 bg-black rounded-md outline-none"
+            />
+          </div>
         </div>
       </div>
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center my-8 h-5/6">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
     </div>
