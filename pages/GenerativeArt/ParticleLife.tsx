@@ -2,256 +2,148 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { P5CanvasInstance, P5WrapperProps, Sketch } from "@p5-wrapper/react";
 import BasicNavbar from "../../components/BasicNavbar";
 import p5 from "p5";
+import { useState } from "react";
+
+const makeRandomMatrix = (numColours: number) => {
+  const rows = [];
+  for (let i = 0; i < numColours; i++) {
+    const row = [];
+    for (let j = 0; j < numColours; j++) {
+      row.push(Math.random() * 2 - 1);
+    }
+    rows.push(row);
+  }
+  return rows;
+  // return [
+  //   [1, 0, 0, 0, 0, 0],
+  //   [0, 1, 0.5, 0, 0, 0],
+  //   [0, 0, 1, 0.5, 0, 0],
+  //   [0, 0, 0, 1, 0.5, 0],
+  //   [0, 0, 0, 0, 1, 0.5],
+  //   [0.5, 0, 0, 0, 0, 1],
+  // ];
+};
+
+const force = (r: number, a: number) => {
+  const beta = 0.3;
+  if (r < beta) {
+    return r / beta - 1;
+  } else if (beta < r && r < 1) {
+    return a * (1 - Math.abs(2 * r - 1 - beta) / (1 - beta));
+  } else {
+    return 0;
+  }
+};
 
 const ParticleLife = () => {
-  const width = 1200;
-  const height = 800;
+  let width = 1600;
+  let height = 1000;
+  const [n, setN] = useState(1000);
+  const fps = 60;
+  const dt = 1 / fps;
+  const numColours = 6;
+  // Attraction matrix
+  const [matrix, setMatrix] = useState(makeRandomMatrix(numColours));
+  // Maximum attraction distance (0-1)
+  const [rMax, setRMax] = useState(0.2);
+  const [forceFactor, setForceFactor] = useState(2);
+  const [frictionHalfLife, setFrictionHalfLife] = useState(0.04);
+  const frictionFactor = Math.pow(0.5, dt / frictionHalfLife);
+  const [particleSize, setParticleSize] = useState(4);
+
+  const colours = new Int32Array(n);
+  const positionsX = new Float32Array(n);
+  const positionsY = new Float32Array(n);
+  const velocitiesX = new Float32Array(n);
+  const velocitiesY = new Float32Array(n);
+
+  for (let i = 0; i < n; i++) {
+    colours[i] = Math.floor(Math.random() * numColours);
+    positionsX[i] = Math.random();
+    positionsY[i] = Math.random();
+    velocitiesX[i] = 0;
+    velocitiesY[i] = 0;
+  }
+
+  const updateParticles = () => {
+    // update velocities
+    for (let i = 0; i < n; i++) {
+      let totalForceX = 0;
+      let totalForceY = 0;
+
+      for (let j = 0; j < n; j++) {
+        if (j === i) continue;
+        let rx = positionsX[j] - positionsX[i];
+        let ry = positionsY[j] - positionsY[i];
+
+        // Adjust for wrapping around the canvas
+        if (Math.abs(rx) > 0.5) {
+          rx -= Math.sign(rx);
+        }
+        if (Math.abs(ry) > 0.5) {
+          ry -= Math.sign(ry);
+        }
+
+        const r = Math.hypot(rx, ry);
+        if (r > 0 && r < rMax) {
+          const f = force(r / rMax, matrix[colours[i]][colours[j]]);
+          totalForceX += (rx / r) * f;
+          totalForceY += (ry / r) * f;
+        }
+      }
+
+      totalForceX *= rMax * forceFactor;
+      totalForceY *= rMax * forceFactor;
+
+      velocitiesX[i] *= frictionFactor;
+      velocitiesY[i] *= frictionFactor;
+
+      velocitiesX[i] += totalForceX * dt;
+      velocitiesY[i] += totalForceY * dt;
+    }
+
+    // update positions
+    for (let i = 0; i < n; i++) {
+      positionsX[i] += velocitiesX[i] * dt;
+      positionsY[i] += velocitiesY[i] * dt;
+
+      // Wrap around the canvas if they go out of it
+      if (positionsX[i] <= 0) {
+        positionsX[i] = 1;
+      } else if (positionsX[i] >= 1) {
+        positionsX[i] = 0;
+      }
+      if (positionsY[i] <= 0) {
+        positionsY[i] = 1;
+      } else if (positionsY[i] >= 1) {
+        positionsY[i] = 0;
+      }
+    }
+  };
 
   const sketch: Sketch = (p5: P5CanvasInstance) => {
-    enum Colour {
-      Red = 0,
-      Orange = 1,
-      Yellow = 2,
-      Green = 3,
-      Blue = 4,
-      Purple = 5,
-    }
-    let particles: Particle[];
-    let particleRuleSet: ParticleRuleSet;
-    const n = 300;
-    const nColours = 6;
-    const dampingFactor = 0.9;
-    const close_repulsion_distance = 50;
-    // Keep this negative
-    const close_repulsion_force = 10;
-    const max_distance_force = 200;
-    const wall_bounce = 3;
-    const speed = 50; // Lower is faster
-    class Particle {
-      position: p5.Vector;
-      velocity: p5.Vector;
-      acceleration: p5.Vector;
-      p5Colour: p5.Color;
-      constructor(x: number, y: number, public colour: Colour) {
-        this.position = p5.createVector(x, y);
-        this.velocity = p5.createVector(0, 0);
-        this.acceleration = p5.createVector(0, 0);
-        this.p5Colour = p5.color(0, 0, 0);
-        this.setColour(colour);
-      }
-      update() {
-        this.velocity.add(this.acceleration).mult(dampingFactor);
-        this.position.add(this.velocity);
-        // Check if its gone off the screen, wrap it back around
-        if (this.position.x < 0) {
-          // this.position.x = width - 1;
-          this.position.x = 0;
-          this.velocity.x *= -wall_bounce;
-        } else if (this.position.x >= width) {
-          this.position.x = width - 1;
-          this.velocity.x *= -wall_bounce;
-        }
-        if (this.position.y < 0) {
-          this.position.y = 0;
-          this.velocity.y *= -wall_bounce;
-        } else if (this.position.y >= height) {
-          this.position.y = height - 1;
-          this.velocity.y *= -wall_bounce;
-        }
-        // Reset acceleration
-        this.acceleration.x = 0;
-        this.acceleration.y = 0;
-      }
-      applyForce(force: p5.Vector) {
-        this.acceleration.add(force.div(speed));
-      }
-      setColour(colour: Colour) {
-        switch (colour) {
-          case Colour.Red:
-            this.p5Colour = p5.color(235, 64, 52);
-            break;
-          case Colour.Orange:
-            this.p5Colour = p5.color(235, 147, 52);
-            break;
-          case Colour.Yellow:
-            this.p5Colour = p5.color(255, 242, 99);
-            break;
-          case Colour.Green:
-            this.p5Colour = p5.color(64, 235, 52);
-            break;
-          case Colour.Blue:
-            this.p5Colour = p5.color(52, 134, 235);
-            break;
-          case Colour.Purple:
-            this.p5Colour = p5.color(168, 52, 235);
-            break;
-          default:
-            this.p5Colour = p5.color(0, 0, 0);
-        }
-      }
-    }
-    // Defines a CxC matrix regarding the attraction/repulsion rules
-    // for all the various colours
-    class ParticleRuleSet {
-      ruleMatrix: number[][];
-      constructor(
-        private universal_repulsion_distance: number,
-        private max_force_distance: number
-      ) {
-        // Create a random one for now
-        this.ruleMatrix = Array();
-        for (let i = 0; i < nColours; i++) {
-          this.ruleMatrix.push(Array(nColours));
-          for (let j = 0; j < nColours; j++) {
-            if (i === j) {
-              // this.ruleMatrix[i][j] = 1;
-              this.ruleMatrix[i][j] = Math.random() * 4 - 2;
-              // this.ruleMatrix[i][j] = 0;
-            } else {
-              this.ruleMatrix[i][j] = Math.random() * 4 - 2;
-            }
-          }
-        }
-      }
-      // Calculate the force to be applied to particle a based on the characteristics of
-      // particle b
-      forceOnParticle(a: Particle, b: Particle): p5.Vector {
-        // const r = a.position.dist(b.position);
-        const { r, directionVector } = this.calculateDistanceAndVector(a, b);
-        if (
-          r >=
-          (this.max_force_distance - this.universal_repulsion_distance) * 2 +
-            this.universal_repulsion_distance
-        ) {
-          // If the particles are too far, then no force should be applied
-          return p5.createVector(0, 0);
-        } else if (r <= this.universal_repulsion_distance) {
-          // The particles are too close to each other, apply the universal repulsion force
-          // to prevent them from converging to a single point
-
-          // COULDNT USE p5.Vector static method for some reason, cause window not defined error???
-          // So I'm creating and doing the subtraction myself
-          return directionVector
-            .normalize()
-            .mult(
-              r / this.universal_repulsion_distance - close_repulsion_force
-            );
-        } else {
-          // Look at the rule set for the correct force to apply
-          // We use an absolute value cartesian equation
-          const F = this.ruleMatrix[a.colour][b.colour];
-          const force =
-            (F /
-              (this.max_force_distance - this.universal_repulsion_distance)) *
-            Math.abs(r - this.max_force_distance);
-          return directionVector.normalize().mult(force);
-        }
-      }
-
-      calculateDistanceAndVector(a: Particle, b: Particle) {
-        // Calculate straight line distance
-        const r = a.position.dist(b.position);
-
-        // Calculate the wrapped distance in both x and y directions
-        let wrappedDistanceX = p5.abs(b.position.x - a.position.x);
-        if (wrappedDistanceX > width / 2) {
-          wrappedDistanceX = width - wrappedDistanceX;
-        }
-
-        let wrappedDistanceY = p5.abs(b.position.y - a.position.y);
-        if (wrappedDistanceY > height / 2) {
-          wrappedDistanceY = height - wrappedDistanceY;
-        }
-
-        // Create a vector between the points
-        let directionVector = p5.createVector(
-          b.position.x - a.position.x,
-          b.position.y - a.position.y
-        );
-
-        // Adjust vector for wrapping in x direction
-        if (wrappedDistanceX < p5.abs(b.position.x - a.position.x)) {
-          if (b.position.x < a.position.x) {
-            directionVector.x = width - a.position.x + b.position.x;
-          } else {
-            directionVector.x = -width + b.position.x - a.position.x;
-          }
-        }
-
-        // Adjust vector for wrapping in y direction
-        if (wrappedDistanceY < p5.abs(b.position.y - a.position.y)) {
-          if (b.position.y < a.position.y) {
-            directionVector.y = height - a.position.y + b.position.y;
-          } else {
-            directionVector.y = -height + b.position.y - a.position.y;
-          }
-        }
-
-        return { r, directionVector };
-      }
-
-      setRuleMatrix(newRules: number[][]) {
-        // Make sure its nColours by nColours
-        this.ruleMatrix = newRules;
-      }
-    }
     p5.setup = () => {
+      width = Math.min(width, p5.windowWidth - 10);
+      height = Math.min(height, p5.windowHeight - 200);
       p5.createCanvas(width, height);
-      const coloursArray = [
-        Colour.Red,
-        Colour.Orange,
-        Colour.Yellow,
-        Colour.Green,
-        Colour.Blue,
-        Colour.Purple,
-      ];
-      particles = new Array();
-      for (let i = 0; i < n; i++) {
-        const randomIndex = Math.floor(Math.random() * coloursArray.length);
-        const randomColour = coloursArray[randomIndex] as Colour;
 
-        particles.push(
-          new Particle(
-            p5.random(0, width - 1),
-            p5.random(0, height - 1),
-            randomColour
-          )
-        );
-      }
-      particleRuleSet = new ParticleRuleSet(
-        close_repulsion_distance,
-        max_distance_force
-      );
-      particleRuleSet.setRuleMatrix([
-        // R, O, Y, G, B, P
-        [1, 2, 0, 0, -4, 0], // R
-        [0, 1, 2, 0, 0, 0], // O
-        [0, 0, -3, 0, 0, 0], // Y
-        [0, -3, 0, 1, 0, 0], // G
-        [0, 0, 0, 0, 1, 0], // B
-        [2, 0, 0, 0, 0, 1], // P
-      ]);
       p5.noStroke();
-      p5.frameRate(30);
+      p5.colorMode(p5.HSL);
+      p5.frameRate(fps);
     };
+
+    p5.mousePressed = () => {};
 
     p5.draw = () => {
       p5.background(0);
-      for (let i = 0; i < n; i++) {
-        // Loop through every other particle and apply the force to it
-        for (let j = 0; j < n; j++) {
-          // Dont apply force on it self
-          if (i == j) continue;
-          const forceToApply = particleRuleSet.forceOnParticle(
-            particles[i],
-            particles[j]
-          );
 
-          particles[i].applyForce(forceToApply);
-        }
-        particles[i].update();
-        p5.fill(particles[i].p5Colour);
-        p5.circle(particles[i].position.x, particles[i].position.y, 6);
+      updateParticles();
+
+      for (let i = 0; i < n; i++) {
+        const screenX = positionsX[i] * width;
+        const screenY = positionsY[i] * height;
+        p5.fill((360 * colours[i]) / numColours, 100, 50);
+        p5.circle(screenX, screenY, particleSize);
       }
     };
   };
