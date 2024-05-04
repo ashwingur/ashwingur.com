@@ -5,8 +5,8 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { QueriesObserver } from "react-query";
 
 const RainbowSmoke = () => {
-  const [branching, setBranching] = useState(0.5);
-  const [rgbResolution, setRgbResolution] = useState(32);
+  const [branching, setBranching] = useState(0.3);
+  const [rgbResolution, setRgbResolution] = useState(48);
   const [boardSizeIndex, setBoardSizeIndex] = useState(4);
   const [queueReset, setQueueReset] = useState(true);
   const [binSize, setBinSize] = useState(10);
@@ -122,15 +122,6 @@ const RainbowSmoke = () => {
         y: number,
         z: number
       ): [number, number, number] {
-        // for (let i = 0; i < this.resolution; i++) {
-        //   for (let j = 0; j < this.resolution; j++) {
-        //     for (let k = 0; k < this.resolution; k++) {
-        //       this.visited[i][j][k] = false;
-        //     }
-        //   }
-        // }
-
-        // const queue: Cell[] = [];
         if (queueReset) {
           this.queue = [];
         }
@@ -144,9 +135,6 @@ const RainbowSmoke = () => {
 
         while (this.queue.length > 0) {
           const currentCell = this.queue.shift() as Cell;
-          //   console.log(
-          //     `Visiting cell (${currentCell.x}, ${currentCell.y}, ${currentCell.z})`
-          //   );
 
           // Check if this is an unused RGB value
           // If its unused then we have successfully found the next colour to use
@@ -166,11 +154,8 @@ const RainbowSmoke = () => {
               this.isValidCell(nextCell) &&
               !this.visited[nextX][nextY][nextZ]
             ) {
-              //   Math.random() > 0.5
-              //     ? queue.push(nextCell)
-              //     : queue.unshift(nextCell);
               this.queue.push(nextCell);
-              //   queue.unshift(nextCell);
+
               this.visited[nextX][nextY][nextZ] = true;
             }
           }
@@ -193,12 +178,14 @@ const RainbowSmoke = () => {
 
     p5.mouseClicked = () => {
       if (
-        p5.mouseX >= 0 &&
+        p5.mouseX > 0 &&
         p5.mouseX < width &&
-        p5.mouseY >= 0 &&
+        p5.mouseY > 0 &&
         p5.mouseY <= height &&
         width > 1000
       ) {
+        console.log(p5.mouseX);
+        console.log(p5.mouseY);
         p5.saveCanvas("painting.png");
       }
     };
@@ -266,9 +253,6 @@ const RainbowSmoke = () => {
           for (let c = 0; c < binSize && to_visit.length > 0; c++) {
             // Pop the first pixel and colour it in
             const pixel = to_visit.shift() as Pixel;
-            // const pixel = to_visit.shift() as Pixel;
-            //   const randomIndex = Math.floor(Math.random() * to_visit.length * 0.2);
-            //   const pixel = to_visit.splice(randomIndex, 1)[0];
 
             // Find the closest unused colour
             const [r, g, b] = rgbSpace.findClosestUnusedColour(
@@ -298,13 +282,6 @@ const RainbowSmoke = () => {
               );
               p5.rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size);
             }
-            // board[i][j].filled
-            //   ? p5.fill(
-            //       board[i][j].R * rgb_scale,
-            //       board[i][j].G * rgb_scale,
-            //       board[i][j].B * rgb_scale
-            //     )
-            //   : p5.fill(255);
           }
         }
       }
@@ -390,7 +367,7 @@ const RainbowSmoke = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center my-8">
+      <div className="flex flex-col justify-center items-center my-8">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
     </div>
