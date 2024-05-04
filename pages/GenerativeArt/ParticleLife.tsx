@@ -36,9 +36,9 @@ const force = (r: number, a: number) => {
 };
 
 const ParticleLife = () => {
-  let width = 1600;
+  let width = 1000;
   let height = 1000;
-  const [n, setN] = useState(1000);
+  const [n, setN] = useState(800);
   const fps = 60;
   const dt = 1 / fps;
   const [numColours, setNumColours] = useState(6);
@@ -169,65 +169,14 @@ const ParticleLife = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       width = Math.min(width, p5.windowWidth - 10);
-      height = Math.min(height, p5.windowHeight - 200);
-      if (width < 800) {
-        setN(500);
-      }
+      height = width; // We want a square so there's no distortion
+
       p5.createCanvas(width, height);
 
       p5.noStroke();
       p5.colorMode(p5.HSL);
       p5.frameRate(fps);
     };
-
-    // p5.mouseDragged = () => {
-    //   for (let i = 0; i < n; i++) {
-    //     // Apply repulsion force from the mouse coords
-    //     let totalForceX = 0;
-    //     let totalForceY = 0;
-    //     let rx = p5.mouseX - positionsX[i];
-    //     let ry = p5.mouseY - positionsY[i];
-
-    //     // Adjust for wrapping around the canvas
-    //     if (Math.abs(rx) > 0.5) {
-    //       rx -= Math.sign(rx);
-    //     }
-    //     if (Math.abs(ry) > 0.5) {
-    //       ry -= Math.sign(ry);
-    //     }
-
-    //     const r = Math.hypot(rx, ry);
-    //     if (r > 0 && r < rMax) {
-    //       const f = force(r / rMax, -1);
-    //       totalForceX += (rx / r) * f;
-    //       totalForceY += (ry / r) * f;
-    //     }
-    //     totalForceX *= rMax * forceFactor;
-    //     totalForceY *= rMax * forceFactor;
-
-    //     velocitiesX[i] *= frictionFactor * 1;
-    //     velocitiesY[i] *= frictionFactor * 1;
-
-    //     velocitiesX[i] += totalForceX * dt;
-    //     velocitiesY[i] += totalForceY * dt;
-
-    //     positionsX[i] += velocitiesX[i] * dt;
-    //     positionsY[i] += velocitiesY[i] * dt;
-
-    //     // Wrap around the canvas if they go out of it
-    //     if (positionsX[i] <= 0) {
-    //       positionsX[i] = 1;
-    //     } else if (positionsX[i] >= 1) {
-    //       positionsX[i] = 0;
-    //     }
-    //     if (positionsY[i] <= 0) {
-    //       positionsY[i] = 1;
-    //     } else if (positionsY[i] >= 1) {
-    //       positionsY[i] = 0;
-    //     }
-    //   }
-    //   console.log("mouse pressed");
-    // };
 
     p5.draw = () => {
       p5.background(0, 1 - trails);
