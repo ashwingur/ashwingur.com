@@ -95,8 +95,8 @@ const ParticleLife = () => {
     // I NEED TO PROPERLY UPDATE THE STATE, THIS SHOULD BE FIXED EVEN THOUGHT IT WORKS
     for (let i = 0; i < n; i++) {
       colours[i] = Math.floor(Math.random() * numColours);
-      positionsX[i] = Math.random();
-      positionsY[i] = Math.random();
+      positionsX[i] = 0.5 + Math.random() * 0.01;
+      positionsY[i] = 0.5 + Math.random() * 0.01;
       velocitiesX[i] = 0;
       velocitiesY[i] = 0;
     }
