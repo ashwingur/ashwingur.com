@@ -31,6 +31,12 @@ const GenerativeArt = () => {
           <button>Cellular Automata</button>
         </Link>
         <Link
+          href="/GenerativeArt/RainbowSmoke"
+          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
+        >
+          <button>Rainbow Smoke</button>
+        </Link>
+        <Link
           href="/GenerativeArt/Bubbles"
           className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto my-4 transition-all w-48 text-center"
         >
