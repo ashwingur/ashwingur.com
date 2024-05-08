@@ -126,18 +126,6 @@ const CellularAutomata = () => {
     ): number => {
       return rule_array[7 - ((left << 2) + (centre << 1) + right)];
     };
-
-    // p5.windowResized = () => {
-    //   // Reset everything
-    //   width = Math.floor((p5.windowWidth - padding) / n) * n;
-    //   height = h * pixelSize();
-    //   p5.resizeCanvas(width, height);
-    //   max_level = height / (width / n);
-    //   level = 0;
-    //   p5.background(255);
-    //   row = new Array(n).fill(0);
-    //   row[Math.floor(row.length / 2)] = 1;
-    // };
   };
 
   return (

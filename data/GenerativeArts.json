@@ -25,7 +25,12 @@
       "There are some notable rules that give interesting behaviour. Rule 30 displays a chaotic behaviour that also appears on a Conus textile shell. Rule 26 generates the Sierpinski triangle fractal. "
     ]
   },
-
+  {
+    "name": "Neon Beehive",
+    "url": "/GenerativeArt/NeonBeehive",
+    "image": "/assets/generativeart/neon_beehive.gif",
+    "description": ["Neon style particles that travel in a hexagonal pattern."]
+  },
   {
     "name": "Rainbow Smoke",
     "url": "/GenerativeArt/RainbowSmoke",
@@ -35,19 +40,19 @@
     ]
   },
   {
-    "name": "Bubbles",
-    "url": "/GenerativeArt/Bubbles",
-    "image": "/assets/generativeart/bubbles.gif",
-    "description": [
-      "Really simple animation that involves a bunch of circle particles that travel in a random radius. Bubbles expand in size the closer they are to the mouse."
-    ]
-  },
-  {
     "name": "Bouncing Particles",
     "url": "/GenerativeArt/BouncingParticles",
     "image": "/assets/generativeart/bouncing_particles.gif",
     "description": [
       "Simulating a simple gas particle with inelastic collisions against the walls. Particle size, count and speed can be adjusted."
+    ]
+  },
+  {
+    "name": "Bubbles",
+    "url": "/GenerativeArt/Bubbles",
+    "image": "/assets/generativeart/bubbles.gif",
+    "description": [
+      "Really simple animation that involves a bunch of circle particles that travel in a random radius. Bubbles expand in size the closer they are to the mouse."
     ]
   }
 ]
