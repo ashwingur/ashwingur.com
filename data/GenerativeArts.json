@@ -29,7 +29,9 @@
     "name": "Neon Beehive",
     "url": "/GenerativeArt/NeonBeehive",
     "image": "/assets/generativeart/neon_beehive.gif",
-    "description": ["Neon style particles that travel in a hexagonal pattern."]
+    "description": [
+      "Neon style particles that travel in a hexagonal pattern. Many parameters can be changed for some unique effects."
+    ]
   },
   {
     "name": "Rainbow Smoke",
