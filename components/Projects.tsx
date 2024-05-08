@@ -3,7 +3,7 @@ import ProjectData from "../data/Projects.json";
 import ProjectCard from "./ProjectCard";
 
 const Projects = () => {
-  var projectCards = ProjectData.map((item, index) => (
+  let projectCards = ProjectData.map((item, index) => (
     <ProjectCard {...item} key={index} />
   ));
 
