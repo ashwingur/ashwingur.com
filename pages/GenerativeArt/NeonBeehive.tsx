@@ -147,6 +147,10 @@ const NeonBeehive = () => {
 
     p5.draw = () => {
       p5.background(0, 0, 0, 0.03);
+      p5.fill(0, 0, 0);
+      p5.rect(0, 0, 50, 20);
+      p5.fill(0, 100, 100);
+      p5.text(Math.floor(p5.frameRate()), 10, 20);
 
       particle_colour += 0.15;
       particle_colour %= 360;
