@@ -34,6 +34,12 @@
     ]
   },
   {
+    "name": "Spark Puddle",
+    "url": "/GenerativeArt/SparkPuddle",
+    "image": "/assets/generativeart/black.png",
+    "description": ["In progress"]
+  },
+  {
     "name": "Rainbow Smoke",
     "url": "/GenerativeArt/RainbowSmoke",
     "image": "/assets/generativeart/rainbow_smoke.gif",

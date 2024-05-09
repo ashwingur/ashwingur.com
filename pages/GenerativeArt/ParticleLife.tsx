@@ -1,8 +1,7 @@
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import { P5CanvasInstance, P5WrapperProps, Sketch } from "@p5-wrapper/react";
-import BasicNavbar from "../../components/BasicNavbar";
-import p5 from "p5";
+import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { useEffect, useState } from "react";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const makeRandomMatrix = (numColours: number) => {
   const rows = [];
@@ -197,7 +196,7 @@ const ParticleLife = () => {
 
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Particle Life</h1>
       <div className="flex flex-col items-center justify-center">
         <button

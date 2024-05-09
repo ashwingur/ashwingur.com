@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import BasicNavbar from "../../components/BasicNavbar";
+import { useState } from "react";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import { QueriesObserver } from "react-query";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const RainbowSmoke = () => {
   const [branching, setBranching] = useState(0.3);
@@ -293,7 +292,7 @@ const RainbowSmoke = () => {
 
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Rainbow Smoke</h1>
       <div className="flex flex-col justify-center items-center">
         <button

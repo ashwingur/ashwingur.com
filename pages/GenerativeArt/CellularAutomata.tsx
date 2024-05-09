@@ -1,7 +1,7 @@
 import { useState } from "react";
-import BasicNavbar from "../../components/BasicNavbar";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const CellularAutomata = () => {
   const [rule, setRule] = useState<number | "">(30);
@@ -130,7 +130,7 @@ const CellularAutomata = () => {
 
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Cellular Automata</h1>
       <div className="flex justify-center items-center mt-4 gap-4">
         <div className="w-24 text-end">Rule (1-255)</div>

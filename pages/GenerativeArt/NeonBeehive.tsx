@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import BasicNavbar from "../../components/BasicNavbar";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const NeonBeehive = () => {
   const [speed, setSpeed] = useState(2);
@@ -186,7 +186,7 @@ const NeonBeehive = () => {
 
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Neon Beehive</h1>
       <div className="flex flex-col items-center justify-center">
         <div className="grid grid-cols-2 md:grid-cols-3 justify-center items-center gap-4 mt-4">

@@ -1,6 +1,6 @@
 import { P5CanvasInstance, type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import BasicNavbar from "../../components/BasicNavbar";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const sketch: Sketch = (p5: P5CanvasInstance) => {
   let grid: number[][];
@@ -117,7 +117,7 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
 const Sand = () => {
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center mt-20">Dune</h1>
       <div className="flex justify-center mt-8">
         <NextReactP5Wrapper sketch={sketch} />

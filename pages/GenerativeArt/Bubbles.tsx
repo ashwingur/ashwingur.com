@@ -1,7 +1,6 @@
-import React from "react";
-import BasicNavbar from "../../components/BasicNavbar";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
+import ArtNavBar from "../../components/ArtNavBar";
 
 const Circles = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
@@ -93,7 +92,7 @@ const Circles = () => {
 
   return (
     <div>
-      <BasicNavbar absolute={true} />
+      <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Bubbles!</h1>
       <div className="fixed inset-0 -z-10">
         <NextReactP5Wrapper sketch={sketch} />
