@@ -300,7 +300,7 @@ const NeonBeehive = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mb-8">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
     </div>
