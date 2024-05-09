@@ -4,7 +4,8 @@
     "url": "/GenerativeArt/ParticleLife",
     "image": "/assets/generativeart/particle_life.gif",
     "description": [
-      "A simulation that demonstrates emergence through simple rules. A particle is associated to a species according to its colour. Each colour has a random attracive or repulsive force to itself and every other particle. There is also a universal repulsion force between every particle regardless of colour, which prevents attracted particles from collapsing to a singularity.",
+      "This was heavily inspired by a youtube video I saw that is also called Particle Life. This is definitely my favourite creation so far because you can get a unique behaviour every time, and you will likely never see that exact behaviour again. ",
+      "A simulation that demonstrates emergence through simple rules. A particle is associated to a species according to its colour. Each colour has a random attracive or repulsive force to itself and every other particle. There is also a universal repulsion force between every particle regardless of colour, which prevents attracted particles from collapsing to a singularity. The physics also wrap around the edges of the canvas, you can think of it as a torus structure.",
       "There are many customisable parameters to mess around with to change the particle behaviours or appearance. A cool fluid like effect is so set the trails to maximum and then set a blur value."
     ]
   },
@@ -13,7 +14,7 @@
     "url": "/GenerativeArt/Dune",
     "image": "/assets/generativeart/dune.gif",
     "description": [
-      "The first generative art project I made. It is a falling sand simulator where can hold and drag within the canvas to create sand in that area and watch it fall."
+      "The first generative art project I made. It is a falling sand simulator where can hold and drag within the canvas to create sand in that area and watch it fall. It was a bit challenging to get gravity implemented and there are some quirks with the behaviour. The sand will aim to disperse into a triangular shape. If there is an empty spot to the bottom left or bottom right pixel, then the sand particle will move there."
     ]
   },
   {
@@ -37,7 +38,9 @@
     "name": "Spark Puddle",
     "url": "/GenerativeArt/SparkPuddle",
     "image": "/assets/generativeart/black.png",
-    "description": ["In progress"]
+    "description": [
+      "In progress. A particle system similar to sparklers. Also includes a cool reflection effect when the particles bounce off the ground."
+    ]
   },
   {
     "name": "Rainbow Smoke",
