@@ -37,9 +37,9 @@
   {
     "name": "Spark Puddle",
     "url": "/GenerativeArt/SparkPuddle",
-    "image": "/assets/generativeart/black.png",
+    "image": "/assets/generativeart/spark_puddle.gif",
     "description": [
-      "In progress. A particle system similar to sparklers. Also includes a cool reflection effect when the particles bounce off the ground."
+      "A particle system similar to sparklers. Also includes a cool reflection effect when the particles bounce off the ground."
     ]
   },
   {
