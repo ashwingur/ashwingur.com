@@ -71,7 +71,7 @@ const SparkPuddle = () => {
     }
 
     p5.setup = () => {
-      width = Math.min(p5.windowWidth - 20, 1200);
+      width = p5.windowWidth - 20;
       height = Math.min(p5.windowWidth - 20, 800);
       p5.createCanvas(width, height);
       groundLevel = Math.floor(height * 0.6);
