@@ -67,8 +67,8 @@
     ]
   },
   {
-    "name": "Steady Downpour",
-    "url": "/GenerativeArt/SteadyDownpour",
+    "name": "The Downpour",
+    "url": "/GenerativeArt/TheDownpour",
     "image": "/assets/generativeart/black.png",
     "description": ["TODO: Cool rain simulation against buildings."]
   }

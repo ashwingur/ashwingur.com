@@ -3,7 +3,7 @@ import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import p5 from "p5";
 
-const SteadyDownpour = () => {
+const TheDownpour = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     let width: number;
     let height: number;
@@ -12,9 +12,13 @@ const SteadyDownpour = () => {
     const gravity = 0.2;
     const rainDensity = 30;
     const numLayers = 2;
+    const hue = 0;
+    const terminalVelocity = 10;
+    const layerVelocityMultiplier = 1;
 
     class Particle {
       pos: p5.Vector;
+      prev_pos: p5.Vector;
       vel: p5.Vector;
       life: number;
       layer: number;
@@ -22,7 +26,12 @@ const SteadyDownpour = () => {
       constructor(public x: number, public y: number) {
         this.layer = Math.floor(Math.random() * numLayers);
         this.pos = p5.createVector(x, y);
-        this.vel = p5.createVector(0.2, 3 + this.layer);
+        this.prev_pos = this.pos.copy();
+        this.vel = p5.createVector(
+          1 + this.layer * 0,
+          2,
+          3 + this.layer * layerVelocityMultiplier
+        );
         this.life = 300;
       }
 
@@ -30,14 +39,21 @@ const SteadyDownpour = () => {
         this.life--;
         const prev_x = this.pos.x;
         const prev_y = this.pos.y;
+        this.prev_pos = this.pos.copy();
         this.pos.x += this.vel.x;
         this.pos.y += this.vel.y;
         this.vel.y += gravity;
+        if (
+          this.vel.y >=
+          terminalVelocity + this.layer * layerVelocityMultiplier
+        ) {
+          this.vel.y = terminalVelocity + this.layer * layerVelocityMultiplier;
+        }
 
         // Go through every wall and check if there was a collision
         walls.forEach((w) => {
           if (
-            w.layer < this.layer ||
+            w.layer > this.layer ||
             !w.isCollision(prev_x, prev_y, this.pos.x, this.pos.y)
           ) {
             return;
@@ -65,8 +81,13 @@ const SteadyDownpour = () => {
       }
 
       draw() {
-        p5.fill(255);
+        p5.fill(0, 50, 80 + this.vel.mag() * 2);
         p5.circle(this.pos.x, this.pos.y, 2);
+      }
+
+      drawPrev() {
+        p5.fill(0, 50, 50 + this.vel.mag());
+        p5.circle(this.prev_pos.x, this.prev_pos.y, 2);
       }
 
       isDead() {
@@ -246,20 +267,21 @@ const SteadyDownpour = () => {
       height = Math.min(p5.windowWidth - 20, 800);
       p5.createCanvas(width, height);
 
-      // walls.push(...Wall.squareBuilding());
-      walls.push(...Wall.twoLayerRoof());
+      walls.push(...Wall.squareBuilding());
+      // walls.push(...Wall.twoLayerRoof());
 
       p5.noStroke();
+      p5.colorMode(p5.HSL);
     };
 
     p5.draw = () => {
-      p5.background(30, 0, 0, 90);
+      p5.background(0, 0, 0, 0.2);
 
       for (let i = 0; i < rainDensity; i++) {
         particles.push(
           new Particle(
             Math.floor(-0.2 * width + Math.random() * 1.2 * width),
-            -Math.random() * 100
+            -(Math.random() * 100 + 100)
           )
         );
       }
@@ -271,6 +293,9 @@ const SteadyDownpour = () => {
         }
       }
 
+      particles.forEach((p) => {
+        p.drawPrev();
+      });
       particles.forEach((p) => {
         p.update();
         p.draw();
@@ -285,7 +310,7 @@ const SteadyDownpour = () => {
   return (
     <div>
       <ArtNavBar fixed={true} />
-      <h1 className="text-center pt-20">Steady Downpour</h1>
+      <h1 className="text-center pt-20">The Downpour.</h1>
       <div className="flex justify-center mt-4 mb-8">
         <NextReactP5Wrapper sketch={sketch} />
       </div>
@@ -293,4 +318,4 @@ const SteadyDownpour = () => {
   );
 };
 
-export default SteadyDownpour;
+export default TheDownpour;
