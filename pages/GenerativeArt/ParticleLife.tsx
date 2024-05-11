@@ -309,7 +309,7 @@ const ParticleLife = () => {
             Zero Matrix
           </button>
         </div>
-        <div className="flex flex-col mb-4">
+        <div className="flex flex-col mb-4 bg-gray-500 p-2 rounded-lg">
           <div className="flex justify-end gap-1 mb-1">{topColourRow}</div>{" "}
           {matrixButtons}
         </div>
