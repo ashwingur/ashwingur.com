@@ -12,7 +12,7 @@ const TheDownpour = () => {
     const gravity = 0.2;
     const rainDensity = 30;
     const numLayers = 5;
-    const hue = 0;
+    const hue = Math.random() * 360;
     const terminalVelocity = 10;
     const layerVelocityMultiplier = 1;
 
@@ -28,8 +28,7 @@ const TheDownpour = () => {
         this.pos = p5.createVector(x, y);
         this.prev_pos = this.pos.copy();
         this.vel = p5.createVector(
-          1 + this.layer * 0,
-          2,
+          2 + this.layer * 0,
           3 + this.layer * layerVelocityMultiplier
         );
         this.life = 300;
@@ -81,12 +80,12 @@ const TheDownpour = () => {
       }
 
       draw() {
-        p5.fill(0, 50, 80 + this.vel.mag() * 2);
+        p5.fill(hue, 50, 80 + this.vel.mag() * 2);
         p5.circle(this.pos.x, this.pos.y, 2);
       }
 
       drawPrev() {
-        p5.fill(0, 50, 50 + this.vel.mag());
+        p5.fill(hue, 50, 50 + this.vel.mag());
         p5.circle(this.prev_pos.x, this.prev_pos.y, 2);
       }
 
@@ -294,7 +293,7 @@ const TheDownpour = () => {
       // walls.push(...Wall.twoLayerRoof());
       walls.push(...Wall.makeHouseShape(500, 300, 700, 200, 4));
       walls.push(...Wall.makeHouseShape(350, 500, 550, 400, 3));
-      walls.push(...Wall.makeHouseShape(600, 550, 750, 450, 1));
+      walls.push(...Wall.makeHouseShape(600, 550, 750, 450, 0));
       walls.push(...Wall.makeHouseShape(50, 700, 300, 600, 1));
 
       p5.noStroke();
