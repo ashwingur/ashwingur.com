@@ -11,7 +11,7 @@ const TheDownpour = () => {
     let particles: Particle[] = [];
     const gravity = 0.2;
     const rainDensity = 30;
-    const numLayers = 2;
+    const numLayers = 5;
     const hue = 0;
     const terminalVelocity = 10;
     const layerVelocityMultiplier = 1;
@@ -213,6 +213,29 @@ const TheDownpour = () => {
         }
       }
 
+      static makeHouseShape(
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        layer: number
+      ): Wall[] {
+        let house: Wall[] = [];
+
+        // Left wall
+        house.push(new Wall(x1, y1, x1, height, layer));
+        // Right wall
+        house.push(
+          new Wall(x1 + 2 * (x2 - x1), y1, x1 + 2 * (x2 - x1), height, layer)
+        );
+        // Left roof
+        house.push(new Wall(x1, y1, x2 + 1, y2, layer));
+        // Right roof
+        house.push(new Wall(x2 - 1, y2, x1 + 2 * (x2 - x1), y1, layer));
+
+        return house;
+      }
+
       static squareBuilding() {
         return [
           new Wall(
@@ -267,8 +290,12 @@ const TheDownpour = () => {
       height = Math.min(p5.windowWidth - 20, 800);
       p5.createCanvas(width, height);
 
-      walls.push(...Wall.squareBuilding());
+      // walls.push(...Wall.squareBuilding());
       // walls.push(...Wall.twoLayerRoof());
+      walls.push(...Wall.makeHouseShape(500, 300, 700, 200, 4));
+      walls.push(...Wall.makeHouseShape(350, 500, 550, 400, 3));
+      walls.push(...Wall.makeHouseShape(600, 550, 750, 450, 1));
+      walls.push(...Wall.makeHouseShape(50, 700, 300, 600, 1));
 
       p5.noStroke();
       p5.colorMode(p5.HSL);
