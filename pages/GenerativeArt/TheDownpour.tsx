@@ -294,7 +294,7 @@ const TheDownpour = () => {
       walls.push(...Wall.makeHouseShape(500, 300, 700, 200, 4));
       walls.push(...Wall.makeHouseShape(350, 500, 550, 400, 3));
       walls.push(...Wall.makeHouseShape(600, 550, 750, 450, 0));
-      walls.push(...Wall.makeHouseShape(50, 700, 300, 600, 1));
+      walls.push(...Wall.makeHouseShape(-50, 700, 200, 600, 1));
 
       p5.noStroke();
       p5.colorMode(p5.HSL);
