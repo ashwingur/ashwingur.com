@@ -10,6 +10,14 @@
     ]
   },
   {
+    "name": "The Downpour",
+    "url": "/GenerativeArt/TheDownpour",
+    "image": "/assets/generativeart/downpour.gif",
+    "description": [
+      "Cool rain simulation with collision physics against buildings. There is also a layered effect that gives a sense of depth. This one is better experience on PC because of the larger canvas size capability."
+    ]
+  },
+  {
     "name": "Dune",
     "url": "/GenerativeArt/Dune",
     "image": "/assets/generativeart/dune.gif",
@@ -65,11 +73,5 @@
     "description": [
       "Really simple animation that involves a bunch of circle particles that travel in a random radius. Bubbles expand in size the closer they are to the mouse."
     ]
-  },
-  {
-    "name": "The Downpour",
-    "url": "/GenerativeArt/TheDownpour",
-    "image": "/assets/generativeart/black.png",
-    "description": ["TODO: Cool rain simulation against buildings."]
   }
 ]

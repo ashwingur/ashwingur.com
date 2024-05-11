@@ -10,7 +10,7 @@ const TheDownpour = () => {
     let walls: Wall[] = [];
     let particles: Particle[] = [];
     const gravity = 0.2;
-    const rainDensity = 30;
+    const rainDensity = 25;
     const numLayers = 5;
     const hue = Math.random() * 360;
     const terminalVelocity = 10;
@@ -81,7 +81,11 @@ const TheDownpour = () => {
 
       draw() {
         p5.fill(hue, 50, 80 + this.vel.mag() * 2);
-        p5.circle(this.pos.x, this.pos.y, 2);
+        p5.circle(
+          this.pos.x,
+          this.pos.y,
+          Math.ceil((numLayers - this.layer) / 4 + 1)
+        );
       }
 
       drawPrev() {
@@ -228,9 +232,9 @@ const TheDownpour = () => {
           new Wall(x1 + 2 * (x2 - x1), y1, x1 + 2 * (x2 - x1), height, layer)
         );
         // Left roof
-        house.push(new Wall(x1, y1, x2 + 1, y2, layer));
+        house.push(new Wall(x1 - 1, y1, x2 + 2, y2, layer));
         // Right roof
-        house.push(new Wall(x2 - 1, y2, x1 + 2 * (x2 - x1), y1, layer));
+        house.push(new Wall(x2 - 2, y2, x1 + 2 * (x2 - x1) + 1, y1, layer));
 
         return house;
       }
@@ -301,7 +305,7 @@ const TheDownpour = () => {
     };
 
     p5.draw = () => {
-      p5.background(0, 0, 0, 0.2);
+      p5.background(hue, 5, 5, 0.2);
 
       for (let i = 0; i < rainDensity; i++) {
         particles.push(
@@ -322,6 +326,7 @@ const TheDownpour = () => {
       particles.forEach((p) => {
         p.drawPrev();
       });
+      p5.filter(p5.BLUR, 1);
       particles.forEach((p) => {
         p.update();
         p.draw();
