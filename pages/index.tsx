@@ -2,7 +2,6 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
-import Contact from "../components/Contact";
 import Apps from "../components/Apps";
 import Footer from "../components/Footer";
 
