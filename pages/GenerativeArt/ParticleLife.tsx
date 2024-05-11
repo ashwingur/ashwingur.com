@@ -23,6 +23,55 @@ const makeRandomMatrix = (numColours: number) => {
   // ];
 };
 
+const zeroMatrix = (numColours: number) => {
+  const rows = [];
+  for (let i = 0; i < numColours; i++) {
+    const row = [];
+    for (let j = 0; j < numColours; j++) {
+      row.push(0);
+    }
+    rows.push(row);
+  }
+  return rows;
+};
+
+function hslToHex(h: number, s: number, l: number): string {
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n: number): string => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, "0"); // convert to Hex and prefix "0" if needed
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+const forceToColour = (f: number): string => {
+  if (f === -1) {
+    return "bg-red-700";
+  } else if (f <= -0.75) {
+    return "bg-red-800";
+  } else if (f <= -0.5) {
+    return "bg-red-900";
+  } else if (f < 0) {
+    return "bg-red-950";
+  } else if (f === 0) {
+    return "bg-black";
+  } else if (f <= 0.25) {
+    return "bg-green-700";
+  } else if (f <= 0.5) {
+    return "bg-green-800";
+  } else if (f <= 0.75) {
+    return "bg-green-900";
+  } else if (f <= 1) {
+    return "bg-green-950";
+  } else {
+    return "bg-white";
+  }
+};
+
 const force = (r: number, a: number) => {
   const beta = 0.3;
   if (r < beta) {
@@ -89,6 +138,49 @@ const ParticleLife = () => {
   const lightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLight(parseInt(event.target.value));
   };
+
+  const handleMatrixButtonClick = (row: number, col: number) => {
+    setMatrix((prevMatrix) => {
+      const newGrid = [...prevMatrix];
+      let updatedValue = Math.floor(newGrid[row][col] * 4) / 4; // Round to the nearest 0.25
+      updatedValue += 0.25; // Increment by 0.25
+      // If greater than 1 then wrap back around to -1
+      if (updatedValue > 1) {
+        updatedValue = -1;
+      }
+      newGrid[row][col] = updatedValue;
+      return newGrid;
+    });
+  };
+
+  const topColourRow: JSX.Element[] = [<div key={-1}></div>];
+  for (let i = 0; i < numColours; i++) {
+    const cellColour = hslToHex((360 / numColours) * i, 100, 50);
+    topColourRow.push(
+      <div
+        style={{ backgroundColor: cellColour }}
+        className={`h-4 w-4 lg:w-6 lg:h-6 rounded-full mr-1`}
+      ></div>
+    );
+  }
+  const matrixButtons = matrix.map((row, rowIndex) => {
+    const cellColour = hslToHex((360 / numColours) * rowIndex, 100, 50);
+    return (
+      <div key={rowIndex} className="flex items-center">
+        <div
+          style={{ backgroundColor: cellColour }}
+          className={`h-4 w-4 lg:w-6 lg:h-6 rounded-full mr-1`}
+        ></div>
+        {row.map((cell, colIndex) => (
+          <button
+            key={colIndex}
+            onClick={() => handleMatrixButtonClick(rowIndex, colIndex)}
+            className={`h-4 w-4 lg:w-8 lg:h-8 ${forceToColour(cell)}`}
+          ></button>
+        ))}
+      </div>
+    );
+  });
 
   useEffect(() => {
     // I NEED TO PROPERLY UPDATE THE STATE, THIS SHOULD BE FIXED EVEN THOUGHT IT WORKS
@@ -199,14 +291,28 @@ const ParticleLife = () => {
       <ArtNavBar fixed={true} />
       <h1 className="text-center pt-20">Particle Life</h1>
       <div className="flex flex-col items-center justify-center">
-        <button
-          className="text-center p-2 bg-blue-600 text-white rounded-md my-4"
-          onClick={() => {
-            setMatrix(makeRandomMatrix(numColours));
-          }}
-        >
-          Random Matrix
-        </button>
+        <div className="flex gap-4">
+          <button
+            className="text-center p-2 bg-blue-600 text-white rounded-md my-4"
+            onClick={() => {
+              setMatrix(makeRandomMatrix(numColours));
+            }}
+          >
+            Random Matrix
+          </button>
+          <button
+            className="text-center p-2 bg-blue-600 text-white rounded-md my-4"
+            onClick={() => {
+              setMatrix(zeroMatrix(numColours));
+            }}
+          >
+            Zero Matrix
+          </button>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex justify-end gap-1 mb-1">{topColourRow}</div>{" "}
+          {matrixButtons}
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
           <div>
             <div>Max F distance: {rMax}</div>
