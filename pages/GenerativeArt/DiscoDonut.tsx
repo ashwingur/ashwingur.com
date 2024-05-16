@@ -20,6 +20,7 @@ const DiscoDonut = () => {
       gradientShader = p5.createShader(vert, frag);
       p5.noStroke();
       p5.ellipseMode(p5.CORNER);
+      p5.pixelDensity(1);
     };
 
     p5.draw = () => {
