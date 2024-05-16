@@ -51,6 +51,22 @@
     ]
   },
   {
+    "name": "Mandelbrot",
+    "url": "/GenerativeArt/Mandelbrot",
+    "image": "/assets/generativeart/mandelbrot.gif",
+    "description": [
+      "Mandelbrot implementation provided by p5js. I wanted to learn about shaders so I attempted to get this integrated with nextjs and the p5 wrapper."
+    ]
+  },
+  {
+    "name": "Disco Donut",
+    "url": "/GenerativeArt/DiscoDonut",
+    "image": "/assets/generativeart/black.png",
+    "description": [
+      "My very first original shader where I didn't copy any existing code. Messed around with some sinuisoidal patterns to get this cool lens effect."
+    ]
+  },
+  {
     "name": "Rainbow Smoke",
     "url": "/GenerativeArt/RainbowSmoke",
     "image": "/assets/generativeart/rainbow_smoke.gif",
