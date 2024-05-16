@@ -2,8 +2,8 @@ import ArtNavBar from "../../components/ArtNavBar";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import p5 from "p5";
-import vert from "./Gradient/shader.vert";
-import frag from "./Gradient/shader.frag";
+import vert from "./DiscoDonut/shader.vert";
+import frag from "./DiscoDonut/shader.frag";
 
 const DiscoDonut = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
