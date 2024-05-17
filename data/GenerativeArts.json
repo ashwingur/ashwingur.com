@@ -61,7 +61,7 @@
   {
     "name": "Disco Donut",
     "url": "/GenerativeArt/DiscoDonut",
-    "image": "/assets/generativeart/black.png",
+    "image": "/assets/generativeart/disco_donut.gif",
     "description": [
       "My very first original shader where I didn't copy any existing code. Messed around with some sinuisoidal patterns to get this cool lens effect."
     ]
