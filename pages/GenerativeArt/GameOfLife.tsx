@@ -4,8 +4,6 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import p5 from "p5";
 import vert from "./GameOfLife/shader.vert";
 import frag from "./GameOfLife/shader.frag";
-import { useState } from "react";
-
 const GameOfLife = () => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     let width: number;
@@ -15,7 +13,7 @@ const GameOfLife = () => {
 
     p5.setup = () => {
       width = Math.min(p5.windowWidth - 20, 1200);
-      height = Math.min(p5.windowHeight - 20, 800);
+      height = Math.min(p5.windowWidth - 20, 800);
       p5.createCanvas(width, height, p5.WEBGL);
       myShader = p5.createShader(vert, frag);
       p5.pixelDensity(1);
