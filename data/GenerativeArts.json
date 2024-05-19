@@ -53,8 +53,10 @@
   {
     "name": "Game of Life",
     "url": "/GenerativeArt/GameOfLife",
-    "image": "/assets/generativeart/black.png",
-    "description": ["Game of life implementation using shaders."]
+    "image": "/assets/generativeart/game_of_life.gif",
+    "description": [
+      "Game of life implementation using shaders. Each pixel is a cell and the previous state is passed in as a 2D texture which allows us to sample the neighbouring values. The shader allows us to run at a much higher resolution."
+    ]
   },
   {
     "name": "Mandelbrot",
