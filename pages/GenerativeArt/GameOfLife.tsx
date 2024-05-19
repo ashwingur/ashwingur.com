@@ -22,6 +22,7 @@ const GameOfLife = () => {
       p5.noSmooth();
       p5.shader(myShader);
       myShader.setUniform("pixelSize", [1.0 / width, 1.0 / height]);
+      p5.frameRate(15);
     };
 
     p5.draw = () => {
