@@ -15,6 +15,8 @@ const TheDownpour = () => {
     const hue = Math.random() * 360;
     const terminalVelocity = 10;
     const layerVelocityMultiplier = 1;
+    let mouseWall: Wall;
+    const mouseWallWidth = 40;
 
     class Particle {
       pos: p5.Vector;
@@ -50,7 +52,7 @@ const TheDownpour = () => {
         }
 
         // Go through every wall and check if there was a collision
-        walls.forEach((w) => {
+        [...walls, mouseWall].forEach((w) => {
           if (
             w.layer > this.layer ||
             !w.isCollision(prev_x, prev_y, this.pos.x, this.pos.y)
@@ -216,6 +218,39 @@ const TheDownpour = () => {
         }
       }
 
+      updateWallPosition(
+        start_x: number,
+        start_y: number,
+        end_x: number,
+        end_y: number,
+        layer: number
+      ) {
+        this.start_x = start_x;
+        this.start_y = start_y;
+        this.end_x = end_x;
+        this.end_y = end_y;
+        this.layer = layer;
+
+        if (end_x < start_x) {
+          throw new Error(
+            `Start x (${start_x}) should be less than end x (${end_x})`
+          );
+        }
+
+        // Generate all the points along a straight line from the start and end coordinates
+        // Consider 3 scenarios: horizontal, vertical and diagonal line
+        if (start_x == end_x) {
+          this.initialiseVerticalLine();
+          this.walltype = WallType.VERTICAL;
+        } else if (start_y == end_y) {
+          this.initialiseHorizontalLine();
+          this.walltype = WallType.HORIZONTAL;
+        } else {
+          this.initialiseDiagonalLine();
+          this.walltype = WallType.DIAGONAL;
+        }
+      }
+
       static makeHouseShape(
         x1: number,
         y1: number,
@@ -300,12 +335,30 @@ const TheDownpour = () => {
       walls.push(...Wall.makeHouseShape(600, 550, 750, 450, 0));
       walls.push(...Wall.makeHouseShape(-50, 700, 200, 600, 1));
 
+      // Make a wall that will follow the mouse
+      mouseWall = new Wall(
+        p5.mouseX - mouseWallWidth,
+        p5.mouseY,
+        p5.mouseX + mouseWallWidth,
+        p5.mouseY,
+        0
+      );
+
       p5.noStroke();
       p5.colorMode(p5.HSL);
     };
 
     p5.draw = () => {
       p5.background(hue, 5, 5, 0.2);
+
+      // Update the mouse wall position
+      mouseWall.updateWallPosition(
+        p5.mouseX - mouseWallWidth,
+        p5.mouseY,
+        p5.mouseX + mouseWallWidth,
+        p5.mouseY,
+        0
+      );
 
       for (let i = 0; i < rainDensity; i++) {
         particles.push(
