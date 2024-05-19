@@ -12,7 +12,7 @@ const GameOfLife = () => {
     let textCanvas: p5.Graphics;
 
     p5.setup = () => {
-      width = Math.min(p5.windowWidth - 20, 1200);
+      width = Math.min(p5.windowWidth - 20, 800);
       height = Math.min(p5.windowWidth - 20, 800);
       p5.createCanvas(width, height, p5.WEBGL);
       myShader = p5.createShader(vert, frag);
