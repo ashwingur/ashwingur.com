@@ -51,6 +51,12 @@
     ]
   },
   {
+    "name": "Game of Life",
+    "url": "/GenerativeArt/GameOfLife",
+    "image": "/assets/generativeart/black.png",
+    "description": ["Game of life implementation using shaders."]
+  },
+  {
     "name": "Mandelbrot",
     "url": "/GenerativeArt/Mandelbrot",
     "image": "/assets/generativeart/mandelbrot.gif",
