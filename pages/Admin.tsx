@@ -5,15 +5,16 @@ import { useAuth } from "../components/AuthContext";
 import { useRouter } from "next/navigation";
 
 const Admin = () => {
-  const { user, role } = useAuth();
+  const { user, role, loading } = useAuth();
   const router = useRouter();
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    if (role !== "admin") {
+    console.log(role);
+    if (!loading && role !== "admin") {
       router.replace("/");
     }
-  }, [role, router]);
+  }, [loading, role, router]);
 
   const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_ASHWINGUR_API,
