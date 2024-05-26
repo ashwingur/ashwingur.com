@@ -3,14 +3,16 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext";
 import { useRouter } from "next/navigation";
+import { TailSpin } from "react-loading-icons";
 
 const Admin = () => {
   const { user, role, loading } = useAuth();
   const router = useRouter();
   const [msg, setMsg] = useState("");
 
+  console.log(loading);
+
   useEffect(() => {
-    console.log(role);
     if (!loading && role !== "admin") {
       router.replace("/");
     }
@@ -34,6 +36,18 @@ const Admin = () => {
     };
     adminTest();
   }, [api]);
+
+  if (loading || role !== "admin") {
+    return (
+      <div>
+        <Navbar fixed={false} />
+        <div className="flex flex-col items-center justify-center mt-8">
+          <TailSpin />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar fixed={false} />
