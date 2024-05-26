@@ -1,11 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { MdOutlineMenu, MdOutlineClose } from "react-icons/md";
+import {
+  MdOutlineMenu,
+  MdOutlineClose,
+  MdLogout,
+  MdLogin,
+  MdSettings,
+} from "react-icons/md";
 import ToggleThemeButton from "./ToggleThemeButton";
+import { useAuth } from "./AuthContext";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {
   const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
+  const { user, logout } = useAuth();
+  console.log("Running again");
+  console.log(user);
 
   return (
     <div>
@@ -40,10 +52,26 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           >
             <li>Projects</li>
           </Link>
-
           <li>
             <ToggleThemeButton />
           </li>
+
+          {!user && (
+            <Link
+              href="/Login"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md"
+            >
+              <MdLogin />
+            </Link>
+          )}
+          {user && (
+            <Link
+              href="/Login"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md"
+            >
+              <MdSettings />
+            </Link>
+          )}
         </ul>
         <div
           className="cursor-pointer lg:hidden"
@@ -125,6 +153,22 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             <li>
               <ToggleThemeButton />
             </li>
+            {!user && (
+              <Link
+                href="/Login"
+                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md my-2"
+              >
+                <MdLogin />
+              </Link>
+            )}
+            {user && (
+              <Link
+                href="/Login"
+                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md my-2"
+              >
+                <MdSettings />
+              </Link>
+            )}
           </ul>
         </div>
       </div>

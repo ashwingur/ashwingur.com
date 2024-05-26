@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider, useTheme } from "next-themes";
-import AppContext from "../components/AppContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { Nunito } from "next/font/google";
+import { AuthProvider } from "../components/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -16,15 +16,15 @@ const inter = Nunito({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={{}}>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider enableSystem={true} attribute="class">
           <main className={`${inter.variable} font-sans`}>
             <Component {...pageProps} />
           </main>
         </ThemeProvider>
-      </AppContext.Provider>
-      <Analytics />
-    </QueryClientProvider>
+        <Analytics />
+      </QueryClientProvider>
+    </AuthProvider>
   );
 }
