@@ -7,9 +7,14 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, user, logout } = useAuth();
+  const [isCorrectLogin, setIsCorrectLogin] = useState(true);
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await login(username, password);
+    if (!user) {
+      setIsCorrectLogin(false);
+      setPassword("");
+    }
   };
 
   const handleLogout = async () => {
@@ -45,19 +50,28 @@ const Login = () => {
               onSubmit={handleSubmit}
             >
               <input
-                className="p-2 rounded-lg"
+                className={`p-2 rounded-lg ${
+                  !isCorrectLogin ? "border-2 border-red-500" : ""
+                }`}
                 type="text"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
-                className="p-2 rounded-lg"
+                className={`p-2 rounded-lg ${
+                  !isCorrectLogin ? "border-2 border-red-500" : ""
+                }`}
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {!isCorrectLogin && (
+                <div className="text-red-500">
+                  Incorrect username or password
+                </div>
+              )}
               <button
                 className="bg-blue-200 dark:bg-[#2e1065] py-2 px-8 mt-4 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
                 type="submit"
