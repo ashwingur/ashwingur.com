@@ -16,8 +16,6 @@ import { useAuth } from "./AuthContext";
 const Navbar = ({ fixed }: { fixed: boolean }) => {
   const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
   const { user, logout } = useAuth();
-  console.log("Running again");
-  console.log(user);
 
   return (
     <div>

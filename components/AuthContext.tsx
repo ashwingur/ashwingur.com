@@ -11,6 +11,7 @@ import axios from "axios";
 
 interface AuthContextType {
   user: string | null;
+  role: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
@@ -26,6 +27,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     withCredentials: true,
   });
   const [user, setUser] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -35,6 +37,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         const response = await api.get("/checkauth");
         if (response.data.authenticated) {
           setUser(response.data.username);
+          setRole(response.data.role);
         } else {
           setUser(null);
         }
@@ -71,7 +74,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, role, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

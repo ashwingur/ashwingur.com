@@ -15,7 +15,13 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "context/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "context/*.tsx",
+    "middleware.ts"
+  ],
   "exclude": ["node_modules"],
   "resolveJsonModule": true
 }
