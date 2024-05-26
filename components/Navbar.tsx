@@ -15,7 +15,7 @@ import { useAuth } from "./AuthContext";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {
   const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
-  const { user, logout } = useAuth();
+  const { user, role } = useAuth();
 
   return (
     <div>
@@ -50,6 +50,15 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           >
             <li>Projects</li>
           </Link>
+          {user && role === "admin" && (
+            <Link
+              href="/Admin"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+              scroll={false}
+            >
+              <li>Admin</li>
+            </Link>
+          )}
           <li>
             <ToggleThemeButton />
           </li>
@@ -147,6 +156,18 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             >
               <li>Projects</li>
             </Link>
+            {user && role === "admin" && (
+              <Link
+                href="/Admin"
+                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
+                scroll={false}
+                onClick={() => {
+                  setMobileNavMenu(false);
+                }}
+              >
+                <li>Admin</li>
+              </Link>
+            )}
 
             <li>
               <ToggleThemeButton />
