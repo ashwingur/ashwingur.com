@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+// CURRENTLY NOT BEING USED BECAUSE IT ONLY RUNS ON THE SERVER SIDE SO WE CANT GET COOKIES
+
 type CheckAuth = {
   authenticated: boolean;
   role: string;
@@ -44,5 +46,6 @@ export async function middleware(req: NextRequest) {
 
 // Define the matcher function to specify which paths should use the middleware
 export const config = {
-  matcher: ["/Admin/:path*"], // Adjust this to match your protected routes
+  // matcher: ["/Admin/:path*"], // Adjust this to match your protected routes
+  matcher: [],
 };

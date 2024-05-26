@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useAuth } from "../components/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Admin = () => {
+  const { user, role } = useAuth();
+  const router = useRouter();
   const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    if (role !== "admin") {
+      router.replace("/");
+    }
+  }, [role, router]);
+
   const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_ASHWINGUR_API,
     withCredentials: true,
   });
+
   useEffect(() => {
     const adminTest = async () => {
       try {
