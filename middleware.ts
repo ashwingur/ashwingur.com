@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 type CheckAuth = {
   authenticated: boolean;
@@ -21,6 +22,7 @@ export async function middleware(req: NextRequest) {
 
   const authData: CheckAuth = await authResponse.json();
 
+  console.log(`cookies: ${cookies().toString()}`);
   console.log(authData);
   console.log(req.cookies.getAll());
 
