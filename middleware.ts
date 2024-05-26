@@ -22,6 +22,7 @@ export async function middleware(req: NextRequest) {
   const authData: CheckAuth = await authResponse.json();
 
   console.log(authData);
+  console.log(req.cookies.getAll());
 
   // Check if the user is authenticated
   if (!authData.authenticated) {
