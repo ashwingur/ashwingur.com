@@ -33,19 +33,22 @@ function convertToShortLocalDateTime(datetimeString: string) {
 const UserList: React.FC = () => {
   const { user } = useAuth();
   // Fetch users query
-  const { isLoading, data } = useQuery<User[]>("users", async () => {
-    const response = await fetch(USERS_ENDPOINT, { credentials: "include" });
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+  const { isLoading, data } = useQuery<User[]>(
+    "users",
+    async (): Promise<User[]> => {
+      const response = await fetch(USERS_ENDPOINT, { credentials: "include" });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
     }
-    return response.json();
-  });
+  );
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-center mb-2">User Dashboard</h2>
+      <h2 className="text-center mb-2">Users</h2>
       <ul className="">
         <li className={`flex px-2 md:px-4 font-bold dark:bg-black py-1`}>
           <div className="md:w-1/5 w-1/4">ID</div>
@@ -54,28 +57,30 @@ const UserList: React.FC = () => {
           <div className="hidden md:block md:w-1/5">Last Login</div>
           <div className="md:w-1/5 w-1/4">Role</div>
         </li>
-        {data?.map((user_element, index) => {
-          let bg_colour =
-            index % 2 == 0 ? "bg-stone-200 dark:bg-slate-700" : "";
-          if (user_element.username === user) {
-            bg_colour = "bg-green-200 dark:bg-green-800";
-          }
-          return (
-            <li key={index} className={`flex px-2 py-1 md:px-4 ${bg_colour}`}>
-              <div className="md:w-1/5 w-1/4">{user_element.id}</div>
-              <div className="md:w-1/5 w-1/2">{user_element.username}</div>
-              <div className="hidden md:block md:w-1/5">
-                {convertToShortLocalDateTime(user_element.date_registered)}
-              </div>
-              <div className="hidden md:block md:w-1/5">
-                {user_element.last_login
-                  ? convertToShortLocalDateTime(user_element.last_login)
-                  : "N/A"}
-              </div>
-              <div className="md:w-1/5 w-1/4">{user_element.role}</div>
-            </li>
-          );
-        })}
+        {data
+          ?.sort((a, b) => a.id - b.id)
+          .map((user_element, index) => {
+            let bg_colour =
+              index % 2 == 0 ? "bg-stone-200 dark:bg-slate-700" : "";
+            if (user_element.username === user) {
+              bg_colour = "bg-green-200 dark:bg-green-800";
+            }
+            return (
+              <li key={index} className={`flex px-2 py-1 md:px-4 ${bg_colour}`}>
+                <div className="md:w-1/5 w-1/4">{user_element.id}</div>
+                <div className="md:w-1/5 w-1/2">{user_element.username}</div>
+                <div className="hidden md:block md:w-1/5">
+                  {convertToShortLocalDateTime(user_element.date_registered)}
+                </div>
+                <div className="hidden md:block md:w-1/5">
+                  {user_element.last_login
+                    ? convertToShortLocalDateTime(user_element.last_login)
+                    : "N/A"}
+                </div>
+                <div className="md:w-1/5 w-1/4">{user_element.role}</div>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );
