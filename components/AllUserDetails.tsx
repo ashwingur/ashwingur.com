@@ -199,7 +199,7 @@ const DeleteUser: React.FC = () => {
 
   return (
     <div>
-      <h2 className="mb-2">Delete User</h2>
+      <h2 className="mb-2 text-center">Delete User</h2>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col justify-between gap-2 items-center"
@@ -232,7 +232,7 @@ const DeleteUser: React.FC = () => {
 // Main component
 const AllUserDetails: React.FC = () => {
   return (
-    <div className="flex flex-col gap-8 items-center justify-center bg-stone-100 dark:bg-slate-900 p-8 rounded-lg w-11/12 md:w-3/4 md:px-12 shadow-lg">
+    <div className="flex flex-col gap-8 items-center justify-center bg-stone-100 dark:bg-slate-900 p-4 md:p-8 rounded-lg w-11/12 md:w-3/4 md:px-12 shadow-lg">
       <UserList />
       <AddUser />
       <DeleteUser />
