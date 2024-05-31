@@ -3,6 +3,7 @@ import axios from "axios";
 import { WeatherData } from "../../shared/interfaces/weather.interface";
 import Thermometer from "./Thermometer";
 import PressureGauge from "./PressureGauge";
+import AirQuality from "./AirQuality";
 
 export const fetchLatestWeatherData = async (): Promise<WeatherData> => {
   try {
@@ -35,6 +36,17 @@ export const LatestWeather: React.FC = () => {
       <div className="grid grid-cols-2 justify-center items-center">
         <Thermometer temperature={temperature} />
         <PressureGauge pressure={pressure} />
+        <div className="flex flex-col items-center text-center">
+          <div>
+            <h3>Humidity</h3>
+            {humidity.toFixed(2)}%
+          </div>
+          <div>
+            <h3>Ambient Light</h3>
+            {light.toFixed(2)} lx
+          </div>
+        </div>
+        <AirQuality aqi={aqi} tvoc={tvoc} eco2={eco2} />
       </div>
     </div>
   );

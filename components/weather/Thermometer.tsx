@@ -60,7 +60,7 @@ const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
           className="thermometer-fill"
         />
       </svg>
-      <div className="">{temperature.toFixed(1)}°C</div>
+      <div className="">{temperature.toFixed(1)} °C</div>
     </div>
   );
 };

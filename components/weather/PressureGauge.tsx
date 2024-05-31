@@ -27,7 +27,7 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
 
   return (
     <div className="w-48 h-24 flex flex-col items-center">
-      <h3>Air Pressure</h3>
+      <h3 className="mb-4">Air Pressure</h3>
       <GaugeChart
         hideText={true}
         nrOfLevels={1}
@@ -35,8 +35,9 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
         arcsLength={[colour_1_length, colour_2_length, colour_3_length]}
         needleColor="#000"
         needleBaseColor="#000"
+        cornerRadius={4}
       />
-      {pressure.toFixed(2)}hPa
+      {pressure.toFixed(2)} hPa
     </div>
   );
 };
