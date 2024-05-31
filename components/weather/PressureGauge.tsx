@@ -37,6 +37,7 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
         needleColor="#000"
         needleBaseColor="#000"
         cornerRadius={4}
+        animDelay={0}
       />
       {pressure.toFixed(2)} hPa
     </div>
