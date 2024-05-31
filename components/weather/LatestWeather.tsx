@@ -26,10 +26,15 @@ function calculateMinutesAgo(unixTimestamp: number) {
 
 export const fetchLatestWeatherData = async (): Promise<WeatherData> => {
   try {
-    const response = await axios.get<WeatherData>(
+    const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather`
     );
-    return response.data;
+    if (!response.ok) {
+      throw new Error("Failed to fetch weather data");
+    }
+
+    const weatherData: WeatherData = await response.json();
+    return weatherData;
   } catch (error) {
     throw new Error(`Failed to fetch weather data ${error}`);
   }
