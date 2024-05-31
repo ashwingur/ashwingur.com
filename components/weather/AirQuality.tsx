@@ -20,8 +20,8 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
     rating = "Unhealthy";
   }
   return (
-    <div className="flex flex-col items-center w-48 h-24">
-      <h3>Air Quality</h3>
+    <div className="flex flex-col items-center justify-center lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2">
+      <h3 className="mb-4">Air Quality</h3>
       <GaugeChart
         hideText={true}
         percent={percent}
@@ -32,6 +32,8 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
         colors={["#0390fc", "#03fc6b", "#e7fc03", "#fc9403", "#fc0b03"]}
       />
       {rating}
+      <div className="mt-4">TVOC: {tvoc} ppb</div>
+      <div>eCO2: {eco2} ppm</div>
     </div>
   );
 };
