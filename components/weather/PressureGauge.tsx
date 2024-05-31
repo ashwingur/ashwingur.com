@@ -1,4 +1,5 @@
-import GaugeChart from "react-gauge-chart";
+import dynamic from "next/dynamic";
+const GaugeChart = dynamic(() => import("react-gauge-chart"), { ssr: false });
 
 interface AirPressureGaugeProps {
   pressure: number; // Pressure value between 950 and 1050
