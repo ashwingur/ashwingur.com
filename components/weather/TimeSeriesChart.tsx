@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import {
   LineChart,
   Line,
@@ -29,6 +30,13 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   domain,
   tickCount = 5, // Default tick count
 }) => {
+  // No tailwindcss for recharts, so we manually get the current theme
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const axisStrokeColour = currentTheme === "dark" ? "#fff" : "#000";
+  const lineColour = currentTheme === "dark" ? "#d14747" : "#bd0000";
+  const gridColour = currentTheme === "dark" ? "#b0b0b0" : "#4f4f4f";
+
   // Function to format UNIX timestamp to "dd/mm/yy hh:mm" string
   const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000); // Convert UNIX timestamp to milliseconds
@@ -63,11 +71,12 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
               position: "insideBottomRight",
               offset: 0,
             }}
+            stroke={axisStrokeColour}
             ticks={timestamps.length < tickCount ? timestamps : undefined} // Use timestamps.length if less than tickCount
             interval={Math.ceil(timestamps.length / tickCount)} // Calculate interval
             tick={{
               // Custom tick rendering function
-              dy: 10, // Adjust vertical position
+              dy: 12, // Adjust vertical position
               fontSize: "12px", // Adjust font size
               textAnchor: "middle", // Center the text
               width: "50",
@@ -75,14 +84,27 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             angle={-40}
           />
           <YAxis
-            label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            label={{
+              value: yLabel,
+              angle: -90,
+              position: "insideLeft",
+              style: { fill: axisStrokeColour },
+            }}
             domain={(domain as AxisDomain) || ["auto", "auto"]}
             allowDecimals={false}
+            stroke={axisStrokeColour}
+            tick={{
+              fontSize: "14px",
+            }}
           />
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColour} />
           <Tooltip />
-          {/* <Legend /> */}
-          <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} />
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke={lineColour}
+            dot={false}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>

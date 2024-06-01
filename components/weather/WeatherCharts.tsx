@@ -9,7 +9,6 @@ const fetchWeatherData = async (
   start: number,
   end: number
 ): Promise<WeatherData> => {
-  console.log(`fetching: start = ${start}, end=${end}`);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${start}&end=${end}`
@@ -38,10 +37,17 @@ const timeOptions = [
 
 const WeatherCharts = () => {
   const [selectedTime, setSelectedTime] = useState(timeOptions[0]);
+
+  // Calculate start and end times based on selectedTime
   const start = Math.floor(Date.now() / 1000 - selectedTime.seconds);
   const end = Math.floor(Date.now() / 1000);
-  console.log(start, end);
-  const queryClient = useQueryClient();
+
+  // Use the calculated start and end times in the query key and query function
+  const { data, isLoading, isError } = useQuery<WeatherData>({
+    queryKey: ["historicalweather", start, end],
+    queryFn: () => fetchWeatherData(start, end),
+    keepPreviousData: true, // Keeps the previous data while fetching new data
+  });
 
   const onSelectedTimeChange = (value: {
     id: number;
@@ -50,20 +56,24 @@ const WeatherCharts = () => {
   }) => {
     const newTime = timeOptions[value.id - 1];
     setSelectedTime(newTime);
-    queryClient.invalidateQueries({ queryKey: ["historicalweather"] });
   };
 
-  const { data, isLoading, isError } = useQuery<WeatherData>({
-    queryKey: ["historicalweather", { start, end }],
-    queryFn: () => fetchWeatherData(start, end),
-  });
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+        <h2 className="mt-2">Historical Data</h2>
+        <p className="mb-8">Loading...</p>
+      </div>
+    );
   }
 
   if (isError || data === undefined) {
-    return <div>Error</div>;
+    return (
+      <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+        <h2 className="mt-2">Historical Data</h2>
+        <p className="mb-8">Error fetching data</p>
+      </div>
+    );
   }
 
   // Now we will have 8 arrays
@@ -82,7 +92,7 @@ const WeatherCharts = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
       <h2 className="mt-2">Historical Data</h2>
-      <div className="relative  my-2">
+      <div className="relative mt-4 mb-2">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
           <div className="cursor-default overflow-hidden rounded-lg bg-white dark:bg-zinc-900 text-left focus:outline-none w-60 py-2 px-4 justify-between">
             <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
@@ -107,6 +117,9 @@ const WeatherCharts = () => {
           </Listbox.Options>
         </Listbox>
       </div>
+      <p className="text-xs mb-4">
+        Weather station deployed on 31/6/24 (no data before then)
+      </p>
       <TimeSeriesChart
         timestamps={timestamps}
         values={temperatures}
