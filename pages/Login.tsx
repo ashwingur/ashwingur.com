@@ -21,23 +21,6 @@ const Login = () => {
     await logout();
   };
 
-  // const api = axios.create({
-  //   baseURL: process.env.NEXT_PUBLIC_ASHWINGUR_API,
-  //   withCredentials: true,
-  // });
-  // const userPress = async () => {
-  //   try {
-  //     const response = await api.get("user_test");
-  //     console.log(response.data);
-  //   } catch (error) {}
-  // };
-  // const adminPress = async () => {
-  //   try {
-  //     const response = await api.get("admin_test");
-  //     console.log(response.data);
-  //   } catch (error) {}
-  // };
-
   return (
     <div>
       <Navbar fixed={true} />
