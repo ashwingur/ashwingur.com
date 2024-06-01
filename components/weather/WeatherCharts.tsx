@@ -55,49 +55,50 @@ const WeatherCharts = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
       <h2 className="mt-2">Historical Data</h2>
+      <p>Last 24 hours</p>
       <TimeSeriesChart
         timestamps={timestamps}
         values={temperatures}
         title={"Temperature"}
-        yLabel={"Temperature"}
+        yLabel={"°C"}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={pressures}
         title={"Pressure"}
-        yLabel={"Pressure"}
+        yLabel={"hPa"}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={humidities}
         title={"Humidity"}
-        yLabel={"Humidity (%)"}
+        yLabel={"%"}
         domain={[0, 100]}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={lights.map((x) => Math.round(x))}
         title={"Ambient Light"}
-        yLabel={"Ambient Light"}
+        yLabel={"lx"}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={aqis}
         title={"Air Quality Index"}
-        yLabel={"Air Quality Index"}
+        yLabel={"AQI"}
         domain={[0, 5]}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={tvocs.map((x) => Math.round(x))}
         title={"Total Volatile Organic Compounds"}
-        yLabel={"TVOC"}
+        yLabel={"ppb"}
       />
       <TimeSeriesChart
         timestamps={timestamps}
         values={eco2s}
         title={"Equivalent Embodied Carbon Dioxide"}
-        yLabel={"eCO2"}
+        yLabel={"ppm"}
       />
     </div>
   );

@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { AxisDomain } from "recharts/types/util/types";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -15,7 +16,8 @@ interface TimeSeriesChartProps {
   title: string;
   xLabel?: string;
   yLabel: string;
-  domain?: number[];
+  domain?: (number | string)[];
+  tickCount?: number; // Add tickCount prop
 }
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
@@ -25,35 +27,61 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   xLabel,
   yLabel,
   domain,
+  tickCount = 5, // Default tick count
 }) => {
+  // Function to format UNIX timestamp to "dd/mm/yy hh:mm" string
+  const formatTimestamp = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000); // Convert UNIX timestamp to milliseconds
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear().toString().slice(-2);
+    const hours = ("0" + date.getHours()).slice(-2);
+    const minutes = ("0" + date.getMinutes()).slice(-2);
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  };
+
   const data = timestamps.map((timestamp, index) => ({
-    timestamp,
+    timestamp: formatTimestamp(timestamp),
     value: values[index],
   }));
 
   return (
     <div className="w-full h-96 px-4">
-      <h3>{title}</h3>
+      <h3 className="text-center">{title}</h3>
       <ResponsiveContainer width="100%" height="90%">
-        <LineChart width={800} height={400} data={data}>
+        <LineChart
+          width={800}
+          height={400}
+          data={data}
+          margin={{ bottom: 20, left: 10 }}
+        >
           <XAxis
             dataKey="timestamp"
-            type="number"
-            scale="time"
-            domain={["auto", "auto"]}
+            type="category"
             label={{
-              value: xLabel ?? "Time",
+              value: xLabel ?? "",
               position: "insideBottomRight",
               offset: 0,
             }}
+            ticks={timestamps.length < tickCount ? timestamps : undefined} // Use timestamps.length if less than tickCount
+            interval={Math.ceil(timestamps.length / tickCount)} // Calculate interval
+            tick={{
+              // Custom tick rendering function
+              dy: 10, // Adjust vertical position
+              fontSize: "12px", // Adjust font size
+              textAnchor: "middle", // Center the text
+              width: "50",
+            }}
+            angle={-40}
           />
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
-            domain={domain || ["auto", "auto"]}
+            domain={(domain as AxisDomain) || ["auto", "auto"]}
+            allowDecimals={false}
           />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend />
+          {/* <Legend /> */}
           <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} />
         </LineChart>
       </ResponsiveContainer>
