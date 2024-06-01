@@ -6,9 +6,9 @@ interface ThermometerProps {
 
 const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
   // Constrain the temperature between 5 and 45
-  const constrainedTemp = Math.max(5, Math.min(temperature, 45));
+  const constrainedTemp = Math.max(0, Math.min(temperature, 45));
   // Calculate the fill percentage
-  const fillPercentage = ((constrainedTemp - 5) / 40) * 100;
+  const fillPercentage = (constrainedTemp / 40) * 100;
 
   return (
     <div className="flex flex-col items-center justify-center bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2 h-48 lg:h-60">
