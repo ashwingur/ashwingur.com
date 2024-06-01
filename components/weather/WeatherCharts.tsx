@@ -36,6 +36,7 @@ const timeOptions = [
 ];
 
 const WeatherCharts = () => {
+  const firstDbEntryTime = 1717137003;
   const [selectedTime, setSelectedTime] = useState(timeOptions[0]);
 
   // Calculate start and end times based on selectedTime
@@ -46,7 +47,7 @@ const WeatherCharts = () => {
   const { data, isLoading, isError } = useQuery<WeatherData>({
     queryKey: ["historicalweather", start, end],
     queryFn: () => fetchWeatherData(start, end),
-    keepPreviousData: true, // Keeps the previous data while fetching new data
+    keepPreviousData: true, // Keeps the previous data while fetching new data (also smooth transitions as a benefit)
   });
 
   const onSelectedTimeChange = (value: {
@@ -117,9 +118,11 @@ const WeatherCharts = () => {
           </Listbox.Options>
         </Listbox>
       </div>
-      <p className="text-xs mb-4">
-        Weather station deployed on 31/5/24 (no data before then)
-      </p>
+      {start < firstDbEntryTime && (
+        <p className="text-xs mb-4">
+          Note: weather station deployed on 31/5/24 (no data exists before then)
+        </p>
+      )}
       <TimeSeriesChart
         timestamps={timestamps}
         values={temperatures}
