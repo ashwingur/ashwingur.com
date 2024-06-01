@@ -45,7 +45,7 @@ export const LatestWeather: React.FC = () => {
     fetchLatestWeatherData
   );
 
-  if (!isLoading)
+  if (isLoading)
     return (
       <div>
         <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
