@@ -23,7 +23,7 @@ function calculateMinutesAgo(unixTimestamp: number) {
   return minutesAgo;
 }
 
-export const fetchLatestWeatherData = async (): Promise<WeatherData> => {
+const fetchLatestWeatherData = async (): Promise<WeatherData> => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather`
