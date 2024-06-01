@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { WeatherData } from "../../shared/interfaces/weather.interface";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import TimeSeriesChart from "./TimeSeriesChart";
+import { Listbox } from "@headlessui/react";
+import { AiOutlineClose, AiOutlineDown } from "react-icons/ai";
 
 const fetchWeatherData = async (
   start: number,
   end: number
 ): Promise<WeatherData> => {
+  console.log(`fetching: start = ${start}, end=${end}`);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${start}&end=${end}`
@@ -22,14 +25,38 @@ const fetchWeatherData = async (
   }
 };
 
-const WeatherCharts = () => {
-  const start = Math.floor((Date.now() - 24 * 60 * 60 * 1000) / 1000);
-  const end = Math.floor(Date.now() / 1000);
+const timeOptions = [
+  { id: 1, display: "Last 24 hours", seconds: 24 * 3600 },
+  { id: 2, display: "Last 3 days", seconds: 24 * 3600 * 3 },
+  { id: 3, display: "Last 7 days", seconds: 24 * 3600 * 7 },
+  { id: 4, display: "Last 14 days", seconds: 24 * 3600 * 14 },
+  { id: 5, display: "Last 31 days", seconds: 24 * 3600 * 31 },
+  { id: 6, display: "Last 90 days", seconds: 24 * 3600 * 90 },
+  { id: 7, display: "Last 180 days", seconds: 24 * 3600 * 180 },
+  { id: 8, display: "Last 365 days", seconds: 24 * 3600 * 365 },
+];
 
-  const { data, isLoading, isError } = useQuery<WeatherData>(
-    "historicalweather",
-    () => fetchWeatherData(start, end)
-  );
+const WeatherCharts = () => {
+  const [selectedTime, setSelectedTime] = useState(timeOptions[0]);
+  const start = Math.floor(Date.now() / 1000 - selectedTime.seconds);
+  const end = Math.floor(Date.now() / 1000);
+  console.log(start, end);
+  const queryClient = useQueryClient();
+
+  const onSelectedTimeChange = (value: {
+    id: number;
+    display: string;
+    seconds: number;
+  }) => {
+    const newTime = timeOptions[value.id - 1];
+    setSelectedTime(newTime);
+    queryClient.invalidateQueries({ queryKey: ["historicalweather"] });
+  };
+
+  const { data, isLoading, isError } = useQuery<WeatherData>({
+    queryKey: ["historicalweather", { start, end }],
+    queryFn: () => fetchWeatherData(start, end),
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -55,7 +82,31 @@ const WeatherCharts = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
       <h2 className="mt-2">Historical Data</h2>
-      <p>Last 24 hours</p>
+      <div className="relative  my-2">
+        <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
+          <div className="cursor-default overflow-hidden rounded-lg bg-white dark:bg-zinc-900 text-left focus:outline-none w-60 py-2 px-4 justify-between">
+            <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
+              {selectedTime.display}
+              <AiOutlineDown className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
+            </Listbox.Button>
+          </div>
+          <Listbox.Options className="absolute z-50 bg-white dark:bg-zinc-900 rounded-lg w-60 mt-1 max-h-60 overflow-auto">
+            {timeOptions.map((time) => (
+              <Listbox.Option
+                key={time.id}
+                value={time}
+                className={({ active }) =>
+                  `px-4 cursor-pointer py-2 ${
+                    active ? "bg-green-600 dark:bg-[#3b0764] text-white " : ""
+                  }`
+                }
+              >
+                {time.display}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Listbox>
+      </div>
       <TimeSeriesChart
         timestamps={timestamps}
         values={temperatures}
