@@ -118,7 +118,7 @@ const WeatherCharts = () => {
         </Listbox>
       </div>
       <p className="text-xs mb-4">
-        Weather station deployed on 31/6/24 (no data before then)
+        Weather station deployed on 31/5/24 (no data before then)
       </p>
       <TimeSeriesChart
         timestamps={timestamps}
