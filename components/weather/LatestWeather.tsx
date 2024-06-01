@@ -46,9 +46,30 @@ export const LatestWeather: React.FC = () => {
     fetchLatestWeatherData
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+          <h2 className="mt-2">Latest Weather Data</h2>
+          <p className="text-sm mt-1">loading...</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
+          </div>
+        </div>
+      </div>
+    );
   if (isError || data === undefined)
-    return <div>Error fetching weather data</div>;
+    return (
+      <div>
+        <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+          <h2 className="mt-2">Latest Weather Data</h2>
+          <p className="text-sm mt-1 mb-8">Error fetching data</p>
+        </div>
+      </div>
+    );
 
   const [timestamp, temperature, pressure, humidity, light, aqi, tvoc, eco2] =
     data.data[0];
@@ -60,7 +81,7 @@ export const LatestWeather: React.FC = () => {
         {formatUnixTimestamp(timestamp)} ({calculateMinutesAgo(timestamp)}min
         ago)
       </p>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center items-stretch">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 p-4 justify-center items-stretch">
         <Thermometer temperature={temperature} />
         <PressureGauge pressure={pressure} />
         <div className="flex flex-col text-center justify-center gap-8 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2">
