@@ -36,6 +36,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   const axisStrokeColour = currentTheme === "dark" ? "#fff" : "#000";
   const lineColour = currentTheme === "dark" ? "#d14747" : "#bd0000";
   const gridColour = currentTheme === "dark" ? "#b0b0b0" : "#4f4f4f";
+  const tooltipColour = currentTheme === "dark" ? "#2e2e2e" : "#ebebeb";
 
   // Function to format UNIX timestamp to "dd/mm/yy hh:mm" string
   const formatTimestamp = (timestamp: number): string => {
@@ -98,7 +99,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             }}
           />
           <CartesianGrid strokeDasharray="3 3" stroke={gridColour} />
-          <Tooltip />
+          <Tooltip contentStyle={{ backgroundColor: tooltipColour }} />
           <Line
             type="monotone"
             dataKey="value"
