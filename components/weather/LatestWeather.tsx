@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import axios from "axios";
 import { WeatherData } from "../../shared/interfaces/weather.interface";
 import Thermometer from "./Thermometer";
 import PressureGauge from "./PressureGauge";
@@ -46,17 +45,17 @@ export const LatestWeather: React.FC = () => {
     fetchLatestWeatherData
   );
 
-  if (isLoading)
+  if (!isLoading)
     return (
       <div>
         <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
           <h2 className="mt-2">Latest Weather Data</h2>
           <p className="text-sm mt-1">loading...</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
-            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
-            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
-            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
-            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-300 dark:bg-stone-700 shadow-lg rounded-lg animate-pulse" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-300 dark:bg-stone-700 shadow-lg rounded-lg animate-pulse" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-300 dark:bg-stone-700 shadow-lg rounded-lg animate-pulse" />
+            <div className="h-48 lg:h-60 w-36 lg:w-48 bg-stone-300 dark:bg-stone-700 shadow-lg rounded-lg animate-pulse" />
           </div>
         </div>
       </div>
