@@ -34,6 +34,7 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
         nrOfLevels={1}
         percent={percent}
         arcsLength={[colour_1_length, colour_2_length, colour_3_length]}
+        colors={["#0390fc", "#11c700", "#fc0b03"]}
         needleColor="#000"
         needleBaseColor="#000"
         cornerRadius={4}

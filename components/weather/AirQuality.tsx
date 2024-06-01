@@ -29,7 +29,7 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
         cornerRadius={4}
         needleColor="#000"
         needleBaseColor="#000"
-        colors={["#0390fc", "#03fc6b", "#e7fc03", "#fc9403", "#fc0b03"]}
+        colors={["#0390fc", "#03fc6b", "#f5dd02", "#fc9403", "#fc0b03"]}
         animDelay={0}
       />
       {rating}
