@@ -1,5 +1,5 @@
 // src/components/CodeEditor.tsx
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Editor, EditorProps, Monaco } from "@monaco-editor/react";
 import { editor } from "monaco-editor";
 import LanguageSelector from "./LanguageSelector";
@@ -9,9 +9,10 @@ import clsx from "clsx";
 interface CodeEditorProps {
   languages: LanguageType[];
   className?: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CodeEditor = ({ languages, className }: CodeEditorProps) => {
+const CodeEditor = ({ languages, className, setValue }: CodeEditorProps) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const vsTheme = currentTheme == "light" ? "vs-light" : "vs-dark";
@@ -26,9 +27,11 @@ const CodeEditor = ({ languages, className }: CodeEditorProps) => {
     editorRef.current = editor;
   }
 
-  function showValue() {
-    alert(editorRef.current?.getValue());
-  }
+  useEffect(() => {
+    if (editorRef) {
+      setValue(editorRef.current?.getValue() ?? selectedLanguage.defaultValue);
+    }
+  });
 
   return (
     <div className={clsx(className)}>
@@ -47,6 +50,7 @@ const CodeEditor = ({ languages, className }: CodeEditorProps) => {
         theme={vsTheme}
         onMount={handleEditorDidMount}
         path={selectedLanguage.name}
+        onChange={(value) => setValue(value ?? selectedLanguage.defaultValue)}
       />
     </div>
   );

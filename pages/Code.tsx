@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import CodeOutput from "../components/CodeEditor/CodeOutput";
@@ -51,12 +51,19 @@ int main() {
   },
 ];
 const Code = () => {
+  // Current code editor value
+  const [value, setValue] = useState("");
+
   return (
     <div className="bg-slate-200 dark:bg-black min-h-screen">
       <Navbar fixed={false} />
       <div className="flex flex-col lg:flex-row">
-        <CodeEditor languages={languages} className="lg:w-1/2" />
-        <CodeOutput className="lg:w-1/2" />
+        <CodeEditor
+          languages={languages}
+          setValue={setValue}
+          className="lg:w-1/2"
+        />
+        <CodeOutput className="lg:w-1/2" value={value} />
       </div>
     </div>
   );
