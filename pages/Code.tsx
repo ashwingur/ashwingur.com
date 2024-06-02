@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import CodeOutput from "../components/CodeEditor/CodeOutput";
+import { LanguageType } from "../shared/interfaces/code.interface";
 
 const languages: LanguageType[] = [
   {
