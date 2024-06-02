@@ -34,19 +34,37 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const axisStrokeColour = currentTheme === "dark" ? "#fff" : "#000";
-  const lineColour = currentTheme === "dark" ? "#d14747" : "#bd0000";
+  const lineColour = currentTheme === "dark" ? "#d61818" : "#bd0000";
   const gridColour = currentTheme === "dark" ? "#b0b0b0" : "#4f4f4f";
   const tooltipColour = currentTheme === "dark" ? "#2e2e2e" : "#ebebeb";
 
-  // Function to format UNIX timestamp to "dd/mm/yy hh:mm" string
+  // See how long the time period is
+  const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
+
+  // Function to format UNIX timestamp to "dd/mm/yy hh:mm AM/PM" string
   const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000); // Convert UNIX timestamp to milliseconds
     const day = ("0" + date.getDate()).slice(-2);
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear().toString().slice(-2);
-    const hours = ("0" + date.getHours()).slice(-2);
+
+    let hours = date.getHours();
     const minutes = ("0" + date.getMinutes()).slice(-2);
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const formattedHours = ("0" + hours).slice(-2);
+
+    // If the time period is <= 25 h, only display time
+    // If > 30 days display date only
+    if (timeRange < 3600 * 25) {
+      return `${formattedHours}:${minutes} ${ampm}`;
+    } else if (timeRange < 3600 * 24 * 30) {
+      return `${day}/${month}/${year} ${formattedHours}:${minutes} ${ampm}`;
+    } else {
+      return `${day}/${month}/${year}`;
+    }
   };
 
   const data = timestamps.map((timestamp, index) => ({
@@ -55,14 +73,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   }));
 
   return (
-    <div className="w-full h-96 px-4">
-      <h3 className="text-center">{title}</h3>
+    <div className="w-full h-96 lg:h-[32rem] px-4 pb-8 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg">
+      <h3 className="text-center my-4 text-xl">{title}</h3>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={800}
           height={400}
           data={data}
-          margin={{ bottom: 20, left: 10 }}
+          margin={{ bottom: 40, left: 10 }}
         >
           <XAxis
             dataKey="timestamp"
@@ -77,10 +95,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             interval={Math.ceil(timestamps.length / tickCount)} // Calculate interval
             tick={{
               // Custom tick rendering function
-              dy: 12, // Adjust vertical position
+              dy: 18, // Adjust vertical position
               fontSize: "12px", // Adjust font size
               textAnchor: "middle", // Center the text
-              width: "50",
+              width: "70",
             }}
             angle={-40}
           />

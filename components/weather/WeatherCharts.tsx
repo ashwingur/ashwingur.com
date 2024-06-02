@@ -91,7 +91,7 @@ const WeatherCharts = () => {
   const eco2s = transposedData[7];
 
   return (
-    <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+    <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/90 rounded-lg mx-4 py-2 shadow-md">
       <h2 className="mt-2">Historical Data</h2>
       <div className="relative mt-4 mb-2">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
@@ -123,50 +123,52 @@ const WeatherCharts = () => {
           Note: weather station deployed on 31/5/24 (no data exists before then)
         </p>
       )}
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={temperatures}
-        title={"Temperature"}
-        yLabel={"°C"}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={pressures}
-        title={"Pressure"}
-        yLabel={"hPa"}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={humidities}
-        title={"Humidity"}
-        yLabel={"%"}
-        domain={[0, 100]}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={lights.map((x) => Math.round(x))}
-        title={"Ambient Light"}
-        yLabel={"lx"}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={aqis}
-        title={"Air Quality Index"}
-        yLabel={"AQI"}
-        domain={[0, 5]}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={tvocs.map((x) => Math.round(x))}
-        title={"Total Volatile Organic Compounds"}
-        yLabel={"ppb"}
-      />
-      <TimeSeriesChart
-        timestamps={timestamps}
-        values={eco2s}
-        title={"Equivalent Embodied Carbon Dioxide"}
-        yLabel={"ppm"}
-      />
+      <div className="flex flex-col self-stretch gap-8 px-2 lg:px-4">
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={temperatures}
+          title={"Temperature"}
+          yLabel={"°C"}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={pressures}
+          title={"Pressure"}
+          yLabel={"hPa"}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={humidities}
+          title={"Humidity"}
+          yLabel={"%"}
+          domain={[0, 100]}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={lights.map((x) => Math.round(x))}
+          title={"Ambient Light"}
+          yLabel={"lx"}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={aqis}
+          title={"Air Quality Index"}
+          yLabel={"AQI"}
+          domain={[0, 5]}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={tvocs.map((x) => Math.round(x))}
+          title={"Total Volatile Organic Compounds"}
+          yLabel={"ppb"}
+        />
+        <TimeSeriesChart
+          timestamps={timestamps}
+          values={eco2s}
+          title={"Equivalent Embodied Carbon Dioxide"}
+          yLabel={"ppm"}
+        />
+      </div>
     </div>
   );
 };
