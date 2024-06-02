@@ -1,4 +1,4 @@
-interface LanguageType {
+export interface LanguageType {
   name: string;
   displayName: string;
   version: string;
