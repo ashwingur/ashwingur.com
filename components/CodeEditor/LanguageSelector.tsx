@@ -2,6 +2,7 @@ import { Listbox } from "@headlessui/react";
 import React from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import clsx from "clsx";
+import { LanguageType } from "../../shared/interfaces/code.interface";
 
 interface LanguageSelectorProps {
   languages: LanguageType[];
