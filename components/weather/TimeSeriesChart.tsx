@@ -33,8 +33,8 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   // No tailwindcss for recharts, so we manually get the current theme
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
-  const axisStrokeColour = currentTheme === "dark" ? "#fff" : "#000";
-  const lineColour = currentTheme === "dark" ? "#d61818" : "#bd0000";
+  const axisStrokeColour = currentTheme === "dark" ? "#c9c9c9" : "#000";
+  const lineColour = currentTheme === "dark" ? "#ffbdbd" : "#bd0000";
   const gridColour = currentTheme === "dark" ? "#b0b0b0" : "#4f4f4f";
   const tooltipColour = currentTheme === "dark" ? "#2e2e2e" : "#ebebeb";
 
