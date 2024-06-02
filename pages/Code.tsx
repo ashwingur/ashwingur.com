@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
+import CodeOutput from "../components/CodeEditor/CodeOutput";
 
 const languages: LanguageType[] = [
   {
@@ -51,10 +52,11 @@ int main() {
 ];
 const Code = () => {
   return (
-    <div className="bg-slate-200 dark:bg-black h-screen">
+    <div className="bg-slate-200 dark:bg-black min-h-screen">
       <Navbar fixed={false} />
-      <div className=" ">
-        <CodeEditor languages={languages} />
+      <div className="flex flex-col lg:flex-row">
+        <CodeEditor languages={languages} className="lg:w-1/2" />
+        <CodeOutput className="lg:w-1/2" />
       </div>
     </div>
   );

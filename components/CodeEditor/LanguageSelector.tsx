@@ -17,7 +17,7 @@ const LanguageSelector = ({
   className,
 }: LanguageSelectorProps) => {
   return (
-    <div className={clsx("relative mt-4 mb-2", className)}>
+    <div className={clsx("relative", className)}>
       <Listbox value={selectedLanguage} onChange={onSelectedLanguageChange}>
         <div className="cursor-default overflow-hidden rounded-lg bg-white dark:bg-zinc-900 text-left focus:outline-none w-60 py-2 px-4 justify-between">
           <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
