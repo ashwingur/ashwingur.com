@@ -5,6 +5,7 @@ import { editor } from "monaco-editor";
 import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
+import { LanguageType } from "../../shared/interfaces/code.interface";
 
 interface CodeEditorProps {
   languages: LanguageType[];
