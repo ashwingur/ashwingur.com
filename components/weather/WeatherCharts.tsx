@@ -145,7 +145,7 @@ const WeatherCharts = () => {
         />
         <TimeSeriesChart
           timestamps={timestamps}
-          values={lights.map((x) => Math.round(x))}
+          values={lights}
           title={"Ambient Light"}
           yLabel={"lx"}
         />
@@ -158,7 +158,7 @@ const WeatherCharts = () => {
         />
         <TimeSeriesChart
           timestamps={timestamps}
-          values={tvocs.map((x) => Math.round(x))}
+          values={tvocs}
           title={"Total Volatile Organic Compounds"}
           yLabel={"ppb"}
         />

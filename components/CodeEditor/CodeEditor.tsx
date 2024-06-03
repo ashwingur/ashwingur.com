@@ -15,7 +15,13 @@ interface CodeEditorProps {
   setSelectedLanguage: React.Dispatch<React.SetStateAction<LanguageType>>;
 }
 
-const CodeEditor = ({ languages, className, setValue, selectedLanguage, setSelectedLanguage }: CodeEditorProps) => {
+const CodeEditor = ({
+  languages,
+  className,
+  setValue,
+  selectedLanguage,
+  setSelectedLanguage,
+}: CodeEditorProps) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const vsTheme = currentTheme == "light" ? "vs-light" : "vs-dark";
@@ -54,6 +60,7 @@ const CodeEditor = ({ languages, className, setValue, selectedLanguage, setSelec
         onMount={handleEditorDidMount}
         path={selectedLanguage.name}
         onChange={(value) => setValue(value ?? selectedLanguage.defaultValue)}
+        options={{ padding: { top: 10, bottom: 10 } }}
       />
     </div>
   );
