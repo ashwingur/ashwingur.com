@@ -74,7 +74,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   return (
     <div className="w-full h-96 lg:h-[32rem] px-4 pb-8 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg">
-      <h3 className="text-center my-4 text-xl">{title}</h3>
+      <h3 className="text-center my-4 lg:text-xl">{title}</h3>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={800}
