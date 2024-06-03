@@ -11,14 +11,16 @@ interface CodeEditorProps {
   languages: LanguageType[];
   className?: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  selectedLanguage: LanguageType;
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<LanguageType>>;
 }
 
-const CodeEditor = ({ languages, className, setValue }: CodeEditorProps) => {
+const CodeEditor = ({ languages, className, setValue, selectedLanguage, setSelectedLanguage }: CodeEditorProps) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const vsTheme = currentTheme == "light" ? "vs-light" : "vs-dark";
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  // const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   // const [value, setValue] = useState("");
 
   function handleEditorDidMount(
