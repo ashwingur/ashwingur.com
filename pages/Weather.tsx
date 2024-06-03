@@ -7,7 +7,7 @@ import React from "react";
 const MetricTable = () => {
   return (
     <div className="overflow-x-auto px-4 mt-4 md:w-4/5">
-      <table className="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700">
+      <table className="min-w-full bg-white dark:bg-stone-700/25 border border-gray-300 dark:border-gray-700">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
