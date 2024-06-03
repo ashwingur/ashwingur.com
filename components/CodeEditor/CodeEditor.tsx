@@ -60,7 +60,10 @@ const CodeEditor = ({
         onMount={handleEditorDidMount}
         path={selectedLanguage.name}
         onChange={(value) => setValue(value ?? selectedLanguage.defaultValue)}
-        options={{ padding: { top: 10, bottom: 10 } }}
+        options={{
+          padding: { top: 10, bottom: 10 },
+          minimap: { enabled: false },
+        }}
       />
     </div>
   );

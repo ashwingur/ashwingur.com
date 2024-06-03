@@ -90,10 +90,8 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
     );
   }
 
-  // let output = "";
-  // if (data !== undefined){
-  //   output = data.run.stderr === "" ?
-  // }
+  let stdout: string[] = data?.run.stdout.split("\n") ?? [];
+  let stderr: string[] = data?.run.stderr.split("\n") ?? [];
 
   return (
     <div className={clsx(className)}>
@@ -103,7 +101,7 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
           disabled={isLoading}
           className={clsx(
             isLoading ? "" : "hover:bg-blue-400 dark:hover:bg-violet-800",
-            "bg-sky-200 dark:bg-[#2e1065] rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center"
+            "bg-sky-200 dark:bg-[#2e1065] rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
           )}
         >
           {isLoading ? (
@@ -114,9 +112,9 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
         </button>
       </div>
 
-      <div className="bg-[#f0f0f0] dark:bg-[#151515] h-[80vh] py-3 px-4">
-        {data !== undefined &&
-          (data.run.stderr === "" ? data.run.stdout : data.run.stderr)}
+      <div className="bg-[#f0f0f0] dark:bg-[#151515] h-[80vh] py-3 px-4 overflow-y-scroll overflow-x-hidden">
+        <pre className="mb-2 text-wrap">{data?.run.stdout}</pre>
+        <pre className="text-red-700 dark:text-red-500">{data?.run.stderr}</pre>
       </div>
     </div>
   );

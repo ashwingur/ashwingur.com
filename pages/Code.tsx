@@ -16,11 +16,7 @@ const Code = () => {
       name: "java",
       displayName: "Java",
       version: "15.0.2",
-      defaultValue: `public class HelloWorld {
-      public static void main(String[] args) {
-          System.out.println("Hello, World!");
-      }
-  }`,
+      defaultValue: `public class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello, World!");\n\t}\n}`,
     },
     {
       name: "javascript",
@@ -38,37 +34,82 @@ const Code = () => {
       name: "csharp",
       displayName: "C#",
       version: "5.0.201",
-      defaultValue: `using System;
-  
-  class Program {
-      static void Main() {
-          Console.WriteLine("Hello, World!");
-      }
-  }`,
+      defaultValue: `using System;\n\nclass Program {\n\tstatic void Main() {\n\t\tConsole.WriteLine("Hello, World!");\n\t}\n}`,
     },
     {
       name: "cpp",
       displayName: "C++",
       version: "10.2.0",
-      defaultValue: `#include <iostream>
-    
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
-}`,
+      defaultValue: `#include <iostream>\n\nint main() {\n\tstd::cout << "Hello, World!" << std::endl;\n\treturn 0;\n}`,
     },
     {
       name: "c",
       displayName: "C",
       version: "10.2.0",
-      defaultValue: `#include <stdio.h>
-      
-int main() {
-    printf("Hello, world!\\n");
-    return 0;
-}`,
+      defaultValue: `#include <stdio.h>\n\nint main() {\n\tprintf("Hello, world!\\n");\n\treturn 0;\n}`,
+    },
+    {
+      name: "php",
+      displayName: "PHP",
+      version: "8.2.3",
+      defaultValue: `<?php\n\necho "Hello, World!";\n?>`,
+    },
+    {
+      name: "rust",
+      displayName: "Rust",
+      version: "1.68.2",
+      defaultValue: `fn main() {\n\tprintln!("Hello, World!");\n}`,
+    },
+    {
+      name: "haskell",
+      displayName: "Haskell",
+      version: "9.0.1",
+      defaultValue: `main = putStrLn "Hello, World!"`,
+    },
+    {
+      name: "kotlin",
+      displayName: "Kotlin",
+      version: "1.8.20",
+      defaultValue: `fun main() {\n\tprintln("Hello, World!")\n}`,
+    },
+    {
+      name: "fortran",
+      displayName: "Fortran",
+      version: "10.2.0",
+      defaultValue: `program Hello\n\tprint *, 'Hello, World!'\nend program Hello`,
+    },
+    {
+      name: "bash",
+      displayName: "Bash",
+      version: "5.2.0",
+      defaultValue: `#!/bin/bash\n\necho "Hello, World!"`,
+    },
+    {
+      name: "brainfuck",
+      displayName: "Brainfuck",
+      version: "2.7.3",
+      defaultValue: `++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.`,
+    },
+    {
+      name: "swift",
+      displayName: "Swift",
+      version: "5.3.3",
+      defaultValue: `print("Hello, World!")`,
+    },
+    {
+      name: "matl",
+      displayName: "MATL",
+      version: "22.5.0",
+      defaultValue: `'Hello, world!'`,
+    },
+    {
+      name: "ruby",
+      displayName: "Ruby",
+      version: "3.0.1",
+      defaultValue: `puts "Hello, World!"`,
     },
   ];
+
   // Current code editor value
   const [value, setValue] = useState(languages[0].defaultValue);
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
@@ -84,7 +125,11 @@ int main() {
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
         />
-        <CodeOutput className="lg:w-1/2" value={value} language={selectedLanguage} />
+        <CodeOutput
+          className="lg:w-1/2"
+          value={value}
+          language={selectedLanguage}
+        />
       </div>
     </div>
   );
