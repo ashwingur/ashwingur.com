@@ -33,7 +33,6 @@ const Tron = () => {
     connected_users: 0,
   });
   const [latency, setLatency] = useState<number | null>(null);
-  console.log(latency);
 
   const createRoom = () => {
     socket?.emit("create_room", { max_players: 3 });
@@ -66,27 +65,17 @@ const Tron = () => {
       setLatency(Date.now() - data.timestamp);
     });
 
-    newSocket.on("connect", () => {
-      console.log("connected");
-    });
+    // newSocket.on("connect", () => {
+    //   console.log("connected");
+    // });
 
     // Response to both create and join room
     newSocket.on("join_room", (data: JoinRoomResponse) => {
-      console.log(data);
       if (data.success && data.room !== undefined) {
-        console.log("setting room");
         setRoom(data.room.room_code);
         setRoomInput("");
       }
     });
-
-    newSocket.on("error", (data: any) => {
-      console.log(data);
-    });
-    newSocket.on("debug", (data: any) => {
-      console.log(`debug: ` + JSON.stringify(data));
-    });
-
     newSocket.on("available_rooms", (data: AvailableRoomsResponse) => {
       setAvailableRooms(data);
     });
