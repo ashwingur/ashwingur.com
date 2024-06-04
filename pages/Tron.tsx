@@ -42,7 +42,7 @@ const Tron = () => {
   };
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5000/tron", {
+    const newSocket = io(`${process.env.NEXT_PUBLIC_ASHWINGUR_API}/tron`, {
       transports: ["websocket"],
     });
     setSocket(newSocket);
