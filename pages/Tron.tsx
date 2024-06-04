@@ -20,6 +20,10 @@ interface JoinRoomResponse {
   error?: string;
 }
 
+interface PingPacket {
+  timestamp: number;
+}
+
 const Tron = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [room, setRoom] = useState<string | null>(null);
@@ -28,6 +32,8 @@ const Tron = () => {
     rooms: [],
     connected_users: 0,
   });
+  const [latency, setLatency] = useState<number | null>(null);
+  console.log(latency);
 
   const createRoom = () => {
     socket?.emit("create_room", { max_players: 3 });
@@ -52,11 +58,12 @@ const Tron = () => {
     const pingInterval = setInterval(() => {
       if (newSocket) {
         newSocket.emit("available_rooms");
+        newSocket.emit("ping", { timestamp: Date.now() });
       }
     }, 3000);
 
-    newSocket.on("pong", () => {
-      console.log("PING RECEIVED");
+    newSocket.on("pong", (data: PingPacket) => {
+      setLatency(Date.now() - data.timestamp);
     });
 
     newSocket.on("connect", () => {
@@ -117,6 +124,7 @@ const Tron = () => {
         </button>
       </div>
       <div>Users online: {availableRooms.connected_users}</div>
+      <div>ms: {latency ?? "NA"}</div>
       {availableRooms.rooms.map((room, index) => (
         <div key={index}>
           {room.room_code} - {room.players.length}/{room.max_players}
