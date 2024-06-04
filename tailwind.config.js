@@ -7,6 +7,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        "tron-blue": "#3ed9de",
+        "tron-orange": "#d69760",
+      },
       fontFamily: {
         clash: ["Clash-Regular", "sans-serif"],
         coc: ["Coc", "sans-serif"],
