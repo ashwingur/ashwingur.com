@@ -52,6 +52,7 @@ const Tron = () => {
   const joinRoom = () => {
     socket?.emit("join_room", { room_code: roomInput });
     socket?.emit("room_details");
+    socket?.emit("available_rooms");
   };
 
   const leaveRoom = () => {
