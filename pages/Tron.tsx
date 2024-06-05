@@ -9,6 +9,7 @@ import {
   JoinRoomEvent,
   PingPacket,
   Room,
+  SIDEvent,
 } from "@interfaces/tron.interface";
 import BasicNavbar from "@components/BasicNavbar";
 import RoomTable from "@components/tron/TronLobby";
@@ -19,6 +20,7 @@ import TronGame from "@components/tron/TronGame";
 
 const Tron = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
+  const [sid, setSid] = useState<string | null>(null);
   const [gameState, setGameState] = useState<GAME_STATE>(GAME_STATE.Connecting);
   const [room, setRoom] = useState<string | null>(null);
   const [roomInput, setRoomInput] = useState("");
@@ -71,6 +73,10 @@ const Tron = () => {
       }
     }, 3000);
 
+    newSocket.on("sid", (data: SIDEvent) => {
+      setSid(data.sid);
+    });
+
     newSocket.on("pong", (data: PingPacket) => {
       setLatency(Date.now() - data.timestamp);
     });
@@ -96,6 +102,10 @@ const Tron = () => {
     newSocket.on("game_start", (data: GameStartEvent) => {
       setGameStart(data);
       setGameState(GAME_STATE.Game);
+    });
+
+    newSocket.on("game_tick", (data: GameTickEvent) => {
+      setGameTick(data);
     });
 
     return () => {
@@ -134,8 +144,13 @@ const Tron = () => {
           leaveRoom={leaveRoom}
         />
       )}
-      {gameState === GAME_STATE.Game && (
-        <TronGame gameStart={gameStart} gameTick={gameTick} />
+      {gameState === GAME_STATE.Game && socket && sid && (
+        <TronGame
+          socket={socket}
+          sid={sid}
+          gameStart={gameStart}
+          gameTick={gameTick}
+        />
       )}
     </div>
   );

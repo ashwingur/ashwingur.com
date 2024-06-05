@@ -6,8 +6,15 @@ export interface AvailableRoomsResponse {
 export interface Room {
   room_code: string;
   max_players: number;
-  players: string[];
+  players: Player[];
   game_started: boolean;
+}
+
+export interface Player {
+  sid: string;
+  colour: string;
+  position: [number, number];
+  direction: string;
 }
 
 export interface JoinRoomEvent {
@@ -27,6 +34,10 @@ export interface GameTickEvent {
 
 export interface PingPacket {
   timestamp: number;
+}
+
+export interface SIDEvent {
+  sid: string;
 }
 
 export enum GAME_STATE {
