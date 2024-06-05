@@ -231,7 +231,7 @@ const TicTacToe = () => {
     <div>
       {inLobby && (
         <div className="flex flex-col h-screen">
-          <BasicNavbar absolute={false} />
+          <BasicNavbar fixed={false} />
           <h1 className="text-center py-2">Tic Tac Toe</h1>
           <div className=" m-auto flex flex-col items-center gap-4 justify-center">
             <input
@@ -258,7 +258,7 @@ const TicTacToe = () => {
       )}
       {!inLobby && (
         <div>
-          <BasicNavbar absolute={false} />
+          <BasicNavbar fixed={false} />
           <button
             className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32 ml-4 mt-4"
             onClick={backToLobby}

@@ -6,7 +6,6 @@ import Image from "next/image";
 import {
   MdOutlineMenu,
   MdOutlineClose,
-  MdLogout,
   MdLogin,
   MdSettings,
 } from "react-icons/md";

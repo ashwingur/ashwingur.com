@@ -491,7 +491,7 @@ const CubeTimer = () => {
       onTouchStart={handle_spacebar_down}
       onTouchEnd={handle_spacebar_up}
     >
-      <BasicNavbar absolute={false} />
+      <BasicNavbar fixed={false} />
       <h1 className="text-center mt-4">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button

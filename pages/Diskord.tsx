@@ -135,7 +135,7 @@ const PusherTest = () => {
         }
       }}
     >
-      <BasicNavbar absolute={false} />
+      <BasicNavbar fixed={false} />
       {!loggedIn && (
         <div className="flex h-screen">
           <div className="m-auto flex flex-col items-center justify-center">
