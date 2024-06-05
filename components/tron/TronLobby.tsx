@@ -9,7 +9,7 @@ interface RoomTableProps {
   updateRoomInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RoomTable: React.FC<RoomTableProps> = ({
+const TronLobby: React.FC<RoomTableProps> = ({
   availableRooms,
   roomInput,
   createRoom,
@@ -89,4 +89,4 @@ const RoomTable: React.FC<RoomTableProps> = ({
   );
 };
 
-export default RoomTable;
+export default TronLobby;

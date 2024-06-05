@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Socket, io } from "socket.io-client";
 import { AiOutlineLoading } from "react-icons/ai";
 import {
   AvailableRoomsResponse,
   GAME_STATE,
+  GameOverEvent,
   GameStartEvent,
   GameTickEvent,
   JoinRoomEvent,
@@ -12,16 +13,19 @@ import {
   SIDEvent,
 } from "@interfaces/tron.interface";
 import BasicNavbar from "@components/BasicNavbar";
-import RoomTable from "@components/tron/TronLobby";
+import TronLobby from "@components/tron/TronLobby";
 import TronConnecting from "@components/tron/TronConnecting";
 import TronStatus from "@components/tron/TronStatus";
 import TronWaitingRoom from "@components/tron/TronWaitingRoom";
 import TronGame from "@components/tron/TronGame";
+import TronGameOver from "@components/tron/TronGameOver";
 
 const Tron = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [sid, setSid] = useState<string | null>(null);
   const [gameState, setGameState] = useState<GAME_STATE>(GAME_STATE.Connecting);
+  // Ref to track latest gameState, so we dont have a stale value in socket.on('leave_room')
+  const gameStateRef = useRef(gameState);
   const [room, setRoom] = useState<string | null>(null);
   const [roomInput, setRoomInput] = useState("");
   const [availableRooms, setAvailableRooms] = useState<AvailableRoomsResponse>({
@@ -32,18 +36,19 @@ const Tron = () => {
   // Game state management
   const [gameStart, setGameStart] = useState<GameStartEvent>();
   const [gameTick, setGameTick] = useState<GameTickEvent>();
+  const [gameoverEvent, setGameOverEvent] = useState<GameOverEvent>();
 
   const createRoom = () => {
     socket?.emit("create_room", { max_players: 2 });
     socket?.emit("available_rooms");
   };
+
   const joinRoom = (room?: Room) => {
     if (room !== undefined) {
       socket?.emit("join_room", { room_code: room.room_code });
-    } else {
+    } else if (roomInput !== "") {
       socket?.emit("join_room", { room_code: roomInput });
     }
-    socket?.emit("room_details");
     socket?.emit("available_rooms");
   };
 
@@ -52,9 +57,23 @@ const Tron = () => {
     socket?.emit("available_rooms");
   };
 
+  const resetToLobby = () => {
+    socket?.emit("available_rooms");
+    setRoom(null);
+    setRoomInput("");
+    setGameStart(undefined);
+    setGameTick(undefined);
+    setGameOverEvent(undefined);
+    setGameState(GAME_STATE.Lobby);
+  };
+
   const updateRoomInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRoomInput(event.target.value.toUpperCase());
   };
+
+  useEffect(() => {
+    gameStateRef.current = gameState; // Update ref whenever gameState changes
+  }, [gameState]);
 
   useEffect(() => {
     const newSocket = io(`${process.env.NEXT_PUBLIC_ASHWINGUR_API}/tron`, {
@@ -96,7 +115,12 @@ const Tron = () => {
 
     newSocket.on("leave_room", () => {
       setRoom(null);
-      setGameState(GAME_STATE.Lobby);
+      console.log(
+        `Leave room received, game state is ${GAME_STATE[gameStateRef.current]}`
+      );
+      if (gameStateRef.current !== GAME_STATE.GameOver) {
+        setGameState(GAME_STATE.Lobby);
+      }
     });
 
     newSocket.on("game_start", (data: GameStartEvent) => {
@@ -106,6 +130,16 @@ const Tron = () => {
 
     newSocket.on("game_tick", (data: GameTickEvent) => {
       setGameTick(data);
+    });
+
+    newSocket.on("game_over", (data: GameOverEvent) => {
+      console.log("Game over received");
+      setGameOverEvent(data);
+      setGameState(GAME_STATE.GameOver);
+    });
+
+    newSocket.on("disconnect", () => {
+      console.log("disconnecting");
     });
 
     return () => {
@@ -129,7 +163,7 @@ const Tron = () => {
       )}
       {gameState === GAME_STATE.Connecting && <TronConnecting />}
       {gameState === GAME_STATE.Lobby && (
-        <RoomTable
+        <TronLobby
           availableRooms={availableRooms}
           roomInput={roomInput}
           createRoom={createRoom}
@@ -150,6 +184,13 @@ const Tron = () => {
           sid={sid}
           gameStart={gameStart}
           gameTick={gameTick}
+        />
+      )}
+      {gameState === GAME_STATE.GameOver && (
+        <TronGameOver
+          gameover_event={gameoverEvent}
+          sid={sid}
+          resetToLobby={resetToLobby}
         />
       )}
     </div>

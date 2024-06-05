@@ -8,6 +8,7 @@ export interface Room {
   max_players: number;
   players: Player[];
   game_started: boolean;
+  grid_size: number;
 }
 
 export interface Player {
@@ -30,6 +31,12 @@ export interface GameStartEvent {
 
 export interface GameTickEvent {
   positions: Record<string, [number, number]>;
+}
+
+export interface GameOverEvent {
+  winner: string;
+  colour: string;
+  tie: boolean;
 }
 
 export interface PingPacket {

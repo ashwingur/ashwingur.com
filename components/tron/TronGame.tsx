@@ -92,25 +92,26 @@ const TronGame: React.FC<TronGameProps> = ({
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction]);
 
   const playerColours = gameStart?.room.players.map((p) => p.colour);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       {countdown !== null && countdown > 0 ? (
         <div className="countdown">Game starts in: {countdown}</div>
       ) : (
         <div className="tron-game">{/* Render game UI here */}</div>
       )}
       {playerColour && (
-        <h1>
+        <h2 className="mb-4">
           Your colour is{" "}
           <span
             className="w-8 h-8 inline-block"
             style={{ background: playerColour }}
           ></span>
-        </h1>
+        </h2>
       )}
       <div>
         <NextReactP5Wrapper
@@ -120,9 +121,6 @@ const TronGame: React.FC<TronGameProps> = ({
           positions={gameTick?.positions}
         />
       </div>
-      <h1>{sid}</h1>
-      <pre>{JSON.stringify(gameStart, null, 2)}</pre>
-      <pre>{JSON.stringify(gameTick, null, 2)}</pre>
     </div>
   );
 };
