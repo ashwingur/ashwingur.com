@@ -1,6 +1,8 @@
 import { GameStartEvent, GameTickEvent } from "@interfaces/tron.interface";
 import React, { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
+import sketch from "./TronGameSketch";
+import { NextReactP5Wrapper } from "@p5-wrapper/next";
 
 interface TronGameProps {
   socket: Socket;
@@ -92,6 +94,8 @@ const TronGame: React.FC<TronGameProps> = ({
     };
   }, [direction]);
 
+  const playerColours = gameStart?.room.players.map((p) => p.colour);
+
   return (
     <div>
       {countdown !== null && countdown > 0 ? (
@@ -108,6 +112,14 @@ const TronGame: React.FC<TronGameProps> = ({
           ></span>
         </h1>
       )}
+      <div>
+        <NextReactP5Wrapper
+          sketch={sketch}
+          players={gameStart?.room.players}
+          colours={playerColours}
+          positions={gameTick?.positions}
+        />
+      </div>
       <h1>{sid}</h1>
       <pre>{JSON.stringify(gameStart, null, 2)}</pre>
       <pre>{JSON.stringify(gameTick, null, 2)}</pre>
