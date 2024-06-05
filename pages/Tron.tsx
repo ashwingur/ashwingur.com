@@ -149,7 +149,7 @@ const Tron = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-[#001724] to-[#001c26] h-screen text-slate-100 flex flex-col items-stretch">
+    <div className="bg-gradient-to-b from-[#001724] to-[#001c26] min-h-screen text-slate-100 flex flex-col items-stretch">
       <BasicNavbar
         fixed={false}
         className="bg-slate-800/100 dark:bg-slate-800/100"

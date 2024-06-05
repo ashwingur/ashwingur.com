@@ -5,6 +5,7 @@ type MySketchProps = {
   players: Player[];
   colours?: string[];
   positions: Record<string, [number, number]>;
+  grid_size: number;
 };
 
 const sketch: Sketch = (p5: P5CanvasInstance<MySketchProps>) => {
@@ -13,13 +14,17 @@ const sketch: Sketch = (p5: P5CanvasInstance<MySketchProps>) => {
   let players: Player[] = [];
   let colours: string[] = [];
   let positions: Record<string, [number, number]> = {};
+  // Some default values for now
+  let grid_size = 100;
+  let pixel_size = 4;
 
   p5.setup = () => {
-    width = Math.min(p5.windowWidth - 20, 800);
-    height = Math.min(p5.windowWidth - 20, 800);
+    width = Math.min(p5.windowWidth - 20, 1000);
+    height = Math.min(p5.windowWidth - 20, 1000);
     p5.createCanvas(width, height);
     p5.background(0);
     p5.noStroke();
+    console.log(`width is ${width}`);
   };
 
   p5.updateWithProps = (props) => {
@@ -32,6 +37,11 @@ const sketch: Sketch = (p5: P5CanvasInstance<MySketchProps>) => {
     if (props.positions !== undefined) {
       positions = props.positions;
     }
+    // This should only be called once, which sets the proper grid and pixel size
+    if (props.grid_size !== undefined && props.grid_size !== grid_size) {
+      grid_size = props.grid_size;
+      pixel_size = width / grid_size;
+    }
   };
 
   p5.draw = () => {
@@ -40,7 +50,11 @@ const sketch: Sketch = (p5: P5CanvasInstance<MySketchProps>) => {
     players.forEach((p) => {
       if (p.sid in positions) {
         p5.fill(p.colour);
-        p5.square(positions[p.sid][0] * 4, positions[p.sid][1] * 4, 4);
+        p5.square(
+          positions[p.sid][0] * pixel_size,
+          positions[p.sid][1] * pixel_size,
+          pixel_size
+        );
       }
     });
   };

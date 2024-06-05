@@ -98,11 +98,11 @@ const TronGame: React.FC<TronGameProps> = ({
   const playerColours = gameStart?.room.players.map((p) => p.colour);
 
   return (
-    <div className="flex flex-col items-center">
-      {countdown !== null && countdown > 0 ? (
-        <div className="countdown">Game starts in: {countdown}</div>
-      ) : (
-        <div className="tron-game">{/* Render game UI here */}</div>
+    <div className="relative flex flex-col items-center mb-4 lg:mb-8">
+      {countdown !== null && countdown > 0 && (
+        <div className="absolute top-1/2 transform -translate-y-1/2 text-9xl z-10">
+          {countdown}
+        </div>
       )}
       {playerColour && (
         <h2 className="mb-4">
@@ -113,12 +113,13 @@ const TronGame: React.FC<TronGameProps> = ({
           ></span>
         </h2>
       )}
-      <div>
+      <div className="relative">
         <NextReactP5Wrapper
           sketch={sketch}
           players={gameStart?.room.players}
           colours={playerColours}
           positions={gameTick?.positions}
+          grid_size={gameStart?.room.grid_size}
         />
       </div>
     </div>
