@@ -4,7 +4,9 @@ import { AiOutlineLoading } from "react-icons/ai";
 import {
   AvailableRoomsResponse,
   GAME_STATE,
-  JoinRoomResponse,
+  GameStartEvent,
+  GameTickEvent,
+  JoinRoomEvent,
   PingPacket,
   Room,
 } from "@interfaces/tron.interface";
@@ -13,6 +15,7 @@ import RoomTable from "@components/tron/TronLobby";
 import TronConnecting from "@components/tron/TronConnecting";
 import TronStatus from "@components/tron/TronStatus";
 import TronWaitingRoom from "@components/tron/TronWaitingRoom";
+import TronGame from "@components/tron/TronGame";
 
 const Tron = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -24,10 +27,12 @@ const Tron = () => {
     connected_users: 0,
   });
   const [latency, setLatency] = useState<number | null>(null);
-  const [joinError, setJoinError] = useState(false);
+  // Game state management
+  const [gameStart, setGameStart] = useState<GameStartEvent>();
+  const [gameTick, setGameTick] = useState<GameTickEvent>();
 
   const createRoom = () => {
-    socket?.emit("create_room", { max_players: 3 });
+    socket?.emit("create_room", { max_players: 2 });
     socket?.emit("available_rooms");
   };
   const joinRoom = (room?: Room) => {
@@ -71,14 +76,11 @@ const Tron = () => {
     });
 
     // Response to both create and join room
-    newSocket.on("join_room", (data: JoinRoomResponse) => {
+    newSocket.on("join_room", (data: JoinRoomEvent) => {
       if (data.success && data.room !== undefined) {
         setRoom(data.room.room_code);
         setRoomInput("");
-        setJoinError(false);
         setGameState(GAME_STATE.WaitingRoom);
-      } else if (!data.success) {
-        setJoinError(true);
       }
     });
 
@@ -89,6 +91,11 @@ const Tron = () => {
     newSocket.on("leave_room", () => {
       setRoom(null);
       setGameState(GAME_STATE.Lobby);
+    });
+
+    newSocket.on("game_start", (data: GameStartEvent) => {
+      setGameStart(data);
+      setGameState(GAME_STATE.Game);
     });
 
     return () => {
@@ -120,12 +127,15 @@ const Tron = () => {
           updateRoomInput={updateRoomInput}
         />
       )}
-      {gameState == GAME_STATE.WaitingRoom && (
+      {gameState === GAME_STATE.WaitingRoom && (
         <TronWaitingRoom
           room={room}
           availableRooms={availableRooms}
           leaveRoom={leaveRoom}
         />
+      )}
+      {gameState === GAME_STATE.Game && (
+        <TronGame gameStart={gameStart} gameTick={gameTick} />
       )}
     </div>
   );

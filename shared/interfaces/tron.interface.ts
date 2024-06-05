@@ -10,10 +10,19 @@ export interface Room {
   game_started: boolean;
 }
 
-export interface JoinRoomResponse {
+export interface JoinRoomEvent {
   success: boolean;
   room?: Room;
   error?: string;
+}
+
+export interface GameStartEvent {
+  room: Room;
+  countdown: number;
+}
+
+export interface GameTickEvent {
+  positions: Record<string, [number, number]>;
 }
 
 export interface PingPacket {
