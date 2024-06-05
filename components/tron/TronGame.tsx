@@ -113,7 +113,7 @@ const TronGame: React.FC<TronGameProps> = ({
           ></span>
         </h2>
       )}
-      <div className="relative">
+      <div className="relative min-h-96">
         <NextReactP5Wrapper
           sketch={sketch}
           players={gameStart?.room.players}

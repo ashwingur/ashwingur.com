@@ -24,7 +24,7 @@ const TronWaitingRoom: React.FC<TronWaitingRoomProps> = ({
       </div>
       <button
         onClick={leaveRoom}
-        className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-md shadow-tron-orange hover:bg-tron-orange/20 transition-all text-lg"
+        className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
       >
         Leave Room
       </button>

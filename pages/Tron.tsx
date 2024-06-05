@@ -38,8 +38,8 @@ const Tron = () => {
   const [gameTick, setGameTick] = useState<GameTickEvent>();
   const [gameoverEvent, setGameOverEvent] = useState<GameOverEvent>();
 
-  const createRoom = () => {
-    socket?.emit("create_room", { max_players: 4 });
+  const createRoom = (players: number) => {
+    socket?.emit("create_room", { max_players: players });
     socket?.emit("available_rooms");
   };
 

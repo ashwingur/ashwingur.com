@@ -1,10 +1,10 @@
 import { AvailableRoomsResponse, Room } from "@interfaces/tron.interface";
-import React from "react";
+import React, { useState } from "react";
 
 interface RoomTableProps {
   availableRooms: AvailableRoomsResponse;
   roomInput: string;
-  createRoom: () => void;
+  createRoom: (players: number) => void;
   joinRoom: (room?: Room) => void;
   updateRoomInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -16,28 +16,60 @@ const TronLobby: React.FC<RoomTableProps> = ({
   joinRoom,
   updateRoomInput,
 }) => {
+  const [createRoomPlayerCount, setCreateRoomPlayerCount] = useState(2);
+
+  const onCreateRoomPlayerCountChange = (increment: boolean) => {
+    if (increment) {
+      setCreateRoomPlayerCount((prev) => Math.min(prev + 1, 6));
+    } else {
+      setCreateRoomPlayerCount((prev) => Math.max(prev - 1, 2));
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 bg-black self-center w-11/12 lg:w-2/3 xl:w-2/5 p-4 md:p-8 mt-4 rounded-2xl border-4 border-tron-blue animate-pulse-glow">
-      <button
-        onClick={createRoom}
-        className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
-      >
-        Create Room
-      </button>
-      <button
-        onClick={() => joinRoom()}
-        className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg mt-2"
-      >
-        Join Room
-      </button>
-      <div>
+      <div className="flex items-center gap-4 md:gap-8">
+        <button
+          onClick={() => createRoom(createRoomPlayerCount)}
+          className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
+        >
+          Create Room
+        </button>
+        <div className="flex items-center gap-2 w-20 md:w-32 md:justify-center">
+          <button
+            onClick={() => {
+              onCreateRoomPlayerCountChange(false);
+            }}
+            className="px-2 border-2 rounded-lg border-tron-orange shadow-glow-orange hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
+          >
+            −
+          </button>
+          <div className="text-center">{createRoomPlayerCount}</div>
+          <button
+            onClick={() => {
+              onCreateRoomPlayerCountChange(true);
+            }}
+            className="px-2 border-2 rounded-lg border-tron-orange shadow-glow-orange hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div className="flex items-center gap-4 md:gap-8 mt-2">
+        <button
+          onClick={() => joinRoom()}
+          className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg"
+        >
+          Join Room
+        </button>
+
         <input
           value={roomInput}
           type="text"
           maxLength={4}
-          placeholder="JOIN CODE"
+          placeholder="CODE"
           onChange={updateRoomInput}
-          className="px-4 py-2 bg-slate-800 border-tron-blue border-2 rounded-lg shadow-glow-blue-lg text-center text-lg w-32 mt-2"
+          className="px-4 py-2 bg-slate-800 border-tron-blue border-2 rounded-lg shadow-glow-blue-lg text-center w-20 md:w-32"
         />
       </div>
       <div className="w-full overflow-x-auto mt-4 border-tron-blue border-2 rounded-lg shadow-glow-blue-lg">
@@ -56,7 +88,7 @@ const TronLobby: React.FC<RoomTableProps> = ({
                   colSpan={3}
                   className="px-4 py-4 text-center text-lg font-mono"
                 >
-                  No rooms available
+                  No rooms created
                 </td>
               </tr>
             ) : (
