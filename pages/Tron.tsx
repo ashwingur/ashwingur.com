@@ -9,7 +9,10 @@ import {
   Room,
 } from "@interfaces/tron.interface";
 import BasicNavbar from "@components/BasicNavbar";
-import RoomTable from "@components/tron/Lobby";
+import RoomTable from "@components/tron/TronLobby";
+import TronConnecting from "@components/tron/TronConnecting";
+import TronStatus from "@components/tron/TronStatus";
+import TronWaitingRoom from "@components/tron/TronWaitingRoom";
 
 const Tron = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -102,17 +105,12 @@ const Tron = () => {
       />
       <h1 className="text-center mt-4">Tron</h1>
       {gameState !== GAME_STATE.Connecting && (
-        <div className="flex gap-8 justify-center mt-2 md:mt-4 mb-2 font-mono">
-          <div>Total Online: {availableRooms.connected_users}</div>
-          <div className="w-20">ms: {latency ?? "NA"}</div>
-        </div>
+        <TronStatus
+          connectedUsers={availableRooms.connected_users}
+          latency={latency}
+        />
       )}
-      {gameState === GAME_STATE.Connecting && (
-        <div className="flex flex-col items-center text-3xl mt-8">
-          <div>Connecting to server...</div>
-          <AiOutlineLoading className="text-4xl animate-spin mt-4" />
-        </div>
-      )}
+      {gameState === GAME_STATE.Connecting && <TronConnecting />}
       {gameState === GAME_STATE.Lobby && (
         <RoomTable
           availableRooms={availableRooms}
@@ -123,27 +121,11 @@ const Tron = () => {
         />
       )}
       {gameState == GAME_STATE.WaitingRoom && (
-        <div className="flex flex-col items-center justify-center gap-4 bg-black self-center w-11/12 lg:w-2/3 xl:w-2/5 p-4 md:p-8 mt-4 rounded-2xl border-4 border-tron-blue shadow-2xl shadow-tron-blue/50">
-          <h2>Room: {room}</h2>
-          <div className="font-mono text-xl">
-            Players:{" "}
-            {
-              availableRooms.rooms.find((item) => item.room_code === room)
-                ?.players.length
-            }
-            /
-            {
-              availableRooms.rooms.find((item) => item.room_code === room)
-                ?.max_players
-            }
-          </div>
-          <button
-            onClick={leaveRoom}
-            className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-md shadow-tron-orange hover:bg-tron-orange/20 transition-all text-lg"
-          >
-            Leave Room
-          </button>
-        </div>
+        <TronWaitingRoom
+          room={room}
+          availableRooms={availableRooms}
+          leaveRoom={leaveRoom}
+        />
       )}
     </div>
   );
