@@ -147,7 +147,7 @@ const Tron = () => {
           </button>
           <button
             onClick={() => {
-              joinRoom;
+              joinRoom();
             }}
             disabled={room !== null}
             className="p-4 w-48 border-2 rounded-lg border-tron-orange shadow-glow-orange-md hover:shadow-glow-orange-2xl hover:text-tron-orange hover:font-bold transition-all text-lg mt-2"
