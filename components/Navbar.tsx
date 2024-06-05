@@ -26,7 +26,13 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         }
       >
         <Link href="/">
-          <Image src="/logo.png" alt="logo" width="30" height="30" />
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width="30"
+            height="30"
+            fetchPriority="high"
+          />
         </Link>
         <ul className="hidden lg:flex lg:gap-4 lg:items-center) ">
           <Link
