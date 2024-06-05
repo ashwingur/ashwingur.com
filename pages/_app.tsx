@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ThemeProvider, useTheme } from "next-themes";
+import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { Nunito } from "next/font/google";
-import { AuthProvider } from "../components/AuthContext";
+import { AuthProvider } from "@components/AuthContext";
 
 const queryClient = new QueryClient();
 
