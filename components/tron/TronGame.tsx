@@ -105,13 +105,13 @@ const TronGame: React.FC<TronGameProps> = ({
         </div>
       )}
       {playerColour && (
-        <h2 className="mb-4">
-          Your colour is{" "}
-          <span
+        <div className="flex items-center mb-4 gap-4">
+          <h2>Your colour is </h2>
+          <div
             className="w-8 h-8 inline-block"
             style={{ background: playerColour }}
-          ></span>
-        </h2>
+          />
+        </div>
       )}
       <div className="relative min-h-96">
         <NextReactP5Wrapper
