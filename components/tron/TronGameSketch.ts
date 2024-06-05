@@ -45,8 +45,6 @@ const sketch: Sketch = (p5: P5CanvasInstance<MySketchProps>) => {
   };
 
   p5.draw = () => {
-    // p5.circle(400 + 100 * p5.sin(p5.millis() * currentSpeed), 400, 10);
-
     players.forEach((p) => {
       if (p.sid in positions) {
         p5.fill(p.colour);

@@ -39,7 +39,7 @@ const Tron = () => {
   const [gameoverEvent, setGameOverEvent] = useState<GameOverEvent>();
 
   const createRoom = () => {
-    socket?.emit("create_room", { max_players: 2 });
+    socket?.emit("create_room", { max_players: 4 });
     socket?.emit("available_rooms");
   };
 
