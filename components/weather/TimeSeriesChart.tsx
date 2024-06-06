@@ -6,10 +6,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
+import { isDark } from "@components/ToggleThemeButton";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -33,10 +33,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   // No tailwindcss for recharts, so we manually get the current theme
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
-  const axisStrokeColour = currentTheme === "dark" ? "#c9c9c9" : "#000";
-  const lineColour = currentTheme === "dark" ? "#ffbdbd" : "#bd0000";
-  const gridColour = currentTheme === "dark" ? "#b0b0b0" : "#4f4f4f";
-  const tooltipColour = currentTheme === "dark" ? "#2e2e2e" : "#ebebeb";
+  const axisStrokeColour = isDark(currentTheme ?? "") ? "#c9c9c9" : "#000";
+  const lineColour = isDark(currentTheme ?? "") ? "#ffbdbd" : "#bd0000";
+  const gridColour = isDark(currentTheme ?? "") ? "#b0b0b0" : "#4f4f4f";
+  const tooltipColour = isDark(currentTheme ?? "") ? "#2e2e2e" : "#ebebeb";
 
   // See how long the time period is
   const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
@@ -73,7 +73,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   }));
 
   return (
-    <div className="w-full h-96 lg:h-[32rem] px-4 pb-8 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg">
+    <div className="w-full h-96 lg:h-[32rem] px-4 pb-8 bg-background-hover shadow-lg rounded-lg">
       <h3 className="text-center my-4 lg:text-xl">{title}</h3>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart

@@ -8,6 +8,7 @@ import clsx from "clsx";
 const themes = [
   {
     name: "light",
+    isDark: false,
     color: "text-yellow-500",
     icon: (additionalClasses: string) => (
       <FaSun className={clsx(additionalClasses)} />
@@ -16,6 +17,7 @@ const themes = [
   {
     name: "dark",
     color: "text-gray-800",
+    isDark: true,
     icon: (additionalClasses: string) => (
       <FaMoon className={clsx(additionalClasses)} />
     ),
@@ -23,6 +25,7 @@ const themes = [
   {
     name: "blue",
     color: "text-blue-500",
+    isDark: false,
     icon: (additionalClasses: string) => (
       <MdOutlineColorLens className={clsx(additionalClasses)} />
     ),
@@ -78,4 +81,8 @@ const ToggleThemeButton = () => {
   );
 };
 
-export default ToggleThemeButton;
+const isDark = (currentTheme: string): boolean => {
+  return themes.find((t) => t.name === currentTheme)?.isDark ?? false;
+};
+
+export { ToggleThemeButton, isDark };

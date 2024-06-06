@@ -9,7 +9,7 @@ import {
   MdLogin,
   MdSettings,
 } from "react-icons/md";
-import ToggleThemeButton from "./ToggleThemeButton";
+import { ToggleThemeButton } from "./ToggleThemeButton";
 import { useAuth } from "./AuthContext";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {

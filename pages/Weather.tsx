@@ -8,60 +8,56 @@ import Link from "next/link";
 const MetricTable = () => {
   return (
     <div className="overflow-x-auto px-4 mt-4 md:w-4/5">
-      <table className="min-w-full bg-white dark:bg-stone-700/25 border border-gray-300 dark:border-gray-700">
+      <table className="min-w-full bg-background-hover border border-text-muted">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
-              Metric
-            </th>
-            <th className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <th className="py-2 px-4 border-b border-text-muted">Metric</th>
+            <th className="py-2 px-4 border-b border-text-muted">
               Explanation
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               Temperature
             </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               The measure of the warmth or coldness of an environment, in
               degrees Celsius (°C).
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               Air Pressure
             </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               The force exerted by the weight of air in the atmosphere, measured
               in hectopascals (hPa). The standard air pressure at sea level is
               1013.25 hPa.
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
-              Humidity
-            </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">Humidity</td>
+            <td className="py-2 px-4 border-b border-text-muted">
               The amount of water vapor in the air, expressed as a percentage
               (%).
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               Ambient Light
             </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               The intensity of light present in the environment, measured in
               lux.
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               Air Quality
             </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">
               A numerical value representing the quality of air. It is derived
               from a guideline by the German Federal Agency. From 1 to 5
               respectively the ratings are: excellent, good, moderate, poor,
@@ -69,19 +65,15 @@ const MetricTable = () => {
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
-              TVOC
-            </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">TVOC</td>
+            <td className="py-2 px-4 border-b border-text-muted">
               Total Volatile Organic Compounds, measured in parts per billion
               (ppb).
             </td>
           </tr>
           <tr>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
-              eCO2
-            </td>
-            <td className="py-2 px-4 border-b border-gray-300 dark:border-gray-700">
+            <td className="py-2 px-4 border-b border-text-muted">eCO2</td>
+            <td className="py-2 px-4 border-b border-text-muted">
               Equivalent Carbon Dioxide, a measure of CO2 levels, in parts per
               million (ppm).
             </td>
@@ -99,7 +91,7 @@ const Weather = () => {
       <div className="flex flex-col mx-auto mt-20 pb-8 md:w-4/5 gap-8">
         <LatestWeather />
         <WeatherCharts />
-        <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-4 shadow-md">
+        <div className="flex flex-col items-center card mx-4">
           <h2>Notes</h2>
           <div>
             <p className="mx-8 md:mx-auto md:w-96 lg:w-3/5">
@@ -116,7 +108,7 @@ const Weather = () => {
                 href="https://github.com/ashwingur/pi-weather-station"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-700 dark:text-blue-300"
+                className="text-accent"
               >
                 GitHub Repository
               </Link>
