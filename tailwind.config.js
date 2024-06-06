@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -9,9 +10,20 @@ module.exports = {
     extend: {
       colors: {
         primary: "var(--color-primary)",
+        "primary-light": "var(--color-primary-light)",
+        "primary-dark": "var(--color-primary-dark)",
         secondary: "var(--color-secondary)",
+        "secondary-light": "var(--color-secondary-light)",
+        "secondary-dark": "var(--color-secondary-dark)",
         background: "var(--color-background)",
+        "background-light": "var(--color-background-light)",
+        "background-dark": "var(--color-background-dark)",
         text: "var(--color-text)",
+        "text-light": "var(--color-text-light)",
+        "text-dark": "var(--color-text-dark)",
+        accent: "var(--color-accent)",
+        "accent-light": "var(--color-accent-light)",
+        "accent-dark": "var(--color-accent-dark)",
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
       },
@@ -58,6 +70,11 @@ module.exports = {
       },
     },
   },
-
+  variants: {
+    extend: {
+      backgroundColor: ["dark"],
+      textColor: ["dark"],
+    },
+  },
   plugins: [],
 };
