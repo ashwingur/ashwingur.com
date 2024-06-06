@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import WeatherCharts from "../components/weather/WeatherCharts";
 
 import React from "react";
+import Link from "next/link";
 
 const MetricTable = () => {
   return (
@@ -102,15 +103,24 @@ const Weather = () => {
           <h2>Notes</h2>
           <div>
             <p className="mx-8 md:mx-auto md:w-96 lg:w-3/5">
-              The weather station is a Raspberry Pi Zero 2W attached to an
-              atmospheric, ambient light, and air quality sensor. It runs 24/7
+              The weather station is a Raspberry Pi Zero 2W attached to
+              atmospheric, ambient light, and air quality sensors. It runs 24/7
               and samples the sensor data every 5 minutes. The setup is located
-              outside, but under a patio which means the light sensor readings
-              may not be as accurate. The general location is North-west Sydney.
-              When querying a larger time window, the values are averages over
-              larger bin sizes which will lead to smoother curves. This allows
-              it to be both efficient and more useful for analysing long term
-              trends.
+              outside but under a patio, which means the light sensor readings
+              may not be as accurate. The general location is north-west Sydney.
+              When querying a larger time window, the values are averaged over
+              larger bin sizes, leading to smoother curves. This allows it to be
+              both efficient and more useful for analyzing long-term trends.
+              More setup information available at{" "}
+              <Link
+                href="https://github.com/ashwingur/pi-weather-station"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 dark:text-blue-300"
+              >
+                GitHub Repository
+              </Link>
+              .
             </p>
           </div>
           <MetricTable />
