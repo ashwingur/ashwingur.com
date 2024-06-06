@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectProps {
   title: string;
@@ -23,24 +24,25 @@ const ProjectCard = ({
   links,
 }: ProjectProps) => {
   const stack_items = stack.map((item, index) => (
-    <div key={index} className="bg-gray-200 dark:bg-gray-600 p-2 rounded-md">
+    <div key={index} className="bg-secondary text-text-button p-2 rounded-md">
       {item}
     </div>
   ));
 
   const link_items = links?.map((item, index) => (
-    <div
+    <Link
       key={index}
-      className="bg-blue-200 dark:bg-[#2e1065] p-2 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
+      className="btn-accent"
+      href={item.url}
+      target="_blank"
+      rel="noreferrer"
     >
-      <a href={item.url} target="_blank" rel="noreferrer">
-        {item.display}
-      </a>
-    </div>
+      {item.display}
+    </Link>
   ));
 
   return (
-    <div className="flex flex-col justify-center rounded-2xl bg-stone-100 dark:bg-gradient-to-b dark:from-zinc-900 dark:to-slate-900 max-w-lg shadow-xl relative m-8 p-4">
+    <div className="card !rounded-2xl flex flex-col justify-center max-w-lg !shadow-xl relative m-8 p-4">
       <div className="w-full h-36 md:h-72 relative">
         <Image
           alt="Mountains"

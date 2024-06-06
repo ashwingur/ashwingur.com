@@ -41,10 +41,12 @@ export default function Home() {
 
       <div className="mb-8">
         <HomeSection />
-        <div className="bg-background text-text p-4">
+        <div className="bg-background p-4">
           <h1 className="text-primary">Hello, World!</h1>
           <p className="text-secondary">This is an example component.</p>
-          <button className="bg-accent text-background p-2">Click Me</button>
+          <button className="bg-primary text-text-button hover:bg-primary-hover p-2">
+            Click Me
+          </button>
         </div>
         <Apps />
         <Projects />

@@ -10,20 +10,23 @@ module.exports = {
     extend: {
       colors: {
         primary: "var(--color-primary)",
-        "primary-light": "var(--color-primary-light)",
-        "primary-dark": "var(--color-primary-dark)",
+        "primary-muted": "var(--color-primary-muted)",
+        "primary-hover": "var(--color-primary-hover)",
         secondary: "var(--color-secondary)",
-        "secondary-light": "var(--color-secondary-light)",
-        "secondary-dark": "var(--color-secondary-dark)",
+        "secondary-muted": "var(--color-secondary-muted)",
+        "secondary-hover": "var(--color-secondary-hover)",
         background: "var(--color-background)",
-        "background-light": "var(--color-background-light)",
-        "background-dark": "var(--color-background-dark)",
+        "background-muted": "var(--color-background-muted)",
+        "background-hover": "var(--color-background-hover)",
         text: "var(--color-text)",
-        "text-light": "var(--color-text-light)",
-        "text-dark": "var(--color-text-dark)",
+        "text-muted": "var(--color-text-muted)",
+        "text-hover": "var(--color-text-hover)",
+        "text-primary": "var(--color-text-primary)", // Contrasts against primary colour
+        "text-secondary": "var(--color-text-primary)", // Contrasts against secondary colour
+        "text-accent": "var(--color-text-primary)", // Contrasts against accent colour
         accent: "var(--color-accent)",
-        "accent-light": "var(--color-accent-light)",
-        "accent-dark": "var(--color-accent-dark)",
+        "accent-muted": "var(--color-accent-muted)",
+        "accent-hover": "var(--color-accent-hover)",
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
       },

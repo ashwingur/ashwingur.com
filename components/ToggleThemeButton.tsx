@@ -27,20 +27,6 @@ const themes = [
       <MdOutlineColorLens className={clsx(additionalClasses)} />
     ),
   },
-  {
-    name: "green",
-    color: "text-green-500",
-    icon: (additionalClasses: string) => (
-      <MdOutlineColorLens className={clsx(additionalClasses)} />
-    ),
-  },
-  {
-    name: "custom",
-    color: "text-purple-500",
-    icon: (additionalClasses: string) => (
-      <MdOutlineColorLens className={clsx(additionalClasses)} />
-    ),
-  },
 ];
 
 const ToggleThemeButton = () => {

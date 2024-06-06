@@ -20,7 +20,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
     <div>
       <div
         className={
-          "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/50 dark:bg-white/10 z-50" +
+          "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-background/50 z-50" +
           (fixed ? " fixed top-0" : "")
         }
       >
