@@ -36,21 +36,21 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <ul className="hidden lg:flex lg:gap-4 lg:items-center) ">
           <Link
             href="/#home"
-            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            className="hover:bg-background-hover px-2 py-1 transition rounded-md"
             scroll={false}
           >
             <li>Home</li>
           </Link>
           <Link
             href="/#apps"
-            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            className="hover:bg-background-hover px-2 py-1 transition rounded-md"
             scroll={false}
           >
             <li>Apps</li>
           </Link>
           <Link
             href="/#projects"
-            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            className="hover:bg-background-hover px-2 py-1 transition rounded-md"
             scroll={false}
           >
             <li>Projects</li>
@@ -58,7 +58,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           {user && role === "admin" && (
             <Link
               href="/Admin"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+              className="hover:bg-background-hover px-2 py-1 transition rounded-md"
               scroll={false}
             >
               <li>Admin</li>
@@ -71,7 +71,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           {!user && (
             <Link
               href="/Login"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md"
+              className="hover:bg-background-hover px-2 py-2 transition rounded-md"
             >
               <MdLogin />
             </Link>
@@ -79,7 +79,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           {user && (
             <Link
               href="/Login"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md"
+              className="hover:bg-background-hover px-2 py-2 transition rounded-md"
             >
               <MdSettings />
             </Link>
@@ -106,8 +106,8 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <div
           className={
             mobileNavMenu
-              ? "absolute left-0 top-0 w-[75%] h-full bg-gradient-to-r from-lime-100 to-orange-100 dark:bg-gradient-to-r dark:from-slate-900 dark:to-emerald-900 ease-in duration-500 z-50"
-              : "fixed left-[-100%] w-[75%] top-0 h-full p-10 ease-in duration-500 z-50 bg-gradient-to-r from-lime-100 to-orange-100 dark:bg-gradient-to-r dark:from-emerald-900 dark:to-slate-900"
+              ? "absolute left-0 top-0 w-[75%] h-full bg-background ease-in duration-500 z-50"
+              : "fixed left-[-100%] w-[75%] top-0 h-full p-10 ease-in duration-500 z-50 bg-background"
           }
           onClick={(e) => {
             e.stopPropagation();

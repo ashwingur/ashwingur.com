@@ -45,10 +45,8 @@ const ToggleThemeButton = () => {
   return (
     <div className="relative inline-block text-left">
       <Combobox value={currentTheme} onChange={setTheme}>
-        <Combobox.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
-          {themes
-            .find((t) => t.name === currentTheme)
-            ?.icon(themes.find((t) => t.name === currentTheme)?.color ?? "")}
+        <Combobox.Button className="inline-flex justify-center w-full rounded-md shadow-sm px-4 py-2 focus:outline-none hover:bg-background-hover transition-all">
+          {themes.find((t) => t.name === currentTheme)?.icon("")}
         </Combobox.Button>
 
         <Combobox.Options className="absolute mt-1 w-full bg-slate-200 shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">

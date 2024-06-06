@@ -29,20 +29,20 @@
   --color-text: #f9fafb;
   --color-text-muted: #c7c7c7;
   --color-text-hover: #fafafb;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #ffffff;
-  --color-text-accent: #ffffff;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #f9fafb;
+  --color-text-accent: #f9fafb;
   --color-primary: #1e3a8a;
   --color-primary-muted: #152f73;
   --color-primary-hover: #3758a8;
-  --color-secondary: #10b981;
-  --color-secondary-muted: #0b8e68;
-  --color-secondary-hover: #2ac399;
+  --color-secondary: #0d885f;
+  --color-secondary-muted: #096c50;
+  --color-secondary-hover: #19b98e;
   --color-background: #1a202c;
   --color-background-muted: #171923;
   --color-background-hover: #2d3748;
-  --color-accent: #e74c3c;
-  --color-accent-muted: #b93a2d;
+  --color-accent: #be392a;
+  --color-accent-muted: #983227;
   --color-accent-hover: #eb6f64;
 }
 
@@ -112,6 +112,11 @@ html {
   @apply text-white dark:text-slate-100 font-coc font-thin [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }
 
+/*
+  btn, btn-secondary, btn-accent use primary, secondary and accent colours respectively
+  The invert versions use the same but the text colour is primary, secondary or accent and there is no bg
+*/
+
 .btn {
   @apply px-4 py-2 rounded-full shadow-md text-center;
   @apply bg-primary text-text-primary;
@@ -158,6 +163,7 @@ html {
   @apply p-4 rounded-lg shadow-lg;
   @apply bg-background-muted;
 }
+
 .card-hover {
   @apply p-4 rounded-lg shadow-lg;
   @apply bg-background-hover;

@@ -24,7 +24,10 @@ const ProjectCard = ({
   links,
 }: ProjectProps) => {
   const stack_items = stack.map((item, index) => (
-    <div key={index} className="bg-secondary text-text-button p-2 rounded-md">
+    <div
+      key={index}
+      className="bg-secondary text-text-secondary p-2 rounded-md"
+    >
       {item}
     </div>
   ));

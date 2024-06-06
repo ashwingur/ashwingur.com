@@ -191,7 +191,7 @@ const MediaReviews = () => {
     return (
       <button
         className={
-          "md:text-2xl px-4 pb-1 relative before:content-[''] before:absolute before:mt-2 before:block before:w-full before:h-[3px] before:bottom-0 before:-translate-x-1/2 before:left-1/2 before:bg-black dark:before:bg-slate-50 before:transition before:ease-in-out before:duration-300" +
+          "md:text-2xl px-4 pb-1 relative before:content-[''] before:absolute before:mt-2 before:block before:w-full before:h-[3px] before:bottom-0 before:-translate-x-1/2 before:left-1/2 before:bg-accent before:transition before:ease-in-out before:duration-300" +
           (selectedTab == index ? " before:scale-x-100" : " before:scale-x-0")
         }
         key={index}
@@ -262,10 +262,7 @@ const MediaReviews = () => {
         );
       });
       return (
-        <div
-          key={index}
-          className="bg-slate-100 dark:bg-zinc-900 p-4 md:p-8 rounded-lg"
-        >
+        <div key={index} className="card-hover">
           <div className="flex justify-between items-center mb-4">
             <div className="text-xl md:text-2xl w-4/5">
               <div className="font-bold">{subItem.name}</div>
@@ -280,7 +277,9 @@ const MediaReviews = () => {
                   subItem.rating
                 )}`}
               >
-                <p className="m-auto font-bold text-xl">{subItem.rating}</p>
+                <p className="m-auto font-bold text-xl text-slate-800">
+                  {subItem.rating}
+                </p>
               </div>
             )}
           </div>
@@ -302,7 +301,7 @@ const MediaReviews = () => {
     return (
       <div
         key={index}
-        className="bg-slate-50 dark:bg-slate-800 p-4 md:p-8 w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 rounded-lg animate-fade shadow-sm"
+        className="card w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 animate-fade"
       >
         <div className="flex justify-between items-center mb-2">
           <div className=" w-4/5">
@@ -317,7 +316,7 @@ const MediaReviews = () => {
                 item.rating
               )}`}
             >
-              <p className="m-auto font-bold">{item.rating}</p>
+              <p className="m-auto font-bold text-slate-800">{item.rating}</p>
             </div>
           )}
         </div>
@@ -360,9 +359,9 @@ const MediaReviews = () => {
         A nonexhaustive list of all the media I have consumed over the years and
         my (highly subjective) reviews of them. May contain spoilers.
       </p>
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-2 items-center mt-4">
         <button
-          className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-16 md:w-32 transition-all"
+          className="btn flex items-center justify-center w-20 md:w-32"
           onClick={() => {
             if (sortAtoZ === null) {
               setSortAtoZ(true);
@@ -379,7 +378,7 @@ const MediaReviews = () => {
             (sortAtoZ ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />)}
         </button>
         <button
-          className="flex items-center justify-center bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-20 md:w-32 transition-all"
+          className="btn flex items-center justify-center w-20 md:w-32"
           onClick={() => {
             if (sortRatingDescending === null) {
               setSortRatingDescending(true);
@@ -400,7 +399,7 @@ const MediaReviews = () => {
             ))}
         </button>
         <button
-          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 p-2 rounded-lg mt-4 w-32 transition-all"
+          className="btn flex items-center justify-center w-36"
           onClick={() => {
             localStorage.setItem("showImages", showImages ? "false" : "true");
             setShowImages(!showImages);
@@ -420,7 +419,7 @@ const MediaReviews = () => {
             setSelectedSearch(val);
           }}
         >
-          <div className="relative cursor-default overflow-hidden rounded-lg bg-white dark:bg-black text-left focus:outline-none">
+          <div className="relative cursor-default overflow-hidden rounded-lg text-left focus:outline-none">
             <Combobox.Input
               placeholder="Search"
               onChange={(event) => {
@@ -431,7 +430,7 @@ const MediaReviews = () => {
                 }
               }}
               displayValue={(review: string) => review}
-              className="dark:bg-zinc-900 w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none"
+              className="bg-background-hover w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none"
             />
             {(searchQuery !== "" || selectedSearch !== "") && (
               <button
@@ -441,21 +440,21 @@ const MediaReviews = () => {
                   setSelectedSearch("");
                 }}
               >
-                <AiOutlineClose className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
+                <AiOutlineClose className="hover:text-xl transition-all" />
               </button>
             )}
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
-          <Combobox.Options className="absolute mx-auto bg-white dark:bg-zinc-900 w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg z-50">
+          <Combobox.Options className="absolute mx-auto bg-background-hover w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg z-50">
             {filteredReviewSearches.map((review) => (
               <Combobox.Option
                 key={review.name}
                 value={review.name}
                 className={({ active }) =>
                   `px-4 cursor-pointer py-2 ${
-                    active ? "bg-green-600 dark:bg-[#3b0764] text-white" : ""
+                    active ? "bg-accent text-text-accent" : ""
                   }`
                 }
               >
@@ -474,7 +473,7 @@ const MediaReviews = () => {
       </div>
       <button
         className={
-          "fixed bottom-0 right-0 mr-2 mb-2 md:mb-4 md:mr-4 transition-all rounded-full bg-black text-white dark:text-slate-200 hover:text-6xl dark:bg-green-900" +
+          "fixed bottom-0 right-0 mr-2 mb-2 md:mb-4 md:mr-4 transition-all rounded-full bg-accent text-text-accent dark:text-slate-200 hover:text-6xl" +
           (scrollPosition === 0
             ? " scale-0"
             : " scale-100 hover:scale-110 md:hover:scale-125")
