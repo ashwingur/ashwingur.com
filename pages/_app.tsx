@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider enableSystem={true} attribute="class">
+        <ThemeProvider enableSystem={true} attribute="data-theme">
           <main className={`${inter.variable} font-sans`}>
             <Component {...pageProps} />
           </main>

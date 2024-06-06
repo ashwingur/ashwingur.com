@@ -8,6 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        background: "var(--color-background)",
+        text: "var(--color-text)",
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
       },
@@ -54,5 +58,6 @@ module.exports = {
       },
     },
   },
+
   plugins: [],
 };

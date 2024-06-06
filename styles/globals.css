@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light Theme */
+[data-theme="light"] {
+  --color-text: #333333;
+  --color-background: #ffffff;
+  --color-primary: #3498db;
+  --color-secondary: #2ecc71;
+  --color-accent: #e74c3c;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-text: #f9fafb;
+  --color-background: #1a202c;
+  --color-primary: #1e3a8a;
+  --color-secondary: #10b981;
+  --color-accent: #e74c3c;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+  --color-text: #1a202c;
+  --color-background: #e0f7fa;
+  --color-primary: #007bff;
+  --color-secondary: #6610f2;
+  --color-accent: #ff7f50;
+}
+
+/* Green Theme */
+[data-theme="green"] {
+  --color-text: #1a202c;
+  --color-background: #e9f7ef;
+  --color-primary: #28a745;
+  --color-secondary: #20c997;
+  --color-accent: #ff6347;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -48,7 +84,7 @@ html {
 
 @layer base {
   body {
-    @apply bg-gradient-to-r from-green-200 via-orange-100 to-green-200 dark:from-slate-900 dark:via-emerald-900 dark:to-slate-900 dark:text-gray-200;
+    @apply bg-background text-text;
   }
 
   h1,
