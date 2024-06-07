@@ -430,7 +430,7 @@ const MediaReviews = () => {
                 }
               }}
               displayValue={(review: string) => review}
-              className="bg-background-hover w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none"
+              className="bg-background-hover w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none placeholder:text-text-muted"
             />
             {(searchQuery !== "" || selectedSearch !== "") && (
               <button

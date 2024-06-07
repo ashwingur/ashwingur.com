@@ -28,7 +28,7 @@
 [data-theme="dark"] {
   --color-background: theme(colors.slate.900);
   --color-background-muted: theme(colors.slate.950);
-  --color-background-hover: theme(colors.stone.800);
+  --color-background-hover: theme(colors.slate.800);
   --color-text: theme(colors.slate.100);
   --color-text-muted: theme(colors.slate.200);
   --color-text-hover: theme(colors.slate.50);
@@ -52,7 +52,7 @@
   --color-background-muted: theme(colors.orange.200);
   --color-background-hover: theme(colors.orange.300);
   --color-text: theme(colors.slate.900);
-  --color-text-muted: theme(colors.slate.700);
+  --color-text-muted: theme(colors.yellow.700);
   --color-text-hover: theme(colors.slate.800);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);

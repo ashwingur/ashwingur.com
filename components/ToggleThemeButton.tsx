@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
-import { MdOutlineColorLens } from "react-icons/md";
+import { MdOutlineColorLens, MdSunny } from "react-icons/md";
 import clsx from "clsx";
 
 const themes = [
@@ -11,7 +11,7 @@ const themes = [
     isDark: false,
     color: "text-yellow-500",
     icon: (additionalClasses: string) => (
-      <FaSun className={clsx(additionalClasses)} />
+      <MdSunny className={clsx(additionalClasses)} />
     ),
   },
   {
