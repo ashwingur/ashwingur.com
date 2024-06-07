@@ -100,8 +100,8 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
           onClick={handleRunClick}
           disabled={isLoading}
           className={clsx(
-            isLoading ? "" : "hover:bg-blue-400 dark:hover:bg-violet-800",
-            "bg-sky-200 dark:bg-[#2e1065] rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
+            isLoading ? "" : "hover:bg-primary-hover",
+            "bg-primary text-text-primary rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
           )}
         >
           {isLoading ? (
@@ -112,7 +112,7 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
         </button>
       </div>
 
-      <div className="bg-[#f0f0f0] dark:bg-[#151515] h-[80vh] py-3 px-4 overflow-y-scroll overflow-x-hidden">
+      <div className="bg-background-muted dark:bg-[#151515] h-[80vh] py-3 px-4 overflow-y-scroll overflow-x-hidden">
         <pre className="mb-2 text-wrap">{data?.run.stdout}</pre>
         <pre className="text-red-700 dark:text-red-500">{data?.run.stderr}</pre>
       </div>
