@@ -188,7 +188,10 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
       </div>
       {mobileNavMenu && (
         <div
-          className={"bg-black/30 h-full"}
+          className={clsx(
+            "h-full",
+            isDark(theme ?? "") ? "bg-black/70" : "bg-black/30"
+          )}
           onClick={() => setMobileNavMenu(false)}
         ></div>
       )}
