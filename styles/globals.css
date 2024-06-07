@@ -9,7 +9,7 @@
   --color-background-hover: theme(colors.stone.300);
   --color-text: theme(colors.slate.900);
   --color-text-muted: theme(colors.slate.700);
-  --color-text-hover: theme(colors.slate.800);
+  --color-text-hover: theme(colors.blue.700);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
   --color-text-accent: theme(colors.slate.50);
@@ -31,7 +31,7 @@
   --color-background-hover: theme(colors.slate.800);
   --color-text: theme(colors.slate.100);
   --color-text-muted: theme(colors.slate.200);
-  --color-text-hover: theme(colors.slate.50);
+  --color-text-hover: theme(colors.blue.400);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
   --color-text-accent: theme(colors.slate.50);
@@ -53,7 +53,7 @@
   --color-background-hover: theme(colors.orange.300);
   --color-text: theme(colors.slate.900);
   --color-text-muted: theme(colors.yellow.700);
-  --color-text-hover: theme(colors.slate.800);
+  --color-text-hover: theme(colors.orange.800);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
   --color-text-accent: theme(colors.slate.50);
@@ -68,14 +68,14 @@
   --color-accent-hover: theme(colors.red.700);
 }
 
-/* Dark Theme */
+/* Cyberpunk Theme */
 [data-theme="cyberpunk"] {
   --color-background: theme(colors.violet.950);
   --color-background-muted: theme(colors.violet.900);
   --color-background-hover: theme(colors.violet.800);
   --color-text: theme(colors.slate.100);
   --color-text-muted: theme(colors.slate.200);
-  --color-text-hover: theme(colors.slate.50);
+  --color-text-hover: theme(colors.blue.400);
   --color-text-primary: theme(colors.slate.900);
   --color-text-secondary: theme(colors.slate.100);
   --color-text-accent: theme(colors.slate.100);

@@ -34,7 +34,7 @@ const themes = [
   {
     name: "cyberpunk",
     color: "text-purple-500",
-    isDark: false,
+    isDark: true,
     icon: (additionalClasses: string) => (
       <FaGun className={clsx(additionalClasses)} />
     ),

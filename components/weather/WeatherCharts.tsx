@@ -91,7 +91,7 @@ const WeatherCharts = () => {
   const eco2s = transposedData[7];
 
   return (
-    <div className="flex flex-col items-center justify-center bg-background-muted rounded-lg mx-4 py-2 shadow-md">
+    <div className="card !px-2 !md:px-4 flex flex-col items-center justify-center mx-4 pt-2 pb-4">
       <h2 className="mt-2">Historical Data</h2>
       <div className="relative mt-4 mb-2">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>

@@ -108,7 +108,7 @@ const Weather = () => {
                 href="https://github.com/ashwingur/pi-weather-station"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-text-muted"
               >
                 GitHub Repository
               </Link>
