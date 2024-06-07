@@ -99,15 +99,15 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             )}
           </ul>
           <div
-            className="cursor-pointer lg:hidden p-2"
+            className="cursor-pointer lg:hidden"
             onClick={() => {
               setMobileNavMenu(!mobileNavMenu);
             }}
           >
             {mobileNavMenu ? (
-              <MdOutlineClose size={25} />
+              <MdOutlineClose size={30} />
             ) : (
-              <MdOutlineMenu size={25} />
+              <MdOutlineMenu size={30} />
             )}
           </div>
         </div>
