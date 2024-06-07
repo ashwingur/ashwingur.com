@@ -17,8 +17,7 @@ import {
 } from "react";
 import { themesList } from "@components/ToggleThemeButton";
 
-// The user can select there fonts using the setFont hook, if the given font doesnt exist it falls back to a default option
-
+// Define fonts
 const roboto = Roboto({
   weight: ["400"],
   subsets: ["latin"],
@@ -44,6 +43,7 @@ const rajdhani = Rajdhani({
   subsets: ["latin"],
 });
 
+// List of fonts
 const fonts_list: { name: string; font: NextFont }[] = [
   {
     name: "roboto",
@@ -75,15 +75,20 @@ type FontContextType = {
 const FontContext = createContext<FontContextType | undefined>(undefined);
 
 export const FontProvider = ({ children }: { children: ReactNode }) => {
-  // We check what the current theme is and load the starting font based off that
   const { theme } = useTheme();
-  const theme_font = themesList.find((t) => t.name === theme)?.font;
-  const starting_font =
-    fonts_list.find((f) => f.name === theme_font)?.font ?? roboto;
-  const [font, setFont] = useState(starting_font);
+  const [font, setFont] = useState(roboto); // Default to roboto
+
+  useEffect(() => {
+    // Get the font based on the current theme after hydration
+    const theme_font = themesList.find((t) => t.name === theme)?.font;
+    const new_font =
+      fonts_list.find((f) => f.name === theme_font)?.font ?? roboto;
+    setFont(new_font);
+  }, [theme]);
 
   const handleFontChange = (fontName: string) => {
-    setFont(fonts_list.find((f) => f.name == fontName)?.font ?? roboto);
+    const newFont = fonts_list.find((f) => f.name === fontName)?.font ?? roboto;
+    setFont(newFont);
   };
 
   return (
