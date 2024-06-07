@@ -61,14 +61,14 @@ const ToggleThemeButton = () => {
           {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
         </Combobox.Button>
 
-        <Combobox.Options className="absolute mt-1 w-full bg-slate-200 shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+        <Combobox.Options className="absolute mt-1 w-full bg-stone-200 shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
           {themes.map((theme) => (
             <Combobox.Option
               key={theme.name}
               value={theme.name}
               className={({ active }) =>
                 `cursor-default select-none ${
-                  active ? "text-white bg-slate-800" : "text-gray-900"
+                  active ? "text-white bg-stone-800" : "text-gray-900"
                 }`
               }
             >

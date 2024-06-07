@@ -71,8 +71,8 @@
 /* Cyberpunk Theme */
 [data-theme="cyberpunk"] {
   --color-background: theme(colors.violet.950);
-  --color-background-muted: theme(colors.violet.900);
-  --color-background-hover: theme(colors.violet.800);
+  --color-background-muted: #200c46;
+  --color-background-hover: #0d051c;
   --color-text: theme(colors.slate.100);
   --color-text-muted: theme(colors.slate.200);
   --color-text-hover: theme(colors.blue.400);
