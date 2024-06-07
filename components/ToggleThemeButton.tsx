@@ -2,6 +2,7 @@ import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
+import { FaGun } from "react-icons/fa6";
 import { MdOutlineColorLens, MdSunny } from "react-icons/md";
 import clsx from "clsx";
 
@@ -28,6 +29,14 @@ const themes = [
     isDark: false,
     icon: (additionalClasses: string) => (
       <FaFire className={clsx(additionalClasses)} />
+    ),
+  },
+  {
+    name: "cyberpunk",
+    color: "text-purple-500",
+    isDark: false,
+    icon: (additionalClasses: string) => (
+      <FaGun className={clsx(additionalClasses)} />
     ),
   },
 ];

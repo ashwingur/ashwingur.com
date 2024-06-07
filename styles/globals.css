@@ -68,6 +68,28 @@
   --color-accent-hover: theme(colors.red.700);
 }
 
+/* Dark Theme */
+[data-theme="cyberpunk"] {
+  --color-background: theme(colors.violet.950);
+  --color-background-muted: theme(colors.violet.900);
+  --color-background-hover: theme(colors.violet.800);
+  --color-text: theme(colors.slate.100);
+  --color-text-muted: theme(colors.slate.200);
+  --color-text-hover: theme(colors.slate.50);
+  --color-text-primary: theme(colors.slate.900);
+  --color-text-secondary: theme(colors.slate.100);
+  --color-text-accent: theme(colors.slate.100);
+  --color-primary: theme(colors.fuchsia.200);
+  --color-primary-muted: theme(colors.fuchsia.100);
+  --color-primary-hover: theme(colors.fuchsia.300);
+  --color-secondary: theme(colors.blue.700);
+  --color-secondary-muted: theme(colors.blue.600);
+  --color-secondary-hover: theme(colors.blue.800);
+  --color-accent: theme(colors.rose.700);
+  --color-accent-muted: theme(colors.rose.600);
+  --color-accent-hover: theme(colors.rose.800);
+}
+
 html {
   scroll-behavior: smooth;
 }
