@@ -20,20 +20,21 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
   const { user, role } = useAuth();
 
   return (
-    <div>
+    <div
+      className={clsx(
+        "fixed top-0 flex flex-col z-50",
+        fixed ? "fixed top-0" : "",
+        mobileNavMenu ? "h-screen" : ""
+      )}
+    >
       <div
         className={clsx(
-          "flex flex-col z-50 w-screen shadow-lg backdrop-blur-md bg-background/50",
-          fixed ? "fixed top-0" : "",
-          mobileNavMenu ? "h-[60vh]" : "",
-          isDark(theme ?? "") ? "border-b-2 border-background-muted" : ""
+          "flex flex-col w-screen shadow-lg backdrop-blur-md bg-background/50 border-b border-background-muted "
         )}
       >
         <div
           className={clsx(
-            "flex w-full justify-between px-6 md:px-8 lg:px-16 py-4",
-
-            isDark(theme ?? "") ? "border-b-2 border-background-muted" : ""
+            "flex w-full justify-between px-6 md:px-8 lg:px-16 py-4"
           )}
         >
           <Link href="/">
@@ -113,14 +114,16 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
 
         <div
           className={clsx(
-            "lg:hidden duration-300 overflow-hidden mx-4 flex justify-between z-50 relative",
-            mobileNavMenu ? "min-h-full" : "max-h-0"
+            "lg:hidden duration-300 mx-4 flex justify-between z-50 relative",
+            mobileNavMenu
+              ? "min-h-full border-t border-background-muted box-border"
+              : "hidden"
           )}
         >
-          <ul className="flex flex-col gap-4 mt-4">
+          <ul className="flex flex-col gap-4 my-4">
             <Link
               href="/#home"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-1 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -130,7 +133,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             </Link>
             <Link
               href="/#apps"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-1 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -140,7 +143,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             </Link>
             <Link
               href="/#projects"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-1 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -149,11 +152,11 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
               <li>Projects</li>
             </Link>
           </ul>
-          <ul className="flex flex-col items-center gap-4 mt-4">
+          <ul className="flex flex-col items-center gap-4 my-4">
             {user && role === "admin" && (
               <Link
                 href="/Admin"
-                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 rounded-md my-2"
+                className="hover:bg-background-hover px-2 py-1 rounded-md my-2"
                 scroll={false}
                 onClick={() => {
                   setMobileNavMenu(false);
@@ -162,13 +165,10 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
                 <li>Admin</li>
               </Link>
             )}
-            <li>
-              <ToggleThemeButton className="px-2" />
-            </li>
             {!user && (
               <Link
                 href="/Login"
-                className="hover:bg-blue-100 dark:hover:bg-black rounded-md my-2 pr-1"
+                className="hover:bg-background-hover rounded-md my-2 pr-1"
               >
                 <MdLogin />
               </Link>
@@ -176,17 +176,19 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && (
               <Link
                 href="/Login"
-                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 rounded-md my-2"
+                className="hover:bg-background-hover px-2 py-2 rounded-md my-2"
               >
                 <MdSettings />
               </Link>
             )}
+
+            <ToggleThemeButton className="px-2" />
           </ul>
         </div>
       </div>
       {mobileNavMenu && (
         <div
-          className={"fixed inset-x-0 bottom-0 bg-black/20 z-40 h-[40vh]"}
+          className={"bg-black/30 h-full"}
           onClick={() => setMobileNavMenu(false)}
         ></div>
       )}

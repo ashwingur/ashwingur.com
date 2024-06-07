@@ -26,7 +26,7 @@ const Login = () => {
       <Navbar fixed={true} />
       <div className="flex flex-col items-center justify-center mt-32">
         {(user === null || user === undefined) && (
-          <div className="flex flex-col items-center p-8 card w-96">
+          <div className="flex flex-col items-center p-8 card w-11/12 md:w-96">
             <form
               className="flex flex-col items-center my-4 w-72 gap-2"
               onSubmit={handleSubmit}
@@ -61,7 +61,7 @@ const Login = () => {
           </div>
         )}
         {user && (
-          <div className="flex flex-col items-center p-8 card w-96">
+          <div className="flex flex-col items-center p-8 card w-11/12 md:w-96">
             <div className="mt-4 font-bold">Username: {user}</div>
             <button
               className="btn mt-4 w-32"
@@ -74,10 +74,6 @@ const Login = () => {
           </div>
         )}
       </div>
-      {/* <div className="flex flex-col items-center mt-7">
-        <button onClick={userPress}>User</button>
-        <button onClick={adminPress}>Admin</button>
-      </div> */}
     </div>
   );
 };
