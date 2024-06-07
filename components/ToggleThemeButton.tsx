@@ -5,6 +5,7 @@ import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { FaGun } from "react-icons/fa6";
 import { MdSunny } from "react-icons/md";
 import clsx from "clsx";
+import { useFont } from "@context/FontContext";
 
 interface ThemeType {
   name: string;
@@ -12,15 +13,17 @@ interface ThemeType {
   isDark: boolean;
   color: string;
   icon: (className?: string) => JSX.Element;
+  font: string;
 }
 
-const themes: ThemeType[] = [
+const themesList: ThemeType[] = [
   {
     name: "light",
     displayName: "Light",
     isDark: false,
     color: "text-yellow-500",
     icon: (className?: string) => <MdSunny className={clsx(className)} />,
+    font: "roboto",
   },
   {
     name: "dark",
@@ -28,6 +31,7 @@ const themes: ThemeType[] = [
     color: "text-gray-800",
     isDark: true,
     icon: (className?: string) => <FaMoon className={clsx(className)} />,
+    font: "open_sans",
   },
   {
     name: "fire",
@@ -35,6 +39,7 @@ const themes: ThemeType[] = [
     color: "text-orange-500",
     isDark: false,
     icon: (className?: string) => <FaFire className={clsx(className)} />,
+    font: "lora",
   },
   {
     name: "cyberpunk",
@@ -42,6 +47,7 @@ const themes: ThemeType[] = [
     color: "text-purple-500",
     isDark: true,
     icon: (className?: string) => <FaGun className={clsx(className)} />,
+    font: "rajdhani",
   },
 ];
 
@@ -50,6 +56,7 @@ interface ToggleThemeButtonProps {
 }
 
 const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
+  const { setFont } = useFont();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const currentTheme = theme;
@@ -62,16 +69,23 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
     return null;
   }
 
+  const onThemeChange = (new_theme: string) => {
+    setTheme(new_theme ?? "light");
+    setFont(themesList.find((t) => t.name === new_theme)?.font ?? "roboto");
+  };
+
   return (
     <div className="relative inline-block text-left">
-      <Combobox value={currentTheme} onChange={setTheme}>
+      <Combobox value={currentTheme} onChange={onThemeChange}>
         <Combobox.Button
           className={clsx(
             "inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all",
             className
           )}
         >
-          {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
+          {themesList.find((t) => t.name === currentTheme)?.icon("") ?? (
+            <FaSun />
+          )}
         </Combobox.Button>
 
         <Combobox.Options
@@ -82,7 +96,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
               : "bg-stone-200"
           )}
         >
-          {themes.map((theme) => (
+          {themesList.map((theme) => (
             <Combobox.Option
               key={theme.name}
               value={theme.name}
@@ -120,7 +134,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 };
 
 const isDark = (currentTheme: string): boolean => {
-  return themes.find((t) => t.name === currentTheme)?.isDark ?? false;
+  return themesList.find((t) => t.name === currentTheme)?.isDark ?? false;
 };
 
-export { ToggleThemeButton, isDark };
+export { ToggleThemeButton, isDark, themesList };
