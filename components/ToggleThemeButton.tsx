@@ -57,7 +57,7 @@ const ToggleThemeButton = () => {
   return (
     <div className="relative inline-block text-left">
       <Combobox value={currentTheme} onChange={setTheme}>
-        <Combobox.Button className="inline-flex justify-center w-full rounded-md shadow-sm px-4 py-2 focus:outline-none hover:bg-background-hover transition-all">
+        <Combobox.Button className="inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all">
           {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
         </Combobox.Button>
 
