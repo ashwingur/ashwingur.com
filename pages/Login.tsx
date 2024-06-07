@@ -24,16 +24,15 @@ const Login = () => {
   return (
     <div>
       <Navbar fixed={true} />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mt-32">
         {(user === null || user === undefined) && (
-          <div className="flex flex-col mt-20 p-8 items-center bg-stone-100 dark:bg-slate-800 rounded-lg">
-            <h1 className="text-center">Login</h1>
+          <div className="flex flex-col items-center p-8 card w-96">
             <form
               className="flex flex-col items-center my-4 w-72 gap-2"
               onSubmit={handleSubmit}
             >
               <input
-                className={`p-2 rounded-lg ${
+                className={`p-2 rounded-lg bg-background-hover placeholder:text-muted ${
                   !isCorrectLogin ? "border-2 border-red-500" : ""
                 }`}
                 type="text"
@@ -42,7 +41,7 @@ const Login = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
-                className={`p-2 rounded-lg ${
+                className={`p-2 rounded-lg bg-background-hover placeholder:text-muted ${
                   !isCorrectLogin ? "border-2 border-red-500" : ""
                 }`}
                 type="password"
@@ -55,21 +54,17 @@ const Login = () => {
                   Incorrect username or password
                 </div>
               )}
-              <button
-                className="bg-blue-200 dark:bg-[#2e1065] py-2 px-8 mt-4 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
-                type="submit"
-              >
+              <button className="btn mt-4 w-32" type="submit">
                 Login
               </button>
             </form>
           </div>
         )}
         {user && (
-          <div className="flex flex-col mt-20 p-8 items-center bg-stone-100 dark:bg-slate-800 rounded-lg">
-            <h1 className="text-center">Logout</h1>
-            <div className="mt-4">Username: {user}</div>
+          <div className="flex flex-col items-center p-8 card w-96">
+            <div className="mt-4 font-bold">Username: {user}</div>
             <button
-              className="bg-blue-200 dark:bg-[#2e1065] py-2 px-8 mt-4 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
+              className="btn mt-4 w-32"
               onClick={() => {
                 handleLogout();
               }}
