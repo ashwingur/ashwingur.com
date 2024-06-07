@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { MdOutlineColorLens } from "react-icons/md";
 import clsx from "clsx";
 
@@ -23,11 +23,11 @@ const themes = [
     ),
   },
   {
-    name: "blue",
-    color: "text-blue-500",
+    name: "fire",
+    color: "text-orange-500",
     isDark: false,
     icon: (additionalClasses: string) => (
-      <MdOutlineColorLens className={clsx(additionalClasses)} />
+      <FaFire className={clsx(additionalClasses)} />
     ),
   },
 ];

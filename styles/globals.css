@@ -4,6 +4,9 @@
 
 /* Light Theme */
 [data-theme="light"] {
+  --color-background: theme(colors.stone.100);
+  --color-background-muted: theme(colors.stone.200);
+  --color-background-hover: theme(colors.stone.300);
   --color-text: theme(colors.slate.900);
   --color-text-muted: theme(colors.slate.700);
   --color-text-hover: theme(colors.slate.800);
@@ -16,9 +19,6 @@
   --color-secondary: theme(colors.cyan.600);
   --color-secondary-muted: theme(colors.cyan.500);
   --color-secondary-hover: theme(colors.cyan.700);
-  --color-background: theme(colors.stone.100);
-  --color-background-muted: theme(colors.stone.200);
-  --color-background-hover: theme(colors.stone.300);
   --color-accent: theme(colors.red.600);
   --color-accent-muted: theme(colors.red.500);
   --color-accent-hover: theme(colors.red.700);
@@ -26,46 +26,46 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --color-text: #333333;
-  --color-text-muted: #4f4f4f;
-  --color-text-hover: #1a1a1a;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #ffffff;
-  --color-text-accent: #ffffff;
-  --color-primary: #4dca4f;
-  --color-primary-muted: #68cd69;
-  --color-primary-hover: #38bc3b;
-  --color-secondary: #466365;
-  --color-secondary-muted: #557375;
-  --color-secondary-hover: #3a6366;
-  --color-background: #ffffff;
-  --color-background-muted: #efefef;
-  --color-background-hover: #e1e1e1;
-  --color-accent: #ce3b3b;
-  --color-accent-muted: #d35050;
-  --color-accent-hover: #bb2828;
+  --color-background: theme(colors.slate.900);
+  --color-background-muted: theme(colors.slate.950);
+  --color-background-hover: theme(colors.stone.800);
+  --color-text: theme(colors.slate.100);
+  --color-text-muted: theme(colors.slate.200);
+  --color-text-hover: theme(colors.slate.50);
+  --color-text-primary: theme(colors.slate.50);
+  --color-text-secondary: theme(colors.slate.50);
+  --color-text-accent: theme(colors.slate.50);
+  --color-primary: theme(colors.emerald.700);
+  --color-primary-muted: theme(colors.emerald.600);
+  --color-primary-hover: theme(colors.emerald.800);
+  --color-secondary: theme(colors.cyan.700);
+  --color-secondary-muted: theme(colors.cyan.600);
+  --color-secondary-hover: theme(colors.cyan.800);
+  --color-accent: theme(colors.red.700);
+  --color-accent-muted: theme(colors.red.600);
+  --color-accent-hover: theme(colors.red.800);
 }
 
-/* Blue Theme */
-[data-theme="blue"] {
-  --color-text: #1a202c;
-  --color-text-muted: #2d3748;
-  --color-text-hover: #171923;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #ffffff;
-  --color-text-accent: #ffffff;
-  --color-primary: #007bff;
-  --color-primary-muted: #339eff;
-  --color-primary-hover: #005bbf;
-  --color-secondary: #6610f2;
-  --color-secondary-muted: #8534f5;
-  --color-secondary-hover: #4a0db2;
-  --color-background: #e0f7fa;
-  --color-background-muted: #f0fcfc;
-  --color-background-hover: #bfe7e9;
-  --color-accent: #ff7f50;
-  --color-accent-muted: #ff9d7a;
-  --color-accent-hover: #cc643d;
+/* Fire Theme */
+[data-theme="fire"] {
+  --color-background: theme(colors.amber.100);
+  --color-background-muted: theme(colors.orange.200);
+  --color-background-hover: theme(colors.orange.300);
+  --color-text: theme(colors.slate.900);
+  --color-text-muted: theme(colors.slate.700);
+  --color-text-hover: theme(colors.slate.800);
+  --color-text-primary: theme(colors.slate.50);
+  --color-text-secondary: theme(colors.slate.50);
+  --color-text-accent: theme(colors.slate.50);
+  --color-primary: theme(colors.orange.600);
+  --color-primary-muted: theme(colors.orange.500);
+  --color-primary-hover: theme(colors.orange.700);
+  --color-secondary: theme(colors.pink.600);
+  --color-secondary-muted: theme(colors.pink.500);
+  --color-secondary-hover: theme(colors.pink.700);
+  --color-accent: theme(colors.red.600);
+  --color-accent-muted: theme(colors.red.500);
+  --color-accent-hover: theme(colors.red.700);
 }
 
 html {
