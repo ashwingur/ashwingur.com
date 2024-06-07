@@ -1,7 +1,7 @@
 // Import necessary dependencies
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "@context/AuthContext";
 
 // Define interface for User object
 interface User {

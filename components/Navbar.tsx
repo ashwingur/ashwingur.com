@@ -10,7 +10,7 @@ import {
   MdSettings,
 } from "react-icons/md";
 import { ToggleThemeButton, isDark } from "./ToggleThemeButton";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "@context/AuthContext";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 

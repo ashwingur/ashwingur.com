@@ -1,7 +1,6 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useAuth } from "../components/AuthContext";
-import axios from "axios";
+import { useAuth } from "@context/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");

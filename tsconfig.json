@@ -22,7 +22,8 @@
     "baseUrl": "./",
     "paths": {
       "@interfaces/*": ["shared/interfaces/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"]
     }
   },
   "include": [

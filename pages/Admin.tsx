@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
-import { useAuth } from "../components/AuthContext";
+import { useAuth } from "@context/AuthContext";
 import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loading-icons";
 import AllUserDetails from "../components/AllUserDetails";

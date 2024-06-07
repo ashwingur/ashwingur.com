@@ -4,11 +4,11 @@ import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { Nunito } from "next/font/google";
-import { AuthProvider } from "@components/AuthContext";
+import { AuthProvider } from "@context/AuthContext";
 
 const queryClient = new QueryClient();
 
-const inter = Nunito({
+const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-inter",
   weight: "400",
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider enableSystem={true} attribute="data-theme">
-          <main className={`${inter.variable} font-sans`}>
+          <main className={`${nunito.variable} font-sans`}>
             <Component {...pageProps} />
           </main>
         </ThemeProvider>
