@@ -22,7 +22,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
   return (
     <div
       className={clsx(
-        "fixed top-0 flex flex-col z-50",
+        "flex flex-col z-50",
         fixed ? "fixed top-0" : "",
         mobileNavMenu ? "h-screen" : ""
       )}
@@ -99,7 +99,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             )}
           </ul>
           <div
-            className="cursor-pointer lg:hidden"
+            className="cursor-pointer lg:hidden p-2"
             onClick={() => {
               setMobileNavMenu(!mobileNavMenu);
             }}

@@ -37,13 +37,19 @@ const LanguageSelector = ({
               key={index}
               value={language}
               className={({ active }) =>
-                `px-4 cursor-pointer py-2 ${
-                  active ? "bg-accent text-text-accent " : ""
+                `px-4 cursor-pointer py-2 group ${
+                  active ? "bg-accent text-text-accent" : ""
                 }`
               }
             >
               {language.displayName}{" "}
-              <span className={clsx("text-xs")}>({language.version})</span>
+              <span
+                className={clsx(
+                  "text-xs group-hover:text-orange-200 text-text-muted"
+                )}
+              >
+                ({language.version})
+              </span>
             </Listbox.Option>
           ))}
         </Listbox.Options>

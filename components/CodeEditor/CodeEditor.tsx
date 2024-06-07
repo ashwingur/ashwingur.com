@@ -1,6 +1,6 @@
 // src/components/CodeEditor.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { Editor, EditorProps, Monaco } from "@monaco-editor/react";
+import { Editor, Monaco } from "@monaco-editor/react";
 import { editor } from "monaco-editor";
 import LanguageSelector from "./LanguageSelector";
 import { useTheme } from "next-themes";
