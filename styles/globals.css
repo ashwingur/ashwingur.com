@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Guide:
+
+  background is default page background
+  background-muted is default card background
+  background-hover is the sub-card background
+
+  text is standard text colour on background
+  text-muted is muted text colour, eg for placeholder text
+  text-hover is for hyperlinks etc
+  text-primary is the best text contrast against the primary colour
+  text-secondary is the best text contrast against the secondary colour
+  text-accent is the best text contrast against the accent colour
+
+  primary is used for buttons
+  secondary is used for buttons or tags of less importance
+  accent is used for important actions and other small things (use sparingly)
+  Use the hover variants for button hover
+*/
+
 /* Light Theme */
 [data-theme="light"] {
   --color-background: theme(colors.stone.100);
@@ -26,9 +46,9 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --color-background: theme(colors.slate.900);
-  --color-background-muted: theme(colors.slate.950);
-  --color-background-hover: theme(colors.slate.800);
+  --color-background: theme(colors.stone.950);
+  --color-background-muted: theme(colors.stone.900);
+  --color-background-hover: theme(colors.stone.800);
   --color-text: theme(colors.slate.100);
   --color-text-muted: theme(colors.slate.200);
   --color-text-hover: theme(colors.blue.400);

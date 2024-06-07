@@ -119,7 +119,7 @@ const WeatherCharts = () => {
         </Listbox>
       </div>
       {start < firstDbEntryTime && (
-        <p className="text-xs mb-4">
+        <p className="text-xs mb-4 px-4">
           Note: weather station deployed on 31/5/24 (no data exists before then)
         </p>
       )}
