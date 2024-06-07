@@ -22,8 +22,8 @@ module.exports = {
         "text-muted": "var(--color-text-muted)",
         "text-hover": "var(--color-text-hover)",
         "text-primary": "var(--color-text-primary)", // Contrasts against primary colour
-        "text-secondary": "var(--color-text-primary)", // Contrasts against secondary colour
-        "text-accent": "var(--color-text-primary)", // Contrasts against accent colour
+        "text-secondary": "var(--color-text-secondary)", // Contrasts against secondary colour
+        "text-accent": "var(--color-text-accent)", // Contrasts against accent colour
         accent: "var(--color-accent)",
         "accent-muted": "var(--color-accent-muted)",
         "accent-hover": "var(--color-accent-hover)",

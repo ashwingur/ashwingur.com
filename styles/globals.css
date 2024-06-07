@@ -4,46 +4,46 @@
 
 /* Light Theme */
 [data-theme="light"] {
+  --color-text: theme(colors.slate.900);
+  --color-text-muted: theme(colors.slate.700);
+  --color-text-hover: theme(colors.slate.800);
+  --color-text-primary: theme(colors.slate.50);
+  --color-text-secondary: theme(colors.slate.50);
+  --color-text-accent: theme(colors.slate.50);
+  --color-primary: theme(colors.emerald.600);
+  --color-primary-muted: theme(colors.emerald.500);
+  --color-primary-hover: theme(colors.emerald.700);
+  --color-secondary: theme(colors.cyan.600);
+  --color-secondary-muted: theme(colors.cyan.500);
+  --color-secondary-hover: theme(colors.cyan.700);
+  --color-background: theme(colors.stone.100);
+  --color-background-muted: theme(colors.stone.200);
+  --color-background-hover: theme(colors.stone.300);
+  --color-accent: theme(colors.red.600);
+  --color-accent-muted: theme(colors.red.500);
+  --color-accent-hover: theme(colors.red.700);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
   --color-text: #333333;
   --color-text-muted: #4f4f4f;
   --color-text-hover: #1a1a1a;
   --color-text-primary: #ffffff;
   --color-text-secondary: #ffffff;
   --color-text-accent: #ffffff;
-  --color-primary: #00d66b;
-  --color-primary-muted: #18f184;
-  --color-primary-hover: #00c060;
-  --color-secondary: #4ae0e0;
-  --color-secondary-muted: #5bf5f5;
-  --color-secondary-hover: #43c7c7;
+  --color-primary: #4dca4f;
+  --color-primary-muted: #68cd69;
+  --color-primary-hover: #38bc3b;
+  --color-secondary: #466365;
+  --color-secondary-muted: #557375;
+  --color-secondary-hover: #3a6366;
   --color-background: #ffffff;
-  --color-background-muted: #f7f7f7;
-  --color-background-hover: #e0e0e0;
-  --color-accent: #e74c3c;
-  --color-accent-muted: #eb6f64;
-  --color-accent-hover: #b93a2d;
-}
-
-/* Dark Theme */
-[data-theme="dark"] {
-  --color-text: #f9fafb;
-  --color-text-muted: #c7c7c7;
-  --color-text-hover: #fafafb;
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #f9fafb;
-  --color-text-accent: #f9fafb;
-  --color-primary: #1e3a8a;
-  --color-primary-muted: #152f73;
-  --color-primary-hover: #3758a8;
-  --color-secondary: #0d885f;
-  --color-secondary-muted: #096c50;
-  --color-secondary-hover: #19b98e;
-  --color-background: #1a202c;
-  --color-background-muted: #171923;
-  --color-background-hover: #2d3748;
-  --color-accent: #be392a;
-  --color-accent-muted: #983227;
-  --color-accent-hover: #eb6f64;
+  --color-background-muted: #efefef;
+  --color-background-hover: #e1e1e1;
+  --color-accent: #ce3b3b;
+  --color-accent-muted: #d35050;
+  --color-accent-hover: #bb2828;
 }
 
 /* Blue Theme */
