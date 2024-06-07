@@ -41,7 +41,11 @@ const themes = [
   },
 ];
 
-const ToggleThemeButton = () => {
+interface ToggleThemeButtonProps {
+  className?: string;
+}
+
+const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const currentTheme = theme;
@@ -57,7 +61,12 @@ const ToggleThemeButton = () => {
   return (
     <div className="relative inline-block text-left">
       <Combobox value={currentTheme} onChange={setTheme}>
-        <Combobox.Button className="inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all">
+        <Combobox.Button
+          className={clsx(
+            "inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all",
+            className
+          )}
+        >
           {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
         </Combobox.Button>
 

@@ -5,7 +5,7 @@ const Apps = () => {
   return (
     <div id="apps" className="pt-20 flex flex-col items-center">
       <h1 className="text-center mb-4">Apps</h1>
-      <div className="flex flex-col md:grid grid-cols-3 md:gap-6">
+      <div className="flex flex-col gap-4 md:grid grid-cols-3 md:gap-6">
         <Link href="/MediaReviews" className="btn py-4">
           Media Reviews
         </Link>

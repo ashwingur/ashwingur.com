@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   MdOutlineMenu,
@@ -9,20 +9,29 @@ import {
   MdLogin,
   MdSettings,
 } from "react-icons/md";
-import { ToggleThemeButton } from "./ToggleThemeButton";
+import { ToggleThemeButton, isDark } from "./ToggleThemeButton";
 import { useAuth } from "./AuthContext";
+import { useTheme } from "next-themes";
+import clsx from "clsx";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {
+  const { theme } = useTheme();
   const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
   const { user, role } = useAuth();
 
   return (
-    <div>
+    <div
+      className={clsx(
+        "flex flex-col z-50 w-screen shadow-lg backdrop-blur-md bg-background/50",
+        fixed ? "fixed top-0" : ""
+      )}
+    >
       <div
-        className={
-          "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-background/50 z-50" +
-          (fixed ? " fixed top-0" : "")
-        }
+        className={clsx(
+          "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4",
+
+          isDark(theme ?? "") ? "border-b-2 border-background-muted" : ""
+        )}
       >
         <Link href="/">
           <Image
@@ -33,7 +42,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             fetchPriority="high"
           />
         </Link>
-        <ul className="hidden lg:flex lg:gap-4 lg:items-center) ">
+        <ul className="hidden lg:flex lg:gap-4 lg:items-center">
           <Link
             href="/#home"
             className="hover:bg-background-hover px-2 py-1 transition rounded-md"
@@ -88,113 +97,89 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <div
           className="cursor-pointer lg:hidden"
           onClick={() => {
-            setMobileNavMenu(true);
+            setMobileNavMenu(!mobileNavMenu);
           }}
         >
-          <MdOutlineMenu size={25} />
+          {mobileNavMenu ? (
+            <MdOutlineClose size={25} />
+          ) : (
+            <MdOutlineMenu size={25} />
+          )}
         </div>
       </div>
-      {/* MOBILE NAV MENU */}
       <div
-        className={
+        className={clsx(
+          "lg:hidden transition-all duration-300 overflow-hidden mx-4 flex justify-between",
           mobileNavMenu
-            ? "fixed w-full h-screen bg-black/70 top-0 left-0 z-50 transition-all"
-            : "z-50"
-        }
-        onClick={() => setMobileNavMenu(false)}
+            ? "max-h-screen min-h-[60vh] border-t border-background-muted pt-4"
+            : "max-h-0"
+        )}
       >
-        <div
-          className={
-            mobileNavMenu
-              ? "absolute left-0 top-0 w-[75%] h-full bg-background ease-in duration-500 z-50"
-              : "fixed left-[-100%] w-[75%] top-0 h-full p-10 ease-in duration-500 z-50 bg-background"
-          }
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <div className="flex justify-between items-center mx-8 py-4 border-b">
+        <ul className="flex flex-col gap-4">
+          <Link
+            href="/#home"
+            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            scroll={false}
+            onClick={() => {
+              setMobileNavMenu(false);
+            }}
+          >
+            <li>Home</li>
+          </Link>
+          <Link
+            href="/#apps"
+            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            scroll={false}
+            onClick={() => {
+              setMobileNavMenu(false);
+            }}
+          >
+            <li>Apps</li>
+          </Link>
+          <Link
+            href="/#projects"
+            className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md"
+            scroll={false}
+            onClick={() => {
+              setMobileNavMenu(false);
+            }}
+          >
+            <li>Projects</li>
+          </Link>
+        </ul>
+        <ul className="flex flex-col items-center gap-4">
+          {user && role === "admin" && (
             <Link
-              href="/"
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
-            >
-              <Image src="/logo.png" alt="logo" width="60" height="60" />
-            </Link>
-            <MdOutlineClose
-              size={40}
-              className="hover:bg-blue-100 transition rounded-full p-2 cursor-pointer"
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
-            />
-          </div>
-          <ul className="flex flex-col mx-8 mt-4">
-            <Link
-              href="/#home"
+              href="/Admin"
               className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
               }}
             >
-              <li>Home</li>
+              <li>Admin</li>
             </Link>
+          )}
+          <li>
+            <ToggleThemeButton className="px-2" />
+          </li>
+          {!user && (
             <Link
-              href="/#apps"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
-              scroll={false}
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
+              href="/Login"
+              className="hover:bg-blue-100 dark:hover:bg-black transition rounded-md my-2 pr-1"
             >
-              <li>Apps</li>
+              <MdLogin />
             </Link>
+          )}
+          {user && (
             <Link
-              href="/#projects"
-              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
-              scroll={false}
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
+              href="/Login"
+              className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md my-2"
             >
-              <li>Projects</li>
+              <MdSettings />
             </Link>
-            {user && role === "admin" && (
-              <Link
-                href="/Admin"
-                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-1 transition rounded-md my-2"
-                scroll={false}
-                onClick={() => {
-                  setMobileNavMenu(false);
-                }}
-              >
-                <li>Admin</li>
-              </Link>
-            )}
-
-            <li>
-              <ToggleThemeButton />
-            </li>
-            {!user && (
-              <Link
-                href="/Login"
-                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md my-2"
-              >
-                <MdLogin />
-              </Link>
-            )}
-            {user && (
-              <Link
-                href="/Login"
-                className="hover:bg-blue-100 dark:hover:bg-black px-2 py-2 transition rounded-md my-2"
-              >
-                <MdSettings />
-              </Link>
-            )}
-          </ul>
-        </div>
+          )}
+        </ul>
       </div>
     </div>
   );
