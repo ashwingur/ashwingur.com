@@ -114,16 +114,16 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
 
         <div
           className={clsx(
-            "lg:hidden duration-300 mx-4 flex justify-between z-50 relative",
+            "lg:hidden duration-300 mx-4 md:mx-6 flex justify-between z-50 relative",
             mobileNavMenu
               ? "min-h-full border-t border-background-muted box-border"
               : "hidden"
           )}
         >
-          <ul className="flex flex-col gap-4 my-4">
+          <ul className="flex flex-col gap-2 my-4 w-24">
             <Link
               href="/#home"
-              className="hover:bg-background-hover px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-2 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -133,7 +133,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             </Link>
             <Link
               href="/#apps"
-              className="hover:bg-background-hover px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-2 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -143,7 +143,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             </Link>
             <Link
               href="/#projects"
-              className="hover:bg-background-hover px-2 py-1 rounded-md"
+              className="hover:bg-background-hover px-2 py-2 rounded-md"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -151,12 +151,10 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             >
               <li>Projects</li>
             </Link>
-          </ul>
-          <ul className="flex flex-col items-center gap-4 my-4">
-            {user && role === "admin" && (
+            {!user && role !== "admin" && (
               <Link
                 href="/Admin"
-                className="hover:bg-background-hover px-2 py-1 rounded-md my-2"
+                className="hover:bg-background-hover px-2 py-2 rounded-md"
                 scroll={false}
                 onClick={() => {
                   setMobileNavMenu(false);
@@ -165,10 +163,12 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
                 <li>Admin</li>
               </Link>
             )}
+          </ul>
+          <ul className="flex flex-col gap-2 items-center my-4">
             {!user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover rounded-md my-2 pr-1"
+                className="hover:bg-background-hover rounded-md py-4 px-4"
               >
                 <MdLogin />
               </Link>
@@ -176,13 +176,13 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover px-2 py-2 rounded-md my-2"
+                className="hover:bg-background-hover px-4 py-4 rounded-md my-2"
               >
                 <MdSettings />
               </Link>
             )}
 
-            <ToggleThemeButton className="px-2" />
+            <ToggleThemeButton className="px-4" />
           </ul>
         </div>
       </div>
