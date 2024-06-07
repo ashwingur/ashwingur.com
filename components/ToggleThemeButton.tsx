@@ -61,7 +61,12 @@ const ToggleThemeButton = () => {
           {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
         </Combobox.Button>
 
-        <Combobox.Options className="absolute mt-1 w-full bg-stone-200 shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+        <Combobox.Options
+          className={clsx(
+            "absolute mt-1 w-full shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm",
+            isDark(currentTheme ?? "") ? "bg-stone-700" : "bg-stone-200"
+          )}
+        >
           {themes.map((theme) => (
             <Combobox.Option
               key={theme.name}
