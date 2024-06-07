@@ -8,7 +8,13 @@ import {
   Lora,
   Rajdhani,
 } from "next/font/google";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { themesList } from "@components/ToggleThemeButton";
 
 // The user can select there fonts using the setFont hook, if the given font doesnt exist it falls back to a default option
@@ -69,12 +75,12 @@ type FontContextType = {
 const FontContext = createContext<FontContextType | undefined>(undefined);
 
 export const FontProvider = ({ children }: { children: ReactNode }) => {
+  // We check what the current theme is and load the starting font based off that
   const { theme } = useTheme();
   const theme_font = themesList.find((t) => t.name === theme)?.font;
   const starting_font =
     fonts_list.find((f) => f.name === theme_font)?.font ?? roboto;
   const [font, setFont] = useState(starting_font);
-  console.log(`font is ${JSON.stringify(font)}, theme is ${theme}`);
 
   const handleFontChange = (fontName: string) => {
     setFont(fonts_list.find((f) => f.name == fontName)?.font ?? roboto);
