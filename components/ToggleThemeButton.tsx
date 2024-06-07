@@ -3,41 +3,45 @@ import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { FaGun } from "react-icons/fa6";
-import { MdOutlineColorLens, MdSunny } from "react-icons/md";
+import { MdSunny } from "react-icons/md";
 import clsx from "clsx";
 
-const themes = [
+interface ThemeType {
+  name: string;
+  displayName: string;
+  isDark: boolean;
+  color: string;
+  icon: (className?: string) => JSX.Element;
+}
+
+const themes: ThemeType[] = [
   {
     name: "light",
+    displayName: "Light",
     isDark: false,
     color: "text-yellow-500",
-    icon: (additionalClasses: string) => (
-      <MdSunny className={clsx(additionalClasses)} />
-    ),
+    icon: (className?: string) => <MdSunny className={clsx(className)} />,
   },
   {
     name: "dark",
+    displayName: "Dark",
     color: "text-gray-800",
     isDark: true,
-    icon: (additionalClasses: string) => (
-      <FaMoon className={clsx(additionalClasses)} />
-    ),
+    icon: (className?: string) => <FaMoon className={clsx(className)} />,
   },
   {
     name: "fire",
+    displayName: "Fire",
     color: "text-orange-500",
     isDark: false,
-    icon: (additionalClasses: string) => (
-      <FaFire className={clsx(additionalClasses)} />
-    ),
+    icon: (className?: string) => <FaFire className={clsx(className)} />,
   },
   {
     name: "cyberpunk",
+    displayName: "Cyberpunk",
     color: "text-purple-500",
     isDark: true,
-    icon: (additionalClasses: string) => (
-      <FaGun className={clsx(additionalClasses)} />
-    ),
+    icon: (className?: string) => <FaGun className={clsx(className)} />,
   },
 ];
 
@@ -72,7 +76,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 
         <Combobox.Options
           className={clsx(
-            "absolute mt-1 w-full shadow-lg max-h-60 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
+            "absolute right-0 w-32 mt-1 shadow-lg max-h-60 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
             isDark(currentTheme ?? "") ? "bg-stone-700" : "bg-stone-200"
           )}
         >
@@ -81,7 +85,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
               key={theme.name}
               value={theme.name}
               className={({ active }) =>
-                `cursor-default select-none ${
+                `cursor-default select-none px-1 ${
                   active ? "text-white bg-stone-800" : "text-gray-900"
                 }`
               }
@@ -89,11 +93,20 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
               {({ selected, active }) => (
                 <div
                   className={clsx(
-                    "flex justify-center items-center hover:text-white py-2",
+                    "flex items-center justify-between hover:text-white group py-2 px-2",
                     active ? "text-white" : theme.color
                   )}
                 >
-                  {theme.icon("w-full h-6")}
+                  {theme.icon("")}{" "}
+                  <span
+                    className={clsx(
+                      isDark(currentTheme ?? "") || active
+                        ? "text-slate-200"
+                        : "text-slate-800 group-hover:text-white"
+                    )}
+                  >
+                    {theme.displayName}
+                  </span>
                 </div>
               )}
             </Combobox.Option>
