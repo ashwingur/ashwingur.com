@@ -25,12 +25,13 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         className={clsx(
           "flex flex-col z-50 w-screen shadow-lg backdrop-blur-md bg-background/50",
           fixed ? "fixed top-0" : "",
-          mobileNavMenu ? "h-[60vh]" : ""
+          mobileNavMenu ? "h-[60vh]" : "",
+          isDark(theme ?? "") ? "border-b-2 border-background-muted" : ""
         )}
       >
         <div
           className={clsx(
-            "flex w-full justify-between px-4 md:px-8 lg:px-16 py-4",
+            "flex w-full justify-between px-6 md:px-8 lg:px-16 py-4",
 
             isDark(theme ?? "") ? "border-b-2 border-background-muted" : ""
           )}
@@ -113,9 +114,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <div
           className={clsx(
             "lg:hidden duration-300 overflow-hidden mx-4 flex justify-between z-50 relative",
-            mobileNavMenu
-              ? "min-h-full border-t border-background-muted"
-              : "max-h-0"
+            mobileNavMenu ? "min-h-full" : "max-h-0"
           )}
         >
           <ul className="flex flex-col gap-4 mt-4">
