@@ -29,7 +29,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
     >
       <div
         className={clsx(
-          "flex flex-col w-screen shadow-lg backdrop-blur-md bg-background/50 border-b border-background-muted "
+          "flex flex-col w-screen shadow-lg backdrop-blur-md bg-background/50 border-b border-background-muted"
         )}
       >
         <div

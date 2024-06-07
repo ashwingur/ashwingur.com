@@ -4,7 +4,6 @@ import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
 import Apps from "../components/Apps";
 import Footer from "../components/Footer";
-import RandomPoem from "../components/RandomPoem";
 
 export default function Home() {
   // const appContext = useContext(AppContext);
@@ -44,7 +43,6 @@ export default function Home() {
 
         <Apps />
         <Projects />
-        {/* <RandomPoem /> */}
       </div>
       <Footer />
     </div>

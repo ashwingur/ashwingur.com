@@ -152,7 +152,7 @@ const Tron = () => {
     <div className="bg-gradient-to-b from-[#001724] to-[#001c26] min-h-screen text-slate-100 flex flex-col items-stretch">
       <BasicNavbar
         fixed={false}
-        className="bg-slate-800/100 dark:bg-slate-800/100"
+        className="bg-slate-800/100 dark:bg-slate-800/100 border-b-0"
       />
       <h1 className="text-center mt-4">Tron</h1>
       {gameState !== GAME_STATE.Connecting && (
