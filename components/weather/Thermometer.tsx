@@ -11,7 +11,7 @@ const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
   const fillPercentage = (constrainedTemp / 40) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2 h-48 lg:h-60">
+    <div className="flex flex-col items-center justify-center bg-background-hover shadow-lg rounded-lg p-2 h-48 lg:h-60">
       <h3>Temperature</h3>
       <svg
         className="w-12 md:w-16 lg:w-20 h-auto"

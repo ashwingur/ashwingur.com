@@ -27,7 +27,7 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
     (MAX_PRESSURE - COLOUR_3_START) / (MAX_PRESSURE - MIN_PRESSURE);
 
   return (
-    <div className="lg:w-48 flex flex-col items-center justify-center bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2">
+    <div className="lg:w-48 flex flex-col items-center justify-center bg-background-hover shadow-lg rounded-lg p-2">
       <h3 className="mb-4">Air Pressure</h3>
       <GaugeChart
         hideText={true}

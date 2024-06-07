@@ -20,7 +20,7 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
     rating = "Unhealthy";
   }
   return (
-    <div className="flex flex-col items-center justify-center lg:w-48 bg-stone-100 dark:bg-stone-700/25 shadow-lg rounded-lg p-2">
+    <div className="flex flex-col items-center justify-center lg:w-48 bg-background-hover shadow-lg rounded-lg p-2">
       <h3 className="mb-4">Air Quality</h3>
       <GaugeChart
         hideText={true}
