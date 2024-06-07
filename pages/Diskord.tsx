@@ -151,7 +151,7 @@ const PusherTest = () => {
         </div>
       )}
       {loggedIn && (
-        <div className="h-5/6">
+        <div className="h-5/6 pb-20">
           <h2 className="text-center my-2">Hello, {username}</h2>
           <p className="text-center">
             <span className="text-green-600 font-bold">{liveUserCount} </span>{" "}
@@ -163,13 +163,13 @@ const PusherTest = () => {
             <div ref={messagesEndRef} />
           </div>
           {/* Chat input */}
-          <div className="flex justify-center gap-4 h items-center bottom-0 fixed w-screen px-4">
+          <div className="flex justify-center gap-4 items-center bottom-0 fixed w-screen px-4 mb-8 md:mb-16">
             <input
               className="bg-background-muted border-2 border-text-muted w-64 md:w-[80%] rounded-full py-1 px-4"
               value={currentMessage}
               onChange={handle_input_change}
             />
-            <button className="btn my-16" onClick={send_message}>
+            <button className="btn" onClick={send_message}>
               <div className="flex items-center gap-2">
                 <span>Send</span>
 
