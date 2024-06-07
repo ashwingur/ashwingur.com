@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -8,6 +9,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "var(--color-primary)",
+        "primary-muted": "var(--color-primary-muted)",
+        "primary-hover": "var(--color-primary-hover)",
+        secondary: "var(--color-secondary)",
+        "secondary-muted": "var(--color-secondary-muted)",
+        "secondary-hover": "var(--color-secondary-hover)",
+        background: "var(--color-background)",
+        "background-muted": "var(--color-background-muted)",
+        "background-hover": "var(--color-background-hover)",
+        text: "var(--color-text)",
+        "text-muted": "var(--color-text-muted)",
+        "text-hover": "var(--color-text-hover)",
+        "text-primary": "var(--color-text-primary)", // Contrasts against primary colour
+        "text-secondary": "var(--color-text-secondary)", // Contrasts against secondary colour
+        "text-accent": "var(--color-text-accent)", // Contrasts against accent colour
+        accent: "var(--color-accent)",
+        "accent-muted": "var(--color-accent-muted)",
+        "accent-hover": "var(--color-accent-hover)",
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
       },
@@ -52,6 +71,12 @@ module.exports = {
         "glow-orange-xl": "0 0 25px rgba(214, 151, 96, 0.7)",
         "glow-orange-2xl": "0 0 35px rgba(214, 151, 96, 0.7)",
       },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ["dark"],
+      textColor: ["dark"],
     },
   },
   plugins: [],

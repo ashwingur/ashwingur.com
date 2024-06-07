@@ -115,7 +115,7 @@ const Code = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
 
   return (
-    <div className="bg-slate-200 dark:bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       <Navbar fixed={false} />
       <div className="flex flex-col lg:flex-row">
         <CodeEditor

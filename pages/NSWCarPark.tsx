@@ -24,20 +24,22 @@ interface ParkingBoxProps {
 const ParkingBox = ({ facility }: ParkingBoxProps) => {
   let backgroundColour = "bg-green-400 dark:bg-green-800";
   // Sometimes there are are more occupied than parking spots in the api, cap it at max spots
-  const occupied = Number(facility.occupancy.total > facility.spots ? facility.spots : facility.occupancy.total);
+  const occupied = Number(
+    facility.occupancy.total > facility.spots
+      ? facility.spots
+      : facility.occupancy.total
+  );
 
-  const percentageOccupied =
-    occupied / Number(facility.spots);
+  const percentageOccupied = occupied / Number(facility.spots);
   if (percentageOccupied >= 0.9) {
     backgroundColour = "bg-red-400 dark:bg-red-800";
   } else if (percentageOccupied >= 0.5) {
     backgroundColour = "bg-orange-300 dark:bg-amber-700";
   }
 
-
   return (
     <div
-      className={`${backgroundColour} rounded-lg p-4 flex justify-between items-center`}
+      className={`${backgroundColour} rounded-lg p-4 flex justify-between items-center text-slate-900 shadow-md`}
     >
       <div>
         <div className="font-bold">{facility.facility_name}</div>
@@ -47,9 +49,7 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-2xl">
-          {Number(facility.spots) - occupied}
-        </div>
+        <div className="text-2xl">{Number(facility.spots) - occupied}</div>
         <div className="text-sm">Available</div>
       </div>
     </div>
@@ -115,7 +115,7 @@ const NSWCarPark = () => {
       <p className="text-center text-sm italic mb-4">
         Data sourced from{" "}
         <a
-          className="text-blue-700 dark:text-blue-300"
+          className="text-text-hover"
           href="https://opendata.transport.nsw.gov.au/dataset/car-park-api"
           target="_blank"
           rel="noreferrer"

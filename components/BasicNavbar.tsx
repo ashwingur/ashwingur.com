@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import ToggleThemeButton from "./ToggleThemeButton";
+import { ToggleThemeButton } from "./ToggleThemeButton";
 import clsx from "clsx";
 
 interface BasicNavbarProps {

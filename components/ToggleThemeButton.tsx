@@ -1,14 +1,51 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { Combobox } from "@headlessui/react";
+import { FaSun, FaMoon, FaFire } from "react-icons/fa";
+import { FaGun } from "react-icons/fa6";
+import { MdOutlineColorLens, MdSunny } from "react-icons/md";
+import clsx from "clsx";
+
+const themes = [
+  {
+    name: "light",
+    isDark: false,
+    color: "text-yellow-500",
+    icon: (additionalClasses: string) => (
+      <MdSunny className={clsx(additionalClasses)} />
+    ),
+  },
+  {
+    name: "dark",
+    color: "text-gray-800",
+    isDark: true,
+    icon: (additionalClasses: string) => (
+      <FaMoon className={clsx(additionalClasses)} />
+    ),
+  },
+  {
+    name: "fire",
+    color: "text-orange-500",
+    isDark: false,
+    icon: (additionalClasses: string) => (
+      <FaFire className={clsx(additionalClasses)} />
+    ),
+  },
+  {
+    name: "cyberpunk",
+    color: "text-purple-500",
+    isDark: true,
+    icon: (additionalClasses: string) => (
+      <FaGun className={clsx(additionalClasses)} />
+    ),
+  },
+];
 
 const ToggleThemeButton = () => {
-  // Switching between dark and light themes
-  const { systemTheme, theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const currentTheme = theme;
 
-  // useEffect only runs on the client so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -17,24 +54,49 @@ const ToggleThemeButton = () => {
     return null;
   }
 
-  function toggleTheme() {
-    if (currentTheme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  }
-
   return (
-    <button
-      className=" hover:bg-blue-100 dark:hover:bg-black p-2 rounded-md"
-      onClick={() => {
-        toggleTheme();
-      }}
-    >
-      {currentTheme === "light" ? <MdDarkMode /> : <MdLightMode />}
-    </button>
+    <div className="relative inline-block text-left">
+      <Combobox value={currentTheme} onChange={setTheme}>
+        <Combobox.Button className="inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all">
+          {themes.find((t) => t.name === currentTheme)?.icon("") ?? <FaSun />}
+        </Combobox.Button>
+
+        <Combobox.Options
+          className={clsx(
+            "absolute mt-1 w-full shadow-lg max-h-60 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm",
+            isDark(currentTheme ?? "") ? "bg-stone-700" : "bg-stone-200"
+          )}
+        >
+          {themes.map((theme) => (
+            <Combobox.Option
+              key={theme.name}
+              value={theme.name}
+              className={({ active }) =>
+                `cursor-default select-none ${
+                  active ? "text-white bg-stone-800" : "text-gray-900"
+                }`
+              }
+            >
+              {({ selected, active }) => (
+                <div
+                  className={clsx(
+                    "flex justify-center items-center hover:text-white py-2",
+                    active ? "text-white" : theme.color
+                  )}
+                >
+                  {theme.icon("w-full h-6")}
+                </div>
+              )}
+            </Combobox.Option>
+          ))}
+        </Combobox.Options>
+      </Combobox>
+    </div>
   );
 };
 
-export default ToggleThemeButton;
+const isDark = (currentTheme: string): boolean => {
+  return themes.find((t) => t.name === currentTheme)?.isDark ?? false;
+};
+
+export { ToggleThemeButton, isDark };

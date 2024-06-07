@@ -61,7 +61,7 @@ const WeatherCharts = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+      <div className="flex flex-col items-center justify-center bg-background-muted rounded-lg mx-4 py-2 shadow-md">
         <h2 className="mt-2">Historical Data</h2>
         <p className="mb-8">Loading...</p>
       </div>
@@ -70,7 +70,7 @@ const WeatherCharts = () => {
 
   if (isError || data === undefined || data.data.length == 0) {
     return (
-      <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/80 rounded-lg mx-4 py-2 shadow-md">
+      <div className="flex flex-col items-center justify-center bg-background-muted rounded-lg mx-4 py-2 shadow-md">
         <h2 className="mt-2">Historical Data</h2>
         <p className="mb-8">Error fetching data</p>
       </div>
@@ -91,24 +91,24 @@ const WeatherCharts = () => {
   const eco2s = transposedData[7];
 
   return (
-    <div className="flex flex-col items-center justify-center bg-stone-100/80 dark:bg-stone-800/90 rounded-lg mx-4 py-2 shadow-md">
+    <div className="card !px-2 !md:px-4 flex flex-col items-center justify-center mx-4 pt-2 pb-4">
       <h2 className="mt-2">Historical Data</h2>
       <div className="relative mt-4 mb-2">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
-          <div className="cursor-default overflow-hidden rounded-lg bg-white dark:bg-zinc-900 text-left focus:outline-none w-60 py-2 px-4 justify-between">
+          <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 justify-between">
             <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
               {selectedTime.display}
-              <AiOutlineDown className="text-gray-600 dark:text-gray-300 hover:text-xl transition-all" />
+              <AiOutlineDown className="hover:text-xl transition-all" />
             </Listbox.Button>
           </div>
-          <Listbox.Options className="absolute z-50 bg-white dark:bg-zinc-900 rounded-lg w-60 mt-1 max-h-60 overflow-auto">
+          <Listbox.Options className="absolute z-50 bg-background-muted rounded-lg w-60 mt-1 max-h-60 overflow-auto">
             {timeOptions.map((time) => (
               <Listbox.Option
                 key={time.id}
                 value={time}
                 className={({ active }) =>
                   `px-4 cursor-pointer py-2 ${
-                    active ? "bg-green-600 dark:bg-[#3b0764] text-white " : ""
+                    active ? "bg-accent text-text-accent" : ""
                   }`
                 }
               >
@@ -119,7 +119,7 @@ const WeatherCharts = () => {
         </Listbox>
       </div>
       {start < firstDbEntryTime && (
-        <p className="text-xs mb-4">
+        <p className="text-xs mb-4 px-4">
           Note: weather station deployed on 31/5/24 (no data exists before then)
         </p>
       )}

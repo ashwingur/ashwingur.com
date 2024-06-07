@@ -110,12 +110,10 @@ const PusherTest = () => {
             : "flex gap-4 px-4"
         }
       >
-        <div className="text-purple-500">{msg_data.username}</div>
-        <div className="text-gray-700 dark:text-gray-300">
-          {msg_data.timestamp}
-        </div>
+        <div className="">{msg_data.username}</div>
+        <div className="text-text-muted">{msg_data.timestamp}</div>
       </div>
-      <div className="bg-white dark:bg-gray-900 rounded-2xl px-4 py-2 inline-block max-w-[80%] md:max-w-4xl my-1 break-words">
+      <div className="bg-background-muted rounded-2xl px-4 py-2 inline-block max-w-[80%] md:max-w-4xl my-1 break-words">
         {msg_data.message}
       </div>
     </div>
@@ -140,16 +138,13 @@ const PusherTest = () => {
         <div className="flex h-screen">
           <div className="m-auto flex flex-col items-center justify-center">
             <input
-              className="border-2 w-72 md:w-96 rounded-full py-1 px-4"
+              className="border-2 w-72 md:w-96 rounded-full py-2 px-4 bg-background-muted border-text-muted placeholder:text-text-muted"
               value={username}
               onChange={update_username}
               maxLength={30}
               placeholder="Username"
             />
-            <button
-              className="bg-purple-500 text-gray-100 py-2 px-4 rounded-full my-4 hover:bg-purple-700"
-              onClick={enter_username}
-            >
+            <button className="btn mt-4" onClick={enter_username}>
               Enter Room
             </button>
           </div>
@@ -170,14 +165,11 @@ const PusherTest = () => {
           {/* Chat input */}
           <div className="flex justify-center gap-4 h items-center bottom-0 fixed w-screen px-4">
             <input
-              className="border-2 w-64 md:w-[80%] rounded-full py-1 px-4"
+              className="bg-background-muted border-2 border-text-muted w-64 md:w-[80%] rounded-full py-1 px-4"
               value={currentMessage}
               onChange={handle_input_change}
             />
-            <button
-              className="bg-purple-500 px-4 py-2 my-16 rounded-lg hover:bg-purple-700 transition-all"
-              onClick={send_message}
-            >
+            <button className="btn my-16" onClick={send_message}>
               <div className="flex items-center gap-2">
                 <span>Send</span>
 

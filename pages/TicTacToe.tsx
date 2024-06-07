@@ -235,21 +235,15 @@ const TicTacToe = () => {
           <h1 className="text-center py-2">Tic Tac Toe</h1>
           <div className=" m-auto flex flex-col items-center gap-4 justify-center">
             <input
-              className="border-2 w-60 rounded-2xl py-1 px-4"
+              className="border-2 w-60 rounded-2xl py-1 px-4 placeholder:text-text-muted bg-background-muted border-text-muted"
               placeholder="Create/Join Room Code"
               value={roomName}
               onChange={room_input_change}
             />
-            <button
-              className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32"
-              onClick={createGame}
-            >
+            <button className="btn w-32" onClick={createGame}>
               Create Game
             </button>
-            <button
-              className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32"
-              onClick={joinGame}
-            >
+            <button className="btn w-32" onClick={joinGame}>
               Join Game
             </button>
           </div>
@@ -259,10 +253,7 @@ const TicTacToe = () => {
       {!inLobby && (
         <div>
           <BasicNavbar fixed={false} />
-          <button
-            className="bg-purple-500 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all text-white w-32 ml-4 mt-4"
-            onClick={backToLobby}
-          >
+          <button className="btn w-32 ml-4 mt-4" onClick={backToLobby}>
             Back
           </button>
           {gameStateToJSX(localGameState, onCellClick)}
