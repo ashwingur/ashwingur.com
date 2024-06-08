@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./cyberpunk-theme.css";
+@import "./cyberpunk-theme";
 /*
   Guide:
 

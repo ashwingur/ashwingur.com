@@ -79,5 +79,21 @@ module.exports = {
       textColor: ["dark"],
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".clip-path-chamfered": {
+            clipPath:
+              "polygon(7% 0%, 93% 0%, 100% 20%, 100% 80%, 93% 100%, 7% 100%, 0% 80%, 0% 20%)",
+          },
+          ".clip-path-chamfered-logo": {
+            clipPath:
+              "polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)",
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };
