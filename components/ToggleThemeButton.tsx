@@ -2,8 +2,8 @@ import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
-import { FaGun } from "react-icons/fa6";
 import { MdSunny } from "react-icons/md";
+import { GiPistolGun } from "react-icons/gi";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
 
@@ -44,9 +44,11 @@ const themesList: ThemeType[] = [
   {
     name: "cyberpunk",
     displayName: "Cyberpunk",
-    color: "text-purple-500",
+    color: "text-tron-blue",
     isDark: true,
-    icon: (className?: string) => <FaGun className={clsx(className)} />,
+    icon: (className?: string) => (
+      <GiPistolGun className={(clsx(className), "text-xl")} />
+    ),
     font: "rajdhani",
   },
 ];

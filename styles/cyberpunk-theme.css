@@ -25,7 +25,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-text text-lg animate-moveBackgroundDiagonal;
+    @apply bg-background text-text text-lg lg:text-xl animate-moveBackgroundDiagonal;
     /* Apply font-bold for cyberpunk theme */
     [data-theme="cyberpunk"] & {
       background-image: radial-gradient(
