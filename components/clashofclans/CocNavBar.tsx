@@ -6,6 +6,7 @@ import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { MdOutlineMenu } from "react-icons/md";
 import CocButton from "./CocButton";
+import CustomisableLogo from "@components/CustomisableLogo";
 
 interface Tags {
   playerTag: string;
@@ -55,7 +56,7 @@ const CocNavBar = () => {
     <div>
       <div className="flex w-full justify-between px-4 md:px-8 lg:px-16 py-4 shadow-lg backdrop-blur-md bg-white/30 dark:bg-black/30 z-50 fixed">
         <Link href="/">
-          <Image src="/logo.png" alt="logo" width="30" height="30" />
+          <CustomisableLogo className="bg-[#6c779b] text-white" />
         </Link>
         {/* Input Fields */}
         <div className="hidden md:flex flex-col items-center md:flex-row justify-center gap-8 font-coc font-thin">
