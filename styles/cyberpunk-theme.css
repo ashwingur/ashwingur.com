@@ -5,7 +5,7 @@
 [data-theme="cyberpunk"] {
   --color-background: #021413;
   --color-background-muted: #032120;
-  --color-background-hover: #010e0d;
+  --color-background-hover: #042c29;
   --color-text: theme(colors.tron-blue);
   --color-text-muted: theme(colors.slate.400);
   --color-text-hover: theme(colors.blue.400);

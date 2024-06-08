@@ -495,7 +495,7 @@ const CubeTimer = () => {
       <h1 className="text-center mt-4">Cube Timer</h1>
       <div className="flex justify-center my-8  delay-150">
         <button
-          className="bg-green-200 hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-600 p-2 rounded-lg mx-auto transition"
+          className="btn"
           onClick={(e) => {
             setScramble(generate_scramble(23));
           }}
