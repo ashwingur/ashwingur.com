@@ -1,5 +1,5 @@
 import axios from "axios";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { ParkingFacility } from "../shared/interfaces/parking.interface";

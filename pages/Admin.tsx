@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loading-icons";

@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import Image from "next/image";
 import {
   MdOutlineMenu,
   MdOutlineClose,
   MdLogin,
   MdSettings,
 } from "react-icons/md";
-import { ToggleThemeButton, isDark } from "./ToggleThemeButton";
+import { ToggleThemeButton, isDark } from "../ToggleThemeButton";
 import { useAuth } from "@context/AuthContext";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
-import CustomisableLogo from "./CustomisableLogo";
+import CustomisableLogo from "../CustomisableLogo";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {
   const { theme } = useTheme();
@@ -30,7 +29,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
     >
       <div
         className={clsx(
-          "flex flex-col w-screen shadow-lg backdrop-blur-md bg-background/50 border-b border-background-muted"
+          "flex flex-col w-screen shadow-lg backdrop-blur-lg bg-background/50 border-b border-background-muted"
         )}
       >
         <div
@@ -39,14 +38,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           )}
         >
           <Link href="/">
-            {/* <Image
-              src="/logo.png"
-              alt="logo"
-              width="30"
-              height="30"
-              fetchPriority="high"
-            /> */}
-            <CustomisableLogo letter="A" />
+            <CustomisableLogo />
           </Link>
           <ul className="hidden lg:flex lg:gap-4 lg:items-center">
             <Link

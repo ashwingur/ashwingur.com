@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import Reviews from "../data/Reviews.json";
 import Image from "next/image";
 import {

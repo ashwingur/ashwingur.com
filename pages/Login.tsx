@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 
 const Login = () => {

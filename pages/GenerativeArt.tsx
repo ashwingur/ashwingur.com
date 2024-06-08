@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import Link from "next/link";
 import GenerativeArtProjects from "../components/GenerativeArtProjects";
 

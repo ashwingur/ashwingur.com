@@ -1,5 +1,5 @@
 import { LatestWeather } from "../components/weather/LatestWeather";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import WeatherCharts from "../components/weather/WeatherCharts";
 
 import React from "react";

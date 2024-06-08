@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbars/Navbar";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import CodeOutput from "../components/CodeEditor/CodeOutput";
 import { LanguageType } from "../shared/interfaces/code.interface";
