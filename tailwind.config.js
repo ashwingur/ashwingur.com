@@ -38,6 +38,7 @@ module.exports = {
       animation: {
         fade: "fadeIn 1s ease-in-out",
         "pulse-glow": "pulseGlow 8s infinite ease-in-out",
+        moveBackgroundDiagonal: "moveBackground 60s linear infinite",
       },
       keyframes: (theme) => ({
         fadeIn: {
@@ -51,6 +52,10 @@ module.exports = {
         pulseGlowOrange: {
           "0%, 100%": { boxShadow: "0 0 40px rgba(214, 151, 96, 1)" },
           "50%": { boxShadow: "0 0 45px rgba(214, 151, 96, 0.5)" },
+        },
+        moveBackground: {
+          "0%": { backgroundPosition: "0 0" },
+          "100%": { backgroundPosition: "70% 100%" },
         },
       }),
       gridTemplateColumns: {

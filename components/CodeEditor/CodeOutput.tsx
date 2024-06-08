@@ -101,7 +101,7 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
           disabled={isLoading}
           className={clsx(
             isLoading ? "" : "hover:bg-primary-hover",
-            "bg-primary text-text-primary rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
+            "btn bg-primary text-text-primary rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
           )}
         >
           {isLoading ? (

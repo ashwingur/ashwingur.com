@@ -25,15 +25,16 @@
 
 @layer base {
   body {
-    @apply bg-background text-text text-lg;
+    @apply bg-background text-text text-lg animate-moveBackgroundDiagonal;
     /* Apply font-bold for cyberpunk theme */
     [data-theme="cyberpunk"] & {
       background-image: radial-gradient(
         circle,
-        rgba(255, 255, 255, 0.155) 1px,
+        rgba(255, 255, 255, 0.155) 2px,
         transparent 1px
       );
       background-size: 4rem 4rem;
+      background-attachment: fixed; /* Make the background pattern static */
     }
   }
 
