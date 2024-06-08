@@ -17,7 +17,7 @@ const HomeSection = () => {
       </div>
       <p className="text-center text-lg mt-8 mx-8 md:mx-20">
         I am studying Bachelor of Mechatronics Engineering (Major: Space
-        Engineering) and Bachelor of Science (Major: Computer Science) at The
+        Engineering) and Bachelor of Science (Major: Computer Science) at the
         University of Sydney.
       </p>
 

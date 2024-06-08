@@ -13,6 +13,7 @@ import { ToggleThemeButton, isDark } from "./ToggleThemeButton";
 import { useAuth } from "@context/AuthContext";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
+import CustomisableLogo from "./CustomisableLogo";
 
 const Navbar = ({ fixed }: { fixed: boolean }) => {
   const { theme } = useTheme();
@@ -38,13 +39,14 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
           )}
         >
           <Link href="/">
-            <Image
+            {/* <Image
               src="/logo.png"
               alt="logo"
               width="30"
               height="30"
               fetchPriority="high"
-            />
+            /> */}
+            <CustomisableLogo letter="A" />
           </Link>
           <ul className="hidden lg:flex lg:gap-4 lg:items-center">
             <Link
