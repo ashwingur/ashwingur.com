@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import ArtNavBar from "../../components/ArtNavBar";
+import ArtNavBar from "@components/navbars/ArtNavBar";
 
 const CellularAutomata = () => {
   const [rule, setRule] = useState<number | "">(30);

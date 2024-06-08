@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { clearInterval, setInterval } from "timers";
-import BasicNavbar from "../components/BasicNavbar";
+import BasicNavbar from "../components/navbars/BasicNavbar";
 import Stopwatch, {
   StopwatchTime,
   StopwatchInterface,

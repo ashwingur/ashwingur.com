@@ -45,7 +45,7 @@ const ProjectCard = ({
   ));
 
   return (
-    <div className="card !rounded-2xl flex flex-col justify-center max-w-lg !shadow-xl relative m-8 p-4">
+    <div className="card flex flex-col justify-center max-w-lg !shadow-xl relative m-8 p-4">
       <div className="w-full h-36 md:h-72 relative">
         <Image
           alt="Mountains"

@@ -1,0 +1,67 @@
+@tailwind base;
+
+/* Cyberpunk theme specific styles */
+
+@layer base {
+  body {
+    @apply bg-background text-text text-lg;
+    /* Apply font-bold for cyberpunk theme */
+    [data-theme="cyberpunk"] & {
+      background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.155) 1px,
+        transparent 1px
+      );
+      background-size: 4rem 4rem;
+    }
+  }
+}
+
+[data-theme="cyberpunk"] .card {
+  background-color: rgba(94, 0, 0, 0.215);
+  @apply text-text-secondary border-y-2 border-secondary rounded-none;
+}
+
+[data-theme="cyberpunk"] .card-hover {
+  background-color: rgba(0, 33, 94, 0.215);
+  @apply text-text-accent border-y-2 border-accent rounded-none;
+}
+
+[data-theme="cyberpunk"] .btn {
+  background-color: #fffb042e;
+  border-radius: 0px;
+  clip-path: polygon(
+    5% 0%,
+    95% 0%,
+    100% 15%,
+    100% 85%,
+    95% 100%,
+    5% 100%,
+    0% 85%,
+    0% 15%
+  ); /* Chamfered corners */
+  @apply border border-primary;
+}
+
+[data-theme="cyberpunk"] .btn:hover {
+  background-color: #fffb0462;
+}
+
+[data-theme="cyberpunk"] .logo {
+  @apply border border-primary;
+  background-color: #fffb042e;
+  clip-path: polygon(
+    20% 0%,
+    80% 0%,
+    100% 20%,
+    100% 80%,
+    80% 100%,
+    20% 100%,
+    0% 80%,
+    0% 20%
+  ); /* Chamfered corners */
+  border-radius: 0px;
+}
+[data-theme="cyberpunk"] .logo:hover {
+  background-color: #fffb0462;
+}

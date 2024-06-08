@@ -13,7 +13,7 @@ const CustomisableLogo: React.FC<CustomisableLogoProps> = ({
   return (
     <div
       className={clsx(
-        "w-10 h-10 rounded-xl flex items-center justify-center text-3xl font-bold hover:rounded-md transition-all",
+        "logo w-10 h-10 rounded-xl flex items-center justify-center text-3xl font-bold hover:rounded-md transition-all",
         className
       )}
     >

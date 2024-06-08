@@ -12,7 +12,7 @@ import {
   Room,
   SIDEvent,
 } from "@interfaces/tron.interface";
-import BasicNavbar from "@components/BasicNavbar";
+import BasicNavbar from "@components/navbars/BasicNavbar";
 import TronLobby from "@components/tron/TronLobby";
 import TronConnecting from "@components/tron/TronConnecting";
 import TronStatus from "@components/tron/TronStatus";

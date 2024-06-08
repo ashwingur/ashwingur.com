@@ -2,7 +2,7 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { Sketch, P5CanvasInstance } from "@p5-wrapper/react";
 import p5 from "p5";
 import { useTheme } from "next-themes";
-import ArtNavBar from "../../components/ArtNavBar";
+import ArtNavBar from "@components/navbars/ArtNavBar";
 
 const BouncingParticles = () => {
   const { systemTheme, theme } = useTheme();

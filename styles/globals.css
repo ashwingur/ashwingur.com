@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./cyberpunk-theme.css";
 /*
   Guide:
 
@@ -22,7 +23,6 @@
   Use the hover variants for button hover
   
 */
-
 /* Light Theme */
 [data-theme="light"] {
   --color-background: theme(colors.stone.100);
@@ -91,28 +91,51 @@
 
 /* Cyberpunk Theme */
 [data-theme="cyberpunk"] {
-  --color-background: theme(colors.violet.950);
-  --color-background-muted: #200c46;
-  --color-background-hover: #0d051c;
-  --color-text: theme(colors.slate.100);
-  --color-text-muted: theme(colors.slate.200);
+  --color-background: #021413;
+  --color-background-muted: #032120;
+  --color-background-hover: #010e0d;
+  --color-text: theme(colors.tron-blue);
+  --color-text-muted: theme(colors.slate.400);
   --color-text-hover: theme(colors.blue.400);
-  --color-text-primary: theme(colors.slate.900);
+  --color-text-primary: theme(colors.yellow.100);
   --color-text-secondary: theme(colors.slate.100);
   --color-text-accent: theme(colors.slate.100);
-  --color-primary: theme(colors.fuchsia.200);
-  --color-primary-muted: theme(colors.fuchsia.100);
-  --color-primary-hover: theme(colors.fuchsia.300);
-  --color-secondary: theme(colors.blue.700);
-  --color-secondary-muted: theme(colors.blue.600);
-  --color-secondary-hover: theme(colors.blue.800);
-  --color-accent: theme(colors.rose.700);
-  --color-accent-muted: theme(colors.rose.600);
-  --color-accent-hover: theme(colors.rose.800);
+  --color-primary: theme(colors.yellow.500);
+  --color-primary-muted: theme(colors.yellow.400);
+  --color-primary-hover: theme(colors.yellow.600);
+  --color-secondary: theme(colors.red.500);
+  --color-secondary-muted: theme(colors.red.400);
+  --color-secondary-hover: theme(colors.red.600);
+  --color-accent: theme(colors.blue.700);
+  --color-accent-muted: theme(colors.blue.600);
+  --color-accent-hover: theme(colors.blue.800);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl;
+  }
 }
 
 @font-face {
@@ -210,27 +233,4 @@ html {
 .card-hover {
   @apply p-4 rounded-lg shadow-lg;
   @apply bg-background-hover;
-}
-
-@layer base {
-  body {
-    @apply bg-background text-text;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold;
-  }
-
-  h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl sm:text-4xl;
-  }
 }

@@ -3,7 +3,7 @@ import Pusher from "pusher-js";
 import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { BsCircle } from "react-icons/bs";
-import BasicNavbar from "../components/BasicNavbar";
+import BasicNavbar from "../components/navbars/BasicNavbar";
 
 // Host Creates Game and Subscribes to the Channel
 // Guest Subscribes to the channel, and then posts that they joined

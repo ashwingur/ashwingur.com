@@ -1,7 +1,7 @@
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { P5CanvasInstance, Sketch } from "@p5-wrapper/react";
 import { useEffect, useState } from "react";
-import ArtNavBar from "../../components/ArtNavBar";
+import ArtNavBar from "@components/navbars/ArtNavBar";
 
 const makeRandomMatrix = (numColours: number) => {
   const rows = [];

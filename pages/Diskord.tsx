@@ -3,7 +3,7 @@ import Pusher from "pusher-js";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
-import BasicNavbar from "../components/BasicNavbar";
+import BasicNavbar from "@components/navbars/ArtNavBar";
 
 export interface MessageData {
   message: string;
