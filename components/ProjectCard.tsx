@@ -26,7 +26,7 @@ const ProjectCard = ({
   const stack_items = stack.map((item, index) => (
     <div
       key={index}
-      className="bg-secondary text-text-secondary p-2 rounded-md"
+      className="stack bg-secondary text-text-secondary p-2 rounded-md"
     >
       {item}
     </div>

@@ -9,9 +9,9 @@
   --color-text: theme(colors.tron-blue);
   --color-text-muted: theme(colors.slate.400);
   --color-text-hover: theme(colors.blue.400);
-  --color-text-primary: theme(colors.yellow.100);
-  --color-text-secondary: theme(colors.red.100);
-  --color-text-accent: theme(colors.slate.100);
+  --color-text-primary: theme(colors.yellow.200);
+  --color-text-secondary: theme(colors.red.200);
+  --color-text-accent: theme(colors.blue.200);
   --color-primary: theme(colors.yellow.500);
   --color-primary-muted: theme(colors.yellow.400);
   --color-primary-hover: theme(colors.yellow.600);
@@ -48,8 +48,7 @@
   @apply text-text-accent border-y-2 border-accent rounded-none;
 }
 
-[data-theme="cyberpunk"] .btn {
-  background-color: #fffb042e;
+.cyberpunk-border {
   border-radius: 0px;
   clip-path: polygon(
     5% 0%,
@@ -61,8 +60,14 @@
     0% 85%,
     0% 15%
   ); /* Chamfered corners */
-  @apply border border-primary;
 }
+
+/* [data-theme="cyberpunk"] .btn {
+  background-color: #fffb042e;
+  border-radius: 0px;
+  cyber
+  @apply border border-primary;
+} */
 
 [data-theme="cyberpunk"] .btn:hover {
   background-color: #fffb0462;
