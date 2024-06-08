@@ -37,23 +37,24 @@
       background-attachment: fixed; /* Make the background pattern static */
     }
   }
+  [data-theme="cyberpunk"] {
+    .btn {
+      @apply clip-path-chamfered;
+    }
+    .btn-secondary {
+      @apply clip-path-chamfered;
+    }
+    .btn-accent {
+      @apply clip-path-chamfered;
+    }
 
-  .btn {
-    @apply clip-path-chamfered;
-  }
-  .btn-secondary {
-    @apply clip-path-chamfered;
-  }
-  .btn-accent {
-    @apply clip-path-chamfered;
-  }
+    .logo {
+      @apply clip-path-chamfered-logo;
+    }
 
-  .logo {
-    @apply clip-path-chamfered-logo;
-  }
-
-  .tag {
-    @apply clip-path-chamfered;
+    .tag {
+      @apply clip-path-chamfered;
+    }
   }
 }
 

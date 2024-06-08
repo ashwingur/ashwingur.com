@@ -92,7 +92,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 
         <Combobox.Options
           className={clsx(
-            "absolute right-0 w-32 mt-1 shadow-lg max-h-60 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
+            "absolute right-0 w-32 lg:w-40 lg:text-lg mt-1 shadow-lg max-h-60 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
             isDark(currentTheme ?? "")
               ? "bg-stone-700 shadow-background-hover"
               : "bg-stone-200"

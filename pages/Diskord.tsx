@@ -3,7 +3,7 @@ import Pusher from "pusher-js";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
-import BasicNavbar from "@components/navbars/ArtNavBar";
+import BasicNavbar from "@components/navbars/BasicNavbar";
 
 export interface MessageData {
   message: string;
@@ -154,8 +154,8 @@ const PusherTest = () => {
         <div className="h-5/6 pb-20">
           <h2 className="text-center my-2">Hello, {username}</h2>
           <p className="text-center">
-            <span className="text-green-600 font-bold">{liveUserCount} </span>{" "}
-            user{liveUserCount == 1 ? "" : "s"} online
+            <span className="text-accent font-bold">{liveUserCount} </span> user
+            {liveUserCount == 1 ? "" : "s"} online
           </p>
           <div className="h-5/6 m-8 overflow-y-scroll flex flex-col">
             {/* Chat */}
