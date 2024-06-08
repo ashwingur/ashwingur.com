@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Base style colours
         primary: "var(--color-primary)",
         "primary-muted": "var(--color-primary-muted)",
         "primary-hover": "var(--color-primary-hover)",
@@ -27,6 +28,7 @@ module.exports = {
         accent: "var(--color-accent)",
         "accent-muted": "var(--color-accent-muted)",
         "accent-hover": "var(--color-accent-hover)",
+        // Tron colours
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
       },
