@@ -40,7 +40,7 @@
       @apply before:opacity-10;
     }
     .card::before {
-      background-image: url("https://wallpapers.com/images/hd/parchment-paper-background-1280-x-853-hu23a7njfkjjczgx.jpg");
+      background-image: url("/assets/textures/paper1.jpg");
     }
 
     .card-hover {
@@ -48,7 +48,7 @@
       @apply before:opacity-20;
     }
     .card-hover::before {
-      background-image: url("https://webdesignledger.com/wp-content/uploads/tan-antique-vintage-paper.jpg");
+      background-image: url("/assets/textures/paper2.jpg");
     }
   }
 }
