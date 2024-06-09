@@ -4,6 +4,7 @@ import WeatherCharts from "../components/weather/WeatherCharts";
 
 import React from "react";
 import Link from "next/link";
+import Card from "@components/Card";
 
 const MetricTable = () => {
   return (
@@ -91,7 +92,10 @@ const Weather = () => {
       <div className="flex flex-col mx-auto mt-20 pb-8 md:w-4/5 gap-8">
         <LatestWeather />
         <WeatherCharts />
-        <div className="flex flex-col items-center card mx-4">
+        <Card
+          className="flex flex-col items-center card mx-4"
+          firstLayer={true}
+        >
           <h2>Notes</h2>
           <div>
             <p className="mx-8 md:mx-auto md:w-96 lg:w-3/5">
@@ -116,7 +120,7 @@ const Weather = () => {
             </p>
           </div>
           <MetricTable />
-        </div>
+        </Card>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   LineChart,
@@ -10,6 +11,7 @@ import {
 } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
 import { isDark } from "@components/ToggleThemeButton";
+import Card from "@components/Card";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -30,20 +32,45 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   domain,
   tickCount = 5, // Default tick count
 }) => {
-  // No tailwindcss for recharts, so we manually get the current theme
-  const { systemTheme, theme, setTheme } = useTheme();
+  const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const axisStrokeColour = isDark(currentTheme ?? "") ? "#c9c9c9" : "#000";
-  const lineColour = isDark(currentTheme ?? "") ? "#ffbdbd" : "#bd0000";
   const gridColour = isDark(currentTheme ?? "") ? "#b0b0b0" : "#4f4f4f";
   const tooltipColour = isDark(currentTheme ?? "") ? "#2e2e2e" : "#ebebeb";
 
-  // See how long the time period is
+  const [lineColour, setLineColour] = useState(
+    getComputedStyle(document.documentElement).getPropertyValue(
+      "--color-primary"
+    )
+  );
+
+  useEffect(() => {
+    const updateLineColour = () => {
+      const newColor = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue("--color-primary");
+      setLineColour(newColor);
+    };
+
+    // Set up observer to detect changes in the CSS variable
+    const observer = new MutationObserver(updateLineColour);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+
+    // Update color on theme change
+    updateLineColour();
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [currentTheme]);
+
   const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
 
-  // Function to format UNIX timestamp to "dd/mm/yy hh:mm AM/PM" string
   const formatTimestamp = (timestamp: number): string => {
-    const date = new Date(timestamp * 1000); // Convert UNIX timestamp to milliseconds
+    const date = new Date(timestamp * 1000);
     const day = ("0" + date.getDate()).slice(-2);
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear().toString().slice(-2);
@@ -53,11 +80,9 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     const ampm = hours >= 12 ? "PM" : "AM";
 
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12;
     const formattedHours = ("0" + hours).slice(-2);
 
-    // If the time period is <= 25 h, only display time
-    // If > 30 days display date only
     if (timeRange < 3600 * 25) {
       return `${formattedHours}:${minutes} ${ampm}`;
     } else if (timeRange < 3600 * 24 * 30) {
@@ -73,7 +98,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   }));
 
   return (
-    <div className="w-full h-96 lg:h-[32rem] px-4 pb-8 bg-background-hover shadow-lg rounded-lg">
+    <Card className="w-full h-96 lg:h-[32rem]" firstLayer={false}>
       <h3 className="text-center my-4 lg:text-xl">{title}</h3>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
@@ -91,13 +116,12 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
               offset: 0,
             }}
             stroke={axisStrokeColour}
-            ticks={timestamps.length < tickCount ? timestamps : undefined} // Use timestamps.length if less than tickCount
-            interval={Math.ceil(timestamps.length / tickCount)} // Calculate interval
+            ticks={timestamps.length < tickCount ? timestamps : undefined}
+            interval={Math.ceil(timestamps.length / tickCount)}
             tick={{
-              // Custom tick rendering function
-              dy: 18, // Adjust vertical position
-              fontSize: "12px", // Adjust font size
-              textAnchor: "middle", // Center the text
+              dy: 18,
+              fontSize: "12px",
+              textAnchor: "middle",
               width: "70",
             }}
             angle={-40}
@@ -126,7 +150,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
           />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </Card>
   );
 };
 

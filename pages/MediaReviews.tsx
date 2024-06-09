@@ -10,6 +10,7 @@ import {
 import { Combobox } from "@headlessui/react";
 import { IoMdArrowRoundUp } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
+import Card from "@components/Card";
 
 interface ReviewItem {
   type: string;
@@ -262,7 +263,7 @@ const MediaReviews = () => {
         );
       });
       return (
-        <div key={index} className="card-hover">
+        <Card key={index} firstLayer={false}>
           <div className="flex justify-between items-center mb-4">
             <div className="text-xl md:text-2xl w-4/5">
               <div className="font-bold">{subItem.name}</div>
@@ -294,14 +295,15 @@ const MediaReviews = () => {
             </div>
           )}
           <div className="flex flex-col gap-4">{subReviewParagraphs}</div>
-        </div>
+        </Card>
       );
     });
 
     return (
-      <div
+      <Card
         key={index}
         className="card w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 animate-fade"
+        firstLayer={true}
       >
         <div className="flex justify-between items-center mb-2">
           <div className=" w-4/5">
@@ -334,7 +336,7 @@ const MediaReviews = () => {
         <div className="flex flex-col py-4 md:p-4 gap-6 md:gap-8">
           {subReviews}
         </div>
-      </div>
+      </Card>
     );
   });
 

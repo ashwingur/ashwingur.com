@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from "react-query";
 import TimeSeriesChart from "./TimeSeriesChart";
 import { Listbox } from "@headlessui/react";
 import { AiOutlineClose, AiOutlineDown } from "react-icons/ai";
+import Card from "@components/Card";
 
 const fetchWeatherData = async (
   start: number,
@@ -91,7 +92,10 @@ const WeatherCharts = () => {
   const eco2s = transposedData[7];
 
   return (
-    <div className="card !px-2 !md:px-4 flex flex-col items-center justify-center mx-4 pt-2 pb-4">
+    <Card
+      className="card !px-2 !md:px-4 flex flex-col items-center justify-center mx-4"
+      firstLayer={true}
+    >
       <h2 className="mt-2">Historical Data</h2>
       <div className="relative mt-4 mb-2">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
@@ -169,7 +173,7 @@ const WeatherCharts = () => {
           yLabel={"ppm"}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

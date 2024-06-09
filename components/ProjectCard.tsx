@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Card from "@components/Card";
 
 interface ProjectProps {
   title: string;
@@ -45,7 +46,7 @@ const ProjectCard = ({
   ));
 
   return (
-    <div className="card flex flex-col justify-center max-w-lg !shadow-xl relative m-8 p-4">
+    <Card className="flex flex-col max-w-lg" firstLayer={true}>
       <div className="w-full h-36 md:h-72 relative">
         <Image
           alt="Mountains"
@@ -68,7 +69,7 @@ const ProjectCard = ({
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

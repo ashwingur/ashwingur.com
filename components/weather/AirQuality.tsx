@@ -1,3 +1,4 @@
+import Card from "@components/Card";
 import dynamic from "next/dynamic";
 const GaugeChart = dynamic(() => import("react-gauge-chart"), { ssr: false });
 
@@ -20,7 +21,10 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
     rating = "Unhealthy";
   }
   return (
-    <div className="flex flex-col items-center justify-center lg:w-48 bg-background-hover shadow-lg rounded-lg p-2">
+    <Card
+      className="flex flex-col items-center justify-center lg:w-48 lg:h-60"
+      firstLayer={false}
+    >
       <h3 className="mb-4">Air Quality</h3>
       <GaugeChart
         hideText={true}
@@ -35,7 +39,7 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
       {rating}
       <div className="mt-4">TVOC: {tvoc} ppb</div>
       <div>eCO2: {eco2} ppm</div>
-    </div>
+    </Card>
   );
 };
 

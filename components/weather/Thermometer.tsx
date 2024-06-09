@@ -1,3 +1,4 @@
+import Card from "@components/Card";
 import React from "react";
 
 interface ThermometerProps {
@@ -11,7 +12,10 @@ const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
   const fillPercentage = (constrainedTemp / 40) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center bg-background-hover shadow-lg rounded-lg p-2 h-48 lg:h-60">
+    <Card
+      firstLayer={false}
+      className="flex flex-col items-center justify-center h-48 lg:h-60"
+    >
       <h3>Temperature</h3>
       <svg
         className="w-12 md:w-16 lg:w-20 h-auto"
@@ -61,7 +65,7 @@ const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
         />
       </svg>
       <div className="">{temperature.toFixed(2)} °C</div>
-    </div>
+    </Card>
   );
 };
 

@@ -1,3 +1,4 @@
+import Card from "@components/Card";
 import dynamic from "next/dynamic";
 const GaugeChart = dynamic(() => import("react-gauge-chart"), { ssr: false });
 
@@ -27,7 +28,10 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
     (MAX_PRESSURE - COLOUR_3_START) / (MAX_PRESSURE - MIN_PRESSURE);
 
   return (
-    <div className="lg:w-48 flex flex-col items-center justify-center bg-background-hover shadow-lg rounded-lg p-2">
+    <Card
+      className="lg:w-48 flex flex-col items-center justify-center lg:h-60"
+      firstLayer={false}
+    >
       <h3 className="mb-4">Air Pressure</h3>
       <GaugeChart
         hideText={true}
@@ -41,7 +45,7 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
         animDelay={0}
       />
       {pressure.toFixed(2)} hPa
-    </div>
+    </Card>
   );
 };
 

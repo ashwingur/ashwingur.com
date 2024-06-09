@@ -4,6 +4,7 @@ import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
 import Apps from "../components/Apps";
 import Footer from "../components/Footer";
+import Card from "@components/Card";
 
 export default function Home() {
   // const appContext = useContext(AppContext);
@@ -40,7 +41,6 @@ export default function Home() {
 
       <div className="mb-8">
         <HomeSection />
-
         <Apps />
         <Projects />
       </div>
