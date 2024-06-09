@@ -401,7 +401,7 @@ const MediaReviews = () => {
             ))}
         </button>
         <button
-          className="btn flex items-center justify-center w-36"
+          className="btn flex items-center justify-center w-36 md:w-40"
           onClick={() => {
             localStorage.setItem("showImages", showImages ? "false" : "true");
             setShowImages(!showImages);

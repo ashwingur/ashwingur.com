@@ -25,7 +25,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-text text-lg lg:text-xl animate-moveBackgroundDiagonal;
+    @apply text-lg lg:text-xl animate-moveBackgroundDiagonal;
     /* Apply font-bold for cyberpunk theme */
     [data-theme="cyberpunk"] & {
       background-image: radial-gradient(
@@ -34,7 +34,6 @@
         transparent 1px
       );
       background-size: 4rem 4rem;
-      background-attachment: fixed; /* Make the background pattern static */
     }
   }
 
@@ -65,7 +64,6 @@
     }
 
     .card {
-      /* background-color: rgba(94, 0, 0, 0.215); */
       @apply text-text-secondary border-y-2 border-secondary rounded-none bg-red-700/20;
     }
     .card-hover {

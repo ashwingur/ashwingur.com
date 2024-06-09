@@ -1,1 +1,54 @@
 @tailwind base;
+
+/* Fire Theme */
+[data-theme="fire"] {
+  --color-background: theme(colors.amber.50);
+  --color-background-muted: theme(colors.orange.100);
+  --color-background-hover: #ffe0b8;
+  --color-text: theme(colors.slate.900);
+  --color-text-muted: theme(colors.yellow.700);
+  --color-text-hover: theme(colors.orange.800);
+  --color-text-primary: theme(colors.white);
+  --color-text-secondary: theme(colors.slate.50);
+  --color-text-accent: theme(colors.slate.50);
+  --color-primary: theme(colors.orange.700);
+  --color-primary-muted: theme(colors.orange.600);
+  --color-primary-hover: theme(colors.orange.800);
+  --color-secondary: theme(colors.pink.600);
+  --color-secondary-muted: theme(colors.pink.500);
+  --color-secondary-hover: theme(colors.pink.700);
+  --color-accent: theme(colors.red.600);
+  --color-accent-muted: theme(colors.red.500);
+  --color-accent-hover: theme(colors.red.700);
+}
+
+@layer base {
+  body {
+    [data-theme="fire"] & {
+      @apply bg-gradient-to-b from-amber-50 to-amber-100;
+    }
+  }
+
+  [data-theme="fire"] {
+    .card,
+    .card-hover {
+      @apply before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full;
+      @apply before:pointer-events-none before:rounded-inherit before:bg-cover before:bg-center;
+    }
+    .card {
+      @apply bg-gradient-to-b from-orange-100 to-orange-200/50;
+      @apply before:opacity-10;
+    }
+    .card::before {
+      background-image: url("https://wallpapers.com/images/hd/parchment-paper-background-1280-x-853-hu23a7njfkjjczgx.jpg");
+    }
+
+    .card-hover {
+      @apply bg-gradient-to-b from-orange-200/10 to-orange-300/30;
+      @apply before:opacity-20;
+    }
+    .card-hover::before {
+      background-image: url("https://webdesignledger.com/wp-content/uploads/tan-antique-vintage-paper.jpg");
+    }
+  }
+}

@@ -69,28 +69,6 @@
   --color-accent-hover: theme(colors.red.800);
 }
 
-/* Fire Theme */
-[data-theme="fire"] {
-  --color-background: theme(colors.amber.100);
-  --color-background-muted: theme(colors.orange.100);
-  --color-background-hover: theme(colors.orange.200);
-  --color-text: theme(colors.slate.900);
-  --color-text-muted: theme(colors.yellow.700);
-  --color-text-hover: theme(colors.orange.800);
-  --color-text-primary: theme(colors.slate.50);
-  --color-text-secondary: theme(colors.slate.50);
-  --color-text-accent: theme(colors.slate.50);
-  --color-primary: theme(colors.orange.700);
-  --color-primary-muted: theme(colors.orange.600);
-  --color-primary-hover: theme(colors.orange.800);
-  --color-secondary: theme(colors.pink.600);
-  --color-secondary-muted: theme(colors.pink.500);
-  --color-secondary-hover: theme(colors.pink.700);
-  --color-accent: theme(colors.red.600);
-  --color-accent-muted: theme(colors.red.500);
-  --color-accent-hover: theme(colors.red.700);
-}
-
 html {
   scroll-behavior: smooth;
 }
