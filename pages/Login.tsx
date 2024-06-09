@@ -21,8 +21,8 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Navbar fixed={true} />
+    <div className="h-screen">
+      <Navbar fixed={false} />
       <div className="flex flex-col items-center justify-center mt-32">
         {(user === null || user === undefined) && (
           <div className="flex flex-col items-center p-8 card w-11/12 md:w-96">

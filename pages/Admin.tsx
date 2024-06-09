@@ -17,7 +17,7 @@ const Admin = () => {
 
   if (loading || role !== "admin") {
     return (
-      <div>
+      <div className="min-h-screen">
         <Navbar fixed={false} />
         <div className="flex flex-col items-center justify-center mt-8">
           <TailSpin />
@@ -27,7 +27,7 @@ const Admin = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar fixed={false} />
       <div className="flex flex-col items-center">
         <h1 className="text-center mt-4 mb-4">Admin</h1>

@@ -192,3 +192,7 @@ html {
   @apply p-4 rounded-lg shadow-lg;
   @apply bg-background-hover;
 }
+
+.input {
+  @apply border border-primary rounded-full px-4 py-1 bg-background-muted placeholder:text-text-muted;
+}

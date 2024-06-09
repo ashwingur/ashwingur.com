@@ -2,6 +2,7 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useAuth } from "@context/AuthContext";
+import Card from "./Card";
 
 // Define interface for User object
 interface User {
@@ -50,7 +51,7 @@ const UserList: React.FC = () => {
     <div className="flex flex-col w-full">
       <h2 className="text-center mb-2">Users</h2>
       <ul className="">
-        <li className={`flex px-2 md:px-4 font-bold dark:bg-black py-1`}>
+        <li className={`flex px-2 md:px-4 font-bold py-1`}>
           <div className="md:w-1/5 w-1/4">ID</div>
           <div className="md:w-1/5 w-2/4">Username</div>
           <div className="hidden md:block md:w-1/5">Registered</div>
@@ -60,10 +61,9 @@ const UserList: React.FC = () => {
         {data
           ?.sort((a, b) => a.id - b.id)
           .map((user_element, index) => {
-            let bg_colour =
-              index % 2 == 0 ? "bg-stone-200 dark:bg-slate-700" : "";
+            let bg_colour = index % 2 == 0 ? "bg-background-muted" : "";
             if (user_element.username === user) {
-              bg_colour = "bg-green-200 dark:bg-green-800";
+              bg_colour = " bg-accent text-text-accent";
             }
             return (
               <li key={index} className={`flex px-2 py-1 md:px-4 ${bg_colour}`}>
@@ -125,46 +125,49 @@ const AddUser: React.FC = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-between gap-2 items-center"
       >
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <label htmlFor="username" className="w-24">
             Username
           </label>
           <input
-            className="rounded-md dark:bg-slate-800 py-1 px-2"
+            className="input"
             type="text"
             id="username"
             name="username"
+            placeholder="username"
             required
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <label htmlFor="password" className="w-24">
             Password
           </label>
           <input
-            className="rounded-md dark:bg-slate-800 py-1 px-2"
+            className="input"
             type="password"
             id="password"
             name="password"
+            placeholder="password"
             required
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <label htmlFor="role" className="w-24">
             Role
           </label>
           <input
-            className="rounded-md dark:bg-slate-800 py-1 px-2"
+            className="input"
             type="text"
             id="role"
             name="role"
             required
+            placeholder="user | admin"
           />
         </div>
         <button
           type="submit"
           disabled={addUserMutation.isLoading}
-          className="w-36 bg-blue-200 dark:bg-[#2e1065] p-2 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
+          className="btn mt-2 w-36"
         >
           Add User
         </button>
@@ -209,23 +212,24 @@ const DeleteUser: React.FC = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-between gap-2 items-center"
       >
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <label htmlFor="userId" className="w-24">
             User ID
           </label>
           <input
-            className="rounded-md dark:bg-slate-800 py-1 px-2"
+            className="input"
             type="text"
             id="userId"
             value={userId}
             onChange={(event) => setUserId(event.target.value)}
             required
+            placeholder="ID"
           />
         </div>
         <button
           type="submit"
           disabled={deleteUserMutation.isLoading}
-          className="w-36 bg-blue-200 dark:bg-[#2e1065] p-2 rounded-md hover:bg-blue-400 dark:hover:bg-violet-800 transition-all"
+          className="btn mt-2 w-36"
         >
           Delete User
         </button>
@@ -237,11 +241,14 @@ const DeleteUser: React.FC = () => {
 // Main component
 const AllUserDetails: React.FC = () => {
   return (
-    <div className="flex flex-col gap-8 items-center justify-center bg-stone-100 dark:bg-slate-900 p-4 md:p-8 rounded-lg w-11/12 md:w-3/4 md:px-12 shadow-lg">
+    <Card
+      className="flex flex-col gap-8 items-center justify-center rounded-lg w-11/12 md:w-3/4 md:px-12 "
+      firstLayer={false}
+    >
       <UserList />
       <AddUser />
       <DeleteUser />
-    </div>
+    </Card>
   );
 };
 
