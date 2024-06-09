@@ -56,13 +56,11 @@
 
     .logo {
       @apply clip-path-chamfered-logo;
-      @apply border border-primary bg-yellow-500/20 hover:bg-yellow-500/40;
-      border-radius: 0px;
+      @apply border border-primary bg-yellow-500/20 hover:bg-yellow-500/40 rounded-none;
     }
 
     .tag {
-      @apply clip-path-chamfered text-center md:px-3;
-      border-radius: 0px;
+      @apply clip-path-chamfered text-center md:px-3 rounded-none;
       @apply border border-secondary bg-red-500/10;
     }
 
