@@ -235,7 +235,7 @@ const TicTacToe = () => {
           <h1 className="text-center py-2">Tic Tac Toe</h1>
           <div className=" m-auto flex flex-col items-center gap-4 justify-center">
             <input
-              className="border-2 w-72 text-center rounded-2xl py-1 px-4 placeholder:text-text-muted bg-background-muted border-text-muted"
+              className="input border-2 w-72 text-center"
               placeholder="Create/Join Room Code"
               value={roomName}
               onChange={room_input_change}

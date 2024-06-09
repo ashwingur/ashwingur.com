@@ -138,7 +138,7 @@ const PusherTest = () => {
         <div className="flex h-2/3">
           <div className="m-auto flex flex-col items-center justify-center">
             <input
-              className="border-2 w-72 md:w-96 rounded-full py-2 px-4 bg-background-muted border-text-muted placeholder:text-text-muted"
+              className="input w-72 md:w-96"
               value={username}
               onChange={update_username}
               maxLength={30}

@@ -31,8 +31,8 @@ const Login = () => {
               onSubmit={handleSubmit}
             >
               <input
-                className={`p-2 rounded-lg bg-background-hover placeholder:text-muted ${
-                  !isCorrectLogin ? "border-2 border-red-500" : ""
+                className={`input-hover ${
+                  !isCorrectLogin ? "!border-2 !border-red-500" : ""
                 }`}
                 type="text"
                 placeholder="Username"
@@ -40,8 +40,8 @@ const Login = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
-                className={`p-2 rounded-lg bg-background-hover placeholder:text-muted ${
-                  !isCorrectLogin ? "border-2 border-red-500" : ""
+                className={`input-hover ${
+                  !isCorrectLogin ? "!border-2 !border-red-500" : ""
                 }`}
                 type="password"
                 placeholder="Password"
@@ -49,7 +49,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {!isCorrectLogin && (
-                <div className="text-red-500">
+                <div className="text-red-500 text-center">
                   Incorrect username or password
                 </div>
               )}

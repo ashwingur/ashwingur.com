@@ -58,7 +58,7 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
 
 const LoadingState = () => {
   return (
-    <div>
+    <div className="h-screen">
       <Navbar fixed={true} />
       <h1 className="text-center pt-20 pb-4">NSW Live Car Park Data</h1>
       <LoadingIcon className="mx-auto" />

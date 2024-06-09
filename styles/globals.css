@@ -31,7 +31,7 @@
   --color-background-muted: theme(colors.stone.200);
   --color-background-hover: theme(colors.stone.300);
   --color-text: theme(colors.slate.900);
-  --color-text-muted: theme(colors.slate.700);
+  --color-text-muted: theme(colors.slate.500);
   --color-text-hover: theme(colors.blue.700);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
@@ -194,5 +194,8 @@ html {
 }
 
 .input {
-  @apply border border-primary rounded-full px-4 py-1 bg-background-muted placeholder:text-text-muted;
+  @apply border-2 border-text-muted rounded-full px-4 py-1 bg-background-muted placeholder:text-text-muted;
+}
+.input-hover {
+  @apply border-2 border-text-muted rounded-full px-4 py-1 bg-background-hover placeholder:text-text-muted;
 }
