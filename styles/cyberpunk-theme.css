@@ -74,28 +74,34 @@
     }
 
     /* Add some effects to the corners of the card */
+    .card-top,
+    .card-bottom {
+      @apply absolute left-0 w-full flex justify-between;
+      @apply before:content-[''] before:h-1 before:w-6 before:bg-secondary;
+      @apply after:content-[''] after:h-1 after:w-6 after:bg-secondary;
+    }
+
     .card-top {
-      @apply absolute top-0 left-0 w-full;
-      @apply before:content-[''] before:h-1 before:w-6 before:bg-secondary before:absolute before:top-0 before:left-0;
-      @apply after:content-[''] after:h-1 after:w-6 after:bg-secondary after:absolute after:top-0 after:right-0;
+      @apply top-0;
     }
 
     .card-bottom {
-      @apply absolute bottom-0 left-0 w-full;
-      @apply before:content-[''] before:h-1 before:w-6 before:bg-secondary before:absolute before:bottom-0 before:left-0;
-      @apply after:content-[''] after:h-1 after:w-6 after:bg-secondary after:absolute after:bottom-0 after:right-0;
+      @apply bottom-0;
+    }
+
+    .card-hover-top,
+    .card-hover-bottom {
+      @apply absolute left-0 w-full flex justify-between;
+      @apply before:content-[''] before:h-1 before:w-6 before:bg-accent;
+      @apply after:content-[''] after:h-1 after:w-6 after:bg-accent;
     }
 
     .card-hover-top {
-      @apply absolute top-0 left-0 w-full;
-      @apply before:content-[''] before:h-1 before:w-6 before:bg-accent before:absolute before:top-0 before:left-0;
-      @apply after:content-[''] after:h-1 after:w-6 after:bg-accent after:absolute after:top-0 after:right-0;
+      @apply top-0;
     }
 
     .card-hover-bottom {
-      @apply absolute bottom-0 left-0 w-full;
-      @apply before:content-[''] before:h-1 before:w-6 before:bg-accent before:absolute before:bottom-0 before:left-0;
-      @apply after:content-[''] after:h-1 after:w-6 after:bg-accent after:absolute after:bottom-0 after:right-0;
+      @apply bottom-0;
     }
   }
 }
