@@ -240,10 +240,10 @@ const TicTacToe = () => {
               value={roomName}
               onChange={room_input_change}
             />
-            <button className="btn w-32" onClick={createGame}>
+            <button className="btn w-36" onClick={createGame}>
               Create Game
             </button>
-            <button className="btn w-32" onClick={joinGame}>
+            <button className="btn w-36" onClick={joinGame}>
               Join Game
             </button>
           </div>
