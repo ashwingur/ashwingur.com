@@ -65,12 +65,11 @@
     }
 
     .card {
-      background-color: rgba(94, 0, 0, 0.215);
-      @apply text-text-secondary border-y-2 border-secondary rounded-none;
+      /* background-color: rgba(94, 0, 0, 0.215); */
+      @apply text-text-secondary border-y-2 border-secondary rounded-none bg-red-700/20;
     }
     .card-hover {
-      background-color: rgba(0, 33, 94, 0.215);
-      @apply text-text-accent border-y-2 border-accent rounded-none;
+      @apply text-text-accent border-y-2 border-accent rounded-none bg-cyan-700/20;
     }
 
     /* Add some effects to the corners of the card */
