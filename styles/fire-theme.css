@@ -23,13 +23,11 @@
 }
 
 @layer base {
-  body {
-    [data-theme="fire"] & {
+  [data-theme="fire"] {
+    body {
       @apply bg-gradient-to-b from-amber-50 to-amber-100;
     }
-  }
 
-  [data-theme="fire"] {
     .card,
     .card-hover {
       @apply before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full;

@@ -145,7 +145,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             >
               <li>Projects</li>
             </Link>
-            {!user && role !== "admin" && (
+            {user && role === "admin" && (
               <Link
                 href="/Admin"
                 className="hover:bg-background-hover px-2 py-2 rounded-md"
