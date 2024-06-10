@@ -28,9 +28,9 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar fixed={false} />
-      <div className="flex flex-col items-center">
-        <h1 className="text-center mt-4 mb-4">Admin</h1>
+      <Navbar fixed={true} />
+      <div className="flex flex-col items-center pt-24 pb-8">
+        <h1 className="text-center mb-4">Admin</h1>
         <AllUserDetails />
       </div>
     </div>
