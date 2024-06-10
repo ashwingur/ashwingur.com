@@ -57,7 +57,7 @@ module.exports = {
         },
         moveBackground: {
           "0%": { backgroundPosition: "0 0" },
-          "100%": { backgroundPosition: "300% 400%" },
+          "100%": { backgroundPosition: "300vw 400vh" },
         },
       }),
       gridTemplateColumns: {

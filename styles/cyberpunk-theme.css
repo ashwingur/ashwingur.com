@@ -24,17 +24,14 @@
 }
 
 @layer base {
-  body {
+  .cyberpunk-background {
     @apply text-lg lg:text-xl animate-moveBackgroundDiagonal;
-    /* Apply font-bold for cyberpunk theme */
-    [data-theme="cyberpunk"] & {
-      background-image: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.155) 2px,
-        transparent 1px
-      );
-      background-size: 4rem 4rem;
-    }
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.155) 2px,
+      transparent 1px
+    );
+    background-size: 4rem 4rem;
   }
 
   [data-theme="cyberpunk"] {
@@ -101,4 +98,8 @@
       @apply bottom-0;
     }
   }
+}
+
+[data-theme="cyberpunk"] body {
+  @apply cyberpunk-background;
 }
