@@ -354,9 +354,9 @@ const MediaReviews = () => {
         });
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Navbar fixed={true} />
-      <h1 className="text-center mt-20">Media Reviews</h1>
+      <h1 className="text-center pt-20">Media Reviews</h1>
       <p className="text-center mx-4">
         A nonexhaustive list of all the media I have consumed over the years and
         my (highly subjective) reviews of them. May contain spoilers.

@@ -1,0 +1,41 @@
+@tailwind base;
+
+/* Light Theme */
+[data-theme="shallow-reef"] {
+  --color-background: theme(colors.sky.200);
+  --color-background-muted: theme(colors.sky.300);
+  --color-background-hover: theme(colors.sky.400);
+  --color-text: theme(colors.blue.950);
+  --color-text-muted: theme(colors.blue.600);
+  --color-text-hover: theme(colors.blue.800);
+  --color-text-primary: theme(colors.orange.50);
+  --color-text-secondary: theme(colors.fuchsia.50);
+  --color-text-accent: theme(colors.blue.50);
+  --color-primary: theme(colors.orange.400);
+  --color-primary-muted: theme(colors.orange.300);
+  --color-primary-hover: theme(colors.orange.500);
+  --color-secondary: theme(colors.fuchsia.500);
+  --color-secondary-muted: theme(colors.fuchsia.400);
+  --color-secondary-hover: theme(colors.fuchsia.600);
+  --color-accent: theme(colors.blue.600);
+  --color-accent-muted: theme(colors.blue.500);
+  --color-accent-hover: theme(colors.blue.700);
+}
+
+@layer base {
+  [data-theme="shallow-reef"] {
+    body {
+      @apply bg-gradient-to-b from-sky-100 to-sky-300/70;
+    }
+
+    .card {
+      @apply border-2 border-sky-100;
+      @apply bg-gradient-to-b from-sky-200 to-sky-300;
+    }
+
+    .card-hover {
+      @apply border-2 border-sky-200;
+      @apply bg-gradient-to-b from-sky-300 to-sky-400;
+    }
+  }
+}

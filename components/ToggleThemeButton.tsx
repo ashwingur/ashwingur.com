@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
-import { GiPistolGun } from "react-icons/gi";
+import { GiPistolGun, GiTropicalFish } from "react-icons/gi";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
 
@@ -50,6 +50,16 @@ const themesList: ThemeType[] = [
       <GiPistolGun className={(clsx(className), "text-xl")} />
     ),
     font: "rajdhani",
+  },
+  {
+    name: "shallow-reef",
+    displayName: "Shallow Reef",
+    color: "text-blue-400",
+    isDark: true,
+    icon: (className?: string) => (
+      <GiTropicalFish className={(clsx(className), "text-xl")} />
+    ),
+    font: "roboto",
   },
 ];
 
