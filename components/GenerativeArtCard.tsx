@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Card from "@components/Card";
 
 interface GenerativeArtProps {
   name: string;
@@ -19,22 +20,24 @@ const GenerativeArtCard = ({
   ));
 
   return (
-    <Link
-      className="bg-gray-600 hover:bg-gray-700 hover:dark:bg-gray-800 bg-opacity-20 hover:bg-opacity-40 hover:dark:bg-opacity-40 px-8 pt-8 pb-4 rounded-xl shadow-md hover:shadow-lg transition-all"
-      href={url}
-    >
-      <div className="w-full h-72 xl:h-96 2xl:h-[30rem] relative rounded-xl overflow-hidden">
-        <Image
-          unoptimized={true}
-          alt={name}
-          src={image}
-          fill={true}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
-      <h2 className="text-center my-4">{name}</h2>
-      <div className="flex flex-col gap-2">{descriptionJSX}</div>
-    </Link>
+    <Card firstLayer={true} className="flex !p-0">
+      <Link
+        className="h-full hover:bg-background-hover p-4 transition-all hover:text-text"
+        href={url}
+      >
+        <div className="w-full h-72 xl:h-96 2xl:h-[30rem] relative rounded-xl overflow-hidden">
+          <Image
+            unoptimized={true}
+            alt={name}
+            src={image}
+            fill={true}
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+        <h2 className="text-center my-4">{name}</h2>
+        <div className="flex flex-col gap-2">{descriptionJSX}</div>
+      </Link>
+    </Card>
   );
 };
 

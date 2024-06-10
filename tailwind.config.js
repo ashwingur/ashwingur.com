@@ -40,7 +40,7 @@ module.exports = {
       animation: {
         fade: "fadeIn 1s ease-in-out",
         "pulse-glow": "pulseGlow 8s infinite ease-in-out",
-        moveBackgroundDiagonal: "moveBackground 160s linear infinite",
+        moveBackgroundDiagonal: "moveBackground 320s linear infinite",
       },
       keyframes: (theme) => ({
         fadeIn: {
