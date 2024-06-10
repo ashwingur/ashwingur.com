@@ -22,7 +22,7 @@ const GenerativeArtCard = ({
   return (
     <Card firstLayer={true} className="flex !p-0">
       <Link
-        className="h-full hover:bg-background-hover p-4 transition-all hover:text-text"
+        className="h-full w-full hover:bg-background-hover p-4 transition-all hover:text-text"
         href={url}
       >
         <div className="w-full h-72 xl:h-96 2xl:h-[30rem] relative rounded-xl overflow-hidden">
