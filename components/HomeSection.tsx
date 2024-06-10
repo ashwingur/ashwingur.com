@@ -7,7 +7,17 @@ import Link from "next/link";
 import Card from "@components/Card";
 import { MdOutlineRateReview } from "react-icons/md";
 import clsx from "clsx";
-import { FaCloudMoonRain, FaGamepad } from "react-icons/fa6";
+import {
+  FaCar,
+  FaCloudMoonRain,
+  FaCode,
+  FaGamepad,
+  FaPaintbrush,
+} from "react-icons/fa6";
+import { RiSwordFill } from "react-icons/ri";
+import { BsGrid3X3 } from "react-icons/bs";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { TbTicTac } from "react-icons/tb";
 
 interface App {
   name: string;
@@ -46,21 +56,49 @@ const appsList: App[] = [
     url: "/GenerativeArt",
     description:
       "A collection of generative artworks I have made with the p5.js library.",
-    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+    icon: (className?: string) => <FaPaintbrush className={clsx(className)} />,
   },
   {
     name: "Code Editor",
     url: "/Code",
     description:
       "A online code editor that supports many languages. The Piston API is used to safely execute code.",
-    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+    icon: (className?: string) => <FaCode className={clsx(className)} />,
   },
   {
     name: "NSW Live Car Park",
     url: "/NSWCarPark",
     description:
       "A public commuter carpark tracker using the Transport Opendata API.",
-    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+    icon: (className?: string) => <FaCar className={clsx(className)} />,
+  },
+  {
+    name: "Clash of Clans Tracker",
+    url: "/ClashOfClans",
+    description:
+      "Uses the Clash of Clans API to view and track the stats of any player or clan.",
+    icon: (className?: string) => <RiSwordFill className={clsx(className)} />,
+  },
+  {
+    name: "Cube Timer",
+    url: "/CubeTimer",
+    description:
+      "Rubik's Cube timer that also provides scrambles for a 3×3 cube. Hold space to activate.",
+    icon: (className?: string) => <BsGrid3X3 className={clsx(className)} />,
+  },
+  {
+    name: "Diskord",
+    url: "/Diskord",
+    description: "An open anonymous chatroom.",
+    icon: (className?: string) => (
+      <IoChatboxEllipsesOutline className={clsx(className)} />
+    ),
+  },
+  {
+    name: "Tic Tac Toe",
+    url: "/TicTacToe",
+    description: "An online multiplayer Tic Tac Toe game",
+    icon: (className?: string) => <TbTicTac className={clsx(className)} />,
   },
 ];
 
@@ -160,7 +198,7 @@ const HomeSection = () => {
             <IoDocumentText size={50} />
           </Link>
         </div>
-        <h2 className="text-2xl mt-8 mb-2">About this website</h2>
+        <h2 className="text-2xl mt-8 mb-2">About this Website</h2>
         <p>
           I originally made this website to learn about React and to display my
           projects. However, it has since evolved into a hobby project that I
@@ -171,7 +209,7 @@ const HomeSection = () => {
           in the top right. Below is a list of apps on this website, with a
           brief overview.
         </p>
-        <h2 className="text-2xl mt-8 mb-2">Apps and pages</h2>
+        <h2 className="text-2xl mt-8 mb-2">Apps and Pages</h2>
         <div className="grid md:grid-cols-2 gap-4">{appCards}</div>
       </Card>
     </div>

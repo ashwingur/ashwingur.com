@@ -41,7 +41,6 @@ export default function Home() {
 
       <div className="mb-8">
         <HomeSection />
-        <Apps />
         <Projects />
       </div>
       <Footer />

@@ -49,13 +49,6 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
               <li>Home</li>
             </Link>
             <Link
-              href="/#apps"
-              className="hover:bg-background-hover px-2 py-1 transition rounded-md"
-              scroll={false}
-            >
-              <li>Apps</li>
-            </Link>
-            <Link
               href="/#projects"
               className="hover:bg-background-hover px-2 py-1 transition rounded-md"
               scroll={false}
@@ -125,16 +118,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             >
               <li>Home</li>
             </Link>
-            <Link
-              href="/#apps"
-              className="hover:bg-background-hover px-2 py-2 rounded-md"
-              scroll={false}
-              onClick={() => {
-                setMobileNavMenu(false);
-              }}
-            >
-              <li>Apps</li>
-            </Link>
+
             <Link
               href="/#projects"
               className="hover:bg-background-hover px-2 py-2 rounded-md"
