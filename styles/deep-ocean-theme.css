@@ -4,7 +4,7 @@
 [data-theme="deep-ocean"] {
   --color-background: theme(colors.blue.950);
   --color-background-muted: theme(colors.blue.900);
-  --color-background-hover: theme(colors.blue.800);
+  --color-background-hover: theme(colors.blue.900);
   --color-text: theme(colors.blue.100);
   --color-text-muted: theme(colors.blue.200);
   --color-text-hover: theme(colors.blue.50);
@@ -42,8 +42,8 @@
     .card-top,
     .card-top-2 {
       @apply absolute bottom-0 w-full h-24 transform pointer-events-none opacity-80;
-      @apply before:content-[""] before:absolute before:border before:border-sky-100 before:rounded-full;
-      @apply after:content-[""] after:absolute after:border after:border-sky-100 after:rounded-full;
+      @apply before:content-[""] before:absolute before:border before:border-sky-400 before:rounded-full;
+      @apply after:content-[""] after:absolute after:border after:border-sky-400 after:rounded-full;
     }
 
     .card-top::before {
