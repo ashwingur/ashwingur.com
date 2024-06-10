@@ -127,7 +127,7 @@ const HomeSection = () => {
       id="home"
       className="pt-24 flex flex-col items-center justify-center px-4"
     >
-      <div className="text-2xl md:text-4xl lg:text-6xl font-mono text-center">
+      <div className="text-2xl md:text-4xl lg:text-5xl font-mono text-center">
         <TypewriterComponent
           onInit={(typewriter) => {
             typewriter.typeString("> Hello, I'm Ashwin Gur").start();
@@ -137,7 +137,7 @@ const HomeSection = () => {
 
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-1/2 mt-4 lg:!px-8"
+        className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-1/2 mt-4 lg:mt-8 lg:!px-8"
       >
         <h2 className="text-2xl mb-2">About Me</h2>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">

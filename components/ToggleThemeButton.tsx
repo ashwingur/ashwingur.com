@@ -29,7 +29,7 @@ const themesList: ThemeType[] = [
   {
     name: "dark",
     displayName: "Dark",
-    color: "text-gray-800",
+    color: "text-gray-200",
     isDark: true,
     icon: (className?: string) => <FaMoon className={clsx(className)} />,
     font: "open_sans",
@@ -107,10 +107,8 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 
         <Combobox.Options
           className={clsx(
-            "absolute right-0 w-56 lg:text-lg mt-1 shadow-lg max-h-96 rounded-md text-base overflow-auto focus:outline-none sm:text-sm z-50",
-            isDark(currentTheme ?? "")
-              ? "bg-stone-700 shadow-background-hover"
-              : "bg-stone-200"
+            "absolute right-0 w-56 lg:text-lg mt-1 shadow-lg max-h-96 rounded-md text-base overflow-auto focus:outline-none sm:text-sm z-50 bg-background-muted",
+            isDark(currentTheme ?? "") ? "shadow-background-hover" : ""
           )}
         >
           {themesList.map((theme) => (
@@ -118,25 +116,23 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
               key={theme.name}
               value={theme.name}
               className={({ active }) =>
-                `cursor-default select-none px-1 ${
-                  active ? "text-white bg-stone-800" : "text-gray-900"
+                `cursor-default select-none ${
+                  active ? "text-text-accent bg-accent" : ""
                 }`
               }
             >
               {({ selected, active }) => (
                 <div
                   className={clsx(
-                    "flex items-center justify-between hover:text-white group py-2 px-2",
+                    "flex items-center justify-between hover:text-white group px-2 py-1",
                     active ? "text-white" : theme.color
                   )}
                 >
-                  {theme.icon("text-2xl")}
+                  <div className="bg-black rounded-full p-2">
+                    {theme.icon("text-2xl")}
+                  </div>
                   <span
-                    className={clsx(
-                      isDark(currentTheme ?? "") || active
-                        ? "text-slate-200"
-                        : "text-slate-800 group-hover:text-white"
-                    )}
+                    className={clsx(active ? "text-text-primary" : "text-text")}
                   >
                     {theme.displayName}
                   </span>
