@@ -10,7 +10,7 @@ const Projects = () => {
   return (
     <div id="projects" className="pt-20 flex flex-col items-center ">
       <h1 className="text-center">Projects</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 lg:gap-16 px-8 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 lg:gap-16 px-4 mt-4">
         {projectCards}
       </div>
     </div>

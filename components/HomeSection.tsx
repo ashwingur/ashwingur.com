@@ -109,7 +109,7 @@ const HomeSection = () => {
         <div className="flex flex-col items-center justify-between h-full">
           <div>
             <h3 className="text-center">{app.name}</h3>
-            <p>{app.description}</p>
+            <p className="text-sm">{app.description}</p>
           </div>
           <Link
             href={app.url}
