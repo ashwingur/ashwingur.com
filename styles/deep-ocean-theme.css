@@ -1,0 +1,65 @@
+@tailwind base;
+
+/* Light Theme */
+[data-theme="deep-ocean"] {
+  --color-background: theme(colors.blue.950);
+  --color-background-muted: theme(colors.blue.900);
+  --color-background-hover: theme(colors.blue.800);
+  --color-text: theme(colors.blue.100);
+  --color-text-muted: theme(colors.blue.200);
+  --color-text-hover: theme(colors.blue.50);
+  --color-text-primary: theme(colors.orange.100);
+  --color-text-secondary: theme(colors.fuchsia.100);
+  --color-text-accent: theme(colors.blue.100);
+  --color-primary: theme(colors.orange.700);
+  --color-primary-muted: theme(colors.orange.800);
+  --color-primary-hover: theme(colors.orange.600);
+  --color-secondary: theme(colors.fuchsia.700);
+  --color-secondary-muted: theme(colors.fuchsia.800);
+  --color-secondary-hover: theme(colors.fuchsia.600);
+  --color-accent: theme(colors.blue.700);
+  --color-accent-muted: theme(colors.blue.600);
+  --color-accent-hover: theme(colors.blue.800);
+}
+
+@layer base {
+  [data-theme="deep-ocean"] {
+    body {
+      @apply lg:text-xl;
+      @apply bg-gradient-to-b from-blue-950 to-[#0c132b];
+    }
+
+    .card {
+      @apply border-2 border-blue-700;
+      @apply bg-gradient-to-b from-blue-900 to-blue-950;
+    }
+
+    .card-hover {
+      @apply border-2 border-blue-700;
+      @apply bg-gradient-to-b from-blue-950 to-[#111b3c];
+    }
+
+    .card-top,
+    .card-top-2 {
+      @apply absolute bottom-0 w-full h-24 transform pointer-events-none opacity-80;
+      @apply before:content-[""] before:absolute before:border before:border-sky-100 before:rounded-full;
+      @apply after:content-[""] after:absolute after:border after:border-sky-100 after:rounded-full;
+    }
+
+    .card-top::before {
+      @apply w-3 h-3 bottom-2 right-8;
+    }
+
+    .card-top::after {
+      @apply w-10 h-10 bottom-6 right-10;
+    }
+
+    .card-top-2::before {
+      @apply w-8 h-8 bottom-[4.5rem] right-6;
+    }
+
+    .card-top-2::after {
+      @apply w-6 h-6 bottom-24 right-16;
+    }
+  }
+}

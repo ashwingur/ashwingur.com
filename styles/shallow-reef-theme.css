@@ -30,7 +30,7 @@
     }
 
     .card {
-      @apply border-2 border-sky-100;
+      @apply border-2 border-sky-100 shadow-blue-300 shadow-xl;
       @apply bg-gradient-to-b from-sky-200 to-sky-300;
     }
 

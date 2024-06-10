@@ -103,7 +103,7 @@ const WeatherCharts = () => {
       firstLayer={true}
     >
       <h2 className="mt-2">Historical Data</h2>
-      <div className="relative mt-4 mb-2">
+      <div className="relative mt-4 mb-2 z-20">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
           <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 justify-between">
             <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">

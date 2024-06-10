@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
-import { GiPistolGun, GiTropicalFish } from "react-icons/gi";
+import { GiAnglerFish, GiPistolGun, GiTropicalFish } from "react-icons/gi";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
 
@@ -46,19 +46,25 @@ const themesList: ThemeType[] = [
     displayName: "Cyberpunk",
     color: "text-tron-blue",
     isDark: true,
-    icon: (className?: string) => (
-      <GiPistolGun className={(clsx(className), "text-xl")} />
-    ),
+    icon: (className?: string) => <GiPistolGun className={clsx(className)} />,
     font: "rajdhani",
   },
   {
     name: "shallow-reef",
     displayName: "Shallow Reef",
-    color: "text-blue-400",
-    isDark: true,
+    color: "text-blue-300",
+    isDark: false,
     icon: (className?: string) => (
-      <GiTropicalFish className={(clsx(className), "text-xl")} />
+      <GiTropicalFish className={clsx(className)} />
     ),
+    font: "josefin_sans",
+  },
+  {
+    name: "deep-ocean",
+    displayName: "Neptune's Depths",
+    color: "text-blue-500",
+    isDark: true,
+    icon: (className?: string) => <GiAnglerFish className={clsx(className)} />,
     font: "josefin_sans",
   },
 ];
@@ -102,7 +108,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 
         <Combobox.Options
           className={clsx(
-            "absolute right-0 w-40 lg:w-40 lg:text-lg mt-1 shadow-lg max-h-60 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
+            "absolute right-0 w-56 lg:text-lg mt-1 shadow-lg max-h-96 rounded-md text-base overflow-auto focus:outline-none sm:text-sm",
             isDark(currentTheme ?? "")
               ? "bg-stone-700 shadow-background-hover"
               : "bg-stone-200"
@@ -125,7 +131,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
                     active ? "text-white" : theme.color
                   )}
                 >
-                  {theme.icon("")}{" "}
+                  {theme.icon("text-2xl")}
                   <span
                     className={clsx(
                       isDark(currentTheme ?? "") || active
