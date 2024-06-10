@@ -7,6 +7,7 @@ import {
   Montserrat,
   Lora,
   Rajdhani,
+  Josefin_Sans,
 } from "next/font/google";
 import {
   createContext,
@@ -43,6 +44,11 @@ const rajdhani = Rajdhani({
   subsets: ["latin"],
 });
 
+const josefin_sans = Josefin_Sans({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
 // List of fonts
 const fonts_list: { name: string; font: NextFont }[] = [
   {
@@ -64,6 +70,10 @@ const fonts_list: { name: string; font: NextFont }[] = [
   {
     name: "rajdhani",
     font: rajdhani,
+  },
+  {
+    name: "josefin_sans",
+    font: josefin_sans,
   },
 ];
 

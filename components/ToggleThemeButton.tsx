@@ -59,7 +59,7 @@ const themesList: ThemeType[] = [
     icon: (className?: string) => (
       <GiTropicalFish className={(clsx(className), "text-xl")} />
     ),
-    font: "roboto",
+    font: "josefin_sans",
   },
 ];
 
