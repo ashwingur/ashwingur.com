@@ -5,8 +5,85 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
 import Card from "@components/Card";
+import { MdOutlineRateReview } from "react-icons/md";
+import clsx from "clsx";
+import { FaCloudMoonRain, FaGamepad } from "react-icons/fa6";
+
+interface App {
+  name: string;
+  url: string;
+  description: string;
+  icon: (className?: string) => JSX.Element;
+}
+
+const appsList: App[] = [
+  {
+    name: "Media Reviews",
+    url: "/MediaReviews",
+    description:
+      "My personal reviews and ratings of books, movies, shows and games that I have consumed.",
+    icon: (className?: string) => (
+      <MdOutlineRateReview className={clsx(className)} />
+    ),
+  },
+  {
+    name: "Ashwin's Weather Hub",
+    url: "/Weather",
+    description:
+      "A weather monitoring system setup in my backyard, providing the latest and historical data.",
+    icon: (className?: string) => (
+      <FaCloudMoonRain className={clsx(className)} />
+    ),
+  },
+  {
+    name: "Tron Arcade",
+    url: "/Tron",
+    description: "An online multiplayer 2D game based on Tron.",
+    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+  },
+  {
+    name: "Generative Art",
+    url: "/GenerativeArt",
+    description:
+      "A collection of generative artworks I have made with the p5.js library.",
+    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+  },
+  {
+    name: "Code Editor",
+    url: "/Code",
+    description:
+      "A online code editor that supports many languages. The Piston API is used to safely execute code.",
+    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+  },
+  {
+    name: "NSW Live Car Park",
+    url: "/NSWCarPark",
+    description:
+      "A public commuter carpark tracker using the Transport Opendata API.",
+    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+  },
+];
 
 const HomeSection = () => {
+  const appCards = appsList.map((app, index) => {
+    return (
+      <Card firstLayer={false} key={index}>
+        <div className="flex flex-col items-center justify-between h-full">
+          <div>
+            <h3 className="text-center">{app.name}</h3>
+            <p>{app.description}</p>
+          </div>
+          <Link
+            href={app.url}
+            className="btn text-2xl w-20 flex justify-center mt-2"
+          >
+            {app.icon()}
+          </Link>
+        </div>
+      </Card>
+    );
+  });
+
   return (
     <div
       id="home"
@@ -24,20 +101,27 @@ const HomeSection = () => {
         firstLayer={true}
         className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-2/5 mt-4 lg:!px-8"
       >
-        <h2 className="text-2xl">About Me</h2>
-        <div>
-          <span className="font-bold">Degree:</span> Bachelor of Mechatronics
-          Engineering + Computer Science double degree (University of Sydney)
+        <h2 className="text-2xl mb-2">About Me</h2>
+        <div className="flex gap-2 md:w-4/5">
+          <span className="font-bold w-24">Degree:</span>{" "}
+          <span className="w-full">
+            Bachelor of Mechatronics Engineering + Computer Science double
+            degree (University of Sydney)
+          </span>
         </div>
-        <div>
-          <span className="font-bold">Interests:</span> Coding, reading, gaming,{" "}
-          <Link
-            href={"https://www.worldcubeassociation.org/persons/2018GURA03"}
-            target="_blank"
-            className="text-text-hover"
-          >
-            solving Rubik's cubes
-          </Link>
+        <div className="flex gap-2 md:w-4/5">
+          <span className="font-bold w-24">Interests:</span>
+          <span className="w-full">
+            Coding, reading, gaming,{" "}
+            <Link
+              href={"https://www.worldcubeassociation.org/persons/2018GURA03"}
+              target="_blank"
+              className="text-text-hover"
+            >
+              solving Rubik's Cubes
+            </Link>
+            , and eating tasty food
+          </span>
         </div>
         <h2 className="text-2xl mt-4 lg:mt-8">Links</h2>
         <div className="flex items-center justify-center gap-4">
@@ -76,7 +160,7 @@ const HomeSection = () => {
             <IoDocumentText size={50} />
           </Link>
         </div>
-        <h2 className="text-2xl mt-8">About this website</h2>
+        <h2 className="text-2xl mt-8 mb-2">About this website</h2>
         <p>
           I originally made this website to learn about React and to display my
           projects. However, it has since evolved into a hobby project that I
@@ -87,6 +171,8 @@ const HomeSection = () => {
           in the top right. Below is a list of apps on this website, with a
           brief overview.
         </p>
+        <h2 className="text-2xl mt-8 mb-2">Apps and pages</h2>
+        <div className="grid md:grid-cols-2 gap-4">{appCards}</div>
       </Card>
     </div>
   );
