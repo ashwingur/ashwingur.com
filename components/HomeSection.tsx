@@ -78,11 +78,14 @@ const HomeSection = () => {
         </div>
         <h2 className="text-2xl mt-8">About this website</h2>
         <p>
-          I originally made this website to learn about React and be able to
-          display my projects. However, it has since evolved to become a hobby
-          project that I continuously work on. In addition to the projects I
-          have linked, there are many other pages such as Media Reviews which
-          feature non-technical content.
+          I originally made this website to learn about React and to display my
+          projects. However, it has since evolved into a hobby project that I
+          continuously work on. In addition to the projects I have linked, there
+          are many other pages, such as Media Reviews, which feature
+          non-technical content. I have also spent a lot of time working on the
+          styling and added multiple interesting themes that you can select from
+          in the top right. Below is a list of apps on this website, with a
+          brief overview.
         </p>
       </Card>
     </div>
