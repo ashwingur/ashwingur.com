@@ -26,7 +26,7 @@
   [data-theme="deep-ocean"] {
     body {
       @apply lg:text-xl;
-      @apply bg-gradient-to-b from-blue-950 to-[#0c132b];
+      @apply bg-gradient-to-b from-blue-950 to-[#080d1e];
     }
 
     .card {

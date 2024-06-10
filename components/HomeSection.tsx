@@ -28,7 +28,7 @@ const HomeSection = () => {
           rel="noreferrer"
           className="hover:bg-background-hover p-2 transition rounded-md group relative flex justify-center"
         >
-          <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
+          <span className="absolute top-20 scale-0 transition-all rounded bg-accent p-2 text-xs text-text-accent group-hover:scale-100">
             Github
           </span>
           <BsGithub size={50} />
@@ -39,7 +39,7 @@ const HomeSection = () => {
           rel="noreferrer"
           className="hover:bg-background-hover p-2 transition rounded-md group relative flex justify-center"
         >
-          <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
+          <span className="absolute top-20 scale-0 transition-all rounded bg-accent p-2 text-xs text-text-accent group-hover:scale-100">
             LinkedIn
           </span>
           <BsLinkedin size={50} />
@@ -51,7 +51,7 @@ const HomeSection = () => {
           rel="noreferrer"
           className="hover:bg-background-hover p-2 transition rounded-md group relative flex justify-center"
         >
-          <span className="absolute top-20 scale-0 transition-all rounded bg-gray-800 dark:bg-black p-2 text-xs text-white group-hover:scale-100">
+          <span className="absolute top-20 scale-0 transition-all rounded bg-accent p-2 text-xs text-text-accent group-hover:scale-100">
             Resume
           </span>
           <IoDocumentText size={50} />

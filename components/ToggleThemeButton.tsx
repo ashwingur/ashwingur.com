@@ -4,6 +4,7 @@ import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
 import { GiAnglerFish, GiPistolGun, GiTropicalFish } from "react-icons/gi";
+import { FaFishFins } from "react-icons/fa6";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
 
@@ -54,9 +55,7 @@ const themesList: ThemeType[] = [
     displayName: "Shallow Reef",
     color: "text-blue-300",
     isDark: false,
-    icon: (className?: string) => (
-      <GiTropicalFish className={clsx(className)} />
-    ),
+    icon: (className?: string) => <FaFishFins className={clsx(className)} />,
     font: "josefin_sans",
   },
   {
