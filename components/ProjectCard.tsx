@@ -59,7 +59,7 @@ const ProjectCard = ({
       <div className="px-4 pt-2 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
         <p>{description}</p>
-        <h3 className="mt-4 text-xl">Languages and Frameworks</h3>
+        <h3 className="mt-4 text-xl">Tech Stack</h3>
         <div className="flex gap-4 my-2 flex-wrap">{stack_items}</div>
 
         {links != undefined && (

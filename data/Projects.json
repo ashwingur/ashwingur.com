@@ -1,5 +1,30 @@
 [
   {
+    "title": "api.ashwingur",
+    "image": "/assets/projects/api.ashwingur.png",
+    "description": "I have developed a new backend for my website. Initially, I used the backend provided with Next.js, but I wanted to expand my backend capabilities and host my owndatabase. I have set up an Ubuntu server on DigitalOcean. The application runs in a Docker container for easy configuration when working between my local and remote environments. A Flask server has been set up, using Gunicorn for the WSGI (Web Server Gateway Interface), and a Caddy web server for HTTPS. The database is PostgreSQL with the TimescaleDB extension for optimal querying of time-series data. The server also features custom rate limiting on each endpoint with a Redis database, and authentication capabilities for accessing protected routes. Additionally, there are apps that allow for websocket connections to enable fast communication.",
+    "stack": [
+      "Ubuntu",
+      "Docker",
+      "Python",
+      "Flask",
+      "PostgreSQL",
+      "Redis",
+      "Gunicorn",
+      "Caddy"
+    ],
+    "links": [
+      {
+        "display": "Page",
+        "url": "https://api.ashwingur.com/"
+      },
+      {
+        "display": "GitHub",
+        "url": "https://github.com/ashwingur/api.ashwingur"
+      }
+    ]
+  },
+  {
     "title": "Clash of Clans Tracker",
     "image": "/assets/projects/clashofclans.png",
     "description": "Uses the Clash of Clans developer API to provide player, clan, war and league information. The style is very similar to the game style and provides the information in a familiar format. There is also a progress tracker for all players in my clan which is scraped daily with a cron job and saved to a MongoDB Atlas database. This data can be viewed in a responsive graph layout.",
@@ -73,7 +98,7 @@
   {
     "title": "Turret-Spinner",
     "image": "/assets/projects/turret_spinner.png",
-    "description": "2D Endless Survival Game created in Unity",
+    "description": "2D Endless Survival Game created in Unity. The pixel art assets were created in GIMP.",
     "stack": ["Unity", "C#", "GIMP"],
     "links": [
       {
@@ -101,7 +126,7 @@
   {
     "title": "Countries of the World Quizzer",
     "image": "/assets/projects/countries_of_the_world.png",
-    "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options.",
+    "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options. The UI colour scheme and layout is pretty ugly, but in my defence it was my first real react project.",
     "stack": ["React", "CSS"],
     "links": [
       { "display": "Website", "url": "https://countries-website.pages.dev/" },
