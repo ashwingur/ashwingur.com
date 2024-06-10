@@ -137,17 +137,17 @@ const HomeSection = () => {
 
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-2/5 mt-4 lg:!px-8"
+        className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-1/2 mt-4 lg:!px-8"
       >
         <h2 className="text-2xl mb-2">About Me</h2>
-        <div className="flex gap-2 md:w-4/5">
+        <div className="flex gap-2 md:w-4/5 xl:w-3/5">
           <span className="font-bold w-24">Degree:</span>{" "}
           <span className="w-full">
             Bachelor of Mechatronics Engineering + Computer Science double
             degree (University of Sydney)
           </span>
         </div>
-        <div className="flex gap-2 md:w-4/5">
+        <div className="flex gap-2 md:w-4/5 xl:w-3/5">
           <span className="font-bold w-24">Interests:</span>
           <span className="w-full">
             Coding, reading, gaming,{" "}
@@ -199,7 +199,7 @@ const HomeSection = () => {
           </Link>
         </div>
         <h2 className="text-2xl mt-8 mb-2">About this Website</h2>
-        <p>
+        <p className="lg:px-8 xl:px-24">
           I originally made this website to learn about React and to display my
           projects. However, it has since evolved into a hobby project that I
           continuously work on. In addition to the projects I have linked, there
@@ -210,7 +210,9 @@ const HomeSection = () => {
           brief overview.
         </p>
         <h2 className="text-2xl mt-8 mb-2">Apps and Pages</h2>
-        <div className="grid md:grid-cols-2 gap-4">{appCards}</div>
+        <div className="grid md:grid-cols-2 gap-4 2xl:grid-cols-3">
+          {appCards}
+        </div>
       </Card>
     </div>
   );
