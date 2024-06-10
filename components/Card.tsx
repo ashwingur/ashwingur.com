@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 interface CardProps<T> {
   firstLayer: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   customProps?: T;
 }

@@ -10,7 +10,7 @@ export default function Home() {
   // const appContext = useContext(AppContext);
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Head>
         <title>Ashwin Gur</title>
         <meta name="description" content="Ashwin Gur's Website" key="desc" />
