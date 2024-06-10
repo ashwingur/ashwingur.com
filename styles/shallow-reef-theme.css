@@ -25,7 +25,7 @@
 @layer base {
   [data-theme="shallow-reef"] {
     body {
-      @apply text-xl;
+      @apply lg:text-xl;
       @apply bg-gradient-to-b from-sky-100 to-sky-300/70;
     }
 
