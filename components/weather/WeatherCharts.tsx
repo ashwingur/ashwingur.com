@@ -72,14 +72,43 @@ const WeatherCharts = () => {
     );
   }
 
-  if (isError || data === undefined || data.data.length == 0) {
+  if (isError || data === undefined || data.data.length === 0) {
     return (
       <Card
         className="flex flex-col items-center justify-center bg-background-muted mx-4"
         firstLayer={true}
       >
         <h2 className="mt-2">Historical Data</h2>
-        <p className="mb-8">Error fetching data</p>
+        <div className="relative mt-4 mb-2 z-20">
+          <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
+            <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 justify-between">
+              <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
+                {selectedTime.display}
+                <AiOutlineDown className="hover:text-xl transition-all" />
+              </Listbox.Button>
+            </div>
+            <Listbox.Options className="absolute z-50 bg-background-muted rounded-lg w-60 mt-1 max-h-60 overflow-auto">
+              {timeOptions.map((time) => (
+                <Listbox.Option
+                  key={time.id}
+                  value={time}
+                  className={({ active }) =>
+                    `px-4 cursor-pointer py-2 ${
+                      active ? "bg-accent text-text-accent" : ""
+                    }`
+                  }
+                >
+                  {time.display}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Listbox>
+        </div>
+        <p className="mb-8">
+          {data?.data.length === 0
+            ? "No data for the selected time period"
+            : "Error fetching data"}
+        </p>
       </Card>
     );
   }

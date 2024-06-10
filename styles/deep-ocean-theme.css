@@ -4,7 +4,7 @@
 [data-theme="deep-ocean"] {
   --color-background: theme(colors.blue.950);
   --color-background-muted: theme(colors.blue.900);
-  --color-background-hover: theme(colors.blue.900);
+  --color-background-hover: theme(colors.blue.800);
   --color-text: theme(colors.blue.100);
   --color-text-muted: theme(colors.blue.200);
   --color-text-hover: theme(colors.blue.50);
@@ -30,7 +30,7 @@
     }
 
     .card {
-      @apply border-2 border-blue-700;
+      @apply border-2 border-blue-700 shadow-blue-800 shadow-xl;
       @apply bg-gradient-to-b from-blue-900 to-blue-950;
     }
 
