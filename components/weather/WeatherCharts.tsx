@@ -62,19 +62,25 @@ const WeatherCharts = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center bg-background-muted rounded-lg mx-4 py-2 shadow-md">
+      <Card
+        className="flex flex-col items-center justify-center bg-background-muted mx-4"
+        firstLayer={true}
+      >
         <h2 className="mt-2">Historical Data</h2>
         <p className="mb-8">Loading...</p>
-      </div>
+      </Card>
     );
   }
 
   if (isError || data === undefined || data.data.length == 0) {
     return (
-      <div className="flex flex-col items-center justify-center bg-background-muted rounded-lg mx-4 py-2 shadow-md">
+      <Card
+        className="flex flex-col items-center justify-center bg-background-muted mx-4"
+        firstLayer={true}
+      >
         <h2 className="mt-2">Historical Data</h2>
         <p className="mb-8">Error fetching data</p>
-      </div>
+      </Card>
     );
   }
 

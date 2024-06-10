@@ -8,7 +8,7 @@ import Card from "@components/Card";
 
 const MetricTable = () => {
   return (
-    <div className="overflow-x-auto px-4 mt-4 md:w-4/5">
+    <div className="overflow-x-auto px-4 mt-4 md:w-4/5 mx-auto">
       <table className="min-w-full bg-background-hover border border-text-muted">
         <thead>
           <tr>
@@ -87,9 +87,9 @@ const MetricTable = () => {
 
 const Weather = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar fixed={true} />
-      <div className="flex flex-col mx-auto mt-24 pb-8 md:w-4/5 gap-8">
+      <div className="flex flex-col mx-auto pt-24 pb-8 md:w-4/5 gap-8">
         <LatestWeather />
         <WeatherCharts />
         <Card

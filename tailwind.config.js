@@ -42,7 +42,7 @@ module.exports = {
         "pulse-glow": "pulseGlow 8s infinite ease-in-out",
         moveBackgroundDiagonal: "moveBackground 120s linear infinite",
       },
-      keyframes: (theme) => ({
+      keyframes: {
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 100 },
@@ -59,7 +59,7 @@ module.exports = {
           "0%": { backgroundPosition: "0 0" },
           "100%": { backgroundPosition: "120rem 160rem" },
         },
-      }),
+      },
       gridTemplateColumns: {
         20: "repeat(20, minmax(0, 1fr))", // Define custom grid with 20 columns
         64: "repeat(64, minmax(0, 1fr))",

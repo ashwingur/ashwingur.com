@@ -75,11 +75,13 @@
       @apply after:content-[''] after:h-1 after:w-6 after:bg-secondary;
     }
 
-    .card-top {
+    .card-top,
+    .card-hover-top {
       @apply top-0;
     }
 
-    .card-bottom {
+    .card-bottom,
+    .card-hover-bottom {
       @apply bottom-0;
     }
 
@@ -88,14 +90,6 @@
       @apply absolute left-0 w-full flex justify-between;
       @apply before:content-[''] before:h-1 before:w-6 before:bg-accent;
       @apply after:content-[''] after:h-1 after:w-6 after:bg-accent;
-    }
-
-    .card-hover-top {
-      @apply top-0;
-    }
-
-    .card-hover-bottom {
-      @apply bottom-0;
     }
   }
 }
