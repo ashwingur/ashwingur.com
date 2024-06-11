@@ -1,6 +1,6 @@
 @tailwind base;
 
-/* Light Theme */
+/* Ocean Theme */
 [data-theme="deep-ocean"] {
   --color-background: theme(colors.blue.950);
   --color-background-muted: theme(colors.blue.900);

@@ -1,0 +1,58 @@
+@tailwind base;
+
+/* Hacker Theme */
+[data-theme="hacker"] {
+  --color-background: #020e07;
+  --color-background-muted: #03180c;
+  --color-background-hover: #042010;
+  --color-text: theme(colors.slate.50);
+  --color-text-muted: theme(colors.slate.200);
+  --color-text-hover: theme(colors.slate.300);
+  --color-text-primary: theme(colors.slate.100);
+  --color-text-secondary: theme(colors.slate.100);
+  --color-text-accent: theme(colors.slate.100);
+  --color-primary: theme(colors.green.900);
+  --color-primary-muted: theme(colors.green.800);
+  --color-primary-hover: theme(colors.green.600);
+  --color-secondary: theme(colors.green.900);
+  --color-secondary-muted: theme(colors.green.800);
+  --color-secondary-hover: theme(colors.green.600);
+  --color-accent: theme(colors.green.900);
+  --color-accent-muted: theme(colors.green.800);
+  --color-accent-hover: theme(colors.green.600);
+}
+
+@layer base {
+  [data-theme="hacker"] {
+    /* body {
+      @apply lg:text-xl;
+      @apply bg-gradient-to-b from-blue-950 to-[#080d1e];
+    } */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-medium text-green-500 uppercase font-mono;
+    }
+
+    .card,
+    .card-hover {
+      @apply rounded-none border border-green-900;
+    }
+
+    .tag {
+      @apply rounded-none font-mono;
+    }
+
+    .btn,
+    .btn-secondary,
+    .btn-accent {
+      @apply uppercase font-mono;
+      @apply rounded-none text-green-500 bg-transparent border border-green-400;
+      @apply hover:bg-green-500 hover:text-white hover:border-white;
+    }
+  }
+}

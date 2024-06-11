@@ -8,6 +8,7 @@ import {
   Lora,
   Rajdhani,
   Josefin_Sans,
+  Inconsolata,
 } from "next/font/google";
 import {
   createContext,
@@ -49,6 +50,11 @@ const josefin_sans = Josefin_Sans({
   subsets: ["latin"],
 });
 
+const inconsolata = Inconsolata({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
 // List of fonts
 const fonts_list: { name: string; font: NextFont }[] = [
   {
@@ -74,6 +80,10 @@ const fonts_list: { name: string; font: NextFont }[] = [
   {
     name: "josefin_sans",
     font: josefin_sans,
+  },
+  {
+    name: "inconsolata",
+    font: inconsolata,
   },
 ];
 

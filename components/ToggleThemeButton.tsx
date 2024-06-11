@@ -4,7 +4,7 @@ import { Combobox } from "@headlessui/react";
 import { FaSun, FaMoon, FaFire } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
 import { GiAnglerFish, GiPistolGun, GiTropicalFish } from "react-icons/gi";
-import { FaFishFins } from "react-icons/fa6";
+import { FaBug, FaFishFins } from "react-icons/fa6";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
 
@@ -60,11 +60,19 @@ const themesList: ThemeType[] = [
   },
   {
     name: "deep-ocean",
-    displayName: "Neptune's Depths",
+    displayName: "Neptune's Abyss",
     color: "text-blue-500",
     isDark: true,
     icon: (className?: string) => <GiAnglerFish className={clsx(className)} />,
     font: "josefin_sans",
+  },
+  {
+    name: "hacker",
+    displayName: "Hacker",
+    color: "text-green-500",
+    isDark: true,
+    icon: (className?: string) => <FaBug className={clsx(className)} />,
+    font: "inconsolata",
   },
 ];
 
