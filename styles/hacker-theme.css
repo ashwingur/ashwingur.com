@@ -7,7 +7,7 @@
   --color-background-hover: #042010;
   --color-text: theme(colors.slate.50);
   --color-text-muted: theme(colors.slate.200);
-  --color-text-hover: theme(colors.slate.300);
+  --color-text-hover: theme(colors.blue.400);
   --color-text-primary: theme(colors.slate.100);
   --color-text-secondary: theme(colors.slate.100);
   --color-text-accent: theme(colors.slate.100);

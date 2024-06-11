@@ -68,7 +68,7 @@ const themesList: ThemeType[] = [
   },
   {
     name: "hacker",
-    displayName: "Hacker",
+    displayName: "Cyber Matrix",
     color: "text-green-500",
     isDark: true,
     icon: (className?: string) => <FaBug className={clsx(className)} />,
