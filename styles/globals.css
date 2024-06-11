@@ -72,6 +72,25 @@
   --color-accent-hover: theme(colors.red.800);
 }
 
+/* Add global scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-hover);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
 html {
   scroll-behavior: smooth;
 }
