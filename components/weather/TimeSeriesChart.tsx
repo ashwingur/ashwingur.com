@@ -40,7 +40,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-primary"
+      "--color-accent"
     )
   );
 
@@ -48,7 +48,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     const updateLineColour = () => {
       const newColor = getComputedStyle(
         document.documentElement
-      ).getPropertyValue("--color-primary");
+      ).getPropertyValue("--color-accent");
       setLineColour(newColor);
     };
 
@@ -61,6 +61,8 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
     // Update color on theme change
     updateLineColour();
+
+    console.log("updating line colour");
 
     return () => {
       observer.disconnect();

@@ -123,6 +123,27 @@ html {
   src: url("/fonts/Coc/coc-thin.ttf");
 }
 
+@font-face {
+  font-family: "Munro";
+  src: url("/fonts/Munro/munro.ttf") format("truetype");
+  font-weight: 400; /* Normal weight */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Munro";
+  src: url("/fonts/Munro/munro-narrow.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Munro";
+  src: url("/fonts/Munro/munro-small.ttf") format("truetype");
+  font-weight: 700; /* Bold weight */
+  font-style: normal;
+}
+
 .clash-font-style {
   @apply text-white dark:text-slate-100 font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }

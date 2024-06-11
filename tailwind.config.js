@@ -35,7 +35,7 @@ module.exports = {
       fontFamily: {
         clash: ["Clash-Regular", "sans-serif"],
         coc: ["Coc", "sans-serif"],
-        sans: ["var(--font-inter)"],
+        munro: ["Munro", "sans-serif"],
       },
       animation: {
         fade: "fadeIn 1s ease-in-out",
