@@ -18,6 +18,7 @@ import { RiSwordFill } from "react-icons/ri";
 import { BsGrid3X3 } from "react-icons/bs";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { TbTicTac } from "react-icons/tb";
+import { ToggleThemeButton } from "./ToggleThemeButton";
 
 interface App {
   name: string;
@@ -199,15 +200,21 @@ const HomeSection = () => {
           </Link>
         </div>
         <h2 className="text-2xl mt-8 mb-2">About this Website</h2>
-        <p className="lg:px-8 xl:px-24">
+        <p className="lg:px-8 xl:px-24 w-full">
           I originally made this website to learn about React and to display my
           projects. However, it has since evolved into a hobby project that I
           continuously work on. In addition to the projects I have linked, there
           are many other pages, such as Media Reviews, which feature
-          non-technical content. I have also spent a lot of time working on the
-          styling and added multiple interesting themes that you can select from
-          in the top right. Below is a list of apps on this website, with a
-          brief overview.
+          non-technical content.
+        </p>
+        <p className="lg:px-8 xl:px-24 w-full mt-2">
+          I have also spent a lot of time working on the styling and added
+          multiple interesting themes that you can select from in the top right
+          or from the following button:
+        </p>
+        <ToggleThemeButton className="text-xl" centerOptions={true} />
+        <p className="lg:px-8 xl:px-24 w-full mt-2">
+          Below are a list of all my apps and pages on this website.
         </p>
         <h2 className="text-2xl mt-8 mb-2">Apps and Pages</h2>
         <div className="grid md:grid-cols-2 gap-4 2xl:grid-cols-3">

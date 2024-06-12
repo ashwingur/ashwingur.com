@@ -78,9 +78,13 @@ const themesList: ThemeType[] = [
 
 interface ToggleThemeButtonProps {
   className?: string;
+  centerOptions?: boolean;
 }
 
-const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
+const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({
+  className,
+  centerOptions = false,
+}) => {
   const { setFont } = useFont();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -115,8 +119,11 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({ className }) => {
 
         <Combobox.Options
           className={clsx(
-            "absolute right-0 w-56 lg:text-lg mt-1 shadow-lg max-h-96 rounded-md text-base overflow-auto focus:outline-none sm:text-sm z-50 bg-background-muted",
-            isDark(currentTheme ?? "") ? "shadow-background-hover" : ""
+            "absolute w-56 lg:text-lg mt-1 shadow-lg max-h-96 rounded-md text-base overflow-auto focus:outline-none sm:text-sm z-50 ",
+            isDark(currentTheme ?? "") ? "shadow-background-hover" : "",
+            centerOptions
+              ? "-translate-x-[5.5rem] bg-background-hover"
+              : "right-0 bg-background-muted"
           )}
         >
           {themesList.map((theme) => (
