@@ -175,7 +175,10 @@
     "description": "A website that helps you learn the countries of the world, capital cities and flags with many different quiz options. The UI colour scheme and layout is pretty ugly, but in my defence it was my first real react project.",
     "stack": ["React", "CSS"],
     "links": [
-      { "display": "Website", "url": "https://countries-website.pages.dev/" },
+      {
+        "display": "Website",
+        "url": "https://countries-website.pages.dev/all_countries"
+      },
       {
         "display": "GitHub",
         "url": "https://github.com/ashwingur/countries-website"
