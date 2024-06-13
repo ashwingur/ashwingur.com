@@ -43,7 +43,7 @@
       @apply before:top-[20%] before:w-full before:h-[5rem] before:-z-10;
       /* Dirt layer (1 layer is covered by grass, other 5 is exposed */
       @apply after:absolute after:content-[""] after:bg-dirt after:bg-repeat after:bg-[auto_5rem];
-      @apply after:top-[20%] after:w-full after:h-[30rem] after:z-[-11];
+      @apply after:top-[20%] after:w-full after:h-[20rem] after:z-[-11];
     }
 
     main {
@@ -60,8 +60,13 @@
     }
 
     .main-bottom {
+      /* Bedrock layer */
       @apply absolute content-[""] bg-bedrock bg-repeat bg-[auto_5rem];
-      @apply bottom-0 w-full h-[25rem] z-[-11];
+      @apply bottom-0 w-full h-[10rem] z-[-11];
+    }
+
+    .main-top-2 {
+      @apply invisible lg:visible absolute top-24 left-20 w-20 h-20 bg-yellow-50 content-[''] shadow-glow-sun;
     }
 
     .tag {
@@ -104,7 +109,7 @@
     }
 
     .card-hover {
-      @apply before:bg-black/70 bg-[auto_7rem] text-stone-100;
+      @apply before:bg-black/70 bg-[auto_6rem] text-stone-100 bg-stone;
     }
 
     .footer {

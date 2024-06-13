@@ -78,6 +78,8 @@ module.exports = {
         "glow-orange-lg": "0 0 20px rgba(214, 151, 96, 0.7)",
         "glow-orange-xl": "0 0 25px rgba(214, 151, 96, 0.7)",
         "glow-orange-2xl": "0 0 35px rgba(214, 151, 96, 0.7)",
+        "glow-sun":
+          "0 0 10px 5px rgba(255, 255, 255, 0.4), 0 0 20px 30px rgba(255, 255, 255, 0.2), 0 0 30px 15px rgba(255, 255, 255, 0.1)",
       },
       borderRadius: {
         inherit: "inherit",
