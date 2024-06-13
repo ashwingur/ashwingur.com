@@ -82,6 +82,13 @@ module.exports = {
       borderRadius: {
         inherit: "inherit",
       },
+      backgroundImage: {
+        grass: "url('/assets/textures/minecraft/grass.webp')",
+        dirt: "url('/assets/textures/minecraft/dirt.webp')",
+        stone: "url('/assets/textures/minecraft/stone.webp')",
+        deepslate: "url('/assets/textures/minecraft/deepslate.webp')",
+        bedrock: "url('/assets/textures/minecraft/bedrock.webp')",
+      },
     },
   },
   variants: {

@@ -24,9 +24,7 @@
 @layer base {
   [data-theme="minecraft"] {
     body {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      @apply w-full h-full relative;
       background: linear-gradient(
         to bottom,
         #87ceeb 0%,
@@ -40,71 +38,30 @@
         #333333 95%,
         #333333 100%
       );
-      /* z-index: -50; */
+      /* Grass layer */
+      @apply before:absolute before:content-[""] before:bg-grass before:bg-repeat-x before:bg-[auto_5rem];
+      @apply before:top-[20%] before:w-full before:h-[5rem] before:-z-10;
+      /* Dirt layer (1 layer is covered by grass, other 5 is exposed */
+      @apply after:absolute after:content-[""] after:bg-dirt after:bg-repeat after:bg-[auto_5rem];
+      @apply after:top-[20%] after:w-full after:h-[30rem] after:z-[-11];
     }
 
     main {
       @apply font-minecraft;
     }
 
-    /* 1 Layer of grass */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 20%;
-      width: 100%;
-      height: 5rem;
-      background-image: url("/assets/textures/minecraft/grass.webp");
-      background-repeat: repeat-x;
-      background-size: auto 5rem;
-      z-index: -10;
+    .main-top {
+      /* Stone layer */
+      @apply before:absolute before:content-[""] before:bg-stone before:bg-repeat before:bg-[auto_5rem];
+      @apply before:top-[20%] before:w-full before:h-[40%] before:z-[-12];
+      /* Deepslate layer */
+      @apply after:absolute after:content-[""] after:bg-deepslate after:bg-repeat after:bg-[auto_5rem];
+      @apply after:top-[60%] after:w-full after:h-[40%] after:z-[-13];
     }
 
-    /* 6 layers of dirt (including grass */
-    body::after {
-      content: "";
-      position: absolute;
-      top: 20%;
-      width: 100%;
-      height: 30rem;
-      background-image: url("/assets/textures/minecraft/dirt.webp");
-      background-repeat: repeat;
-      background-size: auto 5rem;
-      z-index: -11;
-    }
-
-    .main-top::before {
-      content: "";
-      position: absolute;
-      top: 20%;
-      width: 100%;
-      height: 40%;
-      background-image: url("/assets/textures/minecraft/stone.webp");
-      background-repeat: repeat;
-      background-size: auto 5rem;
-      z-index: -12;
-    }
-    .main-top::after {
-      content: "";
-      position: absolute;
-      top: 60%;
-      width: 100%;
-      height: 40%;
-      background-image: url("/assets/textures/minecraft/deepslate.webp");
-      background-repeat: repeat;
-      background-size: auto 5rem;
-      z-index: -13;
-    }
-    .main-bottom::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 25rem;
-      background-image: url("/assets/textures/minecraft/bedrock.webp");
-      background-repeat: repeat;
-      background-size: auto 5rem;
-      z-index: -11;
+    .main-bottom {
+      @apply absolute content-[""] bg-bedrock bg-repeat bg-[auto_5rem];
+      @apply bottom-0 w-full h-[25rem] z-[-11];
     }
   }
 }

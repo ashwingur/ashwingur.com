@@ -94,7 +94,7 @@ const themesList: ThemeType[] = [
         </svg>
       </div>
     ),
-    font: "roboto",
+    font: "roboto", // Fallback font, there is a minecraft font defined in the css
   },
 ];
 
