@@ -15,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider enableSystem={true} attribute="data-theme">
           <FontProvider>
             <main>
+              <div className="main-top" />
               <Component {...pageProps} />
+              <div className="main-bottom" />
             </main>
           </FontProvider>
         </ThemeProvider>
