@@ -164,6 +164,34 @@ html {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Minecraft";
+  src: url("/fonts/Minecraft/Minecraft-Regular.otf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("/fonts/Minecraft/Minecraft-Italic.otf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("/fonts/Minecraft/Minecraft-Bold.otf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("/fonts/Minecraft/Minecraft-BoldItalic.otf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
 .clash-font-style {
   @apply text-white dark:text-slate-100 font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black];
 }

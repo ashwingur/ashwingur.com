@@ -4,7 +4,7 @@
   --color-background: theme(colors.stone.100);
   --color-background-muted: theme(colors.stone.200);
   --color-background-hover: theme(colors.stone.300);
-  --color-text: theme(colors.slate.900);
+  --color-text: theme(colors.black);
   --color-text-muted: theme(colors.slate.500);
   --color-text-hover: theme(colors.blue.700);
   --color-text-primary: theme(colors.slate.50);
@@ -32,15 +32,19 @@
         #87ceeb 0%,
         #b1d7e6 20%,
         #32cd32 20%,
-        #32cd32 70%,
-        #8b4513 70%,
-        #8b4513 80%,
-        #808080 80%,
-        #808080 90%,
-        #333333 90%,
+        #32cd32 25%,
+        #8b4513 25%,
+        #8b4513 60%,
+        #808080 60%,
+        #808080 95%,
+        #333333 95%,
         #333333 100%
       );
       /* z-index: -50; */
+    }
+
+    main {
+      @apply font-minecraft;
     }
 
     /* 1 Layer of grass */

@@ -36,6 +36,7 @@ module.exports = {
         clash: ["Clash-Regular", "sans-serif"],
         coc: ["Coc", "sans-serif"],
         munro: ["Munro", "sans-serif"],
+        minecraft: ["Minecraft", "sans-serif"],
       },
       animation: {
         fade: "fadeIn 1s ease-in-out",
