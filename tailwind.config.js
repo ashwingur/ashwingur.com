@@ -88,6 +88,7 @@ module.exports = {
         stone: "url('/assets/textures/minecraft/stone.webp')",
         deepslate: "url('/assets/textures/minecraft/deepslate.webp')",
         bedrock: "url('/assets/textures/minecraft/bedrock.webp')",
+        smooth_stone: "url('/assets/textures/minecraft/smooth_stone.png')",
       },
     },
   },

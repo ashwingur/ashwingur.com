@@ -63,5 +63,26 @@
       @apply absolute content-[""] bg-bedrock bg-repeat bg-[auto_5rem];
       @apply bottom-0 w-full h-[25rem] z-[-11];
     }
+
+    .tag {
+      @apply rounded-none bg-black;
+    }
+
+    .btn,
+    .btn-secondary,
+    .btn-accent {
+      @apply bg-smooth_stone bg-repeat bg-[auto_4rem] transition-none relative;
+      @apply text-zinc-100 hover:text-yellow-300 text-lg;
+      @apply outline outline-2 outline-black border-2 border-t-stone-300 border-l-stone-300 border-b-stone-500 border-r-stone-500;
+      @apply hover:border-t-indigo-300 hover:border-l-indigo-300 hover:border-r-indigo-500 hover:border-b-indigo-500;
+      @apply rounded-none;
+      @apply before:invisible before:hover:visible before:-z-10 before:bg-indigo-400/40 before:h-full before:w-full before:absolute before:top-0 before:left-0;
+      @apply z-10; /* Ensures text is above the ::before pseudo-element */
+      text-shadow: 1px 1px black;
+    }
+
+    .card {
+      @apply rounded-none;
+    }
   }
 }
