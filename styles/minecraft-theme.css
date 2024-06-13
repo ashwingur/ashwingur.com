@@ -2,11 +2,11 @@
 
 [data-theme="minecraft"] {
   --color-background: theme(colors.stone.100);
-  --color-background-muted: theme(colors.stone.200);
-  --color-background-hover: theme(colors.stone.300);
-  --color-text: theme(colors.black);
-  --color-text-muted: theme(colors.slate.500);
-  --color-text-hover: theme(colors.blue.700);
+  --color-background-muted: theme(colors.stone.800);
+  --color-background-hover: theme(colors.stone.900);
+  --color-text: theme(colors.stone.100);
+  --color-text-muted: theme(colors.stone.200);
+  --color-text-hover: theme(colors.blue.500);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
   --color-text-accent: theme(colors.slate.50);
@@ -27,7 +27,7 @@
       @apply w-full h-full relative;
       background: linear-gradient(
         to bottom,
-        #87ceeb 0%,
+        #68b4d2 0%,
         #b1d7e6 20%,
         #32cd32 20%,
         #32cd32 25%,
@@ -70,7 +70,8 @@
 
     .btn,
     .btn-secondary,
-    .btn-accent {
+    .btn-accent,
+    .logo {
       @apply bg-smooth_stone bg-repeat bg-[auto_4rem] transition-none relative;
       @apply text-zinc-100 hover:text-yellow-300 text-lg;
       @apply outline outline-2 outline-black border-2 border-t-stone-300 border-l-stone-300 border-b-stone-500 border-r-stone-500;
@@ -81,8 +82,33 @@
       text-shadow: 1px 1px black;
     }
 
-    .card {
-      @apply rounded-none;
+    .logo {
+      @apply text-3xl pl-[2px] hover:rounded-none;
+    }
+
+    .card > h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-white underline;
+    }
+
+    .card,
+    .card-hover {
+      @apply text-stone-200 border-4 border-black relative;
+      @apply bg-dirt bg-repeat bg-[auto_6rem];
+      @apply before:bg-black/60 before:h-full before:w-full before:absolute before:top-0 before:left-0 before:-z-10;
+      @apply z-10;
+    }
+
+    .card-hover {
+      @apply before:bg-black/70 bg-[auto_7rem] text-stone-100;
+    }
+
+    .footer {
+      @apply bg-black text-white;
     }
   }
 }
