@@ -470,7 +470,7 @@ const MediaReviews = () => {
         Average Rating:{" "}
         {calculateAverageRating(categoryFilteredReviews).toFixed(1)}
       </div>
-      <div className="flex flex-col gap-8 items-center px-4 mb-12">
+      <div className="flex flex-col gap-8 items-center px-4 pb-12">
         {reviewCards}
       </div>
       <button
