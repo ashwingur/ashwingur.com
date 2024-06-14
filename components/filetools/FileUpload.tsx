@@ -1,22 +1,29 @@
 // components/FileUpload.tsx
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import FilePondPluginFileRename from "filepond-plugin-file-rename";
 import { useMutation } from "react-query";
 import { FilePondFile } from "filepond";
 import { AiOutlineLoading } from "react-icons/ai";
 import clsx from "clsx";
-import Link from "next/link";
+import { FaTrash } from "react-icons/fa6";
 
-registerPlugin(FilePondPluginImagePreview);
+registerPlugin(
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateSize,
+  FilePondPluginFileRename
+);
 
 const FileUpload: React.FC = () => {
   const [files, setFiles] = useState<(string | Blob | File)[]>([]);
   const [format, setFormat] = useState<string>("png");
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState<string>("");
+  const pondRef = useRef<FilePond>(null);
 
   const convertFiles = async (files: (string | Blob | File)[]) => {
     const formData = new FormData();
@@ -30,6 +37,7 @@ const FileUpload: React.FC = () => {
       {
         method: "POST",
         body: formData,
+        credentials: "include",
       }
     );
 
@@ -70,11 +78,16 @@ const FileUpload: React.FC = () => {
     mutate(files);
   };
 
-  //   console.log(files.length);
+  const handleClearFiles = () => {
+    if (pondRef.current) {
+      pondRef.current.removeFiles();
+    }
+  };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center px-4">
       <FilePond
+        ref={pondRef}
         files={files.map((file: any) => ({
           source: file,
           options: {
@@ -85,22 +98,37 @@ const FileUpload: React.FC = () => {
           setFiles(fileItems.map((fileItem) => fileItem.file as File));
         }}
         allowMultiple={true}
-        maxFiles={3}
+        maxFiles={10}
+        maxFileSize="10MB"
+        allowReorder={true}
         name="files"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
-      <div className="flex flex-col items-center gap-4">
-        <div className="mt-4">
+      <div className="flex flex-col items-center gap-4 mt-2">
+        {files.length > 0 && (
+          <button
+            onClick={handleClearFiles}
+            className={clsx(
+              "btn-secondary w-16 flex items-center justify-center h-10"
+            )}
+          >
+            <FaTrash />
+          </button>
+        )}
+        <div className="">
           <label htmlFor="format">Convert to:</label>
           <select
             id="format"
             value={format}
             onChange={(e) => setFormat(e.target.value)}
-            className="ml-2"
+            className="ml-2 px-2 py-1 rounded-lg shadow-sm bg-background-muted"
           >
             <option value="png">PNG</option>
             <option value="jpg">JPG</option>
             <option value="webp">WEBP</option>
+            <option value="pdf">PDF</option>
+            <option value="mkv">MKV</option>
+            <option value="mp4">MP4</option>
           </select>
         </div>
         <button
@@ -116,11 +144,13 @@ const FileUpload: React.FC = () => {
         </button>
         {isError && <p>Error occurred</p>}
         {downloadLink && !isError && !isLoading && (
-          <div className="btn w-32 h-10">
-            <a href={downloadLink} download={downloadName}>
-              Download
-            </a>
-          </div>
+          <a
+            className="btn w-32 h-10 block"
+            href={downloadLink}
+            download={downloadName}
+          >
+            Download
+          </a>
         )}
       </div>
     </div>
