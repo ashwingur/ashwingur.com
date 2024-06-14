@@ -1,0 +1,19 @@
+@tailwind base;
+
+/* filepond-custom.css */
+
+@layer base {
+  /* Change the color of the drop label */
+  .filepond--label-action {
+    @apply text-primary font-bold;
+  }
+}
+
+/* the text color of the drop label*/
+.filepond--root .filepond--drop-label {
+  color: var(--color-text);
+}
+
+.filepond--root .filepond--panel-root {
+  background: var(--color-background-hover);
+}

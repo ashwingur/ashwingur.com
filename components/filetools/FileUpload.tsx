@@ -13,6 +13,8 @@ import clsx from "clsx";
 import { FaTrash } from "react-icons/fa6";
 import { useAuth } from "@context/AuthContext";
 
+import "/styles/filepond-custom.css";
+
 registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginFileValidateSize,
