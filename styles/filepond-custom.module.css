@@ -1,0 +1,12 @@
+.filepond--label-action {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+/* the text color of the drop label*/
+.filepond--root .filepond--drop-label {
+  color: var(--color-text);
+}
+
+.filepond--root .filepond--panel-root {
+  background: var(--color-background-muted);
+}
