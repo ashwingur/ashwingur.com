@@ -6,6 +6,7 @@
   /* Change the color of the drop label */
   .filepond--label-action {
     @apply text-primary font-bold;
+    text-decoration-line: none;
   }
 }
 
@@ -15,5 +16,5 @@
 }
 
 .filepond--root .filepond--panel-root {
-  background: var(--color-background-hover);
+  background: var(--color-background-muted);
 }
