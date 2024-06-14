@@ -9,7 +9,7 @@ const FileTools = () => {
   return (
     <div className="min-h-screen">
       <Navbar fixed={true} />
-      <div className="flex flex-col items-center pt-24 pb-8">
+      <div className="flex flex-col items-center pt-24 pb-8 mx-4">
         <h1>File Tools</h1>
         {user === null && !loading && (
           <p className="bg-red-600 p-1 rounded-lg text-white mt-4">
