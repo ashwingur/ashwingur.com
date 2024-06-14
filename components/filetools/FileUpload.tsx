@@ -127,8 +127,6 @@ const FileUpload: React.FC = () => {
             <option value="jpg">JPG</option>
             <option value="webp">WEBP</option>
             <option value="pdf">PDF</option>
-            <option value="mkv">MKV</option>
-            <option value="mp4">MP4</option>
           </select>
         </div>
         <button
