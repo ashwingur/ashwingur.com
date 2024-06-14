@@ -11,6 +11,7 @@ import {
   FaCar,
   FaCloudMoonRain,
   FaCode,
+  FaFileImage,
   FaGamepad,
   FaPaintbrush,
 } from "react-icons/fa6";
@@ -79,6 +80,13 @@ const appsList: App[] = [
     description:
       "Uses the Clash of Clans API to view and track the stats of any player or clan.",
     icon: (className?: string) => <RiSwordFill className={clsx(className)} />,
+  },
+  {
+    name: "File Tools",
+    url: "/FileTools",
+    description:
+      "A tool for file conversion between png, jpg, webp and pdf. Note this tool requires a login for authentication.",
+    icon: (className?: string) => <FaFileImage className={clsx(className)} />,
   },
   {
     name: "Cube Timer",
