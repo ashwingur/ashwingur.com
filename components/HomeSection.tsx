@@ -85,7 +85,7 @@ const appsList: App[] = [
     name: "File Tools",
     url: "/FileTools",
     description:
-      "A tool for file conversion between png, jpg, webp and pdf. Note this tool requires a login for authentication.",
+      "A tool for file conversion between png, jpg, webp and pdf. Note this tool requires a login.",
     icon: (className?: string) => <FaFileImage className={clsx(className)} />,
   },
   {

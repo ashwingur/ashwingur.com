@@ -12,8 +12,8 @@ const FileTools = () => {
       <div className="flex flex-col items-center pt-24 pb-8">
         <h1>File Tools</h1>
         {user === null && !loading && (
-          <p className="bg-red-600 p-1 rounded-lg text-white">
-            You are not logged in, some functionality may be limited.
+          <p className="bg-red-600 p-1 rounded-lg text-white mt-4">
+            You are not logged in, conversion is disabled.
           </p>
         )}
         <div className="w-full md:w-4/5 lg:w-1/2 mt-4">

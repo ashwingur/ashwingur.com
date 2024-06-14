@@ -11,6 +11,7 @@ import { FilePondFile } from "filepond";
 import { AiOutlineLoading } from "react-icons/ai";
 import clsx from "clsx";
 import { FaTrash } from "react-icons/fa6";
+import { useAuth } from "@context/AuthContext";
 
 registerPlugin(
   FilePondPluginImagePreview,
@@ -19,11 +20,13 @@ registerPlugin(
 );
 
 const FileUpload: React.FC = () => {
+  const { user } = useAuth();
   const [files, setFiles] = useState<(string | Blob | File)[]>([]);
   const [format, setFormat] = useState<string>("png");
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState<string>("");
   const pondRef = useRef<FilePond>(null);
+  console.log(user);
 
   const convertFiles = async (files: (string | Blob | File)[]) => {
     const formData = new FormData();
@@ -131,7 +134,7 @@ const FileUpload: React.FC = () => {
         </div>
         <button
           onClick={handleConvert}
-          disabled={isLoading || files.length === 0}
+          disabled={isLoading || files.length === 0 || user === null}
           className={clsx("btn w-32 flex items-center justify-center h-10")}
         >
           {isLoading ? (
