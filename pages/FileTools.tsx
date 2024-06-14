@@ -4,14 +4,14 @@ import { useAuth } from "@context/AuthContext";
 import React from "react";
 
 const FileTools = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   return (
     <div className="min-h-screen">
       <Navbar fixed={true} />
       <div className="flex flex-col items-center pt-24 pb-8">
         <h1>File Tools</h1>
-        {user === null && (
+        {user === null && !loading && (
           <p className="bg-red-600 p-1 rounded-lg text-white">
             You are not logged in, some functionality may be limited.
           </p>
