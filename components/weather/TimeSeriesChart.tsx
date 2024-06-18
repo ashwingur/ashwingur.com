@@ -12,6 +12,7 @@ import {
 import { AxisDomain } from "recharts/types/util/types";
 import { isDark } from "@components/ToggleThemeButton";
 import Card from "@components/Card";
+import { MetricStats } from "@interfaces/weather.interface";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -21,6 +22,7 @@ interface TimeSeriesChartProps {
   yLabel: string;
   domain?: (number | string)[];
   tickCount?: number; // Add tickCount prop
+  metricStats?: MetricStats;
 }
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
@@ -31,6 +33,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   yLabel,
   domain,
   tickCount = 5, // Default tick count
+  metricStats,
 }) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -100,58 +103,82 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   }));
 
   return (
-    <Card className="w-full h-96 lg:h-[32rem]" firstLayer={false}>
-      <h3 className="text-center my-4 lg:text-xl">{title}</h3>
-      <ResponsiveContainer width="100%" height="90%">
-        <LineChart
-          width={800}
-          height={400}
-          data={data}
-          margin={{ bottom: 40, left: 10 }}
-        >
-          <XAxis
-            dataKey="timestamp"
-            type="category"
-            label={{
-              value: xLabel ?? "",
-              position: "insideBottomRight",
-              offset: 0,
-            }}
-            stroke={axisStrokeColour}
-            ticks={timestamps.length < tickCount ? timestamps : undefined}
-            interval={Math.ceil(timestamps.length / tickCount)}
-            tick={{
-              dy: 18,
-              fontSize: "12px",
-              textAnchor: "middle",
-              width: "70",
-            }}
-            angle={-40}
-          />
-          <YAxis
-            label={{
-              value: yLabel,
-              angle: -90,
-              position: "insideLeft",
-              style: { fill: axisStrokeColour },
-            }}
-            domain={(domain as AxisDomain) || ["auto", "auto"]}
-            allowDecimals={false}
-            stroke={axisStrokeColour}
-            tick={{
-              fontSize: "14px",
-            }}
-          />
-          <CartesianGrid strokeDasharray="3 3" stroke={gridColour} />
-          <Tooltip contentStyle={{ backgroundColor: tooltipColour }} />
-          <Line
-            type="monotone"
-            dataKey="value"
-            stroke={lineColour}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+    <Card className="w-full" firstLayer={false}>
+      <h3 className="text-center my-2 lg:text-xl">{title}</h3>
+      {metricStats !== undefined && (
+        <div className="flex flex-col md:flex-row md:gap-4 items-center justify-center mb-2">
+          <p>
+            <span className="font-bold">Average: </span>
+            {metricStats.average}
+          </p>
+          <p>
+            <span className="font-bold">Min: </span>
+            {metricStats.min.value}{" "}
+            <span className="text-xs">
+              ({formatTimestamp(metricStats.min.timestamp)})
+            </span>
+          </p>
+          <p>
+            <span className="font-bold">Max: </span>
+            {metricStats.max.value}{" "}
+            <span className="text-xs">
+              ({formatTimestamp(metricStats.max.timestamp)})
+            </span>
+          </p>
+        </div>
+      )}
+      <div className="flex h-96 lg:h-[32rem]">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            width={800}
+            height={400}
+            data={data}
+            margin={{ bottom: 40, left: 10 }}
+          >
+            <XAxis
+              dataKey="timestamp"
+              type="category"
+              label={{
+                value: xLabel ?? "",
+                position: "insideBottomRight",
+                offset: 0,
+              }}
+              stroke={axisStrokeColour}
+              ticks={timestamps.length < tickCount ? timestamps : undefined}
+              interval={Math.ceil(timestamps.length / tickCount)}
+              tick={{
+                dy: 18,
+                fontSize: "12px",
+                textAnchor: "middle",
+                width: "70",
+              }}
+              angle={-40}
+            />
+            <YAxis
+              label={{
+                value: yLabel,
+                angle: -90,
+                position: "insideLeft",
+                style: { fill: axisStrokeColour },
+              }}
+              domain={(domain as AxisDomain) || ["auto", "auto"]}
+              allowDecimals={false}
+              stroke={axisStrokeColour}
+              tick={{
+                fontSize: "14px",
+              }}
+            />
+            <CartesianGrid strokeDasharray="3 3" stroke={gridColour} />
+            <Tooltip contentStyle={{ backgroundColor: tooltipColour }} />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={lineColour}
+              dot={false}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </Card>
   );
 };

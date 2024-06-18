@@ -168,12 +168,14 @@ const WeatherCharts = () => {
           values={temperatures}
           title={"Temperature"}
           yLabel={"°C"}
+          metricStats={data.overall_stats?.temperature}
         />
         <TimeSeriesChart
           timestamps={timestamps}
           values={pressures}
           title={"Pressure"}
           yLabel={"hPa"}
+          metricStats={data.overall_stats?.pressure}
         />
         <TimeSeriesChart
           timestamps={timestamps}
@@ -181,12 +183,14 @@ const WeatherCharts = () => {
           title={"Humidity"}
           yLabel={"%"}
           domain={[0, 100]}
+          metricStats={data.overall_stats?.humidity}
         />
         <TimeSeriesChart
           timestamps={timestamps}
           values={lights}
           title={"Ambient Light"}
           yLabel={"lx"}
+          metricStats={data.overall_stats?.ambient_light}
         />
         <TimeSeriesChart
           timestamps={timestamps}
@@ -194,18 +198,21 @@ const WeatherCharts = () => {
           title={"Air Quality Index"}
           yLabel={"AQI"}
           domain={[0, 5]}
+          metricStats={data.overall_stats?.air_quality_index}
         />
         <TimeSeriesChart
           timestamps={timestamps}
           values={tvocs}
           title={"Total Volatile Organic Compounds"}
           yLabel={"ppb"}
+          metricStats={data.overall_stats?.TVOC}
         />
         <TimeSeriesChart
           timestamps={timestamps}
           values={eco2s}
           title={"Equivalent Embodied Carbon Dioxide"}
           yLabel={"ppm"}
+          metricStats={data.overall_stats?.eCO2}
         />
       </div>
     </Card>
