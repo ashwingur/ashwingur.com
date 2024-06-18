@@ -114,14 +114,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
           <p>
             <span className="font-bold">Min: </span>
             {metricStats.min.value}{" "}
-            <span className="text-xs">
+            <span className="text-xs lg:text-sm">
               ({formatTimestamp(metricStats.min.timestamp)})
             </span>
           </p>
           <p>
             <span className="font-bold">Max: </span>
             {metricStats.max.value}{" "}
-            <span className="text-xs">
+            <span className="text-xs lg:text-sm">
               ({formatTimestamp(metricStats.max.timestamp)})
             </span>
           </p>
