@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   LineChart,
@@ -47,7 +47,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     )
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
         document.documentElement
