@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   LineChart,
@@ -47,7 +47,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     )
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
         document.documentElement
@@ -55,23 +55,15 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
       setLineColour(newColor);
     };
 
-    // Set up observer to detect changes in the CSS variable
-    const observer = new MutationObserver(updateLineColour);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-
-    // Update color on theme change
-    updateLineColour();
-
-    console.log("updating line colour");
+    const timeoutId = setTimeout(() => {
+      updateLineColour();
+      console.log("updating line colour");
+    }, 50); // I couldnt get it working without a delay :|
 
     return () => {
-      observer.disconnect();
+      clearTimeout(timeoutId);
     };
   }, [currentTheme]);
-
   const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
 
   const formatTimestamp = (timestamp: number): string => {
