@@ -107,7 +107,10 @@ const Weather = () => {
               When querying a larger time window, the values are averaged over
               larger bin sizes, leading to smoother curves. This allows it to be
               both efficient and more useful for analyzing long-term trends.
-              More setup information available at{" "}
+              Additional statistics such as average, minimum and maximum are
+              also shown. The minimum and maximum values are calculated based on
+              15 minute time buckets so that a random erroneous value will not
+              skew the results. More setup information available at{" "}
               <Link
                 href="https://github.com/ashwingur/pi-weather-station"
                 target="_blank"
