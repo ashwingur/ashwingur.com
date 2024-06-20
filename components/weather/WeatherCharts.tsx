@@ -12,7 +12,8 @@ const fetchWeatherData = async (
 ): Promise<WeatherData> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${start}&end=${end}`
+      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${start}&end=${end}`,
+      { credentials: "include" }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
