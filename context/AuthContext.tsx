@@ -33,8 +33,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const { previousRoute } = usePreviousRoute();
   const router = useRouter();
 
-  console.log(`previous route is ${previousRoute}`);
-
   useEffect(() => {
     const checkAuth = async () => {
       try {

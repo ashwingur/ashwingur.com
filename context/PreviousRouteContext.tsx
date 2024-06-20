@@ -6,7 +6,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 
 interface PreviousRouteContextType {
   previousRoute: string | null;
@@ -16,6 +16,28 @@ interface PreviousRouteContextType {
 const PreviousRouteContext = createContext<
   PreviousRouteContextType | undefined
 >(undefined);
+
+const postCurrentRoute = async (router: NextRouter) => {
+  try {
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_ASHWINGUR_API + "/analytics/frontend_visits",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include credentials with the request
+        body: JSON.stringify({ route: router.asPath }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+  } catch (error) {
+    console.error("Failed to track route:", error);
+  }
+};
 
 export const PreviousRouteProvider = ({
   children,
@@ -29,6 +51,8 @@ export const PreviousRouteProvider = ({
     const handleRouteChange = (url: string) => {
       setPreviousRoute(router.asPath);
     };
+
+    postCurrentRoute(router);
 
     router.events.on("routeChangeStart", handleRouteChange);
 
