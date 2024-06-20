@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import "axios";
 import axios from "axios";
+import { usePreviousRoute } from "./PreviousRouteContext";
 
 interface AuthContextType {
   user: string | null;
@@ -29,7 +30,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [user, setUser] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const { previousRoute } = usePreviousRoute();
   const router = useRouter();
+
+  console.log(`previous route is ${previousRoute}`);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -56,7 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const response = await api.post("/login", { username, password });
       setUser(response.data.username);
-      router.push("/");
+      router.push(previousRoute ?? "/");
     } catch (error) {
       console.error("Login failed:", error);
     }

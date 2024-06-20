@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "@context/AuthContext";
 import { FontProvider } from "@context/FontContext";
 import { useRouter } from "next/router";
+import { PreviousRouteProvider } from "@context/PreviousRouteContext";
 
 const queryClient = new QueryClient();
 
@@ -19,20 +20,22 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider enableSystem={true} attribute="data-theme">
-          <FontProvider>
-            <main>
-              <div className="main-top" />
-              {!isExcludedRoute && <div className="main-top-2" />}
-              <Component {...pageProps} />
-              <div className="main-bottom" />
-            </main>
-          </FontProvider>
-        </ThemeProvider>
-        <Analytics />
-      </QueryClientProvider>
-    </AuthProvider>
+    <PreviousRouteProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider enableSystem={true} attribute="data-theme">
+            <FontProvider>
+              <main>
+                <div className="main-top" />
+                {!isExcludedRoute && <div className="main-top-2" />}
+                <Component {...pageProps} />
+                <div className="main-bottom" />
+              </main>
+            </FontProvider>
+          </ThemeProvider>
+          <Analytics />
+        </QueryClientProvider>
+      </AuthProvider>
+    </PreviousRouteProvider>
   );
 }
