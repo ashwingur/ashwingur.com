@@ -150,14 +150,14 @@ const HomeSection = () => {
       >
         <h2 className="text-2xl mb-2">About Me</h2>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
-          <span className="font-bold w-24">Degree:</span>{" "}
+          <span className="font-bold w-28 md:w-24">Degree:</span>{" "}
           <span className="w-full">
             Bachelor of Mechatronics Engineering + Computer Science double
             degree (University of Sydney)
           </span>
         </div>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
-          <span className="font-bold w-24">Interests:</span>
+          <span className="font-bold w-28 md:w-24">Interests:</span>
           <span className="w-full">
             Coding, reading, gaming,{" "}
             <Link

@@ -78,7 +78,7 @@ const themesList: ThemeType[] = [
     name: "minecraft",
     displayName: "Minecraft",
     color: "text-green-400",
-    isDark: false,
+    isDark: true,
     icon: (className?: string) => (
       <div className={clsx(className)}>
         <svg
