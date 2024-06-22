@@ -8,12 +8,13 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  TooltipProps,
 } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
 import { isDark } from "@components/ToggleThemeButton";
 import Card from "@components/Card";
 import { MetricStats } from "@interfaces/weather.interface";
-import moment from "moment";
+import { Payload } from "recharts/types/component/DefaultTooltipContent";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -25,6 +26,34 @@ interface TimeSeriesChartProps {
   tickCount?: number; // Add tickCount prop
   metricStats?: MetricStats;
 }
+
+interface CustomTooltipProps extends TooltipProps<number, string> {
+  payload?: Payload<number, string>[];
+  unit: string;
+}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({
+  active,
+  payload,
+  unit,
+}) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    const date = new Date(data.timestamp * 1000);
+    const formattedDate = `${date.toLocaleDateString()} ${date
+      .toLocaleTimeString()
+      .toUpperCase()}`;
+
+    return (
+      <div className="bg-background py-2 px-3 rounded-md shadow-md">
+        <p className="text-center font-bold">{`${data.value} ${unit}`}</p>
+        <p className="text-sm">{`${formattedDate}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   timestamps,
@@ -177,7 +206,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
               }}
             />
             <CartesianGrid strokeDasharray="4 4" stroke={gridColour} />
-            <Tooltip contentStyle={{ backgroundColor: tooltipColour }} />
+            <Tooltip
+              content={<CustomTooltip unit={yLabel} />}
+              contentStyle={{ backgroundColor: tooltipColour }}
+            />
             <Line
               type="monotone"
               dataKey="value"

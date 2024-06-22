@@ -1,7 +1,7 @@
 @tailwind base;
 
 [data-theme="minecraft"] {
-  --color-background: theme(colors.stone.100);
+  --color-background: theme(colors.black);
   --color-background-muted: theme(colors.stone.800);
   --color-background-hover: theme(colors.stone.900);
   --color-text: theme(colors.stone.100);
