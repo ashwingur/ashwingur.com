@@ -28,7 +28,7 @@ const fetchWeatherData = async (
 };
 
 const timeOptions = [
-  { id: 0, display: "Custom", seconds: 0 },
+  { id: 0, display: "Custom", seconds: 24 * 3600 },
   { id: 1, display: "Last 24 hours", seconds: 24 * 3600 },
   { id: 2, display: "Last 3 days", seconds: 24 * 3600 * 3 },
   { id: 3, display: "Last 7 days", seconds: 24 * 3600 * 7 },
@@ -185,7 +185,7 @@ const WeatherCharts = () => {
       <h2 className="mt-2">Historical Data</h2>
       <div className="relative mt-4 mb-2 z-20">
         <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
-          <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 justify-between">
+          <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between">
             <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
               {selectedTime.display}
               <AiOutlineDown className="hover:text-xl transition-all" />
