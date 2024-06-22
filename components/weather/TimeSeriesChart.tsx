@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   LineChart,
@@ -13,6 +13,7 @@ import { AxisDomain } from "recharts/types/util/types";
 import { isDark } from "@components/ToggleThemeButton";
 import Card from "@components/Card";
 import { MetricStats } from "@interfaces/weather.interface";
+import moment from "moment";
 
 interface TimeSeriesChartProps {
   timestamps: number[];
@@ -58,12 +59,13 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     const timeoutId = setTimeout(() => {
       updateLineColour();
       console.log("updating line colour");
-    }, 50); // I couldnt get it working without a delay :|
+    }, 50); // I couldn't get it working without a delay :|
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [currentTheme]);
+
   const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
 
   const formatTimestamp = (timestamp: number): string => {
@@ -89,10 +91,23 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     }
   };
 
+  const generateTicks = (
+    min: number,
+    max: number,
+    tickCount: number
+  ): number[] => {
+    const step = (max - min) / (tickCount - 1);
+    return Array.from({ length: tickCount }, (_, i) => min + i * step);
+  };
+
   const data = timestamps.map((timestamp, index) => ({
-    timestamp: formatTimestamp(timestamp),
+    timestamp: timestamp,
     value: values[index],
   }));
+
+  const minTimestamp = Math.min(...timestamps);
+  const maxTimestamp = Math.max(...timestamps);
+  const ticks = generateTicks(minTimestamp, maxTimestamp, tickCount);
 
   return (
     <Card className="w-full" firstLayer={false}>
@@ -125,25 +140,26 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             width={800}
             height={400}
             data={data}
-            margin={{ bottom: 40, left: 10 }}
+            margin={{ bottom: 40, left: 10, right: 40 }}
           >
             <XAxis
               dataKey="timestamp"
-              type="category"
+              type="number"
+              domain={["dataMin", "dataMax"]}
               label={{
                 value: xLabel ?? "",
                 position: "insideBottomRight",
                 offset: 0,
               }}
               stroke={axisStrokeColour}
-              ticks={timestamps.length < tickCount ? timestamps : undefined}
-              interval={Math.ceil(timestamps.length / tickCount)}
+              ticks={ticks}
               tick={{
                 dy: 18,
                 fontSize: "12px",
                 textAnchor: "middle",
                 width: "70",
               }}
+              tickFormatter={(tick) => formatTimestamp(tick)}
               angle={-40}
             />
             <YAxis
@@ -160,7 +176,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
                 fontSize: "14px",
               }}
             />
-            <CartesianGrid strokeDasharray="3 3" stroke={gridColour} />
+            <CartesianGrid strokeDasharray="4 4" stroke={gridColour} />
             <Tooltip contentStyle={{ backgroundColor: tooltipColour }} />
             <Line
               type="monotone"
