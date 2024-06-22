@@ -93,8 +93,12 @@ const WeatherCharts = () => {
     unixDifference: number,
     startLessThanEnd: boolean
   ) => {
-    console.log(`time change!`);
-    setCustomTime({ start, end, difference: unixDifference, startLessThanEnd });
+    setCustomTime({
+      start,
+      end,
+      difference: unixDifference,
+      startLessThanEnd,
+    });
   };
 
   if (isLoading) {
