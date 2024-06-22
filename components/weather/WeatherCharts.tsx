@@ -209,10 +209,17 @@ const WeatherCharts = () => {
         </Listbox>
       </div>
       {selectedTime.id === 0 && (
-        <DateTimePicker
-          onDateTimeChange={onDateTimeChange}
-          className="mt-2 mb-4"
-        />
+        <div>
+          <DateTimePicker
+            onDateTimeChange={onDateTimeChange}
+            className="mt-2 mb-4"
+          />
+          {!customTime.startLessThanEnd && (
+            <p className="font-bold text-center mb-4">
+              Start date must be less than end date
+            </p>
+          )}
+        </div>
       )}
       {start < firstDbEntryTime && (
         <p className="text-xs mb-4 px-4">
