@@ -183,7 +183,7 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({
   );
 };
 
-const isDark = (currentTheme: string): boolean => {
+const isDark = (currentTheme?: string): boolean => {
   return themesList.find((t) => t.name === currentTheme)?.isDark ?? false;
 };
 

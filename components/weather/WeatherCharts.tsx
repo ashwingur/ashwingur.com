@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { WeatherData } from "../../shared/interfaces/weather.interface";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import TimeSeriesChart from "./TimeSeriesChart";
 import { Listbox } from "@headlessui/react";
-import { AiOutlineClose, AiOutlineDown } from "react-icons/ai";
+import { AiOutlineDown } from "react-icons/ai";
 import Card from "@components/Card";
+import DateTimePicker from "@components/DateTimePicker";
 
 const fetchWeatherData = async (
   start: number,
@@ -27,6 +28,7 @@ const fetchWeatherData = async (
 };
 
 const timeOptions = [
+  { id: 0, display: "Custom", seconds: 0 },
   { id: 1, display: "Last 24 hours", seconds: 24 * 3600 },
   { id: 2, display: "Last 3 days", seconds: 24 * 3600 * 3 },
   { id: 3, display: "Last 7 days", seconds: 24 * 3600 * 7 },
@@ -39,11 +41,35 @@ const timeOptions = [
 
 const WeatherCharts = () => {
   const firstDbEntryTime = 1717137003;
-  const [selectedTime, setSelectedTime] = useState(timeOptions[0]);
+  const [selectedTime, setSelectedTime] = useState(timeOptions[1]);
+
+  const [customTime, setCustomTime] = useState<{
+    start?: string;
+    end?: string;
+    difference: number;
+    startLessThanEnd: boolean;
+  }>({
+    start: undefined,
+    end: undefined,
+    difference: 3600 * 24,
+    startLessThanEnd: true,
+  });
 
   // Calculate start and end times based on selectedTime
-  const start = Math.floor(Date.now() / 1000 - selectedTime.seconds);
-  const end = Math.floor(Date.now() / 1000);
+  let start = Math.floor(Date.now() / 1000 - selectedTime.seconds);
+  let end = Math.floor(Date.now() / 1000);
+
+  if (
+    selectedTime.id === 0 &&
+    customTime.start &&
+    customTime.end !== undefined &&
+    customTime.startLessThanEnd &&
+    !isNaN(new Date(customTime.start).getTime()) &&
+    !isNaN(new Date(customTime.end).getTime())
+  ) {
+    start = new Date(customTime.start).getTime() / 1000;
+    end = new Date(customTime.end).getTime() / 1000;
+  }
 
   // Use the calculated start and end times in the query key and query function
   const { data, isLoading, isError } = useQuery<WeatherData>({
@@ -57,8 +83,18 @@ const WeatherCharts = () => {
     display: string;
     seconds: number;
   }) => {
-    const newTime = timeOptions[value.id - 1];
+    const newTime = timeOptions[value.id];
     setSelectedTime(newTime);
+  };
+
+  const onDateTimeChange = (
+    start: string,
+    end: string,
+    unixDifference: number,
+    startLessThanEnd: boolean
+  ) => {
+    console.log(`time change!`);
+    setCustomTime({ start, end, difference: unixDifference, startLessThanEnd });
   };
 
   if (isLoading) {
@@ -105,6 +141,20 @@ const WeatherCharts = () => {
             </Listbox.Options>
           </Listbox>
         </div>
+        {selectedTime.id === 0 && (
+          <div>
+            <DateTimePicker
+              onDateTimeChange={onDateTimeChange}
+              className="mt-2 mb-4"
+            />
+            {!customTime.startLessThanEnd && (
+              <p className="font-bold text-center">
+                Start date must be less than end date
+              </p>
+            )}
+          </div>
+        )}
+
         <p className="mb-8">
           {data?.data.length === 0
             ? "No data for the selected time period"
@@ -158,6 +208,12 @@ const WeatherCharts = () => {
           </Listbox.Options>
         </Listbox>
       </div>
+      {selectedTime.id === 0 && (
+        <DateTimePicker
+          onDateTimeChange={onDateTimeChange}
+          className="mt-2 mb-4"
+        />
+      )}
       {start < firstDbEntryTime && (
         <p className="text-xs mb-4 px-4">
           Note: weather station deployed on 31/5/24 (no data exists before then)

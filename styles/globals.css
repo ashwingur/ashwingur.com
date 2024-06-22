@@ -75,6 +75,10 @@
   --color-accent-hover: theme(colors.red.800);
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: yellow;
+}
+
 /* Add global scrollbar styles */
 ::-webkit-scrollbar {
   width: 12px;

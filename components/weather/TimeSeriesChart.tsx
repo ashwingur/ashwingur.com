@@ -87,7 +87,6 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
     const timeoutId = setTimeout(() => {
       updateLineColour();
-      console.log("updating line colour");
     }, 50); // I couldn't get it working without a delay :|
 
     return () => {
@@ -125,8 +124,16 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     max: number,
     tickCount: number
   ): number[] => {
+    // Using a set to avoid duplicate keys
     const step = (max - min) / (tickCount - 1);
-    return Array.from({ length: tickCount }, (_, i) => min + i * step);
+    const ticks = new Set<number>();
+
+    for (let i = 0; i < tickCount; i++) {
+      const tick = Math.floor(min + i * step);
+      ticks.add(tick);
+    }
+
+    return Array.from(ticks);
   };
 
   const data = timestamps.map((timestamp, index) => ({
