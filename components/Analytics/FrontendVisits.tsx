@@ -78,7 +78,7 @@ const FrontendVisits = () => {
 
   const timestamps = data.timeseries_data.map((d) => d.timestamp);
   const total_visits = data.timeseries_data.map((d) => d.total_visits);
-  const unique_sessions = data.timeseries_data.map((d) => d.unique_user_ids);
+  const unique_ids = data.timeseries_data.map((d) => d.unique_user_ids);
   const unique_ips = data.timeseries_data.map((d) => d.unique_users_ips);
   const routes = data.timeseries_data.map((d) => d.unique_routes);
 
@@ -90,7 +90,18 @@ const FrontendVisits = () => {
         values={total_visits}
         routes={routes}
         title={"Total Visits"}
-        yLabel={""}
+      />
+      <AnalyticsChart
+        timestamps={timestamps}
+        values={unique_ids}
+        routes={routes}
+        title={"Unique User IDs"}
+      />
+      <AnalyticsChart
+        timestamps={timestamps}
+        values={unique_ips}
+        routes={routes}
+        title={"Unique User IPs"}
       />
     </Card>
   );
