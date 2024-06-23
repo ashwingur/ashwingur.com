@@ -84,7 +84,6 @@ const FrontendVisits = () => {
 
   return (
     <Card firstLayer={true} className="flex flex-col items-center">
-      {JSON.stringify(data)}
       <h2>Frontend Visits</h2>
       <AnalyticsChart
         timestamps={timestamps}
