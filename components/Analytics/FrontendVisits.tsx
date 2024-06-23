@@ -114,7 +114,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
       className={clsx(className, "flex flex-col items-center")}
     >
       <h2>Frontend Visits</h2>
-      <div className="flex flex-col self-stretch gap-8 lg:px-4">
+      <div className="flex flex-col self-stretch gap-8 lg:px-4 mt-4">
         <AnalyticsChart
           timestamps={timestamps}
           values={total_visits}

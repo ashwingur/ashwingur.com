@@ -49,6 +49,13 @@ const appsList: App[] = [
     ),
   },
   {
+    name: "Site Analytics",
+    url: "/Analytics",
+    description:
+      "Live and historical analytics of this website, including both frontend routes visited and api requests made.",
+    icon: (className?: string) => <FaChartLine className={clsx(className)} />,
+  },
+  {
     name: "Tron Arcade",
     url: "/Tron",
     description: "An online multiplayer 2D game based on Tron.",
@@ -109,13 +116,6 @@ const appsList: App[] = [
     url: "/TicTacToe",
     description: "An online multiplayer Tic Tac Toe game",
     icon: (className?: string) => <TbTicTac className={clsx(className)} />,
-  },
-  {
-    name: "Site Analytics",
-    url: "/Analytics",
-    description:
-      "Live and historical analytics of this website, including both frontend routes visited and api requests made.",
-    icon: (className?: string) => <FaChartLine className={clsx(className)} />,
   },
 ];
 
