@@ -3,6 +3,13 @@ import { FrontendAnalytics } from "@interfaces/analytics.interface";
 import React from "react";
 import { useQuery } from "react-query";
 import AnalyticsChart from "./AnalyticsChart";
+import clsx from "clsx";
+
+interface FrontendVisitsProps {
+  startTime: Date;
+  endTime: Date;
+  className?: string;
+}
 
 const fetchFrontEndAnalytics = async (
   start_time: string,
@@ -37,7 +44,11 @@ const roundToNearestMinute = (date: Date): Date => {
   return new Date(Math.ceil(date.getTime() / ms) * ms);
 };
 
-const FrontendVisits = () => {
+const FrontendVisits: React.FC<FrontendVisitsProps> = ({
+  startTime,
+  endTime,
+  className,
+}) => {
   let start_time = new Date();
   start_time.setHours(start_time.getHours() - 24);
   start_time = roundToNearestMinute(start_time);
@@ -45,11 +56,11 @@ const FrontendVisits = () => {
   const route: string | undefined = undefined;
 
   const { data, isLoading, isError } = useQuery<FrontendAnalytics>({
-    queryKey: ["frontendAnalytics", start_time, end_time, route],
+    queryKey: ["frontendAnalytics", startTime, endTime, route],
     queryFn: () =>
       fetchFrontEndAnalytics(
-        start_time.toISOString(),
-        end_time.toISOString(),
+        startTime.toISOString(),
+        endTime.toISOString(),
         route
       ),
     staleTime: 60 * 1000, // 1 minute
@@ -83,26 +94,31 @@ const FrontendVisits = () => {
   const routes = data.timeseries_data.map((d) => d.unique_routes);
 
   return (
-    <Card firstLayer={true} className="flex flex-col items-center">
+    <Card
+      firstLayer={true}
+      className={clsx(className, "flex flex-col items-center")}
+    >
       <h2>Frontend Visits</h2>
-      <AnalyticsChart
-        timestamps={timestamps}
-        values={total_visits}
-        routes={routes}
-        title={"Total Visits"}
-      />
-      <AnalyticsChart
-        timestamps={timestamps}
-        values={unique_ids}
-        routes={routes}
-        title={"Unique User IDs"}
-      />
-      <AnalyticsChart
-        timestamps={timestamps}
-        values={unique_ips}
-        routes={routes}
-        title={"Unique User IPs"}
-      />
+      <div className="flex flex-col self-stretch gap-8 lg:px-4">
+        <AnalyticsChart
+          timestamps={timestamps}
+          values={total_visits}
+          routes={routes}
+          title={"Total Visits"}
+        />
+        <AnalyticsChart
+          timestamps={timestamps}
+          values={unique_ids}
+          routes={routes}
+          title={"Unique User IDs"}
+        />
+        <AnalyticsChart
+          timestamps={timestamps}
+          values={unique_ips}
+          routes={routes}
+          title={"Unique User IPs"}
+        />
+      </div>
     </Card>
   );
 };

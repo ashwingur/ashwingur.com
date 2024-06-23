@@ -142,7 +142,14 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
                 textAnchor: "middle",
                 width: "70",
               }}
-              //   tickFormatter={(tick) => formatTimestamp(tick)}
+              tickFormatter={(tick) =>
+                `${new Date(tick).toLocaleDateString()} ${new Date(tick)
+                  .toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                  .toUpperCase()} `
+              }
               angle={-40}
             />
             <YAxis
