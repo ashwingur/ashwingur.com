@@ -135,15 +135,15 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
         />
       </div>
       <h2 className="mt-4">Frontend Routes</h2>
-      <div className="flex gap-4 flex-wrap p-4">{routeButtons}</div>
-      {route && (
-        <button
-          onClick={() => setRoute(undefined)}
-          className="btn-accent text-lg"
-        >
-          Clear Route
-        </button>
-      )}
+      <div className="flex gap-4 flex-wrap p-4 transition-all">
+        {routeButtons}
+
+        {route && (
+          <button onClick={() => setRoute(undefined)} className="btn-accent">
+            Clear Route
+          </button>
+        )}
+      </div>
     </Card>
   );
 };
