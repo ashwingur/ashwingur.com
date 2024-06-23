@@ -177,7 +177,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
               contentStyle={{ backgroundColor: tooltipColour }}
             />
             <Line
-              type="monotone"
+              type="linear"
               dataKey="value"
               stroke={lineColour}
               dot={false}
