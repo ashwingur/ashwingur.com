@@ -1,6 +1,6 @@
 import Card from "@components/Card";
 import { FrontendAnalytics } from "@interfaces/analytics.interface";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import AnalyticsChart from "./AnalyticsChart";
 import clsx from "clsx";
@@ -49,11 +49,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
   endTime,
   className,
 }) => {
-  let start_time = new Date();
-  start_time.setHours(start_time.getHours() - 24);
-  start_time = roundToNearestMinute(start_time);
-  let end_time = roundToNearestMinute(new Date());
-  const route: string | undefined = undefined;
+  const [route, setRoute] = useState<string | undefined>(undefined);
 
   const { data, isLoading, isError } = useQuery<FrontendAnalytics>({
     queryKey: ["frontendAnalytics", startTime, endTime, route],
@@ -87,11 +83,30 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
     );
   }
 
+  // Filter out really nested routes
+  const hasTwoOrLessSlashes = (str: string): boolean => {
+    return str.split("/").length <= 3;
+  };
+
   const timestamps = data.timeseries_data.map((d) => d.timestamp);
   const total_visits = data.timeseries_data.map((d) => d.total_visits);
   const unique_ids = data.timeseries_data.map((d) => d.unique_user_ids);
   const unique_ips = data.timeseries_data.map((d) => d.unique_users_ips);
-  const routes = data.timeseries_data.map((d) => d.unique_routes);
+  const routes = data.timeseries_data.map((d) =>
+    d.unique_routes.filter((r) => hasTwoOrLessSlashes(r))
+  );
+
+  const routeButtons = data.unique_routes
+    .filter((r) => hasTwoOrLessSlashes(r))
+    .map((item, index) => (
+      <button
+        className="btn-secondary"
+        key={index}
+        onClick={() => setRoute(item)}
+      >
+        {item}
+      </button>
+    ));
 
   return (
     <Card
@@ -119,6 +134,16 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
           title={"Unique User IPs"}
         />
       </div>
+      <h2 className="mt-4">Frontend Routes</h2>
+      <div className="flex gap-4 flex-wrap p-4">{routeButtons}</div>
+      {route && (
+        <button
+          onClick={() => setRoute(undefined)}
+          className="btn-accent text-lg"
+        >
+          Clear Route
+        </button>
+      )}
     </Card>
   );
 };

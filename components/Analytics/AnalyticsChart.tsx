@@ -40,8 +40,12 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
 
     return (
       <div className="bg-background py-2 px-3 rounded-md shadow-md">
-        <p className="text-center font-bold">{`${data.value}`}</p>
-        <p className="text-sm">{`${formattedDate}`}</p>
+        <p className="text-center font-bold text-lg">{`${data.value}`}</p>
+        <p className="max-w-20 lg:max-w-48">
+          <span className="font-bold">Routes: </span>
+          {data.routes.join(", ")}
+        </p>
+        <p className="text-sm mt-1">{`${formattedDate}`}</p>
       </div>
     );
   }
@@ -107,6 +111,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   const data = timestamps.map((timestamp, index) => ({
     timestamp: moment(timestamp).valueOf(),
     value: values[index],
+    routes: routes[index],
   }));
 
   const minTimestamp = new Date(timestamps[0]).getTime();
