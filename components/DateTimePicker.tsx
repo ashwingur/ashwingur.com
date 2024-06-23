@@ -76,7 +76,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       )}
     >
       <div className="flex items-center gap-2">
-        <label className="text-sm md:text-base">Start</label>
+        <label className="text-sm md:text-base w-12 lg:w-auto">Start</label>
         <input
           type="datetime-local"
           value={startDateTime}
@@ -86,7 +86,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         />
       </div>
       <div className="flex items-center gap-2">
-        <label className="text-sm md:text-base">End</label>
+        <label className="text-sm md:text-base w-12 lg:w-auto">End</label>
         <input
           type="datetime-local"
           value={endDateTime}
