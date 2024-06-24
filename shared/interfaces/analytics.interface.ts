@@ -1,6 +1,8 @@
 export interface FrontendAnalytics {
   timeseries_data: FrontendTimeseriesData[];
   unique_routes: string[];
+  total_unique_user_id_count: number;
+  total_unique_user_ip_count: number;
 }
 
 interface FrontendTimeseriesData {

@@ -24,6 +24,7 @@ interface AnalyticsChartProps {
   xLabel?: string;
   yLabel?: string;
   tickCount?: number;
+  total?: number;
 }
 
 interface CustomTooltipProps extends TooltipProps<number, string> {
@@ -61,6 +62,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   xLabel,
   yLabel,
   tickCount = 5,
+  total,
 }) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -119,9 +121,11 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
 
   const ticks = generateTicks(minTimestamp, maxTimestamp, tickCount);
 
-  const grandTotal = values.reduce((accumulator: number, currentValue: number): number => {
-    return accumulator + currentValue;
-  }, 0);
+  const grandTotal =
+    total ??
+    values.reduce((accumulator: number, currentValue: number): number => {
+      return accumulator + currentValue;
+    }, 0);
 
   return (
     <Card className="w-full" firstLayer={false}>

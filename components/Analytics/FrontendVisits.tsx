@@ -126,12 +126,14 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
           values={unique_ids}
           routes={routes}
           title={"Unique User IDs"}
+          total={data.total_unique_user_id_count}
         />
         <AnalyticsChart
           timestamps={timestamps}
           values={unique_ips}
           routes={routes}
           title={"Unique User IPs"}
+          total={data.total_unique_user_ip_count}
         />
       </div>
       <h2 className="mt-4">Frontend Routes</h2>
