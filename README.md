@@ -27,7 +27,7 @@ COC_BEARER_TOKEN = "xxx"
 MONGO_USERNAME = "xxx"
 MONGO_PASSWORD = "xxx"
 MONGODB = "xxx"
-CLANTRACK_PIN = "gT0jerpbrUrD7nifB1KT3hR3GksB40LO"
+CLANTRACK_PIN = "xxx"
 OPEN_DATA_TOKEN = "xxx"
 NEXT_PUBLIC_ASHWINGUR_API = "https://localhost"
 ```
