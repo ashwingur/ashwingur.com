@@ -4,7 +4,6 @@ import { AiOutlineDown } from "react-icons/ai";
 import clsx from "clsx";
 
 interface ListboxOption {
-  id: number;
   [key: string]: any;
 }
 
@@ -40,9 +39,9 @@ const GenericListbox = <T extends ListboxOption>({
             maxListBoxHeight
           )}
         >
-          {options.map((option) => (
+          {options.map((option, index) => (
             <Listbox.Option
-              key={option.id}
+              key={index}
               value={option}
               className={({ active }) =>
                 `px-4 cursor-pointer py-2 ${

@@ -22,7 +22,7 @@ const Analytics = () => {
       <Navbar fixed={true} />
       <div className="flex flex-col mx-auto pt-24 pb-8 md:w-4/5 gap-8 px-4 items-center max-h">
         <h3 className="text-center italic">(In Progress)</h3>
-        <GenericListbox
+        <GenericListbox<TimeOption>
           selectedValue={selectedTimeOption}
           onSelectedValueChange={handleSelectedTimeChange}
           options={timeOptions}
