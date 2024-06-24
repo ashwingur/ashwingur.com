@@ -91,7 +91,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
   const timestamps = data.timeseries_data.map((d) => d.timestamp);
   const total_visits = data.timeseries_data.map((d) => d.total_visits);
   const unique_ids = data.timeseries_data.map((d) => d.unique_user_ids);
-  const unique_ips = data.timeseries_data.map((d) => d.unique_users_ips);
+  const unique_ips = data.timeseries_data.map((d) => d.unique_user_ips);
   const routes = data.timeseries_data.map((d) =>
     d.unique_routes.filter((r) => hasTwoOrLessSlashes(r))
   );
@@ -132,6 +132,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
           values={total_visits}
           routes={routes}
           title={"Total Visits"}
+          total={data.total_count}
         />
         <AnalyticsChart
           timestamps={timestamps}
