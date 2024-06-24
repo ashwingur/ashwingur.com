@@ -114,7 +114,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
       className={clsx(className, "flex flex-col items-center")}
     >
       <h2>Frontend Visits</h2>
-      <div className="flex gap-2 md:gap-4 flex-wrap py-4 transition-all">
+      <div className="flex gap-2 md:gap-4 flex-wrap py-4 md:px-4 transition-all">
         {routeButtons}
 
         {route && (
