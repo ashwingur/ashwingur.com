@@ -1,13 +1,13 @@
 // Frontend
 export interface FrontendAnalytics {
-  timeseries_data: BackendTimeSeriesData[];
+  timeseries_data: FrontendTimeSeriesData[];
   unique_routes: string[];
   total_count: number;
   total_unique_user_id_count: number;
   total_unique_user_ip_count: number;
 }
 
-interface BackendTimeSeriesData {
+interface FrontendTimeSeriesData {
   timestamp: string;
   total_visits: number;
   unique_routes: string[];

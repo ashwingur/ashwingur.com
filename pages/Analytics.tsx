@@ -1,3 +1,4 @@
+import BackendRequests from "@components/Analytics/BackendRequests";
 import FrontendVisits from "@components/Analytics/FrontendVisits";
 import GenericListbox from "@components/GenericListBox";
 import Navbar from "@components/navbars/Navbar";
@@ -29,6 +30,11 @@ const Analytics = () => {
           maxListBoxHeight="lg:max-h-none"
         />
         <FrontendVisits
+          startTime={selectedTimeOption.startTime}
+          endTime={selectedTimeOption.endTime}
+          className="self-stretch"
+        />
+        <BackendRequests
           startTime={selectedTimeOption.startTime}
           endTime={selectedTimeOption.endTime}
           className="self-stretch"
