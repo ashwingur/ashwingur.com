@@ -119,9 +119,14 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
 
   const ticks = generateTicks(minTimestamp, maxTimestamp, tickCount);
 
+  const grandTotal = values.reduce((accumulator: number, currentValue: number): number => {
+    return accumulator + currentValue;
+  }, 0);
+
   return (
     <Card className="w-full" firstLayer={false}>
-      <h3 className="text-center my-2 lg:text-xl">{title}</h3>
+      <h3 className="text-center mt-2 mb-1 lg:text-xl">{title}</h3>
+      <p className="text-center mb-2">Total: {grandTotal}</p>
       <div className="flex h-96 lg:h-[32rem]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
