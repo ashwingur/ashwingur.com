@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import timeOptions, { TimeOption } from "shared/timeoptions";
 
 const Analytics = () => {
-  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
+  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
 
   const displayTimeOption = (option: TimeOption) => option.display;
 
