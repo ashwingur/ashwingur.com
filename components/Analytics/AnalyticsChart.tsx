@@ -42,7 +42,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
     return (
       <div className="bg-background py-2 px-3 rounded-md shadow-md">
         <p className="text-center font-bold text-lg">{`${data.value}`}</p>
-        <p className="max-w-20 lg:max-w-48">
+        <p className="max-w-20 lg:max-w-52 break-words">
           <span className="font-bold">Routes: </span>
           {data.routes.join(", ")}
         </p>
