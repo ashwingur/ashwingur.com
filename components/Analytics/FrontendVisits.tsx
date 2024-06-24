@@ -100,7 +100,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
     .filter((r) => hasTwoOrLessSlashes(r))
     .map((item, index) => (
       <button
-        className="btn-secondary"
+        className="btn-secondary text-xs md:text-base"
         key={index}
         onClick={() => setRoute(item)}
       >
@@ -114,6 +114,18 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
       className={clsx(className, "flex flex-col items-center")}
     >
       <h2>Frontend Visits</h2>
+      <div className="flex gap-2 md:gap-4 flex-wrap py-4 transition-all">
+        {routeButtons}
+
+        {route && (
+          <button
+            onClick={() => setRoute(undefined)}
+            className="btn-accent text-xs md:text-base"
+          >
+            Clear Route Filter
+          </button>
+        )}
+      </div>
       <div className="flex flex-col self-stretch gap-8 lg:px-4 mt-4">
         <AnalyticsChart
           timestamps={timestamps}
@@ -135,16 +147,6 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
           title={"Unique User IPs"}
           total={data.total_unique_user_ip_count}
         />
-      </div>
-      <h2 className="mt-4">Frontend Routes</h2>
-      <div className="flex gap-4 flex-wrap p-4 transition-all">
-        {routeButtons}
-
-        {route && (
-          <button onClick={() => setRoute(undefined)} className="btn-accent">
-            Clear Route
-          </button>
-        )}
       </div>
     </Card>
   );
