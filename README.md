@@ -5,13 +5,32 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 The project is deployed on Vercel under the hobby plan. I am using Vercel analytics to track usage, but I have also been designing my own analytics system that can be viewed as a page on my website, as it provides me greater flexbility to track whatever actions I want and also store it indefinitely.
 
 ## Project Layout
+
 Routes are located in the `pages` directory, and the built in api is mapped to `pages/api`.
 
 - All React components are in the `components` directory.
 - All context providers are in the `context` directory.
 - The `data` directory contains any hardcoded json files, such as my Media Reviews.
 
+## Environment File
 
+`.env`
+
+```
+PUSHER_APP_ID = "xxx"
+PUSHER_SECRET = "xxx"
+NEXT_PUBLIC_PUSHER_CLUSTER = "ap4"
+NEXT_PUBLIC_PUSHER_KEY = "71a7b422dcc29a66021c"
+COC_DEV_EMAIL = "xxx"
+COC_DEV_PASS = "xxx"
+COC_BEARER_TOKEN = "xxx"
+MONGO_USERNAME = "xxx"
+MONGO_PASSWORD = "xxx"
+MONGODB = "xxx"
+CLANTRACK_PIN = "gT0jerpbrUrD7nifB1KT3hR3GksB40LO"
+OPEN_DATA_TOKEN = "xxx"
+NEXT_PUBLIC_ASHWINGUR_API = "https://localhost"
+```
 
 ## Getting Started
 
@@ -28,5 +47,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-
