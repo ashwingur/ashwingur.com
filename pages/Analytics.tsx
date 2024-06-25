@@ -3,9 +3,15 @@ import FrontendVisits from "@components/Analytics/FrontendVisits";
 import GenericListbox from "@components/GenericListBox";
 import Navbar from "@components/navbars/Navbar";
 import React, { useState } from "react";
-import timeOptions, { TimeOption } from "shared/timeoptions";
+import { TimeOption, createTimeOptions } from "shared/timeoptions";
 
 const Analytics = () => {
+  const timeOptions = createTimeOptions({
+    hoursOptions: [1, 24],
+    daysOptions: [3, 7, 31, 90, 180],
+    yearsOptions: [1],
+    includeCustom: true,
+  });
   const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
 
   const displayTimeOption = (option: TimeOption) => option.display;

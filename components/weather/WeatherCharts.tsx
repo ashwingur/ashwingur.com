@@ -5,15 +5,23 @@ import TimeSeriesChart from "./TimeSeriesChart";
 import { Listbox } from "@headlessui/react";
 import { AiOutlineDown } from "react-icons/ai";
 import Card from "@components/Card";
-import DateTimePicker from "@components/DateTimePicker";
+import DateTimeRangePicker from "@components/DateTimeRangePicker";
+import {
+  TimeOption,
+  createTimeOptions,
+  roundUpToNearestMinute,
+} from "shared/timeoptions";
+import GenericListbox from "@components/GenericListBox";
 
 const fetchWeatherData = async (
-  start: number,
-  end: number
+  start: Date,
+  end: Date
 ): Promise<WeatherData> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${start}&end=${end}`,
+      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${
+        start.getTime() / 1000
+      }&end=${end.getTime() / 1000}`,
       { credentials: "include" }
     );
     if (!response.ok) {
@@ -27,79 +35,48 @@ const fetchWeatherData = async (
   }
 };
 
-const timeOptions = [
-  { id: 0, display: "Custom", seconds: 24 * 3600 },
-  { id: 1, display: "Last 24 hours", seconds: 24 * 3600 },
-  { id: 2, display: "Last 3 days", seconds: 24 * 3600 * 3 },
-  { id: 3, display: "Last 7 days", seconds: 24 * 3600 * 7 },
-  { id: 4, display: "Last 14 days", seconds: 24 * 3600 * 14 },
-  { id: 5, display: "Last 31 days", seconds: 24 * 3600 * 31 },
-  { id: 6, display: "Last 90 days", seconds: 24 * 3600 * 90 },
-  { id: 7, display: "Last 180 days", seconds: 24 * 3600 * 180 },
-  { id: 8, display: "Last 365 days", seconds: 24 * 3600 * 365 },
-];
-
 const WeatherCharts = () => {
   const firstDbEntryTime = 1717137003;
-  const [selectedTime, setSelectedTime] = useState(timeOptions[1]);
-
-  const [customTime, setCustomTime] = useState<{
-    start?: string;
-    end?: string;
-    difference: number;
-    startLessThanEnd: boolean;
-  }>({
-    start: undefined,
-    end: undefined,
-    difference: 3600 * 24,
-    startLessThanEnd: true,
+  const timeOptions = createTimeOptions({
+    hoursOptions: [1, 24],
+    daysOptions: [3, 7, 31, 90, 180],
+    yearsOptions: [1],
+    includeCustom: true,
   });
+  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
+  const displayTimeOption = (option: TimeOption) => option.display;
 
-  // Calculate start and end times based on selectedTime
-  let start = Math.floor(Date.now() / 1000 - selectedTime.seconds);
-  let end = Math.floor(Date.now() / 1000);
+  const handleSelectedTimeChange = (timeOption: TimeOption) => {
+    setSelectedTimeOption(timeOption);
+  };
 
-  if (
-    selectedTime.id === 0 &&
-    customTime.start &&
-    customTime.end !== undefined &&
-    customTime.startLessThanEnd &&
-    !isNaN(new Date(customTime.start).getTime()) &&
-    !isNaN(new Date(customTime.end).getTime())
-  ) {
-    start = new Date(customTime.start).getTime() / 1000;
-    end = new Date(customTime.end).getTime() / 1000;
-  }
+  const onDateTimeChange = (start: Date, end: Date) => {
+    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+      setSelectedTimeOption((prev) => ({
+        ...prev,
+        startTime: start,
+        endTime: end,
+      }));
+    }
+  };
 
   // Use the calculated start and end times in the query key and query function
   const { data, isLoading, isError } = useQuery<WeatherData>({
-    queryKey: ["historicalweather", start, end],
-    queryFn: () => fetchWeatherData(start, end),
+    queryKey: [
+      "historicalweather",
+      selectedTimeOption.startTime,
+      selectedTimeOption.endTime,
+    ],
+    queryFn: () =>
+      fetchWeatherData(
+        selectedTimeOption.startTime,
+        selectedTimeOption.endTime
+      ),
+    staleTime: 60 * 1000, // 1 minute
+    cacheTime: 5 * 60 * 1000, // 5 minutes
+    retry: 1,
     keepPreviousData: true, // Keeps the previous data while fetching new data (also smooth transitions as a benefit)
   });
-
-  const onSelectedTimeChange = (value: {
-    id: number;
-    display: string;
-    seconds: number;
-  }) => {
-    const newTime = timeOptions[value.id];
-    setSelectedTime(newTime);
-  };
-
-  const onDateTimeChange = (
-    start: string,
-    end: string,
-    unixDifference: number,
-    startLessThanEnd: boolean
-  ) => {
-    setCustomTime({
-      start,
-      end,
-      difference: unixDifference,
-      startLessThanEnd,
-    });
-  };
 
   if (isLoading) {
     return (
@@ -120,38 +97,25 @@ const WeatherCharts = () => {
         firstLayer={true}
       >
         <h2 className="mt-2">Historical Data</h2>
-        <div className="relative mt-4 mb-2 z-20">
-          <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
-            <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 justify-between">
-              <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
-                {selectedTime.display}
-                <AiOutlineDown className="hover:text-xl transition-all" />
-              </Listbox.Button>
-            </div>
-            <Listbox.Options className="absolute z-50 bg-background-muted rounded-lg w-60 mt-1 max-h-60 overflow-auto">
-              {timeOptions.map((time) => (
-                <Listbox.Option
-                  key={time.id}
-                  value={time}
-                  className={({ active }) =>
-                    `px-4 cursor-pointer py-2 ${
-                      active ? "bg-accent text-text-accent" : ""
-                    }`
-                  }
-                >
-                  {time.display}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Listbox>
-        </div>
-        {selectedTime.id === 0 && (
+
+        <GenericListbox<TimeOption>
+          selectedValue={selectedTimeOption}
+          onSelectedValueChange={handleSelectedTimeChange}
+          options={timeOptions}
+          displayValue={displayTimeOption}
+          className="mt-4 mb-2 z-20"
+          maxListBoxHeight="lg:max-h-none"
+        />
+
+        {selectedTimeOption.id === 0 && (
           <div>
-            <DateTimePicker
+            <DateTimeRangePicker
               onDateTimeChange={onDateTimeChange}
               className="mt-2 mb-4"
+              defaultStartTime={timeOptions[0].startTime}
+              defaultEndTime={timeOptions[0].endTime}
             />
-            {!customTime.startLessThanEnd && (
+            {selectedTimeOption.startTime > selectedTimeOption.endTime && (
               <p className="font-bold text-center">
                 Start date must be less than end date
               </p>
@@ -187,45 +151,30 @@ const WeatherCharts = () => {
       firstLayer={true}
     >
       <h2 className="mt-2">Historical Data</h2>
-      <div className="relative mt-4 mb-2 z-20">
-        <Listbox value={selectedTime} onChange={onSelectedTimeChange}>
-          <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between">
-            <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
-              {selectedTime.display}
-              <AiOutlineDown className="hover:text-xl transition-all" />
-            </Listbox.Button>
-          </div>
-          <Listbox.Options className="absolute z-50 bg-background-muted rounded-lg w-60 mt-1 max-h-60 overflow-auto">
-            {timeOptions.map((time) => (
-              <Listbox.Option
-                key={time.id}
-                value={time}
-                className={({ active }) =>
-                  `px-4 cursor-pointer py-2 ${
-                    active ? "bg-accent text-text-accent" : ""
-                  }`
-                }
-              >
-                {time.display}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Listbox>
-      </div>
-      {selectedTime.id === 0 && (
+      <GenericListbox<TimeOption>
+        selectedValue={selectedTimeOption}
+        onSelectedValueChange={handleSelectedTimeChange}
+        options={timeOptions}
+        displayValue={displayTimeOption}
+        className="mt-4 mb-2 z-20"
+        maxListBoxHeight="lg:max-h-none"
+      />
+      {selectedTimeOption.id === 0 && (
         <div>
-          <DateTimePicker
+          <DateTimeRangePicker
             onDateTimeChange={onDateTimeChange}
             className="mt-2 mb-4"
+            defaultStartTime={timeOptions[0].startTime}
+            defaultEndTime={timeOptions[0].endTime}
           />
-          {!customTime.startLessThanEnd && (
+          {selectedTimeOption.startTime > selectedTimeOption.endTime && (
             <p className="font-bold text-center mb-4">
               Start date must be less than end date
             </p>
           )}
         </div>
       )}
-      {start < firstDbEntryTime && (
+      {selectedTimeOption.startTime.getTime() / 1000 < firstDbEntryTime && (
         <p className="text-xs mb-4 px-4">
           Note: weather station deployed on 31/5/24 (no data exists before then)
         </p>
