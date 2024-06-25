@@ -44,7 +44,7 @@ const WeatherCharts = () => {
     includeCustom: true,
   });
   // Listbox props
-  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
+  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
   const displayTimeOption = (option: TimeOption) => option.display;
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
     setSelectedTimeOption(timeOption);
