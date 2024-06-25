@@ -43,13 +43,14 @@ const WeatherCharts = () => {
     yearsOptions: [1],
     includeCustom: true,
   });
+  // Listbox props
   const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
   const displayTimeOption = (option: TimeOption) => option.display;
-
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
     setSelectedTimeOption(timeOption);
   };
 
+  // Date range picker prop
   const onDateTimeChange = (start: Date, end: Date) => {
     if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
       setSelectedTimeOption((prev) => ({
@@ -60,7 +61,7 @@ const WeatherCharts = () => {
     }
   };
 
-  // Use the calculated start and end times in the query key and query function
+  // Query
   const { data, isLoading, isError } = useQuery<WeatherData>({
     queryKey: [
       "historicalweather",

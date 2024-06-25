@@ -1,5 +1,6 @@
 import BackendRequests from "@components/Analytics/BackendRequests";
 import FrontendVisits from "@components/Analytics/FrontendVisits";
+import DateTimeRangePicker from "@components/DateTimeRangePicker";
 import GenericListbox from "@components/GenericListBox";
 import Navbar from "@components/navbars/Navbar";
 import React, { useState } from "react";
@@ -12,29 +13,53 @@ const Analytics = () => {
     yearsOptions: [1],
     includeCustom: true,
   });
+  // Listbox props
   const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
-
   const displayTimeOption = (option: TimeOption) => option.display;
-
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
-    if (timeOption.id === 0) {
-      // Set custom time from date picker
-    }
     setSelectedTimeOption(timeOption);
+  };
+
+  // Date range picker prop
+  const onDateTimeChange = (start: Date, end: Date) => {
+    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+      setSelectedTimeOption((prev) => ({
+        ...prev,
+        startTime: start,
+        endTime: end,
+      }));
+    }
   };
 
   return (
     <div className="min-h-screen">
       <Navbar fixed={true} />
       <div className="flex flex-col mx-auto pt-24 pb-8 md:w-4/5 gap-8 px-4 items-center max-h">
-        <h3 className="text-center italic">(In Progress)</h3>
-        <GenericListbox<TimeOption>
-          selectedValue={selectedTimeOption}
-          onSelectedValueChange={handleSelectedTimeChange}
-          options={timeOptions}
-          displayValue={displayTimeOption}
-          maxListBoxHeight="lg:max-h-none"
-        />
+        <div className="flex flex-col items-center">
+          <h3 className="mb-2 text-xl">Time Filter</h3>
+          <GenericListbox<TimeOption>
+            selectedValue={selectedTimeOption}
+            onSelectedValueChange={handleSelectedTimeChange}
+            options={timeOptions}
+            displayValue={displayTimeOption}
+            maxListBoxHeight="lg:max-h-none"
+          />
+          {selectedTimeOption.id === 0 && (
+            <div>
+              <DateTimeRangePicker
+                onDateTimeChange={onDateTimeChange}
+                className="mt-2 mb-4"
+                defaultStartTime={timeOptions[0].startTime}
+                defaultEndTime={timeOptions[0].endTime}
+              />
+              {selectedTimeOption.startTime > selectedTimeOption.endTime && (
+                <p className="font-bold text-center">
+                  Start date must be less than end date
+                </p>
+              )}
+            </div>
+          )}
+        </div>
         <FrontendVisits
           startTime={selectedTimeOption.startTime}
           endTime={selectedTimeOption.endTime}

@@ -17,8 +17,6 @@ export const roundUpToNearestMinute = (date: Date): Date => {
   return roundedDate;
 };
 
-const now = new Date();
-
 interface TimeOptionsInput {
   minutesOptions?: number[];
   hoursOptions?: number[];
