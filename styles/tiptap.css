@@ -35,7 +35,7 @@
 }
 
 .menubar button {
-  @apply py-1 md:px-2 flex items-center justify-center text-center hover:bg-primary hover:text-text-primary rounded-lg transition-all min-w-8 font-sans font-bold;
+  @apply py-1 md:px-2 flex items-center justify-center text-center hover:bg-primary hover:text-text-primary rounded-lg transition-all w-8 h-8 font-sans font-bold;
 }
 
 .menubar .is-active {
