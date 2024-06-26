@@ -1,24 +1,48 @@
+import CodeBlock from "@tiptap/extension-code-block";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
-import {
-  EditorProvider,
-  useCurrentEditor,
-  EditorContent,
-  useEditor,
-  Editor,
-} from "@tiptap/react";
+import { EditorContent, useEditor, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import clsx from "clsx";
 import React from "react";
-import { FaItalic, FaStrikethrough } from "react-icons/fa";
-import { FaBold, FaCode, FaEraser, FaUnderline } from "react-icons/fa6";
+import { AiOutlineEnter } from "react-icons/ai";
+import {
+  FaAlignCenter,
+  FaItalic,
+  FaRedo,
+  FaStrikethrough,
+  FaUndo,
+} from "react-icons/fa";
+import {
+  FaAlignJustify,
+  FaAlignLeft,
+  FaAlignRight,
+  FaBold,
+  FaCode,
+  FaEraser,
+  FaQuoteLeft,
+  FaSubscript,
+  FaSuperscript,
+  FaUnderline,
+} from "react-icons/fa6";
 import { IoCode } from "react-icons/io5";
-import { MdOutlineFormatClear } from "react-icons/md";
+import {
+  MdFormatListBulleted,
+  MdFormatListNumbered,
+  MdHorizontalRule,
+  MdOutlineFormatClear,
+} from "react-icons/md";
+import { common, createLowlight } from "lowlight";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
 
-// import "styles/tiptap.css";
+interface TipTapProps {
+  className?: string;
+}
 
 interface MenuBarProps {
   editor: Editor | null;
@@ -33,9 +57,22 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
   return (
     <div className={clsx(className)}>
       <button
+        onClick={() => editor.chain().focus().undo().run()}
+        disabled={!editor.can().chain().focus().undo().run()}
+      >
+        <FaUndo />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().redo().run()}
+        disabled={!editor.can().chain().focus().redo().run()}
+      >
+        <FaRedo />
+      </button>
+
+      <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
-        className={editor.isActive("bold") ? "bg-red-500" : ""}
+        className={editor.isActive("bold") ? "is-active" : ""}
       >
         <FaBold />
       </button>
@@ -61,6 +98,30 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
         <FaStrikethrough />
       </button>
       <button
+        onClick={() => editor.chain().focus().setTextAlign("left").run()}
+        className={editor.isActive("left") ? "is-active" : ""}
+      >
+        <FaAlignLeft />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("center").run()}
+        className={editor.isActive("strike") ? "is-active" : ""}
+      >
+        <FaAlignCenter />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("right").run()}
+        className={editor.isActive("strike") ? "is-active" : ""}
+      >
+        <FaAlignRight />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+        className={editor.isActive("strike") ? "is-active" : ""}
+      >
+        <FaAlignJustify />
+      </button>
+      <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
         className={editor.isActive("code") ? "is-active" : ""}
@@ -84,7 +145,7 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={editor.isActive("paragraph") ? "is-active" : ""}
       >
-        Paragraph
+        P
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -105,67 +166,47 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
         H3
       </button>
       <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive("heading", { level: 4 }) ? "is-active" : ""}
-      >
-        H4
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive("heading", { level: 5 }) ? "is-active" : ""}
-      >
-        H5
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive("heading", { level: 6 }) ? "is-active" : ""}
-      >
-        H6
-      </button>
-      <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive("bulletList") ? "is-active" : ""}
       >
-        Bullet list
+        <MdFormatListBulleted />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive("orderedList") ? "is-active" : ""}
       >
-        Ordered list
+        <MdFormatListNumbered />
       </button>
 
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive("blockquote") ? "is-active" : ""}
       >
-        Blockquote
-      </button>
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        Horizontal rule
-      </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-        Hard break
+        <FaQuoteLeft />
       </button>
       <button
-        onClick={() => editor.chain().focus().undo().run()}
-        disabled={!editor.can().chain().focus().undo().run()}
+        onClick={() =>
+          editor.chain().focus().toggleSuperscript().unsetSubscript().run()
+        }
+        className={editor.isActive("superscript") ? "is-active" : ""}
       >
-        Undo
+        <FaSuperscript />
       </button>
       <button
-        onClick={() => editor.chain().focus().redo().run()}
-        disabled={!editor.can().chain().focus().redo().run()}
-      >
-        Redo
-      </button>
-      <button
-        onClick={() => editor.chain().focus().setColor("#958DF1").run()}
+        onClick={() =>
+          editor.chain().focus().toggleSubscript().unsetSuperscript().run()
+        }
         className={
-          editor.isActive("textStyle", { color: "#958DF1" }) ? "is-active" : ""
+          editor.isActive("superscript") ? "is-active bg-blue-400" : ""
         }
       >
-        Purple
+        <FaSubscript />
+      </button>
+      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+        <MdHorizontalRule />
+      </button>
+      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+        <AiOutlineEnter />
       </button>
     </div>
   );
@@ -178,13 +219,26 @@ const extensions = [
     types: ["heading", "paragraph"],
   }),
   Underline,
-  StarterKit,
+  StarterKit.configure({
+    codeBlock: false,
+  }),
+  CodeBlockLowlight.configure({
+    lowlight: createLowlight(common),
+  }),
+  Subscript,
+  Superscript,
 ];
 
 const content = `
+<h1>
+  This is a H1 Heading,
+</h1>
 <h2>
-  Hi there,
+  This is a H2 Heading,
 </h2>
+<h3>
+  This is a H3 Heading,
+</h3>
 <p>
   this is a <em>basic</em> example of <strong>Tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
 </p>
@@ -212,18 +266,29 @@ const content = `
 </blockquote>
 `;
 
-const TipTap = () => {
+function formatHTML(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+  return new XMLSerializer().serializeToString(doc);
+}
+
+const TipTap: React.FC<TipTapProps> = ({ className }) => {
   const editor = useEditor({ extensions, content });
   return (
-    <div className="border border-text p-2 lg:p-4">
-      <MenuBar editor={editor} className="flex flex-wrap gap-2 border-b" />
+    <div
+      className={clsx(className, "border border-text rounded-md px-3 md:px-4")}
+    >
+      <MenuBar
+        editor={editor}
+        className="menubar flex flex-wrap gap-1 border-b border-text-muted py-2 text-lg"
+      />
       <EditorContent
         editor={editor}
         content={content}
-        className="editor"
+        className="editor py-4"
         autoComplete="new-password"
       />
-      <pre>{JSON.stringify(editor?.getHTML(), null, 2)}</pre>
+      {/* <pre className="text-wrap">{editor?.getHTML()}</pre> */}
     </div>
   );
 };
