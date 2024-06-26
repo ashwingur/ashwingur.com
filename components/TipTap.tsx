@@ -99,25 +99,25 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
       </button>
       <button
         onClick={() => editor.chain().focus().setTextAlign("left").run()}
-        className={editor.isActive("left") ? "is-active" : ""}
+        className={editor.isActive({ textAlign: "left" }) ? "is-active" : ""}
       >
         <FaAlignLeft />
       </button>
       <button
         onClick={() => editor.chain().focus().setTextAlign("center").run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        className={editor.isActive({ textAlign: "center" }) ? "is-active" : ""}
       >
         <FaAlignCenter />
       </button>
       <button
         onClick={() => editor.chain().focus().setTextAlign("right").run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        className={editor.isActive({ textAlign: "right" }) ? "is-active" : ""}
       >
         <FaAlignRight />
       </button>
       <button
         onClick={() => editor.chain().focus().setTextAlign("justify").run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        className={editor.isActive({ textAlign: "justify" }) ? "is-active" : ""}
       >
         <FaAlignJustify />
       </button>
