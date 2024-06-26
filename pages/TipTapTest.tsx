@@ -11,7 +11,7 @@ const TipTapTest = () => {
         firstLayer={true}
         className="flex flex-col items-center mx-4 lg:mx-auto lg:w-2/3 "
       >
-        <TipTap className="mt-8  bg-background-muted" />
+        <TipTap className="mt-8 bg-background-muted w-full" />
       </Card>
     </div>
   );

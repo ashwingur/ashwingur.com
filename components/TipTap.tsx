@@ -276,7 +276,10 @@ const TipTap: React.FC<TipTapProps> = ({ className }) => {
   const editor = useEditor({ extensions, content });
   return (
     <div
-      className={clsx(className, "border border-text rounded-md px-3 md:px-4")}
+      className={clsx(
+        className,
+        "border border-text rounded-md px-3 md:px-4 flex flex-col max-w-fit"
+      )}
     >
       <MenuBar
         editor={editor}
@@ -288,7 +291,7 @@ const TipTap: React.FC<TipTapProps> = ({ className }) => {
         className="editor py-4"
         autoComplete="new-password"
       />
-      {/* <pre className="text-wrap">{editor?.getHTML()}</pre> */}
+      <pre className="text-wrap">{editor?.getHTML()}</pre>
     </div>
   );
 };
