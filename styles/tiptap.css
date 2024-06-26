@@ -1,0 +1,11 @@
+/* Get rid of that outline */
+.ProseMirror:focus {
+  outline: none;
+}
+
+.editor:first-child {
+  margin-top: 0;
+}
+
+.editor h2 {
+}
