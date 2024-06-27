@@ -52,6 +52,7 @@
   --color-accent: theme(colors.red.600);
   --color-accent-muted: theme(colors.red.500);
   --color-accent-hover: theme(colors.red.700);
+  --color-error: theme(colors.red.700);
 }
 
 /* Dark Theme */
@@ -74,6 +75,7 @@
   --color-accent: theme(colors.red.700);
   --color-accent-muted: theme(colors.red.600);
   --color-accent-hover: theme(colors.red.800);
+  --color-error: theme(colors.red.400);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -275,6 +277,16 @@ html {
 .input {
   @apply border-2 border-text-muted rounded-full px-4 py-1 md:py-2 bg-background-muted placeholder:text-text-muted;
 }
+.input:invalid,
+.input[aria-invalid="true"] {
+  @apply border-error;
+}
+
 .input-hover {
   @apply border-2 border-text-muted rounded-full px-4 py-1 md:py-2 bg-background-hover placeholder:text-text-muted;
+}
+
+.input-hover:invalid,
+.input-hover[aria-invalid="true"] {
+  @apply border-error;
 }

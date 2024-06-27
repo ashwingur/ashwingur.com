@@ -20,6 +20,7 @@
   --color-accent: theme(colors.blue.600);
   --color-accent-muted: theme(colors.blue.500);
   --color-accent-hover: theme(colors.blue.700);
+  --color-error: theme(colors.red.600);
 }
 
 @layer base {

@@ -5,11 +5,11 @@ import Navbar from "@components/navbars/Navbar";
 
 const TipTapTest = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-8">
       <Navbar fixed={true} />
       <h1 className="text-center pt-24">Tip Tap Test</h1>
       <Card
-        firstLayer={true}
+        firstLayer={false}
         className="flex flex-col items-center mx-4 lg:mx-auto lg:w-2/3 "
       >
         <CreateOrUpdateReviewForm className="mb-10 w-full px-4" />

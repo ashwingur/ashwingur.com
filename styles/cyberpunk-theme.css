@@ -21,6 +21,7 @@
   --color-accent: theme(colors.cyan.700);
   --color-accent-muted: theme(colors.cyan.600);
   --color-accent-hover: theme(colors.cyan.800);
+  --color-error: theme(colors.red.500);
 }
 
 @layer base {

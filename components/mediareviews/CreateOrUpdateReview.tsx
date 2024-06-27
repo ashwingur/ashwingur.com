@@ -3,50 +3,49 @@ import { MediaReview } from "@interfaces/mediareview.interface";
 import clsx from "clsx";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { mediaReviewSchema } from "shared/validations/mediaReviewSchema";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import GenreSelector, { GenreOption } from "./GenreSelector";
+import { MultiValue } from "react-select";
+import GenericMultiSelector from "@components/GenericSelector";
 
 interface CreateOrUpdateReviewFormProps {
-  existingData?: MediaReview;
+  // existingData?: MediaReview;
   className?: string;
 }
 
+type Schema = z.infer<typeof mediaReviewSchema>;
+
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
-const availableGenres = [
-  "Action",
-  "Drama",
-  "Comedy",
-  "Horror",
-  "Science Fiction",
-  "Romance",
+
+const predefinedGenres: GenreOption[] = [
+  { value: "Action", label: "Action" },
+  { value: "Drama", label: "Drama" },
+  { value: "Comedy", label: "Comedy" },
+  { value: "Horror", label: "Horror" },
+  { value: "Science Fiction", label: "Science Fiction" },
+  { value: "Romance", label: "Romance" },
 ];
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
-  existingData,
+  // existingData,
   className,
 }) => {
-  // Existing data means we want to update something already in the DB
-  // Otherwise create a fresh new review
-  const defaultValues = existingData ?? {
-    id: null,
-    name: "",
-    media_type: "Book",
-    cover_image: "",
-    rating: null,
-    review_content: null,
-    word_count: null,
-    run_time: null,
-    creator: null,
-    media_creation_date: null,
-    date_consumed: null,
-    genres: [],
-    pros: [],
-    cons: [],
-    visible: true,
-  };
-
-  const { control, handleSubmit, register, setValue } = useForm<MediaReview>({
-    defaultValues: defaultValues,
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+    watch,
+  } = useForm<Schema>({
+    resolver: zodResolver(mediaReviewSchema),
+    // defaultValues: defaultValues,
   });
 
+  // console.log(watch());
+  // console.log(errors);
+  // console.log(errors.name !== undefined);
   const onSubmit = (data: MediaReview) => {
     // Handle form submission, e.g., send data to the server
     console.log(`form submitted`);
@@ -58,7 +57,12 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <label>Name:</label>
-          <input className="input w-11/12 md:w-4/5" {...register("name")} />
+          <input
+            className="input w-11/12 md:w-4/5"
+            aria-invalid={errors.name !== undefined}
+            {...register("name")}
+          />
+          <p className="text-error">{errors.name?.message}</p>
         </div>
         <div>
           <label>Media Type:</label>
@@ -84,9 +88,11 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             type="number"
             step="0.1"
             {...register("rating")}
+            aria-invalid={errors.rating !== undefined}
           />
+          <p className="text-error">{errors.rating?.message}</p>
         </div>
-        <div>
+        <div className="flex flex-col gap-1">
           <label>Review Content:</label>
           <Controller
             name="review_content"
@@ -95,7 +101,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               <TipTap
                 value={field.value || ""}
                 onChange={field.onChange}
-                className="w-full"
+                className="w-11/12 md:w-4/5 bg-background-muted"
               />
             )}
           />
@@ -114,7 +120,9 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             className="input w-11/12 md:w-4/5"
             type="number"
             {...register("run_time")}
+            aria-invalid={errors.run_time !== undefined}
           />
+          <p className="text-error">{errors.run_time?.message}</p>
         </div>
         <div className="flex flex-col gap-1">
           <label>Creator:</label>
@@ -142,15 +150,19 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             name="genres"
             control={control}
             render={({ field }) => (
-              <select {...field} multiple>
-                {availableGenres.map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </select>
+              <GenreSelector
+                value={(field.value || []).map((genre: string) => ({
+                  value: genre,
+                  label: genre,
+                }))}
+                onChange={(selectedGenres: MultiValue<GenreOption>) =>
+                  field.onChange(selectedGenres.map((genre) => genre.value))
+                }
+                className="w-11/12 md:w-4/5 border-2 border-text-muted rounded-full"
+              />
             )}
           />
+          <p className="text-error">{errors.genres?.message}</p>
         </div>
         <div className="flex flex-col gap-1">
           <label>Pros:</label>
@@ -190,7 +202,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             )}
           />
         </div>
-        <div>
+        <div className="flex items-center gap-2">
           <label>Visible:</label>
           <input type="checkbox" {...register("visible")} />
         </div>

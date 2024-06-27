@@ -334,7 +334,7 @@ const TipTap: React.FC<TipTapProps> = ({ value, onChange, className }) => {
     <div
       className={clsx(
         className,
-        "border border-text rounded-md px-3 md:px-4 flex flex-col max-w-fit"
+        "border border-text rounded-md px-3 md:px-4 flex flex-col"
       )}
     >
       <MenuBar

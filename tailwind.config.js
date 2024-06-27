@@ -28,6 +28,7 @@ module.exports = {
         accent: "var(--color-accent)",
         "accent-muted": "var(--color-accent-muted)",
         "accent-hover": "var(--color-accent-hover)",
+        error: "var(--color-error)",
         // Tron colours
         "tron-blue": "#3ed9de",
         "tron-orange": "#d69760",
