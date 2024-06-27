@@ -13,6 +13,10 @@
   @apply text-xl;
 }
 
+.editor a {
+  @apply text-text-hover hover:cursor-pointer;
+}
+
 .editor ul {
   @apply list-disc pl-4;
 }

@@ -1,5 +1,6 @@
 import Card from "@components/Card";
 import TipTap from "@components/TipTap";
+import CreateOrUpdateReviewForm from "@components/mediareviews/CreateOrUpdateReview";
 import Navbar from "@components/navbars/Navbar";
 
 const TipTapTest = () => {
@@ -11,7 +12,7 @@ const TipTapTest = () => {
         firstLayer={true}
         className="flex flex-col items-center mx-4 lg:mx-auto lg:w-2/3 "
       >
-        <TipTap className="mt-8 bg-background-muted w-full" />
+        <CreateOrUpdateReviewForm className="mb-10 w-full px-4" />
       </Card>
     </div>
   );
