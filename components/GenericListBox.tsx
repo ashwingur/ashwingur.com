@@ -7,27 +7,34 @@ interface ListboxOption {
   [key: string]: any;
 }
 
-interface GenericListboxProps<T extends ListboxOption> {
+interface GenericListboxProps<T> {
   selectedValue: T;
   onSelectedValueChange: (value: T) => void;
   options: T[];
   displayValue: (option: T) => string;
   className?: string;
   maxListBoxHeight?: string;
+  muted?: boolean;
 }
 
-const GenericListbox = <T extends ListboxOption>({
+const GenericListbox = <T,>({
   selectedValue,
   onSelectedValueChange,
   options,
   displayValue,
   className,
   maxListBoxHeight = "max-h-60",
+  muted = false,
 }: GenericListboxProps<T>) => {
   return (
     <div className={clsx("relative", className)}>
       <Listbox value={selectedValue} onChange={onSelectedValueChange}>
-        <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between shadow-md">
+        <div
+          className={clsx(
+            "cursor-default overflow-hidden rounded-lg text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between shadow-md",
+            muted ? "bg-background-muted" : "bg-background-hover"
+          )}
+        >
           <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
             {displayValue(selectedValue)}
             <AiOutlineDown className="hover:text-xl transition-all" />

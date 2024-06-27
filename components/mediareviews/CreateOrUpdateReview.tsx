@@ -8,6 +8,7 @@ import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
 import GenericMultiSelector from "@components/GenericSelector";
+import GenericListbox from "@components/GenericListBox";
 
 interface CreateOrUpdateReviewFormProps {
   // existingData?: MediaReview;
@@ -15,6 +16,18 @@ interface CreateOrUpdateReviewFormProps {
 }
 
 type Schema = z.infer<typeof mediaReviewSchema>;
+
+interface MediaType {
+  media_type: string;
+}
+
+// const mediaTypes: MediaType[] = [
+//   { media_type: "Movie" },
+//   { media_type: "Book" },
+//   { media_type: "Show" },
+//   { media_type: "Game" },
+//   { media_type: "Music" },
+// ];
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
 
@@ -45,7 +58,6 @@ const predefinedGenres: GenreOption[] = [
   { value: "War", label: "War" },
   { value: "Sports", label: "Sports" },
   { value: "Superhero", label: "Superhero" },
-  { value: "Epic", label: "Epic" },
   { value: "Martial Arts", label: "Martial Arts" },
   { value: "Steampunk", label: "Steampunk" },
   { value: "Cyberpunk", label: "Cyberpunk" },
@@ -58,13 +70,38 @@ const predefinedGenres: GenreOption[] = [
   { value: "Satire", label: "Satire" },
   { value: "Tragedy", label: "Tragedy" },
   { value: "Spy", label: "Spy" },
-  { value: "Mystery Thriller", label: "Mystery Thriller" },
-  { value: "Legal Thriller", label: "Legal Thriller" },
-  { value: "Techno Thriller", label: "Techno Thriller" },
-  { value: "Romantic Comedy", label: "Romantic Comedy" },
-  { value: "Dark Comedy", label: "Dark Comedy" },
-  { value: "Space Opera", label: "Space Opera" },
-  { value: "Post-Apocalyptic", label: "Post-Apocalyptic" },
+  { value: "Apocalyptic", label: "Apocalyptic" },
+  { value: "Dystopian", label: "Dystopian" },
+  { value: "Bollywood", label: "Bollywood" },
+  { value: "RPG", label: "RPG" },
+  { value: "ARPG", label: "ARPG" },
+  { value: "Simulation", label: "Simulation" },
+  { value: "Strategy", label: "Strategy" },
+  { value: "Sports", label: "Sports" },
+  { value: "Puzzle", label: "Puzzle" },
+  { value: "Idle", label: "Idle" },
+  { value: "Casual", label: "Casual" },
+  { value: "Shooter", label: "Shooter" },
+  { value: "Fighting", label: "Fighting" },
+  { value: "Racing", label: "Racing" },
+  { value: "Stealth", label: "Stealth" },
+  { value: "Survival", label: "Survival" },
+  { value: "Horror", label: "Horror" },
+  { value: "Platformer", label: "Platformer" },
+  { value: "Music", label: "Music" },
+  { value: "Party", label: "Party" },
+  { value: "Board", label: "Board" },
+  { value: "Card", label: "Card" },
+  { value: "Trivia", label: "Trivia" },
+  { value: "Educational", label: "Educational" },
+  { value: "MMORPG", label: "MMORPG" },
+  { value: "MOBA", label: "MOBA" },
+  { value: "Sandbox", label: "Sandbox" },
+  { value: "Tower Defense", label: "Tower Defense" },
+  { value: "Metroidvania", label: "Metroidvania" },
+  { value: "Visual Novel", label: "Visual Novel" },
+  { value: "Roguelike", label: "Roguelike" },
+  { value: "Indie", label: "Indie" },
 ];
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
@@ -105,13 +142,24 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
         </div>
         <div>
           <label>Media Type:</label>
-          <select {...register("media_type")}>
-            {mediaTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          <Controller
+            name="media_type"
+            control={control}
+            render={({ field }) => {
+              return (
+                <GenericListbox<string>
+                  selectedValue={
+                    mediaTypes.find((i) => i === field.value) ?? mediaTypes[0]
+                  }
+                  onSelectedValueChange={(value) => field.onChange(value)}
+                  options={mediaTypes}
+                  displayValue={(option) => option}
+                  className="w-11/12 md:w-4/5"
+                  muted={true}
+                />
+              );
+            }}
+          />
         </div>
         <div className="flex flex-col gap-1">
           <label>Cover Image URL:</label>
@@ -190,12 +238,14 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             control={control}
             render={({ field }) => {
               // Filter out selected genres from options
-              const filteredOptions = predefinedGenres.filter(
-                (genre) =>
-                  !(field.value || []).some(
-                    (selectedGenre: string) => selectedGenre === genre.value
-                  )
-              );
+              const filteredOptions = predefinedGenres
+                .filter(
+                  (genre) =>
+                    !(field.value || []).some(
+                      (selectedGenre: string) => selectedGenre === genre.value
+                    )
+                )
+                .sort((a, b) => a.value.localeCompare(b.value));
 
               return (
                 <GenericMultiSelector<GenreOption>
