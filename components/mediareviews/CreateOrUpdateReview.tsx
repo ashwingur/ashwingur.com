@@ -4,9 +4,8 @@ import clsx from "clsx";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { mediaReviewSchema } from "shared/validations/mediaReviewSchema";
-import { z } from "zod";
+import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import GenreSelector, { GenreOption } from "./GenreSelector";
 import { MultiValue } from "react-select";
 import GenericMultiSelector from "@components/GenericSelector";
 
@@ -19,13 +18,53 @@ type Schema = z.infer<typeof mediaReviewSchema>;
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
 
+interface GenreOption {
+  value: string;
+  label: string;
+}
+
 const predefinedGenres: GenreOption[] = [
   { value: "Action", label: "Action" },
-  { value: "Drama", label: "Drama" },
+  { value: "Adventure", label: "Adventure" },
   { value: "Comedy", label: "Comedy" },
+  { value: "Crime", label: "Crime" },
+  { value: "Drama", label: "Drama" },
+  { value: "Fantasy", label: "Fantasy" },
+  { value: "Historical", label: "Historical" },
   { value: "Horror", label: "Horror" },
-  { value: "Science Fiction", label: "Science Fiction" },
+  { value: "Mystery", label: "Mystery" },
   { value: "Romance", label: "Romance" },
+  { value: "Science Fiction", label: "Science Fiction" },
+  { value: "Thriller", label: "Thriller" },
+  { value: "Western", label: "Western" },
+  { value: "Animation", label: "Animation" },
+  { value: "Biography", label: "Biography" },
+  { value: "Documentary", label: "Documentary" },
+  { value: "Family", label: "Family" },
+  { value: "Musical", label: "Musical" },
+  { value: "War", label: "War" },
+  { value: "Sports", label: "Sports" },
+  { value: "Superhero", label: "Superhero" },
+  { value: "Epic", label: "Epic" },
+  { value: "Martial Arts", label: "Martial Arts" },
+  { value: "Steampunk", label: "Steampunk" },
+  { value: "Cyberpunk", label: "Cyberpunk" },
+  { value: "Noir", label: "Noir" },
+  { value: "Dystopian", label: "Dystopian" },
+  { value: "Utopian", label: "Utopian" },
+  { value: "Paranormal", label: "Paranormal" },
+  { value: "Psychological", label: "Psychological" },
+  { value: "Political", label: "Political" },
+  { value: "Satire", label: "Satire" },
+  { value: "Tragedy", label: "Tragedy" },
+  { value: "Spy", label: "Spy" },
+  { value: "Mystery Thriller", label: "Mystery Thriller" },
+  { value: "Legal Thriller", label: "Legal Thriller" },
+  { value: "Techno Thriller", label: "Techno Thriller" },
+  { value: "Romantic Comedy", label: "Romantic Comedy" },
+  { value: "Dark Comedy", label: "Dark Comedy" },
+  { value: "Space Opera", label: "Space Opera" },
+  { value: "Post-Apocalyptic", label: "Post-Apocalyptic" },
 ];
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
@@ -149,18 +188,30 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           <Controller
             name="genres"
             control={control}
-            render={({ field }) => (
-              <GenreSelector
-                value={(field.value || []).map((genre: string) => ({
-                  value: genre,
-                  label: genre,
-                }))}
-                onChange={(selectedGenres: MultiValue<GenreOption>) =>
-                  field.onChange(selectedGenres.map((genre) => genre.value))
-                }
-                className="w-11/12 md:w-4/5 border-2 border-text-muted rounded-full"
-              />
-            )}
+            render={({ field }) => {
+              // Filter out selected genres from options
+              const filteredOptions = predefinedGenres.filter(
+                (genre) =>
+                  !(field.value || []).some(
+                    (selectedGenre: string) => selectedGenre === genre.value
+                  )
+              );
+
+              return (
+                <GenericMultiSelector<GenreOption>
+                  options={filteredOptions}
+                  value={(field.value || []).map((genre: string) => ({
+                    value: genre,
+                    label: genre,
+                  }))}
+                  onChange={(selectedGenres: MultiValue<GenreOption>) =>
+                    field.onChange(selectedGenres.map((genre) => genre.value))
+                  }
+                  displayKey="label"
+                  className="w-11/12 md:w-4/5 border-2 border-text-muted rounded-full"
+                />
+              );
+            }}
           />
           <p className="text-error">{errors.genres?.message}</p>
         </div>

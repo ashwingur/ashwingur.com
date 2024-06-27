@@ -43,6 +43,7 @@ const GenericMultiSelector = <T extends OptionType>({
       components={animatedComponents}
       isMulti
       unstyled
+      hideSelectedOptions={true}
       options={formattedOptions}
       value={value.map((option) => ({
         value: option,
