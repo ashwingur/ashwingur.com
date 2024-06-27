@@ -27,7 +27,7 @@ const GenericListbox = <T extends ListboxOption>({
   return (
     <div className={clsx("relative", className)}>
       <Listbox value={selectedValue} onChange={onSelectedValueChange}>
-        <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between">
+        <div className="cursor-default overflow-hidden rounded-lg bg-background-hover text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between shadow-md">
           <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
             {displayValue(selectedValue)}
             <AiOutlineDown className="hover:text-xl transition-all" />

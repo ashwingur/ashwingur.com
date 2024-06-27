@@ -22,11 +22,15 @@
 }
 
 .editor hr {
-  @apply border-text-muted;
+  @apply border-text-muted my-2;
 }
 
 .editor code {
   @apply bg-background-hover py-[2px] px-1 rounded-md;
+}
+
+.editor p.is-editor-empty:first-child::before {
+  @apply text-text-muted content-[attr(data-placeholder)] float-left pointer-events-none h-0;
 }
 
 .editor blockquote {

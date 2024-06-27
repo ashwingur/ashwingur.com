@@ -39,6 +39,7 @@ import {
 import { common, createLowlight } from "lowlight";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
+import Placeholder from "@tiptap/extension-placeholder";
 
 interface TipTapProps {
   className?: string;
@@ -48,6 +49,26 @@ interface MenuBarProps {
   editor: Editor | null;
   className?: string;
 }
+
+const extensions = [
+  Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  TextStyle,
+  TextAlign.configure({
+    types: ["heading", "paragraph"],
+  }),
+  Underline,
+  StarterKit.configure({
+    codeBlock: false,
+  }),
+  CodeBlockLowlight.configure({
+    lowlight: createLowlight(common),
+  }),
+  Subscript,
+  Superscript,
+  Placeholder.configure({
+    placeholder: "May your nib remain sharp and your ink flow effortlessly...",
+  }),
+];
 
 const MenuBar = ({ editor, className }: MenuBarProps) => {
   if (!editor) {
@@ -212,23 +233,6 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
   );
 };
 
-const extensions = [
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle,
-  TextAlign.configure({
-    types: ["heading", "paragraph"],
-  }),
-  Underline,
-  StarterKit.configure({
-    codeBlock: false,
-  }),
-  CodeBlockLowlight.configure({
-    lowlight: createLowlight(common),
-  }),
-  Subscript,
-  Superscript,
-];
-
 const content = `
 <h1>
   This is a H1 Heading,
@@ -273,7 +277,7 @@ function formatHTML(htmlString: string) {
 }
 
 const TipTap: React.FC<TipTapProps> = ({ className }) => {
-  const editor = useEditor({ extensions, content });
+  const editor = useEditor({ extensions });
   return (
     <div
       className={clsx(
@@ -287,11 +291,10 @@ const TipTap: React.FC<TipTapProps> = ({ className }) => {
       />
       <EditorContent
         editor={editor}
-        content={content}
-        className="editor py-4"
+        className="editor py-4 min-h-48"
         autoComplete="new-password"
       />
-      <pre className="text-wrap">{editor?.getHTML()}</pre>
+      {/* <pre className="text-wrap">{editor?.getHTML()}</pre> */}
     </div>
   );
 };

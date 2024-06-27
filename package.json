@@ -18,6 +18,7 @@
     "@tiptap/extension-code-block-lowlight": "^2.4.0",
     "@tiptap/extension-color": "^2.4.0",
     "@tiptap/extension-list-item": "^2.4.0",
+    "@tiptap/extension-placeholder": "^2.4.0",
     "@tiptap/extension-subscript": "^2.4.0",
     "@tiptap/extension-superscript": "^2.4.0",
     "@tiptap/extension-text-align": "^2.4.0",
