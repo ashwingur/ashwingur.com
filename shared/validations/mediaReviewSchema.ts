@@ -25,7 +25,10 @@ export const mediaReviewSchema = z.object({
   visible: z.boolean(),
 });
 
-export const getDefaultMediaReview = () => ({
+type MediaReview = z.infer<typeof mediaReviewSchema>;
+
+export const getDefaultMediaReview = (): MediaReview => ({
+  id: null,
   name: "",
   media_type: "Movie",
   cover_image: null,

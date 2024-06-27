@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useId } from "react";
 import Select, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
 
@@ -18,7 +18,7 @@ interface MultiSelectProps<T> {
 
 const animatedComponents = makeAnimated();
 
-const GenericMultiSelector = <T extends OptionType>({
+const GenericMultiSelect = <T extends OptionType>({
   options,
   value,
   onChange,
@@ -45,6 +45,7 @@ const GenericMultiSelector = <T extends OptionType>({
       unstyled
       hideSelectedOptions={true}
       options={formattedOptions}
+      instanceId={useId()}
       value={value.map((option) => ({
         value: option,
         label: option[displayKey] as unknown as string,
@@ -70,11 +71,11 @@ const GenericMultiSelector = <T extends OptionType>({
         menu: () => " mt-2 border border-text-muted",
         menuList: () => "shadow-lg max-h-56",
         multiValue: () =>
-          "bg-secondary text-text-secondary px-2 rounded-md mx-2 py-[2px]",
+          "bg-secondary text-text-secondary px-2 rounded-md mx-2 py-[2px] text-base",
         multiValueLabel: () => "mr-1",
       }}
     />
   );
 };
 
-export default GenericMultiSelector;
+export default GenericMultiSelect;

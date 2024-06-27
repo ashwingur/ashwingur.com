@@ -3,11 +3,14 @@ import { MediaReview } from "@interfaces/mediareview.interface";
 import clsx from "clsx";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { mediaReviewSchema } from "shared/validations/mediaReviewSchema";
+import {
+  getDefaultMediaReview,
+  mediaReviewSchema,
+} from "shared/validations/mediaReviewSchema";
 import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
-import GenericMultiSelector from "@components/GenericSelector";
+import GenericMultiSelect from "@components/GenericMultiSelect";
 import GenericListbox from "@components/GenericListBox";
 
 interface CreateOrUpdateReviewFormProps {
@@ -16,18 +19,6 @@ interface CreateOrUpdateReviewFormProps {
 }
 
 type Schema = z.infer<typeof mediaReviewSchema>;
-
-interface MediaType {
-  media_type: string;
-}
-
-// const mediaTypes: MediaType[] = [
-//   { media_type: "Movie" },
-//   { media_type: "Book" },
-//   { media_type: "Show" },
-//   { media_type: "Game" },
-//   { media_type: "Music" },
-// ];
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
 
@@ -94,6 +85,7 @@ const predefinedGenres: GenreOption[] = [
   { value: "Card", label: "Card" },
   { value: "Trivia", label: "Trivia" },
   { value: "Educational", label: "Educational" },
+  { value: "Single Player", label: "Single Player" },
   { value: "MMORPG", label: "MMORPG" },
   { value: "MOBA", label: "MOBA" },
   { value: "Sandbox", label: "Sandbox" },
@@ -102,6 +94,8 @@ const predefinedGenres: GenreOption[] = [
   { value: "Visual Novel", label: "Visual Novel" },
   { value: "Roguelike", label: "Roguelike" },
   { value: "Indie", label: "Indie" },
+  { value: "Soundtrack", label: "Soundtrack" },
+  { value: "Orchestral", label: "Orchestral" },
 ];
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
@@ -116,7 +110,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     watch,
   } = useForm<Schema>({
     resolver: zodResolver(mediaReviewSchema),
-    // defaultValues: defaultValues,
+    defaultValues: getDefaultMediaReview(),
   });
 
   // console.log(watch());
@@ -248,7 +242,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 .sort((a, b) => a.value.localeCompare(b.value));
 
               return (
-                <GenericMultiSelector<GenreOption>
+                <GenericMultiSelect<GenreOption>
                   options={filteredOptions}
                   value={(field.value || []).map((genre: string) => ({
                     value: genre,
@@ -277,7 +271,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 value={field.value?.join(", ") || ""}
                 onChange={(e) =>
                   field.onChange(
-                    e.target.value.split(", ").map((item) => item.trim())
+                    e.target.value.split(", ").map((item) => item.trim()) || []
                   )
                 }
               />
@@ -290,15 +284,19 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             name="cons"
             control={control}
             render={({ field }) => (
-              <input
-                className="input w-11/12 md:w-4/5"
+              <textarea
+                className="input w-11/12 md:w-4/5 !rounded-xl"
                 {...field}
-                value={field.value?.join(", ") || ""}
-                onChange={(e) =>
+                value={field.value?.join("\n") || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
                   field.onChange(
-                    e.target.value.split(", ").map((item) => item.trim())
-                  )
-                }
+                    value === ""
+                      ? []
+                      : value.split("\n").map((item) => item.trim())
+                  );
+                }}
+                rows={1} // Adjust the number of rows as needed
               />
             )}
           />
