@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
 import GenericMultiSelect from "@components/GenericMultiSelect";
 import GenericListbox from "@components/GenericListBox";
+import { useMutation, useQueryClient } from "react-query";
 
 interface CreateOrUpdateReviewFormProps {
   // existingData?: MediaReview;
@@ -98,6 +99,59 @@ const predefinedGenres: GenreOption[] = [
   { value: "Orchestral", label: "Orchestral" },
 ];
 
+const submitMediaReview = async (data: MediaReview) => {
+  const ResponseSchema = z.object({
+    id: z.number().optional(),
+    error: z.string().optional(),
+  });
+
+  const apiUrl = new URL(
+    "/mediareviews",
+    process.env.NEXT_PUBLIC_ASHWINGUR_API
+  ).toString();
+
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
+  });
+
+  let responseData;
+
+  try {
+    responseData = await response.json();
+  } catch (error) {
+    throw new Error(`Error ${response.status}`);
+  }
+
+  if (!responseData) {
+    throw new Error(
+      `Error ${response.status}: ${responseData.error || "Unknown error"}`
+    );
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      `Error ${response.status}: ${responseData.error || "Unknown error"}`
+    );
+  }
+
+  const result = ResponseSchema.safeParse(responseData);
+
+  if (!result.success) {
+    throw new Error(`Error ${response.status}: Invalid response format`);
+  }
+
+  if (result.data.error) {
+    throw new Error(`Error ${response.status}: ${result.data.error}`);
+  }
+
+  return result.data.id;
+};
+
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   // existingData,
   className,
@@ -113,14 +167,40 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     defaultValues: getDefaultMediaReview(),
   });
 
-  // console.log(watch());
-  // console.log(errors);
-  // console.log(errors.name !== undefined);
+  const mutation = useMutation(submitMediaReview);
+
   const onSubmit = (data: MediaReview) => {
-    // Handle form submission, e.g., send data to the server
     console.log(`form submitted`);
     console.log(data);
+    mutation.mutate(data);
   };
+
+  let prosErrorMessages: JSX.Element[] = [];
+  if (errors.pros) {
+    const length = errors.pros.length ?? 0;
+    for (let i = 0; i < length ?? 0; i++) {
+      if (errors.pros[i]) {
+        prosErrorMessages.push(
+          <p key={i} className="text-error">
+            {errors.pros[i]?.message} (line: {i + 1})
+          </p>
+        );
+      }
+    }
+  }
+  let consErrorMessages: JSX.Element[] = [];
+  if (errors.cons) {
+    const length = errors.cons.length ?? 0;
+    for (let i = 0; i < length ?? 0; i++) {
+      if (errors.cons[i]) {
+        consErrorMessages.push(
+          <p key={i} className="text-error">
+            {errors.cons[i]?.message} (line: {i + 1})
+          </p>
+        );
+      }
+    }
+  }
 
   return (
     <div className={clsx(className)}>
@@ -260,23 +340,28 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           <p className="text-error">{errors.genres?.message}</p>
         </div>
         <div className="flex flex-col gap-1">
-          <label>Pros:</label>
+          <label>Pros (Each new line is a separator):</label>
           <Controller
             name="pros"
             control={control}
             render={({ field }) => (
-              <input
-                className="input w-11/12 md:w-4/5"
+              <textarea
+                className="input w-11/12 md:w-4/5 !rounded-xl"
                 {...field}
-                value={field.value?.join(", ") || ""}
-                onChange={(e) =>
+                value={field.value?.join("\n") || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
                   field.onChange(
-                    e.target.value.split(", ").map((item) => item.trim()) || []
-                  )
-                }
+                    value === ""
+                      ? []
+                      : value.split("\n").map((item) => item.trim())
+                  );
+                }}
+                rows={4} // Adjust the number of rows as needed
               />
             )}
           />
+          {prosErrorMessages}
         </div>
         <div className="flex flex-col gap-1">
           <label>Cons:</label>
@@ -296,10 +381,11 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                       : value.split("\n").map((item) => item.trim())
                   );
                 }}
-                rows={1} // Adjust the number of rows as needed
+                rows={4} // Adjust the number of rows as needed
               />
             )}
           />
+          {consErrorMessages}
         </div>
         <div className="flex items-center gap-2">
           <label>Visible:</label>
@@ -308,6 +394,14 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
         <button className="btn self-center w-36" type="submit">
           Submit
         </button>
+        {mutation.isLoading && "Submitting..."}
+        {mutation.isError && mutation.error instanceof Error && (
+          <p className="text-lg text-error text-center mt-2">
+            {mutation.error.message}
+          </p>
+        )}
+        {mutation.isSuccess && "Submitted!"}
+        {mutation.data && `ID: ${mutation.data}`}
       </form>
     </div>
   );

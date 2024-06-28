@@ -19,9 +19,9 @@ export const mediaReviewSchema = z.object({
   creator: z.string().nullable(),
   media_creation_date: z.string().nullable(),
   date_consumed: z.string().nullable(),
-  genres: z.array(z.string()),
-  pros: z.array(z.string()),
-  cons: z.array(z.string()),
+  genres: z.array(z.string().min(1)),
+  pros: z.array(z.string().min(1, "There cannot be a blank value")),
+  cons: z.array(z.string().min(1, "There cannot be a blank value")),
   visible: z.boolean(),
 });
 
