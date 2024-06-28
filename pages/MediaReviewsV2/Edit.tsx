@@ -24,6 +24,11 @@ const Edit = () => {
     }
   };
 
+  const onSubmitSuccess = () => {
+    // We want the editor to hide again after a successful create/update
+    setCurrentlyEditing(undefined);
+  };
+
   return (
     <div className="min-h-screen pt-24">
       <Navbar fixed={true} />
@@ -35,7 +40,10 @@ const Edit = () => {
           </button>
         )}
         {currentlyEditing && (
-          <CreateOrUpdateReviewForm existingData={currentlyEditing} />
+          <CreateOrUpdateReviewForm
+            existingData={currentlyEditing}
+            onSubmitSuccess={onSubmitSuccess}
+          />
         )}
         <ListEditableReviews handleEdit={handleEdit} />
       </div>

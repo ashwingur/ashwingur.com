@@ -18,6 +18,7 @@ import { QUERY_KEY } from "shared/queries/mediareviews";
 
 interface CreateOrUpdateReviewFormProps {
   existingData?: MediaReview;
+  onSubmitSuccess?: () => void;
   className?: string;
 }
 
@@ -164,6 +165,7 @@ const submitMediaReview = async (data: z.infer<typeof mediaReviewSchema>) => {
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   existingData,
+  onSubmitSuccess,
   className,
 }) => {
   const queryClient = useQueryClient();
@@ -201,6 +203,8 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
       reset({ ...data, media_creation_date: formattedMediaCreationDate });
 
       queryClient.invalidateQueries(QUERY_KEY);
+
+      onSubmitSuccess && onSubmitSuccess();
     },
   });
 
