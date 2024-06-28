@@ -105,18 +105,42 @@ const submitMediaReview = async (data: z.infer<typeof mediaReviewSchema>) => {
   });
 
   const apiUrl = new URL(
-    "/mediareviews",
+    `/mediareviews${data.id ? `/${data.id}` : ""}`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
   ).toString();
 
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(data),
-  });
+  let response;
+
+  if (data.id) {
+    // We are modifying an existing review, so we do PUT
+    response = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
+  } else {
+    // Create a brand new review
+    response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
+  }
+
+  // const response = await fetch(apiUrl, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   credentials: "include",
+  //   body: JSON.stringify(data),
+  // });
 
   let responseData;
 
@@ -452,8 +476,9 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             {mutation.error.message}
           </p>
         )}
-        {mutation.isSuccess && "Submitted!"}
-        {mutation.data && JSON.stringify(mutation.data)}
+
+        {mutation.isSuccess && <p className="text-center">Success</p>}
+        {/* {mutation.data && JSON.stringify(mutation.data)} */}
       </form>
     </div>
   );

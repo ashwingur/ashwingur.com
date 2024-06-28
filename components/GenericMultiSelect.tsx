@@ -56,7 +56,7 @@ const GenericMultiSelect = <T extends OptionType>({
       classNames={{
         control: (state) =>
           clsx(
-            "border-1 rounded-full px-4 py-1 md:py-2 bg-background-muted",
+            "border-1 rounded-full px-4 py-1 md:py-1 bg-background-muted",
             state.isFocused ? "border-text-muted" : ""
           ),
         option: ({ isFocused, isSelected }) =>
@@ -71,7 +71,7 @@ const GenericMultiSelect = <T extends OptionType>({
         menu: () => " mt-2 border border-text-muted",
         menuList: () => "shadow-lg max-h-56",
         multiValue: () =>
-          "bg-secondary text-text-secondary px-2 rounded-md mx-2 py-[2px] text-base",
+          "bg-secondary text-text-secondary px-2 rounded-md mx-2 my-1 py-[2px] text-base",
         multiValueLabel: () => "mr-1",
       }}
     />
