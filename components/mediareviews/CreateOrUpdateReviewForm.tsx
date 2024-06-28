@@ -3,6 +3,7 @@ import clsx from "clsx";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
+  MediaReview,
   getDefaultMediaReview,
   mediaReviewSchema,
 } from "shared/validations/mediaReviewSchema";
@@ -11,11 +12,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
 import GenericMultiSelect from "@components/GenericMultiSelect";
 import GenericListbox from "@components/GenericListBox";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { AiOutlineLoading } from "react-icons/ai";
+import { QUERY_KEY } from "shared/queries/mediareviews";
 
 interface CreateOrUpdateReviewFormProps {
-  // existingData?: MediaReview;
+  existingData?: MediaReview;
   className?: string;
 }
 
@@ -133,15 +135,6 @@ const submitMediaReview = async (data: z.infer<typeof mediaReviewSchema>) => {
     });
   }
 
-  // const response = await fetch(apiUrl, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   credentials: "include",
-  //   body: JSON.stringify(data),
-  // });
-
   let responseData;
 
   try {
@@ -166,15 +159,15 @@ const submitMediaReview = async (data: z.infer<typeof mediaReviewSchema>) => {
     throw new Error(`Error ${response.status}: Invalid response format`);
   }
 
-  console.log(result.data);
-
   return result.data;
 };
 
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
-  // existingData,
+  existingData,
   className,
 }) => {
+  const queryClient = useQueryClient();
+
   const {
     control,
     handleSubmit,
@@ -185,8 +178,15 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     getValues,
   } = useForm<Schema>({
     resolver: zodResolver(mediaReviewSchema),
-    defaultValues: getDefaultMediaReview(),
+    defaultValues: existingData ?? getDefaultMediaReview(),
   });
+
+  // If we change the existing data from parent component, it will populate the new values
+  useEffect(() => {
+    if (existingData) {
+      reset(existingData);
+    }
+  }, [existingData, reset]);
 
   const mutation = useMutation(submitMediaReview, {
     onSuccess: (data) => {
@@ -199,19 +199,12 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
         media_creation_date?.toISOString().slice(0, 16) ?? null;
 
       reset({ ...data, media_creation_date: formattedMediaCreationDate });
+
+      queryClient.invalidateQueries(QUERY_KEY);
     },
   });
 
-  // useEffect(() => {
-  //   if (mutation.data) {
-  //     reset(mutation.data);
-  //   }
-  // }, [mutation.data, reset]);
-
   const onSubmit = (data: Schema) => {
-    console.log(`form submitted`);
-    console.log(data);
-
     const parsedMediaCreationDate = data.media_creation_date
       ? new Date(data.media_creation_date).toISOString()
       : null;
@@ -259,7 +252,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
-      {id && <h2 className="text-center">ID: {id}</h2>}
+      {id && <h2 className="text-center">Currently Editing ID: {id}</h2>}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <label className="w-11/12 md:w-4/5 mx-auto">Name:</label>
@@ -470,15 +463,15 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             "Create"
           )}
         </button>
-        {mutation.isLoading && "Submitting..."}
-        {mutation.isError && mutation.error instanceof Error && (
-          <p className="text-lg text-error text-center mt-2">
-            {mutation.error.message}
-          </p>
-        )}
+        <div className="min-h-6 mt-2">
+          {mutation.isError && mutation.error instanceof Error && (
+            <p className="text-lg text-error text-center">
+              {mutation.error.message}
+            </p>
+          )}
 
-        {mutation.isSuccess && <p className="text-center">Success</p>}
-        {/* {mutation.data && JSON.stringify(mutation.data)} */}
+          {mutation.isSuccess && <p className="text-center">Success</p>}
+        </div>
       </form>
     </div>
   );

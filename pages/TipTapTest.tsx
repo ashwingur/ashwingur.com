@@ -1,6 +1,6 @@
 import Card from "@components/Card";
 import TipTap from "@components/TipTap";
-import CreateOrUpdateReviewForm from "@components/mediareviews/CreateOrUpdateReview";
+import CreateOrUpdateReviewForm from "@components/mediareviews/CreateOrUpdateReviewForm";
 import Navbar from "@components/navbars/Navbar";
 
 const TipTapTest = () => {

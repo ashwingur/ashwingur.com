@@ -3,6 +3,8 @@ import { z } from "zod";
 export const mediaReviewSchema = z.object({
   id: z.number().min(0).nullable(),
   name: z.string().min(1, "Name is required"),
+  review_creation_date: z.string().nullable(),
+  review_last_update_date: z.string().nullable(),
   media_type: z.enum(["Movie", "Book", "Show", "Game", "Music"]),
   cover_image: z.string().nullable(),
   rating: z.coerce
@@ -28,11 +30,13 @@ export const mediaReviewSchema = z.object({
   visible: z.boolean(),
 });
 
-type MediaReview = z.infer<typeof mediaReviewSchema>;
+export type MediaReview = z.infer<typeof mediaReviewSchema>;
 
 export const getDefaultMediaReview = (): MediaReview => ({
   id: null,
   name: "",
+  review_creation_date: null,
+  review_last_update_date: null,
   media_type: "Movie",
   cover_image: null,
   rating: null,
