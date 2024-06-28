@@ -11,14 +11,17 @@ export const mediaReviewSchema = z.object({
     .max(10, "Rating cannot be more than 10")
     .nullable(),
   review_content: z.string().nullable(),
-  word_count: z.coerce.number().nullable(),
+  word_count: z.coerce
+    .number()
+    .min(0, "Word count must be 0 or greater")
+    .nullable(),
   run_time: z.coerce
     .number()
     .min(0, "Run time must be 0 or greater")
     .nullable(),
   creator: z.string().nullable(),
   media_creation_date: z.string().nullable(),
-  date_consumed: z.string().nullable(),
+  consumed_date: z.string().nullable(),
   genres: z.array(z.string().min(1)),
   pros: z.array(z.string().min(1, "There cannot be a blank value")),
   cons: z.array(z.string().min(1, "There cannot be a blank value")),
@@ -38,7 +41,7 @@ export const getDefaultMediaReview = (): MediaReview => ({
   run_time: null,
   creator: null,
   media_creation_date: null,
-  date_consumed: null,
+  consumed_date: null,
   genres: [],
   pros: [],
   cons: [],

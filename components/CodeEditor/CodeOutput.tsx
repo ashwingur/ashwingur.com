@@ -90,9 +90,6 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
     );
   }
 
-  let stdout: string[] = data?.run.stdout.split("\n") ?? [];
-  let stderr: string[] = data?.run.stderr.split("\n") ?? [];
-
   return (
     <div className={clsx(className)}>
       <div className="h-16 mt-4">

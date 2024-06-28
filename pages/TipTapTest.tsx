@@ -10,7 +10,7 @@ const TipTapTest = () => {
       <h1 className="text-center pt-24">Tip Tap Test</h1>
       <Card
         firstLayer={false}
-        className="flex flex-col items-center mx-4 lg:mx-auto lg:w-2/3 "
+        className="flex flex-col items-center justify-center mx-4 lg:mx-auto lg:w-2/3 "
       >
         <CreateOrUpdateReviewForm className="mb-10 w-full px-4" />
       </Card>
