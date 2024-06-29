@@ -1,7 +1,7 @@
 import TipTap from "@components/TipTap";
 import clsx from "clsx";
 import React, { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldError, useForm } from "react-hook-form";
 import {
   MediaReview,
   getDefaultMediaReview,
@@ -12,9 +12,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
 import GenericMultiSelect from "@components/GenericMultiSelect";
 import GenericListbox from "@components/GenericListBox";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import { AiOutlineLoading } from "react-icons/ai";
-import { QUERY_KEY } from "shared/queries/mediareviews";
+import {
+  QUERY_KEY,
+  useCreateOrUpdateMediaReview,
+} from "shared/queries/mediareviews";
+import RHFInput from "./RHFInput";
+import RHFControllerInput from "./RHFControllerInput";
 
 interface CreateOrUpdateReviewFormProps {
   existingData?: MediaReview;
@@ -102,67 +107,6 @@ const predefinedGenres: GenreOption[] = [
   { value: "Orchestral", label: "Orchestral" },
 ];
 
-const submitMediaReview = async (data: z.infer<typeof mediaReviewSchema>) => {
-  const errorSchema = z.object({
-    error: z.string().optional(),
-  });
-
-  const apiUrl = new URL(
-    `/mediareviews${data.id ? `/${data.id}` : ""}`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
-
-  let response;
-
-  if (data.id) {
-    // We are modifying an existing review, so we do PUT
-    response = await fetch(apiUrl, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(data),
-    });
-  } else {
-    // Create a brand new review
-    response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(data),
-    });
-  }
-
-  let responseData;
-
-  try {
-    responseData = await response.json();
-  } catch (error) {
-    throw new Error(`Error ${response.status}`);
-  }
-
-  if (!response.ok) {
-    // Try to parse the error message if available
-    const result = errorSchema.safeParse(responseData);
-    if (result.success && result.data.error) {
-      throw new Error(`Error ${response.status}: ${result.data.error}`);
-    } else {
-      throw new Error(`Error ${response.status}: Unknown error`);
-    }
-  }
-
-  const result = mediaReviewSchema.safeParse(responseData);
-
-  if (!result.success) {
-    throw new Error(`Error ${response.status}: Invalid response format`);
-  }
-
-  return result.data;
-};
-
 const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   existingData,
   onSubmitSuccess,
@@ -175,7 +119,6 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     handleSubmit,
     register,
     formState: { errors },
-    watch,
     reset,
     getValues,
   } = useForm<Schema>({
@@ -190,23 +133,23 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     }
   }, [existingData, reset]);
 
-  const mutation = useMutation(submitMediaReview, {
-    onSuccess: (data) => {
-      // Convert media_creation_date to the format yyyy-MM-ddThh:mm
-      let media_creation_date: null | Date = null;
-      if (data.media_creation_date) {
-        media_creation_date = new Date(data.media_creation_date);
-      }
-      const formattedMediaCreationDate =
-        media_creation_date?.toISOString().slice(0, 16) ?? null;
+  const onMutationSuccess = (data: MediaReview) => {
+    // Convert media_creation_date to the format yyyy-MM-ddThh:mm
+    let media_creation_date: null | Date = null;
+    if (data.media_creation_date) {
+      media_creation_date = new Date(data.media_creation_date);
+    }
+    const formattedMediaCreationDate =
+      media_creation_date?.toISOString().slice(0, 16) ?? null;
 
-      reset({ ...data, media_creation_date: formattedMediaCreationDate });
+    reset({ ...data, media_creation_date: formattedMediaCreationDate });
 
-      queryClient.invalidateQueries(QUERY_KEY);
+    queryClient.invalidateQueries(QUERY_KEY);
 
-      onSubmitSuccess && onSubmitSuccess();
-    },
-  });
+    onSubmitSuccess && onSubmitSuccess();
+  };
+
+  const mutation = useCreateOrUpdateMediaReview(onMutationSuccess);
 
   const onSubmit = (data: Schema) => {
     const parsedMediaCreationDate = data.media_creation_date
@@ -258,17 +201,12 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
       {id && <h2 className="text-center">Currently Editing ID: {id}</h2>}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Name:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            aria-invalid={errors.name !== undefined}
-            {...register("name")}
-          />
-          <p className="text-error">{errors.name?.message}</p>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Media Type:</label>
+        <RHFInput
+          label="Name"
+          register={register("name")}
+          errors={errors.name}
+        />
+        <RHFControllerInput label="Media Type">
           <Controller
             name="media_type"
             control={control}
@@ -287,25 +225,19 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               );
             }}
           />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Cover Image URL:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            {...register("cover_image")}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Rating:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            type="number"
-            step="0.1"
-            {...register("rating")}
-            aria-invalid={errors.rating !== undefined}
-          />
-          <p className="text-error">{errors.rating?.message}</p>
-        </div>
+        </RHFControllerInput>
+        <RHFInput
+          label="Cover Image URL"
+          register={register("cover_image")}
+          errors={errors.cover_image}
+        />
+        <RHFInput
+          label="Rating"
+          register={register("rating")}
+          errors={errors.rating}
+          type="number"
+          step="0.1"
+        />
         <div className="flex flex-col gap-1">
           <label className="w-11/12 md:w-4/5 mx-auto">Review Content:</label>
           <Controller
@@ -320,54 +252,46 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             )}
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Word Count:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            type="number"
-            {...register("word_count")}
-          />
-        </div>
-        <p className="text-error">{errors.word_count?.message}</p>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">
-            Run Time (minutes):
-          </label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            type="number"
-            {...register("run_time")}
-            aria-invalid={errors.run_time !== undefined}
-          />
-          <p className="text-error">{errors.run_time?.message}</p>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Creator:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            {...register("creator")}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">
-            Media Creation Date:
-          </label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            type="datetime-local"
-            {...register("media_creation_date")}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Date Consumed:</label>
-          <input
-            className="input w-11/12 md:w-4/5 mx-auto"
-            type="datetime-local"
-            {...register("consumed_date")}
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Genres:</label>
+        <RHFInput
+          label="Word Count"
+          register={register("word_count")}
+          errors={errors.word_count}
+          type="number"
+        />
+        <RHFInput
+          label="Run Time (minutes)"
+          register={register("run_time")}
+          errors={errors.run_time}
+          type="number"
+        />
+        <RHFInput
+          label="Creator"
+          register={register("creator")}
+          errors={errors.creator}
+        />
+        <RHFInput
+          label="Media Creation Date"
+          register={register("media_creation_date")}
+          errors={errors.media_creation_date}
+          type="datetime-local"
+        />
+        <RHFInput
+          label="Date Consumed"
+          register={register("consumed_date")}
+          errors={errors.consumed_date}
+          type="datetime-local"
+        />
+
+        <RHFControllerInput
+          label="Genres"
+          // Display the first error that appears
+          errors={
+            errors.genres &&
+            (errors.genres as (FieldError | undefined)[])?.find(
+              (e) => e !== undefined
+            )
+          }
+        >
           <Controller
             name="genres"
             control={control}
@@ -393,23 +317,28 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                     field.onChange(selectedGenres.map((genre) => genre.value))
                   }
                   displayKey="label"
-                  className="w-11/12 md:w-4/5 border-2 border-text-muted rounded-full mx-auto"
+                  className=" border-2 border-text-muted rounded-full"
                 />
               );
             }}
           />
-          <p className="text-error">{errors.genres?.message}</p>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">
-            Pros (Each new line is a separator):
-          </label>
+        </RHFControllerInput>
+
+        <RHFControllerInput
+          label="Pros (each new line is a separator)"
+          errors={
+            errors.pros &&
+            (errors.pros as (FieldError | undefined)[])?.find(
+              (e) => e !== undefined
+            )
+          }
+        >
           <Controller
             name="pros"
             control={control}
             render={({ field }) => (
               <textarea
-                className="input w-11/12 md:w-4/5 !rounded-xl mx-auto"
+                className="input !rounded-xl "
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -420,20 +349,28 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                       : value.split("\n").map((item) => item.trim())
                   );
                 }}
+                aria-invalid={errors.pros !== undefined}
                 rows={4} // Adjust the number of rows as needed
               />
             )}
           />
-          {prosErrorMessages}
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Cons:</label>
+        </RHFControllerInput>
+
+        <RHFControllerInput
+          label="Cons (each new line is a separator)"
+          errors={
+            errors.cons &&
+            (errors.cons as (FieldError | undefined)[])?.find(
+              (e) => e !== undefined
+            )
+          }
+        >
           <Controller
             name="cons"
             control={control}
             render={({ field }) => (
               <textarea
-                className="input w-11/12 md:w-4/5 !rounded-xl mx-auto"
+                className="input !rounded-xl"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -444,16 +381,19 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                       : value.split("\n").map((item) => item.trim())
                   );
                 }}
+                aria-invalid={errors.cons !== undefined}
                 rows={4} // Adjust the number of rows as needed
               />
             )}
           />
-          {consErrorMessages}
-        </div>
-        <div className="flex items-center gap-2 w-11/12 md:w-4/5 mx-auto">
-          <label className="">Visible:</label>
-          <input type="checkbox" {...register("visible")} />
-        </div>
+        </RHFControllerInput>
+        <RHFInput
+          label="Visible"
+          register={register("visible")}
+          errors={errors.visible}
+          type="checkbox"
+        />
+
         <button
           disabled={mutation.isLoading}
           className="btn self-center w-36 flex items-center justify-center h-10"
