@@ -26,7 +26,11 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
       deleteReviewMutation.isLoading &&
       deleteReviewMutation.variables === review.id;
     return (
-      <Card key={review.id} firstLayer={true} className="flex flex-col mx-auto">
+      <Card
+        key={review.id}
+        firstLayer={true}
+        className="flex flex-col mx-auto w-4/5 md:w-full"
+      >
         <h3 className="text-center">{review.name}</h3>
         <p>
           <span className="font-bold">ID:</span> {review.id}
@@ -61,12 +65,19 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
             review.id && deleteReviewMutation.mutate(review.id);
           }}
         />
+        {deleteReviewMutation.isError &&
+          deleteReviewMutation.error instanceof Error &&
+          deleteReviewMutation.variables === review.id && (
+            <p className="text-lg text-error text-center mt-2">
+              {deleteReviewMutation.error.message}
+            </p>
+          )}
       </Card>
     );
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full">
       {reviewItems}
     </div>
   );
