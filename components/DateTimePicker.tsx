@@ -29,7 +29,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   label,
   className,
   labelClassName,
-  inputClassName,
+  inputClassName = "input",
   startBlank = false,
 }) => {
   const { theme } = useTheme();
@@ -51,10 +51,13 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     if (defaultTime && !startBlank) {
       setDatetime(formatDateTimeLocal(defaultTime));
     }
+  }, [defaultTime, startBlank]);
+
+  useEffect(() => {
     if (startBlank) {
       setDatetime("");
     }
-  }, [defaultTime, startBlank]);
+  }, [startBlank]);
 
   return (
     <div className={clsx(className, "flex items-center gap-2")}>
@@ -72,7 +75,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         type="datetime-local"
         value={datetime}
         onChange={handleEndDateTimeChange}
-        className={clsx(inputClassName ?? "input")}
+        className={inputClassName}
         style={{ colorScheme: isDark(theme) ? "dark" : "light" }}
       />
     </div>

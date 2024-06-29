@@ -274,19 +274,23 @@ html {
   @apply bg-background-hover;
 }
 
+.input-bg {
+  @apply border-2 border-text-muted rounded-full px-4 py-1 md:py-2 bg-background placeholder:text-text-muted;
+}
+
 .input {
   @apply border-2 border-text-muted rounded-full px-4 py-1 md:py-2 bg-background-muted placeholder:text-text-muted;
-}
-.input:invalid,
-.input[aria-invalid="true"] {
-  @apply border-error;
 }
 
 .input-hover {
   @apply border-2 border-text-muted rounded-full px-4 py-1 md:py-2 bg-background-hover placeholder:text-text-muted;
 }
 
+.input:invalid,
+.input[aria-invalid="true"],
 .input-hover:invalid,
-.input-hover[aria-invalid="true"] {
+.input-hover[aria-invalid="true"],
+.input-bg:invalid,
+.input-bg[aria-invalid="true"] {
   @apply border-error;
 }

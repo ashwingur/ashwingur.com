@@ -200,7 +200,14 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
-      {id && <h2 className="text-center">Currently Editing ID: {id}</h2>}
+      {id && (
+        <div>
+          <h2 className="text-center">{getValues("name")}</h2>
+          <h3 className="text-center">
+            {getValues("media_type")} (ID: {id})
+          </h3>
+        </div>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <RHFInput
           label="Name"
@@ -221,7 +228,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                   options={mediaTypes}
                   displayValue={(option) => option}
                   className="w-11/12 md:w-4/5 mx-auto"
-                  muted={true}
+                  bgClass="bg-background"
                 />
               );
             }}
@@ -248,7 +255,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               <TipTap
                 value={field.value || ""}
                 onChange={field.onChange}
-                className="w-11/12 md:w-4/5 bg-background-muted mx-auto"
+                className="w-11/12 md:w-4/5 bg-background mx-auto border-2"
               />
             )}
           />
@@ -279,6 +286,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultMediaCreationDate}
                   startBlank={!defaultMediaCreationDate}
+                  inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
                     field.onChange(datetime.toISOString());
                   }}
@@ -296,6 +304,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultConsumedDate}
                   startBlank={!defaultConsumedDate}
+                  inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
                     field.onChange(datetime.toISOString());
                   }}
@@ -304,12 +313,6 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             }}
           />
         </RHFControllerInput>
-        {/* <RHFInput
-          label="Date Consumed"
-          register={register("consumed_date")}
-          errors={errors.consumed_date}
-          type="datetime-local"
-        /> */}
 
         <RHFControllerInput
           label="Genres"
@@ -346,7 +349,8 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                     field.onChange(selectedGenres.map((genre) => genre.value))
                   }
                   displayKey="label"
-                  className=" border-2 border-text-muted rounded-full"
+                  className="border-2 border-text-muted rounded-full"
+                  bgClass="bg-background"
                 />
               );
             }}
@@ -367,7 +371,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input !rounded-xl "
+                className="input-bg !rounded-xl "
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -399,7 +403,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input !rounded-xl"
+                className="input-bg !rounded-xl"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -443,7 +447,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             </p>
           )}
 
-          {mutation.isSuccess && <p className="text-center">Success</p>}
+          {/* {mutation.isSuccess && <p className="text-center">Success</p>} */}
         </div>
       </form>
     </div>

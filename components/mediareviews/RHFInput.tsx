@@ -8,6 +8,7 @@ interface RHFInputProps {
   type?: React.HTMLInputTypeAttribute;
   step?: string;
   className?: string;
+  inputClassName?: string;
 }
 
 const RHFInput: React.FC<RHFInputProps> = ({
@@ -17,12 +18,13 @@ const RHFInput: React.FC<RHFInputProps> = ({
   type = "text",
   step,
   className,
+  inputClassName = "input-bg",
 }) => {
   return (
     <div className={clsx(className)}>
       <label className="">{label}</label>
       <input
-        className="input"
+        className={inputClassName}
         type={type}
         step={step}
         {...register}

@@ -14,6 +14,7 @@ interface MultiSelectProps<T> {
   onChange: (selectedOptions: MultiValue<T>) => void;
   className?: string;
   displayKey: keyof T;
+  bgClass?: string;
 }
 
 const animatedComponents = makeAnimated();
@@ -24,6 +25,7 @@ const GenericMultiSelect = <T extends OptionType>({
   onChange,
   className,
   displayKey,
+  bgClass = "bg-background-muted",
 }: MultiSelectProps<T>) => {
   const formattedOptions = options.map((option) => ({
     value: option,
@@ -56,7 +58,8 @@ const GenericMultiSelect = <T extends OptionType>({
       classNames={{
         control: (state) =>
           clsx(
-            "border-1 rounded-full px-4 py-1 md:py-1 bg-background-muted",
+            bgClass,
+            "border-1 rounded-full px-4 py-1 md:py-1",
             state.isFocused ? "border-text-muted" : ""
           ),
         option: ({ isFocused, isSelected }) =>
@@ -64,12 +67,12 @@ const GenericMultiSelect = <T extends OptionType>({
             "pl-2 py-2",
             isFocused && " bg-accent text-text-accent",
             isSelected && "bg-accent text-text-accent",
-            !isFocused && !isSelected && "bg-background-muted"
+            !isFocused && !isSelected && bgClass
           ),
         noOptionsMessage: () =>
           "bg-background-muted shadow-lg mt-2 border-2 border-black",
-        menu: () => " mt-2 border border-text-muted",
-        menuList: () => "shadow-lg max-h-56",
+        menu: () => " mt-2 rounded-lg",
+        menuList: () => "shadow-lg max-h-56 rounded-lg",
         multiValue: () =>
           "bg-secondary text-text-secondary px-2 rounded-md mx-2 my-1 py-[2px] text-base",
         multiValueLabel: () => "mr-1",

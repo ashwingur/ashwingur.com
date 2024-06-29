@@ -1,3 +1,5 @@
+import Card from "@components/Card";
+import ConfirmButton from "@components/ConfirmButton";
 import CreateOrUpdateReviewForm from "@components/mediareviews/CreateOrUpdateReviewForm";
 import ListEditableReviews from "@components/mediareviews/ListEditableReviews";
 import Navbar from "@components/navbars/Navbar";
@@ -40,12 +42,23 @@ const Edit = () => {
           </button>
         )}
         {currentlyEditing && (
-          <CreateOrUpdateReviewForm
-            existingData={currentlyEditing}
-            onSubmitSuccess={onSubmitSuccess}
-          />
+          <Card firstLayer={true}>
+            <CreateOrUpdateReviewForm
+              existingData={currentlyEditing}
+              onSubmitSuccess={onSubmitSuccess}
+            />
+            <ConfirmButton
+              content="Cancel"
+              className="w-36 flex gap-2 justify-center"
+              mainBtnClassName="btn h-10"
+              confirmBtnClassName="btn h-10"
+              onClick={() => {
+                setCurrentlyEditing(undefined);
+              }}
+            />
+          </Card>
         )}
-        <ListEditableReviews handleEdit={handleEdit} />
+        {!currentlyEditing && <ListEditableReviews handleEdit={handleEdit} />}
       </div>
     </div>
   );
