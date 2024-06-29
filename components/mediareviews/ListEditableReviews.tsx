@@ -66,7 +66,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:w-4/5 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full">
       {reviewItems}
     </div>
   );
