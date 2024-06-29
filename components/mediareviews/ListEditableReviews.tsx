@@ -1,5 +1,6 @@
 import Card from "@components/Card";
 import ConfirmButton from "@components/ConfirmButton";
+import LoadingIcon from "@components/LoadingIcon";
 import React from "react";
 import {
   useDeleteMediaReview,
@@ -21,6 +22,9 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
     return <div>Error: {error instanceof Error && error.message}</div>;
 
   const reviewItems = data.map((review) => {
+    const isLoadingDelete =
+      deleteReviewMutation.isLoading &&
+      deleteReviewMutation.variables === review.id;
     return (
       <Card key={review.id} firstLayer={true} className="flex flex-col">
         <p>ID: {review.id}</p>
@@ -35,7 +39,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           Edit
         </button>
         <ConfirmButton
-          content={"Delete"}
+          content={isLoadingDelete ? <LoadingIcon /> : "Delete"}
           className="mx-auto flex gap-2 mt-2 items-center justify-center"
           mainBtnClassName="btn w-24  h-10"
           confirmBtnClassName="btn  h-10"
