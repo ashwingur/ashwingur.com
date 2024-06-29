@@ -2,12 +2,14 @@ import clsx from "clsx";
 import React, { ReactNode, useState } from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 
+// Button with a yes or no confirmation, the yes confirmation has a customisable delay
+
 interface ConfirmButtonProps {
   content?: JSX.Element | string;
   className?: string;
   mainBtnClassName?: string;
   confirmBtnClassName?: string;
-  onClick: () => void;
+  onConfirmClick: () => void;
   confirmDelay?: number;
 }
 
@@ -16,7 +18,7 @@ const ConfirmButton: React.FC<ConfirmButtonProps> = ({
   content,
   mainBtnClassName,
   confirmBtnClassName,
-  onClick,
+  onConfirmClick,
   confirmDelay = 2000,
 }) => {
   const [confirm, setConfirm] = useState(false);
@@ -30,7 +32,7 @@ const ConfirmButton: React.FC<ConfirmButtonProps> = ({
   };
 
   const handleConfirm = () => {
-    onClick();
+    onConfirmClick();
     setConfirm(false);
     setCanClick(false); // Reset canClick state after confirming
   };

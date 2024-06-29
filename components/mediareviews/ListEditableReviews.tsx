@@ -43,7 +43,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           className="mx-auto flex gap-2 mt-2 items-center justify-center"
           mainBtnClassName="btn w-24  h-10"
           confirmBtnClassName="btn  h-10"
-          onClick={() => {
+          onConfirmClick={() => {
             review.id && deleteReviewMutation.mutate(review.id);
           }}
         />

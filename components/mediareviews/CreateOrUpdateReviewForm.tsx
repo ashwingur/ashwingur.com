@@ -145,48 +145,8 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   const mutation = useCreateOrUpdateMediaReview(onMutationSuccess);
 
   const onSubmit = (data: Schema) => {
-    const parsedMediaCreationDate = data.media_creation_date
-      ? new Date(data.media_creation_date).toISOString()
-      : null;
-    const parsedConsumedDate = data.consumed_date
-      ? new Date(data.consumed_date).toISOString()
-      : null;
-
-    const transformedData: Schema = {
-      ...data,
-      media_creation_date: parsedMediaCreationDate,
-      consumed_date: parsedConsumedDate,
-    };
-
-    mutation.mutate(transformedData);
+    mutation.mutate(data);
   };
-
-  let prosErrorMessages: JSX.Element[] = [];
-  if (errors.pros) {
-    const length = errors.pros.length ?? 0;
-    for (let i = 0; i < length ?? 0; i++) {
-      if (errors.pros[i]) {
-        prosErrorMessages.push(
-          <p key={i} className="text-error">
-            {errors.pros[i]?.message} (line: {i + 1})
-          </p>
-        );
-      }
-    }
-  }
-  let consErrorMessages: JSX.Element[] = [];
-  if (errors.cons) {
-    const length = errors.cons.length ?? 0;
-    for (let i = 0; i < length ?? 0; i++) {
-      if (errors.cons[i]) {
-        consErrorMessages.push(
-          <p key={i} className="text-error">
-            {errors.cons[i]?.message} (line: {i + 1})
-          </p>
-        );
-      }
-    }
-  }
 
   const id = getValues().id;
   const media_creation_date = getValues("media_creation_date");
@@ -208,13 +168,23 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           </h3>
         </div>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-2"
+        autoComplete="false"
+      >
         <RHFInput
           label="Name"
           register={register("name")}
           errors={errors.name}
+          className="flex flex-col"
+          labelClassName="ml-2"
         />
-        <RHFControllerInput label="Media Type">
+        <RHFControllerInput
+          label="Media Type"
+          className="flex flex-col"
+          labelClassName="ml-2"
+        >
           <Controller
             name="media_type"
             control={control}
@@ -227,7 +197,6 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                   onSelectedValueChange={(value) => field.onChange(value)}
                   options={mediaTypes}
                   displayValue={(option) => option}
-                  className="w-11/12 md:w-4/5 mx-auto"
                   bgClass="bg-background"
                 />
               );
@@ -238,16 +207,21 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           label="Cover Image URL"
           register={register("cover_image")}
           errors={errors.cover_image}
+          className="flex flex-col"
+          labelClassName="ml-2"
         />
         <RHFInput
           label="Rating"
           register={register("rating")}
           errors={errors.rating}
+          className="flex flex-col"
+          labelClassName="ml-2"
+          inputClassName="max-w-20 input-bg"
           type="number"
-          step="0.1"
+          min={0}
+          max={10}
         />
-        <div className="flex flex-col gap-1">
-          <label className="w-11/12 md:w-4/5 mx-auto">Review Content:</label>
+        <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller
             name="review_content"
             control={control}
@@ -255,29 +229,38 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               <TipTap
                 value={field.value || ""}
                 onChange={field.onChange}
-                className="w-11/12 md:w-4/5 bg-background mx-auto border-2"
+                className="w-full bg-background border-2"
               />
             )}
           />
-        </div>
+        </RHFControllerInput>
         <RHFInput
           label="Word Count"
           register={register("word_count")}
           errors={errors.word_count}
+          className="flex flex-col"
+          labelClassName="ml-2"
+          inputClassName="max-w-40 input-bg"
           type="number"
+          min={0}
         />
         <RHFInput
           label="Run Time (minutes)"
           register={register("run_time")}
           errors={errors.run_time}
+          className="flex flex-col"
+          labelClassName="ml-2"
+          inputClassName="max-w-40 input-bg"
           type="number"
         />
         <RHFInput
           label="Creator"
           register={register("creator")}
           errors={errors.creator}
+          className="flex flex-col"
+          labelClassName="ml-2"
         />
-        <RHFControllerInput label="Media Creation Date">
+        <RHFControllerInput label="Media Creation Date" labelClassName="ml-2">
           <Controller
             control={control}
             name="media_creation_date"
@@ -288,14 +271,18 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                   startBlank={!defaultMediaCreationDate}
                   inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
-                    field.onChange(datetime.toISOString());
+                    if (isNaN(datetime.getTime())) {
+                      field.onChange(null);
+                    } else {
+                      field.onChange(datetime.toISOString());
+                    }
                   }}
                 />
               );
             }}
           />
         </RHFControllerInput>
-        <RHFControllerInput label="Consumed Date">
+        <RHFControllerInput label="Consumed Date" labelClassName="ml-2">
           <Controller
             control={control}
             name="consumed_date"
@@ -306,7 +293,11 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                   startBlank={!defaultConsumedDate}
                   inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
-                    field.onChange(datetime.toISOString());
+                    if (isNaN(datetime.getTime())) {
+                      field.onChange(null);
+                    } else {
+                      field.onChange(datetime.toISOString());
+                    }
                   }}
                 />
               );
@@ -316,6 +307,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
 
         <RHFControllerInput
           label="Genres"
+          labelClassName="ml-2"
           // Display the first error that appears
           errors={
             errors.genres &&
@@ -359,6 +351,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
 
         <RHFControllerInput
           label="Pros (each new line is a separator)"
+          labelClassName="ml-2"
           errors={
             errors.pros &&
             (errors.pros as (FieldError | undefined)[])?.find(
@@ -371,7 +364,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl "
+                className="input-bg !rounded-xl w-full min-h-20"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -391,6 +384,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
 
         <RHFControllerInput
           label="Cons (each new line is a separator)"
+          labelClassName="ml-2"
           errors={
             errors.cons &&
             (errors.cons as (FieldError | undefined)[])?.find(
@@ -403,7 +397,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl"
+                className="input-bg !rounded-xl w-full min-h-20"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -425,11 +419,12 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           register={register("visible")}
           errors={errors.visible}
           type="checkbox"
+          className="flex ml-2 gap-2"
         />
 
         <button
           disabled={mutation.isLoading}
-          className="btn self-center w-36 flex items-center justify-center h-10"
+          className="btn self-center w-36 h-10"
           type="submit"
         >
           {mutation.isLoading ? (

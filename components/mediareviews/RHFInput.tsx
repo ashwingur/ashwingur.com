@@ -1,34 +1,38 @@
 import clsx from "clsx";
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
-interface RHFInputProps {
+interface RHFInputProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   label: string;
   register: UseFormRegisterReturn;
   errors: FieldError | undefined;
-  type?: React.HTMLInputTypeAttribute;
-  step?: string;
   className?: string;
   inputClassName?: string;
+  labelClassName?: string;
 }
 
 const RHFInput: React.FC<RHFInputProps> = ({
   label,
   register,
   errors,
-  type = "text",
-  step,
   className,
   inputClassName = "input-bg",
+  labelClassName,
+  ...props
 }) => {
   return (
     <div className={clsx(className)}>
-      <label className="">{label}</label>
+      <label className={labelClassName}>{label}</label>
       <input
         className={inputClassName}
-        type={type}
-        step={step}
         {...register}
         aria-invalid={errors !== undefined}
+        autoComplete="off"
+        {...props}
       />
       <p className="text-error">{errors?.message}</p>
     </div>

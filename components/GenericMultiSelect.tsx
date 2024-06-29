@@ -76,6 +76,7 @@ const GenericMultiSelect = <T extends OptionType>({
         multiValue: () =>
           "bg-secondary text-text-secondary px-2 rounded-md mx-2 my-1 py-[2px] text-base",
         multiValueLabel: () => "mr-1",
+        placeholder: () => "text-text-muted",
       }}
     />
   );

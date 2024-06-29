@@ -7,6 +7,8 @@ interface RHFControllerInputProps {
   errors?: FieldError | undefined;
   className?: string;
   children: ReactNode;
+  inputClassName?: string;
+  labelClassName?: string;
 }
 
 const RHFControllerInput: React.FC<RHFControllerInputProps> = ({
@@ -14,11 +16,13 @@ const RHFControllerInput: React.FC<RHFControllerInputProps> = ({
   errors,
   className,
   children,
+  inputClassName,
+  labelClassName,
 }) => {
   return (
     <div className={clsx(className)}>
-      <label className="">{label}</label>
-      <div className="">{children}</div>
+      <label className={labelClassName}>{label}</label>
+      <div className={inputClassName}>{children}</div>
       <p className="text-error">{errors?.message}</p>
     </div>
   );
