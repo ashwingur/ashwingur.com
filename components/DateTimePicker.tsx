@@ -10,6 +10,7 @@ interface DateTimePickerProps {
   className?: string;
   labelClassName?: string;
   inputClassName?: string;
+  startBlank?: boolean;
 }
 
 const formatDateTimeLocal = (date: Date) => {
@@ -29,9 +30,12 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   className,
   labelClassName,
   inputClassName,
+  startBlank = false,
 }) => {
   const { theme } = useTheme();
-  const [datetime, setDatetime] = useState(formatDateTimeLocal(defaultTime));
+  const [datetime, setDatetime] = useState(
+    startBlank ? "" : formatDateTimeLocal(defaultTime)
+  );
   const handleEndDateTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatetime(e.target.value);
     onDatetimeChange(new Date(e.target.value));
@@ -42,6 +46,15 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     onDatetimeChange(defaultTime);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (defaultTime && !startBlank) {
+      setDatetime(formatDateTimeLocal(defaultTime));
+    }
+    if (startBlank) {
+      setDatetime("");
+    }
+  }, [defaultTime, startBlank]);
 
   return (
     <div className={clsx(className, "flex items-center gap-2")}>

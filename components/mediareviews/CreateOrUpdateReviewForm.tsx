@@ -20,6 +20,7 @@ import {
 } from "shared/queries/mediareviews";
 import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
+import DateTimePicker from "@components/DateTimePicker";
 
 interface CreateOrUpdateReviewFormProps {
   existingData?: MediaReview;
@@ -134,15 +135,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   }, [existingData, reset]);
 
   const onMutationSuccess = (data: MediaReview) => {
-    // Convert media_creation_date to the format yyyy-MM-ddThh:mm
-    let media_creation_date: null | Date = null;
-    if (data.media_creation_date) {
-      media_creation_date = new Date(data.media_creation_date);
-    }
-    const formattedMediaCreationDate =
-      media_creation_date?.toISOString().slice(0, 16) ?? null;
-
-    reset({ ...data, media_creation_date: formattedMediaCreationDate });
+    reset({ ...data });
 
     queryClient.invalidateQueries(QUERY_KEY);
 
@@ -196,6 +189,14 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   }
 
   const id = getValues().id;
+  const media_creation_date = getValues("media_creation_date");
+  const defaultMediaCreationDate = media_creation_date
+    ? new Date(media_creation_date)
+    : undefined;
+  const consumed_date = getValues("consumed_date");
+  const defaultConsumedDate = consumed_date
+    ? new Date(consumed_date)
+    : undefined;
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
@@ -269,18 +270,46 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           register={register("creator")}
           errors={errors.creator}
         />
-        <RHFInput
-          label="Media Creation Date"
-          register={register("media_creation_date")}
-          errors={errors.media_creation_date}
-          type="datetime-local"
-        />
-        <RHFInput
+        <RHFControllerInput label="Media Creation Date">
+          <Controller
+            control={control}
+            name="media_creation_date"
+            render={({ field }) => {
+              return (
+                <DateTimePicker
+                  defaultTime={defaultMediaCreationDate}
+                  startBlank={!defaultMediaCreationDate}
+                  onDatetimeChange={(datetime) => {
+                    field.onChange(datetime.toISOString());
+                  }}
+                />
+              );
+            }}
+          />
+        </RHFControllerInput>
+        <RHFControllerInput label="Consumed Date">
+          <Controller
+            control={control}
+            name="consumed_date"
+            render={({ field }) => {
+              return (
+                <DateTimePicker
+                  defaultTime={defaultConsumedDate}
+                  startBlank={!defaultConsumedDate}
+                  onDatetimeChange={(datetime) => {
+                    field.onChange(datetime.toISOString());
+                  }}
+                />
+              );
+            }}
+          />
+        </RHFControllerInput>
+        {/* <RHFInput
           label="Date Consumed"
           register={register("consumed_date")}
           errors={errors.consumed_date}
           type="datetime-local"
-        />
+        /> */}
 
         <RHFControllerInput
           label="Genres"
