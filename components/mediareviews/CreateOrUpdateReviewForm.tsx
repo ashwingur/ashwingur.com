@@ -6,6 +6,7 @@ import {
   MediaReview,
   getDefaultMediaReview,
   mediaReviewSchema,
+  Genre,
 } from "shared/validations/mediaReviewSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -325,7 +326,8 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 .filter(
                   (genre) =>
                     !(field.value || []).some(
-                      (selectedGenre: string) => selectedGenre === genre.value
+                      (selectedGenre: Genre) =>
+                        selectedGenre.name === genre.value
                     )
                 )
                 .sort((a, b) => a.value.localeCompare(b.value));
@@ -333,12 +335,14 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               return (
                 <GenericMultiSelect<GenreOption>
                   options={filteredOptions}
-                  value={(field.value || []).map((genre: string) => ({
-                    value: genre,
-                    label: genre,
+                  value={(field.value || []).map((genre: Genre) => ({
+                    value: genre.name,
+                    label: genre.name,
                   }))}
                   onChange={(selectedGenres: MultiValue<GenreOption>) =>
-                    field.onChange(selectedGenres.map((genre) => genre.value))
+                    field.onChange(
+                      selectedGenres.map((genre) => ({ name: genre.value }))
+                    )
                   }
                   displayKey="label"
                   className="border-2 border-text-muted rounded-full"

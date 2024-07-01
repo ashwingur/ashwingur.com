@@ -28,7 +28,10 @@ const fetchAllMediaReviews = async () => {
   const result = responseSchema.safeParse(responseData);
 
   if (!result.success) {
-    throw new Error(`Error ${response.status}: Invalid response format`);
+    console.log(result.error.errors);
+    throw new Error(
+      `Error ${response.status}: Invalid response format (${JSON.stringify(result.error.errors)})`
+    );
   }
 
   return result.data;
@@ -111,6 +114,10 @@ const deleteMediaReview = async (id: number) => {
     method: "DELETE",
     credentials: "include",
   });
+
+  if (response.status === 204) {
+    return;
+  }
 
   let responseData;
 

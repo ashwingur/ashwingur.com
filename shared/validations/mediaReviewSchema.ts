@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+export const genreSchema = z.object({
+  name: z.string().min(1, "Genre cannot be an empty string"),
+});
+
 export const mediaReviewSchema = z.object({
   id: z.number().min(0).nullable(),
   name: z.string().min(1, "Name is required"),
@@ -24,13 +28,14 @@ export const mediaReviewSchema = z.object({
   creator: z.string().nullable(),
   media_creation_date: z.string().nullable(),
   consumed_date: z.string().nullable(),
-  genres: z.array(z.string().min(1)),
+  genres: z.array(genreSchema),
   pros: z.array(z.string().min(1, "There cannot be a blank line")),
   cons: z.array(z.string().min(1, "There cannot be a blank line")),
   visible: z.boolean(),
 });
 
 export type MediaReview = z.infer<typeof mediaReviewSchema>;
+export type Genre = z.infer<typeof genreSchema>;
 
 export const getDefaultMediaReview = (): MediaReview => ({
   id: null,

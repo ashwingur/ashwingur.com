@@ -19,7 +19,11 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !data)
-    return <div>Error: {error instanceof Error && error.message}</div>;
+    return (
+      <div className="text-error">
+        Error: {error instanceof Error && error.message}
+      </div>
+    );
 
   const reviewItems = data.map((review) => {
     const isLoadingDelete =
