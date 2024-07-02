@@ -1,4 +1,4 @@
-import Navbar from "@components/navbars/ArtNavBar";
+import Navbar from "@components/navbars/Navbar";
 
 export default function Custom404() {
   return (
