@@ -4,11 +4,11 @@ import React, { useEffect } from "react";
 import { Controller, FieldError, useForm } from "react-hook-form";
 import {
   MediaReview,
-  getDefaultMediaReview,
+  defaultMediaReview,
   mediaReviewSchema,
   Genre,
-} from "shared/validations/mediaReviewSchema";
-import { z } from "zod";
+  defaultSubMediaReview,
+} from "shared/validations/MediaReviewSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiValue } from "react-select";
 import GenericMultiSelect from "@components/GenericMultiSelect";
@@ -22,14 +22,13 @@ import {
 import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
+import SubMediaReviewForm from "./SubMediaReviewForm";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
   onSubmitSuccess?: () => void;
   className?: string;
 }
-
-type Schema = z.infer<typeof mediaReviewSchema>;
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
 
@@ -116,6 +115,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 }) => {
   const queryClient = useQueryClient();
 
+  const defaultValues = existingData ?? defaultMediaReview();
+
   const {
     control,
     handleSubmit,
@@ -123,19 +124,10 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     formState: { errors, isDirty, dirtyFields },
     reset,
     getValues,
-  } = useForm<Schema>({
+  } = useForm<MediaReview>({
     resolver: zodResolver(mediaReviewSchema),
-    defaultValues: existingData ?? getDefaultMediaReview(),
+    defaultValues,
   });
-
-  console.log(errors)
-
-  // If we change the existing data from parent component, it will populate the new values
-  useEffect(() => {
-    if (existingData) {
-      reset(existingData);
-    }
-  }, [existingData, reset]);
 
   const onMutationSuccess = (data: MediaReview) => {
     reset({ ...data });
@@ -147,11 +139,10 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   const mutation = useCreateOrUpdateMediaReview(onMutationSuccess);
 
-  const onSubmit = (data: Schema) => {
+  const onSubmit = (data: MediaReview) => {
     mutation.mutate(data);
   };
 
-  const id = getValues().id;
   const media_creation_date = getValues("media_creation_date");
   const defaultMediaCreationDate = media_creation_date
     ? new Date(media_creation_date)
@@ -168,18 +159,32 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   const getDirtyFieldsString = () => {
     const dirtyFieldNames = Object.keys(dirtyFields)
-      .filter(field => dirtyFields[field as keyof Schema])
-      .map(field => field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")) // Format the keys to look better
-    return dirtyFieldNames.join(', ')
-  }
+      .filter((field) => dirtyFields[field as keyof MediaReview])
+      .map((field) =>
+        field
+          .split("_")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      ); // Format the keys to look better
+    return dirtyFieldNames.join(", ");
+  };
+
+  const subMediaReviewForms = getValues()
+    .sub_media_reviews.sort((a, b) => a.display_index - b.display_index)
+    .map((s, index) => (
+      <SubMediaReviewForm
+        key={index}
+        defaultValues={s ?? defaultSubMediaReview()}
+      />
+    ));
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
-      {id && (
+      {getValues().id && (
         <div>
-          <h2 className="text-center">{getValues("name")}</h2>
+          <h2 className="text-center">{defaultValues.name}</h2>
           <h3 className="text-center">
-            {getValues("media_type")} (ID: {id})
+            {defaultValues.media_type} (ID: {getValues().id})
           </h3>
         </div>
       )}
@@ -387,9 +392,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value.trimStart() === ""
-                      ? []
-                      : value.split("\n").map((item) => item.trim())
+                    value === "" ? [] : value.split("\n").map((item) => item)
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
@@ -420,9 +423,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value.trimStart() === ""
-                      ? []
-                      : value.split("\n").map((item) => item.trim())
+                    value === "" ? [] : value.split("\n").map((item) => item)
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
@@ -439,6 +440,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex ml-2 gap-2"
         />
 
+        {getValues().sub_media_reviews.length > 0 && subMediaReviewForms}
         <button
           disabled={mutation.isLoading}
           className="btn self-center w-36 h-10"
@@ -452,21 +454,19 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             "Create"
           )}
         </button>
-        <div>
-          {mutation.isError && mutation.error instanceof Error && (
-            <p className="text-lg text-error text-center my-2">
-              {mutation.error.message}
-            </p>
-          )}
-          {isDirty &&
-
-            <p className="text-error text-center my-2">
-              You have unsaved changes: {getDirtyFieldsString()}
-            </p>
-          }
-
-        </div>
       </form>
+      <div>
+        {mutation.isError && mutation.error instanceof Error && (
+          <p className="text-lg text-error text-center my-2">
+            {mutation.error.message}
+          </p>
+        )}
+        {isDirty && (
+          <p className="text-error text-center my-2">
+            You have unsaved changes: {getDirtyFieldsString()}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

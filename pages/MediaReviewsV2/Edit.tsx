@@ -8,8 +8,8 @@ import React, { useState } from "react";
 import { useMediaReviews } from "shared/queries/mediareviews";
 import {
   MediaReview,
-  getDefaultMediaReview,
-} from "shared/validations/mediaReviewSchema";
+  defaultMediaReview,
+} from "shared/validations/MediaReviewSchemas";
 
 const Edit = () => {
   const { data } = useMediaReviews();
@@ -17,7 +17,7 @@ const Edit = () => {
   const { user, loading } = useAuth();
 
   const handleCreateNew = () => {
-    setCurrentlyEditing(getDefaultMediaReview());
+    setCurrentlyEditing(defaultMediaReview());
   };
 
   const handleEdit = (id: number) => {

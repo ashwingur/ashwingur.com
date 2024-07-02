@@ -2,7 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   MediaReview,
   mediaReviewSchema,
-} from "shared/validations/mediaReviewSchema";
+  mediaReviewWriteSchema,
+} from "shared/validations/MediaReviewSchemas";
 import { z } from "zod";
 
 export const QUERY_KEY = "mediaReviews";
@@ -51,6 +52,13 @@ const createOrUpdateMediaReview = async (
 
   let response;
 
+  // Omit parameters that are calculated by the backend
+  const writeData = mediaReviewWriteSchema.safeParse(data);
+
+  if (!writeData.success) {
+    throw new Error(`Error parsing MediaReview`);
+  }
+
   if (data.id) {
     // We are modifying an existing review, so we do PUT
     response = await fetch(apiUrl, {
@@ -59,7 +67,7 @@ const createOrUpdateMediaReview = async (
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(data),
+      body: JSON.stringify(writeData.data),
     });
   } else {
     // Create a brand new review
@@ -69,7 +77,7 @@ const createOrUpdateMediaReview = async (
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(data),
+      body: JSON.stringify(writeData.data),
     });
   }
 

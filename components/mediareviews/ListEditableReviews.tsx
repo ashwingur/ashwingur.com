@@ -35,7 +35,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
         firstLayer={true}
         className="flex flex-col mx-auto w-4/5 md:w-full"
       >
-        <h3 className="text-center">{review.name}</h3>
+        <h2 className="text-center">{review.name}</h2>
         <p>
           <span className="font-bold">ID:</span> {review.id}
         </p>
@@ -52,6 +52,31 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           {review.review_last_update_date &&
             `${new Date(review.review_last_update_date).toLocaleDateString()} ${new Date(review.review_last_update_date).toLocaleTimeString()}`}
         </p>
+        {review.sub_media_reviews.length > 0 && (
+          <div className="my-2">
+            <h3 className="text-center">Sub Reviews</h3>
+            <div className="flex flex-col gap-4">
+              {review.sub_media_reviews.map((subReview) => (
+                <Card key={subReview.id} firstLayer={false} className="">
+                  <p className="font-bold text-center">{subReview.name}</p>
+                  <p>
+                    <span className="font-bold">ID:</span> {subReview.id}
+                  </p>
+                  <p>
+                    <span className="font-bold">Created:</span>{" "}
+                    {subReview.review_creation_date &&
+                      `${new Date(subReview.review_creation_date).toLocaleDateString()} ${new Date(subReview.review_creation_date).toLocaleTimeString()}`}
+                  </p>
+                  <p>
+                    <span className="font-bold">Updated:</span>{" "}
+                    {subReview.review_last_update_date &&
+                      `${new Date(subReview.review_last_update_date).toLocaleDateString()} ${new Date(subReview.review_last_update_date).toLocaleTimeString()}`}
+                  </p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
         <button
           className="btn mx-auto mt-2 w-24 h-10"
           onClick={() => {

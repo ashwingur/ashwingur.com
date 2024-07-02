@@ -13,6 +13,7 @@ interface RHFInputProps
   className?: string;
   inputClassName?: string;
   labelClassName?: string;
+  submitOnEnter?: boolean;
 }
 
 const RHFInput: React.FC<RHFInputProps> = ({
@@ -22,8 +23,14 @@ const RHFInput: React.FC<RHFInputProps> = ({
   className,
   inputClassName = "input-bg",
   labelClassName,
+  submitOnEnter = false,
   ...props
 }) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && !submitOnEnter) {
+      event.preventDefault(); // Prevent form submission on Enter key press
+    }
+  };
   return (
     <div className={clsx(className)}>
       <label className={labelClassName}>{label}</label>
@@ -32,6 +39,7 @@ const RHFInput: React.FC<RHFInputProps> = ({
         {...register}
         aria-invalid={errors !== undefined}
         autoComplete="off"
+        onKeyDown={handleKeyPress}
         {...props}
       />
       <p className="text-error">{errors?.message}</p>
