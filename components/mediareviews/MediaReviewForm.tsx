@@ -452,15 +452,15 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             "Create"
           )}
         </button>
-        <div className="my-2">
+        <div>
           {mutation.isError && mutation.error instanceof Error && (
-            <p className="text-lg text-error text-center">
+            <p className="text-lg text-error text-center my-2">
               {mutation.error.message}
             </p>
           )}
           {isDirty &&
 
-            <p className="text-error text-center">
+            <p className="text-error text-center my-2">
               You have unsaved changes: {getDirtyFieldsString()}
             </p>
           }
