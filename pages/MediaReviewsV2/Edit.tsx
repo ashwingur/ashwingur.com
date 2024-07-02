@@ -1,6 +1,6 @@
 import Card from "@components/Card";
 import ConfirmButton from "@components/ConfirmButton";
-import CreateOrUpdateReviewForm from "@components/mediareviews/CreateOrUpdateReviewForm";
+import MediaReviewForm from "@components/mediareviews/MediaReviewForm";
 import ListEditableReviews from "@components/mediareviews/ListEditableReviews";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
@@ -53,7 +53,7 @@ const Edit = () => {
             firstLayer={true}
             className="flex flex-col items-center mx-4 md:w-4/5 xl:w-2/3"
           >
-            <CreateOrUpdateReviewForm
+            <MediaReviewForm
               existingData={currentlyEditing}
               onSubmitSuccess={onSubmitSuccess}
               className="w-full lg:w-4/5"

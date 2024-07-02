@@ -23,7 +23,7 @@ import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
 
-interface CreateOrUpdateReviewFormProps {
+interface MediaReviewFormProps {
   existingData?: MediaReview;
   onSubmitSuccess?: () => void;
   className?: string;
@@ -109,7 +109,7 @@ const predefinedGenres: GenreOption[] = [
   { value: "Orchestral", label: "Orchestral" },
 ];
 
-const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
+const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   existingData,
   onSubmitSuccess,
   className,
@@ -120,13 +120,15 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
     control,
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isDirty, dirtyFields },
     reset,
     getValues,
   } = useForm<Schema>({
     resolver: zodResolver(mediaReviewSchema),
     defaultValues: existingData ?? getDefaultMediaReview(),
   });
+
+  console.log(errors)
 
   // If we change the existing data from parent component, it will populate the new values
   useEffect(() => {
@@ -158,6 +160,18 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
   const defaultConsumedDate = consumed_date
     ? new Date(consumed_date)
     : undefined;
+
+  let dirtyValuesString = "";
+  for (const field in dirtyFields) {
+    dirtyValuesString += field;
+  }
+
+  const getDirtyFieldsString = () => {
+    const dirtyFieldNames = Object.keys(dirtyFields)
+      .filter(field => dirtyFields[field as keyof Schema])
+      .map(field => field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")) // Format the keys to look better
+    return dirtyFieldNames.join(', ')
+  }
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
@@ -243,7 +257,6 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
           labelClassName="ml-2"
           inputClassName="max-w-40 input-bg"
           type="number"
-          min={0}
         />
         <RHFInput
           label="Run Time (minutes)"
@@ -370,11 +383,11 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
               <textarea
                 className="input-bg !rounded-xl w-full min-h-20"
                 {...field}
-                value={field.value?.join("\n") || ""}
+                value={field.value?.join("\n")}
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === ""
+                    value.trimStart() === ""
                       ? []
                       : value.split("\n").map((item) => item.trim())
                   );
@@ -407,7 +420,7 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === ""
+                    value.trimStart() === ""
                       ? []
                       : value.split("\n").map((item) => item.trim())
                   );
@@ -439,18 +452,23 @@ const CreateOrUpdateReviewForm: React.FC<CreateOrUpdateReviewFormProps> = ({
             "Create"
           )}
         </button>
-        <div className="min-h-6 mt-2">
+        <div className="my-2">
           {mutation.isError && mutation.error instanceof Error && (
             <p className="text-lg text-error text-center">
               {mutation.error.message}
             </p>
           )}
+          {isDirty &&
 
-          {/* {mutation.isSuccess && <p className="text-center">Success</p>} */}
+            <p className="text-error text-center">
+              You have unsaved changes: {getDirtyFieldsString()}
+            </p>
+          }
+
         </div>
       </form>
     </div>
   );
 };
 
-export default CreateOrUpdateReviewForm;
+export default MediaReviewForm;
