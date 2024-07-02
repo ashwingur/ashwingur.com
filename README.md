@@ -20,7 +20,7 @@ Routes are located in the `pages` directory, and the built in api is mapped to `
 PUSHER_APP_ID = "xxx"
 PUSHER_SECRET = "xxx"
 NEXT_PUBLIC_PUSHER_CLUSTER = "ap4"
-NEXT_PUBLIC_PUSHER_KEY = "71a7b422dcc29a66021c"
+NEXT_PUBLIC_PUSHER_KEY = "xxx"
 COC_DEV_EMAIL = "xxx"
 COC_DEV_PASS = "xxx"
 COC_BEARER_TOKEN = "xxx"
@@ -29,7 +29,7 @@ MONGO_PASSWORD = "xxx"
 MONGODB = "xxx"
 CLANTRACK_PIN = "xxx"
 OPEN_DATA_TOKEN = "xxx"
-NEXT_PUBLIC_ASHWINGUR_API = "https://localhost"
+NEXT_PUBLIC_ASHWINGUR_API = "http://localhost:5000"
 ```
 
 ## Getting Started
