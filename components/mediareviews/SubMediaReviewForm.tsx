@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, FieldError, useForm } from "react-hook-form";
 import {
   SubMediaReview,
@@ -24,6 +24,7 @@ interface SubMediaReviewFormProps {
   defaultValues: SubMediaReview;
   onSubmitSuccess?: () => void;
   onDeleteSuccess?: () => void;
+  updateDirty?: (isDirty: boolean) => void;
   className?: string;
 }
 
@@ -31,11 +32,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
   defaultValues,
   onSubmitSuccess,
   onDeleteSuccess,
+  updateDirty,
   className,
 }) => {
-  console.log(`default value:`);
-  console.log(defaultValues);
-
   const queryClient = useQueryClient();
   const {
     control,
@@ -48,6 +47,12 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
     resolver: zodResolver(subMediaReviewSchema),
     defaultValues,
   });
+
+  // Keep main review form informed on if a subreview has been changed
+  useEffect(() => {
+    updateDirty && updateDirty(isDirty);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDirty]);
 
   const onMutationSuccess = (data: SubMediaReview) => {
     reset({ ...data });
@@ -96,7 +101,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
   };
 
   return (
-    <Card firstLayer={false}>
+    <Card firstLayer={false} className={className}>
       {getValues().id && (
         <div>
           <h2 className="text-center">{defaultValues.name}</h2>

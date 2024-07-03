@@ -138,7 +138,12 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     onSubmitSuccess && onSubmitSuccess();
   };
 
-  const [subReviews, setSubReviews] = useState(getValues().sub_media_reviews);
+  const [subReviews, setSubReviews] = useState(
+    getValues().sub_media_reviews.map((subReview) => ({
+      value: subReview,
+      isDirty: false,
+    }))
+  );
 
   console.log(subReviews);
 
@@ -151,7 +156,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   const onAddSubreview = () => {
     const id = getValues().id;
     const defaultVal = defaultSubMediaReview(id, subReviews.length);
-    setSubReviews([...subReviews, defaultVal]);
+    setSubReviews([...subReviews, { value: defaultVal, isDirty: false }]);
   };
 
   const media_creation_date = getValues("media_creation_date");
@@ -173,17 +178,37 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")
       ); // Format the keys to look better
+    subReviews.forEach((s) => {
+      if (s.isDirty) {
+        if (s.value.id) {
+          dirtyFieldNames.push(`Sub Review "${s.value.name}" (${s.value.id})`);
+        } else {
+          dirtyFieldNames.push("Sub Review (new)");
+        }
+      }
+    });
     return dirtyFieldNames.join(", ");
   };
 
   const subMediaReviewForms = subReviews
-    .sort((a, b) => a.display_index - b.display_index)
+    .sort((a, b) => a.value.display_index - b.value.display_index)
     .map((s, index) => (
       <SubMediaReviewForm
         key={index}
-        defaultValues={s}
+        defaultValues={s.value}
         onDeleteSuccess={() => {
-          setSubReviews(subReviews.filter((a) => a.id !== s.id));
+          setSubReviews(subReviews.filter((a) => a.value.id !== s.value.id));
+        }}
+        updateDirty={(isDirty: boolean) => {
+          setSubReviews(
+            subReviews.map((sr) => {
+              if (sr.value.id === s.value.id) {
+                return { ...sr, isDirty };
+              } else {
+                return sr;
+              }
+            })
+          );
         }}
       />
     ));
@@ -480,7 +505,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           Add Subreview
         </button>
       )}
-      {isDirty && (
+      {getDirtyFieldsString() && (
         <p className="text-error text-center mb-2">
           You have unsaved changes: {getDirtyFieldsString()}
         </p>
