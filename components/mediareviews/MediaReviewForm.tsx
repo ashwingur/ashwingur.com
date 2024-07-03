@@ -493,7 +493,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           </p>
         )}
       </div>
-      {getValues().sub_media_reviews.length > 0 && (
+      {subMediaReviewForms.length > 0 && (
         <div className="flex flex-col gap-8 my-4">{subMediaReviewForms}</div>
       )}
       {getValues().id && (
