@@ -1,7 +1,12 @@
 import TipTap from "@components/TipTap";
 import clsx from "clsx";
-import React, { useEffect } from "react";
-import { Controller, FieldError, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import {
+  Controller,
+  FieldError,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import {
   MediaReview,
   defaultMediaReview,
@@ -15,10 +20,7 @@ import GenericMultiSelect from "@components/GenericMultiSelect";
 import GenericListbox from "@components/GenericListBox";
 import { useQueryClient } from "react-query";
 import { AiOutlineLoading } from "react-icons/ai";
-import {
-  QUERY_KEY,
-  useCreateOrUpdateMediaReview,
-} from "shared/queries/mediareviews";
+import { QUERY_KEY, useWriteMediaReview } from "shared/queries/mediareviews";
 import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
@@ -124,6 +126,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     formState: { errors, isDirty, dirtyFields },
     reset,
     getValues,
+    setValue,
   } = useForm<MediaReview>({
     resolver: zodResolver(mediaReviewSchema),
     defaultValues,
@@ -131,36 +134,35 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   const onMutationSuccess = (data: MediaReview) => {
     reset({ ...data });
-
     queryClient.invalidateQueries(QUERY_KEY);
-
     onSubmitSuccess && onSubmitSuccess();
   };
 
-  const mutation = useCreateOrUpdateMediaReview(onMutationSuccess);
+  const [subReviews, setSubReviews] = useState(getValues().sub_media_reviews);
 
-  console.log(defaultValues);
+  console.log(subReviews);
+
+  const mutation = useWriteMediaReview(onMutationSuccess);
 
   const onSubmit = (data: MediaReview) => {
     mutation.mutate(data);
+  };
+
+  const onAddSubreview = () => {
+    const id = getValues().id;
+    const defaultVal = defaultSubMediaReview(id, subReviews.length);
+    setSubReviews([...subReviews, defaultVal]);
   };
 
   const media_creation_date = getValues("media_creation_date");
   const defaultMediaCreationDate = media_creation_date
     ? new Date(media_creation_date)
     : undefined;
-  console.log(
-    `default media creation date: ${defaultMediaCreationDate}, mediacreation date: ${media_creation_date}`
-  );
+
   const consumed_date = getValues("consumed_date");
   const defaultConsumedDate = consumed_date
     ? new Date(consumed_date)
     : undefined;
-
-  let dirtyValuesString = "";
-  for (const field in dirtyFields) {
-    dirtyValuesString += field;
-  }
 
   const getDirtyFieldsString = () => {
     const dirtyFieldNames = Object.keys(dirtyFields)
@@ -174,12 +176,15 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     return dirtyFieldNames.join(", ");
   };
 
-  const subMediaReviewForms = getValues()
-    .sub_media_reviews.sort((a, b) => a.display_index - b.display_index)
+  const subMediaReviewForms = subReviews
+    .sort((a, b) => a.display_index - b.display_index)
     .map((s, index) => (
       <SubMediaReviewForm
         key={index}
-        defaultValues={s ?? defaultSubMediaReview()}
+        defaultValues={s}
+        onDeleteSuccess={() => {
+          setSubReviews(subReviews.filter((a) => a.id !== s.id));
+        }}
       />
     ));
 
@@ -229,13 +234,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           />
         </RHFControllerInput>
         <RHFInput
-          label="Cover Image URL"
-          register={register("cover_image")}
-          errors={errors.cover_image}
-          className="flex flex-col"
-          labelClassName="ml-2"
-        />
-        <RHFInput
           label="Rating"
           register={register("rating")}
           errors={errors.rating}
@@ -243,8 +241,13 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           labelClassName="ml-2"
           inputClassName="max-w-20 input-bg"
           type="number"
-          min={0}
-          max={10}
+        />
+        <RHFInput
+          label="Cover Image URL"
+          register={register("cover_image")}
+          errors={errors.cover_image}
+          className="flex flex-col"
+          labelClassName="ml-2"
         />
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller
@@ -276,6 +279,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           labelClassName="ml-2"
           inputClassName="max-w-40 input-bg"
           type="number"
+          step="0.1"
         />
         <RHFInput
           label="Creator"
@@ -399,7 +403,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
-                rows={4} // Adjust the number of rows as needed
+                rows={4}
               />
             )}
           />
@@ -430,7 +434,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
-                rows={4} // Adjust the number of rows as needed
+                rows={4}
               />
             )}
           />
@@ -443,10 +447,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex ml-2 gap-2"
         />
 
-        {getValues().sub_media_reviews.length > 0 && subMediaReviewForms}
         <button
           disabled={mutation.isLoading}
-          className="btn self-center w-36 h-10"
+          className="btn self-center w-44 h-10 my-2"
           type="submit"
         >
           {mutation.isLoading ? (
@@ -460,16 +463,28 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       </form>
       <div>
         {mutation.isError && mutation.error instanceof Error && (
-          <p className="text-lg text-error text-center my-2">
+          <p className="text-lg text-error text-center mb-2">
             {mutation.error.message}
           </p>
         )}
-        {isDirty && (
-          <p className="text-error text-center my-2">
-            You have unsaved changes: {getDirtyFieldsString()}
-          </p>
-        )}
       </div>
+      {getValues().sub_media_reviews.length > 0 && (
+        <div className="flex flex-col gap-8 my-4">{subMediaReviewForms}</div>
+      )}
+      {getValues().id && (
+        <button
+          disabled={mutation.isLoading}
+          className="btn self-center w-44 h-10 mb-2"
+          onClick={onAddSubreview}
+        >
+          Add Subreview
+        </button>
+      )}
+      {isDirty && (
+        <p className="text-error text-center mb-2">
+          You have unsaved changes: {getDirtyFieldsString()}
+        </p>
+      )}
     </div>
   );
 };

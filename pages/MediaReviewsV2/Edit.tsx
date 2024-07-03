@@ -56,16 +56,17 @@ const Edit = () => {
             <MediaReviewForm
               existingData={currentlyEditing}
               onSubmitSuccess={onSubmitSuccess}
-              className="w-full lg:w-4/5"
+              className="w-full lg:w-4/5 flex flex-col"
             />
             <ConfirmButton
               content="Cancel"
-              className="w-36 flex gap-2 justify-center"
+              className="w-44 flex gap-2 justify-center"
               mainBtnClassName="btn h-10"
               confirmBtnClassName="btn h-10"
               onConfirmClick={() => {
                 setCurrentlyEditing(undefined);
               }}
+              confirmDelay={1500}
             />
           </Card>
         )}

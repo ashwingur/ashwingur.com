@@ -122,10 +122,13 @@ export const defaultMediaReview = (): MediaReview => ({
   sub_media_reviews: [],
 });
 
-export const defaultSubMediaReview = (): SubMediaReview => ({
+export const defaultSubMediaReview = (
+  media_review_id: number | null,
+  display_index: number
+): SubMediaReview => ({
   id: null,
-  media_review_id: null,
-  display_index: 0,
+  media_review_id,
+  display_index,
   name: "",
   review_creation_date: null,
   review_last_update_date: null,
