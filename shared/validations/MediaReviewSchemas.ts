@@ -7,7 +7,7 @@ export const genreSchema = z.object({
 export const subMediaReviewSchema = z.object({
   id: z.number().min(0).nullable(),
   media_review_id: z.number().min(1).nullable(),
-  display_index: z.number().min(0),
+  display_index: z.coerce.number().min(0),
   name: z.string().min(1, "Name is required"),
   review_creation_date: z.string().nullable(),
   review_last_update_date: z.string().nullable(),

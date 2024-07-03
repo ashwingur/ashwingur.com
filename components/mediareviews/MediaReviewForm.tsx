@@ -145,8 +145,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     }))
   );
 
-  console.log(subReviews);
-
   const mutation = useWriteMediaReview(onMutationSuccess);
 
   const onSubmit = (data: MediaReview) => {

@@ -123,7 +123,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         <RHFInput
           label="Display Index"
           register={register("display_index")}
-          errors={errors.rating}
+          errors={errors.display_index}
           className="flex flex-col"
           labelClassName="ml-2"
           inputClassName="max-w-20 input-bg"
