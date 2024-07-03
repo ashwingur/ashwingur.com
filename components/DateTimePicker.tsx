@@ -4,13 +4,12 @@ import { useTheme } from "next-themes";
 import clsx from "clsx";
 
 interface DateTimePickerProps {
-  onDatetimeChange: (datetime: Date) => void;
+  onDatetimeChange: (datetime?: Date) => void;
   defaultTime?: Date;
   label?: string;
   className?: string;
   labelClassName?: string;
   inputClassName?: string;
-  startBlank?: boolean;
 }
 
 const formatDateTimeLocal = (date: Date) => {
@@ -25,39 +24,22 @@ const formatDateTimeLocal = (date: Date) => {
 
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
   onDatetimeChange,
-  defaultTime = new Date(),
+  defaultTime,
   label,
   className,
   labelClassName,
   inputClassName = "input",
-  startBlank = false,
 }) => {
   const { theme } = useTheme();
   const [datetime, setDatetime] = useState(
-    startBlank ? "" : formatDateTimeLocal(defaultTime)
+    defaultTime ? formatDateTimeLocal(defaultTime) : ""
   );
   const handleEndDateTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatetime(e.target.value);
-    onDatetimeChange(new Date(e.target.value));
+    const newDate = new Date(e.target.value);
+    const isNan = isNaN(newDate.getTime());
+    onDatetimeChange(isNan ? undefined : newDate);
   };
-
-  // Call this once when the component mounts for the initial value
-  useEffect(() => {
-    onDatetimeChange(defaultTime);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (defaultTime && !startBlank) {
-      setDatetime(formatDateTimeLocal(defaultTime));
-    }
-  }, [defaultTime, startBlank]);
-
-  useEffect(() => {
-    if (startBlank) {
-      setDatetime("");
-    }
-  }, [startBlank]);
 
   return (
     <div className={clsx(className, "flex items-center gap-2")}>

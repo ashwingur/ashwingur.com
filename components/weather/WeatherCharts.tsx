@@ -6,11 +6,7 @@ import { Listbox } from "@headlessui/react";
 import { AiOutlineDown } from "react-icons/ai";
 import Card from "@components/Card";
 import DateTimeRangePicker from "@components/DateTimeRangePicker";
-import {
-  TimeOption,
-  createTimeOptions,
-  roundUpToNearestMinute,
-} from "shared/timeoptions";
+import { TimeOption, createTimeOptions } from "shared/timeoptions";
 import GenericListbox from "@components/GenericListBox";
 
 const fetchWeatherData = async (
@@ -51,8 +47,12 @@ const WeatherCharts = () => {
   };
 
   // Date range picker prop
-  const onDateTimeChange = (start: Date, end: Date) => {
-    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+  const onDateTimeChange = (
+    _startLessThanEnd: boolean,
+    start?: Date,
+    end?: Date
+  ) => {
+    if (start && end) {
       setSelectedTimeOption((prev) => ({
         ...prev,
         startTime: start,

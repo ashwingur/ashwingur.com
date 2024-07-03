@@ -139,6 +139,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   const mutation = useCreateOrUpdateMediaReview(onMutationSuccess);
 
+  console.log(defaultValues);
+
   const onSubmit = (data: MediaReview) => {
     mutation.mutate(data);
   };
@@ -147,6 +149,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   const defaultMediaCreationDate = media_creation_date
     ? new Date(media_creation_date)
     : undefined;
+  console.log(
+    `default media creation date: ${defaultMediaCreationDate}, mediacreation date: ${media_creation_date}`
+  );
   const consumed_date = getValues("consumed_date");
   const defaultConsumedDate = consumed_date
     ? new Date(consumed_date)
@@ -287,13 +292,12 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               return (
                 <DateTimePicker
                   defaultTime={defaultMediaCreationDate}
-                  startBlank={!defaultMediaCreationDate}
                   inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
-                    if (isNaN(datetime.getTime())) {
-                      field.onChange(null);
-                    } else {
+                    if (datetime) {
                       field.onChange(datetime.toISOString());
+                    } else {
+                      field.onChange(null);
                     }
                   }}
                 />
@@ -309,13 +313,12 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               return (
                 <DateTimePicker
                   defaultTime={defaultConsumedDate}
-                  startBlank={!defaultConsumedDate}
                   inputClassName="input-bg"
                   onDatetimeChange={(datetime) => {
-                    if (isNaN(datetime.getTime())) {
-                      field.onChange(null);
-                    } else {
+                    if (datetime) {
                       field.onChange(datetime.toISOString());
+                    } else {
+                      field.onChange(null);
                     }
                   }}
                 />

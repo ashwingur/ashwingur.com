@@ -21,8 +21,12 @@ const Analytics = () => {
   };
 
   // Date range picker prop
-  const onDateTimeChange = (start: Date, end: Date) => {
-    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+  const onDateTimeChange = (
+    startLessThanEnd: boolean,
+    start?: Date,
+    end?: Date
+  ) => {
+    if (start && end) {
       setSelectedTimeOption((prev) => ({
         ...prev,
         startTime: start,

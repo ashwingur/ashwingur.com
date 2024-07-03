@@ -4,7 +4,11 @@ import { useTheme } from "next-themes";
 import DateTimePicker from "./DateTimePicker";
 
 interface DateTimeRangePickerProps {
-  onDateTimeChange: (start: Date, end: Date, startLessThanEnd: boolean) => void;
+  onDateTimeChange: (
+    startLessThanEnd: boolean,
+    start?: Date,
+    end?: Date
+  ) => void;
   defaultStartTime?: Date;
   defaultEndTime?: Date;
   className?: string;
@@ -28,18 +32,28 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
   className,
 }) => {
   const { defaultStart, defaultEnd } = getDefaultDateTimes();
-  const [startDatetime, setStartDatetime] = useState(
+  const [startDatetime, setStartDatetime] = useState<Date | undefined>(
     defaultStartTime ?? defaultStart
   );
-  const [endDatetime, setEndDatetime] = useState(defaultEndTime ?? defaultEnd);
+  const [endDatetime, setEndDatetime] = useState<Date | undefined>(
+    defaultEndTime ?? defaultEnd
+  );
 
-  const onStartTimeChange = (start: Date) => {
+  const onStartTimeChange = (start?: Date) => {
     setStartDatetime(start);
-    onDateTimeChange(start, endDatetime, start < endDatetime);
+    onDateTimeChange(
+      start && endDatetime ? start < endDatetime : false,
+      start,
+      endDatetime
+    );
   };
-  const onEndTimeChange = (end: Date) => {
+  const onEndTimeChange = (end?: Date) => {
     setEndDatetime(end);
-    onDateTimeChange(startDatetime, end, startDatetime < end);
+    onDateTimeChange(
+      startDatetime && end ? startDatetime < end : false,
+      startDatetime,
+      end
+    );
   };
 
   return (
