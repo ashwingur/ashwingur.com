@@ -14,6 +14,17 @@ const nextConfig = {
         hostname: "raw.githubusercontent.com",
         pathname: "**",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.ashwingur.com",
+        pathname: "**",
+      },
+      // { protocol: "https", hostname: "**" },
     ],
   },
   webpack: (config) => {

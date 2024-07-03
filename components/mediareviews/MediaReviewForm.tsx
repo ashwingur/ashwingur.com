@@ -25,6 +25,7 @@ import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
 import SubMediaReviewForm from "./SubMediaReviewForm";
+import Image from "next/image";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
@@ -272,6 +273,16 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
+        {getValues().cover_image && (
+          <div className="w-full h-72 relative">
+            <Image
+              src={getValues().cover_image ?? ""}
+              alt={"Main review cover image"}
+              style={{ objectFit: "contain" }}
+              layout="fill"
+            />
+          </div>
+        )}
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller
             name="review_content"
