@@ -24,6 +24,11 @@ const nextConfig = {
         hostname: "api.ashwingur.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "imgproxy.ashwingur.com",
+        pathname: "**",
+      },
       // { protocol: "https", hostname: "**" },
     ],
   },
