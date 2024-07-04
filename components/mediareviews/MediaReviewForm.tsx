@@ -502,7 +502,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       {getValues().id && (
         <button
           disabled={mutation.isLoading}
-          className="btn w-44 h-10"
+          className="btn-secondary w-44 h-10"
           onClick={onAddSubreview}
         >
           Add Subreview

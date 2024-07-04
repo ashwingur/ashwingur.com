@@ -304,7 +304,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         )}
         <button
           disabled={mutation.isLoading}
-          className="btn self-center w-44 h-10 my-2"
+          className="btn self-center w-44 h-10 mt-2"
           type="submit"
         >
           {mutation.isLoading ? (
@@ -315,6 +315,29 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             "Create"
           )}
         </button>
+        {/* {!isDirty && (
+          <button
+            className="btn w-44 h-10 self-center"
+            onClick={() => {
+              reset({ ...defaultValues });
+            }}
+          >
+            Discard
+          </button>
+        )} */}
+        {isDirty && getValues().id && (
+          <ConfirmButton
+            content="Discard"
+            className="w-44 flex gap-2 justify-center self-center"
+            mainBtnClassName="btn h-10"
+            confirmBtnClassName="btn h-10"
+            onConfirmClick={() => {
+              reset({ ...defaultValues });
+            }}
+            confirmDelay={1500}
+          />
+        )}
+
         <ConfirmButton
           className="flex justify-center self-center gap-4 w-44 h-10"
           onConfirmClick={onDelete}
