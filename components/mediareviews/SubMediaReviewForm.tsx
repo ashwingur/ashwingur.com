@@ -19,6 +19,7 @@ import {
 } from "shared/queries/mediareviews";
 import { useQueryClient } from "react-query";
 import ConfirmButton from "@components/ConfirmButton";
+import Image from "next/image";
 
 interface SubMediaReviewFormProps {
   defaultValues: SubMediaReview;
@@ -145,6 +146,16 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
+        {getValues().signed_cover_image && (
+          <div className="w-full h-72 relative">
+            <Image
+              src={getValues().signed_cover_image ?? ""}
+              alt={"Main review cover image"}
+              style={{ objectFit: "contain" }}
+              layout="fill"
+            />
+          </div>
+        )}
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller
             name="review_content"

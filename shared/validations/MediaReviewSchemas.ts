@@ -12,6 +12,7 @@ export const subMediaReviewSchema = z.object({
   review_creation_date: z.string().nullable(),
   review_last_update_date: z.string().nullable(),
   cover_image: z.string().nullable(),
+  signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
     .min(0, "Rating cannot be less than 0")
@@ -50,6 +51,7 @@ export const mediaReviewSchema = z.object({
   review_last_update_date: z.string().nullable(),
   media_type: z.enum(["Movie", "Book", "Show", "Game", "Music"]),
   cover_image: z.string().nullable(),
+  signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
     .min(0, "Rating cannot be less than 0")
@@ -90,11 +92,13 @@ export const mediaReviewWriteSchema = mediaReviewSchema.omit({
   review_creation_date: true,
   review_last_update_date: true,
   sub_media_reviews: true,
+  signed_cover_image: true,
 });
 export const subMediaReviewWriteSchema = subMediaReviewSchema.omit({
   id: true,
   review_creation_date: true,
   review_last_update_date: true,
+  signed_cover_image: true,
 });
 
 export type MediaReview = z.infer<typeof mediaReviewSchema>;
@@ -108,6 +112,7 @@ export const defaultMediaReview = (): MediaReview => ({
   review_last_update_date: null,
   media_type: "Movie",
   cover_image: null,
+  signed_cover_image: null,
   rating: null,
   review_content: null,
   word_count: null,
@@ -133,6 +138,7 @@ export const defaultSubMediaReview = (
   review_creation_date: null,
   review_last_update_date: null,
   cover_image: null,
+  signed_cover_image: null,
   rating: null,
   review_content: null,
   word_count: null,

@@ -273,10 +273,10 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
-        {getValues().cover_image && (
+        {getValues().signed_cover_image && (
           <div className="w-full h-72 relative">
             <Image
-              src={getValues().cover_image ?? ""}
+              src={getValues().signed_cover_image ?? ""}
               alt={"Main review cover image"}
               style={{ objectFit: "contain" }}
               layout="fill"
