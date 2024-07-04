@@ -23,13 +23,16 @@ const Edit = () => {
   const handleEdit = (id: number) => {
     if (data) {
       const review = data.find((r) => r.id === id);
-      console.log(review);
       review && setCurrentlyEditing(review);
     }
   };
 
   const onSubmitSuccess = () => {
     // We want the editor to hide again after a successful create/update
+    setCurrentlyEditing(undefined);
+  };
+
+  const onExit = () => {
     setCurrentlyEditing(undefined);
   };
 
@@ -56,17 +59,8 @@ const Edit = () => {
             <MediaReviewForm
               existingData={currentlyEditing}
               onSubmitSuccess={onSubmitSuccess}
-              className="w-full lg:w-4/5 flex flex-col"
-            />
-            <ConfirmButton
-              content="Cancel"
-              className="w-44 flex gap-2 justify-center"
-              mainBtnClassName="btn h-10"
-              confirmBtnClassName="btn h-10"
-              onConfirmClick={() => {
-                setCurrentlyEditing(undefined);
-              }}
-              confirmDelay={1500}
+              onExit={onExit}
+              className="w-full lg:w-4/5 flex flex-col items-center"
             />
           </Card>
         )}

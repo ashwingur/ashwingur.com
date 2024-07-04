@@ -26,10 +26,12 @@ import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
 import SubMediaReviewForm from "./SubMediaReviewForm";
 import Image from "next/image";
+import ConfirmButton from "@components/ConfirmButton";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
   onSubmitSuccess?: () => void;
+  onExit?: () => void;
   className?: string;
 }
 
@@ -114,6 +116,7 @@ const predefinedGenres: GenreOption[] = [
 const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   existingData,
   onSubmitSuccess,
+  onExit,
   className,
 }) => {
   const queryClient = useQueryClient();
@@ -179,6 +182,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       ); // Format the keys to look better
     subReviews.forEach((s) => {
       if (s.isDirty) {
+        isSomeSubReviewDirty = true;
+        console.log(isSomeSubReviewDirty);
         if (s.value.id) {
           dirtyFieldNames.push(`Sub Review "${s.value.name}" (${s.value.id})`);
         } else {
@@ -212,6 +217,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       />
     ));
 
+  let isSomeSubReviewDirty = false;
+  const dirtyFieldString = getDirtyFieldsString();
+
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
       {getValues().id && (
@@ -223,9 +231,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         </div>
       )}
       <form
-        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2"
         autoComplete="false"
+        id="main-review-form"
       >
         <RHFInput
           label="Name"
@@ -480,20 +488,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           type="checkbox"
           className="flex ml-2 gap-2"
         />
-
-        <button
-          disabled={mutation.isLoading}
-          className="btn self-center w-44 h-10 my-2"
-          type="submit"
-        >
-          {mutation.isLoading ? (
-            <AiOutlineLoading className="animate-spin text-xl" />
-          ) : getValues().id ? (
-            "Update"
-          ) : (
-            "Create"
-          )}
-        </button>
       </form>
       <div>
         {mutation.isError && mutation.error instanceof Error && (
@@ -508,16 +502,55 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       {getValues().id && (
         <button
           disabled={mutation.isLoading}
-          className="btn self-center w-44 h-10 mb-2"
+          className="btn w-44 h-10"
           onClick={onAddSubreview}
         >
           Add Subreview
         </button>
       )}
-      {getDirtyFieldsString() && (
-        <p className="text-error text-center mb-2">
-          You have unsaved changes: {getDirtyFieldsString()}
-        </p>
+      {dirtyFieldString && (
+        <>
+          <p className="text-error text-center my-2">
+            You have unsaved changes: {dirtyFieldString}
+          </p>
+          <ConfirmButton
+            content="Discard"
+            className="w-44 flex gap-2 justify-center"
+            mainBtnClassName="btn h-10"
+            confirmBtnClassName="btn h-10"
+            onConfirmClick={() => {
+              onExit && onExit();
+            }}
+            confirmDelay={1500}
+          />
+        </>
+      )}
+      {!isSomeSubReviewDirty && (
+        <button
+          disabled={mutation.isLoading || isSomeSubReviewDirty}
+          className="btn self-center w-44 h-10 my-2"
+          form="main-review-form"
+          onClick={handleSubmit(onSubmit)}
+        >
+          {mutation.isLoading ? (
+            <AiOutlineLoading className="animate-spin text-xl" />
+          ) : getValues().id ? (
+            "Update"
+          ) : (
+            "Create"
+          )}
+        </button>
+      )}
+      {!dirtyFieldString && (
+        <button
+          disabled={mutation.isLoading}
+          className="btn w-44 h-10 mb-2"
+          onClick={() => {
+            onExit && onExit();
+          }}
+        >
+          Back
+        </button>
       )}
     </div>
   );

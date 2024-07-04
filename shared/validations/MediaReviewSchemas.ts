@@ -147,5 +147,5 @@ export const defaultSubMediaReview = (
   consumed_date: null,
   pros: [],
   cons: [],
-  visible: false,
+  visible: true,
 });
