@@ -281,13 +281,14 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
-        {getValues().signed_cover_image && (
+        {baseValues.signed_cover_image && (
           <div className="w-full h-72 relative">
             <Image
               src={getValues().signed_cover_image ?? ""}
               alt={"Main review cover image"}
               style={{ objectFit: "contain" }}
-              layout="fill"
+              fill
+              priority
             />
           </div>
         )}
@@ -339,6 +340,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultMediaCreationDate}
                   inputClassName="input-bg"
+                  dateOnly={true}
                   onDatetimeChange={(datetime) => {
                     if (datetime) {
                       field.onChange(datetime.toISOString());
@@ -351,6 +353,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             }}
           />
         </RHFControllerInput>
+        <input type="date"></input>
         <RHFControllerInput label="Consumed Date" labelClassName="ml-2">
           <Controller
             control={control}

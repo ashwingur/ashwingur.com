@@ -10,14 +10,19 @@ interface DateTimePickerProps {
   className?: string;
   labelClassName?: string;
   inputClassName?: string;
+  dateOnly?: boolean;
 }
 
-const formatDateTimeLocal = (date: Date) => {
+const formatDateTimeLocal = (date: Date, dateOnly: boolean) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  if (dateOnly) {
+    return `${year}-${month}-${day}`;
+  }
 
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
@@ -29,10 +34,11 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   className,
   labelClassName,
   inputClassName = "input",
+  dateOnly = false,
 }) => {
   const { theme } = useTheme();
   const [datetime, setDatetime] = useState(
-    defaultTime ? formatDateTimeLocal(defaultTime) : ""
+    defaultTime ? formatDateTimeLocal(defaultTime, dateOnly) : ""
   );
   const handleEndDateTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatetime(e.target.value);
@@ -54,7 +60,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         </label>
       )}
       <input
-        type="datetime-local"
+        type={dateOnly ? "date" : "datetime-local"}
         value={datetime}
         onChange={handleEndDateTimeChange}
         className={inputClassName}
