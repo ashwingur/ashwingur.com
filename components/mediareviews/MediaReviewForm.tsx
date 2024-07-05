@@ -353,7 +353,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             }}
           />
         </RHFControllerInput>
-        <input type="date"></input>
         <RHFControllerInput label="Consumed Date" labelClassName="ml-2">
           <Controller
             control={control}
@@ -363,6 +362,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultConsumedDate}
                   inputClassName="input-bg"
+                  dateOnly={true}
                   onDatetimeChange={(datetime) => {
                     if (datetime) {
                       field.onChange(datetime.toISOString());
@@ -424,7 +424,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         </RHFControllerInput>
 
         <RHFControllerInput
-          label="Pros (each new line is a separator)"
+          label="Pros"
           labelClassName="ml-2"
           errors={
             errors.pros &&
@@ -448,14 +448,15 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
-                rows={getValues().pros.length ?? 3}
+                rows={getValues().pros.length ?? 2}
+                placeholder="Each line is one pro"
               />
             )}
           />
         </RHFControllerInput>
 
         <RHFControllerInput
-          label="Cons (each new line is a separator)"
+          label="Cons"
           labelClassName="ml-2"
           errors={
             errors.cons &&
@@ -479,7 +480,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
-                rows={getValues().pros.length ?? 3}
+                rows={getValues().pros.length ?? 2}
+                placeholder="Each line is one con"
               />
             )}
           />

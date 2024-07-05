@@ -61,6 +61,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       )}
       <input
         type={dateOnly ? "date" : "datetime-local"}
+        min="1900-01-01"
+        max="2100-01-01"
         value={datetime}
         onChange={handleEndDateTimeChange}
         className={inputClassName}

@@ -196,6 +196,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultMediaCreationDate}
                   inputClassName="input-bg"
+                  dateOnly={true}
                   onDatetimeChange={(datetime) => {
                     if (datetime) {
                       field.onChange(datetime.toISOString());
@@ -217,6 +218,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                 <DateTimePicker
                   defaultTime={defaultConsumedDate}
                   inputClassName="input-bg"
+                  dateOnly={true}
                   onDatetimeChange={(datetime) => {
                     if (datetime) {
                       field.onChange(datetime.toISOString());
@@ -230,7 +232,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           />
         </RHFControllerInput>
         <RHFControllerInput
-          label="Pros (each new line is a separator)"
+          label="Pros"
           labelClassName="ml-2"
           errors={
             errors.pros &&
@@ -254,14 +256,15 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
-                rows={4}
+                rows={getValues().pros.length ?? 2}
+                placeholder="Each line is one pro"
               />
             )}
           />
         </RHFControllerInput>
 
         <RHFControllerInput
-          label="Cons (each new line is a separator)"
+          label="Cons"
           labelClassName="ml-2"
           errors={
             errors.cons &&
@@ -285,7 +288,8 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
-                rows={4}
+                rows={getValues().pros.length ?? 2}
+                placeholder="Each line is one con"
               />
             )}
           />
@@ -339,6 +343,13 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           confirmBtnClassName="btn w-20 flex items-center justify-center"
           confirmDelay={1000}
         />
+        <div>
+          {mutation.isError && mutation.error instanceof Error && (
+            <p className="text-lg text-error text-center">
+              {mutation.error.message}
+            </p>
+          )}
+        </div>
       </form>
     </Card>
   );
