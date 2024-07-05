@@ -3,6 +3,11 @@ import React, { useId } from "react";
 import Select, { MultiValue, GroupBase } from "react-select";
 import makeAnimated from "react-select/animated";
 
+/*
+    Generic multi select component that uses react select
+    Supports both groups and ungrouped options
+*/
+
 interface OptionType {
   value: string;
   label: string;

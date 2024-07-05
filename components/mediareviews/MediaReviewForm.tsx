@@ -22,7 +22,7 @@ import SubMediaReviewForm from "./SubMediaReviewForm";
 import Image from "next/image";
 import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
-import groupedGenreOptions from "shared/media-genres";
+import groupedGenreOptions from "shared/mediareview-genres";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;

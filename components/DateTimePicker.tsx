@@ -47,6 +47,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     onDatetimeChange(isNan ? undefined : newDate);
   };
 
+  console.log(datetime);
+
   return (
     <div className={clsx(className, "flex items-center gap-2")}>
       {label && (
@@ -65,7 +67,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         max="2100-01-01"
         value={datetime}
         onChange={handleEndDateTimeChange}
-        className={inputClassName}
+        className={clsx(inputClassName, !datetime && "!text-text-muted")}
         style={{ colorScheme: isDark(theme) ? "dark" : "light" }}
       />
     </div>
