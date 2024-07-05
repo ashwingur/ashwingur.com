@@ -315,16 +315,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             "Create"
           )}
         </button>
-        {/* {!isDirty && (
-          <button
-            className="btn w-44 h-10 self-center"
-            onClick={() => {
-              reset({ ...defaultValues });
-            }}
-          >
-            Discard
-          </button>
-        )} */}
+
         {isDirty && getValues().id && (
           <ConfirmButton
             content="Discard"
@@ -334,7 +325,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             onConfirmClick={() => {
               reset({ ...defaultValues });
             }}
-            confirmDelay={1500}
+            confirmDelay={1000}
           />
         )}
 
@@ -344,6 +335,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           content="Delete"
           mainBtnClassName="btn"
           confirmBtnClassName="btn w-20 flex items-center justify-center"
+          confirmDelay={1000}
         />
       </form>
     </Card>

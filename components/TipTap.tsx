@@ -47,6 +47,7 @@ interface TipTapProps {
   value: string;
   onChange: (content: string) => void;
   className?: string;
+  editorClassName?: string;
 }
 
 interface MenuBarProps {
@@ -285,7 +286,12 @@ const MenuBar = ({ editor, className }: MenuBarProps) => {
   );
 };
 
-const TipTap: React.FC<TipTapProps> = ({ value, onChange, className }) => {
+const TipTap: React.FC<TipTapProps> = ({
+  value,
+  onChange,
+  className,
+  editorClassName,
+}) => {
   const editor = useEditor({
     extensions,
     content: value,
@@ -306,8 +312,11 @@ const TipTap: React.FC<TipTapProps> = ({ value, onChange, className }) => {
       />
       <EditorContent
         editor={editor}
-        className="editor py-4 min-h-48"
+        className={clsx("editor py-4 cursor-text min-h-24", editorClassName)}
         autoComplete="new-password"
+        onClick={() => {
+          editor && !editor.isFocused && editor.commands.focus();
+        }}
       />
       {/* <pre className="text-wrap">{editor?.getHTML()}</pre> */}
     </div>

@@ -1,20 +1,22 @@
 import Card from "@components/Card";
-import ConfirmButton from "@components/ConfirmButton";
 import MediaReviewForm from "@components/mediareviews/MediaReviewForm";
 import ListEditableReviews from "@components/mediareviews/ListEditableReviews";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaReviews } from "shared/queries/mediareviews";
 import {
   MediaReview,
   defaultMediaReview,
 } from "shared/validations/MediaReviewSchemas";
+import { useRouter } from "next/router";
+import { z } from "zod";
 
 const Edit = () => {
   const { data } = useMediaReviews();
   const [currentlyEditing, setCurrentlyEditing] = useState<MediaReview>();
   const { user, loading } = useAuth();
+  const router = useRouter();
 
   const handleCreateNew = () => {
     setCurrentlyEditing(defaultMediaReview());
@@ -23,7 +25,12 @@ const Edit = () => {
   const handleEdit = (id: number) => {
     if (data) {
       const review = data.find((r) => r.id === id);
-      review && setCurrentlyEditing(review);
+      if (review) {
+        setCurrentlyEditing(review);
+        router.push({ pathname: router.pathname, query: { id: review?.id } });
+      } else {
+        router.push({ pathname: router.pathname });
+      }
     }
   };
 
@@ -33,8 +40,19 @@ const Edit = () => {
   };
 
   const onExit = () => {
+    router.push({ pathname: router.pathname });
     setCurrentlyEditing(undefined);
   };
+
+  useEffect(() => {
+    // Upon first load check if there's a url parameter and go to that review if data has loaded
+    const { id } = router.query;
+    const idResult = z.coerce.number().min(0).safeParse(id);
+    console.log(idResult);
+    if (idResult.success && data) {
+      handleEdit(idResult.data);
+    }
+  }, [data]);
 
   return (
     <div className="min-h-screen pt-24 pb-8">

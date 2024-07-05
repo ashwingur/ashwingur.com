@@ -17,7 +17,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   const { data, error, isLoading } = useMediaReviews();
   const deleteReviewMutation = useDeleteMediaReview();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingIcon className="text-5xl mt-16" />;
   if (error || !data)
     return (
       <div className="text-error">

@@ -435,7 +435,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl w-full min-h-20"
+                className="input-bg !rounded-2xl w-full min-h-20"
                 {...field}
                 value={field.value?.join("\n")}
                 onChange={(e) => {
@@ -445,7 +445,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
-                rows={4}
+                rows={getValues().pros.length ?? 3}
               />
             )}
           />
@@ -466,7 +466,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl w-full min-h-20"
+                className="input-bg !rounded-2xl w-full min-h-20"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
@@ -476,7 +476,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
-                rows={4}
+                rows={getValues().pros.length ?? 3}
               />
             )}
           />
@@ -521,7 +521,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             onConfirmClick={() => {
               onExit && onExit();
             }}
-            confirmDelay={1500}
+            confirmDelay={1000}
           />
         </>
       )}

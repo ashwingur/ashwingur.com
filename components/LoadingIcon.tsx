@@ -7,7 +7,7 @@ interface LoadingIconProps {
 }
 
 const LoadingIcon: React.FC<LoadingIconProps> = ({ className }) => (
-  <AiOutlineLoading className={clsx(className ?? "animate-spin text-xl")} />
+  <AiOutlineLoading className={clsx(className ?? "text-xl", "animate-spin")} />
 );
 
 export default LoadingIcon;
