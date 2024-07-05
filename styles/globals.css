@@ -60,8 +60,8 @@
   --color-background: theme(colors.stone.950);
   --color-background-muted: theme(colors.stone.900);
   --color-background-hover: theme(colors.stone.800);
-  --color-text: theme(colors.slate.100);
-  --color-text-muted: theme(colors.slate.200);
+  --color-text: theme(colors.slate.200);
+  --color-text-muted: theme(colors.slate.400);
   --color-text-hover: theme(colors.blue.400);
   --color-text-primary: theme(colors.slate.50);
   --color-text-secondary: theme(colors.slate.50);
