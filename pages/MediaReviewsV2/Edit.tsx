@@ -36,7 +36,7 @@ const Edit = () => {
 
   const onSubmitSuccess = () => {
     // We want the editor to hide again after a successful create/update
-    setCurrentlyEditing(undefined);
+    // setCurrentlyEditing(undefined);
   };
 
   const onExit = () => {
@@ -48,10 +48,11 @@ const Edit = () => {
     // Upon first load check if there's a url parameter and go to that review if data has loaded
     const { id } = router.query;
     const idResult = z.coerce.number().min(0).safeParse(id);
-    console.log(idResult);
-    if (idResult.success && data) {
+    if (idResult.success && data && !currentlyEditing) {
+      console.log(`handleedit called`);
       handleEdit(idResult.data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (

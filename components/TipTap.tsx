@@ -318,7 +318,6 @@ const TipTap: React.FC<TipTapProps> = ({
           editor && !editor.isFocused && editor.commands.focus();
         }}
       />
-      {/* <pre className="text-wrap">{editor?.getHTML()}</pre> */}
     </div>
   );
 };

@@ -36,7 +36,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
         className="flex flex-col mx-auto w-4/5 md:w-full justify-between"
       >
         <div className="h-full">
-          <h2 className="text-center">{review.name}</h2>
+          <h2 className="text-center break-words">{review.name}</h2>
           <p>
             <span className="font-bold">ID:</span> {review.id}
           </p>
@@ -110,7 +110,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full ">
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full ">
       {reviewItems}
     </div>
   );

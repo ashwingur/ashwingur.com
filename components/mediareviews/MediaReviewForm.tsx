@@ -120,26 +120,27 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   className,
 }) => {
   const queryClient = useQueryClient();
-
-  const defaultValues = existingData ?? defaultMediaReview();
+  const [baseValues, setBaseValues] = useState(
+    existingData ?? defaultMediaReview()
+  );
 
   const {
     control,
     handleSubmit,
     register,
-    formState: { errors, isDirty, dirtyFields },
+    formState: { errors, dirtyFields },
     reset,
     getValues,
-    setValue,
   } = useForm<MediaReview>({
     resolver: zodResolver(mediaReviewSchema),
-    defaultValues,
+    defaultValues: baseValues,
   });
 
   const onMutationSuccess = (data: MediaReview) => {
     reset({ ...data });
     queryClient.invalidateQueries(QUERY_KEY);
     onSubmitSuccess && onSubmitSuccess();
+    setBaseValues(data);
   };
 
   const [subReviews, setSubReviews] = useState(
@@ -183,7 +184,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     subReviews.forEach((s) => {
       if (s.isDirty) {
         isSomeSubReviewDirty = true;
-        console.log(isSomeSubReviewDirty);
         if (s.value.id) {
           dirtyFieldNames.push(`Sub Review "${s.value.name}" (${s.value.id})`);
         } else {
@@ -199,7 +199,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     .map((s, index) => (
       <SubMediaReviewForm
         key={index}
-        defaultValues={s.value}
+        existingData={s.value}
         onDeleteSuccess={() => {
           setSubReviews(subReviews.filter((a) => a.value.id !== s.value.id));
         }}
@@ -222,11 +222,11 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   return (
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
-      {getValues().id && (
-        <div>
-          <h2 className="text-center">{defaultValues.name}</h2>
+      {baseValues.id && (
+        <div className="w-full">
+          <h2 className="text-center break-words">{baseValues.name}</h2>
           <h3 className="text-center">
-            {defaultValues.media_type} (ID: {getValues().id})
+            {baseValues.media_type} (ID: {baseValues.id})
           </h3>
         </div>
       )}
@@ -499,20 +499,38 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       {subMediaReviewForms.length > 0 && (
         <div className="flex flex-col gap-8 my-4">{subMediaReviewForms}</div>
       )}
-      {getValues().id && (
-        <button
-          disabled={mutation.isLoading}
-          className="btn-secondary w-44 h-10"
-          onClick={onAddSubreview}
-        >
-          Add Subreview
-        </button>
-      )}
-      {dirtyFieldString && (
-        <>
-          <p className="text-error text-center my-2">
+      <div className="flex flex-col items-center gap-2">
+        {getValues().id && (
+          <button
+            disabled={mutation.isLoading}
+            className="btn-secondary w-44 h-10"
+            onClick={onAddSubreview}
+          >
+            Add Subreview
+          </button>
+        )}
+        {dirtyFieldString && (
+          <p className="text-error text-center">
             You have unsaved changes: {dirtyFieldString}
           </p>
+        )}
+        {!isSomeSubReviewDirty && dirtyFieldString && (
+          <button
+            disabled={mutation.isLoading || isSomeSubReviewDirty}
+            className="btn self-center w-44 h-10"
+            form="main-review-form"
+            onClick={handleSubmit(onSubmit)}
+          >
+            {mutation.isLoading ? (
+              <AiOutlineLoading className="animate-spin text-xl" />
+            ) : getValues().id ? (
+              "Update"
+            ) : (
+              "Create"
+            )}
+          </button>
+        )}
+        {dirtyFieldString && (
           <ConfirmButton
             content="Discard"
             className="w-44 flex gap-2 justify-center"
@@ -523,35 +541,19 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             }}
             confirmDelay={1000}
           />
-        </>
-      )}
-      {!isSomeSubReviewDirty && (
-        <button
-          disabled={mutation.isLoading || isSomeSubReviewDirty}
-          className="btn self-center w-44 h-10 my-2"
-          form="main-review-form"
-          onClick={handleSubmit(onSubmit)}
-        >
-          {mutation.isLoading ? (
-            <AiOutlineLoading className="animate-spin text-xl" />
-          ) : getValues().id ? (
-            "Update"
-          ) : (
-            "Create"
-          )}
-        </button>
-      )}
-      {!dirtyFieldString && (
-        <button
-          disabled={mutation.isLoading}
-          className="btn w-44 h-10 mb-2"
-          onClick={() => {
-            onExit && onExit();
-          }}
-        >
-          Back
-        </button>
-      )}
+        )}
+        {!dirtyFieldString && (
+          <button
+            disabled={mutation.isLoading}
+            className="btn w-44 h-10"
+            onClick={() => {
+              onExit && onExit();
+            }}
+          >
+            Back
+          </button>
+        )}
+      </div>
     </div>
   );
 };

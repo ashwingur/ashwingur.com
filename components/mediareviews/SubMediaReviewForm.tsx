@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, FieldError, useForm } from "react-hook-form";
 import {
   SubMediaReview,
-  defaultSubMediaReview,
   subMediaReviewSchema,
 } from "shared/validations/MediaReviewSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,7 +21,7 @@ import ConfirmButton from "@components/ConfirmButton";
 import Image from "next/image";
 
 interface SubMediaReviewFormProps {
-  defaultValues: SubMediaReview;
+  existingData: SubMediaReview;
   onSubmitSuccess?: () => void;
   onDeleteSuccess?: () => void;
   updateDirty?: (isDirty: boolean) => void;
@@ -30,13 +29,15 @@ interface SubMediaReviewFormProps {
 }
 
 const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
-  defaultValues,
+  existingData,
   onSubmitSuccess,
   onDeleteSuccess,
   updateDirty,
   className,
 }) => {
   const queryClient = useQueryClient();
+  const [baseValues, setBaseValues] = useState(existingData);
+
   const {
     control,
     handleSubmit,
@@ -46,7 +47,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
     getValues,
   } = useForm<SubMediaReview>({
     resolver: zodResolver(subMediaReviewSchema),
-    defaultValues,
+    defaultValues: baseValues,
   });
 
   // Keep main review form informed on if a subreview has been changed
@@ -57,10 +58,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
 
   const onMutationSuccess = (data: SubMediaReview) => {
     reset({ ...data });
-
     queryClient.invalidateQueries(QUERY_KEY);
-
     onSubmitSuccess && onSubmitSuccess();
+    setBaseValues(data);
   };
 
   const mutation = useWriteSubMediaReview(onMutationSuccess);
@@ -103,10 +103,10 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
 
   return (
     <Card firstLayer={false} className={className}>
-      {getValues().id && (
+      {baseValues.id && (
         <div>
-          <h2 className="text-center">{defaultValues.name}</h2>
-          <h3 className="text-center">(ID: {getValues().id})</h3>
+          <h2 className="text-center">{baseValues.name}</h2>
+          <h3 className="text-center">(ID: {baseValues.id})</h3>
         </div>
       )}
       <form
@@ -302,19 +302,21 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             You have unsaved changes: {getDirtyFieldsString()}
           </p>
         )}
-        <button
-          disabled={mutation.isLoading}
-          className="btn self-center w-44 h-10 mt-2"
-          type="submit"
-        >
-          {mutation.isLoading ? (
-            <AiOutlineLoading className="animate-spin text-xl" />
-          ) : getValues().id ? (
-            "Update"
-          ) : (
-            "Create"
-          )}
-        </button>
+        {isDirty && (
+          <button
+            disabled={mutation.isLoading}
+            className="btn self-center w-44 h-10"
+            type="submit"
+          >
+            {mutation.isLoading ? (
+              <AiOutlineLoading className="animate-spin text-xl" />
+            ) : getValues().id ? (
+              "Update"
+            ) : (
+              "Create"
+            )}
+          </button>
+        )}
 
         {isDirty && getValues().id && (
           <ConfirmButton
@@ -323,7 +325,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             mainBtnClassName="btn h-10"
             confirmBtnClassName="btn h-10"
             onConfirmClick={() => {
-              reset({ ...defaultValues });
+              reset({ ...baseValues });
             }}
             confirmDelay={1000}
           />

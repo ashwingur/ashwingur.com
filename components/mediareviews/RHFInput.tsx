@@ -38,7 +38,7 @@ const RHFInput: React.FC<RHFInputProps> = ({
         className={inputClassName}
         {...register}
         aria-invalid={errors !== undefined}
-        autoComplete="off"
+        autoComplete="new-password"
         onKeyDown={handleKeyPress}
         {...props}
       />
