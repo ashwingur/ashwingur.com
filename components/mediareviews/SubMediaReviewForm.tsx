@@ -187,7 +187,11 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           inputClassName="max-w-40 input-bg"
           type="number"
         />
-        <RHFControllerInput label="Media Creation Date" labelClassName="ml-2">
+        <RHFControllerInput
+          label="Media Creation Date"
+          labelClassName="ml-2"
+          errors={errors.media_creation_date}
+        >
           <Controller
             control={control}
             name="media_creation_date"
@@ -209,7 +213,11 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             }}
           />
         </RHFControllerInput>
-        <RHFControllerInput label="Consumed Date" labelClassName="ml-2">
+        <RHFControllerInput
+          label="Consumed Date"
+          labelClassName="ml-2"
+          errors={errors.consumed_date}
+        >
           <Controller
             control={control}
             name="consumed_date"

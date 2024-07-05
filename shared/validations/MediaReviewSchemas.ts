@@ -8,12 +8,9 @@ const dateSchema = z
   .string()
   .nullable()
   .refine((date) => {
-    console.log(`DATE IS:`);
-    console.log(date);
     if (date === null) return true;
     const parsedDate = new Date(date);
     const year = parsedDate.getFullYear();
-    console.log(!isNaN(parsedDate.getTime()) && year >= 1000 && year <= 2100);
     return !isNaN(parsedDate.getTime()) && year >= 1000 && year <= 2100;
   }, "Date must be a valid date between the years 1000 and 2100");
 
@@ -40,8 +37,8 @@ export const subMediaReviewSchema = z.object({
     .number()
     .min(0, "Run time must be 0 or greater")
     .nullable(),
-  media_creation_date: z.string().nullable(),
-  consumed_date: z.string().nullable(),
+  media_creation_date: dateSchema,
+  consumed_date: dateSchema,
   pros: z.array(
     z
       .string()
@@ -81,7 +78,7 @@ export const mediaReviewSchema = z.object({
     .nullable(),
   creator: z.string().nullable(),
   media_creation_date: dateSchema,
-  consumed_date: z.string().nullable(),
+  consumed_date: dateSchema,
   genres: z.array(genreSchema),
   pros: z.array(
     z
