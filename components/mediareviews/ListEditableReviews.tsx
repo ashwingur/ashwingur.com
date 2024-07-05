@@ -2,6 +2,7 @@ import Card from "@components/Card";
 import ConfirmButton from "@components/ConfirmButton";
 import LoadingIcon from "@components/LoadingIcon";
 import React from "react";
+import { AiFillEyeInvisible } from "react-icons/ai";
 import {
   useDeleteMediaReview,
   useMediaReviews,
@@ -56,9 +57,13 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           {review.sub_media_reviews.length > 0 && (
             <div className="my-2">
               <h3 className="text-center">Sub Reviews</h3>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 w-full">
                 {review.sub_media_reviews.map((subReview) => (
-                  <Card key={subReview.id} firstLayer={false} className="">
+                  <Card
+                    key={subReview.id}
+                    firstLayer={false}
+                    className="w-full"
+                  >
                     <p className="font-bold text-center">{subReview.name}</p>
                     <p>
                       <span className="font-bold">ID:</span> {subReview.id}
@@ -73,13 +78,19 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
                       {subReview.review_last_update_date &&
                         `${new Date(subReview.review_last_update_date).toLocaleDateString()} ${new Date(subReview.review_last_update_date).toLocaleTimeString()}`}
                     </p>
+                    {!subReview.visible && (
+                      <AiFillEyeInvisible className="text-secondary text-xl ml-auto" />
+                    )}
                   </Card>
                 ))}
               </div>
             </div>
           )}
         </div>
-        <div className="self-center">
+        <div className="flex items-center flex-col">
+          {!review.visible && (
+            <AiFillEyeInvisible className="text-secondary text-2xl absolute bottom-0 right-0" />
+          )}
           <button
             className="btn mx-auto mt-2 w-24 h-10"
             onClick={() => {
