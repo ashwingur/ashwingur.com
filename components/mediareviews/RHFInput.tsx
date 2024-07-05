@@ -42,7 +42,7 @@ const RHFInput: React.FC<RHFInputProps> = ({
         onKeyDown={handleKeyPress}
         {...props}
       />
-      <p className="text-error">{errors?.message}</p>
+      <p className="text-error ml-2">{errors?.message}</p>
     </div>
   );
 };

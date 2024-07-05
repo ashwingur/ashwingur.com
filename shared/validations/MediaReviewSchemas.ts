@@ -96,6 +96,15 @@ export const mediaReviewSchema = z.object({
   sub_media_reviews: z.array(subMediaReviewSchema),
 });
 
+export const paginatedMediaReviewSchema = z.object({
+  media_reviews: z.array(mediaReviewSchema),
+  total: z.number(),
+  pages: z.number(),
+  current_page: z.number(),
+  per_page: z.number(),
+  has_next: z.boolean(),
+});
+
 // Omit fields that arent expected by the API
 export const mediaReviewWriteSchema = mediaReviewSchema.omit({
   id: true,
@@ -114,6 +123,7 @@ export const subMediaReviewWriteSchema = subMediaReviewSchema.omit({
 export type MediaReview = z.infer<typeof mediaReviewSchema>;
 export type SubMediaReview = z.infer<typeof subMediaReviewSchema>;
 export type Genre = z.infer<typeof genreSchema>;
+export type PaginatedMediaReview = z.infer<typeof paginatedMediaReviewSchema>;
 
 export const defaultMediaReview = (): MediaReview => ({
   id: null,

@@ -1,21 +1,29 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "react-query";
 import {
   MediaReview,
+  PaginatedMediaReview,
   SubMediaReview,
   mediaReviewSchema,
   mediaReviewWriteSchema,
+  paginatedMediaReviewSchema,
   subMediaReviewSchema,
   subMediaReviewWriteSchema,
 } from "shared/validations/MediaReviewSchemas";
 import { z } from "zod";
+import { apiFetch } from "./api-fetch";
 
 export const QUERY_KEY = "mediaReviews";
 
-const fetchAllMediaReviews = async () => {
+const getAllMediaReviews = async () => {
   const apiUrl = new URL(
     `/mediareviews`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
+  );
 
   const response = await fetch(apiUrl, {
     credentials: "include",
@@ -41,6 +49,14 @@ const fetchAllMediaReviews = async () => {
   return result.data;
 };
 
+const getPaginatedMediaReviews = async ({ pageParam = 1 }) => {
+  return await apiFetch({
+    endpoint: "/mediareviews/paginated",
+    responseSchema: paginatedMediaReviewSchema,
+    options: { queryParams: { page: pageParam.toString(), per_page: "5" } },
+  });
+};
+
 const writeMediaReview = async (data: MediaReview) => {
   const errorSchema = z.object({
     error: z.string().optional(),
@@ -49,7 +65,7 @@ const writeMediaReview = async (data: MediaReview) => {
   const apiUrl = new URL(
     `/mediareviews${data.id ? `/${data.id}` : ""}`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
+  );
 
   let response;
 
@@ -117,7 +133,7 @@ const deleteMediaReview = async (id: number) => {
   const apiUrl = new URL(
     `/mediareviews/${id}`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
+  );
 
   const response = await fetch(apiUrl, {
     method: "DELETE",
@@ -154,7 +170,7 @@ const writeSubMediaReview = async (data: SubMediaReview) => {
   const apiUrl = new URL(
     `/mediareviews/submediareview${data.id ? `/${data.id}` : ""}`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
+  );
 
   let response;
 
@@ -222,7 +238,7 @@ const deleteSubMediaReview = async (id: number) => {
   const apiUrl = new URL(
     `/mediareviews/submediareview/${id}`,
     process.env.NEXT_PUBLIC_ASHWINGUR_API
-  ).toString();
+  );
 
   const response = await fetch(apiUrl, {
     method: "DELETE",
@@ -282,5 +298,18 @@ export const useDeleteSubMediaReview = (onSuccess?: () => void) => {
 };
 
 export const useMediaReviews = () => {
-  return useQuery(QUERY_KEY, fetchAllMediaReviews);
+  return useQuery(QUERY_KEY, getAllMediaReviews);
+};
+
+export const usePaginatedMediaReviews = () => {
+  return useInfiniteQuery({
+    queryKey: ["paginatedMediaReviews"],
+    queryFn: getPaginatedMediaReviews,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.has_next) {
+        return lastPage.current_page + 1;
+      }
+      return undefined; // No more pages to fetch
+    },
+  });
 };
