@@ -1,16 +1,11 @@
 import { GroupBase } from "react-select";
 
-interface GenreOption {
-  value: string;
-  label: string;
-}
-
 interface MultiSelectGroup {
   group_name: string;
   group_options: string[];
 }
 
-interface OptionType {
+export interface OptionType {
   value: string;
   label: string;
 }

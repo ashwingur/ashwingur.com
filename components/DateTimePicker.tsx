@@ -14,7 +14,7 @@ interface DateTimePickerProps {
 }
 
 const formatDateTimeLocal = (date: Date, dateOnly: boolean) => {
-  const year = date.getFullYear();
+  const year = String(date.getFullYear()).padStart(4, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const hours = String(date.getHours()).padStart(2, "0");
@@ -40,14 +40,13 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   const [datetime, setDatetime] = useState(
     defaultTime ? formatDateTimeLocal(defaultTime, dateOnly) : ""
   );
+
   const handleEndDateTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDatetime(e.target.value);
     const newDate = new Date(e.target.value);
     const isNan = isNaN(newDate.getTime());
     onDatetimeChange(isNan ? undefined : newDate);
   };
-
-  console.log(datetime);
 
   return (
     <div className={clsx(className, "flex items-center gap-2")}>
@@ -63,11 +62,9 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       )}
       <input
         type={dateOnly ? "date" : "datetime-local"}
-        min="1900-01-01"
-        max="2100-01-01"
         value={datetime}
         onChange={handleEndDateTimeChange}
-        className={clsx(inputClassName, !datetime && "!text-text-muted")}
+        className={inputClassName}
         style={{ colorScheme: isDark(theme) ? "dark" : "light" }}
       />
     </div>

@@ -89,7 +89,7 @@ const GenericMultiSelectGroup = <T extends OptionType>({
         menu: () => "mt-2 rounded-lg",
         menuList: () => "shadow-lg max-h-56 rounded-lg",
         multiValue: () =>
-          "bg-secondary text-text-secondary rounded-md mx-2 my-1 text-base",
+          "bg-secondary text-text-secondary rounded-md mx-1 my-1 text-base",
         multiValueLabel: () => "ml-2 mr-1 py-[2px]",
         multiValueRemove: () =>
           "hover:bg-secondary-hover transition-all px-2 py-[6px] rounded-r-md",

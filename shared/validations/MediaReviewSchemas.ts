@@ -4,6 +4,19 @@ export const genreSchema = z.object({
   name: z.string().min(1, "Genre cannot be an empty string"),
 });
 
+const dateSchema = z
+  .string()
+  .nullable()
+  .refine((date) => {
+    console.log(`DATE IS:`);
+    console.log(date);
+    if (date === null) return true;
+    const parsedDate = new Date(date);
+    const year = parsedDate.getFullYear();
+    console.log(!isNaN(parsedDate.getTime()) && year >= 1000 && year <= 2100);
+    return !isNaN(parsedDate.getTime()) && year >= 1000 && year <= 2100;
+  }, "Date must be a valid date between the years 1000 and 2100");
+
 export const subMediaReviewSchema = z.object({
   id: z.number().min(0).nullable(),
   media_review_id: z.number().min(1).nullable(),
@@ -67,7 +80,7 @@ export const mediaReviewSchema = z.object({
     .min(0, "Run time must be 0 or greater")
     .nullable(),
   creator: z.string().nullable(),
-  media_creation_date: z.string().nullable(),
+  media_creation_date: dateSchema,
   consumed_date: z.string().nullable(),
   genres: z.array(genreSchema),
   pros: z.array(

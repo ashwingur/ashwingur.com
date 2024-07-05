@@ -22,7 +22,7 @@ import SubMediaReviewForm from "./SubMediaReviewForm";
 import Image from "next/image";
 import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
-import groupedGenreOptions from "shared/mediareview-genres";
+import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
@@ -32,161 +32,6 @@ interface MediaReviewFormProps {
 }
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
-
-interface GenreOption {
-  value: string;
-  label: string;
-}
-
-interface GenreCategories {
-  movies: GenreOption[];
-  shows: GenreOption[];
-  books: GenreOption[];
-  games: GenreOption[];
-  music: GenreOption[];
-}
-
-const predefinedGenres: GenreCategories = {
-  movies: [
-    { value: "Action", label: "Action" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Comedy", label: "Comedy" },
-    { value: "Crime", label: "Crime" },
-    { value: "Drama", label: "Drama" },
-    { value: "Fantasy", label: "Fantasy" },
-    { value: "Historical", label: "Historical" },
-    { value: "Horror", label: "Horror" },
-    { value: "Mystery", label: "Mystery" },
-    { value: "Romance", label: "Romance" },
-    { value: "Science Fiction", label: "Science Fiction" },
-    { value: "Thriller", label: "Thriller" },
-    { value: "Western", label: "Western" },
-    { value: "Animation", label: "Animation" },
-    { value: "Biography", label: "Biography" },
-    { value: "Documentary", label: "Documentary" },
-    { value: "Family", label: "Family" },
-    { value: "Musical", label: "Musical" },
-    { value: "War", label: "War" },
-    { value: "Superhero", label: "Superhero" },
-    { value: "Steampunk", label: "Steampunk" },
-    { value: "Cyberpunk", label: "Cyberpunk" },
-    { value: "Noir", label: "Noir" },
-    { value: "Dystopian", label: "Dystopian" },
-    { value: "Utopian", label: "Utopian" },
-    { value: "Paranormal", label: "Paranormal" },
-    { value: "Psychological", label: "Psychological" },
-    { value: "Political", label: "Political" },
-    { value: "Satire", label: "Satire" },
-    { value: "Tragedy", label: "Tragedy" },
-    { value: "Spy", label: "Spy" },
-    { value: "Apocalyptic", label: "Apocalyptic" },
-    { value: "Bollywood", label: "Bollywood" },
-  ],
-  shows: [
-    { value: "Action", label: "Action" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Comedy", label: "Comedy" },
-    { value: "Crime", label: "Crime" },
-    { value: "Drama", label: "Drama" },
-    { value: "Fantasy", label: "Fantasy" },
-    { value: "Historical", label: "Historical" },
-    { value: "Horror", label: "Horror" },
-    { value: "Mystery", label: "Mystery" },
-    { value: "Romance", label: "Romance" },
-    { value: "Science Fiction", label: "Science Fiction" },
-    { value: "Thriller", label: "Thriller" },
-    { value: "Western", label: "Western" },
-    { value: "Animation", label: "Animation" },
-    { value: "Biography", label: "Biography" },
-    { value: "Documentary", label: "Documentary" },
-    { value: "Family", label: "Family" },
-    { value: "Musical", label: "Musical" },
-    { value: "War", label: "War" },
-    { value: "Superhero", label: "Superhero" },
-    { value: "Steampunk", label: "Steampunk" },
-    { value: "Cyberpunk", label: "Cyberpunk" },
-    { value: "Noir", label: "Noir" },
-    { value: "Dystopian", label: "Dystopian" },
-    { value: "Utopian", label: "Utopian" },
-    { value: "Paranormal", label: "Paranormal" },
-    { value: "Psychological", label: "Psychological" },
-    { value: "Political", label: "Political" },
-    { value: "Satire", label: "Satire" },
-    { value: "Tragedy", label: "Tragedy" },
-    { value: "Spy", label: "Spy" },
-    { value: "Apocalyptic", label: "Apocalyptic" },
-    { value: "Bollywood", label: "Bollywood" },
-  ],
-  books: [
-    { value: "Action", label: "Action" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Comedy", label: "Comedy" },
-    { value: "Crime", label: "Crime" },
-    { value: "Drama", label: "Drama" },
-    { value: "Fantasy", label: "Fantasy" },
-    { value: "Historical", label: "Historical" },
-    { value: "Horror", label: "Horror" },
-    { value: "Mystery", label: "Mystery" },
-    { value: "Romance", label: "Romance" },
-    { value: "Science Fiction", label: "Science Fiction" },
-    { value: "Thriller", label: "Thriller" },
-    { value: "Western", label: "Western" },
-    { value: "Biography", label: "Biography" },
-    { value: "Documentary", label: "Documentary" },
-    { value: "Family", label: "Family" },
-    { value: "War", label: "War" },
-    { value: "Steampunk", label: "Steampunk" },
-    { value: "Cyberpunk", label: "Cyberpunk" },
-    { value: "Noir", label: "Noir" },
-    { value: "Dystopian", label: "Dystopian" },
-    { value: "Utopian", label: "Utopian" },
-    { value: "Paranormal", label: "Paranormal" },
-    { value: "Psychological", label: "Psychological" },
-    { value: "Political", label: "Political" },
-    { value: "Satire", label: "Satire" },
-    { value: "Tragedy", label: "Tragedy" },
-    { value: "Spy", label: "Spy" },
-    { value: "Apocalyptic", label: "Apocalyptic" },
-  ],
-  games: [
-    { value: "Action", label: "Action" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "RPG", label: "RPG" },
-    { value: "ARPG", label: "ARPG" },
-    { value: "Simulation", label: "Simulation" },
-    { value: "Strategy", label: "Strategy" },
-    { value: "Sports", label: "Sports" },
-    { value: "Puzzle", label: "Puzzle" },
-    { value: "Idle", label: "Idle" },
-    { value: "Casual", label: "Casual" },
-    { value: "Shooter", label: "Shooter" },
-    { value: "Fighting", label: "Fighting" },
-    { value: "Racing", label: "Racing" },
-    { value: "Stealth", label: "Stealth" },
-    { value: "Survival", label: "Survival" },
-    { value: "Horror", label: "Horror" },
-    { value: "Platformer", label: "Platformer" },
-    { value: "Music", label: "Music" },
-    { value: "Party", label: "Party" },
-    { value: "Board", label: "Board" },
-    { value: "Card", label: "Card" },
-    { value: "Trivia", label: "Trivia" },
-    { value: "Educational", label: "Educational" },
-    { value: "Single Player", label: "Single Player" },
-    { value: "MMORPG", label: "MMORPG" },
-    { value: "MOBA", label: "MOBA" },
-    { value: "Sandbox", label: "Sandbox" },
-    { value: "Tower Defense", label: "Tower Defense" },
-    { value: "Metroidvania", label: "Metroidvania" },
-    { value: "Visual Novel", label: "Visual Novel" },
-    { value: "Roguelike", label: "Roguelike" },
-    { value: "Indie", label: "Indie" },
-  ],
-  music: [
-    { value: "Soundtrack", label: "Soundtrack" },
-    { value: "Orchestral", label: "Orchestral" },
-  ],
-};
 
 const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   existingData,
@@ -407,7 +252,11 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
-        <RHFControllerInput label="Media Creation Date" labelClassName="ml-2">
+        <RHFControllerInput
+          label="Media Creation Date"
+          labelClassName="ml-2"
+          errors={errors.media_creation_date}
+        >
           <Controller
             control={control}
             name="media_creation_date"
@@ -480,13 +329,13 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               }));
 
               return (
-                <GenericMultiSelectGroup<GenreOption>
+                <GenericMultiSelectGroup<OptionType>
                   options={filteredOptions}
                   value={(field.value || []).map((genre: Genre) => ({
                     value: genre.name,
                     label: genre.name,
                   }))}
-                  onChange={(selectedGenres: MultiValue<GenreOption>) =>
+                  onChange={(selectedGenres: MultiValue<OptionType>) =>
                     field.onChange(
                       selectedGenres.map((genre) => ({ name: genre.value }))
                     )
