@@ -19,7 +19,6 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [width, setWidth] = useState(0);
-  console.log(`div width: ${width}`);
 
   useEffect(() => {
     const updateSize = () => {
@@ -43,8 +42,8 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     const { naturalWidth, naturalHeight } = event;
     if (naturalWidth && naturalHeight) {
       setAspectRatio(naturalHeight / naturalWidth);
+      setImageHeight((width / naturalWidth) * naturalHeight);
       if (naturalWidth > naturalHeight) {
-        setImageHeight((width / naturalWidth) * naturalHeight);
       }
     }
   };
@@ -57,8 +56,13 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       )}
     >
       <div
-        className="w-full h-96 relative bg-black overflow-hidden rounded-t-2xl"
-        style={aspectRatio < 1 ? { height: Math.min(imageHeight, 400) } : {}}
+        className={`w-full relative bg-black overflow-hidden rounded-t-2xl 
+            before:content-[''] before:absolute before:w-full before:h-full before:bg-gradient-to-b before:from-black/0 before:to-black/50 before:z-10`}
+        style={
+          mediaReview.signed_cover_image
+            ? { height: Math.min(imageHeight, 400) }
+            : {}
+        }
         ref={imageContainerRef}
       >
         {mediaReview.signed_cover_image && (
@@ -72,7 +76,11 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             ref={imageRef}
           />
         )}
+        <div className="absolute bottom-0 left-0 p-2 text-white z-20">
+          <div className="text-3xl lg:text-4xl">{mediaReview.name}</div>
+        </div>
       </div>
+
       <h2 className="text-center">{mediaReview.name}</h2>
       <Link
         className="btn self-center my-4"
