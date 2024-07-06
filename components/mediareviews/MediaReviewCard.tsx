@@ -54,8 +54,8 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       )}
     >
       <div
-        className={`w-full relative bg-black overflow-hidden rounded-t-2xl 
-            before:content-[''] before:absolute before:w-full before:h-full before:bg-gradient-to-b before:from-black/0 before:to-black/70 before:z-10`}
+        className={`w-full relative bg-cyan-900 overflow-hidden rounded-2xl 
+            before:content-[''] before:absolute before:w-full before:h-1/2 before:bg-gradient-to-b before:from-black/0 before:to-black/90 before:z-10 before:bottom-0`}
         style={
           mediaReview.signed_cover_image
             ? { height: Math.min(imageHeight, 500) }
@@ -74,21 +74,25 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             ref={imageRef}
           />
         )}
-        <div className="absolute bottom-0 left-0 p-2 text-white z-20">
-          {mediaReview.media_creation_date && (
-            <div>{new Date(mediaReview.media_creation_date).getFullYear()}</div>
-          )}
-          <div className="text-3xl lg:text-4xl">{mediaReview.name}</div>
+        <div className="absolute bottom-0 left-0 w-full p-4 text-white z-20 flex justify-between items-end">
+          <div>
+            {mediaReview.media_creation_date && (
+              <p className="font-mono tracking-widest text-lg">
+                {new Date(mediaReview.media_creation_date).getFullYear()}
+              </p>
+            )}
+            <p>{mediaReview.genres.map((g) => g.name).join(", ")}</p>
+            <p className="text-3xl lg:text-4xl font-bold">{mediaReview.name}</p>
+          </div>
+          <p className="text-5xl">{mediaReview.rating}</p>
         </div>
+        <Link
+          className="btn absolute right-0 m-4"
+          href={`/MediaReviewsV2/Edit?id=${mediaReview.id}`}
+        >
+          Edit
+        </Link>
       </div>
-
-      <h2 className="text-center">{mediaReview.name}</h2>
-      <Link
-        className="btn self-center my-4"
-        href={`/MediaReviewsV2/Edit?id=${mediaReview.id}`}
-      >
-        Edit
-      </Link>
     </div>
   );
 };
