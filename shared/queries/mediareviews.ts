@@ -53,7 +53,7 @@ const getPaginatedMediaReviews = async ({ pageParam = 1 }) => {
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
     responseSchema: paginatedMediaReviewSchema,
-    options: { queryParams: { page: pageParam.toString(), per_page: "2" } },
+    options: { queryParams: { page: pageParam.toString(), per_page: "1" } },
   });
 };
 
@@ -291,7 +291,6 @@ export const useDeleteMediaReview = () => {
 };
 
 export const useDeleteSubMediaReview = (onSuccess?: () => void) => {
-  const queryClient = useQueryClient();
   return useMutation((id: number) => deleteSubMediaReview(id), {
     onSuccess,
   });

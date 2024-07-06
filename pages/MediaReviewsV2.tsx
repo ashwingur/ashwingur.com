@@ -9,6 +9,7 @@ const MediaReviewsV2 = () => {
   const reviews = data?.pages.flatMap((page) => page.media_reviews);
 
   const isFetchingNextPageRef = useRef(isFetchingNextPage);
+  const hasNextPageRef = useRef(hasNextPage);
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
@@ -17,9 +18,9 @@ const MediaReviewsV2 = () => {
 
     if (
       scrollHeight - currentScroll <= threshold &&
-      !isFetchingNextPageRef.current
+      !isFetchingNextPageRef.current &&
+      hasNextPageRef.current
     ) {
-      console.log("FETCHING NEXT PAGE");
       fetchNextPage();
     }
   };
@@ -27,7 +28,8 @@ const MediaReviewsV2 = () => {
   // Keep the ref up to date so we don't spam next page request in handlescroll
   useEffect(() => {
     isFetchingNextPageRef.current = isFetchingNextPage;
-  }, [isFetchingNextPage]);
+    hasNextPageRef.current = hasNextPage;
+  }, [isFetchingNextPage, hasNextPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
