@@ -53,7 +53,7 @@ const getPaginatedMediaReviews = async ({ pageParam = 1 }) => {
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
     responseSchema: paginatedMediaReviewSchema,
-    options: { queryParams: { page: pageParam.toString(), per_page: "5" } },
+    options: { queryParams: { page: pageParam.toString(), per_page: "2" } },
   });
 };
 
@@ -305,6 +305,7 @@ export const usePaginatedMediaReviews = () => {
   return useInfiniteQuery({
     queryKey: ["paginatedMediaReviews"],
     queryFn: getPaginatedMediaReviews,
+    staleTime: 300000,
     getNextPageParam: (lastPage) => {
       if (lastPage.has_next) {
         return lastPage.current_page + 1;
