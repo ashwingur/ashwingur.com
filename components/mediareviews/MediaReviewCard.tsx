@@ -77,6 +77,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           />
         )}
         <div className="absolute bottom-0 left-0 p-2 text-white z-20">
+          {mediaReview.media_creation_date && (
+            <div>{new Date(mediaReview.media_creation_date).getFullYear()}</div>
+          )}
           <div className="text-3xl lg:text-4xl">{mediaReview.name}</div>
         </div>
       </div>
