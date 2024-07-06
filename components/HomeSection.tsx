@@ -31,6 +31,15 @@ interface App {
 
 const appsList: App[] = [
   {
+    name: "Ashwin's Weather Hub",
+    url: "/Weather",
+    description:
+      "A weather monitoring system setup in my backyard, providing the latest and historical data.",
+    icon: (className?: string) => (
+      <FaCloudMoonRain className={clsx(className)} />
+    ),
+  },
+  {
     name: "Media Reviews",
     url: "/MediaReviews",
     description:
@@ -40,12 +49,12 @@ const appsList: App[] = [
     ),
   },
   {
-    name: "Ashwin's Weather Hub",
-    url: "/Weather",
+    name: "Media Reviews V2",
+    url: "/MediaReviewsV2",
     description:
-      "A weather monitoring system setup in my backyard, providing the latest and historical data.",
+      "(IN PROGRESS) My new media review site with full database integration and more features. It is also a lot more efficient.",
     icon: (className?: string) => (
-      <FaCloudMoonRain className={clsx(className)} />
+      <MdOutlineRateReview className={clsx(className)} />
     ),
   },
   {

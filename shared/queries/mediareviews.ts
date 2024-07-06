@@ -49,11 +49,19 @@ const getAllMediaReviews = async () => {
   return result.data;
 };
 
-const getPaginatedMediaReviews = async ({ pageParam = 1 }) => {
+const getPaginatedMediaReviews = async ({
+  pageParam = 1,
+  perPage,
+}: {
+  pageParam: number;
+  perPage: number;
+}) => {
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
     responseSchema: paginatedMediaReviewSchema,
-    options: { queryParams: { page: pageParam.toString(), per_page: "1" } },
+    options: {
+      queryParams: { page: pageParam.toString(), per_page: perPage.toString() },
+    },
   });
 };
 
@@ -300,10 +308,11 @@ export const useMediaReviews = () => {
   return useQuery(QUERY_KEY, getAllMediaReviews);
 };
 
-export const usePaginatedMediaReviews = () => {
+export const usePaginatedMediaReviews = (perPage: number) => {
   return useInfiniteQuery({
-    queryKey: ["paginatedMediaReviews"],
-    queryFn: getPaginatedMediaReviews,
+    queryKey: ["paginatedMediaReviews", perPage],
+    queryFn: ({ pageParam = 1 }) =>
+      getPaginatedMediaReviews({ pageParam, perPage }),
     staleTime: 300000,
     getNextPageParam: (lastPage) => {
       if (lastPage.has_next) {

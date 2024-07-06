@@ -1,10 +1,11 @@
 import Navbar from "@components/navbars/Navbar";
+import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    usePaginatedMediaReviews();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    usePaginatedMediaReviews(5);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews);
 
@@ -14,7 +15,7 @@ const MediaReviewsV2 = () => {
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
     const currentScroll = window.scrollY + window.innerHeight;
-    const threshold = 200; // Replace with your desired threshold value in pixels
+    const threshold = 500; // Replace with your desired threshold value in pixels
 
     if (
       scrollHeight - currentScroll <= threshold &&
@@ -51,10 +52,9 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pt-24">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-      <button className="btn" onClick={() => fetchNextPage()}>
-        Next Page
-      </button>
-      {hasNextPage && "Has next page"}
+      <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
+        Edit Reviews
+      </Link>
       <pre>{JSON.stringify(reviews, null, 2)}</pre>
     </div>
   );

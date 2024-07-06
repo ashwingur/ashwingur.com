@@ -11,6 +11,7 @@ import {
 } from "shared/validations/MediaReviewSchemas";
 import { useRouter } from "next/router";
 import { z } from "zod";
+import Link from "next/link";
 
 const Edit = () => {
   const { data } = useMediaReviews();
@@ -66,9 +67,14 @@ const Edit = () => {
           </p>
         )}
         {!currentlyEditing && (
-          <button className="btn mb-4" onClick={handleCreateNew}>
-            Create New
-          </button>
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
+            <Link className="btn w-48" href={"/MediaReviewsV2"}>
+              Back to Reviews
+            </Link>
+            <button className="btn w-48" onClick={handleCreateNew}>
+              Create New
+            </button>
+          </div>
         )}
         {currentlyEditing && (
           <Card
