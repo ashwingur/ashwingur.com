@@ -27,6 +27,7 @@ import Image from "next/image";
 import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";
+import ResponsiveImageContainer from "./ResponsiveImageContainer";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
@@ -207,16 +208,21 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
+        <RHFInput
+          label="Background Colour"
+          register={register("cover_image_bg_colour")}
+          errors={errors.cover_image_bg_colour}
+          className="flex flex-col"
+          inputClassName="max-w-32 input-bg"
+          labelClassName="ml-2"
+          placeholder="#000000"
+        />
         {baseValues.signed_cover_image && (
-          <div className="w-full h-72 relative my-4 bg-black rounded-2xl overflow-hidden">
-            <Image
-              src={getValues().signed_cover_image ?? ""}
-              alt={"Main review cover image"}
-              style={{ objectFit: "contain" }}
-              fill
-              priority
-            />
-          </div>
+          <ResponsiveImageContainer
+            imageSrc={getValues().signed_cover_image ?? ""}
+            imageAlt="Main review cover image"
+            bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
+          />
         )}
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller

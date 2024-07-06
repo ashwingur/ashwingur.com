@@ -26,6 +26,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             imageSrc={mediaReview.signed_cover_image ?? ""}
             imageAlt={`Main review cover image of ${mediaReview.name}`}
             maxHeight={500}
+            bgImageColour={mediaReview.cover_image_bg_colour ?? undefined}
           />
         )}
         <div

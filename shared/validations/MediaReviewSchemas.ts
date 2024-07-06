@@ -22,6 +22,13 @@ export const subMediaReviewSchema = z.object({
   review_creation_date: z.string().nullable(),
   review_last_update_date: z.string().nullable(),
   cover_image: z.string().nullable(),
+  cover_image_bg_colour: z
+    .string()
+    .nullable()
+    .refine((colour) => {
+      if (colour === null) return true;
+      return /^#[0-9A-Fa-f]{6}$/.test(colour);
+    }, "Invalid HEX colour"),
   signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
@@ -61,6 +68,13 @@ export const mediaReviewSchema = z.object({
   review_last_update_date: z.string().nullable(),
   media_type: z.enum(["Movie", "Book", "Show", "Game", "Music"]),
   cover_image: z.string().nullable(),
+  cover_image_bg_colour: z
+    .string()
+    .nullable()
+    .refine((colour) => {
+      if (colour === null) return true;
+      return /^#[0-9A-Fa-f]{6}$/.test(colour);
+    }, "Invalid HEX colour"),
   signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
@@ -132,6 +146,7 @@ export const defaultMediaReview = (): MediaReview => ({
   review_last_update_date: null,
   media_type: "Movie",
   cover_image: null,
+  cover_image_bg_colour: null,
   signed_cover_image: null,
   rating: null,
   review_content: null,
@@ -158,6 +173,7 @@ export const defaultSubMediaReview = (
   review_creation_date: null,
   review_last_update_date: null,
   cover_image: null,
+  cover_image_bg_colour: null,
   signed_cover_image: null,
   rating: null,
   review_content: null,
