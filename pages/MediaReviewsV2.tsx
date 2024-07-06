@@ -50,8 +50,13 @@ const MediaReviewsV2 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const reviewCards = reviews.map((review) => (
-    <MediaReviewCard className="" mediaReview={review} key={review.id} />
+  const reviewCards = reviews.map((review, index) => (
+    <MediaReviewCard
+      className=""
+      mediaReview={review}
+      index={index}
+      key={review.id}
+    />
   ));
 
   return (

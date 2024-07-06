@@ -5,6 +5,7 @@ import clsx from "clsx";
 interface ResponsiveImageContainerProps {
   imageSrc: string;
   imageAlt: string;
+  priorityLoad: boolean;
   maxHeight?: number;
   bgImageColour?: string;
 }
@@ -13,6 +14,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   imageSrc,
   imageAlt,
   maxHeight = 500,
+  priorityLoad,
   bgImageColour = "#000000",
 }) => {
   const [imageHeight, setImageHeight] = useState(0);
@@ -64,7 +66,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
         alt={imageAlt}
         className="object-contain h-full w-full"
         fill
-        priority
+        priority={priorityLoad}
         onLoadingComplete={handleImageLoad}
       />
     </div>

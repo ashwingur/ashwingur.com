@@ -222,6 +222,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             imageSrc={getValues().signed_cover_image ?? ""}
             imageAlt="Main review cover image"
             bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
+            priorityLoad={true}
           />
         )}
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
