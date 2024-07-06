@@ -323,7 +323,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             type="submit"
           >
             {mutation.isLoading ? (
-              <AiOutlineLoading className="animate-spin text-xl" />
+              <AiOutlineLoading className="animate-spin text-xl mx-auto" />
             ) : getValues().id ? (
               "Update"
             ) : (
