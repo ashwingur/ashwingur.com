@@ -43,8 +43,6 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     if (naturalWidth && naturalHeight) {
       setAspectRatio(naturalHeight / naturalWidth);
       setImageHeight((width / naturalWidth) * naturalHeight);
-      if (naturalWidth > naturalHeight) {
-      }
     }
   };
 
@@ -57,10 +55,10 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     >
       <div
         className={`w-full relative bg-black overflow-hidden rounded-t-2xl 
-            before:content-[''] before:absolute before:w-full before:h-full before:bg-gradient-to-b before:from-black/0 before:to-black/50 before:z-10`}
+            before:content-[''] before:absolute before:w-full before:h-full before:bg-gradient-to-b before:from-black/0 before:to-black/70 before:z-10`}
         style={
           mediaReview.signed_cover_image
-            ? { height: Math.min(imageHeight, 400) }
+            ? { height: Math.min(imageHeight, 500) }
             : {}
         }
         ref={imageContainerRef}
