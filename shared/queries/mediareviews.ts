@@ -17,7 +17,8 @@ import {
 import { z } from "zod";
 import { apiFetch } from "./api-fetch";
 
-export const QUERY_KEY = "mediaReviews";
+export const UPDATE_QUERY_KEY = "mediaReviews";
+export const PAGINATED_QUERY_KEY = "paginatedMediaReviews";
 
 const getAllMediaReviews = async () => {
   const apiUrl = new URL(
@@ -293,7 +294,8 @@ export const useDeleteMediaReview = () => {
   const queryClient = useQueryClient();
   return useMutation((id: number) => deleteMediaReview(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY);
+      queryClient.invalidateQueries(UPDATE_QUERY_KEY);
+      queryClient.invalidateQueries(PAGINATED_QUERY_KEY);
     },
   });
 };
@@ -305,12 +307,12 @@ export const useDeleteSubMediaReview = (onSuccess?: () => void) => {
 };
 
 export const useMediaReviews = () => {
-  return useQuery(QUERY_KEY, getAllMediaReviews);
+  return useQuery(UPDATE_QUERY_KEY, getAllMediaReviews);
 };
 
 export const usePaginatedMediaReviews = (perPage: number) => {
   return useInfiniteQuery({
-    queryKey: ["paginatedMediaReviews", perPage],
+    queryKey: [PAGINATED_QUERY_KEY, perPage],
     queryFn: ({ pageParam = 1 }) =>
       getPaginatedMediaReviews({ pageParam, perPage }),
     staleTime: 300000,

@@ -246,27 +246,6 @@ html {
   @apply transition-all;
 }
 
-.btn-invert {
-  @apply px-4 py-2 rounded-full shadow-md text-center;
-  @apply text-primary border-2 border-primary;
-  @apply hover:bg-primary-hover hover:text-text-primary hover:border-primary-hover;
-  @apply transition-all;
-}
-
-.btn-secondary-invert {
-  @apply px-4 py-2 rounded-full shadow-md text-center;
-  @apply text-secondary border-2 border-secondary;
-  @apply hover:bg-secondary-hover hover:text-text-secondary hover:border-secondary-hover;
-  @apply transition-all;
-}
-
-.btn-accent-invert {
-  @apply px-4 py-2 rounded-full shadow-md text-center;
-  @apply text-accent border-2 border-accent;
-  @apply hover:bg-accent-hover hover:text-text-accent hover:border-accent-hover;
-  @apply transition-all;
-}
-
 .card {
   @apply p-4 rounded-lg shadow-lg;
   @apply bg-background-muted;

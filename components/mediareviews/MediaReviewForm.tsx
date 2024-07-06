@@ -14,7 +14,11 @@ import { MultiValue } from "react-select";
 import GenericListbox from "@components/GenericListBox";
 import { useQueryClient } from "react-query";
 import { AiOutlineLoading } from "react-icons/ai";
-import { QUERY_KEY, useWriteMediaReview } from "shared/queries/mediareviews";
+import {
+  PAGINATED_QUERY_KEY,
+  UPDATE_QUERY_KEY,
+  useWriteMediaReview,
+} from "shared/queries/mediareviews";
 import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
@@ -58,7 +62,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
   const onMutationSuccess = (data: MediaReview) => {
     reset({ ...data });
-    queryClient.invalidateQueries(QUERY_KEY);
+    queryClient.invalidateQueries(UPDATE_QUERY_KEY);
+    queryClient.invalidateQueries(PAGINATED_QUERY_KEY);
     onSubmitSuccess && onSubmitSuccess();
     setBaseValues(data);
   };

@@ -12,7 +12,8 @@ import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
 import { AiOutlineLoading } from "react-icons/ai";
 import {
-  QUERY_KEY,
+  PAGINATED_QUERY_KEY,
+  UPDATE_QUERY_KEY,
   useDeleteSubMediaReview,
   useWriteSubMediaReview,
 } from "shared/queries/mediareviews";
@@ -58,7 +59,8 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
 
   const onMutationSuccess = (data: SubMediaReview) => {
     reset({ ...data });
-    queryClient.invalidateQueries(QUERY_KEY);
+    queryClient.invalidateQueries(UPDATE_QUERY_KEY);
+    queryClient.invalidateQueries(PAGINATED_QUERY_KEY);
     onSubmitSuccess && onSubmitSuccess();
     setBaseValues(data);
   };

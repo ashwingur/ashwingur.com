@@ -1,3 +1,5 @@
+import LoadingIcon from "@components/LoadingIcon";
+import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import Navbar from "@components/navbars/Navbar";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
@@ -7,7 +9,7 @@ const MediaReviewsV2 = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePaginatedMediaReviews(5);
 
-  const reviews = data?.pages.flatMap((page) => page.media_reviews);
+  const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
   const isFetchingNextPageRef = useRef(isFetchingNextPage);
   const hasNextPageRef = useRef(hasNextPage);
@@ -48,6 +50,10 @@ const MediaReviewsV2 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  const reviewCards = reviews.map((review) => (
+    <MediaReviewCard className="" mediaReview={review} key={review.id} />
+  ));
+
   return (
     <div className="min-h-screen pt-24">
       <Navbar fixed={true} />
@@ -55,7 +61,8 @@ const MediaReviewsV2 = () => {
       <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
         Edit Reviews
       </Link>
-      <pre>{JSON.stringify(reviews, null, 2)}</pre>
+      <div className="flex flex-col items-center gap-8 px-4">{reviewCards}</div>
+      {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
     </div>
   );
 };
