@@ -208,7 +208,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           labelClassName="ml-2"
         />
         {baseValues.signed_cover_image && (
-          <div className="w-full h-72 relative">
+          <div className="w-full h-72 relative my-4 bg-black rounded-2xl overflow-hidden">
             <Image
               src={getValues().signed_cover_image ?? ""}
               alt={"Main review cover image"}

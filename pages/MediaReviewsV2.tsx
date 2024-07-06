@@ -58,9 +58,11 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pt-24">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-      <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
-        Edit Reviews
-      </Link>
+      <div className=" flex justify-center my-4">
+        <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
+          Edit Reviews
+        </Link>
+      </div>
       <div className="flex flex-col items-center gap-8 px-4">{reviewCards}</div>
       {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
     </div>

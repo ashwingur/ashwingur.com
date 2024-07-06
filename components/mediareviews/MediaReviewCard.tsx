@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MediaReview } from "shared/validations/MediaReviewSchemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +13,42 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   className,
   mediaReview,
 }) => {
+  //   const [aspectRatio, setAspectRatio] = useState(16 / 9); // Default aspect ratio
+  const [imageHeight, setImageHeight] = useState(0);
+  const [aspectRatio, setAspectRatio] = useState(16 / 9);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [width, setWidth] = useState(0);
+  console.log(`div width: ${width}`);
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (imageContainerRef.current) {
+        setWidth(imageContainerRef.current.offsetWidth);
+        setImageHeight(aspectRatio * imageContainerRef.current.offsetWidth);
+      }
+    };
+    updateSize(); // Set initial size
+    window.addEventListener("resize", updateSize); // Adjust on resize
+
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
+  const handleImageLoad = (event: {
+    naturalWidth: number;
+    naturalHeight: number;
+  }) => {
+    const { naturalWidth, naturalHeight } = event;
+    if (naturalWidth && naturalHeight) {
+      setAspectRatio(naturalHeight / naturalWidth);
+      if (naturalWidth > naturalHeight) {
+        setImageHeight((width / naturalWidth) * naturalHeight);
+      }
+    }
+  };
+
   return (
     <div
       className={clsx(
@@ -20,15 +56,20 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         className
       )}
     >
-      <div className="w-full h-96 relative bg-black overflow-hidden rounded-t-2xl">
+      <div
+        className="w-full h-96 relative bg-black overflow-hidden rounded-t-2xl"
+        style={aspectRatio < 1 ? { height: Math.min(imageHeight, 400) } : {}}
+        ref={imageContainerRef}
+      >
         {mediaReview.signed_cover_image && (
           <Image
             src={mediaReview.signed_cover_image ?? ""}
             alt={`Main review cover image of ${mediaReview.name}`}
-            className=""
+            className="object-contain h-full w-full"
             fill
             priority
-            objectFit="contain"
+            onLoadingComplete={handleImageLoad}
+            ref={imageRef}
           />
         )}
       </div>
