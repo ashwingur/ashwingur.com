@@ -19,6 +19,14 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
   const consumedDate = review.consumed_date
     ? new Date(review.consumed_date)
     : undefined;
+  const formattedConsumedDate = consumedDate
+    ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
+      ? consumedDate.getFullYear()
+      : consumedDate.toLocaleDateString("en-AU", {
+          month: "short",
+          year: "numeric",
+        })
+    : "";
 
   const pros = review.pros.map((pro, index) => (
     <li key={index} className="flex gap-2">
@@ -94,10 +102,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
           {review.consumed_date && (
             <p className="ml-4">
               <span className="font-bold">Consumed</span>{" "}
-              {consumedDate?.toLocaleDateString("en-AU", {
-                month: "short",
-                year: "numeric",
-              })}
+              {formattedConsumedDate}
             </p>
           )}
         </div>
