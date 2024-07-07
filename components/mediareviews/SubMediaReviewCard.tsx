@@ -1,23 +1,21 @@
+import React from "react";
+import { SubMediaReview } from "shared/validations/MediaReviewSchemas";
+import FixedImageContainer from "./FixedImageContainer";
 import clsx from "clsx";
-import { MediaReview } from "shared/validations/MediaReviewSchemas";
 import Link from "next/link";
-import MediaTypeIcon from "./MediaTypeIcon";
-import { MdEdit } from "react-icons/md";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import DOMPurify from "dompurify";
-import FixedImageContainer from "./FixedImageContainer";
-import SubMediaReviewCard from "./SubMediaReviewCard";
 
-interface MediaReviewCardProps {
-  review: MediaReview;
-  index: number;
+interface SubMediaReviewCardProps {
+  review: SubMediaReview;
+  parentIndex: number;
   className?: string;
 }
 
-const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
-  className,
-  index,
+const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
   review,
+  parentIndex,
+  className,
 }) => {
   const consumedDate = review.consumed_date
     ? new Date(review.consumed_date)
@@ -25,7 +23,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
 
   const pros = review.pros.map((pro, index) => (
     <li key={index} className="flex gap-2">
-      <div className="mt-1">
+      <div className="mt-[2px]">
         <IoMdCheckmark />
       </div>
       <p>{pro}</p>
@@ -33,46 +31,17 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   ));
   const cons = review.cons.map((con, index) => (
     <li key={index} className="flex gap-2">
-      <div className="mt-1">
+      <div className="mt-[2px]">
         <IoMdClose />
       </div>
       {con}
     </li>
   ));
 
-  let creatorTitle = "Creator";
-  switch (review.media_type) {
-    case "Movie":
-      creatorTitle = "Director/Studio";
-      break;
-    case "Book":
-      creatorTitle = "Author";
-      break;
-    case "Show":
-      creatorTitle = "Showrunner/Studio";
-      break;
-    case "Game":
-      creatorTitle = "Developer";
-      break;
-    case "Music":
-      creatorTitle = "Artist";
-      break;
-    default:
-      break;
-  }
-
-  const subReviewCards = review.sub_media_reviews.map((subReview) => (
-    <SubMediaReviewCard
-      key={review.id}
-      parentIndex={index}
-      review={subReview}
-    />
-  ));
-
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-xl bg-background-muted flex flex-col",
+        "rounded-2xl shadow-xl bg-background-hover flex flex-col",
         className
       )}
     >
@@ -82,16 +51,12 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             <FixedImageContainer
               imageSrc={review.signed_cover_image ?? ""}
               imageAlt={`Main review cover image of ${review.name}`}
-              priorityLoad={index < 5}
+              priorityLoad={parentIndex < 5}
+              heightClassName="h-72 lg:h-96"
             />
           </div>
         )}
-        <div className="absolute top-0 left-0 m-4 bg-black/80 p-2 rounded-full">
-          <MediaTypeIcon
-            media_type={review.media_type}
-            className="text-white"
-          />
-        </div>
+
         <div
           className={clsx(
             "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none",
@@ -106,27 +71,14 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
-            <p>{review.genres.map((g) => g.name).join(", ")}</p>
             <p className="text-3xl lg:text-4xl font-bold">{review.name}</p>
           </div>
           <p className="text-7xl ml-4">{review.rating}</p>
         </div>
-        <Link
-          className="btn !absolute right-0 top-0 m-4"
-          href={`/MediaReviewsV2/Edit?id=${review.id}`}
-        >
-          <MdEdit />
-        </Link>
       </div>
       <div className="flex flex-col p-4 gap-2">
         <div className="flex justify-between">
           <div>
-            {review.creator && (
-              <p>
-                <span className="font-bold">{creatorTitle}</span>{" "}
-                {review.creator}
-              </p>
-            )}
             {review.run_time && (
               <p>
                 <span className="font-bold">Run Time</span> {review.run_time}{" "}
@@ -150,7 +102,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col md:flex-row gap-2">
+        <div className="flex flex-col md:flex-row gap-2 text-sm">
           {pros.length > 0 && (
             <div className={clsx(cons.length > 0 ? "md:w-1/2" : "")}>
               <h3>Pros</h3>
@@ -174,10 +126,6 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           }}
         />
       )}
-      {subReviewCards.length > 0 && (
-        <h2 className="text-center">Sub Reviews</h2>
-      )}
-      <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
       {review.review_last_update_date && (
         <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
           Updated{" "}
@@ -189,4 +137,4 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   );
 };
 
-export default MediaReviewCard;
+export default SubMediaReviewCard;

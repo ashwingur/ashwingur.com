@@ -4,7 +4,7 @@
 [data-theme="hacker"] {
   --color-background: #020e07;
   --color-background-muted: #03180c;
-  --color-background-hover: #042010;
+  --color-background-hover: #052814;
   --color-text: theme(colors.slate.50);
   --color-text-muted: theme(colors.slate.300);
   --color-text-hover: theme(colors.blue.400);

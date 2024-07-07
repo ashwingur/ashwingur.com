@@ -53,7 +53,7 @@ const MediaReviewsV2 = () => {
   const reviewCards = reviews.map((review, index) => (
     <MediaReviewCard
       className="w-full"
-      mediaReview={review}
+      review={review}
       index={index}
       key={review.id}
     />
