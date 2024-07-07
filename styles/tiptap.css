@@ -4,10 +4,10 @@
 }
 
 .editor h1 {
-  @apply text-4xl;
+  @apply text-3xl mb-1;
 }
 .editor h2 {
-  @apply text-3xl;
+  @apply text-2xl;
 }
 .editor h3 {
   @apply text-xl;
@@ -42,8 +42,11 @@
 }
 
 .editor blockquote {
-  @apply pl-8 overflow-hidden;
-  @apply before:float-start before:content-[''] before:w-2 before:h-4 before:rounded-sm before:bg-background-hover before:mr-2;
+  @apply pl-8 relative;
+}
+
+.editor blockquote::before {
+  @apply content-[''] w-2 h-full bg-background-hover absolute top-0 left-0 ml-4;
 }
 
 .menubar button {
