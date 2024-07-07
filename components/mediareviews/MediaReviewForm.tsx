@@ -218,12 +218,14 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           placeholder="#000000"
         />
         {baseValues.signed_cover_image && (
-          <ResponsiveImageContainer
-            imageSrc={getValues().signed_cover_image ?? ""}
-            imageAlt="Main review cover image"
-            bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
-            priorityLoad={true}
-          />
+          <div className="overflow-hidden rounded-2xl">
+            <ResponsiveImageContainer
+              imageSrc={getValues().signed_cover_image ?? ""}
+              imageAlt="Main review cover image"
+              bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
+              priorityLoad={true}
+            />
+          </div>
         )}
         <RHFControllerInput label="Review Content" labelClassName="ml-2">
           <Controller

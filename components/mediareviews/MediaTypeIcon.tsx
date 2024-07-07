@@ -4,8 +4,8 @@ import {
   FaClapperboard,
   FaItunesNote,
   FaQuestion,
-  FaTv,
 } from "react-icons/fa6";
+import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { IoGameController } from "react-icons/io5";
 
 interface MediaTypeIconProps {
@@ -24,7 +24,7 @@ const MediaTypeIcon: React.FC<MediaTypeIconProps> = ({
       case "Book":
         return <FaBook />;
       case "Show":
-        return <FaTv />;
+        return <PiTelevisionSimpleBold />;
       case "Game":
         return <IoGameController />;
       case "Music":

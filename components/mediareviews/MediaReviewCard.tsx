@@ -25,7 +25,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         className
       )}
     >
-      <div className="w-full relative">
+      <div className="w-full relative overflow-hidden rounded-2xl">
         {mediaReview.signed_cover_image && (
           <ResponsiveImageContainer
             imageSrc={mediaReview.signed_cover_image ?? ""}

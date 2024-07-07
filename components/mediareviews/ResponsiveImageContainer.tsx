@@ -17,7 +17,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   priorityLoad,
   bgImageColour = "#000000",
 }) => {
-  const [imageHeight, setImageHeight] = useState(0);
+  const [imageHeight, setImageHeight] = useState(200);
   const [aspectRatio, setAspectRatio] = useState(16 / 9);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -52,8 +52,9 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   return (
     <div
       className={clsx(
-        "w-full relative overflow-hidden rounded-2xl",
-        "before:content-[''] before:absolute before:w-full before:h-2/5 before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
+        "w-full relative overflow-hidden rounded-2xl hover:scale-125 transition-all duration-1000",
+        "before:content-[''] before:absolute before:w-full before:h-2/5 before:transition-all before:duration-1000",
+        " before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
       )}
       style={{
         height: Math.min(imageHeight, maxHeight),
@@ -61,6 +62,14 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
       }}
       ref={imageContainerRef}
     >
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        className="object-cover h-full w-full blur-3xl"
+        fill
+        priority={priorityLoad}
+        onLoadingComplete={handleImageLoad}
+      />
       <Image
         src={imageSrc}
         alt={imageAlt}
