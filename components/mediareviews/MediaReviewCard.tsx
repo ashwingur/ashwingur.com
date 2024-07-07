@@ -8,6 +8,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import DOMPurify from "dompurify";
+import FixedImageContainer from "./FixedImageContainer";
 
 interface MediaReviewCardProps {
   mediaReview: MediaReview;
@@ -72,11 +73,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       <div className="w-full relative overflow-hidden">
         {mediaReview.signed_cover_image && (
           <div className="overflow-hidden rounded-t-2xl">
-            <ResponsiveImageContainer
+            <FixedImageContainer
               imageSrc={mediaReview.signed_cover_image ?? ""}
               imageAlt={`Main review cover image of ${mediaReview.name}`}
-              maxHeight={500}
-              bgImageColour={mediaReview.cover_image_bg_colour ?? undefined}
               priorityLoad={index < 5}
             />
           </div>
@@ -89,7 +88,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         </div>
         <div
           className={clsx(
-            "w-full p-4 text-white z-20 flex justify-between items-end",
+            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none",
             mediaReview.signed_cover_image
               ? "absolute bottom-0 left-0"
               : "bg-black rounded-t-2xl h-96 lg:h-[30rem]"
@@ -104,7 +103,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             <p>{mediaReview.genres.map((g) => g.name).join(", ")}</p>
             <p className="text-3xl lg:text-4xl font-bold">{mediaReview.name}</p>
           </div>
-          <p className="text-5xl ml-4">{mediaReview.rating}</p>
+          <p className="text-7xl ml-4">{mediaReview.rating}</p>
         </div>
         <Link
           className="btn absolute right-0 top-0 m-4"
@@ -130,7 +129,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             )}
             {mediaReview.word_count && (
               <p>
-                <span className="font-bold">Word Count:</span>{" "}
+                <span className="font-bold">Word Count</span>{" "}
                 {mediaReview.word_count?.toLocaleString()}
               </p>
             )}

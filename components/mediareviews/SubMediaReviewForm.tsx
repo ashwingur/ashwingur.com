@@ -19,8 +19,7 @@ import {
 } from "shared/queries/mediareviews";
 import { useQueryClient } from "react-query";
 import ConfirmButton from "@components/ConfirmButton";
-import Image from "next/image";
-import ResponsiveImageContainer from "./ResponsiveImageContainer";
+import FixedImageContainer from "./FixedImageContainer";
 
 interface SubMediaReviewFormProps {
   existingData: SubMediaReview;
@@ -160,10 +159,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         {baseValues.signed_cover_image && (
           <div className="overflow-hidden rounded-2xl">
-            <ResponsiveImageContainer
-              imageSrc={getValues().signed_cover_image ?? ""}
+            <FixedImageContainer
+              imageSrc={baseValues.signed_cover_image ?? ""}
               imageAlt="Sub review cover image"
-              bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
               priorityLoad={false}
             />
           </div>

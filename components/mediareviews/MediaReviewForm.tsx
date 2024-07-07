@@ -27,6 +27,7 @@ import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";
 import ResponsiveImageContainer from "./ResponsiveImageContainer";
+import FixedImageContainer from "./FixedImageContainer";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
@@ -220,10 +221,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         {baseValues.signed_cover_image && (
           <div className="overflow-hidden rounded-2xl">
-            <ResponsiveImageContainer
-              imageSrc={getValues().signed_cover_image ?? ""}
+            <FixedImageContainer
+              imageSrc={baseValues.signed_cover_image ?? ""}
               imageAlt="Main review cover image"
-              bgImageColour={baseValues.cover_image_bg_colour ?? undefined}
               priorityLoad={true}
             />
           </div>
