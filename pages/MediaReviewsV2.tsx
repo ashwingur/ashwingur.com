@@ -60,7 +60,7 @@ const MediaReviewsV2 = () => {
   ));
 
   return (
-    <div className="min-h-screen pt-24">
+    <div className="min-h-screen pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
       <div className=" flex justify-center my-4">

@@ -2,7 +2,6 @@ import React from "react";
 import { SubMediaReview } from "shared/validations/MediaReviewSchemas";
 import FixedImageContainer from "./FixedImageContainer";
 import clsx from "clsx";
-import Link from "next/link";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import DOMPurify from "dompurify";
 
@@ -62,7 +61,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
             "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none",
             review.signed_cover_image
               ? "absolute bottom-0 left-0"
-              : "bg-black rounded-t-2xl h-96 lg:h-[30rem]"
+              : "bg-black rounded-t-2xl h-36"
           )}
         >
           <div>
