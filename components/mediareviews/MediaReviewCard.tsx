@@ -107,9 +107,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
               </p>
             )}
             <p>{review.genres.map((g) => g.name).join(", ")}</p>
-            <p className="text-3xl lg:text-4xl font-bold">{review.name}</p>
+            <p className="text-3xl font-bold">{review.name}</p>
           </div>
-          <p className="text-7xl ml-4">{review.rating}</p>
+          <p className="text-5xl ml-8">{review.rating}</p>
         </div>
         <Link
           className="btn !absolute right-0 top-0 m-4"

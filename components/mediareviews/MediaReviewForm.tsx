@@ -202,6 +202,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           labelClassName="ml-2"
           inputClassName="max-w-20 input-bg"
           type="number"
+          step="0.1"
         />
         <RHFInput
           label="Cover Image URL"

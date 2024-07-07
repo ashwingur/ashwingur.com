@@ -70,9 +70,9 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
-            <p className="text-3xl lg:text-4xl font-bold">{review.name}</p>
+            <p className="text-2xl lg:text-3xl font-bold">{review.name}</p>
           </div>
-          <p className="text-7xl ml-4">{review.rating}</p>
+          <p className="text-4xl ml-8">{review.rating}</p>
         </div>
       </div>
       <div className="flex flex-col p-4 gap-2">
