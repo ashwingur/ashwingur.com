@@ -23,7 +23,6 @@ import RHFInput from "./RHFInput";
 import RHFControllerInput from "./RHFControllerInput";
 import DateTimePicker from "@components/DateTimePicker";
 import SubMediaReviewForm from "./SubMediaReviewForm";
-import Image from "next/image";
 import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";

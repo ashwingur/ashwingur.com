@@ -8,6 +8,7 @@ interface ResponsiveImageContainerProps {
   priorityLoad: boolean;
   maxHeight?: number;
   bgImageColour?: string;
+  roundingClassName?: string;
 }
 
 const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
@@ -16,6 +17,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   maxHeight = 500,
   priorityLoad,
   bgImageColour = "#000000",
+  roundingClassName = "rounded-t-2xl",
 }) => {
   const [imageHeight, setImageHeight] = useState(200);
   const [aspectRatio, setAspectRatio] = useState(16 / 9);
@@ -52,7 +54,8 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   return (
     <div
       className={clsx(
-        "w-full relative overflow-hidden rounded-2xl hover:scale-125 transition-all duration-1000",
+        "w-full relative overflow-hidden hover:scale-125 transition-all duration-1000",
+        roundingClassName,
         "before:content-[''] before:absolute before:w-full before:h-2/5 before:transition-all before:duration-1000",
         " before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
       )}
