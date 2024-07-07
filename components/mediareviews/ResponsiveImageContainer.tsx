@@ -55,14 +55,15 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
     <div
       className={clsx(
         "w-full relative overflow-hidden hover:scale-125 transition-all duration-1000",
+        "h-96 lg:h-[30rem]", // Height, going back to nondynamic for now
         roundingClassName,
         "before:content-[''] before:absolute before:w-full before:h-2/5 before:transition-all before:duration-1000",
-        " before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
+        "before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
       )}
-      style={{
-        height: Math.min(imageHeight, maxHeight),
-        backgroundColor: bgImageColour,
-      }}
+      // style={{
+      //   height: Math.min(imageHeight, maxHeight),
+      //   backgroundColor: bgImageColour,
+      // }}
       ref={imageContainerRef}
     >
       <Image

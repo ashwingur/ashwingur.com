@@ -92,7 +92,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             "w-full p-4 text-white z-20 flex justify-between items-end",
             mediaReview.signed_cover_image
               ? "absolute bottom-0 left-0"
-              : "bg-black rounded-t-2xl"
+              : "bg-black rounded-t-2xl h-96 lg:h-[30rem]"
           )}
         >
           <div>
