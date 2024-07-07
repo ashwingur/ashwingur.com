@@ -37,6 +37,8 @@ interface MediaReviewFormProps {
 
 const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
 
+export const parseConsumedDate = (consumed_date: Date) => {};
+
 const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   existingData,
   onSubmitSuccess,

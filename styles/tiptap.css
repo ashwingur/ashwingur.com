@@ -13,6 +13,10 @@
   @apply text-xl;
 }
 
+.editor p {
+  @apply min-h-5;
+}
+
 .editor a {
   @apply text-text-hover hover:cursor-pointer;
 }
@@ -39,7 +43,7 @@
 
 .editor blockquote {
   @apply pl-8 overflow-hidden;
-  @apply before:float-start before:h-auto before:content-['a'] before:w-2 before:rounded-sm before:bg-background-hover before:mr-2;
+  @apply before:float-start before:content-[''] before:w-2 before:h-4 before:rounded-sm before:bg-background-hover before:mr-2;
 }
 
 .menubar button {

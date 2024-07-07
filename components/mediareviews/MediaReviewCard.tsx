@@ -7,6 +7,7 @@ import MediaTypeIcon from "./MediaTypeIcon";
 import { FaEdit } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
+import DOMPurify from "dompurify";
 
 interface MediaReviewCardProps {
   mediaReview: MediaReview;
@@ -159,6 +160,15 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           )}
         </div>
       </div>
+
+      {mediaReview.review_content && (
+        <div
+          className="editor"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(mediaReview.review_content),
+          }}
+        />
+      )}
       {mediaReview.review_last_update_date && (
         <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
           Updated{" "}

@@ -36,6 +36,7 @@
     "axios": "^1.6.0",
     "clsx": "^2.1.1",
     "color": "^4.2.3",
+    "dompurify": "^3.1.6",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
     "filepond": "^4.31.1",
@@ -71,6 +72,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/glob": "^8.1.0",
     "@types/react": "^18.3.3",
     "@types/react-filepond": "^7.1.0",
