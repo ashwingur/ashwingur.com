@@ -196,7 +196,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         </RHFControllerInput>
         <RHFInput
           label="Rating"
-          register={register("rating")}
+          register={register("rating", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.rating}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -206,7 +208,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         <RHFInput
           label="Cover Image URL"
-          register={register("cover_image")}
+          register={register("cover_image", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.cover_image}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -244,7 +248,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         </RHFControllerInput>
         <RHFInput
           label="Word Count"
-          register={register("word_count")}
+          register={register("word_count", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.word_count}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -253,7 +259,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         <RHFInput
           label="Run Time (minutes)"
-          register={register("run_time")}
+          register={register("run_time", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.run_time}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -263,7 +271,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         <RHFInput
           label="Creator"
-          register={register("creator")}
+          register={register("creator", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.creator}
           className="flex flex-col"
           labelClassName="ml-2"

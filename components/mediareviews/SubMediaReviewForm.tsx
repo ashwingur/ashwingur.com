@@ -134,7 +134,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         <RHFInput
           label="Rating"
-          register={register("rating")}
+          register={register("rating", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.rating}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -144,7 +146,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         <RHFInput
           label="Cover Image URL"
-          register={register("cover_image")}
+          register={register("cover_image", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.cover_image}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -182,7 +186,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         </RHFControllerInput>
         <RHFInput
           label="Word Count"
-          register={register("word_count")}
+          register={register("word_count", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.word_count}
           className="flex flex-col"
           labelClassName="ml-2"
@@ -191,7 +197,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         <RHFInput
           label="Run Time (minutes)"
-          register={register("run_time")}
+          register={register("run_time", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.run_time}
           className="flex flex-col"
           labelClassName="ml-2"
