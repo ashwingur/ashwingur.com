@@ -69,13 +69,15 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       break;
   }
 
-  const subReviewCards = review.sub_media_reviews.map((subReview) => (
-    <SubMediaReviewCard
-      key={review.id}
-      parentIndex={index}
-      review={subReview}
-    />
-  ));
+  const subReviewCards = review.sub_media_reviews
+    .sort((a, b) => a.display_index - b.display_index)
+    .map((subReview) => (
+      <SubMediaReviewCard
+        key={review.id}
+        parentIndex={index}
+        review={subReview}
+      />
+    ));
 
   return (
     <div
