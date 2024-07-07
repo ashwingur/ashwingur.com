@@ -40,6 +40,27 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     </li>
   ));
 
+  let creatorTitle = "Creator";
+  switch (mediaReview.media_type) {
+    case "Movie":
+      creatorTitle = "Director/Studio";
+      break;
+    case "Book":
+      creatorTitle = "Author";
+      break;
+    case "Show":
+      creatorTitle = "Showrunner/Studio";
+      break;
+    case "Game":
+      creatorTitle = "Developer";
+      break;
+    case "Music":
+      creatorTitle = "Artist";
+      break;
+    default:
+      break;
+  }
+
   return (
     <div
       className={clsx(
@@ -82,7 +103,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             <p>{mediaReview.genres.map((g) => g.name).join(", ")}</p>
             <p className="text-3xl lg:text-4xl font-bold">{mediaReview.name}</p>
           </div>
-          <p className="text-5xl">{mediaReview.rating}</p>
+          <p className="text-5xl ml-4">{mediaReview.rating}</p>
         </div>
         <Link
           className="btn absolute right-0 top-0 m-4"
@@ -96,7 +117,8 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           <div>
             {mediaReview.creator && (
               <p>
-                <span className="font-bold">Creator</span> {mediaReview.creator}
+                <span className="font-bold">{creatorTitle}</span>{" "}
+                {mediaReview.creator}
               </p>
             )}
             {mediaReview.run_time && (
@@ -113,7 +135,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             )}
           </div>
           {mediaReview.consumed_date && (
-            <p>
+            <p className="ml-4">
               <span className="font-bold">Consumed</span>{" "}
               {consumedDate?.toLocaleDateString("en-AU", {
                 month: "short",
