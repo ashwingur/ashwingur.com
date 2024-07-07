@@ -3,6 +3,9 @@ import { MediaReview } from "shared/validations/MediaReviewSchemas";
 
 import Link from "next/link";
 import ResponsiveImageContainer from "./ResponsiveImageContainer";
+import MediaTypeIcon from "./MediaTypeIcon";
+import { FaEdit } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 interface MediaReviewCardProps {
   mediaReview: MediaReview;
@@ -32,6 +35,12 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             priorityLoad={index < 5}
           />
         )}
+        <div className="absolute top-0 left-0 m-4 bg-black/80 p-2 rounded-full">
+          <MediaTypeIcon
+            media_type={mediaReview.media_type}
+            className="text-white"
+          />
+        </div>
         <div
           className={clsx(
             "w-full p-4 text-white z-20 flex justify-between items-end",
@@ -55,7 +64,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           className="btn absolute right-0 top-0 m-4"
           href={`/MediaReviewsV2/Edit?id=${mediaReview.id}`}
         >
-          Edit
+          <MdEdit />
         </Link>
       </div>
     </div>
