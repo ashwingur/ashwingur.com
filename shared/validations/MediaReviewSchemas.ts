@@ -66,7 +66,7 @@ export const mediaReviewSchema = z.object({
   name: z.string().min(1, "Name is required"),
   review_creation_date: z.string().nullable(),
   review_last_update_date: z.string().nullable(),
-  media_type: z.enum(["Movie", "Book", "Show", "Game", "Music"]),
+  media_type: z.enum(["SELECT", "Movie", "Book", "Show", "Game", "Music"]),
   cover_image: z.string().nullable(),
   cover_image_bg_colour: z
     .string()
@@ -144,7 +144,7 @@ export const defaultMediaReview = (): MediaReview => ({
   name: "",
   review_creation_date: null,
   review_last_update_date: null,
-  media_type: "Movie",
+  media_type: "SELECT",
   cover_image: null,
   cover_image_bg_colour: null,
   signed_cover_image: null,

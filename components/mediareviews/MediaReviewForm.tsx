@@ -1,6 +1,6 @@
 import TipTap from "@components/TipTap";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Controller, FieldError, useForm } from "react-hook-form";
 import {
   MediaReview,
@@ -36,7 +36,7 @@ interface MediaReviewFormProps {
   className?: string;
 }
 
-const mediaTypes = ["Movie", "Book", "Show", "Game", "Music"];
+const mediaTypes = ["SELECT", "Movie", "Book", "Show", "Game", "Music"];
 
 const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   existingData,
@@ -56,6 +56,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     formState: { errors, dirtyFields },
     reset,
     getValues,
+    setError,
   } = useForm<MediaReview>({
     resolver: zodResolver(mediaReviewSchema),
     defaultValues: baseValues,
@@ -78,11 +79,17 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       }))
   );
 
-  console.log(subReviews);
-
   const mutation = useWriteMediaReview(onMutationSuccess);
 
   const onSubmit = (data: MediaReview) => {
+    if (data.media_type === "SELECT") {
+      setError("media_type", {
+        type: "required",
+        message: "Select a valid media type",
+      });
+      mediaTypeRef.current?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
     mutation.mutate(data);
   };
 
@@ -91,6 +98,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     const defaultVal = defaultSubMediaReview(id, subReviews.length);
     setSubReviews([...subReviews, { value: defaultVal, isDirty: false }]);
   };
+
+  const mediaTypeRef = useRef<HTMLDivElement | null>(null);
 
   const media_creation_date = getValues("media_creation_date");
   const defaultMediaCreationDate = media_creation_date
@@ -136,8 +145,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           setSubReviews(newSubReviews);
         }}
         onDeleteSuccess={() => {
-          console.log(`on delete`);
-          console.log(subReviews);
           setSubReviews((prevSubReviews) =>
             prevSubReviews.filter((a) => a.value.id !== s.value.id)
           );
@@ -182,29 +189,32 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           className="flex flex-col"
           labelClassName="ml-2"
         />
-        <RHFControllerInput
-          label="Media Type"
-          className="flex flex-col"
-          labelClassName="ml-2"
-        >
-          <Controller
-            name="media_type"
-            control={control}
-            render={({ field }) => {
-              return (
-                <GenericListbox<string>
-                  selectedValue={
-                    mediaTypes.find((i) => i === field.value) ?? mediaTypes[0]
-                  }
-                  onSelectedValueChange={(value) => field.onChange(value)}
-                  options={mediaTypes}
-                  displayValue={(option) => option}
-                  bgClass="bg-background"
-                />
-              );
-            }}
-          />
-        </RHFControllerInput>
+        <div ref={mediaTypeRef}>
+          <RHFControllerInput
+            label="Media Type"
+            className="flex flex-col"
+            labelClassName="ml-2"
+            errors={errors.media_type}
+          >
+            <Controller
+              name="media_type"
+              control={control}
+              render={({ field }) => {
+                return (
+                  <GenericListbox<string>
+                    selectedValue={
+                      mediaTypes.find((i) => i === field.value) ?? mediaTypes[0]
+                    }
+                    onSelectedValueChange={(value) => field.onChange(value)}
+                    options={mediaTypes}
+                    displayValue={(option) => option}
+                    bgClass="bg-background"
+                  />
+                );
+              }}
+            />
+          </RHFControllerInput>
+        </div>
         <RHFInput
           label="Rating"
           register={register("rating", {
