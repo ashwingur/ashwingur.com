@@ -26,9 +26,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-          month: "short",
-          year: "numeric",
-        })
+        month: "short",
+        year: "numeric",
+      })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -175,7 +175,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
 
       {review.review_content && (
         <div
-          className="editor p-4"
+          className="editor p-4 text-text"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(review.review_content),
           }}

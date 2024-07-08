@@ -6,9 +6,11 @@
 .editor h1 {
   @apply text-3xl mb-1;
 }
+
 .editor h2 {
   @apply text-2xl;
 }
+
 .editor h3 {
   @apply text-xl;
 }
