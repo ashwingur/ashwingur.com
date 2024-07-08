@@ -59,7 +59,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
               imageSrc={review.signed_cover_image ?? ""}
               imageAlt={`Main review cover image of ${review.name}`}
               priorityLoad={parentIndex < 5}
-              heightClassName="h-72 lg:h-96"
+              heightClassName="h-72"
             />
           </div>
         )}

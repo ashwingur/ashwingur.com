@@ -70,11 +70,15 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   };
 
   const [subReviews, setSubReviews] = useState(
-    getValues().sub_media_reviews.map((subReview) => ({
-      value: subReview,
-      isDirty: false,
-    }))
+    getValues()
+      .sub_media_reviews.sort((a, b) => a.display_index - b.display_index)
+      .map((subReview) => ({
+        value: subReview,
+        isDirty: false,
+      }))
   );
+
+  console.log(subReviews);
 
   const mutation = useWriteMediaReview(onMutationSuccess);
 
@@ -124,10 +128,19 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     .sort((a, b) => a.value.display_index - b.value.display_index)
     .map((s, index) => (
       <SubMediaReviewForm
-        key={index}
+        key={`${s.value.id}-${index}`}
         existingData={s.value}
+        onSubmitSuccess={(data) => {
+          const newSubReviews = [...subReviews];
+          newSubReviews[index] = { isDirty: false, value: data };
+          setSubReviews(newSubReviews);
+        }}
         onDeleteSuccess={() => {
-          setSubReviews(subReviews.filter((a) => a.value.id !== s.value.id));
+          console.log(`on delete`);
+          console.log(subReviews);
+          setSubReviews((prevSubReviews) =>
+            prevSubReviews.filter((a) => a.value.id !== s.value.id)
+          );
         }}
         updateDirty={(isDirty: boolean) => {
           setSubReviews(
@@ -231,19 +244,15 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             />
           </div>
         )}
-        <RHFControllerInput label="Review Content" labelClassName="ml-2">
-          <Controller
-            name="review_content"
-            control={control}
-            render={({ field }) => (
-              <TipTap
-                value={field.value || ""}
-                onChange={field.onChange}
-                className="w-full bg-background border-2"
-              />
-            )}
-          />
-        </RHFControllerInput>
+        <RHFInput
+          label="Creator"
+          register={register("creator", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
+          errors={errors.creator}
+          className="flex flex-col"
+          labelClassName="ml-2"
+        />
         <RHFInput
           label="Word Count"
           register={register("word_count", {
@@ -266,15 +275,6 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           inputClassName="max-w-40 input-bg"
           type="number"
           step="0.1"
-        />
-        <RHFInput
-          label="Creator"
-          register={register("creator", {
-            setValueAs: (value) => (value === "" ? null : value),
-          })}
-          errors={errors.creator}
-          className="flex flex-col"
-          labelClassName="ml-2"
         />
         <RHFControllerInput
           label="Media Creation Date"
@@ -432,6 +432,19 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                 aria-invalid={errors.cons !== undefined}
                 rows={getValues().pros.length ?? 2}
                 placeholder="Each line is one con"
+              />
+            )}
+          />
+        </RHFControllerInput>
+        <RHFControllerInput label="Review Content" labelClassName="ml-2">
+          <Controller
+            name="review_content"
+            control={control}
+            render={({ field }) => (
+              <TipTap
+                value={field.value || ""}
+                onChange={field.onChange}
+                className="w-full bg-background border-2"
               />
             )}
           />

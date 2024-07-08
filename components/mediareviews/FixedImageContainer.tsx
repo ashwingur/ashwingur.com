@@ -15,7 +15,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   imageAlt,
   priorityLoad,
   roundingClassName = "rounded-t-2xl",
-  heightClassName = "h-96 lg:h-[30rem]",
+  heightClassName = "h-96",
 }) => {
   return (
     <div

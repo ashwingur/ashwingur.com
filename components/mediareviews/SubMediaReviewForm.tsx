@@ -23,7 +23,7 @@ import FixedImageContainer from "./FixedImageContainer";
 
 interface SubMediaReviewFormProps {
   existingData: SubMediaReview;
-  onSubmitSuccess?: () => void;
+  onSubmitSuccess?: (data: SubMediaReview) => void;
   onDeleteSuccess?: () => void;
   updateDirty?: (isDirty: boolean) => void;
   className?: string;
@@ -61,7 +61,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
     reset({ ...data });
     queryClient.invalidateQueries(UPDATE_QUERY_KEY);
     queryClient.invalidateQueries(PAGINATED_QUERY_KEY);
-    onSubmitSuccess && onSubmitSuccess();
+    if (onSubmitSuccess) onSubmitSuccess(data);
     setBaseValues(data);
   };
 
@@ -76,8 +76,8 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
     const id = getValues().id;
     if (id) {
       deleteMutation.mutate(id);
-    } else {
-      onDeleteSuccess && onDeleteSuccess();
+    } else if (onDeleteSuccess) {
+      onDeleteSuccess();
     }
   };
 
@@ -168,22 +168,11 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
               imageSrc={baseValues.signed_cover_image ?? ""}
               imageAlt="Sub review cover image"
               priorityLoad={false}
+              heightClassName="h-60"
             />
           </div>
         )}
-        <RHFControllerInput label="Review Content" labelClassName="ml-2">
-          <Controller
-            name="review_content"
-            control={control}
-            render={({ field }) => (
-              <TipTap
-                value={field.value || ""}
-                onChange={field.onChange}
-                className="w-full bg-background border-2"
-              />
-            )}
-          />
-        </RHFControllerInput>
+
         <RHFInput
           label="Word Count"
           register={register("word_count", {
@@ -317,6 +306,19 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                 aria-invalid={errors.cons !== undefined}
                 rows={getValues().pros.length ?? 2}
                 placeholder="Each line is one con"
+              />
+            )}
+          />
+        </RHFControllerInput>
+        <RHFControllerInput label="Review Content" labelClassName="ml-2">
+          <Controller
+            name="review_content"
+            control={control}
+            render={({ field }) => (
+              <TipTap
+                value={field.value || ""}
+                onChange={field.onChange}
+                className="w-full bg-background border-2"
               />
             )}
           />
