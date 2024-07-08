@@ -125,7 +125,6 @@ const RainbowSmoke = () => {
           this.queue = [];
         }
         this.queue.push(new Cell(x, y, z));
-        // console.log(x, y, z);
         this.visited[x][y][z] = true;
 
         const dx = [1, -1, 0, 0, 0, 0];
@@ -183,8 +182,6 @@ const RainbowSmoke = () => {
         p5.mouseY <= height &&
         width > 1000
       ) {
-        console.log(p5.mouseX);
-        console.log(p5.mouseY);
         p5.saveCanvas("painting.png");
       }
     };

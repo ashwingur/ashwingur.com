@@ -115,9 +115,6 @@ const Tron = () => {
 
     newSocket.on("leave_room", () => {
       setRoom(null);
-      console.log(
-        `Leave room received, game state is ${GAME_STATE[gameStateRef.current]}`
-      );
       if (gameStateRef.current !== GAME_STATE.GameOver) {
         setGameState(GAME_STATE.Lobby);
       }
@@ -133,14 +130,11 @@ const Tron = () => {
     });
 
     newSocket.on("game_over", (data: GameOverEvent) => {
-      console.log("Game over received");
       setGameOverEvent(data);
       setGameState(GAME_STATE.GameOver);
     });
 
-    newSocket.on("disconnect", () => {
-      console.log("disconnecting");
-    });
+    newSocket.on("disconnect", () => {});
 
     return () => {
       clearInterval(pingInterval);

@@ -41,7 +41,6 @@ const getAllMediaReviews = async () => {
   const result = responseSchema.safeParse(responseData);
 
   if (!result.success) {
-    console.log(result.error.errors);
     throw new Error(
       `Error ${response.status}: Invalid response format (${JSON.stringify(result.error.errors)})`
     );

@@ -30,9 +30,7 @@ const PusherTest = () => {
     });
 
     let channel = pusher.subscribe("diskord");
-    console.log("subscribed");
     channel.bind("chat-send", function (data: MessageData) {
-      // console.log("received data from pusher: " + JSON.stringify(data));
       setMessages((prev) => [...prev, data]);
       // Scroll into view after the message has been given time to render
       setTimeout(() => {
@@ -42,13 +40,11 @@ const PusherTest = () => {
 
     // Live user count
     channel.bind("pusher:subscription_count", (data: any) => {
-      console.log("user count is : " + JSON.stringify(data));
       setLiverUserCount(data.subscription_count);
     });
 
     return () => {
       pusher.unsubscribe("diskord");
-      console.log("unsubscribed");
     };
   }, []);
 

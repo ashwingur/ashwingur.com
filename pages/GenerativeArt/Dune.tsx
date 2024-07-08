@@ -59,7 +59,6 @@ const sketch: Sketch = (p5: P5CanvasInstance) => {
       for (let j = 0; j < cols; j++) {
         p5.noStroke();
         if (grid[i][j] > 0) {
-          //   console.log("square");
           p5.fill(255, 255, 255);
           let y = (i + 1) * w;
           let x = j * w;

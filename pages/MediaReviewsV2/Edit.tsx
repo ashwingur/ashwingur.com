@@ -50,7 +50,6 @@ const Edit = () => {
     const { id } = router.query;
     const idResult = z.coerce.number().min(0).safeParse(id);
     if (idResult.success && data && !currentlyEditing) {
-      console.log(`handleedit called`);
       handleEdit(idResult.data);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

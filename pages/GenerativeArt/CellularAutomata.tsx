@@ -10,7 +10,6 @@ const CellularAutomata = () => {
 
   const n = nPixels === "" ? 10 : nPixels;
   const h = nLevels === "" ? 100 : nLevels;
-  console.log(nLevels);
 
   const ruleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

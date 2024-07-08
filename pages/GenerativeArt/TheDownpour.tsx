@@ -25,7 +25,10 @@ const TheDownpour = () => {
       life: number;
       layer: number;
 
-      constructor(public x: number, public y: number) {
+      constructor(
+        public x: number,
+        public y: number
+      ) {
         this.layer = Math.floor(Math.random() * numLayers);
         this.pos = p5.createVector(x, y);
         this.prev_pos = this.pos.copy();
@@ -154,7 +157,6 @@ const TheDownpour = () => {
 
       initialiseDiagonalLine() {
         let m = (this.end_y - this.start_y) / (this.end_x - this.start_x);
-        console.log(`gradient is ${m}`);
         for (let x = this.start_x; x < this.end_x; x++) {
           this.x_points.push(x);
           this.y_points.push(this.start_y + m * (x - this.start_x));
@@ -205,7 +207,6 @@ const TheDownpour = () => {
             }
           }
         } else {
-          console.log("Unknown wall type.");
         }
 
         return false;

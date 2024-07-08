@@ -28,7 +28,6 @@ const FileUpload: React.FC = () => {
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState<string>("");
   const pondRef = useRef<FilePond>(null);
-  console.log(user);
 
   const convertFiles = async (files: (string | Blob | File)[]) => {
     const formData = new FormData();

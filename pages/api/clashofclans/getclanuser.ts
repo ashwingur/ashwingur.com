@@ -22,7 +22,6 @@ export default async function handler(
       process.env.MONGODB == undefined ? "" : process.env.MONGODB
     );
   } catch (error) {
-    console.log(`Error connecting to mongodb: ${error}`);
     return res.status(500).json({ success: "false", error: error });
   }
 
