@@ -7,7 +7,7 @@ import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    usePaginatedMediaReviews(5);
+    usePaginatedMediaReviews(6);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
@@ -52,7 +52,7 @@ const MediaReviewsV2 = () => {
 
   const reviewCards = reviews.map((review, index) => (
     <MediaReviewCard
-      className="w-full"
+      className="w-full break-inside-avoid-column mb-8 lg:mb-16"
       review={review}
       index={index}
       key={review.id}
@@ -68,7 +68,8 @@ const MediaReviewsV2 = () => {
           Edit Reviews
         </Link>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch lg:w-4/5 mx-auto gap-8 lg:gap-16 px-4">
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch lg:w-4/5 mx-auto gap-8 lg:gap-16 px-4"> */}
+      <div className="columns-2 lg:w-4/5 mx-auto gap-8 lg:gap-16 px-4">
         {reviewCards}
       </div>
       {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}

@@ -175,7 +175,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
 
       {review.review_content && (
         <div
-          className="editor p-4"
+          className="editor px-4 py-2"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(review.review_content),
           }}
