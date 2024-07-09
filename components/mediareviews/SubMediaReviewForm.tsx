@@ -162,16 +162,18 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           labelClassName="ml-2"
           placeholder="#000000"
         />
-        {baseValues.signed_cover_image && (
-          <div className="overflow-hidden rounded-2xl">
-            <FixedImageContainer
-              imageSrc={baseValues.signed_cover_image ?? ""}
-              imageAlt="Sub review cover image"
-              priorityLoad={false}
-              heightClassName="h-60"
-            />
-          </div>
-        )}
+
+        <div className="overflow-hidden rounded-2xl">
+          <FixedImageContainer
+            imageSrc={baseValues.signed_cover_image ?? undefined}
+            imageAlt="Sub review cover image"
+            priorityLoad={false}
+            heightClassName={baseValues.signed_cover_image ? "h-48 lg:h-60" : "h-28"}
+            bgColour={baseValues.cover_image_bg_colour ?? undefined}
+            miniCard={baseValues.cover_image_bg_colour !== undefined}
+          />
+        </div>
+
 
         <RHFInput
           label="Word Count"

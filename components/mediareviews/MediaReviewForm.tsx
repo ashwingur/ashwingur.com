@@ -245,15 +245,16 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           labelClassName="ml-2"
           placeholder="#000000"
         />
-        {baseValues.signed_cover_image && (
-          <div className="overflow-hidden rounded-2xl">
-            <FixedImageContainer
-              imageSrc={baseValues.signed_cover_image ?? ""}
-              imageAlt="Main review cover image"
-              priorityLoad={true}
-            />
-          </div>
-        )}
+
+        <div className="overflow-hidden rounded-2xl">
+          <FixedImageContainer
+            imageSrc={baseValues.signed_cover_image ?? undefined}
+            imageAlt="Main review cover image"
+            priorityLoad={true}
+            bgColour={baseValues.cover_image_bg_colour ?? undefined}
+          />
+        </div>
+
         <RHFInput
           label="Creator"
           register={register("creator", {
