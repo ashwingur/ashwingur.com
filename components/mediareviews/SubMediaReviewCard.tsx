@@ -23,9 +23,9 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-          month: "short",
-          year: "numeric",
-        })
+        month: "short",
+        year: "numeric",
+      })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -59,7 +59,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
               imageSrc={review.signed_cover_image ?? ""}
               imageAlt={`Main review cover image of ${review.name}`}
               priorityLoad={parentIndex < 5}
-              heightClassName="h-72"
+              heightClassName="h-48 lg:h-60"
             />
           </div>
         )}
@@ -69,7 +69,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
             "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none",
             review.signed_cover_image
               ? "absolute bottom-0 left-0"
-              : "bg-black rounded-t-2xl h-36"
+              : "bg-black rounded-t-2xl"
           )}
         >
           <div>
@@ -78,7 +78,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
-            <p className="text-2xl lg:text-3xl font-bold">{review.name}</p>
+            <p className="text-xl lg:text-2xl font-bold">{review.name}</p>
           </div>
           <p className="text-4xl ml-8">{review.rating}</p>
         </div>

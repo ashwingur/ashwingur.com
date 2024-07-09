@@ -87,15 +87,16 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       )}
     >
       <div className="w-full relative overflow-hidden">
-        {review.signed_cover_image && (
-          <div className="overflow-hidden rounded-t-2xl">
-            <FixedImageContainer
-              imageSrc={review.signed_cover_image ?? ""}
-              imageAlt={`Main review cover image of ${review.name}`}
-              priorityLoad={index < 5}
-            />
-          </div>
-        )}
+
+        <div className="overflow-hidden rounded-t-2xl">
+          <FixedImageContainer
+            imageSrc={review.signed_cover_image ?? undefined}
+            imageAlt={`Main review cover image of ${review.name}`}
+            priorityLoad={index < 2}
+            bgColour={review.cover_image_bg_colour ?? ""}
+          />
+        </div>
+
         <div className="absolute top-0 left-0 m-4 bg-black/80 p-2 rounded-full">
           <MediaTypeIcon
             media_type={review.media_type}
@@ -104,22 +105,24 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         </div>
         <div
           className={clsx(
-            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none",
-            review.signed_cover_image
-              ? "absolute bottom-0 left-0"
-              : "bg-black rounded-t-2xl h-96 lg:h-[30rem]"
+            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none absolute bottom-0 left-0",
+            // review.signed_cover_image
+            //   ? "absolute bottom-0 left-0"
+            //   // Also add a black gradient on top of plain bg colour if there's no cover image
+            //   : `rounded-t-2xl h-80`
           )}
+        // style={review.signed_cover_image ? {} : { backgroundColor: review.cover_image_bg_colour ?? "#000000" }}
         >
-          <div>
+          <div className="z-10">
             {review.media_creation_date && (
               <p className="font-mono tracking-widest text-lg">
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
             <p>{review.genres.map((g) => g.name).join(", ")}</p>
-            <p className="text-3xl font-bold">{review.name}</p>
+            <p className="text-2xl lg:text-3xl font-bold">{review.name}</p>
           </div>
-          <p className="text-5xl ml-8">{review.rating}</p>
+          <p className="text-4xl lg:text-5xl ml-8">{review.rating}</p>
         </div>
         <Link
           className="btn !absolute right-0 top-0 m-4"
