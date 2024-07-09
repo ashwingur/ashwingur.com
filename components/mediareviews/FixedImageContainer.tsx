@@ -9,6 +9,7 @@ interface FixedImageContainerProps {
   roundingClassName?: string;
   heightClassName?: string;
   bgColour?: string;
+  miniCard?: boolean;
 }
 
 const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
@@ -17,7 +18,8 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   priorityLoad,
   roundingClassName = "rounded-t-2xl",
   heightClassName = "h-80",
-  bgColour = "#000000"
+  bgColour = "#000000",
+  miniCard = false
 }) => {
   if (imageSrc && !imageAlt) {
     throw new Error("imageSrc is defined but no imageAlt was provided");
@@ -29,8 +31,10 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
         "w-full relative overflow-hidden hover:scale-125 transition-all duration-1000",
         heightClassName,
         roundingClassName,
-        "before:content-[''] before:absolute before:w-full before:h-1/2 before:md-2/5 before:transition-all before:duration-1000",
-        "before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
+        "before:content-[''] before:absolute before:w-full before:transition-all before:duration-1000",
+        "before:bg-gradient-to-b before:z-10 before:bottom-0",
+        miniCard ? "before:h-full before:from-black/0 before:to-black/80" : "before:h-1/2 before:md-2/5 before:from-black/0 before:to-black/80"
+
       )}
       style={{ backgroundColor: bgColour }}
     >
