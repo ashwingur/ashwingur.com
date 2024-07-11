@@ -1,15 +1,17 @@
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { MediaReview } from "shared/validations/MediaReviewSchemas";
+import MediaReviewCard from "./MediaReviewCard";
 
-interface MediaReviewFilterModalProps {
-  onFilter: () => void;
+interface MediaReviewModalProps {
+  review?: MediaReview;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }
 
-const MediaReviewFilterModal: React.FC<MediaReviewFilterModalProps> = ({
-  onFilter,
+const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
+  review,
   visible,
   setVisible,
 }) => {
@@ -43,20 +45,29 @@ const MediaReviewFilterModal: React.FC<MediaReviewFilterModalProps> = ({
           setVisible(false);
         }}
       />
-      <div className="flex flex-col rounded-lg bg-background-muted z-10 p-4">
-        <button
-          className="btn self-end"
-          onClick={() => {
-            setVisible(false);
-          }}
-        >
-          <AiOutlineClose />
-        </button>
-        <h1 className="text-white mt-2">Filter Modal</h1>
-        <p>TODO</p>
+      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 max-h-[83%] overflow-hidden rounded-2xl">
+        <div className="overflow-y-scroll rounded-2xl relative">
+          <button
+            className="btn self-end z-20 absolute top-0 right-0 m-4"
+            onClick={() => {
+              setVisible(false);
+            }}
+          >
+            <AiOutlineClose />
+          </button>
+          {review && (
+            <MediaReviewCard
+              className="w-full"
+              review={review}
+              index={0}
+              key={review.id}
+              minimised={false}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default MediaReviewFilterModal;
+export default MediaReviewModal;

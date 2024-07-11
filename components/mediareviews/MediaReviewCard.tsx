@@ -16,12 +16,16 @@ interface MediaReviewCardProps {
   review: MediaReview;
   index: number;
   className?: string;
+  onCoverClick?: () => void;
+  minimised: boolean;
 }
 
 const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   className,
   index,
   review,
+  onCoverClick,
+  minimised,
 }) => {
   const { user, role } = useAuth();
   const [showFullHeight, setShowFullHeight] = useState<Height>(0);
@@ -84,6 +88,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         key={subReview.id}
         parentIndex={index}
         review={subReview}
+        className="mx-4"
       />
     ));
 
@@ -95,7 +100,13 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       )}
     >
       <div className="w-full relative overflow-hidden">
-        <div className="overflow-hidden rounded-t-2xl">
+        <div
+          className={clsx(
+            minimised ? "rounded-2xl" : "rounded-t-2xl",
+            "overflow-hidden"
+          )}
+          onClick={onCoverClick}
+        >
           <FixedImageContainer
             imageSrc={review.signed_cover_image ?? undefined}
             imageAlt={`Main review cover image of ${review.name}`}
@@ -135,91 +146,75 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           </Link>
         )}
       </div>
-      <div className="flex flex-col px-4 py-2 gap-2">
-        <div className="flex justify-between">
-          <div>
-            {review.creator && (
-              <p>
-                <span className="font-bold">{creatorTitle}</span>{" "}
-                {review.creator}
-              </p>
-            )}
-            {review.run_time && (
-              <p>
-                <span className="font-bold">Run Time</span> {review.run_time}{" "}
-                min
-              </p>
-            )}
-            {review.word_count && (
-              <p>
-                <span className="font-bold">Word Count</span>{" "}
-                {review.word_count?.toLocaleString()}
-              </p>
-            )}
-          </div>
-          {review.consumed_date && (
-            <p className="ml-4">
-              <span className="font-bold">Consumed</span>{" "}
-              {formattedConsumedDate}
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col md:flex-row gap-2">
-          {pros.length > 0 && (
-            <div className={clsx(cons.length > 0 ? "md:w-1/2" : "")}>
-              <h3>Pros</h3>
-              <ul className="flex flex-col">{pros}</ul>
-            </div>
-          )}
-          {cons.length > 0 && (
-            <div className={clsx(pros.length > 0 ? "md:w-1/2" : "")}>
-              <h3>Cons</h3>
-              <ul>{cons}</ul>
-            </div>
-          )}
-        </div>
-      </div>
 
-      {(review.review_content || review.sub_media_reviews.length > 0) && (
-        <button
-          aria-expanded={showFullHeight !== 0}
-          aria-controls="full_review_panel"
-          onClick={() => setShowFullHeight(showFullHeight === 0 ? "auto" : 0)}
-          className="btn self-center mb-2"
-        >
-          {showFullHeight === 0 ? (
-            <FaChevronDown className="text-2xl" />
-          ) : (
-            <FaChevronUp className="text-2xl" />
-          )}
-        </button>
-      )}
-      <AnimateHeight
-        height={showFullHeight}
-        duration={500}
-        id="full_review_panel"
-      >
-        <div>
-          {review.review_content && (
-            <div
-              className="editor px-4 py-2"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(review.review_content),
-              }}
-            />
-          )}
-          {subReviewCards.length > 0 && (
-            <h2 className="text-center">Sub Reviews</h2>
-          )}
-          <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
-        </div>
-      </AnimateHeight>
-      {review.review_last_update_date && (
-        <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
-          Updated{" "}
-          {new Date(review.review_last_update_date).toLocaleDateString()}{" "}
-          {new Date(review.review_last_update_date).toLocaleTimeString()}
-        </p>
+      {!minimised && (
+        <>
+          <div className="flex flex-col px-4 py-2 lg:p-8 gap-2">
+            <div className="flex justify-between">
+              <div>
+                {review.creator && (
+                  <p>
+                    <span className="font-bold">{creatorTitle}</span>{" "}
+                    {review.creator}
+                  </p>
+                )}
+                {review.run_time && (
+                  <p>
+                    <span className="font-bold">Run Time</span>{" "}
+                    {review.run_time} min
+                  </p>
+                )}
+                {review.word_count && (
+                  <p>
+                    <span className="font-bold">Word Count</span>{" "}
+                    {review.word_count?.toLocaleString()}
+                  </p>
+                )}
+              </div>
+              {review.consumed_date && (
+                <p className="ml-4">
+                  <span className="font-bold">Consumed</span>{" "}
+                  {formattedConsumedDate}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col md:flex-row gap-2">
+              {pros.length > 0 && (
+                <div className={clsx(cons.length > 0 ? "md:w-1/2" : "")}>
+                  <h3>Pros</h3>
+                  <ul className="flex flex-col">{pros}</ul>
+                </div>
+              )}
+              {cons.length > 0 && (
+                <div className={clsx(pros.length > 0 ? "md:w-1/2" : "")}>
+                  <h3>Cons</h3>
+                  <ul>{cons}</ul>
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            {review.review_content && (
+              <div
+                className="editor px-4 py-2 lg:px-8"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(review.review_content),
+                }}
+              />
+            )}
+            {subReviewCards.length > 0 && (
+              <h2 className="text-center">Sub Reviews</h2>
+            )}
+            <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
+          </div>
+          {review.review_last_update_date && (
+            <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
+              Updated{" "}
+              {new Date(review.review_last_update_date).toLocaleDateString()}{" "}
+              {new Date(review.review_last_update_date).toLocaleTimeString()}
+            </p>
+          )}{" "}
+        </>
       )}
     </div>
   );

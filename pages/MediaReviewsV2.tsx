@@ -1,20 +1,21 @@
 import LoadingIcon from "@components/LoadingIcon";
 import MasonWrapper from "@components/mediareviews/MasonWrapper";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
-import MediaReviewFilterModal from "@components/mediareviews/MediaReviewFilterModal";
+import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
-import { Masonry } from "masonic";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
+import { MediaReview } from "shared/validations/MediaReviewSchemas";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePaginatedMediaReviews(6);
-  const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const [reviewModalVisible, setReviewModalVisible] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<number | null>(null);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
@@ -61,10 +62,15 @@ const MediaReviewsV2 = () => {
     .filter((review) => review.visible)
     .map((review, index) => (
       <MediaReviewCard
-        className="w-full"
+        className="w-full cursor-pointer"
         review={review}
         index={index}
         key={review.id}
+        onCoverClick={() => {
+          setSelectedReview(review.id);
+          setReviewModalVisible(true);
+        }}
+        minimised={true}
       />
     ));
 
@@ -75,7 +81,7 @@ const MediaReviewsV2 = () => {
       <button
         className="btn mx-auto block"
         onClick={() => {
-          setFilterModalVisible(true);
+          setReviewModalVisible(true);
         }}
       >
         <IoFilter className="text-2xl" />
@@ -92,11 +98,11 @@ const MediaReviewsV2 = () => {
       </div>
 
       {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
-      <MediaReviewFilterModal
-        onFilter={() => {}}
-        visible={filterModalVisible}
+      <MediaReviewModal
+        review={reviews.find((r) => r.id === selectedReview)}
+        visible={reviewModalVisible}
         setVisible={(visible) => {
-          setFilterModalVisible(visible);
+          setReviewModalVisible(visible);
         }}
       />
     </div>
