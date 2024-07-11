@@ -24,6 +24,7 @@ interface GenericMultiSelectGroupProps<T> {
   onChange: (selectedOptions: MultiValue<T>) => void;
   className?: string;
   displayKey: keyof T;
+  placeholder: string;
   bgClass?: string;
 }
 
@@ -35,6 +36,7 @@ const GenericMultiSelectGroup = <T extends OptionType>({
   onChange,
   className,
   displayKey,
+  placeholder,
   bgClass = "bg-background-muted",
 }: GenericMultiSelectGroupProps<T>) => {
   const formatOption = (option: T) => ({
@@ -68,7 +70,7 @@ const GenericMultiSelectGroup = <T extends OptionType>({
       instanceId={useId()}
       value={value.map(formatOption)}
       onChange={handleChange}
-      placeholder="Select genres"
+      placeholder={placeholder}
       className={className}
       classNames={{
         control: (state) =>

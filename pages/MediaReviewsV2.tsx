@@ -1,17 +1,22 @@
 import LoadingIcon from "@components/LoadingIcon";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
+import MediaReviewFilter, {
+  FilterObject,
+} from "@components/mediareviews/MediaReviewFilter";
 import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { IoFilter } from "react-icons/io5";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
+  const [filterObject, setFilterObject] = useState<FilterObject>({
+    mediaTypes: [],
+  });
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    usePaginatedMediaReviews(6);
+    usePaginatedMediaReviews(6, filterObject);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
 
@@ -76,7 +81,7 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-
+      <MediaReviewFilter setFilterObject={setFilterObject} />
       {user && role === "admin" && (
         <div className=" flex justify-center my-4">
           <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
@@ -87,6 +92,9 @@ const MediaReviewsV2 = () => {
       <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
         {reviewCards}
       </div>
+      {reviews.length === 0 && (
+        <p className="text-center italic text-lg mt-4">No Results Found</p>
+      )}
 
       {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
       <MediaReviewModal

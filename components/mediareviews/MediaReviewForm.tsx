@@ -26,7 +26,6 @@ import SubMediaReviewForm from "./SubMediaReviewForm";
 import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";
-import ResponsiveImageContainer from "./ResponsiveImageContainer";
 import FixedImageContainer from "./FixedImageContainer";
 
 interface MediaReviewFormProps {
@@ -368,6 +367,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               return (
                 <GenericMultiSelectGroup<OptionType>
                   options={filteredOptions}
+                  placeholder="Select genres"
                   value={(field.value || []).map((genre: Genre) => ({
                     value: genre.name,
                     label: genre.name,

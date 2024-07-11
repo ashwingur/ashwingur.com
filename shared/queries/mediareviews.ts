@@ -15,7 +15,8 @@ import {
   subMediaReviewWriteSchema,
 } from "shared/validations/MediaReviewSchemas";
 import { z } from "zod";
-import { apiFetch } from "./api-fetch";
+import { apiFetch, CustomQueryParam } from "./api-fetch";
+import { FilterObject } from "@components/mediareviews/MediaReviewFilter";
 
 export const UPDATE_QUERY_KEY = "mediaReviews";
 export const PAGINATED_QUERY_KEY = "paginatedMediaReviews";
@@ -52,16 +53,29 @@ const getAllMediaReviews = async () => {
 const getPaginatedMediaReviews = async ({
   pageParam = 1,
   perPage,
+  mediaTypes,
 }: {
   pageParam: number;
   perPage: number;
+  mediaTypes: string[];
 }) => {
+  // Custom query params for easily mapping string array to the same key
+  // eg ?id=1&id=2&id=3
+  const customQueryParams: CustomQueryParam[] = [];
+  mediaTypes.forEach((m) =>
+    customQueryParams.push({ key: "media_types", val: m })
+  );
+
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
     responseSchema: paginatedMediaReviewSchema,
     options: {
-      queryParams: { page: pageParam.toString(), per_page: perPage.toString() },
+      queryParams: {
+        page: pageParam.toString(),
+        per_page: perPage.toString(),
+      },
     },
+    customParams: customQueryParams,
   });
 };
 
@@ -309,11 +323,18 @@ export const useMediaReviews = () => {
   return useQuery(UPDATE_QUERY_KEY, getAllMediaReviews);
 };
 
-export const usePaginatedMediaReviews = (perPage: number) => {
+export const usePaginatedMediaReviews = (
+  perPage: number,
+  filterObject: FilterObject
+) => {
   return useInfiniteQuery({
-    queryKey: [PAGINATED_QUERY_KEY, perPage],
+    queryKey: [PAGINATED_QUERY_KEY, perPage, filterObject],
     queryFn: ({ pageParam = 1 }) =>
-      getPaginatedMediaReviews({ pageParam, perPage }),
+      getPaginatedMediaReviews({
+        pageParam,
+        perPage,
+        mediaTypes: filterObject.mediaTypes,
+      }),
     staleTime: 300000,
     getNextPageParam: (lastPage) => {
       if (lastPage.has_next) {
@@ -321,5 +342,6 @@ export const usePaginatedMediaReviews = (perPage: number) => {
       }
       return undefined; // No more pages to fetch
     },
+    keepPreviousData: true,
   });
 };
