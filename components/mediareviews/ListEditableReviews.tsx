@@ -62,33 +62,35 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
             <div className="my-2">
               <h3 className="text-center">Sub Reviews</h3>
               <div className="flex flex-col gap-4 w-full">
-                {review.sub_media_reviews.map((subReview) => (
-                  <Card
-                    key={subReview.id}
-                    firstLayer={false}
-                    className="w-full"
-                  >
-                    <p className="font-bold text-center text-base">
-                      {subReview.name}
-                    </p>
-                    <p>
-                      <span className="font-bold">ID:</span> {subReview.id}
-                    </p>
-                    <p>
-                      <span className="font-bold">Created:</span>{" "}
-                      {subReview.review_creation_date &&
-                        `${new Date(subReview.review_creation_date).toLocaleDateString()} ${new Date(subReview.review_creation_date).toLocaleTimeString()}`}
-                    </p>
-                    <p>
-                      <span className="font-bold">Updated:</span>{" "}
-                      {subReview.review_last_update_date &&
-                        `${new Date(subReview.review_last_update_date).toLocaleDateString()} ${new Date(subReview.review_last_update_date).toLocaleTimeString()}`}
-                    </p>
-                    {!subReview.visible && (
-                      <AiFillEyeInvisible className="text-secondary text-xl ml-auto" />
-                    )}
-                  </Card>
-                ))}
+                {review.sub_media_reviews
+                  .sort((a, b) => a.display_index - b.display_index)
+                  .map((subReview) => (
+                    <Card
+                      key={subReview.id}
+                      firstLayer={false}
+                      className="w-full"
+                    >
+                      <p className="font-bold text-center text-base">
+                        {subReview.name}
+                      </p>
+                      <p>
+                        <span className="font-bold">ID:</span> {subReview.id}
+                      </p>
+                      <p>
+                        <span className="font-bold">Created:</span>{" "}
+                        {subReview.review_creation_date &&
+                          `${new Date(subReview.review_creation_date).toLocaleDateString()} ${new Date(subReview.review_creation_date).toLocaleTimeString()}`}
+                      </p>
+                      <p>
+                        <span className="font-bold">Updated:</span>{" "}
+                        {subReview.review_last_update_date &&
+                          `${new Date(subReview.review_last_update_date).toLocaleDateString()} ${new Date(subReview.review_last_update_date).toLocaleTimeString()}`}
+                      </p>
+                      {!subReview.visible && (
+                        <AiFillEyeInvisible className="text-secondary text-xl ml-auto" />
+                      )}
+                    </Card>
+                  ))}
               </div>
             </div>
           )}

@@ -155,7 +155,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         <RHFInput
           label="Background Colour"
-          register={register("cover_image_bg_colour")}
+          register={register("cover_image_bg_colour", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.cover_image_bg_colour}
           className="flex flex-col"
           inputClassName="max-w-32 input-bg"
@@ -168,12 +170,13 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             imageSrc={baseValues.signed_cover_image ?? undefined}
             imageAlt="Sub review cover image"
             priorityLoad={false}
-            heightClassName={baseValues.signed_cover_image ? "h-48 lg:h-60" : "h-28"}
+            heightClassName={
+              baseValues.signed_cover_image ? "h-48 lg:h-60" : "h-28"
+            }
             bgColour={baseValues.cover_image_bg_colour ?? undefined}
             miniCard={baseValues.cover_image_bg_colour !== undefined}
           />
         </div>
-
 
         <RHFInput
           label="Word Count"

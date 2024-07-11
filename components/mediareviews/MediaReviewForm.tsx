@@ -238,7 +238,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         <RHFInput
           label="Background Colour"
-          register={register("cover_image_bg_colour")}
+          register={register("cover_image_bg_colour", {
+            setValueAs: (value) => (value === "" ? null : value),
+          })}
           errors={errors.cover_image_bg_colour}
           className="flex flex-col"
           inputClassName="max-w-32 input-bg"
