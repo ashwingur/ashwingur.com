@@ -90,7 +90,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-lg bg-background-muted flex flex-col",
+        "rounded-2xl shadow-[0_0_14px_6px_rgba(0,0,0,0.15)] md:shadow-lg bg-background-muted flex flex-col",
         className
       )}
     >
@@ -135,7 +135,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           </Link>
         )}
       </div>
-      <div className="flex flex-col p-4 gap-2">
+      <div className="flex flex-col px-4 py-2 gap-2">
         <div className="flex justify-between">
           <div>
             {review.creator && (
@@ -185,7 +185,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           aria-expanded={showFullHeight !== 0}
           aria-controls="full_review_panel"
           onClick={() => setShowFullHeight(showFullHeight === 0 ? "auto" : 0)}
-          className="btn self-center"
+          className="btn self-center mb-2"
         >
           {showFullHeight === 0 ? (
             <FaChevronDown className="text-2xl" />
@@ -199,7 +199,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         duration={500}
         id="full_review_panel"
       >
-        <div className="mt-2">
+        <div>
           {review.review_content && (
             <div
               className="editor px-4 py-2"

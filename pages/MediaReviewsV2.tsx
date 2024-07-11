@@ -58,7 +58,7 @@ const MediaReviewsV2 = () => {
     .filter((review) => review.visible)
     .map((review, index) => (
       <MediaReviewCard
-        className="h-auto"
+        className="w-full"
         review={review}
         index={index}
         key={review.id}
@@ -76,7 +76,7 @@ const MediaReviewsV2 = () => {
           </Link>
         </div>
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch 2xl:w-4/5 mx-auto gap-8 xl:gap-16 px-4 lg:px-8">
+      <div className="grid place-items-center items-start grid-cols-1 lg:grid-cols-2 2xl:w-4/5 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
         {reviewCards}
       </div>
 
