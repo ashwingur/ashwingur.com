@@ -1,5 +1,4 @@
 import LoadingIcon from "@components/LoadingIcon";
-import MasonWrapper from "@components/mediareviews/MasonWrapper";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
 import Navbar from "@components/navbars/Navbar";
@@ -8,7 +7,6 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
-import { MediaReview } from "shared/validations/MediaReviewSchemas";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
