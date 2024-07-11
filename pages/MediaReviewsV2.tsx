@@ -58,7 +58,7 @@ const MediaReviewsV2 = () => {
     .filter((review) => review.visible)
     .map((review, index) => (
       <MediaReviewCard
-        className=""
+        className="h-auto"
         review={review}
         index={index}
         key={review.id}

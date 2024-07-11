@@ -8,19 +8,26 @@ import DOMPurify from "dompurify";
 import FixedImageContainer from "./FixedImageContainer";
 import SubMediaReviewCard from "./SubMediaReviewCard";
 import { useAuth } from "@context/AuthContext";
+import { useState } from "react";
+import AnimateHeight, { Height } from "react-animate-height";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 interface MediaReviewCardProps {
   review: MediaReview;
   index: number;
   className?: string;
+  showFullReview?: boolean;
 }
 
 const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   className,
   index,
   review,
+  showFullReview = false,
 }) => {
   const { user, role } = useAuth();
+  const [showingFullReview, setShowingFullReview] = useState(showFullReview);
+  const [showFullHeight, setShowFullHeight] = useState<Height>(0);
 
   const consumedDate = review.consumed_date
     ? new Date(review.consumed_date)
@@ -86,7 +93,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-xl bg-background-muted flex flex-col",
+        "rounded-2xl shadow-lg bg-background-muted flex flex-col",
         className
       )}
     >
@@ -176,18 +183,40 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         </div>
       </div>
 
-      {review.review_content && (
-        <div
-          className="editor px-4 py-2"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(review.review_content),
-          }}
-        />
+      {(review.review_content || review.sub_media_reviews.length > 0) && (
+        <button
+          aria-expanded={showFullHeight !== 0}
+          aria-controls="full_review_panel"
+          onClick={() => setShowFullHeight(showFullHeight === 0 ? "auto" : 0)}
+          className="btn self-center"
+        >
+          {showFullHeight === 0 ? (
+            <FaChevronDown className="text-2xl" />
+          ) : (
+            <FaChevronUp className="text-2xl" />
+          )}
+        </button>
       )}
-      {subReviewCards.length > 0 && (
-        <h2 className="text-center">Sub Reviews</h2>
-      )}
-      <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
+      <AnimateHeight
+        height={showFullHeight}
+        duration={500}
+        id="full_review_panel"
+      >
+        <div className="mt-2">
+          {review.review_content && (
+            <div
+              className="editor px-4 py-2"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(review.review_content),
+              }}
+            />
+          )}
+          {subReviewCards.length > 0 && (
+            <h2 className="text-center">Sub Reviews</h2>
+          )}
+          <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
+        </div>
+      </AnimateHeight>
       {review.review_last_update_date && (
         <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
           Updated{" "}
