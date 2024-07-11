@@ -46,7 +46,7 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
         }}
       />
       <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
-        <div className="overflow-y-scroll rounded-2xl relative">
+        <div className="overflow-y-auto rounded-2xl relative">
           <button
             className="btn z-50 m-4 fixed"
             onClick={() => {
