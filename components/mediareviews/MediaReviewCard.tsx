@@ -9,8 +9,6 @@ import FixedImageContainer from "./FixedImageContainer";
 import SubMediaReviewCard from "./SubMediaReviewCard";
 import { useAuth } from "@context/AuthContext";
 import { useState } from "react";
-import AnimateHeight, { Height } from "react-animate-height";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 interface MediaReviewCardProps {
   review: MediaReview;
@@ -28,7 +26,6 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   minimised,
 }) => {
   const { user, role } = useAuth();
-  const [showFullHeight, setShowFullHeight] = useState<Height>(0);
 
   const consumedDate = review.consumed_date
     ? new Date(review.consumed_date)
@@ -95,7 +92,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-[0_0_14px_6px_rgba(0,0,0,0.15)] md:shadow-lg bg-background-muted flex flex-col",
+        "rounded-2xl shadow-xl bg-background-muted flex flex-col",
         className
       )}
     >
