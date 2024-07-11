@@ -335,7 +335,7 @@ export const usePaginatedMediaReviews = (
         perPage,
         mediaTypes: filterObject.mediaTypes,
       }),
-    staleTime: 300000,
+    staleTime: 3600000,
     getNextPageParam: (lastPage) => {
       if (lastPage.has_next) {
         return lastPage.current_page + 1;

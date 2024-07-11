@@ -139,7 +139,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             className="btn !absolute right-0 top-0 m-4"
             href={`/MediaReviewsV2/Edit?id=${review.id}`}
           >
-            <MdEdit />
+            <MdEdit className="text-xs" />
           </Link>
         )}
       </div>
