@@ -7,6 +7,7 @@ import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import DOMPurify from "dompurify";
 import FixedImageContainer from "./FixedImageContainer";
 import SubMediaReviewCard from "./SubMediaReviewCard";
+import { useAuth } from "@context/AuthContext";
 
 interface MediaReviewCardProps {
   review: MediaReview;
@@ -19,6 +20,8 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   index,
   review,
 }) => {
+  const { user, role } = useAuth();
+
   const consumedDate = review.consumed_date
     ? new Date(review.consumed_date)
     : undefined;
@@ -26,9 +29,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-        month: "short",
-        year: "numeric",
-      })
+          month: "short",
+          year: "numeric",
+        })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -70,10 +73,11 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   }
 
   const subReviewCards = review.sub_media_reviews
+    .filter((subReview) => subReview.visible)
     .sort((a, b) => a.display_index - b.display_index)
     .map((subReview) => (
       <SubMediaReviewCard
-        key={review.id}
+        key={subReview.id}
         parentIndex={index}
         review={subReview}
       />
@@ -87,7 +91,6 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
       )}
     >
       <div className="w-full relative overflow-hidden">
-
         <div className="overflow-hidden rounded-t-2xl">
           <FixedImageContainer
             imageSrc={review.signed_cover_image ?? undefined}
@@ -119,12 +122,14 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           </div>
           <p className="text-4xl lg:text-5xl ml-8">{review.rating}</p>
         </div>
-        <Link
-          className="btn !absolute right-0 top-0 m-4"
-          href={`/MediaReviewsV2/Edit?id=${review.id}`}
-        >
-          <MdEdit />
-        </Link>
+        {user && role === "admin" && (
+          <Link
+            className="btn !absolute right-0 top-0 m-4"
+            href={`/MediaReviewsV2/Edit?id=${review.id}`}
+          >
+            <MdEdit />
+          </Link>
+        )}
       </div>
       <div className="flex flex-col p-4 gap-2">
         <div className="flex justify-between">

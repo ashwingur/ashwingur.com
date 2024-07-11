@@ -14,6 +14,7 @@ import { z } from "zod";
 import Link from "next/link";
 
 const Edit = () => {
+  const { role } = useAuth();
   const { data } = useMediaReviews();
   const [currentlyEditing, setCurrentlyEditing] = useState<MediaReview>();
   const { user, loading } = useAuth();
@@ -70,9 +71,11 @@ const Edit = () => {
             <Link className="btn w-48" href={"/MediaReviewsV2"}>
               Back to Reviews
             </Link>
-            <button className="btn w-48" onClick={handleCreateNew}>
-              Create New
-            </button>
+            {role === "admin" && (
+              <button className="btn w-48" onClick={handleCreateNew}>
+                Create New
+              </button>
+            )}
           </div>
         )}
         {currentlyEditing && (

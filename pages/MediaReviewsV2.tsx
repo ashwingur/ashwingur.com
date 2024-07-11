@@ -2,12 +2,14 @@ import LoadingIcon from "@components/LoadingIcon";
 import MasonWrapper from "@components/mediareviews/MasonWrapper";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import Navbar from "@components/navbars/Navbar";
+import { useAuth } from "@context/AuthContext";
 import { Masonry } from "masonic";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
+  const { user, role } = useAuth();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePaginatedMediaReviews(6);
 
@@ -52,24 +54,28 @@ const MediaReviewsV2 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const reviewCards = reviews.map((review, index) => (
-    <MediaReviewCard
-      className=""
-      review={review}
-      index={index}
-      key={review.id}
-    />
-  ));
+  const reviewCards = reviews
+    .filter((review) => review.visible)
+    .map((review, index) => (
+      <MediaReviewCard
+        className=""
+        review={review}
+        index={index}
+        key={review.id}
+      />
+    ));
 
   return (
     <div className="min-h-screen pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-      <div className=" flex justify-center my-4">
-        <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
-          Edit Reviews
-        </Link>
-      </div>
+      {user && role === "admin" && (
+        <div className=" flex justify-center my-4">
+          <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
+            Edit Reviews
+          </Link>
+        </div>
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch 2xl:w-4/5 mx-auto gap-8 xl:gap-16 px-4 lg:px-8">
         {reviewCards}
       </div>

@@ -58,6 +58,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const response = await api.post("/login", { username, password });
       setUser(response.data.username);
+      setRole(response.data.role);
       router.push(previousRoute ?? "/");
     } catch (error) {
       console.error("Login failed:", error);
@@ -69,7 +70,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       console.log("logging out");
       await api.post("/logout");
       setUser(null);
-      router.push("/Login");
+      router.push(previousRoute ?? "/");
     } catch (error) {
       console.error("Logout failed:", error);
     }

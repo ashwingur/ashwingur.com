@@ -1,6 +1,7 @@
 import Card from "@components/Card";
 import ConfirmButton from "@components/ConfirmButton";
 import LoadingIcon from "@components/LoadingIcon";
+import { useAuth } from "@context/AuthContext";
 import React from "react";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import {
@@ -15,6 +16,7 @@ interface ListEditableReviewsProps {
 const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   handleEdit,
 }) => {
+  const { role } = useAuth();
   const { data, error, isLoading } = useMediaReviews();
   const deleteReviewMutation = useDeleteMediaReview();
 
@@ -36,14 +38,16 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
         firstLayer={true}
         className="flex flex-col mx-auto w-4/5 md:w-full justify-between"
       >
-        <div className="h-full">
-          <h2 className="text-center break-words">{review.name}</h2>
-          <p>
-            <span className="font-bold">ID:</span> {review.id}
-          </p>
-          <p>
-            <span className="font-bold">Type:</span> {review.media_type}
-          </p>
+        <div className="h-full text-sm">
+          <h2 className="text-center break-words text-2xl">{review.name}</h2>
+          <div className="flex justify-between">
+            <p>
+              <span className="font-bold">Type:</span> {review.media_type}
+            </p>
+            <p>
+              <span className="font-bold">ID:</span> {review.id}
+            </p>
+          </div>
           <p>
             <span className="font-bold">Created:</span>{" "}
             {review.review_creation_date &&
@@ -64,7 +68,9 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
                     firstLayer={false}
                     className="w-full"
                   >
-                    <p className="font-bold text-center">{subReview.name}</p>
+                    <p className="font-bold text-center text-base">
+                      {subReview.name}
+                    </p>
                     <p>
                       <span className="font-bold">ID:</span> {subReview.id}
                     </p>
@@ -99,22 +105,26 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           >
             Edit
           </button>
-          <ConfirmButton
-            content={isLoadingDelete ? <LoadingIcon /> : "Delete"}
-            className="mx-auto flex gap-2 mt-2 items-center justify-center"
-            mainBtnClassName="btn w-24  h-10"
-            confirmBtnClassName="btn  h-10"
-            onConfirmClick={() => {
-              review.id && deleteReviewMutation.mutate(review.id);
-            }}
-          />
-          {deleteReviewMutation.isError &&
-            deleteReviewMutation.error instanceof Error &&
-            deleteReviewMutation.variables === review.id && (
-              <p className="text-lg text-error text-center mt-2">
-                {deleteReviewMutation.error.message}
-              </p>
-            )}
+          {role === "admin" && (
+            <>
+              <ConfirmButton
+                content={isLoadingDelete ? <LoadingIcon /> : "Delete"}
+                className="mx-auto flex gap-2 mt-2 items-center justify-center"
+                mainBtnClassName="btn w-24  h-10"
+                confirmBtnClassName="btn  h-10"
+                onConfirmClick={() => {
+                  review.id && deleteReviewMutation.mutate(review.id);
+                }}
+              />
+              {deleteReviewMutation.isError &&
+                deleteReviewMutation.error instanceof Error &&
+                deleteReviewMutation.variables === review.id && (
+                  <p className="text-lg text-error text-center mt-2">
+                    {deleteReviewMutation.error.message}
+                  </p>
+                )}
+            </>
+          )}
         </div>
       </Card>
     );
