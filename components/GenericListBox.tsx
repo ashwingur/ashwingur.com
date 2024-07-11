@@ -3,7 +3,7 @@ import { Listbox } from "@headlessui/react";
 import { AiOutlineDown } from "react-icons/ai";
 import clsx from "clsx";
 
-interface ListboxOption {
+export interface ListboxOption {
   [key: string]: any;
 }
 
@@ -13,8 +13,11 @@ interface GenericListboxProps<T> {
   options: T[];
   displayValue: (option: T) => string;
   className?: string;
-  maxListBoxHeight?: string;
+  maxHeightClass?: string;
+  widthClass?: string;
   bgClass?: string;
+  shadowClass?: string;
+  roundingClass?: string;
 }
 
 const GenericListbox = <T,>({
@@ -23,28 +26,36 @@ const GenericListbox = <T,>({
   options,
   displayValue,
   className,
-  maxListBoxHeight = "max-h-60",
+  maxHeightClass = "max-h-60",
+  widthClass = "w-60",
   bgClass = "bg-background-hover",
+  shadowClass = "shadow-md",
+  roundingClass = "rounded-lg",
 }: GenericListboxProps<T>) => {
   return (
     <div className={clsx("relative", className)}>
       <Listbox value={selectedValue} onChange={onSelectedValueChange}>
         <div
           className={clsx(
-            "cursor-default overflow-hidden rounded-lg text-left focus:outline-none w-60 py-2 px-4 mb-2 justify-between shadow-md",
-            bgClass
+            "cursor-default overflow-hiddentext-left focus:outline-none py-2 px-4 mb-2 justify-between",
+            bgClass,
+            widthClass,
+            shadowClass,
+            roundingClass
           )}
         >
-          <Listbox.Button className="w-full rounded-lg focus:outline-none flex items-center justify-between">
+          <Listbox.Button className="w-full focus:outline-none flex items-center justify-between">
             {displayValue(selectedValue)}
             <AiOutlineDown className="hover:text-xl transition-all" />
           </Listbox.Button>
         </div>
         <Listbox.Options
           className={clsx(
-            "absolute z-40 shadow-lg rounded-lg w-60 mt-1 overflow-auto",
-            maxListBoxHeight,
-            bgClass
+            "absolute z-40 shadow-lg mt-0 overflow-auto",
+            maxHeightClass,
+            bgClass,
+            widthClass,
+            roundingClass
           )}
         >
           {options.map((option, index) => (

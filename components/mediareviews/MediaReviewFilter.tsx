@@ -1,4 +1,5 @@
 import Card from "@components/Card";
+import GenericListbox, { ListboxOption } from "@components/GenericListBox";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import { PreviousRouteProvider } from "@context/PreviousRouteContext";
 import clsx from "clsx";
@@ -8,6 +9,7 @@ import { OptionType } from "shared/mediareview-genres";
 
 export interface FilterObject {
   mediaTypes: string[];
+  orderBy: string;
 }
 
 interface MediaReviewFilterProps {
@@ -23,6 +25,17 @@ const mediaOptions: OptionType[] = [
   { label: "Music", value: "Music" },
 ];
 
+const orderByOptions: ListboxOption[] = [
+  { label: "A-Z", value: "name_asc" },
+  { label: "Z-A", value: "name_desc" },
+  { label: "Highest Rating", value: "rating_desc" },
+  { label: "Lowest Rating", value: "rating_asc" },
+  { label: "Earliest Creation Date", value: "media_creation_asc" },
+  { label: "Latest Creation Date", value: "media_creation_desc" },
+  { label: "Most Words", value: "word_count_desc" },
+  { label: "Least Words", value: "word_count_asc" },
+];
+
 const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   setFilterObject,
   className,
@@ -31,6 +44,11 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   const [selectedMediaTypes, setSelectedMediaTypes] = useState<OptionType[]>(
     []
   );
+  const [selectedOrderByOption, setSelectedOrderByOption] =
+    useState<ListboxOption>({
+      label: "A-Z",
+      value: "name_asc",
+    });
   const ref = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -93,6 +111,25 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             }}
             displayKey={"label"}
             placeholder="Media Types"
+            className="z-20"
+          />
+          <p className="mt-2 ml-2 font-bold">Order By</p>
+          <GenericListbox
+            bgClass="bg-background-muted"
+            maxHeightClass="max-h-96"
+            widthClass="w-full"
+            shadowClass=""
+            roundingClass="rounded-2xl"
+            options={orderByOptions}
+            selectedValue={selectedOrderByOption}
+            displayValue={(o) => o.label}
+            onSelectedValueChange={(v) => {
+              setSelectedOrderByOption(v);
+              setFilterObject((prev) => ({
+                ...prev,
+                orderBy: v.value,
+              }));
+            }}
           />
         </Card>
       </div>

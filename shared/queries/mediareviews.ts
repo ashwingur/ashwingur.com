@@ -54,10 +54,12 @@ const getPaginatedMediaReviews = async ({
   pageParam = 1,
   perPage,
   mediaTypes,
+  orderBy,
 }: {
   pageParam: number;
   perPage: number;
   mediaTypes: string[];
+  orderBy: string;
 }) => {
   // Custom query params for easily mapping string array to the same key
   // eg ?id=1&id=2&id=3
@@ -73,6 +75,7 @@ const getPaginatedMediaReviews = async ({
       queryParams: {
         page: pageParam.toString(),
         per_page: perPage.toString(),
+        order_by: orderBy,
       },
     },
     customParams: customQueryParams,
@@ -334,6 +337,7 @@ export const usePaginatedMediaReviews = (
         pageParam,
         perPage,
         mediaTypes: filterObject.mediaTypes,
+        orderBy: filterObject.orderBy,
       }),
     staleTime: 3600000,
     getNextPageParam: (lastPage) => {

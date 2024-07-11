@@ -46,7 +46,7 @@ const Analytics = () => {
             onSelectedValueChange={handleSelectedTimeChange}
             options={timeOptions}
             displayValue={displayTimeOption}
-            maxListBoxHeight="lg:max-h-none"
+            maxHeightClass="lg:max-h-none"
           />
           {selectedTimeOption.id === 0 && (
             <div>

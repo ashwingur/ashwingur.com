@@ -15,6 +15,7 @@ const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
   const [filterObject, setFilterObject] = useState<FilterObject>({
     mediaTypes: [],
+    orderBy: "",
   });
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePaginatedMediaReviews(6, filterObject);
@@ -79,7 +80,7 @@ const MediaReviewsV2 = () => {
     ));
 
   return (
-    <div className="min-h-screen pt-20 md:pt-24">
+    <div className="min-h-screen pt-20 md:pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
 

@@ -105,7 +105,7 @@ const WeatherCharts = () => {
           options={timeOptions}
           displayValue={displayTimeOption}
           className="mt-4 mb-2 z-20"
-          maxListBoxHeight="lg:max-h-none"
+          maxHeightClass="lg:max-h-none"
         />
 
         {selectedTimeOption.id === 0 && (
@@ -158,7 +158,7 @@ const WeatherCharts = () => {
         options={timeOptions}
         displayValue={displayTimeOption}
         className="mt-4 mb-2 z-20"
-        maxListBoxHeight="lg:max-h-none"
+        maxHeightClass="lg:max-h-none"
       />
       {selectedTimeOption.id === 0 && (
         <div>
