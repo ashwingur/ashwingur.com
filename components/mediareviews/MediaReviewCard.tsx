@@ -16,17 +16,14 @@ interface MediaReviewCardProps {
   review: MediaReview;
   index: number;
   className?: string;
-  showFullReview?: boolean;
 }
 
 const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   className,
   index,
   review,
-  showFullReview = false,
 }) => {
   const { user, role } = useAuth();
-  const [showingFullReview, setShowingFullReview] = useState(showFullReview);
   const [showFullHeight, setShowFullHeight] = useState<Height>(0);
 
   const consumedDate = review.consumed_date
