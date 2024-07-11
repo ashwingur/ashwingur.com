@@ -1,17 +1,20 @@
 import LoadingIcon from "@components/LoadingIcon";
 import MasonWrapper from "@components/mediareviews/MasonWrapper";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
+import MediaReviewFilterModal from "@components/mediareviews/MediaReviewFilterModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import { Masonry } from "masonic";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { IoFilter } from "react-icons/io5";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     usePaginatedMediaReviews(6);
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
@@ -69,6 +72,14 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
+      <button
+        className="btn mx-auto block"
+        onClick={() => {
+          setFilterModalVisible(true);
+        }}
+      >
+        <IoFilter className="text-2xl" />
+      </button>
       {user && role === "admin" && (
         <div className=" flex justify-center my-4">
           <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
@@ -81,6 +92,13 @@ const MediaReviewsV2 = () => {
       </div>
 
       {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
+      <MediaReviewFilterModal
+        onFilter={() => {}}
+        visible={filterModalVisible}
+        setVisible={(visible) => {
+          setFilterModalVisible(visible);
+        }}
+      />
     </div>
   );
 };
