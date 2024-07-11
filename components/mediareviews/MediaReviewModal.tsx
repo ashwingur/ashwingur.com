@@ -45,7 +45,7 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
           setVisible(false);
         }}
       />
-      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 max-h-[83%] overflow-hidden rounded-2xl">
+      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
         <div className="overflow-y-scroll rounded-2xl relative">
           <button
             className="btn self-end z-20 absolute top-0 right-0 m-4"

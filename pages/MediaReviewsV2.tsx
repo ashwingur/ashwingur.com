@@ -76,14 +76,7 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pt-24 pb-16">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-      <button
-        className="btn mx-auto block"
-        onClick={() => {
-          setReviewModalVisible(true);
-        }}
-      >
-        <IoFilter className="text-2xl" />
-      </button>
+
       {user && role === "admin" && (
         <div className=" flex justify-center my-4">
           <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
@@ -91,7 +84,7 @@ const MediaReviewsV2 = () => {
           </Link>
         </div>
       )}
-      <div className="grid place-items-center items-start grid-cols-1 lg:grid-cols-2 2xl:w-4/5 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
+      <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
         {reviewCards}
       </div>
 

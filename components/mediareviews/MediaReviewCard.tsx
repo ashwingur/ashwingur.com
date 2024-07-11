@@ -85,7 +85,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         key={subReview.id}
         parentIndex={index}
         review={subReview}
-        className="mx-4"
+        className="w-full lg:w-4/5"
       />
     ));
 
@@ -202,7 +202,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             {subReviewCards.length > 0 && (
               <h2 className="text-center">Sub Reviews</h2>
             )}
-            <div className="flex flex-col m-4 gap-8">{subReviewCards}</div>
+            <div className="flex flex-col m-4 gap-8 items-center">
+              {subReviewCards}
+            </div>
           </div>
           {review.review_last_update_date && (
             <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
