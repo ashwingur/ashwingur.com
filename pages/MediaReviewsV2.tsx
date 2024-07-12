@@ -89,6 +89,7 @@ const MediaReviewsV2 = () => {
       )}
 
       <MediaReviewFilter
+        filterObject={filterObject}
         setFilterObject={setFilterObject}
         noResults={reviews.length === 0}
         className="flex flex-col items-center relative my-4"

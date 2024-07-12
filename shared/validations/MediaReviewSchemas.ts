@@ -122,6 +122,7 @@ export const paginatedMediaReviewSchema = z.object({
 export const reviewMetaDataSchema = z.object({
   creators: z.array(z.string()),
   genres: z.array(genreSchema),
+  review_names: z.array(z.string()),
 });
 
 // Omit fields that arent expected by the API

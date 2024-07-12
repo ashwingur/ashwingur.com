@@ -59,6 +59,7 @@ const getPaginatedMediaReviews = async ({
   orderBy,
   genres,
   creators,
+  names,
 }: {
   pageParam: number;
   perPage: number;
@@ -66,6 +67,7 @@ const getPaginatedMediaReviews = async ({
   orderBy: string;
   genres: string[];
   creators: string[];
+  names: string[];
 }) => {
   // Custom query params for easily mapping string array to the same key
   // eg ?id=1&id=2&id=3
@@ -75,6 +77,7 @@ const getPaginatedMediaReviews = async ({
   );
   genres.forEach((g) => customQueryParams.push({ key: "genres", val: g }));
   creators.forEach((c) => customQueryParams.push({ key: "creators", val: c }));
+  names.forEach((n) => customQueryParams.push({ key: "names", val: n }));
 
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
@@ -359,6 +362,7 @@ export const usePaginatedMediaReviews = (
         orderBy: filterObject.orderBy,
         genres: filterObject.genres,
         creators: filterObject.creators,
+        names: filterObject.names,
       }),
     staleTime: 3600000,
     getNextPageParam: (lastPage) => {

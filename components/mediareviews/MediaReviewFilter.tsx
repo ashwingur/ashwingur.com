@@ -12,9 +12,11 @@ export interface FilterObject {
   orderBy: string;
   genres: string[];
   creators: string[];
+  names: string[];
 }
 
 interface MediaReviewFilterProps {
+  filterObject: FilterObject;
   setFilterObject: React.Dispatch<React.SetStateAction<FilterObject>>;
   noResults: boolean;
   className?: string;
@@ -44,25 +46,20 @@ export const defaultFilterObject: FilterObject = {
   orderBy: orderByOptions[0].value,
   genres: [],
   creators: [],
+  names: [],
 };
 
 const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
+  filterObject,
   setFilterObject,
   noResults,
   className,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const [selectedMediaTypes, setSelectedMediaTypes] = useState<OptionType[]>(
-    []
-  );
-  const [selectedGenres, setSelectedGenres] = useState<OptionType[]>([]);
-  const [selectedCreators, setSelectedCreators] = useState<OptionType[]>([]);
-  const [selectedOrderByOption, setSelectedOrderByOption] =
-    useState<ListboxOption>(orderByOptions[0]);
   const ref = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  const { data, isLoading, isError } = useReviewsMetadata();
+  const { data } = useReviewsMetadata();
 
   const genreOptions: OptionType[] = data
     ? data.genres.map((g) => ({ label: g.name, value: g.name }))
@@ -70,15 +67,22 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   const creatorOptions: OptionType[] = data
     ? data.creators.map((c) => ({ label: c, value: c }))
     : [];
+  const nameOptions: OptionType[] = data
+    ? data.review_names.map((c) => ({ label: c, value: c }))
+    : [];
 
   // Filter out the selected options
   const filteredGenreOptions = genreOptions.filter(
     (option) =>
-      !selectedGenres.some((selected) => selected.value === option.value)
+      !filterObject.genres.some((selected) => selected === option.value)
   );
   const filteredCreatorOptions = creatorOptions.filter(
     (option) =>
-      !selectedCreators.some((selected) => selected.value === option.value)
+      !filterObject.creators.some((selected) => selected === option.value)
+  );
+  const filteredNameOptions = nameOptions.filter(
+    (option) =>
+      !filterObject.names.some((selected) => selected === option.value)
   );
 
   useEffect(() => {
@@ -126,13 +130,36 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
         )}
       >
         <Card firstLayer={false}>
+          <p className="mt-2 ml-2 font-bold">Order By</p>
+          <GenericListbox
+            className="z-[20]"
+            bgClass="bg-background-muted"
+            maxHeightClass="max-h-96"
+            widthClass="w-full"
+            shadowClass=""
+            roundingClass="rounded-2xl"
+            options={orderByOptions}
+            selectedValue={
+              orderByOptions.find((o) => o.value === filterObject.orderBy) ??
+              orderByOptions[0]
+            }
+            displayValue={(o) => o.label}
+            onSelectedValueChange={(v) => {
+              setFilterObject((prev) => ({
+                ...prev,
+                orderBy: v.value,
+              }));
+            }}
+          />
           <p className="mt-2 ml-2 font-bold">Media Type</p>
           <GenericMultiSelectGroup
-            className="z-20"
+            className="z-[19]"
             options={mediaOptions}
-            value={selectedMediaTypes}
+            value={mediaOptions.filter((m) =>
+              filterObject.mediaTypes.includes(m.value)
+            )}
             onChange={(selectedOptions) => {
-              setSelectedMediaTypes([...selectedOptions]);
+              // setSelectedMediaTypes([...selectedOptions]);
               setFilterObject((prev) => ({
                 ...prev,
                 mediaTypes: [...selectedOptions]
@@ -143,32 +170,15 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             displayKey={"label"}
             placeholder="Media Types"
           />
-          <p className="mt-2 ml-2 font-bold">Order By</p>
-          <GenericListbox
-            className="z-[19]"
-            bgClass="bg-background-muted"
-            maxHeightClass="max-h-96"
-            widthClass="w-full"
-            shadowClass=""
-            roundingClass="rounded-2xl"
-            options={orderByOptions}
-            selectedValue={selectedOrderByOption}
-            displayValue={(o) => o.label}
-            onSelectedValueChange={(v) => {
-              setSelectedOrderByOption(v);
-              setFilterObject((prev) => ({
-                ...prev,
-                orderBy: v.value,
-              }));
-            }}
-          />
+
           <p className="mt-2 ml-2 font-bold">Genre</p>
           <GenericMultiSelectGroup
             className="z-[18]"
             options={filteredGenreOptions}
-            value={selectedGenres}
+            value={genreOptions.filter((g) =>
+              filterObject.genres.includes(g.value)
+            )}
             onChange={(selectedOptions) => {
-              setSelectedGenres([...selectedOptions]);
               setFilterObject((prev) => ({
                 ...prev,
                 genres: [...selectedOptions]
@@ -183,9 +193,11 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           <GenericMultiSelectGroup
             className="z-[17]"
             options={filteredCreatorOptions}
-            value={selectedCreators}
+            value={creatorOptions.filter((c) =>
+              filterObject.creators.includes(c.value)
+            )}
             onChange={(selectedOptions) => {
-              setSelectedCreators([...selectedOptions]);
+              // setSelectedCreators([...selectedOptions]);
               setFilterObject((prev) => ({
                 ...prev,
                 creators: [...selectedOptions]
@@ -195,6 +207,25 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             }}
             displayKey={"label"}
             placeholder="Creators"
+          />
+          <p className="mt-2 ml-2 font-bold">Review Name</p>
+          <GenericMultiSelectGroup
+            className="z-[17]"
+            options={filteredNameOptions}
+            value={nameOptions.filter((n) =>
+              filterObject.names.includes(n.value)
+            )}
+            onChange={(selectedOptions) => {
+              // setSelectedCreators([...selectedOptions]);
+              setFilterObject((prev) => ({
+                ...prev,
+                names: [...selectedOptions]
+                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+                  .map((m) => m.value),
+              }));
+            }}
+            displayKey={"label"}
+            placeholder="Review Names"
           />
 
           {noResults && (
