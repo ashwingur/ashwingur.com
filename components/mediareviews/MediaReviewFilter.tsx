@@ -6,6 +6,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import { OptionType } from "shared/mediareview-genres";
 import { useReviewsMetadata } from "shared/queries/mediareviews";
+import _ from "lodash";
+import { useRouter } from "next/router";
 
 export interface FilterObject {
   mediaTypes: string[];
@@ -43,7 +45,7 @@ const orderByOptions: ListboxOption[] = [
 
 export const defaultFilterObject: FilterObject = {
   mediaTypes: [],
-  orderBy: orderByOptions[0].value,
+  orderBy: orderByOptions[2].value,
   genres: [],
   creators: [],
   names: [],
@@ -58,8 +60,10 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   const [expanded, setExpanded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+  const [filterUrlRead, setFilterUrlRead] = useState(false);
 
   const { data } = useReviewsMetadata();
+  const router = useRouter();
 
   const genreOptions: OptionType[] = data
     ? data.genres.map((g) => ({ label: g.name, value: g.name }))
@@ -84,6 +88,49 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
     (option) =>
       !filterObject.names.some((selected) => selected === option.value)
   );
+
+  // Initialize filterObject from URL parameters on mount
+  useEffect(() => {
+    const params = new URLSearchParams(router.query as Record<string, string>);
+    if (Array.from(params).length > 0) {
+      const initialFilterObject: FilterObject = {
+        mediaTypes: params.get("mediaTypes")?.split(",") || [],
+        orderBy: params.get("orderBy") || orderByOptions[2].value,
+        genres: params.get("genres")?.split(",") || [],
+        creators: params.get("creators")?.split(",") || [],
+        names: params.get("names")?.split(",") || [],
+      };
+      console.log(initialFilterObject);
+      console.log(_.isEqual(initialFilterObject, filterObject));
+      if (!_.isEqual(initialFilterObject, filterObject)) {
+        setFilterObject(initialFilterObject);
+      }
+      setFilterUrlRead(true);
+    }
+  }, [router.query]);
+
+  // Update URL parameters when filterObject changes
+  useEffect(() => {
+    if (filterUrlRead) {
+      const params = new URLSearchParams();
+      if (filterObject.mediaTypes.length > 0) {
+        params.set("mediaTypes", filterObject.mediaTypes.join(","));
+      }
+      params.set("orderBy", filterObject.orderBy);
+      if (filterObject.genres.length > 0) {
+        params.set("genres", filterObject.genres.join(","));
+      }
+      if (filterObject.creators.length > 0) {
+        params.set("creators", filterObject.creators.join(","));
+      }
+      if (filterObject.names.length > 0) {
+        params.set("names", filterObject.names.join(","));
+      }
+      router.push({ query: params.toString() }, undefined, { shallow: true });
+    }
+  }, [filterObject, filterUrlRead]);
+
+  const filterApplied = !_.isEqual(filterObject, defaultFilterObject);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -115,7 +162,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
     <div className={className}>
       <button
         ref={btnRef}
-        className="btn mb-2"
+        className={clsx(filterApplied ? "btn-accent" : "btn", "mb-2")}
         onClick={() => {
           setExpanded(!expanded);
         }}
@@ -129,7 +176,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           "transition-all origin-top w-80 sm:w-[30rem] lg:w-[36rem] !absolute z-30 bottom-0 translate-y-full"
         )}
       >
-        <Card firstLayer={false}>
+        <Card firstLayer={false} className="flex flex-col">
           <p className="mt-2 ml-2 font-bold">Order By</p>
           <GenericListbox
             className="z-[20]"
@@ -151,15 +198,32 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
               }));
             }}
           />
-          <p className="mt-2 ml-2 font-bold">Media Type</p>
+          <p className="mt-2 ml-2 font-bold">Review Name</p>
           <GenericMultiSelectGroup
             className="z-[19]"
+            options={filteredNameOptions}
+            value={nameOptions.filter((n) =>
+              filterObject.names.includes(n.value)
+            )}
+            onChange={(selectedOptions) => {
+              setFilterObject((prev) => ({
+                ...prev,
+                names: [...selectedOptions]
+                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+                  .map((m) => m.value),
+              }));
+            }}
+            displayKey={"label"}
+            placeholder="Review Names"
+          />
+          <p className="mt-2 ml-2 font-bold">Media Type</p>
+          <GenericMultiSelectGroup
+            className="z-[18]"
             options={mediaOptions}
             value={mediaOptions.filter((m) =>
               filterObject.mediaTypes.includes(m.value)
             )}
             onChange={(selectedOptions) => {
-              // setSelectedMediaTypes([...selectedOptions]);
               setFilterObject((prev) => ({
                 ...prev,
                 mediaTypes: [...selectedOptions]
@@ -173,7 +237,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
 
           <p className="mt-2 ml-2 font-bold">Genre</p>
           <GenericMultiSelectGroup
-            className="z-[18]"
+            className="z-[17]"
             options={filteredGenreOptions}
             value={genreOptions.filter((g) =>
               filterObject.genres.includes(g.value)
@@ -191,13 +255,12 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           />
           <p className="mt-2 ml-2 font-bold">Creator</p>
           <GenericMultiSelectGroup
-            className="z-[17]"
+            className="z-[16]"
             options={filteredCreatorOptions}
             value={creatorOptions.filter((c) =>
               filterObject.creators.includes(c.value)
             )}
             onChange={(selectedOptions) => {
-              // setSelectedCreators([...selectedOptions]);
               setFilterObject((prev) => ({
                 ...prev,
                 creators: [...selectedOptions]
@@ -208,25 +271,17 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             displayKey={"label"}
             placeholder="Creators"
           />
-          <p className="mt-2 ml-2 font-bold">Review Name</p>
-          <GenericMultiSelectGroup
-            className="z-[16]"
-            options={filteredNameOptions}
-            value={nameOptions.filter((n) =>
-              filterObject.names.includes(n.value)
-            )}
-            onChange={(selectedOptions) => {
-              // setSelectedCreators([...selectedOptions]);
-              setFilterObject((prev) => ({
-                ...prev,
-                names: [...selectedOptions]
-                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
-                  .map((m) => m.value),
-              }));
-            }}
-            displayKey={"label"}
-            placeholder="Review Names"
-          />
+
+          {filterApplied && (
+            <button
+              className="btn self-center w-32 mt-4"
+              onClick={() => {
+                setFilterObject(defaultFilterObject);
+              }}
+            >
+              Reset
+            </button>
+          )}
 
           {noResults && (
             <p className="text-center text-error mt-4 text-lg">No Results</p>

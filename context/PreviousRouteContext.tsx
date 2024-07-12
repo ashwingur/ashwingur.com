@@ -17,7 +17,7 @@ const PreviousRouteContext = createContext<
   PreviousRouteContextType | undefined
 >(undefined);
 
-const postCurrentRoute = async (router: NextRouter) => {
+const postCurrentRoute = async (route: string) => {
   try {
     const response = await fetch(
       process.env.NEXT_PUBLIC_ASHWINGUR_API + "/analytics/frontend_visits",
@@ -27,7 +27,7 @@ const postCurrentRoute = async (router: NextRouter) => {
           "Content-Type": "application/json",
         },
         credentials: "include", // Include credentials with the request
-        body: JSON.stringify({ route: router.asPath }),
+        body: JSON.stringify({ route: route }),
       }
     );
 
@@ -48,11 +48,18 @@ export const PreviousRouteProvider = ({
   const [previousRoute, setPreviousRoute] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      setPreviousRoute(router.asPath);
-    };
+    postCurrentRoute(router.asPath);
+  }, []);
 
-    postCurrentRoute(router);
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      const pathname = new URL(url, window.location.href).pathname;
+      if (previousRoute !== pathname) {
+        setPreviousRoute(pathname);
+        console.log("ROUTE CHANGE");
+        postCurrentRoute(pathname);
+      }
+    };
 
     router.events.on("routeChangeStart", handleRouteChange);
 
