@@ -91,8 +91,11 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
 
   // Initialize filterObject from URL parameters on mount
   useEffect(() => {
-    const params = new URLSearchParams(router.query as Record<string, string>);
-    if (Array.from(params).length > 0) {
+    if (router.isReady) {
+      const params = new URLSearchParams(
+        router.query as Record<string, string>
+      );
+
       const initialFilterObject: FilterObject = {
         mediaTypes: params.get("mediaTypes")?.split(",") || [],
         orderBy: params.get("orderBy") || orderByOptions[2].value,
@@ -100,8 +103,6 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
         creators: params.get("creators")?.split(",") || [],
         names: params.get("names")?.split(",") || [],
       };
-      console.log(initialFilterObject);
-      console.log(_.isEqual(initialFilterObject, filterObject));
       if (!_.isEqual(initialFilterObject, filterObject)) {
         setFilterObject(initialFilterObject);
       }
