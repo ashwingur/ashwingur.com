@@ -115,7 +115,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         <div className="absolute top-0 left-0 m-4 bg-black/80 p-2 rounded-full">
           <MediaTypeIcon
             media_type={review.media_type}
-            className="text-white"
+            className="text-white text-xl"
           />
         </div>
         <div
