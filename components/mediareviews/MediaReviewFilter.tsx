@@ -97,8 +97,8 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
       );
 
       const initialFilterObject: FilterObject = {
-        mediaTypes: params.get("mediaTypes")?.split(",") || [],
-        orderBy: params.get("orderBy") || orderByOptions[2].value,
+        mediaTypes: params.get("media-types")?.split(",") || [],
+        orderBy: params.get("order-by") || orderByOptions[2].value,
         genres: params.get("genres")?.split(",") || [],
         creators: params.get("creators")?.split(",") || [],
         names: params.get("names")?.split(",") || [],
@@ -115,9 +115,9 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
     if (filterUrlRead) {
       const params = new URLSearchParams();
       if (filterObject.mediaTypes.length > 0) {
-        params.set("mediaTypes", filterObject.mediaTypes.join(","));
+        params.set("media-types", filterObject.mediaTypes.join(","));
       }
-      params.set("orderBy", filterObject.orderBy);
+      params.set("order-by", filterObject.orderBy);
       if (filterObject.genres.length > 0) {
         params.set("genres", filterObject.genres.join(","));
       }
