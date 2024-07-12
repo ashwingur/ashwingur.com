@@ -345,7 +345,9 @@ export const useMediaReviews = () => {
 };
 
 export const useReviewsMetadata = () => {
-  return useQuery(METADATA_QUERY_KEY, getReviewsMetadata);
+  return useQuery(METADATA_QUERY_KEY, getReviewsMetadata, {
+    staleTime: 1000000,
+  });
 };
 
 export const usePaginatedMediaReviews = (
