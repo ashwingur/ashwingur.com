@@ -210,7 +210,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           />
           <p className="mt-2 ml-2 font-bold">Review Name</p>
           <GenericMultiSelectGroup
-            className="z-[17]"
+            className="z-[16]"
             options={filteredNameOptions}
             value={nameOptions.filter((n) =>
               filterObject.names.includes(n.value)
