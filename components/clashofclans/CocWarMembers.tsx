@@ -45,6 +45,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           <div className="flex items-center h-8">
             <div className="relative w-6 h-6">
               <Image
+                unoptimized
                 src={
                   member.bestOpponentAttack.stars > 0 ? silverStar : blackStar
                 }
@@ -55,6 +56,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
             </div>
             <div className="relative w-6 h-6 mb-4">
               <Image
+                unoptimized
                 src={
                   member.bestOpponentAttack.stars > 1 ? silverStar : blackStar
                 }
@@ -65,6 +67,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
             </div>
             <div className="relative w-6 h-6">
               <Image
+                unoptimized
                 src={
                   member.bestOpponentAttack.stars > 2 ? silverStar : blackStar
                 }
@@ -82,6 +85,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         </div>
         <div className="relative w-16 h-16 md:w-24 md:h-24">
           <Image
+            unoptimized
             src={`/assets/coc/townhalls/${member.townhallLevel}.png`}
             alt={`Townhall level ${member.townhallLevel}`}
             fill
@@ -92,6 +96,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           {attacksRemaining > 0 && (
             <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
               <Image
+                unoptimized
                 src={miniBarb}
                 style={{ objectFit: "contain" }}
                 fill
@@ -102,6 +107,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           {attacksRemaining > 1 && (
             <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
               <Image
+                unoptimized
                 src={miniBarb}
                 style={{ objectFit: "contain" }}
                 fill
@@ -152,6 +158,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           onClick={() => setSelectedMember(undefined)}
         >
           <Image
+            unoptimized
             src={`/assets/coc/buttons/x.png`}
             alt={`Escape Button`}
             fill
@@ -181,6 +188,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
               <div className="flex items-center h-8">
                 <div className="relative w-6 h-6">
                   <Image
+                    unoptimized
                     src={
                       member.bestOpponentAttack.stars > 0
                         ? silverStar
@@ -193,6 +201,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                 </div>
                 <div className="relative w-6 h-6">
                   <Image
+                    unoptimized
                     src={
                       member.bestOpponentAttack.stars > 1
                         ? silverStar
@@ -205,6 +214,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                 </div>
                 <div className="relative w-6 h-6">
                   <Image
+                    unoptimized
                     src={
                       member.bestOpponentAttack.stars > 2
                         ? silverStar

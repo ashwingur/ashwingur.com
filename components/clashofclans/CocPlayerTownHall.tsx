@@ -13,6 +13,7 @@ const CocPlayerTownHall = ({ player }: CocPlayerTownHallProps) => {
         Town Hall {player.townHallLevel}
       </div>
       <Image
+        unoptimized
         src={`/assets/coc/townhalls/${player.townHallLevel}.png`}
         alt={`Townhall level ${player.townHallLevel}`}
         width={90}

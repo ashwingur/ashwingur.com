@@ -28,6 +28,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars < 1 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16">
               <Image
+                unoptimized
                 src={emptyStar}
                 alt={`Member stars`}
                 fill
@@ -38,6 +39,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars > 0 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16">
               <Image
+                unoptimized
                 src={goldenStar}
                 alt={`Member stars`}
                 fill
@@ -48,6 +50,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars < 2 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16 mb-3 md:mb-6">
               <Image
+                unoptimized
                 src={emptyStar}
                 alt={`Member stars`}
                 fill
@@ -58,6 +61,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars > 1 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16 mb-3 md:mb-6">
               <Image
+                unoptimized
                 src={goldenStar}
                 alt={`Member stars`}
                 fill
@@ -68,6 +72,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars < 3 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16">
               <Image
+                unoptimized
                 src={emptyStar}
                 alt={`Member stars`}
                 fill
@@ -78,6 +83,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
           {achievement.stars > 2 && (
             <div className="relative w-10 h-10 md:w-16 md:h-16">
               <Image
+                unoptimized
                 src={goldenStar}
                 alt={`Member stars`}
                 fill

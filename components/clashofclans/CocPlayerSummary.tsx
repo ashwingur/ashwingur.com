@@ -10,6 +10,7 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
   const labels = player.labels.map((label, index) => {
     return (
       <Image
+        unoptimized
         key={index}
         alt={label.name}
         src={label.iconUrls.medium}

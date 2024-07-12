@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import Image from "next/image";
 import { ToggleThemeButton } from "../ToggleThemeButton";
 import { BiHash, BiSearchAlt2 } from "react-icons/bi";
 import { useRouter } from "next/router";

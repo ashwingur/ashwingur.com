@@ -13,6 +13,7 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
         <div className="flex items-center relative">
           <div className="absolute w-32 md:w-36 h-32 md:h-36 left-[-45px] md:left-[-68px] bottom-[-20px]">
             <Image
+              unoptimized
               alt={player.league.name}
               src={player.league.iconUrls.medium}
               fill={true}
@@ -23,6 +24,7 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
             <div className="pl-20 py-1">{player.league.name}</div>
             <div className="flex items-center bg-gradient-to-r from-[#931ae7] to-[rgba(0, 0, 0, 0)] pl-20 pr-10 py-1">
               <Image
+                unoptimized
                 alt="trophy"
                 src={"/assets/coc/cocTrophy.webp"}
                 width={30}
@@ -35,6 +37,7 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
       ) : (
         <div className="flex items-center">
           <Image
+            unoptimized
             alt="trophy"
             src={"/assets/coc/cocTrophy.webp"}
             width={30}

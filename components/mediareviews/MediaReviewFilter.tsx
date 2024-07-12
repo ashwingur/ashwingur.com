@@ -1,7 +1,6 @@
 import Card from "@components/Card";
 import GenericListbox, { ListboxOption } from "@components/GenericListBox";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
-import { PreviousRouteProvider } from "@context/PreviousRouteContext";
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { IoFilter } from "react-icons/io5";
@@ -26,8 +25,8 @@ const mediaOptions: OptionType[] = [
 ];
 
 const orderByOptions: ListboxOption[] = [
-  { label: "A-Z", value: "name_asc" },
-  { label: "Z-A", value: "name_desc" },
+  { label: "A – Z", value: "name_asc" },
+  { label: "Z – A", value: "name_desc" },
   { label: "Highest Rating", value: "rating_desc" },
   { label: "Lowest Rating", value: "rating_asc" },
   { label: "Earliest Creation Date", value: "media_creation_asc" },

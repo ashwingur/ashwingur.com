@@ -22,6 +22,7 @@ const ArmyItemIcon = ({ playerItemLevel, showLevel }: ArmyItemIconProps) => {
   return (
     <div className="border-black border-2 inline-block rounded-md relative font-clash font-thin">
       <Image
+        unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.png`}
         alt={playerItemLevel.name}
         width={64}

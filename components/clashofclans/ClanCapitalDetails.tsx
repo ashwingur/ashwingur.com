@@ -24,6 +24,7 @@ const HallLevelCard = ({ district }: DistrictHallCardProps) => {
     <div className="flex items-center gap-4 my-2 md:my-4">
       <div className="relative h-16 w-16 md:w-32 md:h-32">
         <Image
+          unoptimized
           alt={district.name}
           src={
             district.name === "Capital Peak"

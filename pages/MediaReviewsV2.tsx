@@ -6,7 +6,6 @@ import MediaReviewFilter, {
 import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
-import clsx from "clsx";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";

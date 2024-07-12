@@ -32,6 +32,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           <div className="flex gap-2 justify-between">
             {clan.clanPoints}
             <Image
+              unoptimized
               alt="trophy"
               src={"/assets/coc/cocTrophy.webp"}
               width={24}
@@ -41,6 +42,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           <div className="flex gap-2 justify-between mt-1">
             {clan.clanVersusPoints}
             <Image
+              unoptimized
               alt="trophy"
               src={"/assets/coc/versusTrophy.png"}
               width={24}
@@ -70,6 +72,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           <div className="flex gap-2 justify-between">
             {clan.requiredTrophies}
             <Image
+              unoptimized
               alt="trophy"
               src={"/assets/coc/cocTrophy.webp"}
               width={24}
@@ -79,6 +82,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           <div className="flex gap-2 justify-between mt-1">
             {clan.requiredBuilderBaseTrophies}
             <Image
+              unoptimized
               alt="trophy"
               src={"/assets/coc/versusTrophy.png"}
               width={24}

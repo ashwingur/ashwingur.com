@@ -11,6 +11,7 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
     return (
       <div key={index} className="relative w-12 h-12 md:w-16 md:h-16">
         <Image
+          unoptimized
           key={index}
           alt={label.name}
           src={label.iconUrls.medium}
@@ -26,6 +27,7 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
       <div className="flex items-center gap-4 font-clash clash-font-style">
         <div className="w-20 h-20 md:w-40 md:h-40 relative">
           <Image
+            unoptimized
             src={clan.badgeUrls.large}
             fill
             style={{ objectFit: "cover" }}

@@ -20,6 +20,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
         <div className="w-[1px] my-1 mx-2 md:bg-gray-400" />
         <div className="relative w-12 h-12 md:w-16 md:h-16">
           <Image
+            unoptimized
             alt={clanMember.league.name}
             src={
               clanMember.league.name === "Unranked"
@@ -64,6 +65,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
             {clanMember.trophies}
           </div>
           <Image
+            unoptimized
             alt="trophy"
             src={"/assets/coc/cocTrophy.webp"}
             width={24}

@@ -22,6 +22,7 @@ const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
     >
       <div>{player.clan.name}</div>
       <Image
+        unoptimized
         alt={player.clan.name}
         src={player.clan.badgeUrls.large}
         width={150}

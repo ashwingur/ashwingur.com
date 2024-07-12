@@ -23,6 +23,7 @@ const ClanStatus = (
       <div className="flex gap-2 items-center">
         <div className="w-6 h-6 relative md:w-8 md:h-8">
           <Image
+            unoptimized
             src={`/assets/coc/stars/silver_star.png`}
             alt={`Sword`}
             fill
@@ -36,6 +37,7 @@ const ClanStatus = (
       <div className="coc-font-style flex items-center gap-2 md:text-xl">
         <div className="w-6 h-6 relative md:w-8 md:h-8">
           <Image
+            unoptimized
             src={`/assets/coc/sword.png`}
             alt={`Sword`}
             fill
