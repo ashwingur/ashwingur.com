@@ -15,8 +15,9 @@ const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
   const [filterObject, setFilterObject] =
     useState<FilterObject>(defaultFilterObject);
+  const [filterReady, setFilterReady] = useState(false);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    usePaginatedMediaReviews(6, filterObject);
+    usePaginatedMediaReviews(6, filterObject, filterReady);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
 
@@ -91,10 +92,11 @@ const MediaReviewsV2 = () => {
       <MediaReviewFilter
         filterObject={filterObject}
         setFilterObject={setFilterObject}
+        setFilterReady={setFilterReady}
         noResults={reviews.length === 0}
         className="flex flex-col items-center relative my-4"
       />
-      {reviews.length === 0 && !isLoading && (
+      {reviews.length === 0 && !isLoading && filterReady && (
         <p className="text-center text-error mt-8 text-xl">
           No results for the applied filter
         </p>

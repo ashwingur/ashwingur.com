@@ -18,6 +18,7 @@ import {
 import { z } from "zod";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
 import { FilterObject } from "@components/mediareviews/MediaReviewFilter";
+import { useRouter } from "next/router";
 
 export const UPDATE_QUERY_KEY = "mediaReviews";
 export const PAGINATED_QUERY_KEY = "paginatedMediaReviews";
@@ -352,7 +353,8 @@ export const useReviewsMetadata = () => {
 
 export const usePaginatedMediaReviews = (
   perPage: number,
-  filterObject: FilterObject
+  filterObject: FilterObject,
+  filterReady: boolean
 ) => {
   return useInfiniteQuery({
     queryKey: [PAGINATED_QUERY_KEY, perPage, filterObject],
@@ -374,5 +376,6 @@ export const usePaginatedMediaReviews = (
       return undefined; // No more pages to fetch
     },
     keepPreviousData: true,
+    enabled: filterReady,
   });
 };

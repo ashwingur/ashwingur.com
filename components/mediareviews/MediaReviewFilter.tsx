@@ -20,6 +20,7 @@ export interface FilterObject {
 interface MediaReviewFilterProps {
   filterObject: FilterObject;
   setFilterObject: React.Dispatch<React.SetStateAction<FilterObject>>;
+  setFilterReady: React.Dispatch<React.SetStateAction<boolean>>;
   noResults: boolean;
   className?: string;
 }
@@ -54,6 +55,7 @@ export const defaultFilterObject: FilterObject = {
 const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   filterObject,
   setFilterObject,
+  setFilterReady,
   noResults,
   className,
 }) => {
@@ -107,6 +109,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
         setFilterObject(initialFilterObject);
       }
       setFilterUrlRead(true);
+      setFilterReady(true);
     }
   }, [router.query]);
 

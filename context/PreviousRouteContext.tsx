@@ -49,7 +49,7 @@ export const PreviousRouteProvider = ({
 
   useEffect(() => {
     postCurrentRoute(router.asPath);
-  }, []);
+  });
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
@@ -65,6 +65,7 @@ export const PreviousRouteProvider = ({
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return (
