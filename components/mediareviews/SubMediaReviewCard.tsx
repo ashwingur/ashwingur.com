@@ -23,9 +23,9 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-        month: "short",
-        year: "numeric",
-      })
+          month: "short",
+          year: "numeric",
+        })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -53,22 +53,22 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
       )}
     >
       <div className="w-full relative overflow-hidden">
-
         <div className="overflow-hidden rounded-t-2xl">
           <FixedImageContainer
             imageSrc={review.signed_cover_image ?? undefined}
             imageAlt={`Main review cover image of ${review.name}`}
             priorityLoad={parentIndex < 5}
-            heightClassName={review.signed_cover_image ? "h-48 lg:h-60" : "h-28"}
+            heightClassName={
+              review.signed_cover_image ? "h-48 lg:h-60 xl:h-72" : "h-28"
+            }
             bgColour={review.cover_image_bg_colour ?? undefined}
             miniCard={review.cover_image_bg_colour !== undefined}
           />
         </div>
 
-
         <div
           className={clsx(
-            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none absolute bottom-0 left-0",
+            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none absolute bottom-0 left-0"
           )}
         >
           <div>
