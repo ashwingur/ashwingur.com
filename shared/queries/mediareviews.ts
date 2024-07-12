@@ -11,6 +11,7 @@ import {
   mediaReviewSchema,
   mediaReviewWriteSchema,
   paginatedMediaReviewSchema,
+  reviewMetaDataSchema,
   subMediaReviewSchema,
   subMediaReviewWriteSchema,
 } from "shared/validations/MediaReviewSchemas";
@@ -20,6 +21,7 @@ import { FilterObject } from "@components/mediareviews/MediaReviewFilter";
 
 export const UPDATE_QUERY_KEY = "mediaReviews";
 export const PAGINATED_QUERY_KEY = "paginatedMediaReviews";
+export const METADATA_QUERY_KEY = "reviewMetadata";
 
 const getAllMediaReviews = async () => {
   const apiUrl = new URL(
@@ -55,11 +57,15 @@ const getPaginatedMediaReviews = async ({
   perPage,
   mediaTypes,
   orderBy,
+  genres,
+  creators,
 }: {
   pageParam: number;
   perPage: number;
   mediaTypes: string[];
   orderBy: string;
+  genres: string[];
+  creators: string[];
 }) => {
   // Custom query params for easily mapping string array to the same key
   // eg ?id=1&id=2&id=3
@@ -67,6 +73,8 @@ const getPaginatedMediaReviews = async ({
   mediaTypes.forEach((m) =>
     customQueryParams.push({ key: "media_types", val: m })
   );
+  genres.forEach((g) => customQueryParams.push({ key: "genres", val: g }));
+  creators.forEach((c) => customQueryParams.push({ key: "creators", val: c }));
 
   return await apiFetch({
     endpoint: "/mediareviews/paginated",
@@ -79,6 +87,13 @@ const getPaginatedMediaReviews = async ({
       },
     },
     customParams: customQueryParams,
+  });
+};
+
+const getReviewsMetadata = async () => {
+  return await apiFetch({
+    endpoint: "/mediareviews/metadata",
+    responseSchema: reviewMetaDataSchema,
   });
 };
 
@@ -326,6 +341,10 @@ export const useMediaReviews = () => {
   return useQuery(UPDATE_QUERY_KEY, getAllMediaReviews);
 };
 
+export const useReviewsMetadata = () => {
+  return useQuery(METADATA_QUERY_KEY, getReviewsMetadata);
+};
+
 export const usePaginatedMediaReviews = (
   perPage: number,
   filterObject: FilterObject
@@ -338,6 +357,8 @@ export const usePaginatedMediaReviews = (
         perPage,
         mediaTypes: filterObject.mediaTypes,
         orderBy: filterObject.orderBy,
+        genres: filterObject.genres,
+        creators: filterObject.creators,
       }),
     staleTime: 3600000,
     getNextPageParam: (lastPage) => {

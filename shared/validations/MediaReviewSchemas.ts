@@ -119,6 +119,11 @@ export const paginatedMediaReviewSchema = z.object({
   has_next: z.boolean(),
 });
 
+export const reviewMetaDataSchema = z.object({
+  creators: z.array(z.string()),
+  genres: z.array(genreSchema),
+});
+
 // Omit fields that arent expected by the API
 export const mediaReviewWriteSchema = mediaReviewSchema.omit({
   id: true,

@@ -1,6 +1,7 @@
 import LoadingIcon from "@components/LoadingIcon";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import MediaReviewFilter, {
+  defaultFilterObject,
   FilterObject,
 } from "@components/mediareviews/MediaReviewFilter";
 import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
@@ -12,11 +13,9 @@ import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
-  const [filterObject, setFilterObject] = useState<FilterObject>({
-    mediaTypes: [],
-    orderBy: "",
-  });
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const [filterObject, setFilterObject] =
+    useState<FilterObject>(defaultFilterObject);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     usePaginatedMediaReviews(6, filterObject);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
@@ -62,21 +61,19 @@ const MediaReviewsV2 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const reviewCards = reviews
-    .filter((review) => review.visible)
-    .map((review, index) => (
-      <MediaReviewCard
-        className="w-full cursor-pointer"
-        review={review}
-        index={index}
-        key={review.id}
-        onCoverClick={() => {
-          setSelectedReview(review.id);
-          setReviewModalVisible(true);
-        }}
-        minimised={true}
-      />
-    ));
+  const reviewCards = reviews.map((review, index) => (
+    <MediaReviewCard
+      className="w-full cursor-pointer"
+      review={review}
+      index={index}
+      key={review.id}
+      onCoverClick={() => {
+        setSelectedReview(review.id);
+        setReviewModalVisible(true);
+      }}
+      minimised={true}
+    />
+  ));
 
   return (
     <div className="min-h-screen pt-20 md:pt-24 pb-16">
@@ -90,17 +87,24 @@ const MediaReviewsV2 = () => {
           </Link>
         </div>
       )}
-      <div className="">
-        <MediaReviewFilter
-          setFilterObject={setFilterObject}
-          className="flex flex-col items-center relative my-4"
-        />
-        <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
-          {reviewCards}
-        </div>
+
+      <MediaReviewFilter
+        setFilterObject={setFilterObject}
+        noResults={reviews.length === 0}
+        className="flex flex-col items-center relative my-4"
+      />
+      {reviews.length === 0 && !isLoading && (
+        <p className="text-center text-error mt-8 text-xl">
+          No results for the applied filter
+        </p>
+      )}
+      <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
+        {reviewCards}
       </div>
 
-      {isFetchingNextPage && <LoadingIcon className="mx-auto text-5xl mb-16" />}
+      {(isFetchingNextPage || isLoading) && (
+        <LoadingIcon className="mx-auto text-5xl mb-16 mt-4" />
+      )}
       <MediaReviewModal
         review={reviews.find((r) => r.id === selectedReview)}
         visible={reviewModalVisible}

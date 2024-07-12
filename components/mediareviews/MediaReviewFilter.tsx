@@ -5,14 +5,18 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import { OptionType } from "shared/mediareview-genres";
+import { useReviewsMetadata } from "shared/queries/mediareviews";
 
 export interface FilterObject {
   mediaTypes: string[];
   orderBy: string;
+  genres: string[];
+  creators: string[];
 }
 
 interface MediaReviewFilterProps {
   setFilterObject: React.Dispatch<React.SetStateAction<FilterObject>>;
+  noResults: boolean;
   className?: string;
 }
 
@@ -35,21 +39,47 @@ const orderByOptions: ListboxOption[] = [
   { label: "Least Words", value: "word_count_asc" },
 ];
 
+export const defaultFilterObject: FilterObject = {
+  mediaTypes: [],
+  orderBy: orderByOptions[0].value,
+  genres: [],
+  creators: [],
+};
+
 const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   setFilterObject,
+  noResults,
   className,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedMediaTypes, setSelectedMediaTypes] = useState<OptionType[]>(
     []
   );
+  const [selectedGenres, setSelectedGenres] = useState<OptionType[]>([]);
+  const [selectedCreators, setSelectedCreators] = useState<OptionType[]>([]);
   const [selectedOrderByOption, setSelectedOrderByOption] =
-    useState<ListboxOption>({
-      label: "A-Z",
-      value: "name_asc",
-    });
+    useState<ListboxOption>(orderByOptions[0]);
   const ref = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  const { data, isLoading, isError } = useReviewsMetadata();
+
+  const genreOptions: OptionType[] = data
+    ? data.genres.map((g) => ({ label: g.name, value: g.name }))
+    : [];
+  const creatorOptions: OptionType[] = data
+    ? data.creators.map((c) => ({ label: c, value: c }))
+    : [];
+
+  // Filter out the selected options
+  const filteredGenreOptions = genreOptions.filter(
+    (option) =>
+      !selectedGenres.some((selected) => selected.value === option.value)
+  );
+  const filteredCreatorOptions = creatorOptions.filter(
+    (option) =>
+      !selectedCreators.some((selected) => selected.value === option.value)
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -92,11 +122,13 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
         ref={ref}
         className={clsx(
           expanded ? "scale-y-100" : "scale-y-0",
-          "transition-all origin-top w-80 md:w-96 !absolute z-30 bottom-0 translate-y-full"
+          "transition-all origin-top w-80 sm:w-[30rem] lg:w-[36rem] !absolute z-30 bottom-0 translate-y-full"
         )}
       >
         <Card firstLayer={false}>
+          <p className="mt-2 ml-2 font-bold">Media Type</p>
           <GenericMultiSelectGroup
+            className="z-20"
             options={mediaOptions}
             value={selectedMediaTypes}
             onChange={(selectedOptions) => {
@@ -110,10 +142,10 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             }}
             displayKey={"label"}
             placeholder="Media Types"
-            className="z-20"
           />
           <p className="mt-2 ml-2 font-bold">Order By</p>
           <GenericListbox
+            className="z-[19]"
             bgClass="bg-background-muted"
             maxHeightClass="max-h-96"
             widthClass="w-full"
@@ -130,6 +162,44 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
               }));
             }}
           />
+          <p className="mt-2 ml-2 font-bold">Genre</p>
+          <GenericMultiSelectGroup
+            className="z-[18]"
+            options={filteredGenreOptions}
+            value={selectedGenres}
+            onChange={(selectedOptions) => {
+              setSelectedGenres([...selectedOptions]);
+              setFilterObject((prev) => ({
+                ...prev,
+                genres: [...selectedOptions]
+                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+                  .map((m) => m.value),
+              }));
+            }}
+            displayKey={"label"}
+            placeholder="Genres"
+          />
+          <p className="mt-2 ml-2 font-bold">Creator</p>
+          <GenericMultiSelectGroup
+            className="z-[17]"
+            options={filteredCreatorOptions}
+            value={selectedCreators}
+            onChange={(selectedOptions) => {
+              setSelectedCreators([...selectedOptions]);
+              setFilterObject((prev) => ({
+                ...prev,
+                creators: [...selectedOptions]
+                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+                  .map((m) => m.value),
+              }));
+            }}
+            displayKey={"label"}
+            placeholder="Creators"
+          />
+
+          {noResults && (
+            <p className="text-center text-error mt-4 text-lg">No Results</p>
+          )}
         </Card>
       </div>
     </div>
