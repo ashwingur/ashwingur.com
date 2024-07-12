@@ -56,7 +56,6 @@ export const PreviousRouteProvider = ({
       const pathname = new URL(url, window.location.href).pathname;
       if (previousRoute !== pathname) {
         setPreviousRoute(pathname);
-        console.log("ROUTE CHANGE");
         postCurrentRoute(pathname);
       }
     };
