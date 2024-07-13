@@ -21,6 +21,7 @@ const movieAndShowGenres: MultiSelectGroup = {
     "Action",
     "Adventure",
     "Animation",
+    "Anthology",
     "Apocalyptic",
     "Biography",
     "Comedy",
