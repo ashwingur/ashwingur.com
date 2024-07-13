@@ -287,6 +287,7 @@ const MediaReviews = () => {
           {subItem.image !== undefined && showImages && (
             <div className={"w-full h-36 md:h-72 relative my-4 "}>
               <Image
+                unoptimized
                 alt="Cover Image"
                 src={subItem.image}
                 fill={true}
@@ -325,6 +326,7 @@ const MediaReviews = () => {
         {item.image !== undefined && showImages && (
           <div className="w-full h-36 md:h-72 relative my-4">
             <Image
+              unoptimized
               alt="Cover Image"
               src={item.image}
               fill={true}
