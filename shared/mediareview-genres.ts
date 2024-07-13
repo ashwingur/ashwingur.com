@@ -38,6 +38,7 @@ const movieAndShowGenres: MultiSelectGroup = {
     "Romance",
     "Science Fiction",
     "Sport",
+    "Superhero",
     "Thriller",
     "War",
     "Western",
