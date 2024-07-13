@@ -27,6 +27,7 @@ import ConfirmButton from "@components/ConfirmButton";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import groupedGenreOptions, { OptionType } from "shared/mediareview-genres";
 import FixedImageContainer from "./FixedImageContainer";
+import { useRouter } from "next/router";
 
 interface MediaReviewFormProps {
   existingData?: MediaReview;
@@ -47,6 +48,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
   const [baseValues, setBaseValues] = useState(
     existingData ?? defaultMediaReview()
   );
+  const router = useRouter();
 
   const {
     control,
@@ -67,6 +69,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     queryClient.invalidateQueries(PAGINATED_QUERY_KEY);
     onSubmitSuccess && onSubmitSuccess();
     setBaseValues(data);
+    router.push({ pathname: router.pathname, query: { id: data.id } });
   };
 
   const [subReviews, setSubReviews] = useState(
