@@ -183,7 +183,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
         )}
       >
         <Card firstLayer={false} className="flex flex-col">
-          <p className="mt-2 ml-2 font-bold">Order By</p>
+          <p className="mt-2 ml-2 font-bold">Sort</p>
           <GenericListbox
             className="z-[20]"
             bgClass="bg-background-muted"
