@@ -91,6 +91,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         key={subReview.id}
         parentIndex={index}
         review={subReview}
+        consumedTitle={consumedTitle}
         className="w-full lg:w-4/5"
       />
     ));

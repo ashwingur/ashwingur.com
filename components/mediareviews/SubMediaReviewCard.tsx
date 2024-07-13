@@ -8,12 +8,14 @@ import DOMPurify from "dompurify";
 interface SubMediaReviewCardProps {
   review: SubMediaReview;
   parentIndex: number;
+  consumedTitle: string;
   className?: string;
 }
 
 const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
   review,
   parentIndex,
+  consumedTitle,
   className,
 }) => {
   const consumedDate = review.consumed_date
@@ -100,7 +102,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
           </div>
           {review.consumed_date && (
             <p className="ml-4">
-              <span className="font-bold">Consumed</span>{" "}
+              <span className="font-bold">{consumedTitle}</span>{" "}
               {formattedConsumedDate}
             </p>
           )}
