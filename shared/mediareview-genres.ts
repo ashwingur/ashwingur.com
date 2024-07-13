@@ -21,6 +21,7 @@ const movieAndShowGenres: MultiSelectGroup = {
     "Action",
     "Adventure",
     "Animation",
+    "Apocalyptic",
     "Biography",
     "Comedy",
     "Crime",
@@ -45,7 +46,9 @@ const movieAndShowGenres: MultiSelectGroup = {
 const bookGenres: MultiSelectGroup = {
   group_name: "Books",
   group_options: [
+    "Action",
     "Adventure",
+    "Apocalyptic",
     "Biography",
     "Children",
     "Classics",
@@ -78,6 +81,7 @@ const gameGenres: MultiSelectGroup = {
     "Board Game",
     "Card Game",
     "Casual",
+    "Cyberpunk",
     "Fighting",
     "Flash",
     "Indie",
