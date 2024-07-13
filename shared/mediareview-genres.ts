@@ -60,6 +60,7 @@ const bookGenres: MultiSelectGroup = {
     "Memoir",
     "Mystery",
     "Non-Fiction",
+    "Novella",
     "Poetry",
     "Romance",
     "Science Fiction",
