@@ -42,6 +42,8 @@ const orderByOptions: ListboxOption[] = [
   { label: "Latest Creation Date", value: "media_creation_desc" },
   { label: "Most Words", value: "word_count_desc" },
   { label: "Least Words", value: "word_count_asc" },
+  { label: "Longest Runtime", value: "run_time_desc" },
+  { label: "Shorted Runtime", value: "run_time_asc" },
 ];
 
 export const defaultFilterObject: FilterObject = {
@@ -185,7 +187,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           <GenericListbox
             className="z-[20]"
             bgClass="bg-background-muted"
-            maxHeightClass="max-h-96"
+            maxHeightClass="max-h-[30rem]"
             widthClass="w-full"
             shadowClass=""
             roundingClass="rounded-2xl"

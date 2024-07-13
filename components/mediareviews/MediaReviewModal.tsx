@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MediaReview } from "shared/validations/MediaReviewSchemas";
 import MediaReviewCard from "./MediaReviewCard";
@@ -15,6 +15,14 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
   visible,
   setVisible,
 }) => {
+  const scrollDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollDivRef.current) {
+      scrollDivRef.current.scrollTop = 0;
+    }
+  }, [review]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -46,7 +54,10 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
         }}
       />
       <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
-        <div className="overflow-y-auto rounded-2xl relative">
+        <div
+          ref={scrollDivRef}
+          className="overflow-y-auto rounded-2xl relative"
+        >
           <button
             className="btn z-50 m-4 fixed"
             onClick={() => {

@@ -57,21 +57,27 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   ));
 
   let creatorTitle = "Creator";
+  let consumedTitle = "Consumed";
   switch (review.media_type) {
     case "Movie":
       creatorTitle = "Director/Studio";
+      consumedTitle = "Watched";
       break;
     case "Book":
       creatorTitle = "Author";
+      consumedTitle = "Read";
       break;
     case "Show":
       creatorTitle = "Showrunner/Studio";
+      consumedTitle = "Watched";
       break;
     case "Game":
       creatorTitle = "Developer";
+      consumedTitle = "First Play";
       break;
     case "Music":
       creatorTitle = "Artist";
+      consumedTitle = "First Listen";
       break;
     default:
       break;
@@ -130,7 +136,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
               </p>
             )}
             <p>{review.genres.map((g) => g.name).join(", ")}</p>
-            <p className="text-2xl lg:text-3xl font-bold">{review.name}</p>
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold">
+              {review.name}
+            </p>
           </div>
           <p className="text-4xl lg:text-5xl ml-8">{review.rating}</p>
         </div>
@@ -170,7 +178,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
               </div>
               {review.consumed_date && (
                 <p className="ml-4">
-                  <span className="font-bold">Consumed</span>{" "}
+                  <span className="font-bold">{consumedTitle}</span>{" "}
                   {formattedConsumedDate}
                 </p>
               )}

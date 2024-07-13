@@ -17,7 +17,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   priorityLoad,
   roundingClassName = "rounded-t-2xl",
   heightClassName = "h-80",
-  bgColour = "#000000",
+  bgColour = "#383838",
   miniCard = false,
 }) => {
   if (imageSrc && !imageAlt) {
