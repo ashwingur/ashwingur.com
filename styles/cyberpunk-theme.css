@@ -62,10 +62,10 @@
     }
 
     .card {
-      @apply text-text-secondary border-y-2 border-secondary rounded-none bg-red-700/20;
+      @apply text-text-secondary border-y-2 border-secondary rounded-none bg-red-700/30;
     }
     .card-hover {
-      @apply text-text-accent border-y-2 border-accent rounded-none bg-cyan-700/20;
+      @apply text-text-accent border-y-2 border-accent rounded-none bg-cyan-700/30;
     }
 
     /* Add some effects to the corners of the card */
