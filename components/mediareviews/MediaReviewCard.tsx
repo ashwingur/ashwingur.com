@@ -136,7 +136,12 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
-            <p>{review.genres.map((g) => g.name).join(", ")}</p>
+            <p>
+              {review.genres
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((g) => g.name)
+                .join(", ")}
+            </p>
             <p className="text-xl md:text-2xl lg:text-3xl font-bold">
               {review.name}
             </p>
