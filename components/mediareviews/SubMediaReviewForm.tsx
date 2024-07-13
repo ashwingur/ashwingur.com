@@ -277,7 +277,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
-                rows={getValues().pros.length ?? 2}
+                rows={getValues().pros.length ?? 1}
                 placeholder="Each line is one pro"
               />
             )}
@@ -309,7 +309,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
-                rows={getValues().pros.length ?? 2}
+                rows={getValues().pros.length ?? 1}
                 placeholder="Each line is one con"
               />
             )}
