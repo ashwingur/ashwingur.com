@@ -86,6 +86,7 @@ const gameGenres: MultiSelectGroup = {
     "Card Game",
     "Casual",
     "Cyberpunk",
+    "Farming",
     "Fighting",
     "Flash",
     "Indie",
