@@ -96,6 +96,7 @@ const gameGenres: MultiSelectGroup = {
     "MMO",
     "MOBA",
     "Mobile",
+    "Party",
     "Platformer",
     "Puzzle",
     "Racing",
