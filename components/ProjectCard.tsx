@@ -49,7 +49,7 @@ const ProjectCard = ({
     <Card className="flex flex-col max-w-lg" firstLayer={true}>
       <div className="w-full h-36 md:h-72 relative">
         <Image
-          alt="Mountains"
+          alt="Project thumbnail"
           src={image}
           fill={true}
           style={{ objectFit: "contain" }}

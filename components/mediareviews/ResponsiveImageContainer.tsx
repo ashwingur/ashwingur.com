@@ -66,6 +66,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
       ref={imageContainerRef}
     >
       <Image
+        unoptimized
         src={imageSrc}
         alt={imageAlt}
         className="object-cover h-full w-full blur-3xl"
@@ -74,6 +75,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
         onLoadingComplete={handleImageLoad}
       />
       <Image
+        unoptimized
         src={imageSrc}
         alt={imageAlt}
         className="object-contain h-full w-full"

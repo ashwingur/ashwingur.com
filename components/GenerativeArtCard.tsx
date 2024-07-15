@@ -27,7 +27,7 @@ const GenerativeArtCard = ({
       >
         <div className="w-full h-72 xl:h-96 2xl:h-[30rem] relative rounded-xl overflow-hidden">
           <Image
-            unoptimized={true}
+            unoptimized
             alt={name}
             src={image}
             fill={true}

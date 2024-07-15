@@ -41,6 +41,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
       {imageSrc && imageAlt && (
         <>
           <Image
+            unoptimized
             src={imageSrc}
             alt={imageAlt}
             className="object-cover h-full w-full blur-3xl"
@@ -48,6 +49,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
             priority={priorityLoad}
           />
           <Image
+            unoptimized
             src={imageSrc}
             alt={imageAlt}
             className="object-contain h-full w-full"
