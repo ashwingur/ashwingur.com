@@ -171,7 +171,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             imageAlt="Sub review cover image"
             priorityLoad={false}
             heightClassName={
-              baseValues.signed_cover_image ? "h-48 lg:h-60" : "h-28"
+              baseValues.signed_cover_image ? "h-48 lg:h-52" : "h-28"
             }
             bgColour={baseValues.cover_image_bg_colour ?? undefined}
             miniCard={baseValues.cover_image_bg_colour !== undefined}

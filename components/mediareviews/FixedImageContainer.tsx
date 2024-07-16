@@ -16,7 +16,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   imageAlt,
   priorityLoad,
   roundingClassName = "rounded-t-2xl",
-  heightClassName = "h-80",
+  heightClassName = "h-60",
   bgColour = "#383838",
   miniCard = false,
 }) => {
@@ -34,7 +34,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
         "before:bg-gradient-to-b before:z-10 before:bottom-0",
         miniCard
           ? "before:h-full before:from-black/0 before:to-black/80"
-          : "before:h-1/2 before:md-2/5 before:from-black/0 before:to-black/80"
+          : "before:h-3/5 before:md-2/5 before:from-black/0 before:to-black/80"
       )}
       style={{ backgroundColor: bgColour }}
     >
