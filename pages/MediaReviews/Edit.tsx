@@ -68,7 +68,7 @@ const Edit = () => {
         )}
         {!currentlyEditing && (
           <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <Link className="btn w-48" href={"/MediaReviewsV2"}>
+            <Link className="btn w-48" href="/MediaReviews">
               Back to Reviews
             </Link>
             {role === "admin" && (
