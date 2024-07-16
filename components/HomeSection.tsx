@@ -39,20 +39,12 @@ const appsList: App[] = [
       <FaCloudMoonRain className={clsx(className)} />
     ),
   },
+
   {
     name: "Media Reviews",
     url: "/MediaReviews",
     description:
-      "My personal reviews and ratings of books, movies, shows and games that I have consumed.",
-    icon: (className?: string) => (
-      <MdOutlineRateReview className={clsx(className)} />
-    ),
-  },
-  {
-    name: "Media Reviews V2",
-    url: "/MediaReviewsV2",
-    description:
-      "(IN PROGRESS) My new media review site with full database integration and more features. It is also a lot more efficient.",
+      "My personal reviews of books, movies, shows, games and music I've consumed. It has full database integration, detailed filtering and statistics.",
     icon: (className?: string) => (
       <MdOutlineRateReview className={clsx(className)} />
     ),
@@ -125,6 +117,15 @@ const appsList: App[] = [
     url: "/TicTacToe",
     description: "An online multiplayer Tic Tac Toe game",
     icon: (className?: string) => <TbTicTac className={clsx(className)} />,
+  },
+  {
+    name: "Media Reviews (OLD)",
+    url: "/MediaReviewsOld",
+    description:
+      "My original personal reviews and ratings of books, movies, shows and games that I have consumed.",
+    icon: (className?: string) => (
+      <MdOutlineRateReview className={clsx(className)} />
+    ),
   },
 ];
 

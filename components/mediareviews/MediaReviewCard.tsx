@@ -34,9 +34,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-          month: "short",
-          year: "numeric",
-        })
+        month: "short",
+        year: "numeric",
+      })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -151,7 +151,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         {user && role === "admin" && (
           <Link
             className="btn !absolute right-0 top-0 m-4"
-            href={`/MediaReviewsV2/Edit?id=${review.id}`}
+            href={`/MediaReviews/Edit?id=${review.id}`}
           >
             <MdEdit className="text-xs" />
           </Link>
