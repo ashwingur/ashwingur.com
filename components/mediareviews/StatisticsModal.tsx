@@ -4,12 +4,15 @@ import { AiOutlineClose } from "react-icons/ai";
 import Card from "@components/Card";
 import MediaTypeIcon from "./MediaTypeIcon";
 
-interface InfoModalProps {
+interface StatisticsModalProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
 }
 
-const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
+const StatisticsModal: React.FC<StatisticsModalProps> = ({
+  visible,
+  setVisible,
+}) => {
   const scrollDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,30 +65,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
             <AiOutlineClose />
           </button>
           <Card firstLayer={true} className="!px-8">
-            <p className="mt-10">
-              This site contains a comprehensive catalogue of media I have
-              consumed over the years. They are rated from 0-10 and further
-              details are available by clicking on the review, which also shows
-              all the sub-reviews (if it&apos;s a series for example).
-            </p>
-            <p className="mt-4">
-              I have also created a comprehensive filtering system that allows
-              for searching by name, media type, genre, creator and ordering the
-              results. I currently have 5 media types available:
-            </p>
-            <div className="flex flex-col gap-2 mt-2 items-center">
-              {["Movie", "Book", "Show", "Game", "Music"].map((m, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <MediaTypeIcon media_type={m} className="text-2xl" />
-
-                  <p>{m}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4">
-              I am continously adding and updating my reviews so be sure to take
-              a look at anything new I add!
-            </p>
+            <h2 className="mt-8">Stats for Nerds</h2>
+            <p>TODO</p>
           </Card>
         </div>
       </div>
@@ -93,4 +74,4 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
   );
 };
 
-export default InfoModal;
+export default StatisticsModal;

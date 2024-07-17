@@ -6,17 +6,13 @@ import MediaReviewFilter, {
   FilterObject,
 } from "@components/mediareviews/MediaReviewFilter";
 import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
+import StatisticsModal from "@components/mediareviews/StatisticsModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { FaChartBar, FaChartColumn, FaInfo } from "react-icons/fa6";
-import {
-  MdHideImage,
-  MdImage,
-  MdOutlineHideImage,
-  MdOutlineImage,
-} from "react-icons/md";
+import { FaChartColumn, FaInfo } from "react-icons/fa6";
+import { MdOutlineHideImage, MdOutlineImage } from "react-icons/md";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
@@ -28,6 +24,7 @@ const MediaReviewsV2 = () => {
     usePaginatedMediaReviews(6, filterObject, filterReady);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
+  const [statsModalVisible, setStatsModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
   const [showImages, setShowImages] = useState<boolean>();
 
@@ -133,7 +130,12 @@ const MediaReviewsV2 = () => {
             <MdOutlineImage className="w-12" />
           )}
         </button>
-        <button className="btn text-xl lg:text-2xl">
+        <button
+          className="btn text-xl lg:text-2xl"
+          onClick={() => {
+            setStatsModalVisible(true);
+          }}
+        >
           <FaChartColumn className="w-12" />
         </button>
       </div>
@@ -169,6 +171,12 @@ const MediaReviewsV2 = () => {
         visible={infoModalVisible}
         setVisible={(visible) => {
           setInfoModalVisible(visible);
+        }}
+      />
+      <StatisticsModal
+        visible={statsModalVisible}
+        setVisible={(visible) => {
+          setStatsModalVisible(visible);
         }}
       />
     </div>
