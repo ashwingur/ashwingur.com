@@ -9,6 +9,7 @@ interface SubMediaReviewCardProps {
   review: SubMediaReview;
   parentIndex: number;
   consumedTitle: string;
+  showImages: boolean;
   className?: string;
 }
 
@@ -16,6 +17,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
   review,
   parentIndex,
   consumedTitle,
+  showImages,
   className,
 }) => {
   const consumedDate = review.consumed_date
@@ -25,9 +27,9 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-        month: "short",
-        year: "numeric",
-      })
+          month: "short",
+          year: "numeric",
+        })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -57,11 +59,15 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
       <div className="w-full relative overflow-hidden">
         <div className="overflow-hidden rounded-t-2xl">
           <FixedImageContainer
-            imageSrc={review.signed_cover_image ?? undefined}
+            imageSrc={
+              showImages && review.signed_cover_image
+                ? review.signed_cover_image
+                : undefined
+            }
             imageAlt={`Main review cover image of ${review.name}`}
             priorityLoad={parentIndex < 5}
             heightClassName={
-              review.signed_cover_image ? "h-48 lg:h-52" : "h-28"
+              showImages && review.signed_cover_image ? "h-48 lg:h-52" : "h-28"
             }
             bgColour={review.cover_image_bg_colour ?? undefined}
             miniCard={review.cover_image_bg_colour !== undefined}

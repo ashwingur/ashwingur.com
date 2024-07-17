@@ -8,12 +8,14 @@ interface MediaReviewModalProps {
   review?: MediaReview;
   visible: boolean;
   setVisible: (visible: boolean) => void;
+  showImages: boolean;
 }
 
 const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
   review,
   visible,
   setVisible,
+  showImages,
 }) => {
   const scrollDivRef = useRef<HTMLDivElement>(null);
 
@@ -74,6 +76,7 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
               index={0}
               key={review.id}
               minimised={false}
+              showImages={showImages}
             />
           )}
         </div>

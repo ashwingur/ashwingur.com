@@ -63,7 +63,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
           >
             <AiOutlineClose />
           </button>
-          <Card firstLayer={true} className="">
+          <Card firstLayer={true} className="!px-8">
             <p className="mt-10">
               This site contains a comprehensive catalogue of media I have
               consumed over the years. They are rated from 0-10 and further
@@ -79,6 +79,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
               {["Movie", "Book", "Show", "Game", "Music"].map((m, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <MediaTypeIcon media_type={m} className="text-2xl" />
+
                   <p>{m}</p>
                 </div>
               ))}

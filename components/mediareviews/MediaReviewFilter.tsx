@@ -175,7 +175,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           setExpanded(!expanded);
         }}
       >
-        <IoFilter className="lg:text-xl w-12" />
+        <IoFilter className="text-xl lg:text-2xl w-12" />
       </button>
       <div
         ref={ref}

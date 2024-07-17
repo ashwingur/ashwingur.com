@@ -11,6 +11,12 @@ import { useAuth } from "@context/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaInfo } from "react-icons/fa6";
+import {
+  MdHideImage,
+  MdImage,
+  MdOutlineHideImage,
+  MdOutlineImage,
+} from "react-icons/md";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
@@ -23,6 +29,15 @@ const MediaReviewsV2 = () => {
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
+  const [showImages, setShowImages] = useState<boolean>();
+
+  useEffect(() => {
+    // Retrieving from local storage if the preference was set
+    const showImages = localStorage.getItem("showImages");
+    if (showImages) {
+      setShowImages(showImages === "false" ? false : true);
+    }
+  }, []);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
@@ -76,6 +91,7 @@ const MediaReviewsV2 = () => {
         setReviewModalVisible(true);
       }}
       minimised={true}
+      showImages={showImages === true}
     />
   ));
 
@@ -92,14 +108,27 @@ const MediaReviewsV2 = () => {
         </div>
       )}
 
-      <div>
+      <div className="flex justify-center mt-4 gap-4">
         <button
-          className="btn"
+          className="btn text-xl lg:text-2xl"
           onClick={() => {
             setInfoModalVisible(true);
           }}
         >
-          <FaInfo />
+          <FaInfo className="w-12" />
+        </button>
+        <button
+          className="btn text-xl lg:text-2xl"
+          onClick={() => {
+            localStorage.setItem("showImages", showImages ? "false" : "true");
+            setShowImages(!showImages);
+          }}
+        >
+          {showImages ? (
+            <MdOutlineHideImage className="w-12" />
+          ) : (
+            <MdOutlineImage className="w-12" />
+          )}
         </button>
       </div>
 
@@ -128,6 +157,7 @@ const MediaReviewsV2 = () => {
         setVisible={(visible) => {
           setReviewModalVisible(visible);
         }}
+        showImages={showImages === true}
       />
       <InfoModal
         visible={infoModalVisible}

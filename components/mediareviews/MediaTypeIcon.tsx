@@ -7,30 +7,33 @@ import {
 } from "react-icons/fa6";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { IoGameController } from "react-icons/io5";
+import { IconBaseProps } from "react-icons";
 
 interface MediaTypeIconProps {
   media_type: "SELECT" | "Movie" | "Book" | "Show" | "Game" | "Music" | string;
   className?: string;
+  iconBaseProps?: IconBaseProps;
 }
 
 const MediaTypeIcon: React.FC<MediaTypeIconProps> = ({
   media_type,
   className,
+  iconBaseProps,
 }) => {
   const icon = (media_type: MediaTypeIconProps["media_type"]) => {
     switch (media_type) {
       case "Movie":
-        return <FaClapperboard />;
+        return <FaClapperboard {...iconBaseProps} />;
       case "Book":
-        return <FaBook />;
+        return <FaBook {...iconBaseProps} />;
       case "Show":
-        return <PiTelevisionSimpleBold />;
+        return <PiTelevisionSimpleBold {...iconBaseProps} />;
       case "Game":
-        return <IoGameController />;
+        return <IoGameController {...iconBaseProps} />;
       case "Music":
-        return <FaItunesNote />;
+        return <FaItunesNote {...iconBaseProps} />;
       default:
-        return <FaQuestion />;
+        return <FaQuestion {...iconBaseProps} />;
     }
   };
 

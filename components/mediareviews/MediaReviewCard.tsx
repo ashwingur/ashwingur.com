@@ -8,22 +8,23 @@ import DOMPurify from "dompurify";
 import FixedImageContainer from "./FixedImageContainer";
 import SubMediaReviewCard from "./SubMediaReviewCard";
 import { useAuth } from "@context/AuthContext";
-import { useState } from "react";
 
 interface MediaReviewCardProps {
   review: MediaReview;
   index: number;
-  className?: string;
   onCoverClick?: () => void;
   minimised: boolean;
+  showImages: boolean;
+  className?: string;
 }
 
 const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
-  className,
   index,
   review,
   onCoverClick,
   minimised,
+  showImages,
+  className,
 }) => {
   const { user, role } = useAuth();
 
@@ -34,9 +35,9 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
     ? consumedDate.getDate() === 1 && consumedDate.getMonth() === 0
       ? consumedDate.getFullYear()
       : consumedDate.toLocaleDateString("en-AU", {
-        month: "short",
-        year: "numeric",
-      })
+          month: "short",
+          year: "numeric",
+        })
     : "";
 
   const pros = review.pros.map((pro, index) => (
@@ -92,6 +93,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         parentIndex={index}
         review={subReview}
         consumedTitle={consumedTitle}
+        showImages={showImages}
         className="w-full lg:w-4/5"
       />
     ));
@@ -112,14 +114,18 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           onClick={onCoverClick}
         >
           <FixedImageContainer
-            imageSrc={review.signed_cover_image ?? undefined}
+            imageSrc={
+              showImages && review.signed_cover_image
+                ? review.signed_cover_image
+                : undefined
+            }
             imageAlt={`Main review cover image of ${review.name}`}
             priorityLoad={index < 2}
             bgColour={review.cover_image_bg_colour ?? undefined}
           />
         </div>
 
-        <div className="absolute top-0 left-0 m-4 bg-black/80 p-2 rounded-full">
+        <div className="absolute top-0 right-0 m-4 bg-black/80 p-2 rounded-full">
           <MediaTypeIcon
             media_type={review.media_type}
             className="text-white text-xl"
@@ -150,7 +156,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         </div>
         {user && role === "admin" && (
           <Link
-            className="btn !absolute right-0 top-0 m-4"
+            className="btn !absolute left-0-0 top-0 m-4"
             href={`/MediaReviews/Edit?id=${review.id}`}
           >
             <MdEdit className="text-xs" />
