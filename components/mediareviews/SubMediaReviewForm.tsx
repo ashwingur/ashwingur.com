@@ -69,6 +69,9 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
   const deleteMutation = useDeleteSubMediaReview(onDeleteSuccess);
 
   const onSubmit = (data: SubMediaReview) => {
+    if (data.review_content === "<p></p>") {
+      data.review_content = null;
+    }
     mutation.mutate(data);
   };
 

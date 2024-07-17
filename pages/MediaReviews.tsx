@@ -83,7 +83,7 @@ const MediaReviewsV2 = () => {
 
       {user && role === "admin" && (
         <div className="flex justify-center mt-4">
-          <Link className="btn w-48" href={"/MediaReviewsV2/Edit"}>
+          <Link className="btn w-48" href={"/MediaReviews/Edit"}>
             Edit Reviews
           </Link>
         </div>

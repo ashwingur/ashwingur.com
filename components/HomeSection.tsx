@@ -164,7 +164,7 @@ const HomeSection = () => {
 
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center w-full lg:w-4/5 xl:w-3/5 2xl:w-1/2 mt-4 lg:mt-8 lg:!px-8"
+        className="flex flex-col items-center justify-center w-full lg:w-4/5 2xl:w-2/3 mt-4 lg:mt-8 lg:!px-8"
       >
         <h2 className="text-2xl mb-2">About Me</h2>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
@@ -243,7 +243,7 @@ const HomeSection = () => {
           Below are a list of all my apps and pages on this website.
         </p>
         <h2 className="text-2xl mt-8 mb-2">Apps and Pages</h2>
-        <div className="grid md:grid-cols-2 gap-4 2xl:grid-cols-3">
+        <div className="grid md:grid-cols-2 gap-4 lg:grid-cols-3">
           {appCards}
         </div>
       </Card>

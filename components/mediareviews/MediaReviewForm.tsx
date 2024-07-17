@@ -92,6 +92,9 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       mediaTypeRef.current?.scrollIntoView({ behavior: "smooth" });
       return;
     }
+    if (data.review_content === "<p></p>") {
+      data.review_content = null;
+    }
     mutation.mutate(data);
   };
 

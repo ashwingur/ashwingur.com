@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { useState } from "react";
 
 interface FixedImageContainerProps {
   imageSrc?: string;
@@ -24,6 +25,8 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
     throw new Error("imageSrc is defined but no imageAlt was provided");
   }
 
+  const [isLoading, setIsLoading] = useState(imageSrc !== undefined);
+
   return (
     <div
       className={clsx(
@@ -34,7 +37,8 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
         "before:bg-gradient-to-b before:z-10 before:bottom-0",
         miniCard
           ? "before:h-full before:from-black/0 before:to-black/80"
-          : "before:h-3/5 before:md-2/5 before:from-black/0 before:to-black/80"
+          : "before:h-3/5 before:md-2/5 before:from-black/0 before:to-black/80",
+        isLoading ? "animate-pulse" : ""
       )}
       style={{ backgroundColor: bgColour }}
     >
@@ -53,6 +57,9 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
             src={imageSrc}
             alt={imageAlt}
             className="object-contain h-full w-full"
+            onLoad={(e) => {
+              setIsLoading(false);
+            }}
             fill
             priority={priorityLoad}
           />

@@ -113,6 +113,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
       setFilterUrlRead(true);
       setFilterReady(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query]);
 
   // Update URL parameters when filterObject changes
@@ -134,6 +135,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
       }
       router.push({ query: params.toString() }, undefined, { shallow: true });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterObject, filterUrlRead]);
 
   const filterApplied = !_.isEqual(filterObject, defaultFilterObject);
