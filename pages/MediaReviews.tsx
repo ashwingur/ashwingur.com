@@ -10,7 +10,7 @@ import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { FaInfo } from "react-icons/fa6";
+import { FaChartBar, FaChartColumn, FaInfo } from "react-icons/fa6";
 import {
   MdHideImage,
   MdImage,
@@ -38,6 +38,9 @@ const MediaReviewsV2 = () => {
       setShowImages(showImages === "false" ? false : true);
     }
   }, []);
+
+  const numResults = data?.pages[0].total;
+  console.log(numResults);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 
@@ -130,6 +133,9 @@ const MediaReviewsV2 = () => {
             <MdOutlineImage className="w-12" />
           )}
         </button>
+        <button className="btn text-xl lg:text-2xl">
+          <FaChartColumn className="w-12" />
+        </button>
       </div>
 
       <MediaReviewFilter
@@ -137,11 +143,11 @@ const MediaReviewsV2 = () => {
         setFilterObject={setFilterObject}
         setFilterReady={setFilterReady}
         noResults={reviews.length === 0}
-        className="flex flex-col items-center relative my-4"
+        className="flex flex-col items-center relative mt-4"
       />
-      {reviews.length === 0 && !isLoading && filterReady && (
-        <p className="text-center text-error mt-8 text-xl">
-          No results for the applied filter
+      {numResults !== undefined && !isLoading && filterReady && (
+        <p className="text-center text-xl mb-4 mt-2">
+          {numResults} result{numResults !== 1 && "s"}
         </p>
       )}
       <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">

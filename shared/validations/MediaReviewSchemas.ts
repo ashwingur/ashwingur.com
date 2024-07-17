@@ -123,6 +123,10 @@ export const reviewMetaDataSchema = z.object({
   creators: z.array(z.string()),
   genres: z.array(genreSchema),
   review_names: z.array(z.string()),
+  rating_bins: z.array(z.number()),
+  rating_bins_with_sub_reviews: z.array(z.number()),
+  total_run_time: z.number(),
+  total_word_count: z.number(),
 });
 
 // Omit fields that arent expected by the API
