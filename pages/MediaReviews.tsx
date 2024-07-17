@@ -1,4 +1,5 @@
 import LoadingIcon from "@components/LoadingIcon";
+import InfoModal from "@components/mediareviews/InfoModal";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import MediaReviewFilter, {
   defaultFilterObject,
@@ -9,6 +10,7 @@ import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { FaInfo } from "react-icons/fa6";
 import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
@@ -19,6 +21,7 @@ const MediaReviewsV2 = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     usePaginatedMediaReviews(6, filterObject, filterReady);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
@@ -89,6 +92,17 @@ const MediaReviewsV2 = () => {
         </div>
       )}
 
+      <div>
+        <button
+          className="btn"
+          onClick={() => {
+            setInfoModalVisible(true);
+          }}
+        >
+          <FaInfo />
+        </button>
+      </div>
+
       <MediaReviewFilter
         filterObject={filterObject}
         setFilterObject={setFilterObject}
@@ -113,6 +127,12 @@ const MediaReviewsV2 = () => {
         visible={reviewModalVisible}
         setVisible={(visible) => {
           setReviewModalVisible(visible);
+        }}
+      />
+      <InfoModal
+        visible={infoModalVisible}
+        setVisible={(visible) => {
+          setInfoModalVisible(visible);
         }}
       />
     </div>

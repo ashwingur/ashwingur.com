@@ -9,7 +9,7 @@ import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { IoGameController } from "react-icons/io5";
 
 interface MediaTypeIconProps {
-  media_type: "SELECT" | "Movie" | "Book" | "Show" | "Game" | "Music";
+  media_type: "SELECT" | "Movie" | "Book" | "Show" | "Game" | "Music" | string;
   className?: string;
 }
 
