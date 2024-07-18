@@ -83,6 +83,11 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
               ))}
             </div>
             <p className="mt-4">
+              Furthermore, there is a statistics tab where you can see
+              interesting information such as number of reviews, total word
+              count, total run time and rating distributions by media type.
+            </p>
+            <p className="mt-4">
               I am continously adding and updating my reviews so be sure to take
               a look at anything new I add!
             </p>
