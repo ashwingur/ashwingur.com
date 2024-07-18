@@ -40,7 +40,9 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
           : "before:h-3/5 before:md-2/5 before:from-black/0 before:to-black/80",
         isLoading ? "animate-pulse" : ""
       )}
-      style={{ backgroundColor: bgColour }}
+      style={
+        isLoading || imageSrc === undefined ? { backgroundColor: bgColour } : {}
+      }
     >
       {imageSrc && imageAlt && (
         <>
