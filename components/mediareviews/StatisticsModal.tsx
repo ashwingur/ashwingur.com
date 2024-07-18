@@ -2,7 +2,9 @@ import clsx from "clsx";
 import React, { useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Card from "@components/Card";
-import MediaTypeIcon from "./MediaTypeIcon";
+import { useReviewsMetadata } from "shared/queries/mediareviews";
+import LoadingIcon from "@components/LoadingIcon";
+import ColumnChart from "./ColumnChart";
 
 interface StatisticsModalProps {
   visible: boolean;
@@ -14,6 +16,7 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
   setVisible,
 }) => {
   const scrollDivRef = useRef<HTMLDivElement>(null);
+  const { data, isLoading, isError } = useReviewsMetadata();
 
   useEffect(() => {
     if (scrollDivRef.current) {
@@ -38,6 +41,24 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [visible, setVisible]);
+
+  const mapRatingBins = (values: number[]) => {
+    return values.map((item, index) => ({
+      name: `${index}-${index + 1}`,
+      value: item,
+    }));
+  };
+
+  const all_data = mapRatingBins(data?.rating_bins.all || []);
+  const all_data_with_subreviews = mapRatingBins(
+    data?.rating_bins_with_sub_reviews.all || []
+  );
+  const books_data = mapRatingBins(data?.rating_bins.book || []);
+  const movies_data = mapRatingBins(data?.rating_bins.movie || []);
+  const shows_data = mapRatingBins(data?.rating_bins.show || []);
+  const games_data = mapRatingBins(data?.rating_bins.game || []);
+  const music_data = mapRatingBins(data?.rating_bins.music || []);
+
   return (
     <div
       className={clsx(
@@ -64,9 +85,91 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
           >
             <AiOutlineClose />
           </button>
-          <Card firstLayer={true} className="!px-8">
-            <h2 className="mt-8">Stats for Nerds</h2>
-            <p>TODO</p>
+          <Card firstLayer={true} className="!px-8 flex flex-col items-center">
+            <h2 className="mt-8 text-center mb-4">Stats for Nerds</h2>
+
+            {isLoading && <LoadingIcon className="text-3xl my-8" />}
+            {isError && (
+              <p className="text-error text-lg py-8">
+                Error retrieving statistics
+              </p>
+            )}
+            {data !== undefined && (
+              <>
+                <p>
+                  <span className="font-bold">Total Reviews: </span>
+                  {data.rating_bins.all.reduce((acc, val) => acc + val, 0)}
+                </p>
+                <p>
+                  <span className="font-bold">
+                    Total Reviews (Including Subreviews):{" "}
+                  </span>
+                  {data.rating_bins_with_sub_reviews.all.reduce(
+                    (acc, val) => acc + val,
+                    0
+                  )}
+                </p>
+                <p>
+                  <span className="font-bold">Total Word Count: </span>
+                  {data.total_word_count.toLocaleString()}
+                </p>
+                <p>
+                  <span className="font-bold">Total Run Time: </span>
+                  {(data.total_run_time / 60).toFixed(1).toLocaleString()} hours
+                </p>
+                <p>
+                  <span className="font-bold">Unique Genres: </span>
+                  {data.genres.length}
+                </p>
+                <p>
+                  <span className="font-bold">Unique Creators: </span>
+                  {data.creators.length}
+                </p>
+                <h2 className="text-2xl my-4">Rating Stats</h2>
+                <ColumnChart
+                  className="w-full h-72"
+                  height="80%"
+                  title="All"
+                  data={all_data}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="All (Including Subreviews)"
+                  height="80%"
+                  data={all_data_with_subreviews}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="Books"
+                  height="80%"
+                  data={books_data}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="Movies"
+                  height="80%"
+                  data={movies_data}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="Shows"
+                  height="80%"
+                  data={shows_data}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="Games"
+                  height="80%"
+                  data={games_data}
+                />
+                <ColumnChart
+                  className="w-full h-72"
+                  title="Music"
+                  height="80%"
+                  data={music_data}
+                />
+              </>
+            )}
           </Card>
         </div>
       </div>

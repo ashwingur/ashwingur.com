@@ -37,7 +37,6 @@ const MediaReviewsV2 = () => {
   }, []);
 
   const numResults = data?.pages[0].total;
-  console.log(numResults);
 
   const reviews = data?.pages.flatMap((page) => page.media_reviews) || [];
 

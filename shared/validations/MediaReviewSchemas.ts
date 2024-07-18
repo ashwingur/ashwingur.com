@@ -119,12 +119,21 @@ export const paginatedMediaReviewSchema = z.object({
   has_next: z.boolean(),
 });
 
+const ratingBinsSchema = z.object({
+  all: z.array(z.number()),
+  movie: z.array(z.number()).optional(),
+  book: z.array(z.number()).optional(),
+  show: z.array(z.number()).optional(),
+  game: z.array(z.number()).optional(),
+  music: z.array(z.number()).optional(),
+});
+
 export const reviewMetaDataSchema = z.object({
   creators: z.array(z.string()),
   genres: z.array(genreSchema),
   review_names: z.array(z.string()),
-  rating_bins: z.array(z.number()),
-  rating_bins_with_sub_reviews: z.array(z.number()),
+  rating_bins: ratingBinsSchema,
+  rating_bins_with_sub_reviews: ratingBinsSchema,
   total_run_time: z.number(),
   total_word_count: z.number(),
 });
