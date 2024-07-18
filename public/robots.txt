@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /ClashOfClans/player/
 Disallow: /ClashOfClans/clan/
+Disallow: /ClashOfClans/clanwarleague/
