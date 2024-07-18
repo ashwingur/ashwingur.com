@@ -126,48 +126,50 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                   {data.creators.length}
                 </p>
                 <h2 className="text-2xl my-4">Rating Stats</h2>
-                <ColumnChart
-                  className="w-full h-72"
-                  height="80%"
-                  title="All"
-                  data={all_data}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="All (Including Subreviews)"
-                  height="80%"
-                  data={all_data_with_subreviews}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="Books"
-                  height="80%"
-                  data={books_data}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="Movies"
-                  height="80%"
-                  data={movies_data}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="Shows"
-                  height="80%"
-                  data={shows_data}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="Games"
-                  height="80%"
-                  data={games_data}
-                />
-                <ColumnChart
-                  className="w-full h-72"
-                  title="Music"
-                  height="80%"
-                  data={music_data}
-                />
+                <div className="flex flex-col w-full md:px-8 lg:px-16 2xl:px-32">
+                  <ColumnChart
+                    className="w-full h-72"
+                    height="80%"
+                    title="All"
+                    data={all_data}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="All (Including Subreviews)"
+                    height="80%"
+                    data={all_data_with_subreviews}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="Books"
+                    height="80%"
+                    data={books_data}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="Movies"
+                    height="80%"
+                    data={movies_data}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="Shows"
+                    height="80%"
+                    data={shows_data}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="Games"
+                    height="80%"
+                    data={games_data}
+                  />
+                  <ColumnChart
+                    className="w-full h-72"
+                    title="Music"
+                    height="80%"
+                    data={music_data}
+                  />
+                </div>
               </>
             )}
           </Card>
