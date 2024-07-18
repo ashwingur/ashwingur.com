@@ -4,6 +4,7 @@ import FixedImageContainer from "./FixedImageContainer";
 import clsx from "clsx";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import DOMPurify from "dompurify";
+import { formatRunTime } from "./MediaReviewCard";
 
 interface SubMediaReviewCardProps {
   review: SubMediaReview;
@@ -95,8 +96,8 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
           <div>
             {review.run_time && (
               <p>
-                <span className="font-bold">Run Time</span> {review.run_time}{" "}
-                min
+                <span className="font-bold">Run Time</span>{" "}
+                {formatRunTime(review.run_time)}
               </p>
             )}
             {review.word_count && (

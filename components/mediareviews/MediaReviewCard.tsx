@@ -18,6 +18,35 @@ interface MediaReviewCardProps {
   className?: string;
 }
 
+export function formatRunTime(minutes: number): string {
+  // Calculate the total seconds from the input minutes
+  const totalSeconds = Math.floor(minutes * 60);
+
+  // Calculate hours, remaining minutes, and remaining seconds
+  const hours = Math.floor(totalSeconds / 3600);
+  const remainingMinutes = Math.floor((totalSeconds % 3600) / 60);
+  const remainingSeconds = totalSeconds % 60;
+
+  // Create the formatted string based on the time components
+  let formattedString = "";
+
+  if (hours > 0) {
+    formattedString += `${hours}h `;
+  }
+
+  if (remainingMinutes > 0 || hours > 0) {
+    formattedString += `${remainingMinutes}m `;
+  }
+
+  if (minutes % 1 !== 0) {
+    // Include seconds if the input was a float
+    formattedString += `${remainingSeconds}s`;
+  }
+
+  // Trim any trailing whitespace and return the formatted string
+  return formattedString.trim();
+}
+
 const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   index,
   review,
@@ -178,7 +207,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
                 {review.run_time && (
                   <p>
                     <span className="font-bold">Run Time</span>{" "}
-                    {review.run_time} min
+                    {formatRunTime(review.run_time)}
                   </p>
                 )}
                 {review.word_count && (

@@ -18,7 +18,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   priorityLoad,
   roundingClassName = "rounded-t-2xl",
   heightClassName = "h-60",
-  bgColour = "#383838",
+  bgColour = "#3b3b3b",
   miniCard = false,
 }) => {
   if (imageSrc && !imageAlt) {
@@ -41,7 +41,9 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
         isLoading ? "animate-pulse" : ""
       )}
       style={
-        isLoading || imageSrc === undefined ? { backgroundColor: bgColour } : {}
+        isLoading || imageSrc === undefined
+          ? { backgroundColor: "#3b3b3b" }
+          : { backgroundColor: bgColour }
       }
     >
       {imageSrc && imageAlt && (
