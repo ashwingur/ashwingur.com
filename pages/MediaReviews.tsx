@@ -119,6 +119,14 @@ const MediaReviewsV2 = () => {
         <button
           className="btn text-xl lg:text-2xl"
           onClick={() => {
+            setStatsModalVisible(true);
+          }}
+        >
+          <FaChartColumn className="w-12" />
+        </button>
+        <button
+          className="btn text-xl lg:text-2xl"
+          onClick={() => {
             localStorage.setItem("showImages", showImages ? "false" : "true");
             setShowImages(!showImages);
           }}
@@ -128,14 +136,6 @@ const MediaReviewsV2 = () => {
           ) : (
             <MdOutlineImage className="w-12" />
           )}
-        </button>
-        <button
-          className="btn text-xl lg:text-2xl"
-          onClick={() => {
-            setStatsModalVisible(true);
-          }}
-        >
-          <FaChartColumn className="w-12" />
         </button>
       </div>
 
