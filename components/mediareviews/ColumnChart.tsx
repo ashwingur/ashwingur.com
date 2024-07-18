@@ -9,17 +9,14 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Label,
   LabelList,
 } from "recharts";
 
-// Define the data structure for the chart values
 interface ChartData {
   name: string;
   value: number;
 }
 
-// Define the props for the ColumnChart component
 interface ColumnChartProps {
   title: string;
   data: ChartData[];

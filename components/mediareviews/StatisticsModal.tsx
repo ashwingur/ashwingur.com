@@ -5,6 +5,7 @@ import Card from "@components/Card";
 import { useReviewsMetadata } from "shared/queries/mediareviews";
 import LoadingIcon from "@components/LoadingIcon";
 import ColumnChart from "./ColumnChart";
+import ReviewPieChart from "./PieChart";
 
 interface StatisticsModalProps {
   visible: boolean;
@@ -59,6 +60,29 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
   const games_data = mapRatingBins(data?.rating_bins.game || []);
   const music_data = mapRatingBins(data?.rating_bins.music || []);
 
+  const genreData = [
+    {
+      name: "Books",
+      value: data?.rating_bins.book?.reduce((acc, val) => acc + val, 0) ?? 0,
+    },
+    {
+      name: "Shows",
+      value: data?.rating_bins.show?.reduce((acc, val) => acc + val, 0) ?? 0,
+    },
+    {
+      name: "Movies",
+      value: data?.rating_bins.movie?.reduce((acc, val) => acc + val, 0) ?? 0,
+    },
+    {
+      name: "Games",
+      value: data?.rating_bins.game?.reduce((acc, val) => acc + val, 0) ?? 0,
+    },
+    {
+      name: "Music",
+      value: data?.rating_bins.music?.reduce((acc, val) => acc + val, 0) ?? 0,
+    },
+  ];
+
   return (
     <div
       className={clsx(
@@ -96,11 +120,11 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
             )}
             {data !== undefined && (
               <>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">Total Reviews: </span>
                   {data.rating_bins.all.reduce((acc, val) => acc + val, 0)}
                 </p>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">
                     Total Reviews (Including Subreviews):{" "}
                   </span>
@@ -109,23 +133,29 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                     0
                   )}
                 </p>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">Total Word Count: </span>
                   {data.total_word_count.toLocaleString()}
                 </p>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">Total Run Time: </span>
                   {(data.total_run_time / 60).toFixed(1).toLocaleString()} hours
                 </p>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">Unique Genres: </span>
                   {data.genres.length}
                 </p>
-                <p>
+                <p className="text-center">
                   <span className="font-bold">Unique Creators: </span>
                   {data.creators.length}
                 </p>
-                <h2 className="text-2xl my-4">Rating Stats</h2>
+                <ReviewPieChart
+                  className="w-full h-72 xl:h-80 overflow-auto mt-8"
+                  height="80%"
+                  title="Reviews by Genre"
+                  data={genreData}
+                />
+                <h2 className="text-2xl mb-4">Rating Stats</h2>
                 <div className="flex flex-col w-full md:px-8 lg:px-16 2xl:px-32">
                   <ColumnChart
                     className="w-full h-72 xl:h-80"
