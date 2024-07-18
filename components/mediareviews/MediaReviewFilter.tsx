@@ -43,7 +43,7 @@ const orderByOptions: ListboxOption[] = [
   { label: "Most Words", value: "word_count_desc" },
   { label: "Least Words", value: "word_count_asc" },
   { label: "Longest Runtime", value: "run_time_desc" },
-  { label: "Shorted Runtime", value: "run_time_asc" },
+  { label: "Shortest Runtime", value: "run_time_asc" },
 ];
 
 export const defaultFilterObject: FilterObject = {
