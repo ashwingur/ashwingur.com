@@ -38,9 +38,15 @@ const ColumnChart: React.FC<ColumnChartProps> = ({
   const currentTheme = theme === "system" ? systemTheme : theme;
   const axisStrokeColour = isDark(currentTheme ?? "") ? "#c9c9c9" : "#000";
   const gridColour = isDark(currentTheme ?? "") ? "#757575" : "#a3a3a3";
+  const tooltipColour = isDark(currentTheme ?? "") ? "#2e2e2e" : "#ebebeb";
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-accent"
+      "--color-secondary"
+    )
+  );
+  const [hoverBg, setHoverBg] = useState(
+    getComputedStyle(document.documentElement).getPropertyValue(
+      "--color-background-hover"
     )
   );
 
@@ -50,6 +56,10 @@ const ColumnChart: React.FC<ColumnChartProps> = ({
         document.documentElement
       ).getPropertyValue("--color-secondary");
       setLineColour(newColor);
+      const newHoverColor = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue("--color-background-hover");
+      setHoverBg(newHoverColor);
     };
 
     const timeoutId = setTimeout(() => {
@@ -78,7 +88,10 @@ const ColumnChart: React.FC<ColumnChartProps> = ({
             dy={4}
           ></XAxis>
           <YAxis stroke={axisStrokeColour} width={40} />
-          <Tooltip />
+          <Tooltip
+            contentStyle={{ backgroundColor: tooltipColour }}
+            cursor={{ fill: hoverBg, opacity: 0.5 }}
+          />
           <Bar dataKey="value" fill={lineColour}>
             <LabelList dataKey="value" position="top" fill={axisStrokeColour} />
           </Bar>
