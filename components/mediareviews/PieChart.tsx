@@ -54,7 +54,7 @@ const renderCustomizedLabel = (props: any) => {
   } = props;
 
   const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.1;
+  const radius = innerRadius - 30;
   const xPos = x + radius * Math.cos(-midAngle * RADIAN);
   const yPos = y + radius * Math.sin(-midAngle * RADIAN);
 
@@ -135,7 +135,10 @@ const ReviewPieChart: React.FC<ReviewPieChartProps> = ({
             isAnimationActive={true}
             data={data}
             outerRadius={60}
+            innerRadius={40}
             label={renderCustomizedLabel}
+            stroke="none"
+            paddingAngle={5}
           >
             {data.map((entry, index) => (
               <Cell
