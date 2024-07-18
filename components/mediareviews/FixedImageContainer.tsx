@@ -42,8 +42,8 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
       )}
       style={
         isLoading || imageSrc === undefined
-          ? { backgroundColor: "#3b3b3b" }
-          : { backgroundColor: bgColour }
+          ? { backgroundColor: bgColour }
+          : { backgroundColor: "#3b3b3b" }
       }
     >
       {imageSrc && imageAlt && (
