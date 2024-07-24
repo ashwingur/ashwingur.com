@@ -497,7 +497,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           register={register("visible")}
           errors={errors.visible}
           type="checkbox"
-          className="ml-2 flex gap-2"
+          className="mb-2 ml-2 flex gap-2"
         />
       </form>
       <div>
