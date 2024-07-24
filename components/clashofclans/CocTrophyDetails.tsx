@@ -8,10 +8,10 @@ interface CocTrophyDetailsProps {
 
 const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
   return (
-    <div className="font-clash clash-font-style pb-10 md:pb-0 md:ml-0">
+    <div className="clash-font-style pb-10 font-clash md:ml-0 md:pb-0">
       {player.league !== undefined ? (
-        <div className="flex items-center relative">
-          <div className="absolute w-32 md:w-36 h-32 md:h-36 left-[-45px] md:left-[-68px] bottom-[-20px]">
+        <div className="relative flex items-center">
+          <div className="absolute bottom-[-20px] left-[-45px] h-32 w-32 md:left-[-68px] md:h-36 md:w-36">
             <Image
               unoptimized
               alt={player.league.name}
@@ -21,8 +21,8 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
             />
           </div>
           <div className="flex flex-col items-center bg-gradient-to-r from-black">
-            <div className="pl-20 py-1">{player.league.name}</div>
-            <div className="flex items-center bg-gradient-to-r from-[#931ae7] to-[rgba(0, 0, 0, 0)] pl-20 pr-10 py-1">
+            <div className="py-1 pl-20">{player.league.name}</div>
+            <div className="to-[rgba(0, 0, 0, 0)] flex items-center bg-gradient-to-r from-[#931ae7] py-1 pl-20 pr-10">
               <Image
                 unoptimized
                 alt="trophy"

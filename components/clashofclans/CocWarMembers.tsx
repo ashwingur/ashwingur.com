@@ -38,12 +38,12 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
 
     return (
       <div
-        className="coc-font-style flex flex-col pb-8 px-2 pt-2 rounded-md items-center hover:cursor-pointer hover:bg-black/20 transition-all"
+        className="coc-font-style flex flex-col items-center rounded-md px-2 pb-8 pt-2 transition-all hover:cursor-pointer hover:bg-black/20"
         onClick={() => setSelectedMember(member)}
       >
         {member.opponentAttacks > 0 ? (
-          <div className="flex items-center h-8">
-            <div className="relative w-6 h-6">
+          <div className="flex h-8 items-center">
+            <div className="relative h-6 w-6">
               <Image
                 unoptimized
                 src={
@@ -54,7 +54,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <div className="relative w-6 h-6 mb-4">
+            <div className="relative mb-4 h-6 w-6">
               <Image
                 unoptimized
                 src={
@@ -65,7 +65,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <div className="relative w-6 h-6">
+            <div className="relative h-6 w-6">
               <Image
                 unoptimized
                 src={
@@ -83,7 +83,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         <div className="text-stone-300">
           {member.mapPosition}. {member.name}
         </div>
-        <div className="relative w-16 h-16 md:w-24 md:h-24">
+        <div className="relative h-16 w-16 md:h-24 md:w-24">
           <Image
             unoptimized
             src={`/assets/coc/townhalls/${member.townhallLevel}.png`}
@@ -92,9 +92,9 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
             style={{ objectFit: "contain" }}
           />
         </div>
-        <div className="flex h-8 md:h-12 mt-1">
+        <div className="mt-1 flex h-8 md:h-12">
           {attacksRemaining > 0 && (
-            <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
+            <div className="relative bottom-0 h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={miniBarb}
@@ -105,7 +105,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
             </div>
           )}
           {attacksRemaining > 1 && (
-            <div className="relative bottom-0 w-8 h-8 md:h-12 md:w-12">
+            <div className="relative bottom-0 h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={miniBarb}
@@ -122,7 +122,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
 
   const WarMembersList = (
     members: ClanWarMember[],
-    setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>
+    setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>,
   ) => {
     const memberElements = members
       .sort((a, b) => a.mapPosition - b.mapPosition)
@@ -148,13 +148,13 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
     const bestAttackMember = allyList.find(
       (ally) =>
         member.opponentAttacks > 0 &&
-        ally.tag === member.bestOpponentAttack.attackerTag
+        ally.tag === member.bestOpponentAttack.attackerTag,
     );
 
     return (
-      <div className="border-2 border-white rounded-lg p-2 bg-black/60 clash-font-style flex flex-col items-center">
+      <div className="clash-font-style flex flex-col items-center rounded-lg border-2 border-white bg-black/60 p-2">
         <button
-          className="h-8 w-8 hover:h-7 hover:w-7 transition-all absolute top-2 right-2"
+          className="absolute right-2 top-2 h-8 w-8 transition-all hover:h-7 hover:w-7"
           onClick={() => setSelectedMember(undefined)}
         >
           <Image
@@ -170,14 +170,14 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           {member.mapPosition}. {member.name}
         </div>
         <div className="coc-font-style text-xl">
-          <span className="text-red-700 mr-1">Attacks remaining</span>{" "}
+          <span className="mr-1 text-red-700">Attacks remaining</span>{" "}
           <span className="text-yellow-600">{attacksRemaining}</span>
         </div>
-        <div className="h-[2px] bg-white my-1 min-w-full" />
+        <div className="my-1 h-[2px] min-w-full bg-white" />
         {member.bestOpponentAttack && (
           <div>
             <div className="text-blue-400">Clan best attack:</div>
-            <div className="flex items-center flex-col">
+            <div className="flex flex-col items-center">
               <div className="coc-font-style flex gap-8">
                 <div>
                   <span>{bestAttackMember?.mapPosition}. </span>
@@ -185,8 +185,8 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                 </div>
                 <div>{member.bestOpponentAttack.destructionPercentage}%</div>
               </div>
-              <div className="flex items-center h-8">
-                <div className="relative w-6 h-6">
+              <div className="flex h-8 items-center">
+                <div className="relative h-6 w-6">
                   <Image
                     unoptimized
                     src={
@@ -199,7 +199,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                     style={{ objectFit: "contain" }}
                   />
                 </div>
-                <div className="relative w-6 h-6">
+                <div className="relative h-6 w-6">
                   <Image
                     unoptimized
                     src={
@@ -212,7 +212,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
                     style={{ objectFit: "contain" }}
                   />
                 </div>
-                <div className="relative w-6 h-6">
+                <div className="relative h-6 w-6">
                   <Image
                     unoptimized
                     src={
@@ -229,7 +229,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
             </div>
           </div>
         )}
-        <div className="h-16 flex items-center">
+        <div className="flex h-16 items-center">
           <Link href={`/ClashOfClans/player/${member.tag.slice(1)}`}>
             <CocSmallButton
               className="w-36 hover:w-32"
@@ -248,13 +248,13 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
   const alliesList = WarMembersList(clanWar.clan.members, setSelectedMember);
   const opponentList = WarMembersList(
     clanWar.opponent.members,
-    setSelectedMember
+    setSelectedMember,
   );
   return (
-    <div className="flex gap-4 md:gap-28 lg:gap-48 mb-4 mt-2">
+    <div className="mb-4 mt-2 flex gap-4 md:gap-28 lg:gap-48">
       <div>{alliesList}</div>
       <div>{opponentList}</div>
-      <div className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-4 w-4/5 md:w-2/3 lg:w-1/2">
+      <div className="fixed bottom-0 left-1/2 mb-4 w-4/5 -translate-x-1/2 md:w-2/3 lg:w-1/2">
         {selectedMember && (
           <MemberPopup
             member={selectedMember}

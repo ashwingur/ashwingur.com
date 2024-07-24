@@ -20,7 +20,7 @@ interface ArmyItemIconProps {
 const ArmyItemIcon = ({ playerItemLevel, showLevel }: ArmyItemIconProps) => {
   const icon_name: string = playerItemLevel.name.replaceAll(" ", "_");
   return (
-    <div className="border-black border-2 inline-block rounded-md relative font-clash font-thin">
+    <div className="relative inline-block rounded-md border-2 border-black font-clash font-thin">
       <Image
         unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.png`}
@@ -31,13 +31,13 @@ const ArmyItemIcon = ({ playerItemLevel, showLevel }: ArmyItemIconProps) => {
       {showLevel && (
         <div
           className={
-            "inline-block absolute bottom-1 left-1 rounded-md w-6 h-6 shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white" +
+            "absolute bottom-1 left-1 inline-block h-6 w-6 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white" +
             (playerItemLevel.level != playerItemLevel.maxLevel
               ? " bg-black"
               : " bg-yellow-500")
           }
         >
-          <div className="text-white px-[2px] text-center">
+          <div className="px-[2px] text-center text-white">
             {playerItemLevel.level}
           </div>
         </div>
@@ -59,9 +59,9 @@ const ArmyItemsCategory = ({
   ));
 
   return (
-    <div className="bg-[#5d6b96] dark:bg-[#384672] p-4 mx-4 rounded-lg my-4 border-2 border-black">
-      <div className="clash-font-style text-xl mb-4">{category}</div>
-      <div className="flex flex-row flex-wrap gap-1 ">{items_elements}</div>
+    <div className="mx-4 my-4 rounded-lg border-2 border-black bg-[#5d6b96] p-4 dark:bg-[#384672]">
+      <div className="clash-font-style mb-4 text-xl">{category}</div>
+      <div className="flex flex-row flex-wrap gap-1">{items_elements}</div>
     </div>
   );
 };
@@ -113,21 +113,21 @@ const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
         super_troop_names.includes(item.name) ||
         pet_names.includes(item.name) ||
         item.village == "builderBase"
-      )
+      ),
   );
 
   const siege_machines = player.troops.filter((item) =>
-    siege_machine_names.includes(item.name)
+    siege_machine_names.includes(item.name),
   );
 
   const super_troops = player.troops.filter((item) =>
-    super_troop_names.includes(item.name)
+    super_troop_names.includes(item.name),
   );
 
   const pets = player.troops.filter((item) => pet_names.includes(item.name));
 
   const builder_troops = player.troops.filter(
-    (item) => item.village == "builderBase"
+    (item) => item.village == "builderBase",
   );
 
   return (

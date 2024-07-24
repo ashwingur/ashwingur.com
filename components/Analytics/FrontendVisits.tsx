@@ -14,11 +14,11 @@ interface FrontendVisitsProps {
 const fetchFrontendAnalytics = async (
   start_time: string,
   end_time: string,
-  route?: string
+  route?: string,
 ): Promise<FrontendAnalytics> => {
   try {
     const url = new URL(
-      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/analytics/frontend_visits`
+      `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/analytics/frontend_visits`,
     );
     url.searchParams.append("start_time", start_time);
     url.searchParams.append("end_time", end_time);
@@ -57,7 +57,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
       fetchFrontendAnalytics(
         startTime.toISOString(),
         endTime.toISOString(),
-        route
+        route,
       ),
     staleTime: 60 * 1000, // 1 minute
     cacheTime: 5 * 60 * 1000, // 5 minutes
@@ -93,7 +93,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
   const unique_ids = data.timeseries_data.map((d) => d.unique_user_ids);
   const unique_ips = data.timeseries_data.map((d) => d.unique_user_ips);
   const routes = data.timeseries_data.map((d) =>
-    d.unique_routes.filter((r) => hasTwoOrLessSlashes(r))
+    d.unique_routes.filter((r) => hasTwoOrLessSlashes(r)),
   );
 
   const routeButtons = data.unique_routes
@@ -114,7 +114,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
       className={clsx(className, "flex flex-col items-center")}
     >
       <h2>Frontend Visits</h2>
-      <div className="flex gap-2 md:gap-4 flex-wrap py-4 md:px-4 transition-all">
+      <div className="flex flex-wrap gap-2 py-4 transition-all md:gap-4 md:px-4">
         {routeButtons}
 
         {route && (
@@ -126,7 +126,7 @@ const FrontendVisits: React.FC<FrontendVisitsProps> = ({
           </button>
         )}
       </div>
-      <div className="flex flex-col self-stretch gap-8 lg:px-4 mt-4">
+      <div className="mt-4 flex flex-col gap-8 self-stretch lg:px-4">
         <AnalyticsChart
           timestamps={timestamps}
           values={total_visits}

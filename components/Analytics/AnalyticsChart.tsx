@@ -40,13 +40,13 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
       .toUpperCase()}`;
 
     return (
-      <div className="bg-background py-2 px-3 rounded-md shadow-md">
-        <p className="text-center font-bold text-lg">{`${data.value}`}</p>
-        <p className="max-w-20 lg:max-w-52 break-words">
+      <div className="rounded-md bg-background px-3 py-2 shadow-md">
+        <p className="text-center text-lg font-bold">{`${data.value}`}</p>
+        <p className="max-w-20 break-words lg:max-w-52">
           <span className="font-bold">Routes: </span>
           {data.routes.join(", ")}
         </p>
-        <p className="text-sm mt-1">{`${formattedDate}`}</p>
+        <p className="mt-1 text-sm">{`${formattedDate}`}</p>
       </div>
     );
   }
@@ -72,14 +72,14 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
 
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-accent"
-    )
+      "--color-accent",
+    ),
   );
 
   useEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-accent");
       setLineColour(newColor);
     };
@@ -96,7 +96,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   const generateTicks = (
     min: number,
     max: number,
-    tickCount: number
+    tickCount: number,
   ): number[] => {
     // Using a set to avoid duplicate keys
     const step = (max - min) / (tickCount - 1);
@@ -129,8 +129,8 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
 
   return (
     <Card className="w-full" firstLayer={false}>
-      <h3 className="text-center mt-2 mb-1 lg:text-xl">{title}</h3>
-      <p className="text-center mb-2">Total: {grandTotal}</p>
+      <h3 className="mb-1 mt-2 text-center lg:text-xl">{title}</h3>
+      <p className="mb-2 text-center">Total: {grandTotal}</p>
       <div className="flex h-96 lg:h-[32rem]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart

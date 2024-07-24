@@ -23,13 +23,13 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex items-center gap-4 font-clash clash-font-style">
-        <div className="bg-[#4eb3e3] p-2 rounded-md border-2 border-black">
+      <div className="clash-font-style flex items-center gap-4 font-clash">
+        <div className="rounded-md border-2 border-black bg-[#4eb3e3] p-2">
           {player.expLevel}
         </div>
         <div>
           <div className="text-xl">{player.name}</div>
-          <div className="text-gray-300 font-thin font-coc">{player.tag}</div>
+          <div className="font-coc font-thin text-gray-300">{player.tag}</div>
           <div className="font-coc font-thin">{mapPlayerRole(player.role)}</div>
         </div>
       </div>

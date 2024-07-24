@@ -11,7 +11,7 @@ const CocLoadingOrError = ({
   return (
     <div className="bg-clash min-h-screen pb-4">
       <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">
+      <h2 className="clash-font-style pt-20 text-center font-thin">
         {heading}
       </h2>
       {info}

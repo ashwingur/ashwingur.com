@@ -3,11 +3,21 @@ import GenericListbox, { ListboxOption } from "@components/GenericListBox";
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
-import { IoFilter } from "react-icons/io5";
+import { IoFilter, IoGameController, IoSearch } from "react-icons/io5";
 import { OptionType } from "shared/mediareview-genres";
 import { useReviewsMetadata } from "shared/queries/mediareviews";
 import _ from "lodash";
 import { useRouter } from "next/router";
+import { BiSortAlt2 } from "react-icons/bi";
+import {
+  FaBook,
+  FaClapperboard,
+  FaGlasses,
+  FaItunesNote,
+  FaUser,
+} from "react-icons/fa6";
+import { FaGlassMartini, FaGlassMartiniAlt } from "react-icons/fa";
+import { PiTelevisionSimpleBold } from "react-icons/pi";
 
 export interface FilterObject {
   mediaTypes: string[];
@@ -82,22 +92,22 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
   // Filter out the selected options
   const filteredGenreOptions = genreOptions.filter(
     (option) =>
-      !filterObject.genres.some((selected) => selected === option.value)
+      !filterObject.genres.some((selected) => selected === option.value),
   );
   const filteredCreatorOptions = creatorOptions.filter(
     (option) =>
-      !filterObject.creators.some((selected) => selected === option.value)
+      !filterObject.creators.some((selected) => selected === option.value),
   );
   const filteredNameOptions = nameOptions.filter(
     (option) =>
-      !filterObject.names.some((selected) => selected === option.value)
+      !filterObject.names.some((selected) => selected === option.value),
   );
 
   // Initialize filterObject from URL parameters on mount
   useEffect(() => {
     if (router.isReady) {
       const params = new URLSearchParams(
-        router.query as Record<string, string>
+        router.query as Record<string, string>,
       );
 
       const initialFilterObject: FilterObject = {
@@ -175,17 +185,20 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           setExpanded(!expanded);
         }}
       >
-        <IoFilter className="text-xl lg:text-2xl w-12" />
+        <IoFilter className="w-12 text-xl lg:text-2xl" />
       </button>
       <div
         ref={ref}
         className={clsx(
           expanded ? "scale-y-100" : "scale-y-0",
-          "transition-all origin-top w-80 sm:w-[30rem] lg:w-[36rem] !absolute z-30 bottom-0 translate-y-full"
+          "!absolute bottom-0 z-30 w-80 origin-top translate-y-full transition-all sm:w-[30rem] lg:w-[36rem]",
         )}
       >
         <Card firstLayer={false} className="flex flex-col">
-          <p className="mt-2 ml-2 font-bold">Sort</p>
+          <p className="ml-2 mt-2 font-bold">
+            Sort <BiSortAlt2 className="mb-1 inline-block text-xl" />
+          </p>
+
           <GenericListbox
             className="z-[20]"
             bgClass="bg-background-muted"
@@ -206,12 +219,14 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
               }));
             }}
           />
-          <p className="mt-2 ml-2 font-bold">Review Name</p>
+          <p className="ml-2 mt-2 font-bold">
+            Review Name <IoSearch className="mb-1 ml-1 inline-block text-xl" />
+          </p>
           <GenericMultiSelectGroup
             className="z-[19]"
             options={filteredNameOptions}
             value={nameOptions.filter((n) =>
-              filterObject.names.includes(n.value)
+              filterObject.names.includes(n.value),
             )}
             onChange={(selectedOptions) => {
               setFilterObject((prev) => ({
@@ -224,12 +239,18 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             displayKey={"label"}
             placeholder="Review Names"
           />
-          <p className="mt-2 ml-2 font-bold">Media Type</p>
+          <p className="ml-2 mt-2 font-bold">
+            Media Type <FaClapperboard className="mb-1 ml-1 inline-block" />
+            <FaBook className="mb-1 ml-1 inline-block" />
+            <PiTelevisionSimpleBold className="mb-1 ml-1 inline-block" />
+            <IoGameController className="mb-1 ml-1 inline-block" />
+            <FaItunesNote className="mb-1 ml-1 inline-block" />
+          </p>
           <GenericMultiSelectGroup
             className="z-[18]"
             options={mediaOptions}
             value={mediaOptions.filter((m) =>
-              filterObject.mediaTypes.includes(m.value)
+              filterObject.mediaTypes.includes(m.value),
             )}
             onChange={(selectedOptions) => {
               setFilterObject((prev) => ({
@@ -243,12 +264,14 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             placeholder="Media Types"
           />
 
-          <p className="mt-2 ml-2 font-bold">Genre</p>
+          <p className="ml-2 mt-2 font-bold">
+            Genre <FaGlassMartiniAlt className="mb-1 ml-1 inline-block" />
+          </p>
           <GenericMultiSelectGroup
             className="z-[17]"
             options={filteredGenreOptions}
             value={genreOptions.filter((g) =>
-              filterObject.genres.includes(g.value)
+              filterObject.genres.includes(g.value),
             )}
             onChange={(selectedOptions) => {
               setFilterObject((prev) => ({
@@ -261,12 +284,14 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             displayKey={"label"}
             placeholder="Genres"
           />
-          <p className="mt-2 ml-2 font-bold">Creator</p>
+          <p className="ml-2 mt-2 font-bold">
+            Creator <FaUser className="mb-1 ml-1 inline-block" />
+          </p>
           <GenericMultiSelectGroup
             className="z-[16]"
             options={filteredCreatorOptions}
             value={creatorOptions.filter((c) =>
-              filterObject.creators.includes(c.value)
+              filterObject.creators.includes(c.value),
             )}
             onChange={(selectedOptions) => {
               setFilterObject((prev) => ({
@@ -282,7 +307,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
 
           {filterApplied && (
             <button
-              className="btn self-center w-32 mt-4"
+              className="btn mt-4 w-32 self-center"
               onClick={() => {
                 setFilterObject(defaultFilterObject);
               }}
@@ -292,7 +317,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           )}
 
           {noResults && (
-            <p className="text-center text-error mt-4 text-lg">No Results</p>
+            <p className="mt-4 text-center text-lg text-error">No Results</p>
           )}
         </Card>
       </div>

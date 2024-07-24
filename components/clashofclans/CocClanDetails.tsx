@@ -20,7 +20,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
   const type_case = type_space.charAt(0).toUpperCase() + type_space.slice(1);
 
   return (
-    <div className="coc-font-style text-lg w-72 md:w-96">
+    <div className="coc-font-style w-72 text-lg md:w-96">
       <div className="flex justify-between">
         <div>Clan War League:</div>
         <div>{clan.warLeague.name}</div>
@@ -29,7 +29,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
       <div className="flex justify-between">
         <div>Total points:</div>
         <div>
-          <div className="flex gap-2 justify-between">
+          <div className="flex justify-between gap-2">
             {clan.clanPoints}
             <Image
               unoptimized
@@ -39,7 +39,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
               height={24}
             />
           </div>
-          <div className="flex gap-2 justify-between mt-1">
+          <div className="mt-1 flex justify-between gap-2">
             {clan.clanVersusPoints}
             <Image
               unoptimized
@@ -69,7 +69,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
       <div className="flex justify-between">
         <div>Required trophies:</div>
         <div>
-          <div className="flex gap-2 justify-between">
+          <div className="flex justify-between gap-2">
             {clan.requiredTrophies}
             <Image
               unoptimized
@@ -79,7 +79,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
               height={24}
             />
           </div>
-          <div className="flex gap-2 justify-between mt-1">
+          <div className="mt-1 flex justify-between gap-2">
             {clan.requiredBuilderBaseTrophies}
             <Image
               unoptimized

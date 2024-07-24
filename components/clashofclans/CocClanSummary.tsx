@@ -9,7 +9,7 @@ interface CocClanSummaryProps {
 const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
   const labels = clan.labels.map((label, index) => {
     return (
-      <div key={index} className="relative w-12 h-12 md:w-16 md:h-16">
+      <div key={index} className="relative h-12 w-12 md:h-16 md:w-16">
         <Image
           unoptimized
           key={index}
@@ -24,8 +24,8 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex items-center gap-4 font-clash clash-font-style">
-        <div className="w-20 h-20 md:w-40 md:h-40 relative">
+      <div className="clash-font-style flex items-center gap-4 font-clash">
+        <div className="relative h-20 w-20 md:h-40 md:w-40">
           <Image
             unoptimized
             src={clan.badgeUrls.large}
@@ -36,8 +36,8 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
         </div>
         <div>
           <div className="text-xl text-yellow-100">{clan.name}</div>
-          <div className="font-thin font-coc text-lg">{clan.tag}</div>
-          <div className="text-lg font-thin font-coc w-48 lg:w-96">
+          <div className="font-coc text-lg font-thin">{clan.tag}</div>
+          <div className="w-48 font-coc text-lg font-thin lg:w-96">
             {clan.description}
           </div>
         </div>

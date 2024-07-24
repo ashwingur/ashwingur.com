@@ -2,6 +2,7 @@ import React from "react";
 import { Listbox } from "@headlessui/react";
 import { AiOutlineDown } from "react-icons/ai";
 import clsx from "clsx";
+import { FaChevronDown } from "react-icons/fa6";
 
 export interface ListboxOption {
   [key: string]: any;
@@ -46,7 +47,7 @@ const GenericListbox = <T,>({
         >
           <Listbox.Button className="w-full focus:outline-none flex items-center justify-between">
             {displayValue(selectedValue)}
-            <AiOutlineDown className="hover:text-xl transition-all" />
+            <FaChevronDown className="hover:text-xl transition-all" />
           </Listbox.Button>
         </div>
         <Listbox.Options

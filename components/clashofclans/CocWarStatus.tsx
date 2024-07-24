@@ -13,15 +13,15 @@ const ClanStatus = (
   teamSize: number,
   stars: number,
   attacks: number,
-  attacksPerMember: number
+  attacksPerMember: number,
 ) => {
   return (
-    <div className="flex flex-col clash-font-style gap-2">
+    <div className="clash-font-style flex flex-col gap-2">
       <Link href={`/ClashOfClans/clan/${tag.substring(1)}`}>
         <div className="text-yellow-100">{name}</div>
       </Link>
-      <div className="flex gap-2 items-center">
-        <div className="w-6 h-6 relative md:w-8 md:h-8">
+      <div className="flex items-center gap-2">
+        <div className="relative h-6 w-6 md:h-8 md:w-8">
           <Image
             unoptimized
             src={`/assets/coc/stars/silver_star.png`}
@@ -35,7 +35,7 @@ const ClanStatus = (
         </div>
       </div>
       <div className="coc-font-style flex items-center gap-2 md:text-xl">
-        <div className="w-6 h-6 relative md:w-8 md:h-8">
+        <div className="relative h-6 w-6 md:h-8 md:w-8">
           <Image
             unoptimized
             src={`/assets/coc/sword.png`}
@@ -63,7 +63,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.clan.stars,
     clanWar.clan.attacks,
-    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1
+    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1,
   );
 
   const otherClanStatus = ClanStatus(
@@ -72,17 +72,17 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.opponent.stars,
     clanWar.opponent.attacks,
-    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1
+    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1,
   );
 
   return (
     <div>
-      <div className="flex flex-col items-center gap-2 mt-4 border-2 border-white rounded-lg p-2 bg-black/30">
+      <div className="mt-4 flex flex-col items-center gap-2 rounded-lg border-2 border-white bg-black/30 p-2">
         <div className="flex gap-4 md:gap-16">
           {myClanStatus}
           {otherClanStatus}
         </div>
-        <div className="capitalize coc-font-style">
+        <div className="coc-font-style capitalize">
           <span className="text-red-500">{warState}</span>
         </div>
       </div>

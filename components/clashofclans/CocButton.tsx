@@ -20,18 +20,18 @@ const CocButton = ({
   return (
     <button
       onClick={onClick}
-      className={`${className} ${outerColour} relative clash-font-style p-4 rounded-xl border-2 border-black z-0 text-xl hover:text-base transition-all`}
+      className={`${className} ${outerColour} clash-font-style relative z-0 rounded-xl border-2 border-black p-4 text-xl transition-all hover:text-base`}
     >
-      <div className="absolute flex w-full h-[90%] top-0 left-0 right-0 z-[-1]">
+      <div className="absolute left-0 right-0 top-0 z-[-1] flex h-[90%] w-full">
         <div
           className={
-            middleColour + " w-full h-full rounded-lg mx-[2px] my-[2px]"
+            middleColour + " mx-[2px] my-[2px] h-full w-full rounded-lg"
           }
         ></div>
       </div>
-      <div className="absolute flex w-full h-[50%] top-0 left-0 right-0 z-[-1]">
+      <div className="absolute left-0 right-0 top-0 z-[-1] flex h-[50%] w-full">
         <div
-          className={innerColour + " w-full h-full rounded-lg mx-2 mt-2"}
+          className={innerColour + " mx-2 mt-2 h-full w-full rounded-lg"}
         ></div>
       </div>
       <div className="">{text}</div>

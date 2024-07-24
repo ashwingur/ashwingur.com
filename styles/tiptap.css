@@ -24,11 +24,11 @@
 }
 
 .editor ul {
-  @apply list-disc pl-4;
+  @apply list-disc pl-8;
 }
 
 .editor ol {
-  @apply list-decimal pl-4;
+  @apply list-decimal pl-8;
 }
 
 .editor hr {
