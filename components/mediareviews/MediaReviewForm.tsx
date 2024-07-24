@@ -284,7 +284,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         {subReviews.length > 0 && baseValues.media_type === "Book" && (
           <p className="-mt-1 ml-2 text-sm italic">
-            Subreviews total word count:{" "}
+            Sub-reviews total word count:{" "}
             {subReviews
               .reduce(
                 (acc, subReview) => acc + (subReview.value.word_count ?? 0),
@@ -309,7 +309,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           (baseValues.media_type === "Movie" ||
             baseValues.media_type === "Music") && (
             <p className="-mt-1 ml-2 text-sm italic">
-              Subreviews total run time:{" "}
+              Sub-reviews total run time:{" "}
               {subReviews
                 .reduce(
                   (acc, subReview) => acc + (subReview.value.run_time ?? 0),
