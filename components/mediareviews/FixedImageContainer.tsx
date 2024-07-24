@@ -30,15 +30,15 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   return (
     <div
       className={clsx(
-        "w-full relative overflow-hidden hover:scale-125 transition-all duration-700",
+        "relative w-full overflow-hidden transition-all duration-700 hover:scale-125",
         heightClassName,
         roundingClassName,
-        "before:content-[''] before:absolute before:w-full before:transition-all before:duration-1000",
-        "before:bg-gradient-to-b before:z-10 before:bottom-0",
+        "before:absolute before:w-full before:transition-all before:duration-1000 before:content-['']",
+        "before:bottom-0 before:z-10 before:bg-gradient-to-b",
         miniCard
           ? "before:h-full before:from-black/0 before:to-black/80"
-          : "before:h-3/5 before:md-2/5 before:from-black/0 before:to-black/80",
-        isLoading ? "animate-pulse" : ""
+          : "before:md-2/5 before:h-3/5 before:from-black/0 before:to-black/80",
+        isLoading ? "animate-pulse" : "",
       )}
       style={
         isLoading || imageSrc === undefined
@@ -52,7 +52,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
             unoptimized
             src={imageSrc}
             alt={imageAlt}
-            className="object-cover h-full w-full blur-3xl"
+            className="h-full w-full object-cover blur-3xl"
             fill
             priority={priorityLoad}
           />
@@ -60,7 +60,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
             unoptimized
             src={imageSrc}
             alt={imageAlt}
-            className="object-contain h-full w-full"
+            className="h-full w-full object-contain"
             onLoad={(e) => {
               setIsLoading(false);
             }}

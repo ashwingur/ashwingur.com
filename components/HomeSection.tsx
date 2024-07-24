@@ -133,14 +133,14 @@ const HomeSection = () => {
   const appCards = appsList.map((app, index) => {
     return (
       <Card firstLayer={false} key={index}>
-        <div className="flex flex-col items-center justify-between h-full">
+        <div className="flex h-full flex-col items-center justify-between">
           <div>
             <h3 className="text-center">{app.name}</h3>
             <p className="text-sm">{app.description}</p>
           </div>
           <Link
             href={app.url}
-            className="btn text-2xl w-20 flex justify-center mt-2"
+            className="btn mt-2 flex w-20 justify-center text-2xl"
           >
             {app.icon()}
           </Link>
@@ -152,9 +152,9 @@ const HomeSection = () => {
   return (
     <div
       id="home"
-      className="pt-24 flex flex-col items-center justify-center px-4"
+      className="flex flex-col items-center justify-center px-4 pt-24"
     >
-      <div className="text-2xl md:text-4xl lg:text-5xl font-mono text-center">
+      <div className="text-center font-mono text-2xl md:text-4xl lg:text-5xl">
         <TypewriterComponent
           onInit={(typewriter) => {
             typewriter.typeString("> Hello, I'm Ashwin Gur").start();
@@ -164,18 +164,18 @@ const HomeSection = () => {
 
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center w-full lg:w-4/5 2xl:w-2/3 mt-4 lg:mt-8 lg:!px-8"
+        className="mt-4 flex w-full flex-col items-center justify-center lg:mt-8 lg:w-4/5 lg:!px-8 2xl:w-2/3"
       >
-        <h2 className="text-2xl mb-2">About Me</h2>
+        <h2 className="mb-2 text-2xl">About Me</h2>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
-          <span className="font-bold w-28 md:w-24">Degree:</span>{" "}
+          <span className="w-28 font-bold md:w-24">Degree:</span>{" "}
           <span className="w-full">
             Bachelor of Mechatronics Engineering + Computer Science double
             degree (University of Sydney)
           </span>
         </div>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
-          <span className="font-bold w-28 md:w-24">Interests:</span>
+          <span className="w-28 font-bold md:w-24">Interests:</span>
           <span className="w-full">
             Coding, reading, gaming,{" "}
             <Link
@@ -188,15 +188,15 @@ const HomeSection = () => {
             , and eating tasty food
           </span>
         </div>
-        <h2 className="text-2xl mt-4 lg:mt-8">Links</h2>
+        <h2 className="mt-4 text-2xl lg:mt-8">Links</h2>
         <div className="flex items-center justify-center gap-4">
           <Link
             href="https://github.com/ashwingur"
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-accent hover:text-text-accent p-2 transition rounded-md group relative flex justify-center"
+            className="group relative flex justify-center rounded-md p-2 transition hover:bg-accent hover:text-text-accent"
           >
-            <span className="absolute top-[4.5rem] scale-0 transition-all rounded bg-accent px-2 py-1 text-xs text-text-accent group-hover:scale-100">
+            <span className="absolute top-[4.5rem] scale-0 rounded bg-accent px-2 py-1 text-xs text-text-accent transition-all group-hover:scale-100">
               Github
             </span>
             <BsGithub size={50} />
@@ -205,9 +205,9 @@ const HomeSection = () => {
             href="https://www.linkedin.com/in/ashwingur/?originalSubdomain=au"
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-accent hover:text-text-accent p-2 transition rounded-md group relative flex justify-center"
+            className="group relative flex justify-center rounded-md p-2 transition hover:bg-accent hover:text-text-accent"
           >
-            <span className="absolute top-[4.5rem] scale-0 transition-all rounded bg-accent px-2 py-1 text-xs text-text-accent group-hover:scale-100">
+            <span className="absolute top-[4.5rem] scale-0 rounded bg-accent px-2 py-1 text-xs text-text-accent transition-all group-hover:scale-100">
               LinkedIn
             </span>
             <BsLinkedin size={50} />
@@ -217,33 +217,33 @@ const HomeSection = () => {
             href="/Resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-accent hover:text-text-accent p-2 transition rounded-md group relative flex justify-center"
+            className="group relative flex justify-center rounded-md p-2 transition hover:bg-accent hover:text-text-accent"
           >
-            <span className="absolute top-[4.5rem] scale-0 transition-all rounded bg-accent px-2 py-1 text-xs text-text-accent group-hover:scale-100">
+            <span className="absolute top-[4.5rem] scale-0 rounded bg-accent px-2 py-1 text-xs text-text-accent transition-all group-hover:scale-100">
               Resume
             </span>
             <IoDocumentText size={50} />
           </Link>
         </div>
-        <h2 className="text-2xl mt-8 mb-2">About this Website</h2>
-        <p className="lg:px-8 xl:px-24 w-full">
+        <h2 className="mb-2 mt-8 text-2xl">About this Website</h2>
+        <p className="w-full lg:px-8 xl:px-24">
           I originally made this website to learn about React and to display my
           projects. However, it has since evolved into a hobby project that I
           continuously work on. In addition to the projects I have linked, there
           are many other pages, such as Media Reviews, which feature
           non-technical content.
         </p>
-        <p className="lg:px-8 xl:px-24 w-full mt-2">
+        <p className="mt-2 w-full lg:px-8 xl:px-24">
           I have also spent a lot of time working on the styling and added
           multiple interesting themes that you can select from in the top right
           or from the following button:
         </p>
         <ToggleThemeButton className="text-xl" centerOptions={true} />
-        <p className="lg:px-8 xl:px-24 w-full mt-2">
+        <p className="mt-2 w-full lg:px-8 xl:px-24">
           Below are a list of all my apps and pages on this website.
         </p>
-        <h2 className="text-2xl mt-8 mb-2">Apps and Pages</h2>
-        <div className="grid md:grid-cols-2 gap-4 lg:grid-cols-3">
+        <h2 className="mb-2 mt-8 text-2xl">Apps and Pages</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {appCards}
         </div>
       </Card>

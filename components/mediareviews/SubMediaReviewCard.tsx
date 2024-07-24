@@ -53,11 +53,11 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-xl bg-background-hover flex flex-col",
-        className
+        "flex flex-col rounded-2xl bg-background-hover shadow-xl",
+        className,
       )}
     >
-      <div className="w-full relative overflow-hidden">
+      <div className="relative w-full overflow-hidden">
         <div className="overflow-hidden rounded-t-2xl">
           <FixedImageContainer
             imageSrc={
@@ -77,21 +77,21 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
 
         <div
           className={clsx(
-            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none absolute bottom-0 left-0"
+            "pointer-events-none absolute bottom-0 left-0 z-20 flex w-full items-end justify-between p-4 text-white",
           )}
         >
           <div>
             {review.media_creation_date && (
-              <p className="font-mono tracking-widest text-lg">
+              <p className="font-mono text-lg tracking-widest">
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
-            <p className="text-xl lg:text-2xl font-bold">{review.name}</p>
+            <p className="text-xl font-bold lg:text-2xl">{review.name}</p>
           </div>
-          <p className="text-4xl ml-8">{review.rating}</p>
+          <p className="ml-8 text-4xl">{review.rating}</p>
         </div>
       </div>
-      <div className="flex flex-col p-4 gap-2">
+      <div className="flex flex-col gap-2 p-4">
         <div className="flex justify-between">
           <div>
             {review.run_time && (
@@ -114,7 +114,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
             </p>
           )}
         </div>
-        <div className="flex flex-col md:flex-row gap-2 text-sm">
+        <div className="flex flex-col gap-2 text-sm md:flex-row">
           {pros.length > 0 && (
             <div className={clsx(cons.length > 0 ? "md:w-1/2" : "")}>
               <h3>Pros</h3>
@@ -139,7 +139,7 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
         />
       )}
       {review.review_last_update_date && (
-        <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
+        <p className="mb-2 ml-auto mr-4 mt-auto text-xs italic">
           Updated{" "}
           {new Date(review.review_last_update_date).toLocaleDateString()}{" "}
           {new Date(review.review_last_update_date).toLocaleTimeString()}

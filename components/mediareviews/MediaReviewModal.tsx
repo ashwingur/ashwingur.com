@@ -46,7 +46,7 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
     <div
       className={clsx(
         "fixed inset-0 z-50 flex items-center justify-center transition-all duration-300",
-        visible ? "opacity-100 visible" : "opacity-0 invisible"
+        visible ? "visible opacity-100" : "invisible opacity-0",
       )}
     >
       <div
@@ -55,13 +55,13 @@ const MediaReviewModal: React.FC<MediaReviewModalProps> = ({
           setVisible(false);
         }}
       />
-      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
+      <div className="z-10 flex max-h-[83%] w-full flex-col overflow-hidden rounded-2xl px-4 md:px-8 lg:w-4/5 2xl:w-3/5">
         <div
           ref={scrollDivRef}
-          className="overflow-y-auto rounded-2xl relative"
+          className="relative overflow-y-auto rounded-2xl"
         >
           <button
-            className="btn z-50 m-4 fixed"
+            className="btn fixed z-50 m-4"
             onClick={() => {
               setVisible(false);
             }}

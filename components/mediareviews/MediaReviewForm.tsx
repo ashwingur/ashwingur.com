@@ -46,7 +46,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const [baseValues, setBaseValues] = useState(
-    existingData ?? defaultMediaReview()
+    existingData ?? defaultMediaReview(),
   );
   const router = useRouter();
 
@@ -78,7 +78,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
       .map((subReview) => ({
         value: subReview,
         isDirty: false,
-      }))
+      })),
   );
 
   const mutation = useWriteMediaReview(onMutationSuccess);
@@ -123,7 +123,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         field
           .split("_")
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
+          .join(" "),
       ); // Format the keys to look better
     subReviews.forEach((s) => {
       if (s.isDirty) {
@@ -151,7 +151,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         }}
         onDeleteSuccess={() => {
           setSubReviews((prevSubReviews) =>
-            prevSubReviews.filter((a) => a.value.id !== s.value.id)
+            prevSubReviews.filter((a) => a.value.id !== s.value.id),
           );
         }}
         updateDirty={(isDirty: boolean) => {
@@ -162,7 +162,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               } else {
                 return sr;
               }
-            })
+            }),
           );
         }}
       />
@@ -175,7 +175,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
     <div className={clsx(className, mutation.isLoading ? "animate-pulse" : "")}>
       {baseValues.id && (
         <div className="w-full">
-          <h2 className="text-center break-words">{baseValues.name}</h2>
+          <h2 className="break-words text-center">{baseValues.name}</h2>
           <h3 className="text-center">
             {baseValues.media_type} (ID: {baseValues.id})
           </h3>
@@ -350,7 +350,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           errors={
             errors.genres &&
             (errors.genres as (FieldError | undefined)[])?.find(
-              (e) => e !== undefined
+              (e) => e !== undefined,
             )
           }
         >
@@ -365,8 +365,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   (genre) =>
                     !field.value.some(
                       (selectedGenre: Genre) =>
-                        selectedGenre.name === genre.value
-                    )
+                        selectedGenre.name === genre.value,
+                    ),
                 ),
               }));
 
@@ -380,11 +380,11 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
                   }))}
                   onChange={(selectedGenres: MultiValue<OptionType>) =>
                     field.onChange(
-                      selectedGenres.map((genre) => ({ name: genre.value }))
+                      selectedGenres.map((genre) => ({ name: genre.value })),
                     )
                   }
                   displayKey="label"
-                  className="border-2 border-text-muted rounded-2xl"
+                  className="rounded-2xl border-2 border-text-muted"
                   bgClass="bg-background"
                 />
               );
@@ -398,7 +398,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           errors={
             errors.pros &&
             (errors.pros as (FieldError | undefined)[])?.find(
-              (e) => e !== undefined
+              (e) => e !== undefined,
             )
           }
         >
@@ -407,13 +407,13 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-2xl w-full min-h-20"
+                className="input-bg min-h-20 w-full !rounded-2xl"
                 {...field}
                 value={field.value?.join("\n")}
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === "" ? [] : value.split("\n").map((item) => item)
+                    value === "" ? [] : value.split("\n").map((item) => item),
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
@@ -430,7 +430,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           errors={
             errors.cons &&
             (errors.cons as (FieldError | undefined)[])?.find(
-              (e) => e !== undefined
+              (e) => e !== undefined,
             )
           }
         >
@@ -439,13 +439,13 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-2xl w-full min-h-20"
+                className="input-bg min-h-20 w-full !rounded-2xl"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === "" ? [] : value.split("\n").map((item) => item)
+                    value === "" ? [] : value.split("\n").map((item) => item),
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
@@ -463,7 +463,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
               <TipTap
                 value={field.value || ""}
                 onChange={field.onChange}
-                className="w-full bg-background border-2"
+                className="w-full border-2 bg-background"
               />
             )}
           />
@@ -473,43 +473,43 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           register={register("visible")}
           errors={errors.visible}
           type="checkbox"
-          className="flex ml-2 gap-2"
+          className="ml-2 flex gap-2"
         />
       </form>
       <div>
         {mutation.isError && mutation.error instanceof Error && (
-          <p className="text-lg text-error text-center mb-2">
+          <p className="mb-2 text-center text-lg text-error">
             {mutation.error.message}
           </p>
         )}
       </div>
       {subMediaReviewForms.length > 0 && (
-        <div className="flex flex-col gap-8 my-4">{subMediaReviewForms}</div>
+        <div className="my-4 flex flex-col gap-8">{subMediaReviewForms}</div>
       )}
       <div className="flex flex-col items-center gap-2">
         {getValues().id && (
           <button
             disabled={mutation.isLoading}
-            className="btn-secondary w-44 h-10"
+            className="btn-secondary h-10 w-44"
             onClick={onAddSubreview}
           >
             Add Subreview
           </button>
         )}
         {dirtyFieldString && (
-          <p className="text-error text-center">
+          <p className="text-center text-error">
             You have unsaved changes: {dirtyFieldString}
           </p>
         )}
         {!isSomeSubReviewDirty && dirtyFieldString && (
           <button
             disabled={mutation.isLoading || isSomeSubReviewDirty}
-            className="btn self-center w-44 h-10"
+            className="btn h-10 w-44 self-center"
             form="main-review-form"
             onClick={handleSubmit(onSubmit)}
           >
             {mutation.isLoading ? (
-              <AiOutlineLoading className="animate-spin text-xl mx-auto" />
+              <AiOutlineLoading className="mx-auto animate-spin text-xl" />
             ) : getValues().id ? (
               "Update"
             ) : (
@@ -520,7 +520,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         {dirtyFieldString && (
           <ConfirmButton
             content="Discard"
-            className="w-44 flex gap-2 justify-center"
+            className="flex w-44 justify-center gap-2"
             mainBtnClassName="btn h-10"
             confirmBtnClassName="btn h-10"
             onConfirmClick={() => {
@@ -532,7 +532,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         {!dirtyFieldString && (
           <button
             disabled={mutation.isLoading}
-            className="btn w-44 h-10"
+            className="btn h-10 w-44"
             onClick={() => {
               onExit && onExit();
             }}

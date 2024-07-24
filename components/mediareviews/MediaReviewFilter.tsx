@@ -143,7 +143,9 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
       if (filterObject.names.length > 0) {
         params.set("names", filterObject.names.join(","));
       }
-      router.replace({ query: params.toString() }, undefined, { shallow: true });
+      router.replace({ query: params.toString() }, undefined, {
+        shallow: true,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterObject, filterUrlRead]);

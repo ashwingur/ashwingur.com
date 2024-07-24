@@ -101,7 +101,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         field
           .split("_")
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
+          .join(" "),
       ); // Format the keys to look better
     return dirtyFieldNames.join(", ");
   };
@@ -261,7 +261,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           errors={
             errors.pros &&
             (errors.pros as (FieldError | undefined)[])?.find(
-              (e) => e !== undefined
+              (e) => e !== undefined,
             )
           }
         >
@@ -270,13 +270,13 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl w-full min-h-20"
+                className="input-bg min-h-20 w-full !rounded-xl"
                 {...field}
                 value={field.value?.join("\n")}
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === "" ? [] : value.split("\n").map((item) => item)
+                    value === "" ? [] : value.split("\n").map((item) => item),
                   );
                 }}
                 aria-invalid={errors.pros !== undefined}
@@ -293,7 +293,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           errors={
             errors.cons &&
             (errors.cons as (FieldError | undefined)[])?.find(
-              (e) => e !== undefined
+              (e) => e !== undefined,
             )
           }
         >
@@ -302,13 +302,13 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
             control={control}
             render={({ field }) => (
               <textarea
-                className="input-bg !rounded-xl w-full min-h-20"
+                className="input-bg min-h-20 w-full !rounded-xl"
                 {...field}
                 value={field.value?.join("\n") || ""}
                 onChange={(e) => {
                   const value = e.target.value;
                   field.onChange(
-                    value === "" ? [] : value.split("\n").map((item) => item)
+                    value === "" ? [] : value.split("\n").map((item) => item),
                   );
                 }}
                 aria-invalid={errors.cons !== undefined}
@@ -326,7 +326,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
               <TipTap
                 value={field.value || ""}
                 onChange={field.onChange}
-                className="w-full bg-background border-2"
+                className="w-full border-2 bg-background"
               />
             )}
           />
@@ -336,21 +336,21 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           register={register("visible")}
           errors={errors.visible}
           type="checkbox"
-          className="flex ml-2 gap-2"
+          className="ml-2 flex gap-2"
         />
         {isDirty && (
-          <p className="text-error text-center">
+          <p className="text-center text-error">
             You have unsaved changes: {getDirtyFieldsString()}
           </p>
         )}
         {isDirty && (
           <button
             disabled={mutation.isLoading}
-            className="btn self-center w-44 h-10"
+            className="btn h-10 w-44 self-center"
             type="submit"
           >
             {mutation.isLoading ? (
-              <AiOutlineLoading className="animate-spin text-xl mx-auto" />
+              <AiOutlineLoading className="mx-auto animate-spin text-xl" />
             ) : getValues().id ? (
               "Update"
             ) : (
@@ -362,7 +362,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         {isDirty && getValues().id && (
           <ConfirmButton
             content="Discard"
-            className="w-44 flex gap-2 justify-center self-center"
+            className="flex w-44 justify-center gap-2 self-center"
             mainBtnClassName="btn h-10"
             confirmBtnClassName="btn h-10"
             onConfirmClick={() => {
@@ -373,7 +373,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         )}
 
         <ConfirmButton
-          className="flex justify-center self-center gap-4 w-44 h-10"
+          className="flex h-10 w-44 justify-center gap-4 self-center"
           onConfirmClick={onDelete}
           content="Delete"
           mainBtnClassName="btn"
@@ -382,7 +382,7 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
         />
         <div>
           {mutation.isError && mutation.error instanceof Error && (
-            <p className="text-lg text-error text-center">
+            <p className="text-center text-lg text-error">
               {mutation.error.message}
             </p>
           )}

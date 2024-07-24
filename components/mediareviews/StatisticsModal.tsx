@@ -52,7 +52,7 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
 
   const all_data = mapRatingBins(data?.rating_bins.all || []);
   const all_data_with_subreviews = mapRatingBins(
-    data?.rating_bins_with_sub_reviews.all || []
+    data?.rating_bins_with_sub_reviews.all || [],
   );
   const books_data = mapRatingBins(data?.rating_bins.book || []);
   const movies_data = mapRatingBins(data?.rating_bins.movie || []);
@@ -87,7 +87,7 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
     <div
       className={clsx(
         "fixed inset-0 z-50 flex items-center justify-center transition-all duration-300",
-        visible ? "opacity-100 visible" : "opacity-0 invisible"
+        visible ? "visible opacity-100" : "invisible opacity-0",
       )}
     >
       <div
@@ -96,25 +96,25 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
           setVisible(false);
         }}
       />
-      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
+      <div className="z-10 flex max-h-[83%] w-full flex-col overflow-hidden rounded-2xl px-4 md:px-8 lg:w-4/5 2xl:w-3/5">
         <div
           ref={scrollDivRef}
-          className="overflow-y-auto rounded-2xl relative"
+          className="relative overflow-y-auto rounded-2xl"
         >
           <button
-            className="btn z-50 m-4 fixed"
+            className="btn fixed z-50 m-4"
             onClick={() => {
               setVisible(false);
             }}
           >
             <AiOutlineClose />
           </button>
-          <Card firstLayer={true} className="!px-8 flex flex-col items-center">
-            <h2 className="mt-8 text-center mb-4">Stats for Nerds</h2>
+          <Card firstLayer={true} className="flex flex-col items-center !px-8">
+            <h2 className="mb-4 mt-8 text-center">Stats for Nerds</h2>
 
-            {isLoading && <LoadingIcon className="text-3xl my-8" />}
+            {isLoading && <LoadingIcon className="my-8 text-3xl" />}
             {isError && (
-              <p className="text-error text-lg py-8">
+              <p className="py-8 text-lg text-error">
                 Error retrieving statistics
               </p>
             )}
@@ -130,7 +130,7 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                   </span>
                   {data.rating_bins_with_sub_reviews.all.reduce(
                     (acc, val) => acc + val,
-                    0
+                    0,
                   )}
                 </p>
                 <p className="text-center">
@@ -150,51 +150,51 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                   {data.creators.length}
                 </p>
                 <ReviewPieChart
-                  className="w-full h-72 xl:h-80 overflow-auto mt-8"
+                  className="mt-8 h-72 w-full overflow-auto xl:h-80"
                   height="80%"
                   title="Reviews by Genre"
                   data={genreData}
                 />
-                <h2 className="text-2xl mb-4">Rating Stats</h2>
-                <div className="flex flex-col w-full md:px-8 lg:px-16 2xl:px-32">
+                <h2 className="mb-4 text-2xl">Rating Stats</h2>
+                <div className="flex w-full flex-col md:px-8 lg:px-16 2xl:px-32">
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     height="80%"
                     title="All"
                     data={all_data}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="All (Including Subreviews)"
                     height="80%"
                     data={all_data_with_subreviews}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="Books"
                     height="80%"
                     data={books_data}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="Movies"
                     height="80%"
                     data={movies_data}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="Shows"
                     height="80%"
                     data={shows_data}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="Games"
                     height="80%"
                     data={games_data}
                   />
                   <ColumnChart
-                    className="w-full h-72 xl:h-80"
+                    className="h-72 w-full xl:h-80"
                     title="Music"
                     height="80%"
                     data={music_data}

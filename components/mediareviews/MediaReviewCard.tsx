@@ -130,15 +130,15 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
   return (
     <div
       className={clsx(
-        "rounded-2xl shadow-xl bg-background-muted flex flex-col",
-        className
+        "flex flex-col rounded-2xl bg-background-muted shadow-xl",
+        className,
       )}
     >
-      <div className="w-full relative overflow-hidden">
+      <div className="relative w-full overflow-hidden">
         <div
           className={clsx(
             minimised ? "rounded-2xl" : "rounded-t-2xl",
-            "overflow-hidden"
+            "overflow-hidden",
           )}
           onClick={onCoverClick}
         >
@@ -154,20 +154,20 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
           />
         </div>
 
-        <div className="absolute top-0 right-0 m-4 bg-black/80 p-2 rounded-full">
+        <div className="absolute right-0 top-0 m-4 rounded-full bg-black/80 p-2">
           <MediaTypeIcon
             media_type={review.media_type}
-            className="text-white text-xl"
+            className="text-xl text-white"
           />
         </div>
         <div
           className={clsx(
-            "w-full p-4 text-white z-20 flex justify-between items-end pointer-events-none absolute bottom-0 left-0"
+            "pointer-events-none absolute bottom-0 left-0 z-20 flex w-full items-end justify-between p-4 text-white",
           )}
         >
           <div className="z-10">
             {review.media_creation_date && (
-              <p className="font-mono tracking-widest text-lg">
+              <p className="font-mono text-lg tracking-widest">
                 {new Date(review.media_creation_date).getFullYear()}
               </p>
             )}
@@ -177,15 +177,15 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
                 .map((g) => g.name)
                 .join(", ")}
             </p>
-            <p className="text-xl md:text-2xl lg:text-3xl font-bold">
+            <p className="text-xl font-bold md:text-2xl lg:text-3xl">
               {review.name}
             </p>
           </div>
-          <p className="text-4xl lg:text-5xl ml-8">{review.rating}</p>
+          <p className="ml-8 text-4xl lg:text-5xl">{review.rating}</p>
         </div>
         {user && role === "admin" && (
           <Link
-            className="btn !absolute left-0-0 top-0 m-4"
+            className="btn left-0-0 !absolute top-0 m-4"
             href={`/MediaReviews/Edit?id=${review.id}`}
           >
             <MdEdit className="text-xs" />
@@ -195,7 +195,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
 
       {!minimised && (
         <>
-          <div className="flex flex-col px-4 py-2 lg:p-8 gap-2">
+          <div className="flex flex-col gap-2 px-4 py-2 lg:p-8">
             <div className="flex justify-between">
               <div>
                 {review.creator && (
@@ -224,7 +224,7 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
                 </p>
               )}
             </div>
-            <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex flex-col gap-2 md:flex-row">
               {pros.length > 0 && (
                 <div className={clsx(cons.length > 0 ? "md:w-1/2" : "")}>
                   <h3>Pros</h3>
@@ -251,12 +251,12 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
             {subReviewCards.length > 0 && (
               <h2 className="text-center">Sub Reviews</h2>
             )}
-            <div className="flex flex-col m-4 gap-8 items-center">
+            <div className="m-4 flex flex-col items-center gap-8">
               {subReviewCards}
             </div>
           </div>
           {review.review_last_update_date && (
-            <p className="text-xs italic ml-auto mb-2 mr-4 mt-auto">
+            <p className="mb-2 ml-auto mr-4 mt-auto text-xs italic">
               Updated{" "}
               {new Date(review.review_last_update_date).toLocaleDateString()}{" "}
               {new Date(review.review_last_update_date).toLocaleTimeString()}

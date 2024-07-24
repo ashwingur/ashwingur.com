@@ -20,7 +20,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   const { data, error, isLoading } = useMediaReviews();
   const deleteReviewMutation = useDeleteMediaReview();
 
-  if (isLoading) return <LoadingIcon className="text-5xl mt-16" />;
+  if (isLoading) return <LoadingIcon className="mt-16 text-5xl" />;
   if (error || !data)
     return (
       <div className="text-error">
@@ -36,10 +36,10 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
       <Card
         key={review.id}
         firstLayer={true}
-        className="flex flex-col mx-auto w-4/5 md:w-full justify-between"
+        className="mx-auto flex w-4/5 flex-col justify-between md:w-full"
       >
         <div className="h-full text-sm">
-          <h2 className="text-center break-words text-2xl">{review.name}</h2>
+          <h2 className="break-words text-center text-2xl">{review.name}</h2>
           <div className="flex justify-between">
             <p>
               <span className="font-bold">Type:</span> {review.media_type}
@@ -61,7 +61,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
           {review.sub_media_reviews.length > 0 && (
             <div className="my-2">
               <h3 className="text-center">Sub Reviews</h3>
-              <div className="flex flex-col gap-4 w-full">
+              <div className="flex w-full flex-col gap-4">
                 {review.sub_media_reviews
                   .sort((a, b) => a.display_index - b.display_index)
                   .map((subReview) => (
@@ -70,7 +70,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
                       firstLayer={false}
                       className="w-full"
                     >
-                      <p className="font-bold text-center text-base">
+                      <p className="text-center text-base font-bold">
                         {subReview.name}
                       </p>
                       <p>
@@ -87,7 +87,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
                           `${new Date(subReview.review_last_update_date).toLocaleDateString()} ${new Date(subReview.review_last_update_date).toLocaleTimeString()}`}
                       </p>
                       {!subReview.visible && (
-                        <AiFillEyeInvisible className="text-secondary text-xl ml-auto" />
+                        <AiFillEyeInvisible className="ml-auto text-xl text-secondary" />
                       )}
                     </Card>
                   ))}
@@ -95,12 +95,12 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
             </div>
           )}
         </div>
-        <div className="flex items-center flex-col">
+        <div className="flex flex-col items-center">
           {!review.visible && (
-            <AiFillEyeInvisible className="text-secondary text-2xl absolute bottom-0 right-0" />
+            <AiFillEyeInvisible className="absolute bottom-0 right-0 text-2xl text-secondary" />
           )}
           <button
-            className="btn mx-auto mt-2 w-24 h-10"
+            className="btn mx-auto mt-2 h-10 w-24"
             onClick={() => {
               review.id && handleEdit(review.id);
             }}
@@ -111,7 +111,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
             <>
               <ConfirmButton
                 content={isLoadingDelete ? <LoadingIcon /> : "Delete"}
-                className="mx-auto flex gap-2 mt-2 items-center justify-center"
+                className="mx-auto mt-2 flex items-center justify-center gap-2"
                 mainBtnClassName="btn w-24  h-10"
                 confirmBtnClassName="btn  h-10"
                 onConfirmClick={() => {
@@ -121,7 +121,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
               {deleteReviewMutation.isError &&
                 deleteReviewMutation.error instanceof Error &&
                 deleteReviewMutation.variables === review.id && (
-                  <p className="text-lg text-error text-center mt-2">
+                  <p className="mt-2 text-center text-lg text-error">
                     {deleteReviewMutation.error.message}
                   </p>
                 )}
@@ -133,7 +133,7 @@ const ListEditableReviews: React.FC<ListEditableReviewsProps> = ({
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8 md:w-4/5 w-full ">
+    <div className="grid w-full grid-cols-1 gap-4 md:w-4/5 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3">
       {reviewItems}
     </div>
   );

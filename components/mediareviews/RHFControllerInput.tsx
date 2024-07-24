@@ -23,7 +23,7 @@ const RHFControllerInput: React.FC<RHFControllerInputProps> = ({
     <div className={clsx(className)}>
       <label className={labelClassName}>{label}</label>
       <div className={inputClassName}>{children}</div>
-      <p className="text-error ml-2">{errors?.message}</p>
+      <p className="ml-2 text-error">{errors?.message}</p>
     </div>
   );
 };

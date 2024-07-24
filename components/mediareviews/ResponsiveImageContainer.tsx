@@ -54,10 +54,10 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
   return (
     <div
       className={clsx(
-        "w-full relative overflow-hidden hover:scale-125 transition-all duration-1000",
+        "relative w-full overflow-hidden transition-all duration-1000 hover:scale-125",
         roundingClassName,
-        "before:content-[''] before:absolute before:w-full before:h-2/5 before:transition-all before:duration-1000",
-        "before:bg-gradient-to-b before:from-black/0 before:to-black/80 before:z-10 before:bottom-0"
+        "before:absolute before:h-2/5 before:w-full before:transition-all before:duration-1000 before:content-['']",
+        "before:bottom-0 before:z-10 before:bg-gradient-to-b before:from-black/0 before:to-black/80",
       )}
       style={{
         height: Math.min(imageHeight, maxHeight),
@@ -69,7 +69,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
         unoptimized
         src={imageSrc}
         alt={imageAlt}
-        className="object-cover h-full w-full blur-3xl"
+        className="h-full w-full object-cover blur-3xl"
         fill
         priority={priorityLoad}
         onLoadingComplete={handleImageLoad}
@@ -78,7 +78,7 @@ const ResponsiveImageContainer: React.FC<ResponsiveImageContainerProps> = ({
         unoptimized
         src={imageSrc}
         alt={imageAlt}
-        className="object-contain h-full w-full"
+        className="h-full w-full object-contain"
         fill
         priority={priorityLoad}
         onLoadingComplete={handleImageLoad}

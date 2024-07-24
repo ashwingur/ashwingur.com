@@ -39,7 +39,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
     <div
       className={clsx(
         "fixed inset-0 z-50 flex items-center justify-center transition-all duration-300",
-        visible ? "opacity-100 visible" : "opacity-0 invisible"
+        visible ? "visible opacity-100" : "invisible opacity-0",
       )}
     >
       <div
@@ -48,13 +48,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
           setVisible(false);
         }}
       />
-      <div className="flex flex-col z-10 px-4 w-full md:px-8 lg:w-4/5 2xl:w-3/5 max-h-[83%] overflow-hidden rounded-2xl">
+      <div className="z-10 flex max-h-[83%] w-full flex-col overflow-hidden rounded-2xl px-4 md:px-8 lg:w-4/5 2xl:w-3/5">
         <div
           ref={scrollDivRef}
-          className="overflow-y-auto rounded-2xl relative"
+          className="relative overflow-y-auto rounded-2xl"
         >
           <button
-            className="btn z-50 m-4 fixed"
+            className="btn fixed z-50 m-4"
             onClick={() => {
               setVisible(false);
             }}
@@ -73,7 +73,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, setVisible }) => {
               for searching by name, media type, genre, creator and ordering the
               results. I currently have 5 media types available:
             </p>
-            <div className="flex flex-col gap-2 mt-2 items-center">
+            <div className="mt-2 flex flex-col items-center gap-2">
               {["Movie", "Book", "Show", "Game", "Music"].map((m, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <MediaTypeIcon media_type={m} className="text-2xl" />

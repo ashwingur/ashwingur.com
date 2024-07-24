@@ -38,23 +38,23 @@ const ColumnChart: React.FC<ColumnChartProps> = ({
   const tooltipColour = isDark(currentTheme ?? "") ? "#2e2e2e" : "#ebebeb";
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-secondary"
-    )
+      "--color-secondary",
+    ),
   );
   const [hoverBg, setHoverBg] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-background-hover"
-    )
+      "--color-background-hover",
+    ),
   );
 
   useEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-secondary");
       setLineColour(newColor);
       const newHoverColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-background-hover");
       setHoverBg(newHoverColor);
     };

@@ -34,7 +34,7 @@ const generateColors = (numColors: number, isDark: boolean) => {
   const hueStep = 360 / numColors;
   for (let i = 0; i < numColors; i++) {
     colors.push(
-      `hsl(${i * hueStep}, ${isDark ? 70 : 60}%, ${isDark ? 50 : 40}%)`
+      `hsl(${i * hueStep}, ${isDark ? 70 : 60}%, ${isDark ? 50 : 40}%)`,
     );
   }
   return colors;
@@ -93,23 +93,23 @@ const ReviewPieChart: React.FC<ReviewPieChartProps> = ({
   const tooltipColour = isDark(currentTheme ?? "") ? "#2e2e2e" : "#ebebeb";
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-secondary"
-    )
+      "--color-secondary",
+    ),
   );
   const [hoverBg, setHoverBg] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-background-hover"
-    )
+      "--color-background-hover",
+    ),
   );
 
   useEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-secondary");
       setLineColour(newColor);
       const newHoverColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-background-hover");
       setHoverBg(newHoverColor);
     };
