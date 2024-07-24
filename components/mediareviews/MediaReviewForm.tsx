@@ -282,6 +282,17 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           inputClassName="max-w-40 input-bg"
           type="number"
         />
+        {subReviews.length > 0 && baseValues.media_type === "Book" && (
+          <p className="-mt-1 ml-2 text-sm italic">
+            Subreviews total word count:{" "}
+            {subReviews
+              .reduce(
+                (acc, subReview) => acc + (subReview.value.word_count ?? 0),
+                0,
+              )
+              .toLocaleString()}
+          </p>
+        )}
         <RHFInput
           label="Run Time (minutes)"
           register={register("run_time", {
@@ -294,6 +305,19 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           type="number"
           step="0.1"
         />
+        {subReviews.length > 0 &&
+          (baseValues.media_type === "Movie" ||
+            baseValues.media_type === "Music") && (
+            <p className="-mt-1 ml-2 text-sm italic">
+              Subreviews total run time:{" "}
+              {subReviews
+                .reduce(
+                  (acc, subReview) => acc + (subReview.value.run_time ?? 0),
+                  0,
+                )
+                .toLocaleString()}
+            </p>
+          )}
         <RHFControllerInput
           label="Media Creation Date"
           labelClassName="ml-2"
