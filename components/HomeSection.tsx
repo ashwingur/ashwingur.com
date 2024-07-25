@@ -152,7 +152,7 @@ const HomeSection = () => {
   return (
     <div
       id="home"
-      className="flex flex-col items-center justify-center px-4 pt-24"
+      className="flex flex-col items-center justify-center px-4 pt-24 md:px-8"
     >
       <div className="text-center font-mono text-2xl md:text-4xl lg:text-5xl">
         <TypewriterComponent
@@ -243,7 +243,7 @@ const HomeSection = () => {
           Below are a list of all my apps and pages on this website.
         </p>
         <h2 className="mb-2 mt-8 text-2xl">Apps and Pages</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {appCards}
         </div>
       </Card>

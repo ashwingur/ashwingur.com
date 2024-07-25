@@ -27,7 +27,7 @@ const ProjectCard = ({
   const stack_items = stack.map((item, index) => (
     <div
       key={index}
-      className="tag bg-secondary text-text-secondary p-2 rounded-md"
+      className="tag rounded-md bg-secondary p-2 text-text-secondary"
     >
       {item}
     </div>
@@ -46,8 +46,8 @@ const ProjectCard = ({
   ));
 
   return (
-    <Card className="flex flex-col max-w-lg" firstLayer={true}>
-      <div className="w-full h-36 md:h-72 relative">
+    <Card className="flex max-w-lg flex-col" firstLayer={true}>
+      <div className="relative h-36 w-full md:h-72">
         <Image
           unoptimized
           alt="Project thumbnail"
@@ -59,14 +59,14 @@ const ProjectCard = ({
 
       <div className="px-4 pt-2 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
-        <p>{description}</p>
+        <p className="text-sm md:text-base">{description}</p>
         <h3 className="mt-4 text-xl">Tech Stack</h3>
-        <div className="flex gap-4 my-2 flex-wrap">{stack_items}</div>
+        <div className="my-2 flex flex-wrap gap-4">{stack_items}</div>
 
         {links != undefined && (
           <div>
             <h3 className="mt-4 text-xl">Links</h3>
-            <div className="flex gap-4 my-2 flex-wrap">{link_items}</div>
+            <div className="my-2 flex flex-wrap gap-4">{link_items}</div>
           </div>
         )}
       </div>
