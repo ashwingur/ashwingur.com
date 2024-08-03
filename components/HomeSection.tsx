@@ -243,7 +243,7 @@ const HomeSection = () => {
           Below are a list of all my apps and pages on this website.
         </p>
         <h2 className="mb-2 mt-8 text-2xl">Apps and Pages</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid gap-4 md:mb-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {appCards}
         </div>
       </Card>

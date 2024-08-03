@@ -49,7 +49,6 @@ const ProjectCard = ({
     <Card className="flex max-w-lg flex-col" firstLayer={true}>
       <div className="relative h-36 w-full md:h-72">
         <Image
-          unoptimized
           alt="Project thumbnail"
           src={image}
           fill={true}
