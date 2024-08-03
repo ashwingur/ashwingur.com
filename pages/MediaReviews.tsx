@@ -33,6 +33,9 @@ const MediaReviewsV2 = () => {
     const showImages = localStorage.getItem("showImages");
     if (showImages) {
       setShowImages(showImages === "false" ? false : true);
+    } else {
+      localStorage.setItem("showImages", "true");
+      setShowImages(true);
     }
   }, []);
 
@@ -95,19 +98,19 @@ const MediaReviewsV2 = () => {
   ));
 
   return (
-    <div className="min-h-screen pt-20 md:pt-24 pb-16">
+    <div className="min-h-screen pb-16 pt-20 md:pt-24">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
 
       {user && role === "admin" && (
-        <div className="flex justify-center mt-4">
+        <div className="mt-4 flex justify-center">
           <Link className="btn w-48" href={"/MediaReviews/Edit"}>
             Edit Reviews
           </Link>
         </div>
       )}
 
-      <div className="flex justify-center mt-4 gap-4">
+      <div className="mt-4 flex justify-center gap-4">
         <button
           className="btn text-xl lg:text-2xl"
           onClick={() => {
@@ -144,19 +147,19 @@ const MediaReviewsV2 = () => {
         setFilterObject={setFilterObject}
         setFilterReady={setFilterReady}
         noResults={reviews.length === 0}
-        className="flex flex-col items-center relative mt-4"
+        className="relative mt-4 flex flex-col items-center"
       />
       {numResults !== undefined && !isLoading && filterReady && (
-        <p className="text-center text-xl mb-4 mt-2">
+        <p className="mb-4 mt-2 text-center text-xl">
           {numResults} result{numResults !== 1 && "s"}
         </p>
       )}
-      <div className="grid place-items-stretch grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 2xl:w-5/6 mx-auto gap-8 xl:gap-16 px-4 md:px-8 lg:px-12">
+      <div className="mx-auto grid grid-cols-1 place-items-stretch gap-8 px-4 md:px-8 lg:grid-cols-2 lg:px-12 xl:gap-16 2xl:w-5/6 2xl:grid-cols-3">
         {reviewCards}
       </div>
 
       {(isFetchingNextPage || isLoading) && (
-        <LoadingIcon className="mx-auto text-5xl mb-16 mt-4" />
+        <LoadingIcon className="mx-auto mb-16 mt-4 text-5xl" />
       )}
       <MediaReviewModal
         review={reviews.find((r) => r.id === selectedReview)}
