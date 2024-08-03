@@ -29,7 +29,6 @@ const nextConfig = {
         hostname: "imgproxy.ashwingur.com",
         pathname: "**",
       },
-      // { protocol: "https", hostname: "**" },
     ],
   },
   webpack: (config) => {

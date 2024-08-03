@@ -51,6 +51,37 @@
     ]
   },
   {
+    "title": "Media Reviews",
+    "image": "/assets/projects/media_reviews.png",
+    "description": "Previously, this site used static generation with a single JSON file to store all the review data. However, I wanted to enhance its functionality by enabling dynamic addition and editing of reviews from the frontend. To achieve this, I created a custom form that allows submissions and updates on the backend. There is a one-to-many relationship between reviews and sub-reviews (e.g., one book series can have many books). Genres have a many-to-many relationship with reviews. By utilizing a database, I can efficiently serve reviews using paginated queries and perform complex filter operations server-side. This project also marked my first time integrating proper schema validation on both the frontend and backend. Additionally, I provided a statistics page to track rating distributions, media types, and other interesting data.",
+    "stack": [
+      "Python",
+      "TimescaleDB",
+      "PostgreSQL",
+      "React",
+      "Recharts",
+      "Tailwind CSS"
+    ],
+    "links": [
+      {
+        "display": "Page",
+        "url": "/MediaReviews"
+      },
+      {
+        "display": "Client Code",
+        "url": "https://github.com/ashwingur/ashwingur.com/blob/main/pages/MediaReviews.tsx"
+      },
+      {
+        "display": "DB Model",
+        "url": "https://github.com/ashwingur/api.ashwingur/blob/main/app/models/media_reviews.py"
+      },
+      {
+        "display": "API",
+        "url": "https://github.com/ashwingur/api.ashwingur/blob/main/app/mediareviews/routes.py"
+      }
+    ]
+  },
+  {
     "title": "Tron Arcade",
     "image": "/assets/projects/tron.png",
     "description": "I was inspired to make a multiplayer game once I had my own Flask server set up. I decided to go with the 2D Tron game because I played it in school and it is simple but fun. I am using Socket.IO to communicate between the client and server. It provides utility functions for creating rooms, which is useful in the context of a multiplayer game, where you only want to broadcast messages to players who have joined the room. All game state validation occurs on the server, which prevents cheating from the client side. When a game starts, the client can only send their direction input, which is validated on the server for legality. The game runs at 30 ticks per second and sends every player's location on each tick to the client. The client stores a local game grid, which allows for lightweight communication as only the latest positions are updated. The game is rendered using the p5.js React wrapper library.",
