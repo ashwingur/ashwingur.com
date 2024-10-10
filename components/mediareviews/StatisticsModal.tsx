@@ -60,7 +60,7 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
   const games_data = mapRatingBins(data?.rating_bins.game || []);
   const music_data = mapRatingBins(data?.rating_bins.music || []);
 
-  const genreData = [
+  const mediaTypeData = [
     {
       name: "Books",
       value: data?.rating_bins.book?.reduce((acc, val) => acc + val, 0) ?? 0,
@@ -134,11 +134,11 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                   )}
                 </p>
                 <p className="text-center">
-                  <span className="font-bold">Total Word Count: </span>
+                  <span className="font-bold">Total Words Read: </span>
                   {data.total_word_count.toLocaleString()}
                 </p>
                 <p className="text-center">
-                  <span className="font-bold">Total Run Time: </span>
+                  <span className="font-bold">Total Time Watched: </span>
                   {(data.total_run_time / 60).toFixed(1).toLocaleString()} hours
                 </p>
                 <p className="text-center">
@@ -152,8 +152,8 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
                 <ReviewPieChart
                   className="mt-8 h-72 w-full overflow-auto xl:h-80"
                   height="80%"
-                  title="Reviews by Genre"
-                  data={genreData}
+                  title="Reviews by Media Type"
+                  data={mediaTypeData}
                 />
                 <h2 className="mb-4 text-2xl">Rating Stats</h2>
                 <div className="flex w-full flex-col md:px-8 lg:px-16 2xl:px-32">
