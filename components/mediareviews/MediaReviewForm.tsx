@@ -307,7 +307,8 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
         />
         {subReviews.length > 0 &&
           (baseValues.media_type === "Movie" ||
-            baseValues.media_type === "Music") && (
+            baseValues.media_type === "Music" ||
+            baseValues.media_type === "Show") && (
             <p className="-mt-1 ml-2 text-sm italic">
               Sub-reviews total run time:{" "}
               {subReviews
