@@ -201,7 +201,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
             Review Name <IoSearch className="mb-1 ml-1 inline-block text-xl" />
           </p>
           <GenericMultiSelectGroup
-            className="z-[19]"
+            className="z-[20]"
             options={filteredNameOptions}
             value={nameOptions.filter((n) =>
               filterObject.names.includes(n.value),
@@ -222,7 +222,7 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
           </p>
 
           <GenericListbox
-            className="z-[20]"
+            className="z-[19]"
             bgClass="bg-background-muted"
             maxHeightClass="max-h-[30rem]"
             widthClass="w-full"
