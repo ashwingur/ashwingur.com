@@ -198,6 +198,26 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
       >
         <Card firstLayer={false} className="flex flex-col">
           <p className="ml-2 mt-2 font-bold">
+            Review Name <IoSearch className="mb-1 ml-1 inline-block text-xl" />
+          </p>
+          <GenericMultiSelectGroup
+            className="z-[19]"
+            options={filteredNameOptions}
+            value={nameOptions.filter((n) =>
+              filterObject.names.includes(n.value),
+            )}
+            onChange={(selectedOptions) => {
+              setFilterObject((prev) => ({
+                ...prev,
+                names: [...selectedOptions]
+                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+                  .map((m) => m.value),
+              }));
+            }}
+            displayKey={"label"}
+            placeholder="Review Names"
+          />
+          <p className="ml-2 mt-2 font-bold">
             Sort <BiSortAlt2 className="mb-1 inline-block text-xl" />
           </p>
 
@@ -220,26 +240,6 @@ const MediaReviewFilter: React.FC<MediaReviewFilterProps> = ({
                 orderBy: v.value,
               }));
             }}
-          />
-          <p className="ml-2 mt-2 font-bold">
-            Review Name <IoSearch className="mb-1 ml-1 inline-block text-xl" />
-          </p>
-          <GenericMultiSelectGroup
-            className="z-[19]"
-            options={filteredNameOptions}
-            value={nameOptions.filter((n) =>
-              filterObject.names.includes(n.value),
-            )}
-            onChange={(selectedOptions) => {
-              setFilterObject((prev) => ({
-                ...prev,
-                names: [...selectedOptions]
-                  .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
-                  .map((m) => m.value),
-              }));
-            }}
-            displayKey={"label"}
-            placeholder="Review Names"
           />
           <p className="ml-2 mt-2 font-bold">
             Media Type <FaClapperboard className="mb-1 ml-1 inline-block" />

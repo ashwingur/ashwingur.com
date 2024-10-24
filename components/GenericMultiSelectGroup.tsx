@@ -53,10 +53,10 @@ const GenericMultiSelectGroup = <T extends OptionType>({
       : (options as T[]).map(formatOption);
 
   const handleChange = (
-    selectedOptions: MultiValue<{ value: T; label: string }>
+    selectedOptions: MultiValue<{ value: T; label: string }>,
   ) => {
     onChange(
-      selectedOptions ? selectedOptions.map((option) => option.value) : []
+      selectedOptions ? selectedOptions.map((option) => option.value) : [],
     );
   };
 
@@ -77,19 +77,19 @@ const GenericMultiSelectGroup = <T extends OptionType>({
           clsx(
             bgClass,
             "border-1 rounded-2xl px-4 py-1 md:py-1",
-            state.isFocused ? "border-text-muted" : ""
+            state.isFocused ? "border-text-muted" : "",
           ),
         option: ({ isFocused, isSelected }) =>
           clsx(
             "pl-2 py-2",
             isFocused && " bg-accent text-text-accent",
             isSelected && "bg-accent text-text-accent",
-            !isFocused && !isSelected && bgClass
+            !isFocused && !isSelected && bgClass,
           ),
         noOptionsMessage: () =>
           clsx(bgClass, "shadow-lg mt-2 text-lg py-2 rounded-lg"),
         menu: () => "mt-2 rounded-lg",
-        menuList: () => "shadow-lg max-h-56 rounded-lg",
+        menuList: () => clsx("shadow-lg max-h-56 rounded-lg", bgClass),
         multiValue: () =>
           "bg-secondary text-text-secondary rounded-md mx-1 my-1 text-base",
         multiValueLabel: () => "ml-2 mr-1 py-[2px]",
