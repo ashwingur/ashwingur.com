@@ -46,10 +46,10 @@ const mediaOptions: OptionType[] = [
 const orderByOptions: ListboxOption[] = [
   { label: "A – Z", value: "name_asc" },
   { label: "Z – A", value: "name_desc" },
-  { label: "Top Rated", value: "rating_desc" },
+  { label: "Highest Rated", value: "rating_desc" },
   { label: "Lowest Rated", value: "rating_asc" },
-  { label: "Newest Update", value: "last_update_desc" },
-  { label: "Oldest Update", value: "last_update_asc" },
+  { label: "Newest Updated Review", value: "last_update_desc" },
+  { label: "Oldest Updated Review", value: "last_update_asc" },
   { label: "Earliest Release", value: "media_creation_asc" },
   { label: "Latest Release", value: "media_creation_desc" },
   { label: "Most Words", value: "word_count_desc" },
