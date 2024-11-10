@@ -7,6 +7,7 @@ import { GiAnglerFish, GiPistolGun, GiTropicalFish } from "react-icons/gi";
 import { FaBug, FaFishFins } from "react-icons/fa6";
 import clsx from "clsx";
 import { useFont } from "@context/FontContext";
+import { LuCandy } from "react-icons/lu";
 
 interface ThemeType {
   name: string;
@@ -96,6 +97,14 @@ const themesList: ThemeType[] = [
     ),
     font: "roboto", // Fallback font, there is a minecraft font defined in the css
   },
+  // {
+  //   name: "chocolate",
+  //   displayName: "Chocolate Factory",
+  //   color: "text-purple-500",
+  //   isDark: false,
+  //   icon: (className?: string) => <LuCandy className={clsx(className)} />,
+  //   font: "roboto",
+  // },
 ];
 
 interface ToggleThemeButtonProps {
@@ -130,8 +139,8 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({
       <Combobox value={currentTheme} onChange={onThemeChange}>
         <Combobox.Button
           className={clsx(
-            "inline-flex justify-center w-full rounded-md px-4 py-2 focus:outline-none hover:bg-background-hover transition-all",
-            className
+            "inline-flex w-full justify-center rounded-md px-4 py-2 transition-all hover:bg-background-hover focus:outline-none",
+            className,
           )}
         >
           {themesList.find((t) => t.name === currentTheme)?.icon("") ?? (
@@ -141,11 +150,11 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({
 
         <Combobox.Options
           className={clsx(
-            "absolute w-56 lg:text-lg mt-1 shadow-lg max-h-80 md:max-h-none rounded-md text-base overflow-auto focus:outline-none sm:text-sm z-50 ",
+            "absolute z-50 mt-1 max-h-80 w-56 overflow-auto rounded-md text-base shadow-lg focus:outline-none sm:text-sm md:max-h-none lg:text-lg",
             isDark(currentTheme ?? "") ? "shadow-background-hover" : "",
             centerOptions
               ? "-translate-x-[5.5rem] bg-background-hover"
-              : "right-0 bg-background-muted"
+              : "right-0 bg-background-muted",
           )}
         >
           {themesList.map((theme) => (
@@ -154,18 +163,18 @@ const ToggleThemeButton: React.FC<ToggleThemeButtonProps> = ({
               value={theme.name}
               className={({ active }) =>
                 `cursor-default select-none ${
-                  active ? "text-text-accent bg-accent" : ""
+                  active ? "bg-accent text-text-accent" : ""
                 }`
               }
             >
               {({ selected, active }) => (
                 <div
                   className={clsx(
-                    "flex items-center justify-between hover:text-white group px-2 py-1",
-                    active ? "text-white" : theme.color
+                    "group flex items-center justify-between px-2 py-1 hover:text-white",
+                    active ? "text-white" : theme.color,
                   )}
                 >
-                  <div className="bg-black rounded-full p-2">
+                  <div className="rounded-full bg-black p-2">
                     {theme.icon("text-2xl")}
                   </div>
                   <span

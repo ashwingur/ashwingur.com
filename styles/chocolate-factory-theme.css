@@ -2,13 +2,13 @@
 
 /* Cyberpunk theme specific styles */
 /* Cyberpunk Theme */
-[data-theme="cyberpunk"] {
+[data-theme="chocolate"] {
   --color-background: #021413;
   --color-background-muted: #032120;
   --color-background-hover: #042c29;
-  --color-text: theme(colors.tron-blue);
-  --color-text-muted: theme(colors.slate.400);
-  --color-text-hover: theme(colors.blue.400);
+  --color-text: theme(colors.slate.900);
+  --color-text-muted: theme(colors.slate.500);
+  --color-text-hover: theme(colors.blue.700);
   --color-text-primary: theme(colors.yellow.200);
   --color-text-secondary: theme(colors.red.200);
   --color-text-accent: theme(colors.cyan.200);
@@ -25,17 +25,18 @@
 }
 
 @layer base {
-  .cyberpunk-background {
-    @apply animate-moveBackgroundDiagonal text-lg lg:text-xl;
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.155) 2px,
-      transparent 1px
+  .chocolate-background {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #ffc1f6,
+      #ffc1f6 20px,
+      #f7a6fe 20px,
+      #f7a6fe 40px /* Lighter chocolate color */
     );
-    background-size: 4rem 4rem;
+    background-size: 100% 40px; /* Height of the chocolate "bars" */
   }
 
-  [data-theme="cyberpunk"] {
+  [data-theme="chocolate"] {
     .btn {
       @apply clip-path-chamfered;
       @apply rounded-none border border-primary bg-yellow-500/10 hover:bg-yellow-500/40;
@@ -62,39 +63,14 @@
     }
 
     .card {
-      @apply rounded-none border-y-2 border-secondary bg-red-700/30 text-text-secondary;
+      @apply rounded-none border-y-2 border-accent bg-[#682d23] text-text-accent;
     }
     .card-hover {
       @apply rounded-none border-y-2 border-accent bg-cyan-700/40 text-text-accent;
     }
-
-    /* Add some effects to the corners of the card */
-    .card-top,
-    .card-bottom {
-      @apply absolute left-0 flex w-full justify-between;
-      @apply before:h-1 before:w-6 before:bg-secondary before:content-[''];
-      @apply after:h-1 after:w-6 after:bg-secondary after:content-[''];
-    }
-
-    .card-top,
-    .card-hover-top {
-      @apply top-0;
-    }
-
-    .card-bottom,
-    .card-hover-bottom {
-      @apply bottom-0;
-    }
-
-    .card-hover-top,
-    .card-hover-bottom {
-      @apply absolute left-0 flex w-full justify-between;
-      @apply before:h-1 before:w-6 before:bg-accent before:content-[''];
-      @apply after:h-1 after:w-6 after:bg-accent after:content-[''];
-    }
   }
 }
 
-[data-theme="cyberpunk"] body {
-  @apply cyberpunk-background;
+[data-theme="chocolate"] body {
+  @apply chocolate-background;
 }
