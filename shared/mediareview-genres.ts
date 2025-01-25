@@ -39,10 +39,11 @@ const movieAndShowGenres: MultiSelectGroup = {
     "Political",
     "Romance",
     "Science Fiction",
+    "Sitcom",
+    "Space",
     "Sport",
     "Superhero",
     "Supernatural",
-    "Space",
     "Thriller",
     "War",
     "Western",
@@ -130,7 +131,7 @@ const musicGenres: MultiSelectGroup = {
 };
 
 const transformToGroupedOptionType = (
-  group: MultiSelectGroup
+  group: MultiSelectGroup,
 ): GroupedOptionType<OptionType> => ({
   label: group.group_name,
   options: group.group_options.map((option) => ({
