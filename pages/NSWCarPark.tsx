@@ -7,13 +7,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 
 const fetchParkingIDs = (
-  setLastFetchTime: Dispatch<SetStateAction<string>>
+  setLastFetchTime: Dispatch<SetStateAction<string>>,
 ) => {
   setLastFetchTime(new Date().toLocaleTimeString().toLocaleUpperCase());
   return axios
     .get<ParkingFacility[]>("/api/opendata/carpark/all")
     .then(({ data }) =>
-      data.sort((a, b) => a.facility_name.localeCompare(b.facility_name))
+      data.sort((a, b) => a.facility_name.localeCompare(b.facility_name)),
     );
 };
 
@@ -27,7 +27,7 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
   const occupied = Number(
     facility.occupancy.total > facility.spots
       ? facility.spots
-      : facility.occupancy.total
+      : facility.occupancy.total,
   );
 
   const percentageOccupied = occupied / Number(facility.spots);
@@ -39,10 +39,12 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
 
   return (
     <div
-      className={`${backgroundColour} rounded-lg p-4 flex justify-between items-center text-slate-900 shadow-md`}
+      className={`${backgroundColour} flex items-center justify-between rounded-lg p-4 text-slate-900 shadow-md`}
     >
       <div>
-        <div className="font-bold">{facility.facility_name}</div>
+        <div className="font-bold">
+          {facility.facility_name.replace(/^Park&Ride - /, "")}
+        </div>
         <div>
           Occupied: {occupied}/{facility.spots} (
           {Math.round(percentageOccupied * 100)}%)
@@ -60,7 +62,7 @@ const LoadingState = () => {
   return (
     <div className="h-screen">
       <Navbar fixed={true} />
-      <h1 className="text-center pt-20 pb-4">NSW Live Car Park Data</h1>
+      <h1 className="pb-4 pt-20 text-center">NSW Live Car Park Data</h1>
       <LoadingIcon className="mx-auto" />
     </div>
   );
@@ -71,7 +73,7 @@ const LoadingIcon = ({ className }: { className?: string }) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`${className} w-8 h-8 text-transparent animate-spin dark:text-gray-600 fill-cyan-900`}
+        className={`${className} h-8 w-8 animate-spin fill-cyan-900 text-transparent dark:text-gray-600`}
         viewBox="0 0 100 101"
         fill="none"
       >
@@ -110,9 +112,9 @@ const NSWCarPark = () => {
   return (
     <div className="">
       <Navbar fixed={true} />
-      <h1 className="text-center pt-20 pb-4">NSW Live Car Park Data</h1>
+      <h1 className="pb-4 pt-20 text-center">NSW Live Car Park Data</h1>
       <p className="text-center">Last update: {lastFetchTime}</p>
-      <p className="text-center text-sm italic mb-4">
+      <p className="mb-4 text-center text-sm italic">
         Data sourced from{" "}
         <a
           className="text-text-hover"
@@ -124,7 +126,7 @@ const NSWCarPark = () => {
         </a>
         . The API does not guarantee the values to be accurate at all times.
       </p>
-      <div className="grid grid-cols-1 gap-4 mx-4 md:mx-16 md:grid-cols-2 sm:grid-cols-1 pb-8">
+      <div className="mx-4 grid grid-cols-1 gap-4 pb-8 sm:grid-cols-1 md:mx-16 md:grid-cols-2">
         {parkingBoxes}
       </div>
     </div>
