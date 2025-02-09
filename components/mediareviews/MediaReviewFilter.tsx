@@ -46,16 +46,16 @@ const mediaOptions: OptionType[] = [
 const orderByOptions: ListboxOption[] = [
   { label: "A – Z", value: "name_asc" },
   { label: "Z – A", value: "name_desc" },
-  { label: "Highest Rated", value: "rating_desc" },
-  { label: "Lowest Rated", value: "rating_asc" },
-  { label: "Newest Updated Review", value: "last_update_desc" },
-  { label: "Oldest Updated Review", value: "last_update_asc" },
-  { label: "Earliest Release", value: "media_creation_asc" },
-  { label: "Latest Release", value: "media_creation_desc" },
-  { label: "Most Words", value: "word_count_desc" },
-  { label: "Fewest Words", value: "word_count_asc" },
-  { label: "Longest Runtime", value: "run_time_desc" },
-  { label: "Shortest Runtime", value: "run_time_asc" },
+  { label: "Rating: Highest", value: "rating_desc" },
+  { label: "Rating: Lowest", value: "rating_asc" },
+  { label: "Review Updated: Newest", value: "last_update_desc" },
+  { label: "Review Updated: Oldest", value: "last_update_asc" },
+  { label: "Release Date: Newest", value: "media_creation_asc" },
+  { label: "Release Date: Oldest", value: "media_creation_desc" },
+  { label: "Words: Most", value: "word_count_desc" },
+  { label: "Words: Fewest", value: "word_count_asc" },
+  { label: "Runtime: Longest", value: "run_time_desc" },
+  { label: "Runtime: Shortest", value: "run_time_asc" },
 ];
 
 export const defaultFilterObject: FilterObject = {
