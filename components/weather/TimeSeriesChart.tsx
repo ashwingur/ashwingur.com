@@ -45,7 +45,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
       .toUpperCase()}`;
 
     return (
-      <div className="bg-background py-2 px-3 rounded-md shadow-md">
+      <div className="rounded-md bg-background px-3 py-2 shadow-md">
         <p className="text-center font-bold">{`${data.value} ${unit}`}</p>
         <p className="text-sm">{`${formattedDate}`}</p>
       </div>
@@ -73,14 +73,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   const [lineColour, setLineColour] = useState(
     getComputedStyle(document.documentElement).getPropertyValue(
-      "--color-accent"
-    )
+      "--color-accent",
+    ),
   );
 
   useEffect(() => {
     const updateLineColour = () => {
       const newColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-accent");
       setLineColour(newColor);
     };
@@ -122,7 +122,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   const generateTicks = (
     min: number,
     max: number,
-    tickCount: number
+    tickCount: number,
   ): number[] => {
     // Using a set to avoid duplicate keys
     const step = (max - min) / (tickCount - 1);
@@ -147,9 +147,9 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   return (
     <Card className="w-full" firstLayer={false}>
-      <h3 className="text-center my-2 lg:text-xl">{title}</h3>
+      <h3 className="my-2 text-center lg:text-xl">{title}</h3>
       {metricStats !== undefined && (
-        <div className="flex flex-col md:flex-row md:gap-4 items-center justify-center mb-2">
+        <div className="mb-2 flex flex-col items-center justify-center md:flex-row md:gap-4">
           <p>
             <span className="font-bold">Average: </span>
             {metricStats.average}
@@ -214,6 +214,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
             />
             <CartesianGrid strokeDasharray="4 4" stroke={gridColour} />
             <Tooltip
+              animationDuration={150}
               content={<CustomTooltip unit={yLabel} />}
               contentStyle={{ backgroundColor: tooltipColour }}
             />

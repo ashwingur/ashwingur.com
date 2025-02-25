@@ -182,6 +182,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
             />
             <CartesianGrid strokeDasharray="4 4" stroke={gridColour} />
             <Tooltip
+              animationDuration={150}
               content={<CustomTooltip />}
               contentStyle={{ backgroundColor: tooltipColour }}
             />
