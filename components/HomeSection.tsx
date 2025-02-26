@@ -170,8 +170,16 @@ const HomeSection = () => {
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
           <span className="w-28 font-bold md:w-24">Degree:</span>{" "}
           <span className="w-full">
-            Bachelor of Mechatronics Engineering + Computer Science double
-            degree (University of Sydney)
+            Bachelor of Mechatronics Engineering Honours + Computer Science
+            Double Degree (University of Sydney) (
+            <Link
+              href={"/AshwinGur_PrivacyPreseringSimThesis.pdf"}
+              target="_blank"
+              className="text-text-hover"
+            >
+              thesis
+            </Link>
+            )
           </span>
         </div>
         <div className="flex gap-2 md:w-4/5 xl:w-3/5">
