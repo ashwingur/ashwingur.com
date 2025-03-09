@@ -271,14 +271,19 @@ const WorldMap = () => {
   const bgColour = isDark(theme) ? "bg-blue-800" : "bg-blue-200";
   const landColour = isDark(theme) ? "fill-orange-950" : "fill-orange-200";
   const borderColour = isDark(theme) ? "stroke-orange-800" : "stroke-black";
-  console.log(bgColour);
 
   // Set colour of all paths by default
   useEffect(() => {
     if (svgRef.current) {
       const paths = svgRef.current.querySelectorAll<SVGPathElement>("path"); // Get all path elements
       paths.forEach((path) => {
-        path.classList = [
+        path.classList.remove(
+          "fill-orange-950",
+          "fill-orange-200",
+          "stroke-orange-800",
+          "stroke-black",
+        );
+        path.classList.add(
           landColour,
           borderColour,
           "transition-all",
@@ -288,7 +293,7 @@ const WorldMap = () => {
           "duration-200",
           "ease-in-out",
           "transform-fill-box",
-        ].join(" ");
+        );
 
         // Create a rectangle around each path
         const bbox = path.getBBox(); // Get the bounding box of the path
@@ -303,7 +308,7 @@ const WorldMap = () => {
         rect.setAttribute("fill", "none");
         rect.setAttribute("stroke", "yellow");
         rect.setAttribute("stroke-width", "2");
-        rect.classList = ["hidden"].join("");
+        rect.classList.add("hidden");
 
         path.parentNode?.insertBefore(rect, path); // Insert the rectangle before the path
 
@@ -321,7 +326,6 @@ const WorldMap = () => {
         // Move hovered element to the end so it appears on top
         path.addEventListener("mouseenter", () => {
           // path.parentNode?.appendChild(path); // Move hovered element to the end so it appears on top
-          console.log(path.id);
           setSelectedID(path.id);
         });
       });
@@ -333,7 +337,6 @@ const WorldMap = () => {
     const target = e.target as SVGPathElement; // Cast the event target to an SVG path element
 
     // Ensure the target is an SVG path
-    console.log(target.id); // Log the path ID
     target.style.fill = "green"; // Change the fill color of the clicked path
     target.style.stroke = "black"; // Change the stroke color of the clicked path
   };
