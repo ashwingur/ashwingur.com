@@ -132,6 +132,12 @@ html {
   }
 }
 
+@layer utilities {
+  .transform-fill-box {
+    transform-box: fill-box;
+  }
+}
+
 @font-face {
   font-family: "Clash-Regular";
   font-weight: 400;

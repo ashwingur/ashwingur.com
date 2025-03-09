@@ -1,13 +1,12 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { useTheme } from "next-themes";
 import DateTimePicker from "./DateTimePicker";
 
 interface DateTimeRangePickerProps {
   onDateTimeChange: (
     startLessThanEnd: boolean,
     start?: Date,
-    end?: Date
+    end?: Date,
   ) => void;
   defaultStartTime?: Date;
   defaultEndTime?: Date;
@@ -33,10 +32,10 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
 }) => {
   const { defaultStart, defaultEnd } = getDefaultDateTimes();
   const [startDatetime, setStartDatetime] = useState<Date | undefined>(
-    defaultStartTime ?? defaultStart
+    defaultStartTime ?? defaultStart,
   );
   const [endDatetime, setEndDatetime] = useState<Date | undefined>(
-    defaultEndTime ?? defaultEnd
+    defaultEndTime ?? defaultEnd,
   );
 
   const onStartTimeChange = (start?: Date) => {
@@ -44,7 +43,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
     onDateTimeChange(
       start && endDatetime ? start < endDatetime : false,
       start,
-      endDatetime
+      endDatetime,
     );
   };
   const onEndTimeChange = (end?: Date) => {
@@ -52,7 +51,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
     onDateTimeChange(
       startDatetime && end ? startDatetime < end : false,
       startDatetime,
-      end
+      end,
     );
   };
 
@@ -60,7 +59,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
     <div
       className={clsx(
         className,
-        "flex flex-col lg:flex-row items-center justify-center gap-2 md:gap-8"
+        "flex flex-col items-center justify-center gap-2 md:gap-8 lg:flex-row",
       )}
     >
       <DateTimePicker
