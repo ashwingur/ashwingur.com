@@ -110,7 +110,7 @@ const NSWCarPark = () => {
   ));
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Navbar fixed={true} />
       <h1 className="pb-4 pt-20 text-center">NSW Live Car Park Data</h1>
       <p className="text-center">Last update: {lastFetchTime}</p>
@@ -126,7 +126,7 @@ const NSWCarPark = () => {
         </a>
         . The API does not guarantee the values to be accurate at all times.
       </p>
-      <div className="mx-4 grid grid-cols-1 gap-4 pb-8 sm:grid-cols-1 md:mx-16 md:grid-cols-2">
+      <div className="mx-4 grid grid-cols-1 gap-4 pb-8 sm:grid-cols-1 md:mx-16 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {parkingBoxes}
       </div>
     </div>
