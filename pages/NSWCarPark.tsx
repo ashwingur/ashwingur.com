@@ -25,7 +25,7 @@ const ParkingBox = ({ facility }: ParkingBoxProps) => {
   let backgroundColour = "bg-green-400 dark:bg-green-800";
   // Sometimes there are are more occupied than parking spots in the api, cap it at max spots
   const occupied = Number(
-    facility.occupancy.total > facility.spots
+    Number(facility.occupancy.total) > Number(facility.spots)
       ? facility.spots
       : facility.occupancy.total,
   );
