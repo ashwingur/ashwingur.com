@@ -2,7 +2,6 @@ import Head from "next/head";
 import Navbar from "../components/navbars/Navbar";
 import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
-import Apps from "../components/Apps";
 import Footer from "../components/Footer";
 import Card from "@components/Card";
 

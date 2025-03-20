@@ -77,8 +77,8 @@ const appsList: App[] = [
     icon: (className?: string) => <FaCode className={clsx(className)} />,
   },
   {
-    name: "NSW Live Car Park",
-    url: "/NSWCarPark",
+    name: "Live Car Park",
+    url: "/LiveCarPark",
     description:
       "A public commuter carpark tracker using the Transport Opendata API.",
     icon: (className?: string) => <FaCar className={clsx(className)} />,
