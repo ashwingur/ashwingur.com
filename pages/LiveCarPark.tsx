@@ -10,15 +10,7 @@ const LiveCarPark = () => {
   const router = useRouter();
   const { isLoading, isError, data } = useLatestParkingData();
 
-  if (isLoading) {
-    <div className="min-h-screen">
-      <Navbar fixed={true} />
-      <h1 className="pb-4 pt-20 text-center">{heading}</h1>
-      <LoadingIcon />
-    </div>;
-  }
-
-  if (isError || data === undefined) {
+  if (isError) {
     return (
       <div className="min-h-screen">
         <Navbar fixed={true} />
@@ -26,6 +18,13 @@ const LiveCarPark = () => {
         <p className="text-center">Error fetching parking data.</p>
       </div>
     );
+  }
+  if (isLoading || data === undefined) {
+    <div className="min-h-screen">
+      <Navbar fixed={true} />
+      <h1 className="pb-4 pt-20 text-center">{heading}</h1>
+      <LoadingIcon />
+    </div>;
   }
 
   return (
