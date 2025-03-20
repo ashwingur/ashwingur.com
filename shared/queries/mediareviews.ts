@@ -6,7 +6,6 @@ import {
 } from "react-query";
 import {
   MediaReview,
-  PaginatedMediaReview,
   SubMediaReview,
   mediaReviewSchema,
   mediaReviewWriteSchema,
@@ -27,7 +26,7 @@ export const METADATA_QUERY_KEY = "reviewMetadata";
 const getAllMediaReviews = async () => {
   const apiUrl = new URL(
     `/mediareviews`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
+    process.env.NEXT_PUBLIC_ASHWINGUR_API,
   );
 
   const response = await fetch(apiUrl, {
@@ -46,7 +45,7 @@ const getAllMediaReviews = async () => {
 
   if (!result.success) {
     throw new Error(
-      `Error ${response.status}: Invalid response format (${JSON.stringify(result.error.errors)})`
+      `Error ${response.status}: Invalid response format (${JSON.stringify(result.error.errors)})`,
     );
   }
 
@@ -74,7 +73,7 @@ const getPaginatedMediaReviews = async ({
   // eg ?id=1&id=2&id=3
   const customQueryParams: CustomQueryParam[] = [];
   mediaTypes.forEach((m) =>
-    customQueryParams.push({ key: "media_types", val: m })
+    customQueryParams.push({ key: "media_types", val: m }),
   );
   genres.forEach((g) => customQueryParams.push({ key: "genres", val: g }));
   creators.forEach((c) => customQueryParams.push({ key: "creators", val: c }));
@@ -108,7 +107,7 @@ const writeMediaReview = async (data: MediaReview) => {
 
   const apiUrl = new URL(
     `/mediareviews${data.id ? `/${data.id}` : ""}`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
+    process.env.NEXT_PUBLIC_ASHWINGUR_API,
   );
 
   let response;
@@ -176,7 +175,7 @@ const deleteMediaReview = async (id: number) => {
 
   const apiUrl = new URL(
     `/mediareviews/${id}`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
+    process.env.NEXT_PUBLIC_ASHWINGUR_API,
   );
 
   const response = await fetch(apiUrl, {
@@ -213,7 +212,7 @@ const writeSubMediaReview = async (data: SubMediaReview) => {
 
   const apiUrl = new URL(
     `/mediareviews/submediareview${data.id ? `/${data.id}` : ""}`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
+    process.env.NEXT_PUBLIC_ASHWINGUR_API,
   );
 
   let response;
@@ -281,7 +280,7 @@ const deleteSubMediaReview = async (id: number) => {
 
   const apiUrl = new URL(
     `/mediareviews/submediareview/${id}`,
-    process.env.NEXT_PUBLIC_ASHWINGUR_API
+    process.env.NEXT_PUBLIC_ASHWINGUR_API,
   );
 
   const response = await fetch(apiUrl, {
@@ -318,7 +317,7 @@ export const useWriteMediaReview = (onSuccess: (data: MediaReview) => void) => {
 };
 
 export const useWriteSubMediaReview = (
-  onSuccess: (data: SubMediaReview) => void
+  onSuccess: (data: SubMediaReview) => void,
 ) => {
   return useMutation(writeSubMediaReview, {
     onSuccess,
@@ -354,7 +353,7 @@ export const useReviewsMetadata = () => {
 export const usePaginatedMediaReviews = (
   perPage: number,
   filterObject: FilterObject,
-  filterReady: boolean
+  filterReady: boolean,
 ) => {
   return useInfiniteQuery({
     queryKey: [PAGINATED_QUERY_KEY, perPage, filterObject],
