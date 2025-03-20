@@ -40,22 +40,28 @@ const LiveCarPark = () => {
       const occupied = Math.min(item.occupancy, item.capacity);
       const percentOccupied = occupied / item.capacity;
       let bgClassName = isDark(theme) ? "bg-green-600" : "bg-green-500";
+
       if (percentOccupied >= 0.85) {
         bgClassName = isDark(theme) ? "bg-red-700" : "bg-red-600";
       } else if (percentOccupied >= 0.5) {
         bgClassName = isDark(theme) ? "bg-amber-500" : "bg-amber-500";
       }
+
       return (
         <Link key={index} href={`LiveCarPark/${item.facility_id}`}>
           <Card firstLayer={true} className="hover:outline">
             <div className="group flex justify-between">
               <div className="flex">
-                <div
-                  className={clsx(
-                    "mr-2 h-full w-4 rounded-md md:mr-4",
-                    bgClassName,
-                  )}
-                />
+                <div className="relative mr-2 w-4 rounded-md bg-black md:mr-4">
+                  {/* Colored bar inside the black background */}
+                  <div
+                    className={clsx(
+                      "absolute bottom-0 left-0 right-0 rounded-sm",
+                      bgClassName,
+                    )}
+                    style={{ height: `${percentOccupied * 100}%` }}
+                  />
+                </div>
                 <div className="flex flex-col">
                   <div className="flex items-center">
                     <p className="font-bold">
