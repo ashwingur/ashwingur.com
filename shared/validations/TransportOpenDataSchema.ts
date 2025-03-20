@@ -6,3 +6,16 @@ export const parkingLotSchema = z.object({
   name: z.string(),
   occupancy: z.number().min(0),
 });
+
+export const parkingDataSchema = z.object({
+  capacity: z.number().min(0),
+  facility_id: z.number(),
+  facility_name: z.string(),
+  latest_occupancy: z.number().min(0),
+  historical_data: z.array(
+    z.object({
+      occupied: z.number().min(0),
+      time: z.string(),
+    }),
+  ),
+});

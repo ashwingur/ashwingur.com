@@ -59,7 +59,7 @@ const DateTimeRangePicker: React.FC<DateTimeRangePickerProps> = ({
     <div
       className={clsx(
         className,
-        "flex flex-col items-center justify-center gap-2 md:gap-8 lg:flex-row",
+        "flex flex-col items-center justify-center gap-2 md:flex-row md:gap-8",
       )}
     >
       <DateTimePicker
