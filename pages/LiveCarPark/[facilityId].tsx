@@ -4,6 +4,7 @@ import GenericListbox from "@components/GenericListBox";
 import LoadingIcon from "@components/LoadingIcon";
 import Navbar from "@components/navbars/Navbar";
 import TimeSeriesChart from "@components/weather/TimeSeriesChart";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useParkingHistory } from "shared/queries/transportopendata";
@@ -76,6 +77,11 @@ const FacilityHistory = () => {
       <h1 className="pb-4 pt-20 text-center">
         {data.facility_name.replace(/^Park&Ride - /, "")}
       </h1>
+      <div className="flex justify-center">
+        <Link className="btn my-4 w-32" href="/LiveCarPark">
+          Back
+        </Link>
+      </div>
       <Card firstLayer={true} className="mx-4 md:mx-auto md:w-4/5">
         <div className="z-20 flex flex-col items-center">
           <h3 className="mb-2 text-xl">Time Filter</h3>
@@ -101,6 +107,19 @@ const FacilityHistory = () => {
               )}
             </div>
           )}
+        </div>
+        <div className="mt-2 flex items-center justify-center gap-4 md:gap-8">
+          <p>
+            <span className="font-bold">Current:</span> {data.latest_occupancy}
+          </p>
+          <p>
+            <span className="font-bold">Min: </span>
+            {data.min_occupancy}
+          </p>
+          <p>
+            <span className="font-bold">Max: </span>
+            {data.max_occupancy}
+          </p>
         </div>
         <div className="mt-4 px-4">
           <TimeSeriesChart

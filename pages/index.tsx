@@ -3,7 +3,6 @@ import Navbar from "../components/navbars/Navbar";
 import HomeSection from "../components/HomeSection";
 import Projects from "../components/Projects";
 import Footer from "../components/Footer";
-import Card from "@components/Card";
 
 export default function Home() {
   // const appContext = useContext(AppContext);
