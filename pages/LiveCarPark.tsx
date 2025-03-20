@@ -87,7 +87,7 @@ const LiveCarPark = () => {
     <div className="min-h-screen">
       <Navbar fixed={true} />
       <h1 className="pb-4 pt-20 text-center">Live Parking Data</h1>
-      <p className="mb-4 text-center text-sm italic">
+      <p className="mb-4 px-4 text-center text-sm italic">
         Data sourced from{" "}
         <Link
           className="text-text-hover"
