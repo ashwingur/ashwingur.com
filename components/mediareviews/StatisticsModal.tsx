@@ -122,16 +122,13 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
               <>
                 <p className="text-center">
                   <span className="font-bold">Total Reviews: </span>
-                  {data.rating_bins.all.reduce((acc, val) => acc + val, 0)}
+                  {data.media_review_count}
                 </p>
                 <p className="text-center">
                   <span className="font-bold">
                     Total Reviews (Including Subreviews):{" "}
                   </span>
-                  {data.rating_bins_with_sub_reviews.all.reduce(
-                    (acc, val) => acc + val,
-                    0,
-                  )}
+                  {data.media_review_count + data.sub_media_review_count}
                 </p>
                 <p className="text-center">
                   <span className="font-bold">Total Words Read: </span>

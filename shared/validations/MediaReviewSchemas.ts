@@ -50,13 +50,19 @@ export const subMediaReviewSchema = z.object({
     z
       .string()
       .min(1, "There cannot be a blank line")
-      .refine((value) => value.trim().length > 0, "All lines must have content")
+      .refine(
+        (value) => value.trim().length > 0,
+        "All lines must have content",
+      ),
   ),
   cons: z.array(
     z
       .string()
       .min(1, "There cannot be a blank line")
-      .refine((value) => value.trim().length > 0, "All lines must have content")
+      .refine(
+        (value) => value.trim().length > 0,
+        "All lines must have content",
+      ),
   ),
   visible: z.boolean(),
 });
@@ -98,13 +104,19 @@ export const mediaReviewSchema = z.object({
     z
       .string()
       .min(1, "There cannot be a blank line")
-      .refine((value) => value.trim().length > 0, "All lines must have content")
+      .refine(
+        (value) => value.trim().length > 0,
+        "All lines must have content",
+      ),
   ),
   cons: z.array(
     z
       .string()
       .min(1, "There cannot be a blank line")
-      .refine((value) => value.trim().length > 0, "All lines must have content")
+      .refine(
+        (value) => value.trim().length > 0,
+        "All lines must have content",
+      ),
   ),
   visible: z.boolean(),
   sub_media_reviews: z.array(subMediaReviewSchema),
@@ -136,6 +148,8 @@ export const reviewMetaDataSchema = z.object({
   rating_bins_with_sub_reviews: ratingBinsSchema,
   total_run_time: z.number(),
   total_word_count: z.number(),
+  media_review_count: z.number(),
+  sub_media_review_count: z.number(),
 });
 
 // Omit fields that arent expected by the API
@@ -183,7 +197,7 @@ export const defaultMediaReview = (): MediaReview => ({
 
 export const defaultSubMediaReview = (
   media_review_id: number | null,
-  display_index: number
+  display_index: number,
 ): SubMediaReview => ({
   id: null,
   media_review_id,

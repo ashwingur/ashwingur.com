@@ -57,10 +57,11 @@ const appsList: App[] = [
     icon: (className?: string) => <FaChartLine className={clsx(className)} />,
   },
   {
-    name: "Tron Arcade",
-    url: "/Tron",
-    description: "An online multiplayer 2D game based on Tron.",
-    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+    name: "Live Car Park",
+    url: "/LiveCarPark",
+    description:
+      "A public commuter carpark tracker using the Transport Opendata API.",
+    icon: (className?: string) => <FaCar className={clsx(className)} />,
   },
   {
     name: "Generative Art",
@@ -70,18 +71,17 @@ const appsList: App[] = [
     icon: (className?: string) => <FaPaintbrush className={clsx(className)} />,
   },
   {
+    name: "Tron Arcade",
+    url: "/Tron",
+    description: "An online multiplayer 2D game based on Tron.",
+    icon: (className?: string) => <FaGamepad className={clsx(className)} />,
+  },
+  {
     name: "Code Editor",
     url: "/Code",
     description:
       "A online code editor that supports many languages. The Piston API is used to safely execute code.",
     icon: (className?: string) => <FaCode className={clsx(className)} />,
-  },
-  {
-    name: "Live Car Park",
-    url: "/LiveCarPark",
-    description:
-      "A public commuter carpark tracker using the Transport Opendata API.",
-    icon: (className?: string) => <FaCar className={clsx(className)} />,
   },
   {
     name: "Clash of Clans Tracker",
