@@ -21,3 +21,36 @@ export const parkingDataSchema = z.object({
     }),
   ),
 });
+
+export const ServiceInfoSchema = z.object({
+  current: z.array(
+    z.object({
+      affected: z.object({
+        lines: z.array(
+          z.object({
+            description: z.string(),
+            name: z.string(),
+            number: z.string(),
+          }),
+        ),
+      }),
+      priority: z.string(),
+      timestamps: z.object({
+        availability: z.object({
+          from: z.string(),
+          to: z.string(),
+        }),
+        expiration: z.string(),
+        validity: z.array(
+          z.object({
+            from: z.string(),
+            to: z.string(),
+          }),
+        ),
+      }),
+      type: z.string(),
+      url: z.string().url(),
+      urlText: z.string(),
+    }),
+  ),
+});
