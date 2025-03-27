@@ -1,16 +1,7 @@
-import Card from "@components/Card";
-import LoadingIcon from "@components/LoadingIcon";
 import Navbar from "@components/navbars/Navbar";
-import { isDark } from "@components/ToggleThemeButton";
 import ParkingGrid from "@components/transportopendata/ParkingGrid";
 import ServiceInfoGrid from "@components/transportopendata/ServiceInfoGrid";
-import TimeSeriesChart from "@components/weather/TimeSeriesChart";
-import clsx from "clsx";
-import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import { useLatestParkingData } from "shared/queries/transportopendata";
 
 const LiveCarPark = () => {
   return (

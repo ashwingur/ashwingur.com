@@ -52,7 +52,7 @@ const CocNavBar = () => {
   };
 
   return (
-    <div>
+    <div className="text-slate-900">
       <div className="fixed z-50 flex w-full justify-between bg-white/30 px-4 py-4 shadow-lg backdrop-blur-md dark:bg-black/30 md:px-8 lg:px-16">
         <Link href="/">
           <CustomisableLogo className="bg-[#6c779b] text-white" />

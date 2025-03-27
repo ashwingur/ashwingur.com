@@ -23,7 +23,7 @@ const AvailablePlayers = () => {
 
   if (error instanceof Error) {
     return (
-      <p className="text-center coc-font-style m-8 text-2xl">
+      <p className="coc-font-style m-8 text-center text-2xl">
         Unable to fetch updated clan data: {error.message}
       </p>
     );
@@ -38,7 +38,7 @@ const AvailablePlayers = () => {
       <Link
         key={index}
         href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
-        className="flex items-center justify-center h-16"
+        className="flex h-16 items-center justify-center"
       >
         <CocButton
           text={player.name}
@@ -52,10 +52,10 @@ const AvailablePlayers = () => {
 
   return (
     <div>
-      <h2 className="text-center clash-font-style font-thin text-3xl mt-8 mb-4">
+      <h2 className="clash-font-style mb-4 mt-8 text-center text-3xl font-thin">
         Players
       </h2>
-      <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
+      <div className="grid items-center gap-2 md:grid-cols-3 lg:grid-cols-4">
         {members}
       </div>
     </div>
@@ -67,10 +67,10 @@ const Progress = () => {
     <div className="bg-clash">
       <CocNavBar />
       <div className="flex flex-col items-center">
-        <h2 className="text-center pt-20 clash-font-style font-thin">
+        <h2 className="clash-font-style pt-20 text-center font-thin">
           {title}
         </h2>
-        <p className="text-center coc-font-style mt-8 mx-4 w-3/5 text-xl md:text-2xl">
+        <p className="coc-font-style mx-4 mt-8 w-3/5 text-center text-xl md:text-2xl">
           Note that this progress tracker only tracks players who are part of
           TheOrganization. It tracks all available information in the Player API
           such as trophies, troop/hero/spell levels and achievements. New data

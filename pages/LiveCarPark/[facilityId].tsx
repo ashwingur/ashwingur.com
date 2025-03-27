@@ -56,8 +56,6 @@ const FacilityHistory = () => {
     selectedTimeOption.endTime,
   );
 
-  console.log(isLoading, isError, data);
-
   if (isError) {
     return (
       <div className="min-h-screen">
