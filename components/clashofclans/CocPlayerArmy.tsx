@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Player, PlayerItemLevel } from "../../shared/interfaces/coc.interface";
+import clsx from "clsx";
 
 interface CocPlayerArmyProps {
   player: Player;
@@ -23,19 +24,20 @@ const ArmyItemIcon = ({ playerItemLevel, showLevel }: ArmyItemIconProps) => {
     <div className="relative inline-block rounded-md border-2 border-black font-clash font-thin">
       <Image
         unoptimized
-        src={`/assets/coc/troops/icons/${icon_name}.png`}
+        src={`/assets/coc/troops/icons/${icon_name}.webp`}
         alt={playerItemLevel.name}
         width={64}
         height={64}
       />
       {showLevel && (
         <div
-          className={
-            "absolute bottom-1 left-1 inline-block h-6 w-6 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white" +
-            (playerItemLevel.level != playerItemLevel.maxLevel
-              ? " bg-black"
-              : " bg-yellow-500")
-          }
+          className={clsx(
+            "absolute bottom-1 left-1 inline-block h-6 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white",
+            playerItemLevel.level != playerItemLevel.maxLevel
+              ? "bg-black"
+              : "bg-yellow-500",
+            playerItemLevel.level >= 100 ? "w-10" : "min-w-6",
+          )}
         >
           <div className="px-[2px] text-center text-white">
             {playerItemLevel.level}
@@ -104,6 +106,9 @@ const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
     "Diggy",
     "Poison Lizard",
     "Phoenix",
+    "Spirit Fox",
+    "Angry Jelly",
+    "Sneezy",
   ];
 
   const normal_troops = player.troops.filter(

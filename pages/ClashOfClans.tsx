@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import CocNavBar from "../components/clashofclans/CocNavBar";
 import CocButton from "../components/clashofclans/CocButton";
 import Image from "next/image";
@@ -30,17 +29,17 @@ const ClashOfClans = () => {
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
-      <div className="flex flex-col items-center w-">
-        <h2 className="text-center pt-20 clash-font-style font-thin">
+      <div className="w- flex flex-col items-center">
+        <h2 className="clash-font-style pt-20 text-center font-thin">
           Clash of Clans
         </h2>
-        <p className="text-center coc-font-style m-8 md:w-[60%] text-xl md:text-2xl">
+        <p className="coc-font-style m-8 text-center text-xl md:w-[60%] md:text-2xl">
           Welcome to the Clash of Clans page. Search any player or clan by their
           tag in the navigation bar. This site uses the official Clash of Clans
           API to provide up to date data. Below are some quick links to my
           profile and clan:
         </p>
-        <div className="h-16 flex items-center mb-4">
+        <div className="mb-4 flex h-16 items-center">
           <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
             <CocButton
               className="w-80 hover:w-72"
@@ -51,7 +50,7 @@ const ClashOfClans = () => {
             />
           </Link>
         </div>
-        <div className="h-16 flex items-center mb-4">
+        <div className="mb-4 flex h-16 items-center">
           <Link href={"/ClashOfClans/clan/220QP2GGU"}>
             <CocButton
               className="w-80 hover:w-72"
@@ -62,7 +61,7 @@ const ClashOfClans = () => {
             />
           </Link>
         </div>
-        <div className="h-16 flex items-center">
+        <div className="flex h-16 items-center">
           <Link href={"/ClashOfClans/Progress"}>
             <CocButton
               className="w-80 hover:w-72"
@@ -74,7 +73,7 @@ const ClashOfClans = () => {
           </Link>
         </div>
       </div>
-      <div className="w-72 h-72 md:w-96 md:h-96 relative mx-auto my-8">
+      <div className="relative mx-auto my-8 h-72 w-72 md:h-96 md:w-96">
         <Image
           src={`/assets/coc/ElectroBarb.png`}
           alt={`Electrobarb`}

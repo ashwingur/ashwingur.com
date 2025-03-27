@@ -4,7 +4,11 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { ParkingFacility } from "../shared/interfaces/parking.interface";
 import { Dispatch, SetStateAction, useState } from "react";
-import Link from "next/link";
+
+/*
+  THIS IS AN OLD VERSION, new version is LiveCarPark.tsx
+
+*/
 
 const fetchParkingIDs = (
   setLastFetchTime: Dispatch<SetStateAction<string>>,

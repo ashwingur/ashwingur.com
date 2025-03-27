@@ -86,7 +86,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         <div className="relative h-16 w-16 md:h-24 md:w-24">
           <Image
             unoptimized
-            src={`/assets/coc/townhalls/${member.townhallLevel}.png`}
+            src={`/assets/coc/townhalls/${member.townhallLevel}.webp`}
             alt={`Townhall level ${member.townhallLevel}`}
             fill
             style={{ objectFit: "contain" }}
