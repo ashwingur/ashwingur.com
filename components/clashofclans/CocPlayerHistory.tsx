@@ -20,10 +20,7 @@ import {
 } from "recharts/types/component/DefaultTooltipContent";
 import { usePlayerHistory } from "shared/queries/clashofclans";
 import { createTimeOptions, TimeOption } from "shared/timeoptions";
-import {
-  CocPlayerHistorySchema,
-  PlayerItemLevelSchema,
-} from "shared/validations/ClashOfClansSchemas";
+import { CocPlayerHistorySchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 
 interface CocPlayerHistoryProps {
@@ -44,6 +41,35 @@ interface PlayerItemCategoryProps {
   title: string;
   className?: string;
 }
+
+type CocPlayerHistory = z.infer<typeof CocPlayerHistorySchema>;
+
+// Extract the keys where the value is a number
+type NumericKeys = {
+  [K in keyof CocPlayerHistory]: CocPlayerHistory[K] extends number ? K : never;
+}[keyof CocPlayerHistory]; // This will give us the keys where the value is of type number
+
+interface RootCategoryProps {
+  keys: NumericKeys[];
+  title: string;
+  className?: string;
+}
+
+const rootCategoryKeys: NumericKeys[] = [
+  "townHallLevel",
+  "expLevel",
+  "trophies",
+  "bestTrophies",
+  "warStars",
+  "attackWins",
+  "defenseWins",
+  "builderHallLevel",
+  "builderBaseTrophies",
+  "bestBuilderBaseTrophies",
+  "donations",
+  "donationsReceived",
+  "clanCapitalContributions",
+];
 
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   const [chartData, setChartData] = useState<ChartData[]>([]);
@@ -174,7 +200,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             ]}
             stroke="white"
           />
-          <Tooltip content={CustomTooltip} />
+          <Tooltip content={CustomTooltip} animationDuration={150} />
           <Area
             type="monotone"
             dataKey="y"
@@ -188,12 +214,43 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   };
 
-  function extractNumericValues(
-    history: z.infer<typeof CocPlayerHistorySchema>[],
-    key: keyof z.infer<typeof CocPlayerHistorySchema>,
-  ): string[] {
-    return history.map((entry) => `${entry[key]}`);
-  }
+  const RootCategory: React.FC<RootCategoryProps> = ({
+    keys,
+    title,
+    className,
+  }) => {
+    const items = keys.map((item, index) => {
+      return (
+        <button
+          className="btn"
+          key={index}
+          onClick={() => {
+            setChartData(
+              data.history.map((entry) => {
+                return {
+                  y: entry[item],
+                  time: new Date(entry.timestamp).getTime(),
+                };
+              }),
+            );
+          }}
+        >
+          {item}
+        </button>
+      );
+    });
+    return (
+      <div
+        className={clsx(
+          className,
+          "coc-font-style flex w-full flex-col items-center rounded-md border-2 border-black px-4 py-2",
+        )}
+      >
+        <h3 className="m-4">{title}</h3>
+        <div className="flex flex-wrap gap-2">{items}</div>
+      </div>
+    );
+  };
 
   const PlayerItemCategory: React.FC<PlayerItemCategoryProps> = ({
     nameKey,
@@ -236,30 +293,6 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   };
 
-  const troopNames = data.history[data.history.length - 1].troops.map(
-    (item, index) => {
-      return (
-        <button
-          className="btn"
-          key={index}
-          onClick={() => {
-            setChartData(
-              data.history.map((entry) => {
-                const i = entry.troops.find((i) => i.name === item.name);
-                return {
-                  time: new Date(entry.timestamp).getTime(),
-                  y: i ? i.level : 0,
-                };
-              }),
-            );
-          }}
-        >
-          {item.name}
-        </button>
-      );
-    },
-  );
-
   return (
     <div className="font-clash font-thin">
       <h1 className="pb-4 pt-20 text-center">{data.name}</h1>
@@ -290,6 +323,11 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
       {chartData.length > 0 && <ProgressChart data={chartData} />}
       <div className="p-4">
+        <RootCategory
+          keys={rootCategoryKeys}
+          title={"General"}
+          className="mt-4 bg-[#465172]"
+        />
         <PlayerItemCategory
           nameKey={"troops"}
           title="Troops"
