@@ -93,7 +93,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   }
   if (isLoading || data === undefined) {
     return (
-      <div className="mt-20">
+      <div className="pt-20">
         <SpinningCircles className="mx-auto mt-8" />;
       </div>
     );
