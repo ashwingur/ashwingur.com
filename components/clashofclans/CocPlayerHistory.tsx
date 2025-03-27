@@ -1,15 +1,53 @@
 import DateTimeRangePicker from "@components/DateTimeRangePicker";
 import GenericListbox from "@components/GenericListBox";
+import clsx from "clsx";
+import moment from "moment";
 import React, { useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  TooltipProps,
+  XAxis,
+  YAxis,
+} from "recharts";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 import { usePlayerHistory } from "shared/queries/clashofclans";
 import { createTimeOptions, TimeOption } from "shared/timeoptions";
+import {
+  CocPlayerHistorySchema,
+  PlayerItemLevelSchema,
+} from "shared/validations/ClashOfClansSchemas";
+import { z } from "zod";
 
 interface CocPlayerHistoryProps {
   tag: string;
 }
 
+interface ChartProps {
+  data: ChartData[];
+}
+
+interface ChartData {
+  time: number;
+  y: number;
+}
+
+interface PlayerItemCategoryProps {
+  nameKey: "troops" | "heroes" | "spells" | "heroEquipment";
+  title: string;
+  className?: string;
+}
+
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [selectedStatistic, setSelectedStatistic] = useState("");
   const timeOptions = createTimeOptions({
     hoursOptions: [],
     daysOptions: [7, 31, 90, 180],
@@ -54,14 +92,177 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   }
   if (isLoading || data === undefined) {
-    <div className="mt-20">
-      return <SpinningCircles className="mx-auto mt-8" />;
-    </div>;
+    return (
+      <div className="mt-20">
+        <SpinningCircles className="mx-auto mt-8" />;
+      </div>
+    );
   }
+  if (data.history.length === 0) {
+    return (
+      <div className="pt-20">
+        <p className="text-center font-coc text-xl">
+          No data for this player exists yet.
+        </p>
+      </div>
+    );
+  }
+
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: TooltipProps<ValueType, NameType>) => {
+    if (active) {
+      return (
+        <div className="flex flex-col items-center rounded-md bg-gradient-to-b from-[#293968] to-[#637ac6] p-2 text-white">
+          <p className="label text-lg">{moment(label).format("DD-MM-YY")}</p>
+          <p>{payload?.[0].value?.toLocaleString()}</p>
+          <p className="desc">{selectedStatistic}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const ProgressChart = (chartProps: ChartProps) => {
+    const max = Math.max(...chartProps.data.map((o) => o.y));
+    const min = Math.min(...chartProps.data.map((o) => o.y));
+    const tickDigits = max.toString().length;
+    const delta = max - min + 1;
+    let yLabelWidth = 80;
+    if (tickDigits >= 8) {
+      yLabelWidth = 140;
+    } else if (tickDigits >= 5) {
+      yLabelWidth = 100;
+    }
+    return (
+      <ResponsiveContainer
+        width="95%"
+        height={500}
+        className={"clash-font-style font-thin"}
+      >
+        <AreaChart data={chartProps.data}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="white" stopOpacity={0.7} />
+              <stop offset="95%" stopColor="white" stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid stroke="white" strokeDasharray="6" />
+          <XAxis
+            dataKey="time"
+            name="Time"
+            stroke="white"
+            tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
+            height={100}
+            angle={40}
+            dy={30}
+          />
+          <YAxis
+            width={yLabelWidth}
+            dx={-4}
+            allowDecimals={false}
+            tickFormatter={(tick) => {
+              return tick.toLocaleString();
+            }}
+            domain={[
+              (dataMin: number) =>
+                dataMin - delta < 0 ? 0 : Math.floor(dataMin - 0.2 * delta),
+              (dataMax: number) => Math.ceil(dataMax + 0.2 * delta),
+            ]}
+            stroke="white"
+          />
+          <Tooltip content={CustomTooltip} />
+          <Area
+            type="monotone"
+            dataKey="y"
+            stroke="white"
+            strokeWidth={5}
+            fillOpacity={1}
+            fill="url(#colorUv)"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    );
+  };
+
+  function extractNumericValues(
+    history: z.infer<typeof CocPlayerHistorySchema>[],
+    key: keyof z.infer<typeof CocPlayerHistorySchema>,
+  ): string[] {
+    return history.map((entry) => `${entry[key]}`);
+  }
+
+  const PlayerItemCategory: React.FC<PlayerItemCategoryProps> = ({
+    nameKey,
+    title,
+    className,
+  }) => {
+    const history = data.history;
+    const items = history[history.length - 1][nameKey].map((item, index) => {
+      return (
+        <button
+          className="btn"
+          key={index}
+          onClick={() => {
+            setChartData(
+              history.map((entry) => {
+                const i = entry.troops.find((i) => i.name === item.name);
+                return {
+                  time: new Date(entry.timestamp).getTime(),
+                  y: i ? i.level : 0,
+                };
+              }),
+            );
+          }}
+        >
+          {item.name}
+        </button>
+      );
+    });
+
+    return (
+      <div
+        className={clsx(
+          className,
+          "coc-font-style flex w-full flex-col items-center rounded-md border-2 border-black px-4 py-2",
+        )}
+      >
+        <h3 className="m-4">{title}</h3>
+        <div className="flex flex-wrap gap-2">{items}</div>
+      </div>
+    );
+  };
+
+  const troopNames = data.history[data.history.length - 1].troops.map(
+    (item, index) => {
+      return (
+        <button
+          className="btn"
+          key={index}
+          onClick={() => {
+            setChartData(
+              data.history.map((entry) => {
+                const i = entry.troops.find((i) => i.name === item.name);
+                return {
+                  time: new Date(entry.timestamp).getTime(),
+                  y: i ? i.level : 0,
+                };
+              }),
+            );
+          }}
+        >
+          {item.name}
+        </button>
+      );
+    },
+  );
 
   return (
     <div className="font-clash font-thin">
-      <h1 className="pb-4 pt-20 text-center">Player History</h1>
+      <h1 className="pb-4 pt-20 text-center">{data.name}</h1>
       <div className="z-20 flex flex-col items-center">
         <h3 className="mb-2 text-xl">Time Filter</h3>
         <GenericListbox<TimeOption>
@@ -87,7 +288,29 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           </div>
         )}
       </div>
-      {JSON.stringify(data)}
+      {chartData.length > 0 && <ProgressChart data={chartData} />}
+      <div className="p-4">
+        <PlayerItemCategory
+          nameKey={"troops"}
+          title="Troops"
+          className="mt-4 bg-[#465172]"
+        />
+        <PlayerItemCategory
+          nameKey={"spells"}
+          title="Spells"
+          className="mt-4 bg-[#465172]"
+        />
+        <PlayerItemCategory
+          nameKey={"heroes"}
+          title="Heroes"
+          className="mt-4 bg-[#465172]"
+        />
+        <PlayerItemCategory
+          nameKey={"heroEquipment"}
+          title="Hero Equipment"
+          className="mt-4 bg-[#465172]"
+        />
+      </div>
     </div>
   );
 };

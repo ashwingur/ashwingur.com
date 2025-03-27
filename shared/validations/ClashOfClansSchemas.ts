@@ -40,4 +40,4 @@ const CocPlayerDataSchema = z.object({
   history: z.array(CocPlayerHistorySchema),
 });
 
-export { CocPlayerDataSchema, CocPlayerHistorySchema };
+export { CocPlayerDataSchema, CocPlayerHistorySchema, PlayerItemLevelSchema };
