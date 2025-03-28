@@ -71,10 +71,10 @@ const Progress = () => {
           {title}
         </h2>
         <p className="coc-font-style mx-4 mt-8 w-3/5 text-center text-xl md:text-2xl">
-          Note that this progress tracker only tracks players who are part of
-          TheOrganization. It tracks all available information in the Player API
-          such as trophies, troop/hero/spell levels and achievements. New data
-          is fetched once a day at 00:00.
+          Note this progress tracker only tracks players who are part of
+          TheOrganisation. It tracks all available information in the Player API
+          such as trophies, troop/hero/spell/equipment levels and achievements.
+          New data is fetched once a day at 00:00.
         </p>
 
         <AvailablePlayers />
