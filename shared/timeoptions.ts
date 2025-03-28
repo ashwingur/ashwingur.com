@@ -23,6 +23,7 @@ interface TimeOptionsInput {
   daysOptions?: number[];
   yearsOptions?: number[];
   includeCustom?: boolean;
+  customStartTime?: Date;
   endTime?: Date;
 }
 
@@ -32,6 +33,7 @@ export function createTimeOptions({
   daysOptions = [],
   yearsOptions = [],
   includeCustom = false,
+  customStartTime,
   endTime = roundUpToNearestMinute(new Date()),
 }: TimeOptionsInput): TimeOption[] {
   const options: TimeOption[] = [];
@@ -41,7 +43,8 @@ export function createTimeOptions({
     options.push({
       id: idCounter++,
       display: "Custom",
-      startTime: new Date(endTime.getTime() - 24 * 60 * 60 * 1000), // Default custom range: Last 24 hours
+      startTime:
+        customStartTime ?? new Date(endTime.getTime() - 24 * 60 * 60 * 1000), // Default custom range: Last 24 hours
       endTime: endTime,
     });
   }
@@ -78,7 +81,7 @@ export function createTimeOptions({
       id: idCounter++,
       display: `Last ${years} Year${years > 1 ? "s" : ""}`,
       startTime: new Date(
-        endTime.getTime() - years * 365 * 24 * 60 * 60 * 1000
+        endTime.getTime() - years * 365 * 24 * 60 * 60 * 1000,
       ),
       endTime: endTime,
     });

@@ -2,6 +2,7 @@ import DateTimeRangePicker from "@components/DateTimeRangePicker";
 import GenericListbox from "@components/GenericListBox";
 import clsx from "clsx";
 import moment from "moment";
+import Link from "next/link";
 import React, { useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import {
@@ -22,6 +23,7 @@ import { usePlayerHistory } from "shared/queries/clashofclans";
 import { createTimeOptions, TimeOption } from "shared/timeoptions";
 import { CocPlayerHistorySchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
+import CocButton from "./CocButton";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -79,6 +81,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     daysOptions: [7, 31, 90, 180],
     yearsOptions: [1],
     includeCustom: true,
+    customStartTime: new Date(new Date().getTime() - 7 * 24 * 3600 * 1000),
   });
   // Listbox props
   const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
@@ -110,7 +113,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
   if (isError) {
     return (
-      <div className="pt-20">
+      <div className="pt-24">
         <p className="text-center font-coc text-xl text-error">
           Error fetching player history: {(error as Error).message}
         </p>
@@ -119,17 +122,8 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   }
   if (isLoading || data === undefined) {
     return (
-      <div className="pt-20">
+      <div className="pt-24">
         <SpinningCircles className="mx-auto mt-8" />;
-      </div>
-    );
-  }
-  if (data.history.length === 0) {
-    return (
-      <div className="pt-20">
-        <p className="text-center font-coc text-xl">
-          No data for this player exists yet.
-        </p>
       </div>
     );
   }
@@ -214,6 +208,8 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   };
 
+  const scrollPosition = window.innerWidth <= 768 ? 100 : 0;
+
   const RootCategory: React.FC<RootCategoryProps> = ({
     keys,
     title,
@@ -225,6 +221,12 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           className="btn"
           key={index}
           onClick={() => {
+            window.scrollTo({
+              top: scrollPosition,
+              left: 0,
+              behavior: "smooth",
+            });
+            setSelectedStatistic(item);
             setChartData(
               data.history.map((entry) => {
                 return {
@@ -264,9 +266,15 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           className="btn"
           key={index}
           onClick={() => {
+            window.scrollTo({
+              top: scrollPosition,
+              left: 0,
+              behavior: "smooth",
+            });
+            setSelectedStatistic(`${item.name} Level`);
             setChartData(
               history.map((entry) => {
-                const i = entry.troops.find((i) => i.name === item.name);
+                const i = entry[nameKey].find((i) => i.name === item.name);
                 return {
                   time: new Date(entry.timestamp).getTime(),
                   y: i ? i.level : 0,
@@ -295,7 +303,17 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
   return (
     <div className="font-clash font-thin">
-      <h1 className="pb-4 pt-20 text-center">{data.name}</h1>
+      <div className="mx-auto mb-24 flex h-16 justify-center pt-24">
+        <Link href={`/ClashOfClans/player/${tag}`} className="">
+          <CocButton
+            className="w-80 hover:w-72"
+            text={data.name}
+            innerColour="bg-orange-500"
+            middleColour="bg-orange-600"
+            outerColour="bg-orange-700"
+          />
+        </Link>
+      </div>
       <div className="z-20 flex flex-col items-center">
         <h3 className="mb-2 text-xl">Time Filter</h3>
         <GenericListbox<TimeOption>
@@ -321,34 +339,48 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           </div>
         )}
       </div>
-      {chartData.length > 0 && <ProgressChart data={chartData} />}
-      <div className="p-4">
-        <RootCategory
-          keys={rootCategoryKeys}
-          title={"General"}
-          className="mt-4 bg-[#465172]"
-        />
-        <PlayerItemCategory
-          nameKey={"troops"}
-          title="Troops"
-          className="mt-4 bg-[#465172]"
-        />
-        <PlayerItemCategory
-          nameKey={"spells"}
-          title="Spells"
-          className="mt-4 bg-[#465172]"
-        />
-        <PlayerItemCategory
-          nameKey={"heroes"}
-          title="Heroes"
-          className="mt-4 bg-[#465172]"
-        />
-        <PlayerItemCategory
-          nameKey={"heroEquipment"}
-          title="Hero Equipment"
-          className="mt-4 bg-[#465172]"
-        />
-      </div>
+      {chartData.length > 0 && (
+        <>
+          <h3 className="coc-font-style my-4 text-center text-3xl">
+            {selectedStatistic}
+          </h3>
+          <ProgressChart data={chartData} />
+        </>
+      )}
+      {data.history.length == 0 && (
+        <p className="text-center font-coc text-2xl text-error">
+          No data for this player between the given timestamps.
+        </p>
+      )}
+      {data.history.length > 0 && (
+        <div className="p-4">
+          <RootCategory
+            keys={rootCategoryKeys}
+            title={"General"}
+            className="mt-4 bg-[#465172]"
+          />
+          <PlayerItemCategory
+            nameKey={"troops"}
+            title="Troops"
+            className="mt-4 bg-[#465172]"
+          />
+          <PlayerItemCategory
+            nameKey={"spells"}
+            title="Spells"
+            className="mt-4 bg-[#465172]"
+          />
+          <PlayerItemCategory
+            nameKey={"heroes"}
+            title="Heroes"
+            className="mt-4 bg-[#465172]"
+          />
+          <PlayerItemCategory
+            nameKey={"heroEquipment"}
+            title="Hero Equipment"
+            className="mt-4 bg-[#465172]"
+          />
+        </div>
+      )}
     </div>
   );
 };
