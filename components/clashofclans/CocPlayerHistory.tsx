@@ -263,11 +263,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             tickFormatter={(tick) => {
               return tick.toLocaleString();
             }}
-            domain={[
-              (dataMin: number) =>
-                dataMin - delta < 0 ? 0 : Math.floor(dataMin - 0.2 * delta),
-              (dataMax: number) => Math.ceil(dataMax + 0.2 * delta),
-            ]}
+            domain={[min <= 2 && max <= 2 ? 0 : "auto", "auto"]}
             stroke="white"
           />
           <Tooltip content={CustomTooltip} animationDuration={150} />
