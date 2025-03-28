@@ -24,25 +24,26 @@ export const ArmyItemIcon = ({
 }: ArmyItemIconProps) => {
   const icon_name: string = playerItemLevel.name.replaceAll(" ", "_");
   return (
-    <div className="relative inline-block flex items-center rounded-md border-2 border-black bg-black/20 font-clash font-thin">
+    <div className="relative flex w-12 items-center rounded-md border-2 border-black bg-black/20 font-clash font-thin md:w-14 lg:w-16">
       <Image
         unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.webp`}
         alt={playerItemLevel.name}
-        width={64}
-        height={64}
+        width={0}
+        height={0}
+        className="h-auto w-full"
       />
       {showLevel && (
         <div
           className={clsx(
-            "absolute bottom-1 left-1 inline-block h-6 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white",
+            "absolute bottom-[2px] left-[2px] inline-block h-5 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white md:bottom-1 md:left-1 md:h-6",
             playerItemLevel.level != playerItemLevel.maxLevel
               ? "bg-black"
               : "bg-yellow-500",
-            playerItemLevel.level >= 100 ? "w-10" : "min-w-6",
+            playerItemLevel.level >= 100 ? "w-8 md:w-10" : "min-w-6",
           )}
         >
-          <div className="px-[2px] text-center text-white">
+          <div className="px-[2px] text-center text-xs text-white md:text-base">
             {playerItemLevel.level}
           </div>
         </div>

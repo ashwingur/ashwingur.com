@@ -210,8 +210,10 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       return (
         <div className="flex flex-col items-center rounded-md bg-gradient-to-b from-[#293968] to-[#637ac6] p-2 text-white">
           <p className="label text-lg">{moment(label).format("DD-MM-YY")}</p>
-          <p>{payload?.[0].value?.toLocaleString()}</p>
-          <p className="desc">{selectedStatistic}</p>
+          <p className="text-sm">{payload?.[0].value?.toLocaleString()}</p>
+          <p className="max-w-48 text-center text-xs lg:max-w-none">
+            {selectedStatistic}
+          </p>
         </div>
       );
     }
@@ -490,7 +492,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
       {chartData.length > 0 && (
         <>
-          <h3 className="coc-font-style mb-4 mt-6 text-center text-3xl">
+          <h3 className="coc-font-style mb-4 mt-6 px-4 text-center text-xl md:text-2xl lg:text-3xl">
             {selectedStatistic}
           </h3>
           <ProgressChart data={chartData} />
