@@ -128,6 +128,9 @@ const CocPlayerAchievements = ({ player }: CocPlayerAchievementProps) => {
   const builderAchievements = player.achievements
     .filter((item) => item.village === "builderBase")
     .map((item, index) => <Achievement achievement={item} key={index} />);
+  const clanCapitalAchievements = player.achievements
+    .filter((item) => item.village === "clanCapital")
+    .map((item, index) => <Achievement achievement={item} key={index} />);
 
   return (
     <div className="mx-4 rounded-md border-2 border-black bg-[#5d6b96] p-4 dark:bg-[#344063]">
@@ -138,6 +141,8 @@ const CocPlayerAchievements = ({ player }: CocPlayerAchievementProps) => {
       <div className="flex flex-col gap-2">{homeAchievements}</div>
       <div className="clash-font-style mb-2 mt-4 text-xl">Builder Village</div>
       <div className="flex flex-col gap-2">{builderAchievements}</div>
+      <div className="clash-font-style mb-2 mt-4 text-xl">Clan Capital</div>
+      <div className="flex flex-col gap-2">{clanCapitalAchievements}</div>
     </div>
   );
 };

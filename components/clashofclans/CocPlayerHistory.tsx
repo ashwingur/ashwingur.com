@@ -3,7 +3,7 @@ import GenericListbox from "@components/GenericListBox";
 import clsx from "clsx";
 import moment from "moment";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import {
   Area,
@@ -21,7 +21,10 @@ import {
 } from "recharts/types/component/DefaultTooltipContent";
 import { usePlayerHistory } from "shared/queries/clashofclans";
 import { createTimeOptions, TimeOption } from "shared/timeoptions";
-import { CocPlayerHistorySchema } from "shared/validations/ClashOfClansSchemas";
+import {
+  CocPlayerHistorySchema,
+  AchievementSchema,
+} from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 import CocButton from "./CocButton";
 
@@ -40,6 +43,12 @@ interface ChartData {
 
 interface PlayerItemCategoryProps {
   nameKey: "troops" | "heroes" | "spells" | "heroEquipment";
+  title: string;
+  className?: string;
+}
+
+interface PlayerAchievementCategoryProps {
+  achievements: z.infer<typeof AchievementSchema>[];
   title: string;
   className?: string;
 }
@@ -72,6 +81,55 @@ const rootCategoryKeys: NumericKeys[] = [
   "donationsReceived",
   "clanCapitalContributions",
 ];
+
+const achievementsInfo = [
+  { name: "Bigger Coffers", info: "Gold Storage Level" },
+  { name: "Get those Goblins!", info: "Campaign Map Stars" },
+  { name: "Get even more Goblins!", info: "Campaign Map Stars" },
+  { name: "Nice and Tidy", info: "Obstacles Removed" },
+  { name: "Gold Grab", info: "Gold Stolen" },
+  { name: "Elixir Escapade", info: "Elixir Stolen" },
+  { name: "Heroic Heist", info: "Dark Elixir Stolen" },
+  { name: "League All-Star", info: "Highest Trophy League" },
+  { name: "Unbreakable", info: "Successful Defends" },
+  { name: "Friend in Need", info: "Troops Donated" },
+  { name: "Mortar Mauler", info: "Mortars Destroyed" },
+  { name: "X-Bow Exterminator", info: "X-Bows Destroyed" },
+  { name: "Firefighter", info: "Inferno Towers Destroyed" },
+  { name: "War Hero", info: "Clan War Stars" },
+  { name: "Clan War Wealth", info: "Clan Castle Gold Collected" },
+  { name: "Anti-Artillery", info: "Eagle Artilleries Destroyed" },
+  { name: "Sharing is caring", info: "Spells Donated" },
+  { name: "Games Champion", info: "Clan Games Points" },
+  { name: "Well Seasoned", info: "Season Challenges Points" },
+  { name: "Empire Builder", info: "Clan Castle Level" },
+  { name: "Wall Buster", info: "Walls Destroyed" },
+  { name: "Humiliator", info: "Town Halls Destroyed" },
+  { name: "Union Buster", info: "Builder Huts Destroyed" },
+  { name: "Conqueror", info: "Multiplayer Battles Won" },
+  { name: "Un-Build It", info: "Builder Halls Destroyed" },
+  { name: "War League Legend", info: "War League Stars" },
+  { name: "Shattered and Scattered", info: "Scattershots Destroyed" },
+  { name: "Not So Easy This Time", info: "Weaponised Town Halls Destroyed" },
+  { name: "Bust This!", info: "Weaponised Builder Huts Destroyed" },
+  { name: "Superb Work", info: "Super Troops Boosted" },
+  { name: "Siege Sharer", info: "Siege Machines Donated" },
+  { name: "Aggressive Capitalism", info: "Capital Gold Looted" },
+  { name: "Most Valuable Clanmate", info: "Capital Gold Contributions" },
+  { name: "Counterspell", info: "Spell Towers Destroyed" },
+  { name: "Monolith Masher", info: "Monoliths Destroyed" },
+  {
+    name: "Multi-Archer Tower Terminator",
+    info: "Multi-Archer Towers Destroyed",
+  },
+  { name: "Ricochet Cannon Crusher", info: "Ricochet Cannons Destroyed" },
+  { name: "Firespitter Finisher", info: "Firespitters Destroyed" },
+  { name: "Multi-Gear Tower Trampler", info: "Multi-Gear Towers Destroyed" },
+];
+
+function achievementMapper(achievement: string): string | null {
+  return achievementsInfo.find((i) => i.name === achievement)?.info ?? null;
+}
 
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   const [chartData, setChartData] = useState<ChartData[]>([]);
@@ -110,6 +168,20 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     selectedTimeOption.startTime,
     selectedTimeOption.endTime,
   );
+
+  useEffect(() => {
+    if (selectedStatistic === "" && data && data.history.length > 0) {
+      setSelectedStatistic("Trophies");
+      setChartData(
+        data.history.map((entry) => {
+          return {
+            time: new Date(entry.timestamp).getTime(),
+            y: entry.trophies,
+          };
+        }),
+      );
+    }
+  }, [data]);
 
   if (isError) {
     return (
@@ -226,7 +298,11 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
               left: 0,
               behavior: "smooth",
             });
-            setSelectedStatistic(item);
+            setSelectedStatistic(
+              item
+                .replace(/([A-Z])/g, " $1")
+                .replace(/^./, (match) => match.toUpperCase()),
+            );
             setChartData(
               data.history.map((entry) => {
                 return {
@@ -237,7 +313,9 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             );
           }}
         >
-          {item}
+          {item
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (match) => match.toUpperCase())}
         </button>
       );
     });
@@ -287,7 +365,55 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         </button>
       );
     });
+    return (
+      <div
+        className={clsx(
+          className,
+          "coc-font-style flex w-full flex-col items-center rounded-md border-2 border-black px-4 py-2",
+        )}
+      >
+        <h3 className="m-4">{title}</h3>
+        <div className="flex flex-wrap gap-2">{items}</div>
+      </div>
+    );
+  };
 
+  const PlayerAchievementCategory: React.FC<PlayerAchievementCategoryProps> = ({
+    achievements,
+    title,
+    className,
+  }) => {
+    const items = achievements
+      .filter((item) => !!achievementMapper(item.name))
+      .map((item, index) => {
+        return (
+          <button
+            className="btn"
+            key={index}
+            onClick={() => {
+              window.scrollTo({
+                top: scrollPosition,
+                left: 0,
+                behavior: "smooth",
+              });
+              setSelectedStatistic(
+                `${item.name} (${achievementMapper(item.name)})`,
+              );
+              setChartData(
+                data.history.map((entry) => {
+                  const i = achievements.find((i) => i.name === item.name);
+                  return {
+                    time: new Date(entry.timestamp).getTime(),
+                    y: i ? i.value : 0,
+                  };
+                }),
+              );
+            }}
+          >
+            {achievementMapper(item.name)}
+          </button>
+        );
+      });
     return (
       <div
         className={clsx(
@@ -370,6 +496,11 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           <RootCategory
             keys={rootCategoryKeys}
             title={"General"}
+            className="mt-4 bg-[#465172]"
+          />
+          <PlayerAchievementCategory
+            achievements={data.history[0].achievements}
+            title="Achievements"
             className="mt-4 bg-[#465172]"
           />
           <PlayerItemCategory
