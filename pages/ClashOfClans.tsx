@@ -75,8 +75,8 @@ const ClashOfClans = () => {
       </div>
       <div className="relative mx-auto my-8 h-72 w-72 md:h-96 md:w-96">
         <Image
-          src={`/assets/coc/ElectroBarb.png`}
-          alt={`Electrobarb`}
+          src={`/assets/coc/CocBackground.webp`}
+          alt={`Clash of Clans Background`}
           fill
           style={{ objectFit: "contain" }}
         />
