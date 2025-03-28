@@ -7,8 +7,8 @@ const COC_PLAYER_HISTORY_QUERY_KEY = "coc_player_history";
 const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
   const queryParams: CustomQueryParam[] = [];
   queryParams.push(
-    { key: "start_time", val: start.toISOString() },
-    { key: "end_time", val: end.toISOString() },
+    { key: "start", val: start.toISOString() },
+    { key: "end", val: end.toISOString() },
   );
   return await apiFetch({
     endpoint: `/clashofclans/player_data/%23${tag}`,
