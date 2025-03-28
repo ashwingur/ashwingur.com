@@ -291,7 +291,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const items = keys.map((item, index) => {
       return (
         <button
-          className="btn text-sm md:text-base"
+          className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-sm transition-all hover:bg-black/40 md:text-base"
           key={index}
           onClick={() => {
             window.scrollTo({
@@ -399,7 +399,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       .map((item, index) => {
         return (
           <button
-            className="btn text-sm md:text-base"
+            className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-sm transition-all hover:bg-black/40 md:text-base"
             key={index}
             onClick={() => {
               window.scrollTo({

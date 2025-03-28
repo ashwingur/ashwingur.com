@@ -24,7 +24,7 @@ export const ArmyItemIcon = ({
 }: ArmyItemIconProps) => {
   const icon_name: string = playerItemLevel.name.replaceAll(" ", "_");
   return (
-    <div className="relative inline-block rounded-md border-2 border-black bg-black/20 font-clash font-thin">
+    <div className="relative inline-block flex items-center rounded-md border-2 border-black bg-black/20 font-clash font-thin">
       <Image
         unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.webp`}
@@ -79,6 +79,7 @@ const siege_machine_names = [
   "Log Launcher",
   "Flame Flinger",
   "Battle Drill",
+  "Troop Launcher",
 ];
 
 export const super_troop_names = [
