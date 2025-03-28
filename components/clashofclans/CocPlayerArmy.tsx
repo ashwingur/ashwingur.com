@@ -18,10 +18,13 @@ interface ArmyItemIconProps {
   showLevel: boolean;
 }
 
-const ArmyItemIcon = ({ playerItemLevel, showLevel }: ArmyItemIconProps) => {
+export const ArmyItemIcon = ({
+  playerItemLevel,
+  showLevel,
+}: ArmyItemIconProps) => {
   const icon_name: string = playerItemLevel.name.replaceAll(" ", "_");
   return (
-    <div className="relative inline-block rounded-md border-2 border-black font-clash font-thin">
+    <div className="relative inline-block rounded-md border-2 border-black bg-black/20 font-clash font-thin">
       <Image
         unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.webp`}
@@ -165,6 +168,11 @@ const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
       <ArmyItemsCategory
         items={player.heroes}
         category="Heroes"
+        showLevel={true}
+      />
+      <ArmyItemsCategory
+        items={player.heroEquipment}
+        category="Hero Equipment"
         showLevel={true}
       />
       <ArmyItemsCategory items={pets} category="Pets" showLevel={true} />

@@ -29,6 +29,7 @@ export interface Player {
   troops: PlayerItemLevel[];
   heroes: PlayerItemLevel[];
   spells: PlayerItemLevel[];
+  heroEquipment: PlayerItemLevel[];
 }
 
 export interface PlayerClan {

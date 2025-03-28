@@ -27,6 +27,7 @@ import {
 } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 import CocButton from "./CocButton";
+import { ArmyItemIcon } from "./CocPlayerArmy";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -181,7 +182,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         }),
       );
     }
-  }, [data]);
+  }, [data, selectedStatistic]);
 
   if (isError) {
     return (
@@ -290,7 +291,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const items = keys.map((item, index) => {
       return (
         <button
-          className="btn"
+          className="btn text-sm md:text-base"
           key={index}
           onClick={() => {
             window.scrollTo({
@@ -341,7 +342,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const items = history[history.length - 1][nameKey].map((item, index) => {
       return (
         <button
-          className="btn"
+          className="flex transition-all hover:bg-black/50"
           key={index}
           onClick={() => {
             window.scrollTo({
@@ -361,7 +362,15 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             );
           }}
         >
-          {item.name}
+          <ArmyItemIcon
+            playerItemLevel={{
+              name: item.name,
+              level: item.level,
+              maxLevel: 0,
+              village: "",
+            }}
+            showLevel={false}
+          />
         </button>
       );
     });
@@ -388,7 +397,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       .map((item, index) => {
         return (
           <button
-            className="btn"
+            className="btn text-sm md:text-base"
             key={index}
             onClick={() => {
               window.scrollTo({
@@ -506,22 +515,22 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           <PlayerItemCategory
             nameKey={"troops"}
             title="Troops"
-            className="mt-4 bg-[#465172]"
+            className="mt-4 bg-[#5d6b96]"
           />
           <PlayerItemCategory
             nameKey={"spells"}
             title="Spells"
-            className="mt-4 bg-[#465172]"
+            className="mt-4 bg-[#5d6b96]"
           />
           <PlayerItemCategory
             nameKey={"heroes"}
             title="Heroes"
-            className="mt-4 bg-[#465172]"
+            className="mt-4 bg-[#5d6b96]"
           />
           <PlayerItemCategory
             nameKey={"heroEquipment"}
             title="Hero Equipment"
-            className="mt-4 bg-[#465172]"
+            className="mt-4 bg-[#5d6b96]"
           />
         </div>
       )}
