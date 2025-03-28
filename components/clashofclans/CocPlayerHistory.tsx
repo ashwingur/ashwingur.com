@@ -27,7 +27,7 @@ import {
 } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 import CocButton from "./CocButton";
-import { ArmyItemIcon } from "./CocPlayerArmy";
+import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -339,41 +339,43 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     className,
   }) => {
     const history = data.history;
-    const items = history[history.length - 1][nameKey].map((item, index) => {
-      return (
-        <button
-          className="flex transition-all hover:bg-black/50"
-          key={index}
-          onClick={() => {
-            window.scrollTo({
-              top: scrollPosition,
-              left: 0,
-              behavior: "smooth",
-            });
-            setSelectedStatistic(`${item.name} Level`);
-            setChartData(
-              history.map((entry) => {
-                const i = entry[nameKey].find((i) => i.name === item.name);
-                return {
-                  time: new Date(entry.timestamp).getTime(),
-                  y: i ? i.level : 0,
-                };
-              }),
-            );
-          }}
-        >
-          <ArmyItemIcon
-            playerItemLevel={{
-              name: item.name,
-              level: item.level,
-              maxLevel: 0,
-              village: "",
+    const items = history[history.length - 1][nameKey]
+      .filter((item) => !super_troop_names.includes(item.name))
+      .map((item, index) => {
+        return (
+          <button
+            className="flex transition-all hover:bg-black/50"
+            key={index}
+            onClick={() => {
+              window.scrollTo({
+                top: scrollPosition,
+                left: 0,
+                behavior: "smooth",
+              });
+              setSelectedStatistic(`${item.name} Level`);
+              setChartData(
+                history.map((entry) => {
+                  const i = entry[nameKey].find((i) => i.name === item.name);
+                  return {
+                    time: new Date(entry.timestamp).getTime(),
+                    y: i ? i.level : 0,
+                  };
+                }),
+              );
             }}
-            showLevel={false}
-          />
-        </button>
-      );
-    });
+          >
+            <ArmyItemIcon
+              playerItemLevel={{
+                name: item.name,
+                level: item.level,
+                maxLevel: 0,
+                village: "",
+              }}
+              showLevel={false}
+            />
+          </button>
+        );
+      });
     return (
       <div
         className={clsx(
@@ -463,7 +465,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         </div>
       </div>
       <div className="z-20 flex flex-col items-center">
-        <h3 className="mb-2 text-xl">Time Filter</h3>
+        <h3 className="coc-font-style mb-2 text-2xl">Time Filter</h3>
         <GenericListbox<TimeOption>
           selectedValue={selectedTimeOption}
           onSelectedValueChange={handleSelectedTimeChange}

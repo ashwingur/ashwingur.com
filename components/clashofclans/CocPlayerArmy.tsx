@@ -71,49 +71,51 @@ const ArmyItemsCategory = ({
   );
 };
 
+const siege_machine_names = [
+  "Wall Wrecker",
+  "Battle Blimp",
+  "Stone Slammer",
+  "Siege Barracks",
+  "Log Launcher",
+  "Flame Flinger",
+  "Battle Drill",
+];
+
+export const super_troop_names = [
+  "Super Barbarian",
+  "Super Archer",
+  "Super Giant",
+  "Sneaky Goblin",
+  "Super Wall Breaker",
+  "Rocket Balloon",
+  "Super Wizard",
+  "Super Dragon",
+  "Inferno Dragon",
+  "Super Miner",
+  "Super Minion",
+  "Super Valkyrie",
+  "Super Witch",
+  "Ice Hound",
+  "Super Bowler",
+  "Super Hog Rider",
+  "Super Yeti",
+];
+
+const pet_names = [
+  "L.A.S.S.I",
+  "Electro Owl",
+  "Mighty Yak",
+  "Unicorn",
+  "Frosty",
+  "Diggy",
+  "Poison Lizard",
+  "Phoenix",
+  "Spirit Fox",
+  "Angry Jelly",
+  "Sneezy",
+];
+
 const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
-  const siege_machine_names = [
-    "Wall Wrecker",
-    "Battle Blimp",
-    "Stone Slammer",
-    "Siege Barracks",
-    "Log Launcher",
-    "Flame Flinger",
-    "Battle Drill",
-  ];
-
-  const super_troop_names = [
-    "Super Barbarian",
-    "Super Archer",
-    "Super Giant",
-    "Sneaky Goblin",
-    "Super Wall Breaker",
-    "Rocket Balloon",
-    "Super Wizard",
-    "Super Dragon",
-    "Inferno Dragon",
-    "Super Miner",
-    "Super Minion",
-    "Super Valkyrie",
-    "Super Witch",
-    "Ice Hound",
-    "Super Bowler",
-  ];
-
-  const pet_names = [
-    "L.A.S.S.I",
-    "Electro Owl",
-    "Mighty Yak",
-    "Unicorn",
-    "Frosty",
-    "Diggy",
-    "Poison Lizard",
-    "Phoenix",
-    "Spirit Fox",
-    "Angry Jelly",
-    "Sneezy",
-  ];
-
   const normal_troops = player.troops.filter(
     (item) =>
       !(
