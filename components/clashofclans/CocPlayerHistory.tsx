@@ -236,7 +236,10 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         height={500}
         className={"clash-font-style font-thin"}
       >
-        <AreaChart data={chartProps.data}>
+        <AreaChart
+          data={chartProps.data}
+          margin={{ bottom: 40, left: 10, right: 40 }}
+        >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="white" stopOpacity={0.7} />
@@ -491,7 +494,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
       {chartData.length > 0 && (
         <>
-          <h3 className="coc-font-style my-4 text-center text-3xl">
+          <h3 className="coc-font-style mb-4 mt-6 text-center text-3xl">
             {selectedStatistic}
           </h3>
           <ProgressChart data={chartData} />
