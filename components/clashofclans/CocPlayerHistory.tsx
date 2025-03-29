@@ -291,8 +291,6 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   };
 
-  const scrollPosition = window.innerWidth <= 768 ? 100 : 0;
-
   const RootCategory: React.FC<RootCategoryProps> = ({
     keys,
     title,
