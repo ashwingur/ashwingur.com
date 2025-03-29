@@ -20,9 +20,6 @@ interface Tags {
 }
 
 const CocNavBar = () => {
-  const router = useRouter();
-  const [showMobileNav, setShowMobileNav] = useState(false);
-  const { theme } = useTheme();
   const [mobileNavMenu, setMobileNavMenu] = useState(false); // Mobile nav menu not showing at the start
   const { user, role } = useAuth();
 
@@ -32,33 +29,11 @@ const CocNavBar = () => {
     clanTag: "",
   });
 
-  // The current value of the actual tags
-  const [tags, setTags] = useState<Tags>({
-    playerTag: "",
-    clanTag: "",
-  });
   const updateTagInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setInputFieldTags((prevValue: Tags) => {
       return { ...prevValue, [name]: value };
     });
-  };
-
-  const setPlayerTag = (value: string) => {
-    const tag = value.replace("#", "");
-    setTags((prevValue: Tags) => {
-      return { ...prevValue, playerTag: tag };
-    });
-    router.push(`/ClashOfClans/player/${tag}`);
-  };
-
-  const setClanTag = (value: string) => {
-    const tag = value.replace("#", "");
-    console.log("tag is " + tag);
-    setTags((prevValue: Tags) => {
-      return { ...prevValue, clanTag: tag };
-    });
-    router.push(`/ClashOfClans/clan/${tag}`);
   };
 
   return (
@@ -80,7 +55,7 @@ const CocNavBar = () => {
           )}
         >
           <Link href="/">
-            <CustomisableLogo className="bg-[#6c779b] text-white" />
+            <CustomisableLogo className="clash-font-style bg-[#6c779b] font-thin text-white" />
           </Link>
           {/* Input Fields */}
           <div className="hidden flex-col items-center justify-center gap-8 font-coc font-thin md:flex md:flex-row">
