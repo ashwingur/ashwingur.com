@@ -66,11 +66,11 @@ const Progress = () => {
   return (
     <div className="bg-clash">
       <CocNavBar />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center px-4 md:px-8 lg:px-12">
         <h2 className="clash-font-style pt-20 text-center font-thin">
           {title}
         </h2>
-        <p className="coc-font-style mx-4 mt-8 w-3/5 text-center text-xl md:text-2xl">
+        <p className="coc-font-style mt-8 text-center md:w-4/5 md:text-2xl">
           Note this progress tracker only tracks players who are part of
           TheOrganisation. It tracks all available information in the Player API
           such as trophies, troop/hero/spell/equipment levels and achievements.
