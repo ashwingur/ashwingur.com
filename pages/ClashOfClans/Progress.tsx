@@ -35,19 +35,40 @@ const AvailablePlayers = () => {
   const members = data.memberList
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((player, index) => (
-      <Link
+      <div
         key={index}
-        href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
-        className="flex h-16 items-center justify-center"
+        className="rounded-lg border-2 border-black bg-[#5d6b96]"
       >
-        <CocButton
-          text={player.name}
-          className="w-80 hover:w-72"
-          innerColour="bg-orange-500 dark:bg-orange-600"
-          middleColour="bg-orange-600 dark:bg-orange-700"
-          outerColour="bg-orange-700 dark:bg-orange-900"
-        />
-      </Link>
+        <h3 className="coc-font-style text-center">{player.name}</h3>
+        <div className="flex text-sm">
+          <Link
+            href={`/ClashOfClans/player/${player.tag.replace("#", "")}`}
+            className="flex h-16 w-40 items-center justify-center"
+          >
+            <CocButton
+              text="Profile"
+              className="w-32 hover:w-28"
+              textClassName="text-sm hover:text-xs"
+              innerColour="bg-orange-500"
+              middleColour="bg-orange-600"
+              outerColour="bg-orange-700"
+            />
+          </Link>
+          <Link
+            href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
+            className="flex h-16 w-40 items-center justify-center"
+          >
+            <CocButton
+              text="Progress"
+              className="w-32 hover:w-28"
+              textClassName="text-sm hover:text-xs"
+              innerColour="bg-blue-500"
+              middleColour="bg-blue-600"
+              outerColour="bg-blue-700"
+            />
+          </Link>
+        </div>
+      </div>
     ));
 
   return (
@@ -55,7 +76,7 @@ const AvailablePlayers = () => {
       <h2 className="clash-font-style mb-4 mt-8 text-center text-3xl font-thin">
         Players
       </h2>
-      <div className="grid items-center gap-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid items-center gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {members}
       </div>
     </div>

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 interface CocButtonProps {
@@ -6,7 +7,8 @@ interface CocButtonProps {
   outerColour: string;
   middleColour: string;
   innerColour: string;
-  className?: String;
+  className?: string;
+  textClassName?: string;
 }
 
 const CocButton = ({
@@ -16,11 +18,17 @@ const CocButton = ({
   middleColour,
   innerColour,
   className,
+  textClassName = "text-xl hover:text-base",
 }: CocButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`${className} ${outerColour} clash-font-style relative z-0 rounded-xl border-2 border-black p-4 text-xl transition-all hover:text-base`}
+      className={clsx(
+        outerColour,
+        className,
+        textClassName,
+        "clash-font-style relative z-0 rounded-xl border-2 border-black p-4 transition-all",
+      )}
     >
       <div className="absolute left-0 right-0 top-0 z-[-1] flex h-[90%] w-full">
         <div
