@@ -42,7 +42,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:gap-0">
+      <div className="flex flex-col items-center justify-center gap-2 text-black md:flex-row md:gap-0">
         <div className="flex flex-col items-center px-8">
           <div className="font-coc font-thin text-slate-700">
             Troops donated:

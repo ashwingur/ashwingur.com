@@ -9,7 +9,6 @@ import {
   MdOutlineMenu,
   MdSettings,
 } from "react-icons/md";
-import CocButton from "./CocButton";
 import CustomisableLogo from "@components/CustomisableLogo";
 import { useTheme } from "next-themes";
 import { useAuth } from "@context/AuthContext";
@@ -72,7 +71,7 @@ const CocNavBar = () => {
     >
       <div
         className={clsx(
-          "flex w-screen flex-col border-b border-background-muted bg-white/30 font-clash font-thin shadow-lg backdrop-blur-lg",
+          "flex w-screen flex-col border-b border-background-muted bg-white/30 font-clash font-thin text-black shadow-lg backdrop-blur-lg",
         )}
       >
         <div
