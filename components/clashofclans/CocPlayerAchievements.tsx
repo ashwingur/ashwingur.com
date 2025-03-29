@@ -23,10 +23,10 @@ const Achievement = ({ achievement }: AchievementProps) => {
       : Math.floor((100 * achievement.value) / achievement.target);
   return (
     <div className="flex flex-col items-center justify-between rounded-md border-2 border-black bg-gradient-to-b from-[#d7dbda] to-[#b2b8b7] px-4 dark:from-[#8d9191] dark:to-[#4a4f4e] md:flex-row">
-      <div className="flex flex-col items-center gap-1 md:flex-row md:gap-4">
+      <div className="mt-[2px] flex flex-col items-center md:flex-row md:gap-4">
         <div className="flex items-center">
           {achievement.stars < 1 && (
-            <div className="relative h-10 w-10 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -37,7 +37,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 0 && (
-            <div className="relative h-10 w-10 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -48,7 +48,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars < 2 && (
-            <div className="relative mb-3 h-10 w-10 md:mb-6 md:h-16 md:w-16">
+            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -59,7 +59,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 1 && (
-            <div className="relative mb-3 h-10 w-10 md:mb-6 md:h-16 md:w-16">
+            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -70,7 +70,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars < 3 && (
-            <div className="relative h-10 w-10 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -81,7 +81,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 2 && (
-            <div className="relative h-10 w-10 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-16 md:w-16">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -93,12 +93,14 @@ const Achievement = ({ achievement }: AchievementProps) => {
           )}
         </div>
         <div>
-          <div className="clash-font-style">
-            <span className="text-xl text-yellow-100 [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
+          <div className="clash-font-style text-center md:text-left">
+            <span className="text-yellow-100 [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black] md:text-xl">
               {achievement.name}
             </span>
           </div>
-          <div className="font-coc font-thin">{achievement.info}</div>
+          <div className="font-coc text-sm font-thin md:text-base">
+            {achievement.info}
+          </div>
         </div>
       </div>
       <div className="mt-2 pl-4 md:mt-0">
