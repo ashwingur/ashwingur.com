@@ -22,7 +22,7 @@ interface DistrictHallCardProps {
 const HallLevelCard = ({ district }: DistrictHallCardProps) => {
   return (
     <div className="my-2 flex items-center gap-4 md:my-4">
-      <div className="relative h-16 w-16 md:h-32 md:w-32">
+      <div className="">
         <Image
           unoptimized
           alt={district.name}
@@ -31,12 +31,13 @@ const HallLevelCard = ({ district }: DistrictHallCardProps) => {
               ? `/assets/coc/clancapital/capital-hall-${district.districtHallLevel}.png`
               : `/assets/coc/clancapital/district-hall-${district.districtHallLevel}.png`
           }
-          fill
-          style={{ objectFit: "contain" }}
+          width={0}
+          height={0}
+          className="w-16 lg:w-20"
         />
       </div>
       <div className="coc-font-style">
-        <div className="text-xl md:text-2xl">{district.name}</div>
+        <div className="text-xl">{district.name}</div>
         <div>Level {district.districtHallLevel}</div>
       </div>
     </div>
@@ -54,7 +55,9 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
         Clan Capital
       </div>
       <div className="flex flex-col-reverse items-center justify-around px-4 md:flex-row">
-        <div>{districtHalls}</div>
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          {districtHalls}
+        </div>
         <div className="coc-font-style w-72 text-lg md:w-96">
           <div className="flex justify-between">
             <div>Capital League:</div>
