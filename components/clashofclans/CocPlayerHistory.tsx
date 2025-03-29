@@ -436,26 +436,29 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
   return (
     <div className="font-clash font-thin">
-      <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-20 md:flex-row">
-        <div className="flex w-80 justify-center">
-          <Link href={"/ClashOfClans/Progress"}>
-            <CocButton
-              className="w-80 hover:w-72"
-              text={"Progress"}
-              innerColour="bg-blue-500 dark:bg-blue-600"
-              middleColour="bg-blue-600 dark:bg-blue-700"
-              outerColour="bg-blue-700 dark:bg-blue-900"
-            />
-          </Link>
-        </div>
+      <h2 className="clash-font-style pt-20 text-center font-thin md:mb-0">
+        Player Progress - {data.name}
+      </h2>
+      <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-8 md:flex-row">
         <div className="flex w-80 justify-center">
           <Link href={`/ClashOfClans/player/${tag}`} className="">
             <CocButton
               className="w-80 hover:w-72"
-              text={data.name}
+              text="Profile"
               innerColour="bg-orange-500"
               middleColour="bg-orange-600"
               outerColour="bg-orange-700"
+            />
+          </Link>
+        </div>
+        <div className="flex w-80 justify-center">
+          <Link href={"/ClashOfClans/Progress"}>
+            <CocButton
+              className="w-80 hover:w-72"
+              text={"Clan Members"}
+              innerColour="bg-green-500"
+              middleColour="bg-green-600"
+              outerColour="bg-green-700"
             />
           </Link>
         </div>

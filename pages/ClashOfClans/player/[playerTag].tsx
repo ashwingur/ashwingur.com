@@ -16,7 +16,7 @@ import Link from "next/link";
 import CocButton from "@components/clashofclans/CocButton";
 import CocPlayerStats from "@components/clashofclans/CocPlayerStats";
 
-const title = "Player";
+const title = "Player Details";
 
 const fetchPlayer = (playerTag: string) =>
   axios.get(`/api/clashofclans/player/${playerTag}`).then(({ data }) => data);
@@ -51,21 +51,34 @@ const PlayerPage = () => {
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
       <h2 className="clash-font-style mb-4 pt-20 text-center font-thin md:mb-0">
-        Player
+        Player Details - {data.name}
       </h2>
 
       <div className="flex flex-col">
         {data.clan.name === "TheOrganisation" && (
-          <div className="mx-auto mt-4 flex h-16 items-center">
-            <Link href={`/ClashOfClans/Progress/${playerTag}`}>
-              <CocButton
-                className="w-80 hover:w-72"
-                text={"Progress"}
-                innerColour="bg-blue-500"
-                middleColour="bg-blue-600"
-                outerColour="bg-blue-700"
-              />
-            </Link>
+          <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-8 md:flex-row">
+            <div className="flex w-80 justify-center">
+              <Link href={`/ClashOfClans/Progress/${playerTag}`}>
+                <CocButton
+                  className="w-80 hover:w-72"
+                  text={"Progress"}
+                  innerColour="bg-blue-500"
+                  middleColour="bg-blue-600"
+                  outerColour="bg-blue-700"
+                />
+              </Link>
+            </div>
+            <div className="flex w-80 justify-center">
+              <Link href={`/ClashOfClans/Progress`} className="">
+                <CocButton
+                  className="w-80 hover:w-72"
+                  text="Clan Members"
+                  innerColour="bg-green-500"
+                  middleColour="bg-green-600"
+                  outerColour="bg-green-700"
+                />
+              </Link>
+            </div>
           </div>
         )}
         <div>

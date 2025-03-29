@@ -12,6 +12,7 @@ const ProgressPage = () => {
   return (
     <div className="bg-clash">
       <CocNavBar />
+
       {playerTag && <CocPlayerHistory tag={playerTag} />}
     </div>
   );
