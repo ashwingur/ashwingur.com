@@ -3,7 +3,7 @@ import GenericListbox from "@components/GenericListBox";
 import clsx from "clsx";
 import moment from "moment";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
 import {
   Area,
@@ -133,6 +133,7 @@ function achievementMapper(achievement: string): string | null {
 }
 
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [selectedStatistic, setSelectedStatistic] = useState("");
   const timeOptions = createTimeOptions({
@@ -200,6 +201,14 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
     );
   }
+
+  const scrollToTitle = () => {
+    if (titleRef.current) {
+      const y =
+        titleRef.current.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   const CustomTooltip = ({
     active,
@@ -295,11 +304,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-sm transition-all hover:bg-black/40 md:text-base"
           key={index}
           onClick={() => {
-            window.scrollTo({
-              top: scrollPosition,
-              left: 0,
-              behavior: "smooth",
-            });
+            scrollToTitle();
             setSelectedStatistic(
               item
                 .replace(/([A-Z])/g, " $1")
@@ -348,11 +353,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             className="flex transition-all hover:bg-black/50"
             key={index}
             onClick={() => {
-              window.scrollTo({
-                top: scrollPosition,
-                left: 0,
-                behavior: "smooth",
-              });
+              scrollToTitle();
               setSelectedStatistic(`${item.name} Level`);
               setChartData(
                 history.map((entry) => {
@@ -403,11 +404,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-sm transition-all hover:bg-black/40 md:text-base"
             key={index}
             onClick={() => {
-              window.scrollTo({
-                top: scrollPosition,
-                left: 0,
-                behavior: "smooth",
-              });
+              scrollToTitle();
               setSelectedStatistic(
                 `${item.name} (${achievementMapper(item.name)})`,
               );
@@ -441,7 +438,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
   return (
     <div className="font-clash font-thin">
-      <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-24 md:flex-row">
+      <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-20 md:flex-row">
         <div className="flex w-80 justify-center">
           <Link href={"/ClashOfClans/Progress"}>
             <CocButton
@@ -492,7 +489,10 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
       {chartData.length > 0 && (
         <>
-          <h3 className="coc-font-style mb-4 mt-6 px-4 text-center text-xl md:text-2xl lg:text-3xl">
+          <h3
+            className="coc-font-style mb-4 mt-6 px-4 text-center text-xl md:text-2xl lg:text-3xl"
+            ref={titleRef}
+          >
             {selectedStatistic}
           </h3>
           <ProgressChart data={chartData} />

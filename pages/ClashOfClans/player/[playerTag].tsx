@@ -69,14 +69,16 @@ const PlayerPage = () => {
           </div>
         )}
         <div>
-          <div className="m-4 grid grid-cols-1 items-center justify-center rounded-lg border-2 border-black bg-[#695d96] pt-2 dark:bg-[#473e63] md:grid-cols-2 md:pt-0 lg:flex-row xl:grid-cols-4">
-            <CocPlayerSummary player={data} />
-            <CocPlayerTownHall player={data} />
-            {data.hasOwnProperty("clan") && <CocPlayerClan player={data} />}
+          <div className="grid-cols-2 xl:grid">
+            <div className="m-4 grid grid-cols-1 items-center justify-center rounded-lg border-2 border-black bg-[#695d96] pt-2 dark:bg-[#473e63] md:grid-cols-2 md:pt-0 lg:flex-row xl:grid-cols-2">
+              <CocPlayerSummary player={data} />
+              <CocPlayerTownHall player={data} />
+              {data.hasOwnProperty("clan") && <CocPlayerClan player={data} />}
 
-            <CocTrophyDetails player={data} />
+              <CocTrophyDetails player={data} />
+            </div>
+            <CocPlayerStats player={data} />
           </div>
-          <CocPlayerStats player={data} />
           <div className="mx-4 mb-4 rounded-lg border-2 border-black bg-indigo-900">
             <h2 className="clash-font-style mt-4 text-center text-3xl font-thin">
               Army
