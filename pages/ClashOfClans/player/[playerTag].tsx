@@ -37,7 +37,7 @@ const PlayerPage = () => {
       heading: title,
       info: (
         <p className="coc-font-style m-8 text-center text-2xl">
-          Unable to fetch clan war data: {error.message}
+          Unable to player data: {error.message}
         </p>
       ),
     });
