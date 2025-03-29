@@ -33,7 +33,7 @@ const ClashOfClans = () => {
         <h2 className="clash-font-style pt-20 text-center font-thin">
           Clash of Clans
         </h2>
-        <p className="coc-font-style m-8 text-center text-xl md:w-[60%] md:text-2xl">
+        <p className="coc-font-style m-8 text-center md:w-[70%] md:text-xl lg:w-3/5 lg:text-2xl">
           Welcome to the Clash of Clans page. Search any player or clan by their
           tag in the navigation bar. This site uses the official Clash of Clans
           API to provide up to date data. Below are some quick links to my

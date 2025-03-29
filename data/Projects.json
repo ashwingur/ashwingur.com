@@ -104,14 +104,13 @@
   {
     "title": "Clash of Clans Tracker",
     "image": "/assets/projects/clashofclans.png",
-    "description": "Uses the Clash of Clans developer API to provide player, clan, war and league information. The style is very similar to the game style and provides the information in a familiar format. There is also a progress tracker for all players in my clan which is scraped daily with a cron job and saved to a MongoDB Atlas database. This data can be viewed in a responsive graph layout.",
+    "description": "Uses the Clash of Clans developer API to provide player, clan, war and league information. The style is very similar to the game style and provides the information in a familiar format. There is also a progress tracker for all players in my clan which is scraped daily using a cron. Data is efficiently saved to a PostgreSQL table for efficient querying.",
     "stack": [
       "Next.js",
       "Tailwind CSS",
       "TypeScript",
-      "MongoDB",
-      "Recharts",
-      "Cron Job"
+      "PostgreSQL",
+      "Recharts"
     ],
     "links": [
       {

@@ -83,7 +83,7 @@ const FacilityHistory = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-4">
       <Navbar fixed={true} />
       <h1 className="pb-4 pt-20 text-center">
         {data.facility_name.replace(/^Park&Ride - /, "")}
@@ -93,7 +93,7 @@ const FacilityHistory = () => {
           Back
         </Link>
       </div>
-      <Card firstLayer={true} className="mx-4 mb-6 max-w-96 md:mx-auto">
+      <Card firstLayer={true} className="mx-auto mb-6 max-w-96">
         <div className="group flex justify-between">
           <div className="flex">
             <div className="relative mr-2 w-4 rounded-md bg-black md:mr-4">
@@ -149,6 +149,11 @@ const FacilityHistory = () => {
             </div>
           )}
         </div>
+        {data.historical_data.length === 0 && (
+          <p className="px-4 text-center text-xl font-bold text-error">
+            No parking data exists for this timeframe
+          </p>
+        )}
         <div className="mt-2 flex items-center justify-center gap-4 md:gap-8">
           <p>
             <span className="font-bold">Current:</span> {data.latest_occupancy}{" "}

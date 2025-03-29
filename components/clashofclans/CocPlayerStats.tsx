@@ -16,10 +16,10 @@ const Gap = () => {
 
 const Stat = ({ name, value }: { name: string; value: string }) => {
   return (
-    <div className="coc-font-style flex w-72 flex-col text-lg md:w-96 lg:w-[30rem]">
+    <div className="coc-font-style flex w-72 flex-col text-sm md:w-96 md:text-lg lg:w-[30rem]">
       <div className="flex justify-between">
         <div className="flex flex-wrap">{name}</div>
-        <div className="w-20 text-right md:w-24 lg:w-36">{value}</div>
+        <div className="w-28 text-right lg:w-36">{value}</div>
       </div>
       <HorizontalBar />
     </div>
@@ -30,7 +30,7 @@ const CocPlayerStats = ({ player }: { player: Player }) => {
   return (
     <div className="m-4 flex flex-col items-center rounded-lg border-2 border-black bg-[#695d96] py-4 dark:bg-[#473e63]">
       <h2 className="clash-font-style text-center text-3xl font-thin">Stats</h2>
-      <div className="coc-font-style w-72 text-lg md:w-96 lg:w-[30rem]">
+      <div className="coc-font-style w-72 md:w-96 lg:w-[30rem]">
         <Stat name={"Trophies"} value={player.trophies.toString()} />
         <Stat name={"Best Trophies"} value={player.bestTrophies.toString()} />
         <Stat
