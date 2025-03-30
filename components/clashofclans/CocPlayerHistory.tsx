@@ -266,6 +266,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             height={100}
             angle={40}
             dy={30}
+            style={{ fontSize: "0.7rem" }}
           />
           <YAxis
             width={yLabelWidth}
