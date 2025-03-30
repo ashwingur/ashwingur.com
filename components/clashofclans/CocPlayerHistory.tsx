@@ -499,7 +499,9 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           >
             {selectedStatistic}
           </h3>
-          <ProgressChart data={chartData} />
+          <div className="mx-auto lg:w-4/5">
+            <ProgressChart data={chartData} />
+          </div>
         </>
       )}
       {data.history.length == 0 && (
