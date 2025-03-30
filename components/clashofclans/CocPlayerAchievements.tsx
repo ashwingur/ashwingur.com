@@ -26,7 +26,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
       <div className="mt-[2px] flex flex-col items-center md:flex-row md:gap-4">
         <div className="flex items-center">
           {achievement.stars < 1 && (
-            <div className="relative h-8 w-8 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -37,7 +37,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 0 && (
-            <div className="relative h-8 w-8 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -48,7 +48,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars < 2 && (
-            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-16 md:w-16">
+            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -59,7 +59,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 1 && (
-            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-16 md:w-16">
+            <div className="relative mb-3 h-8 w-8 md:mb-6 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -70,7 +70,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars < 3 && (
-            <div className="relative h-8 w-8 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={emptyStar}
@@ -81,7 +81,7 @@ const Achievement = ({ achievement }: AchievementProps) => {
             </div>
           )}
           {achievement.stars > 2 && (
-            <div className="relative h-8 w-8 md:h-16 md:w-16">
+            <div className="relative h-8 w-8 md:h-12 md:w-12">
               <Image
                 unoptimized
                 src={goldenStar}
@@ -93,14 +93,14 @@ const Achievement = ({ achievement }: AchievementProps) => {
           )}
         </div>
         <div>
-          <div className="clash-font-style text-center md:text-left">
-            <span className="text-yellow-100 [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black] md:text-xl">
+          <p className="clash-font-style text-center md:text-left">
+            <span className="text-yellow-100 [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black] md:text-lg">
               {achievement.name}
             </span>
-          </div>
-          <div className="font-coc text-sm font-thin md:text-base">
+          </p>
+          <p className="font-coc text-sm font-thin md:text-base">
             {achievement.info}
-          </div>
+          </p>
         </div>
       </div>
       <div className="mt-2 pl-4 md:mt-0">
@@ -140,11 +140,17 @@ const CocPlayerAchievements = ({ player }: CocPlayerAchievementProps) => {
         Achievements
       </h2>
       <div className="clash-font-style mb-2 text-xl">Home Village</div>
-      <div className="flex flex-col gap-2">{homeAchievements}</div>
+      <div className="grid grid-cols-1 gap-2 2xl:grid-cols-2">
+        {homeAchievements}
+      </div>
       <div className="clash-font-style mb-2 mt-4 text-xl">Builder Village</div>
-      <div className="flex flex-col gap-2">{builderAchievements}</div>
+      <div className="grid grid-cols-1 gap-2 2xl:grid-cols-2">
+        {builderAchievements}
+      </div>
       <div className="clash-font-style mb-2 mt-4 text-xl">Clan Capital</div>
-      <div className="flex flex-col gap-2">{clanCapitalAchievements}</div>
+      <div className="grid grid-cols-1 gap-2 2xl:grid-cols-2">
+        {clanCapitalAchievements}
+      </div>
     </div>
   );
 };

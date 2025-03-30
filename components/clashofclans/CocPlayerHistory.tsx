@@ -505,7 +505,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         </p>
       )}
       {data.history.length > 0 && (
-        <div className="p-4">
+        <div className="mx-auto p-4 lg:w-4/5">
           <RootCategory
             keys={rootCategoryKeys}
             title={"General"}

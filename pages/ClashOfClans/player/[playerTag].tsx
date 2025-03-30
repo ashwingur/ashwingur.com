@@ -54,7 +54,7 @@ const PlayerPage = () => {
         Player Details - {data.name}
       </h2>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col lg:mx-auto lg:w-5/6">
         {data.clan.name === "TheOrganisation" && (
           <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-8 md:flex-row">
             <div className="flex w-80 justify-center">
