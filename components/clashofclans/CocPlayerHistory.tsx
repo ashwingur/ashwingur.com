@@ -408,7 +408,9 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
               );
               setChartData(
                 data.history.map((entry) => {
-                  const i = achievements.find((i) => i.name === item.name);
+                  const i = entry.achievements.find(
+                    (i) => i.name === item.name,
+                  );
                   return {
                     time: new Date(entry.timestamp).getTime(),
                     y: i ? i.value : 0,
