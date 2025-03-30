@@ -38,9 +38,8 @@ export const ArmyItemIcon = ({
           className={clsx(
             "absolute bottom-[0px] left-[0px] flex items-center justify-center rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white md:bottom-1 md:left-1 md:h-6",
             playerItemLevel.level != playerItemLevel.maxLevel
-              ? "bg-black"
-              : "bg-yellow-500",
-            // playerItemLevel.level >= 100 ? "w-8 md:w-10" : "min-w-6",
+              ? "bg-black/40"
+              : "bg-yellow-400/80",
           )}
         >
           <p className="m-[2px] min-w-4 text-center text-xs text-white">
