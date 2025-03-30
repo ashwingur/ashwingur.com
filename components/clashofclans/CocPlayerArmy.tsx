@@ -36,16 +36,16 @@ export const ArmyItemIcon = ({
       {showLevel && (
         <div
           className={clsx(
-            "absolute bottom-[2px] left-[2px] inline-block h-5 rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white md:bottom-1 md:left-1 md:h-6",
+            "absolute bottom-[0px] left-[0px] flex items-center justify-center rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] md:bottom-1 md:left-1 md:h-6 md:shadow-white",
             playerItemLevel.level != playerItemLevel.maxLevel
               ? "bg-black"
               : "bg-yellow-500",
-            playerItemLevel.level >= 100 ? "w-8 md:w-10" : "min-w-6",
+            // playerItemLevel.level >= 100 ? "w-8 md:w-10" : "min-w-6",
           )}
         >
-          <div className="px-[2px] text-center text-xs text-white md:text-base">
+          <p className="m-[2px] min-w-4 text-center text-xs text-white">
             {playerItemLevel.level}
-          </div>
+          </p>
         </div>
       )}
     </div>

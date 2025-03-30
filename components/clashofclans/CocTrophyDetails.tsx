@@ -33,20 +33,21 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
                 src={"/assets/coc/cocTrophy.webp"}
                 width={0}
                 height={0}
-                className="h-6 w-full"
+                className="h-6 w-6"
               />
               {player.trophies}
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex items-center">
+        <div className="flex items-center gap-1">
           <Image
             unoptimized
             alt="trophy"
             src={"/assets/coc/cocTrophy.webp"}
-            width={30}
-            height={30}
+            width={0}
+            height={0}
+            className="h-6 w-6"
           />
           {player.trophies}
         </div>
