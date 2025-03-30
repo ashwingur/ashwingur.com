@@ -36,7 +36,7 @@ export const ArmyItemIcon = ({
       {showLevel && (
         <div
           className={clsx(
-            "absolute bottom-[0px] left-[0px] flex items-center justify-center rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] md:bottom-1 md:left-1 md:h-6 md:shadow-white",
+            "absolute bottom-[0px] left-[0px] flex items-center justify-center rounded-md shadow-[0_0px_3px_1px_rgba(0,0,0,0.3)] shadow-white md:bottom-1 md:left-1 md:h-6",
             playerItemLevel.level != playerItemLevel.maxLevel
               ? "bg-black"
               : "bg-yellow-500",
