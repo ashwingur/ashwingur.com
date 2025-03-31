@@ -28,6 +28,8 @@ import {
 import { z } from "zod";
 import CocButton from "./CocButton";
 import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
+import { IoCaretUp, IoCaretDown } from "react-icons/io5";
+import { difference } from "lodash";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -144,7 +146,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     customStartTime: new Date(new Date().getTime() - 7 * 24 * 3600 * 1000),
   });
   // Listbox props
-  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[1]);
+  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
   const displayTimeOption = (option: TimeOption) => option.display;
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
     setSelectedTimeOption(timeOption);
@@ -437,6 +439,76 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   };
 
+  const StatSummary = () => {
+    const first = data.history[0];
+    const last = data.history[data.history.length - 1];
+
+    const rootDifferences = rootCategoryKeys.map((key) => {
+      return {
+        name: key
+          .replace(/([A-Z])/g, " $1")
+          .replace(/^./, (match) => match.toUpperCase()),
+        difference: last[key] - first[key],
+      };
+    });
+
+    const achievementDifferences = achievementsInfo.map((item) => {
+      const firstValue = first.achievements.find(
+        (a) => a.name === item.name,
+      )?.value;
+      const lastValue = last.achievements.find(
+        (a) => a.name === item.name,
+      )?.value;
+      let difference = 0;
+      if (lastValue !== undefined && firstValue !== undefined) {
+        difference = lastValue - firstValue;
+      } else if (lastValue !== undefined && firstValue === undefined) {
+        difference = lastValue;
+      }
+      return {
+        name: item.info,
+        difference,
+      };
+    });
+
+    const SummaryStat = (name: string, difference: number) => {
+      return (
+        <div className="flex items-center justify-between">
+          <p className="text-sm">{name}</p>
+
+          <div className="flex items-center">
+            {difference > 0 ? (
+              <IoCaretUp className="text-green-500" />
+            ) : (
+              <IoCaretDown className="text-red-500" />
+            )}
+            <p
+              className={clsx(
+                difference > 0 ? "text-green-400" : "text-red-400",
+              )}
+            >
+              {Math.abs(difference).toLocaleString()}
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <div className="coc-font-style mx-auto rounded-md border-2 border-black bg-[#465172] px-4 py-2 lg:w-4/5">
+        <h3 className="text-center">Change Summary</h3>
+        <h4 className="mt-4 text-center">General</h4>
+        {rootDifferences
+          .filter((i) => i.difference !== 0)
+          .map((i, idx) => SummaryStat(i.name, i.difference))}
+        <h4 className="mt-4 text-center">Achievements</h4>
+        {achievementDifferences
+          .filter((i) => i.difference !== 0)
+          .map((i, idx) => SummaryStat(i.name, i.difference))}
+      </div>
+    );
+  };
+
   return (
     <div className="font-clash font-thin">
       <h2 className="clash-font-style pt-20 text-center font-thin md:mb-0">
@@ -495,6 +567,9 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
       {chartData.length > 0 && (
         <>
+          <div className="mt-2 px-4">
+            <StatSummary />
+          </div>
           <h3
             className="coc-font-style mb-4 mt-6 px-4 text-center text-xl md:text-2xl lg:text-3xl"
             ref={titleRef}
