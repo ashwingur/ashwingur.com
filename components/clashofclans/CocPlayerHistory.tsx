@@ -471,9 +471,36 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       };
     });
 
+    function playerItemLevelDifferences(
+      nameKey: "troops" | "heroes" | "spells" | "heroEquipment",
+    ) {
+      // We are doing Queue method because there are 2 items with the name "Baby Dragon" and we dont have village info
+      const firstQueue = [...first[nameKey]]; // Clone the first list to track consumed elements
+
+      return last[nameKey].map((item) => {
+        // Find the first occurrence of the same item while maintaining order
+        const index = firstQueue.findIndex((i) => i.name === item.name);
+        let firstValue: number | undefined = undefined;
+
+        if (index !== -1) {
+          firstValue = firstQueue[index].level;
+          firstQueue.splice(index, 1); // Remove it so the next same-named item gets the next match
+        }
+
+        const lastValue = item.level;
+        const difference =
+          firstValue === undefined ? lastValue : lastValue - firstValue;
+
+        return {
+          name: item.name,
+          difference,
+        };
+      });
+    }
+
     const SummaryStat = (name: string, difference: number) => {
       return (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between md:max-w-80">
           <p className="text-sm">{name}</p>
 
           <div className="flex items-center">
@@ -494,17 +521,85 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       );
     };
 
+    const generalDifferences = rootDifferences
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
+    const achievementDiffs = achievementDifferences
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
+    const troopDiffs = playerItemLevelDifferences("troops")
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
+    const spellDiffs = playerItemLevelDifferences("spells")
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
+    const heroDiffs = playerItemLevelDifferences("heroes")
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
+    const heroEquipmentDiffs = playerItemLevelDifferences("heroEquipment")
+      .filter((i) => i.difference !== 0)
+      .map((i) => SummaryStat(i.name, i.difference));
+
     return (
       <div className="coc-font-style mx-auto rounded-md border-2 border-black bg-[#465172] px-4 py-2 lg:w-4/5">
         <h3 className="text-center">Change Summary</h3>
-        <h4 className="mt-4 text-center">General</h4>
-        {rootDifferences
-          .filter((i) => i.difference !== 0)
-          .map((i, idx) => SummaryStat(i.name, i.difference))}
-        <h4 className="mt-4 text-center">Achievements</h4>
-        {achievementDifferences
-          .filter((i) => i.difference !== 0)
-          .map((i, idx) => SummaryStat(i.name, i.difference))}
+
+        {generalDifferences.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">General</h4>
+            <div className="grid grid-cols-1 items-center gap-x-8 md:grid-cols-2">
+              {generalDifferences}
+            </div>
+          </>
+        )}
+
+        {achievementDiffs.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">Achievements</h4>
+            <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+              {achievementDiffs}
+            </div>
+          </>
+        )}
+
+        {troopDiffs.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">Troops</h4>
+            <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+              {troopDiffs}
+            </div>
+          </>
+        )}
+
+        {spellDiffs.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">Spells</h4>
+            <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+              {spellDiffs}
+            </div>
+          </>
+        )}
+
+        {heroDiffs.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">Heroes</h4>
+            <div className="grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+              {heroDiffs}
+            </div>
+          </>
+        )}
+
+        {heroEquipmentDiffs.length > 0 && (
+          <>
+            <h4 className="mt-4 text-center">Hero Equipment</h4>
+            <div className="">{heroEquipmentDiffs}</div>
+          </>
+        )}
       </div>
     );
   };
