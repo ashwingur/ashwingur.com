@@ -552,7 +552,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
         {generalDifferences.length > 0 && (
           <>
             <h4 className="mt-4 text-center">General</h4>
-            <div className="grid grid-cols-1 items-center gap-x-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 items-center gap-x-8 md:grid-cols-2 xl:grid-cols-3">
               {generalDifferences}
             </div>
           </>
