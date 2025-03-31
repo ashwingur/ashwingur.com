@@ -20,7 +20,7 @@ const theOrganisationTag = "220QP2GGU";
 
 // Helper function to convert the custom date format into ISO 8601 format
 function formatToISO8601(endTime: string): string {
-  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00.000Z"
+  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00Z"
   return `${endTime.substring(0, 4)}-${endTime.substring(4, 6)}-${endTime.substring(6, 8)}T${endTime.substring(9, 11)}:${endTime.substring(11, 13)}:${endTime.substring(13, 15)}Z`;
 }
 
@@ -46,17 +46,14 @@ const ClashOfClans = () => {
     queryFn: () => fetchTheOrganisation(),
   });
 
-  const { data: goldPass } = useGoldPass();
+  const { data: goldPass, isError } = useGoldPass();
 
   useEffect(() => {
     if (goldPass?.endTime) {
       const intervalId = setInterval(() => {
-        console.log(formatToISO8601(goldPass.endTime));
         const endTime = new Date(formatToISO8601(goldPass.endTime)).getTime();
         const currentTime = new Date().getTime();
         const timeDifference = endTime - currentTime;
-
-        console.log(endTime, currentTime);
 
         if (timeDifference <= 0) {
           clearInterval(intervalId); // Stop the countdown if the end time has passed
@@ -72,7 +69,7 @@ const ClashOfClans = () => {
 
           setRemainingTime({ days, hours, minutes, seconds });
         }
-      }, 1000);
+      }, 100);
 
       // Cleanup the interval on component unmount
       return () => clearInterval(intervalId);
@@ -89,11 +86,21 @@ const ClashOfClans = () => {
         <p className="coc-font-style mt-4 flex items-center gap-2">
           {" "}
           Season End:{" "}
-          <span className="w-52 text-2xl text-yellow-100">
-            {remainingTime.days > 0 && `${remainingTime.days}d`}{" "}
-            {remainingTime.hours}h {remainingTime.minutes}m{" "}
-            {remainingTime.seconds}s
-          </span>
+          {goldPass !== undefined &&
+            remainingTime.days +
+              remainingTime.hours +
+              remainingTime.minutes +
+              remainingTime.seconds !==
+              0 && (
+              <span className="w-52 text-2xl text-yellow-100">
+                {remainingTime.days > 0 && `${remainingTime.days}d`}{" "}
+                {remainingTime.hours}h {remainingTime.minutes}m{" "}
+                {remainingTime.seconds}s
+              </span>
+            )}
+          {isError && (
+            <span className="w-52 text-2xl text-yellow-100">N/A</span>
+          )}
         </p>
         <p className="coc-font-style m-4 text-center md:w-[70%] md:text-xl lg:w-3/5 lg:text-2xl">
           Welcome to the Clash of Clans page. Search any player or clan by their
