@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useGoldPass } from "shared/queries/clashofclans";
+import { useEffect, useState } from "react";
 
 // https://coc.guide/troop for the icons
 
@@ -16,16 +18,66 @@ interface Tags {
 
 const theOrganisationTag = "220QP2GGU";
 
+// Helper function to convert the custom date format into ISO 8601 format
+function formatToISO8601(endTime: string): string {
+  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00.000Z"
+  return `${endTime.substring(0, 4)}-${endTime.substring(4, 6)}-${endTime.substring(6, 8)}T${endTime.substring(9, 11)}:${endTime.substring(11, 13)}:${endTime.substring(13, 15)}Z`;
+}
+
 const fetchTheOrganisation = () =>
   axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);
 
 const ClashOfClans = () => {
+  const [remainingTime, setRemainingTime] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
   //  Caching TheOrganisation clan since it is more frequently accessed
   useQuery({
     queryKey: ["clan", theOrganisationTag],
     queryFn: () => fetchTheOrganisation(),
   });
 
+  const { data: goldPass } = useGoldPass();
+
+  useEffect(() => {
+    if (goldPass?.endTime) {
+      const intervalId = setInterval(() => {
+        console.log(formatToISO8601(goldPass.endTime));
+        const endTime = new Date(formatToISO8601(goldPass.endTime)).getTime();
+        const currentTime = new Date().getTime();
+        const timeDifference = endTime - currentTime;
+
+        console.log(endTime, currentTime);
+
+        if (timeDifference <= 0) {
+          clearInterval(intervalId); // Stop the countdown if the end time has passed
+        } else {
+          const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          );
+          const minutes = Math.floor(
+            (timeDifference % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+          setRemainingTime({ days, hours, minutes, seconds });
+        }
+      }, 1000);
+
+      // Cleanup the interval on component unmount
+      return () => clearInterval(intervalId);
+    }
+  }, [goldPass?.endTime]);
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
@@ -33,7 +85,17 @@ const ClashOfClans = () => {
         <h2 className="clash-font-style pt-20 text-center font-thin">
           Clash of Clans
         </h2>
-        <p className="coc-font-style m-8 text-center md:w-[70%] md:text-xl lg:w-3/5 lg:text-2xl">
+
+        <p className="coc-font-style mt-4 flex items-center gap-2">
+          {" "}
+          Season End:{" "}
+          <span className="w-52 text-2xl text-yellow-100">
+            {remainingTime.days > 0 && `${remainingTime.days}d`}{" "}
+            {remainingTime.hours}h {remainingTime.minutes}m{" "}
+            {remainingTime.seconds}s
+          </span>
+        </p>
+        <p className="coc-font-style m-4 text-center md:w-[70%] md:text-xl lg:w-3/5 lg:text-2xl">
           Welcome to the Clash of Clans page. Search any player or clan by their
           tag in the navigation bar. This site uses the official Clash of Clans
           API to provide up to date data. Below are some quick links to my

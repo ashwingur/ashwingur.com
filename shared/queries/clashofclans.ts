@@ -1,8 +1,12 @@
-import { CocPlayerDataSchema } from "shared/validations/ClashOfClansSchemas";
+import {
+  CocPlayerDataSchema,
+  GoldPassSchema,
+} from "shared/validations/ClashOfClansSchemas";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
 import { useQuery } from "react-query";
 
 const COC_PLAYER_HISTORY_QUERY_KEY = "coc_player_history";
+const GOLD_PASS_QUERY_KEY = "coc_gold_pass";
 
 const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
   const queryParams: CustomQueryParam[] = [];
@@ -25,5 +29,21 @@ export const usePlayerHistory = (tag: string, start: Date, end: Date) => {
     cacheTime: 5 * 60 * 1000, // 5 minutes
     keepPreviousData: true,
     enabled: !!tag,
+  });
+};
+
+const getGoldPass = async () => {
+  return await apiFetch({
+    endpoint: "/clashofclans/goldpass",
+    responseSchema: GoldPassSchema,
+  });
+};
+
+export const useGoldPass = () => {
+  return useQuery({
+    queryKey: [GOLD_PASS_QUERY_KEY],
+    queryFn: getGoldPass,
+    staleTime: 10 * 60 * 1000,
+    keepPreviousData: true,
   });
 };
