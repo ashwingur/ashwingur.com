@@ -636,9 +636,20 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       .filter((i) => i.difference !== 0)
       .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
+    const hasChange =
+      generalDifferences.length +
+        achievementDiffs.length +
+        troopDiffs.length +
+        spellDiffs.length +
+        heroDiffs.length +
+        heroEquipmentDiffs.length !==
+      0;
+
     return (
       <div className="coc-font-style mx-auto rounded-md border-2 border-black bg-[#465172] px-4 py-2 lg:w-4/5">
         <h3 className="text-center">Change Summary</h3>
+
+        {!hasChange && <p className="mt-2 text-center">No changes to report</p>}
 
         {generalDifferences.length > 0 && (
           <>
