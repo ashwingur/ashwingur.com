@@ -170,7 +170,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   // Also add current season as an option in the dropdown
   if (goldPass !== undefined) {
     const startTime = new Date(
-      new Date(formatToISO8601(goldPass.startTime)).getTime(),
+      new Date(formatToISO8601(goldPass.startTime)).getTime() - 24 * 3600000,
     );
     const endTime = new Date(formatToISO8601(goldPass.endTime));
     const seasonTimeOption: TimeOption = {
