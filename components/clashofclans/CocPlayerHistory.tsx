@@ -19,7 +19,11 @@ import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { usePlayerHistory } from "shared/queries/clashofclans";
+import {
+  formatToISO8601,
+  useGoldPass,
+  usePlayerHistory,
+} from "shared/queries/clashofclans";
 import { createTimeOptions, TimeOption } from "shared/timeoptions";
 import {
   CocPlayerHistorySchema,
@@ -29,7 +33,6 @@ import { z } from "zod";
 import CocButton from "./CocButton";
 import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
-import { difference } from "lodash";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -68,6 +71,18 @@ interface RootCategoryProps {
   title: string;
   className?: string;
 }
+
+type SelectedStat = {
+  statType:
+    | "root"
+    | "achievement"
+    | "troops"
+    | "heroes"
+    | "spells"
+    | "heroEquipment";
+  rootKey?: NumericKeys; // If it's a root key
+  name?: string; // If its achievement or other army item
+};
 
 const rootCategoryKeys: NumericKeys[] = [
   "townHallLevel",
@@ -137,7 +152,11 @@ function achievementMapper(achievement: string): string | null {
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
-  const [selectedStatistic, setSelectedStatistic] = useState("");
+  const [selectedStatisticDisplay, setSelectedStatisticDisplay] = useState("");
+  const [selectedStat, setSelectedStat] = useState<SelectedStat>({
+    statType: "root",
+    rootKey: "trophies",
+  });
   const timeOptions = createTimeOptions({
     hoursOptions: [],
     daysOptions: [7, 31, 90, 180],
@@ -145,6 +164,21 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     includeCustom: true,
     customStartTime: new Date(new Date().getTime() - 7 * 24 * 3600 * 1000),
   });
+  const { data: goldPass } = useGoldPass();
+  // Also add current season as an option in the dropdown
+  if (goldPass !== undefined) {
+    const startTime = new Date(
+      new Date(formatToISO8601(goldPass.startTime)).getTime(),
+    );
+    const endTime = new Date(formatToISO8601(goldPass.endTime));
+    const seasonTimeOption: TimeOption = {
+      display: "Current Season",
+      id: timeOptions.length,
+      startTime,
+      endTime,
+    };
+    timeOptions.splice(1, 0, seasonTimeOption);
+  }
   // Listbox props
   const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
   const displayTimeOption = (option: TimeOption) => option.display;
@@ -174,18 +208,19 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   );
 
   useEffect(() => {
-    if (selectedStatistic === "" && data && data.history.length > 0) {
-      setSelectedStatistic("Trophies");
-      setChartData(
-        data.history.map((entry) => {
-          return {
-            time: new Date(entry.timestamp).getTime(),
-            y: entry.trophies,
-          };
-        }),
-      );
+    if (selectedStat.statType === "root" && selectedStat.rootKey) {
+      onRootCategoryClick(selectedStat.rootKey);
+    } else if (selectedStat.statType === "achievement" && selectedStat.name) {
+      onAchievementClick(selectedStat.name);
+    } else if (
+      (selectedStat.statType === "spells" ||
+        selectedStat.statType === "troops" ||
+        selectedStat.statType === "heroes") &&
+      selectedStat.name
+    ) {
+      onPlayerItemClick(selectedStat.statType, selectedStat.name);
     }
-  }, [data, selectedStatistic]);
+  }, [data, selectedStat]);
 
   if (isError) {
     return (
@@ -203,6 +238,51 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       </div>
     );
   }
+
+  const onAchievementClick = (itemName: string) => {
+    setSelectedStatisticDisplay(`${itemName} (${achievementMapper(itemName)})`);
+    setChartData(
+      data.history.map((entry) => {
+        const i = entry.achievements.find((i) => i.name === itemName);
+        return {
+          time: new Date(entry.timestamp).getTime(),
+          y: i ? i.value : 0,
+        };
+      }),
+    );
+  };
+
+  const onRootCategoryClick = (item: NumericKeys) => {
+    setSelectedStatisticDisplay(
+      item
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (match) => match.toUpperCase()),
+    );
+    setChartData(
+      data.history.map((entry) => {
+        return {
+          y: entry[item],
+          time: new Date(entry.timestamp).getTime(),
+        };
+      }),
+    );
+  };
+
+  const onPlayerItemClick = (
+    nameKey: "troops" | "heroes" | "spells" | "heroEquipment",
+    itemName: string,
+  ) => {
+    setSelectedStatisticDisplay(`${itemName} Level`);
+    setChartData(
+      data.history.map((entry) => {
+        const i = entry[nameKey].find((i) => i.name === itemName);
+        return {
+          time: new Date(entry.timestamp).getTime(),
+          y: i ? i.level : 0,
+        };
+      }),
+    );
+  };
 
   const scrollToTitle = () => {
     if (titleRef.current) {
@@ -223,7 +303,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           <p className="label text-lg">{moment(label).format("DD-MM-YY")}</p>
           <p className="text-sm">{payload?.[0].value?.toLocaleString()}</p>
           <p className="max-w-48 text-center text-xs lg:max-w-none">
-            {selectedStatistic}
+            {selectedStatisticDisplay}
           </p>
         </div>
       );
@@ -306,19 +386,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           key={index}
           onClick={() => {
             scrollToTitle();
-            setSelectedStatistic(
-              item
-                .replace(/([A-Z])/g, " $1")
-                .replace(/^./, (match) => match.toUpperCase()),
-            );
-            setChartData(
-              data.history.map((entry) => {
-                return {
-                  y: entry[item],
-                  time: new Date(entry.timestamp).getTime(),
-                };
-              }),
-            );
+            setSelectedStat({ statType: "root", rootKey: item });
           }}
         >
           {item
@@ -355,16 +423,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             key={index}
             onClick={() => {
               scrollToTitle();
-              setSelectedStatistic(`${item.name} Level`);
-              setChartData(
-                history.map((entry) => {
-                  const i = entry[nameKey].find((i) => i.name === item.name);
-                  return {
-                    time: new Date(entry.timestamp).getTime(),
-                    y: i ? i.level : 0,
-                  };
-                }),
-              );
+              setSelectedStat({ statType: nameKey, name: item.name });
             }}
           >
             <ArmyItemIcon
@@ -406,20 +465,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             key={index}
             onClick={() => {
               scrollToTitle();
-              setSelectedStatistic(
-                `${item.name} (${achievementMapper(item.name)})`,
-              );
-              setChartData(
-                data.history.map((entry) => {
-                  const i = entry.achievements.find(
-                    (i) => i.name === item.name,
-                  );
-                  return {
-                    time: new Date(entry.timestamp).getTime(),
-                    y: i ? i.value : 0,
-                  };
-                }),
-              );
+              setSelectedStat({ statType: "achievement", name: item.name });
             }}
           >
             {achievementMapper(item.name)}
@@ -498,9 +544,12 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       });
     }
 
-    const SummaryStat = (name: string, difference: number) => {
+    const SummaryStat = (name: string, difference: number, idx: number) => {
       return (
-        <div className="flex items-center justify-between md:max-w-80">
+        <div
+          className="flex items-center justify-between md:max-w-80"
+          key={idx}
+        >
           <p className="text-sm">{name}</p>
 
           <div className="flex items-center">
@@ -523,27 +572,27 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
     const generalDifferences = rootDifferences
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     const achievementDiffs = achievementDifferences
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     const troopDiffs = playerItemLevelDifferences("troops")
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     const spellDiffs = playerItemLevelDifferences("spells")
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     const heroDiffs = playerItemLevelDifferences("heroes")
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     const heroEquipmentDiffs = playerItemLevelDifferences("heroEquipment")
       .filter((i) => i.difference !== 0)
-      .map((i) => SummaryStat(i.name, i.difference));
+      .map((i, idx) => SummaryStat(i.name, i.difference, idx));
 
     return (
       <div className="coc-font-style mx-auto rounded-md border-2 border-black bg-[#465172] px-4 py-2 lg:w-4/5">
@@ -653,23 +702,25 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
               defaultEndTime={timeOptions[0].endTime}
             />
             {selectedTimeOption.startTime > selectedTimeOption.endTime && (
-              <p className="text-center font-bold text-error">
+              <p className="text-center text-error">
                 Start date must be less than end date
               </p>
             )}
           </div>
         )}
       </div>
-      {chartData.length > 0 && (
+      {data.history.length > 0 && (
+        <div className="mt-2 px-4">
+          <StatSummary />
+        </div>
+      )}
+      {chartData.length > 0 && data.history.length > 0 && (
         <>
-          <div className="mt-2 px-4">
-            <StatSummary />
-          </div>
           <h3
             className="coc-font-style mb-4 mt-6 px-4 text-center text-xl md:text-2xl lg:text-3xl"
             ref={titleRef}
           >
-            {selectedStatistic}
+            {selectedStatisticDisplay}
           </h3>
           <div className="mx-auto lg:w-4/5">
             <ProgressChart data={chartData} />
