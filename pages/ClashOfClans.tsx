@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useGoldPass } from "shared/queries/clashofclans";
+import { formatToISO8601, useGoldPass } from "shared/queries/clashofclans";
 import { useEffect, useState } from "react";
 
 // https://coc.guide/troop for the icons
@@ -17,12 +17,6 @@ interface Tags {
 }
 
 const theOrganisationTag = "220QP2GGU";
-
-// Helper function to convert the custom date format into ISO 8601 format
-export function formatToISO8601(endTime: string): string {
-  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00Z"
-  return `${endTime.substring(0, 4)}-${endTime.substring(4, 6)}-${endTime.substring(6, 8)}T${endTime.substring(9, 11)}:${endTime.substring(11, 13)}:${endTime.substring(13, 15)}Z`;
-}
 
 const fetchTheOrganisation = () =>
   axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);

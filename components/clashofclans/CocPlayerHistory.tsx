@@ -33,6 +33,7 @@ import { z } from "zod";
 import CocButton from "./CocButton";
 import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
+import { useRouter } from "next/router";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -150,6 +151,7 @@ function achievementMapper(achievement: string): string | null {
 }
 
 const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
+  const router = useRouter();
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [selectedStatisticDisplay, setSelectedStatisticDisplay] = useState("");
@@ -208,6 +210,23 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   );
 
   useEffect(() => {
+    if (!router.isReady) return;
+
+    const { statType, rootKey, name } = router.query;
+
+    if (typeof statType === "string") {
+      setSelectedStat({
+        statType: statType as SelectedStat["statType"],
+        rootKey:
+          rootKey && typeof rootKey === "string"
+            ? (rootKey as NumericKeys)
+            : undefined,
+        name: name as string | undefined,
+      });
+    }
+  }, [router.isReady, router.query]);
+
+  useEffect(() => {
     if (selectedStat.statType === "root" && selectedStat.rootKey) {
       onRootCategoryClick(selectedStat.rootKey);
     } else if (selectedStat.statType === "achievement" && selectedStat.name) {
@@ -221,6 +240,54 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       onPlayerItemClick(selectedStat.statType, selectedStat.name);
     }
   }, [data, selectedStat]);
+
+  const onAchievementClick = (itemName: string) => {
+    setSelectedStatisticDisplay(`${itemName} (${achievementMapper(itemName)})`);
+    if (data)
+      setChartData(
+        data.history.map((entry) => {
+          const i = entry.achievements.find((i) => i.name === itemName);
+          return {
+            time: new Date(entry.timestamp).getTime(),
+            y: i ? i.value : 0,
+          };
+        }),
+      );
+  };
+
+  const onRootCategoryClick = (item: NumericKeys) => {
+    setSelectedStatisticDisplay(
+      item
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (match) => match.toUpperCase()),
+    );
+    if (data)
+      setChartData(
+        data.history.map((entry) => {
+          return {
+            y: entry[item],
+            time: new Date(entry.timestamp).getTime(),
+          };
+        }),
+      );
+  };
+
+  const onPlayerItemClick = (
+    nameKey: "troops" | "heroes" | "spells" | "heroEquipment",
+    itemName: string,
+  ) => {
+    setSelectedStatisticDisplay(`${itemName} Level`);
+    if (data)
+      setChartData(
+        data.history.map((entry) => {
+          const i = entry[nameKey].find((i) => i.name === itemName);
+          return {
+            time: new Date(entry.timestamp).getTime(),
+            y: i ? i.level : 0,
+          };
+        }),
+      );
+  };
 
   if (isError) {
     return (
@@ -239,49 +306,21 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
   }
 
-  const onAchievementClick = (itemName: string) => {
-    setSelectedStatisticDisplay(`${itemName} (${achievementMapper(itemName)})`);
-    setChartData(
-      data.history.map((entry) => {
-        const i = entry.achievements.find((i) => i.name === itemName);
-        return {
-          time: new Date(entry.timestamp).getTime(),
-          y: i ? i.value : 0,
-        };
-      }),
-    );
-  };
+  const updateUrlWithStat = (selectedStat: SelectedStat) => {
+    // Convert object to query params
+    const queryParams = new URLSearchParams();
+    queryParams.set("statType", selectedStat.statType);
+    if (selectedStat.rootKey !== undefined) {
+      queryParams.set("rootKey", String(selectedStat.rootKey));
+    }
+    if (selectedStat.name) {
+      queryParams.set("name", selectedStat.name);
+    }
 
-  const onRootCategoryClick = (item: NumericKeys) => {
-    setSelectedStatisticDisplay(
-      item
-        .replace(/([A-Z])/g, " $1")
-        .replace(/^./, (match) => match.toUpperCase()),
-    );
-    setChartData(
-      data.history.map((entry) => {
-        return {
-          y: entry[item],
-          time: new Date(entry.timestamp).getTime(),
-        };
-      }),
-    );
-  };
-
-  const onPlayerItemClick = (
-    nameKey: "troops" | "heroes" | "spells" | "heroEquipment",
-    itemName: string,
-  ) => {
-    setSelectedStatisticDisplay(`${itemName} Level`);
-    setChartData(
-      data.history.map((entry) => {
-        const i = entry[nameKey].find((i) => i.name === itemName);
-        return {
-          time: new Date(entry.timestamp).getTime(),
-          y: i ? i.level : 0,
-        };
-      }),
-    );
+    router.push({
+      pathname: `/ClashOfClans/Progress/${tag}`,
+      query: queryParams.toString(),
+    });
   };
 
   const scrollToTitle = () => {
@@ -386,6 +425,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           key={index}
           onClick={() => {
             scrollToTitle();
+            updateUrlWithStat({ statType: "root", rootKey: item });
             setSelectedStat({ statType: "root", rootKey: item });
           }}
         >
@@ -423,6 +463,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             key={index}
             onClick={() => {
               scrollToTitle();
+              updateUrlWithStat({ statType: nameKey, name: item.name });
               setSelectedStat({ statType: nameKey, name: item.name });
             }}
           >
@@ -465,6 +506,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             key={index}
             onClick={() => {
               scrollToTitle();
+              updateUrlWithStat({ statType: "achievement", name: item.name });
               setSelectedStat({ statType: "achievement", name: item.name });
             }}
           >
