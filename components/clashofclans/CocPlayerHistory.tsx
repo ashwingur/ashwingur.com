@@ -234,7 +234,8 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     } else if (
       (selectedStat.statType === "spells" ||
         selectedStat.statType === "troops" ||
-        selectedStat.statType === "heroes") &&
+        selectedStat.statType === "heroes" ||
+        selectedStat.statType === "heroEquipment") &&
       selectedStat.name
     ) {
       onPlayerItemClick(selectedStat.statType, selectedStat.name);
@@ -317,17 +318,24 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       queryParams.set("name", selectedStat.name);
     }
 
-    router.push({
-      pathname: `/ClashOfClans/Progress/${tag}`,
-      query: queryParams.toString(),
-    });
+    router.push(
+      {
+        pathname: `/ClashOfClans/Progress/${tag}`,
+        query: queryParams.toString(),
+      },
+      undefined,
+      { shallow: true },
+    );
   };
 
   const scrollToTitle = () => {
     if (titleRef.current) {
       const y =
         titleRef.current.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      if (window.scrollY > y) {
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+      console.log(y);
     }
   };
 
