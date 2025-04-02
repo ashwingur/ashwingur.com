@@ -335,7 +335,6 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       if (window.scrollY > y) {
         window.scrollTo({ top: y, behavior: "smooth" });
       }
-      console.log(y);
     }
   };
 
