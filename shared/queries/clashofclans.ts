@@ -1,5 +1,6 @@
 import {
   CocPlayerDataSchema,
+  CocPlayerSchema,
   GoldPassSchema,
 } from "shared/validations/ClashOfClansSchemas";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
@@ -9,6 +10,7 @@ import { z } from "zod";
 const COC_PLAYER_HISTORY_QUERY_KEY = "coc_player_history";
 const GOLD_PASS_QUERY_KEY = "coc_gold_pass";
 const INCREMENT_VIEW_COUNT_KEY = "coc_increment_view_count";
+const COC_PLAYERS_KEY = "coc_players";
 
 const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
   const queryParams: CustomQueryParam[] = [];
@@ -69,6 +71,20 @@ export const useIncrementViewCount = (tag?: string) => {
     enabled: !!tag,
     retry: false,
     refetchOnWindowFocus: false,
+  });
+};
+
+const getCocPlayers = async () => {
+  return await apiFetch({
+    endpoint: "/clashofclans/players",
+    responseSchema: z.array(CocPlayerSchema),
+  });
+};
+
+export const useGetCocPlayers = () => {
+  return useQuery({
+    queryKey: [COC_PLAYERS_KEY],
+    queryFn: getCocPlayers,
   });
 };
 

@@ -40,6 +40,13 @@ const CocPlayerDataSchema = z.object({
   history: z.array(CocPlayerHistorySchema),
 });
 
+const CocPlayerSchema = z.object({
+  tag: z.string(),
+  name: z.string(),
+  clan_tag: z.string(),
+  view_count: z.number().int().min(0),
+});
+
 const GoldPassSchema = z.object({
   startTime: z.string(),
   endTime: z.string(),
@@ -51,4 +58,5 @@ export {
   PlayerItemLevelSchema,
   AchievementSchema,
   GoldPassSchema,
+  CocPlayerSchema,
 };

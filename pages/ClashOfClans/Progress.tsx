@@ -1,30 +1,21 @@
 import React from "react";
 import CocNavBar from "../../components/clashofclans/CocNavBar";
 import axios from "axios";
-import { useQuery } from "react-query";
-import { Clan } from "../../shared/interfaces/coc.interface";
-import TheOrginization from "../../data/TheOrganization.json";
 import { SpinningCircles } from "react-loading-icons";
 import CocButton from "../../components/clashofclans/CocButton";
 import Link from "next/link";
+import { useGetCocPlayers } from "shared/queries/clashofclans";
+import Image from "next/image";
 
 const title = "Progress Tracker";
-const clanTag = "220QP2GGU";
-
-const fetchClan = () =>
-  axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);
 
 const AvailablePlayers = () => {
-  const { isLoading, error, data } = useQuery<Clan>({
-    queryKey: ["clan", clanTag],
-    queryFn: () => fetchClan(),
-    // initialData: TheOrginization as Clan,
-  });
+  const { isLoading, error, data } = useGetCocPlayers();
 
   if (error instanceof Error) {
     return (
       <p className="coc-font-style m-8 text-center text-2xl">
-        Unable to fetch updated clan data: {error.message}
+        Unable to fetch clan members: {error.message}
       </p>
     );
   }
@@ -32,14 +23,25 @@ const AvailablePlayers = () => {
     return <SpinningCircles className="mx-auto mt-8" />;
   }
 
-  const members = data.memberList
+  const members = data
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((player, index) => (
       <div
         key={index}
-        className="rounded-lg border-2 border-black bg-[#5d6b96]"
+        className="relative rounded-lg border-2 border-black bg-[#5d6b96]"
       >
         <h3 className="coc-font-style text-center">{player.name}</h3>
+        <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2">
+          {player.view_count.toLocaleString()}
+          <Image
+            unoptimized
+            alt="gem"
+            src={"/assets/coc/gem.webp"}
+            width={0}
+            height={0}
+            className="h-4 w-4"
+          />
+        </p>
         <div className="flex text-sm">
           <Link
             href={`/ClashOfClans/player/${player.tag.replace("#", "")}`}
@@ -92,10 +94,9 @@ const Progress = () => {
           {title}
         </h2>
         <p className="coc-font-style mt-8 text-center md:w-4/5 md:text-2xl">
-          Note this progress tracker only tracks players who are part of
-          TheOrganisation. It tracks all available information in the Player API
-          such as trophies, troop/hero/spell/equipment levels and achievements.
-          New data is fetched once a day at 00:00.
+          Members of TheOrganisation are tracked once a day at 12am AEST. It
+          tracks general details, army levels and achievements. The gem counter
+          is the number of views a profile has received.
         </p>
 
         <AvailablePlayers />
