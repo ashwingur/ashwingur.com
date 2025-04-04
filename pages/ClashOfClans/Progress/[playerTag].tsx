@@ -1,7 +1,8 @@
 import CocNavBar from "@components/clashofclans/CocNavBar";
 import CocPlayerHistory from "@components/clashofclans/CocPlayerHistory";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React from "react";
+import { useIncrementViewCount } from "shared/queries/clashofclans";
 
 const ProgressPage = () => {
   const router = useRouter();
@@ -9,6 +10,8 @@ const ProgressPage = () => {
     typeof router.query?.playerTag === "string"
       ? router.query.playerTag
       : undefined;
+  useIncrementViewCount(playerTag);
+
   return (
     <div className="bg-clash">
       <CocNavBar />
