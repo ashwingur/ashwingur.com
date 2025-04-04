@@ -34,6 +34,7 @@ import CocButton from "./CocButton";
 import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -718,7 +719,18 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       <h2 className="clash-font-style pt-20 text-center font-thin md:mb-0">
         Player Progress - {data.name}
       </h2>
-      <div className="mx-auto mb-4 flex items-center justify-center gap-2 pt-8 md:gap-4">
+      <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">
+        <span className="">{data.view_count.toLocaleString()}</span>
+        <Image
+          unoptimized
+          alt="gem"
+          src={"/assets/coc/gem.webp"}
+          width={0}
+          height={0}
+          className="h-6 w-6"
+        />
+      </p>
+      <div className="mx-auto mb-4 flex items-center justify-center gap-2 pt-4 md:gap-4">
         <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
           <Link href={`/ClashOfClans/player/${tag}`} className="">
             <CocButton

@@ -15,6 +15,11 @@ import CocLoadingOrError from "@components/clashofclans/CocLoadingOrError";
 import Link from "next/link";
 import CocButton from "@components/clashofclans/CocButton";
 import CocPlayerStats from "@components/clashofclans/CocPlayerStats";
+import {
+  useGetCocPlayer,
+  useIncrementViewCount,
+} from "shared/queries/clashofclans";
+import Image from "next/image";
 
 const title = "Player Details";
 
@@ -24,13 +29,18 @@ const fetchPlayer = (playerTag: string) =>
 const PlayerPage = () => {
   const router = useRouter();
   const playerTag =
-    typeof router.query?.playerTag === "string" ? router.query.playerTag : "";
+    typeof router.query?.playerTag === "string"
+      ? router.query.playerTag
+      : undefined;
 
   const { isLoading, error, data } = useQuery<Player>({
     queryKey: ["player", playerTag],
-    queryFn: () => fetchPlayer(playerTag),
-    enabled: router.isReady,
+    queryFn: () => fetchPlayer(playerTag!),
+    enabled: !!playerTag,
   });
+
+  useIncrementViewCount(playerTag);
+  const { data: cocPlayer } = useGetCocPlayer(playerTag);
 
   if (error instanceof Error)
     return CocLoadingOrError({
@@ -53,10 +63,23 @@ const PlayerPage = () => {
       <h2 className="clash-font-style mb-4 pt-20 text-center font-thin md:mb-0">
         Player Details - {data.name}
       </h2>
+      {cocPlayer && (
+        <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">
+          <span className="">{cocPlayer.view_count.toLocaleString()}</span>
+          <Image
+            unoptimized
+            alt="gem"
+            src={"/assets/coc/gem.webp"}
+            width={0}
+            height={0}
+            className="h-6 w-6"
+          />
+        </p>
+      )}
 
       <div className="flex flex-col lg:mx-auto lg:w-5/6">
         {data.clan.name === "TheOrganisation" && (
-          <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-8 md:flex-row">
+          <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-4 md:flex-row">
             <div className="flex w-80 justify-center">
               <Link href={`/ClashOfClans/Progress/${playerTag}`}>
                 <CocButton

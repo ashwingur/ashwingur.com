@@ -88,6 +88,21 @@ export const useGetCocPlayers = () => {
   });
 };
 
+const getCocPlayer = async (tag: string) => {
+  return await apiFetch({
+    endpoint: `/clashofclans/players/%23${tag}`,
+    responseSchema: CocPlayerSchema,
+  });
+};
+
+export const useGetCocPlayer = (tag?: string) => {
+  return useQuery({
+    queryKey: [COC_PLAYERS_KEY, tag],
+    queryFn: () => getCocPlayer(tag!),
+    enabled: !!tag,
+  });
+};
+
 // Helper function to convert the custom date format into ISO 8601 format
 export function formatToISO8601(endTime: string): string {
   // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00Z"

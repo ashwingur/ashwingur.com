@@ -38,12 +38,16 @@ const CocPlayerDataSchema = z.object({
   tag: z.string(),
   name: z.string(),
   history: z.array(CocPlayerHistorySchema),
+  clan_tag: z.string().nullable(),
+  clan_name: z.string().nullable(),
+  view_count: z.number().int().min(0),
 });
 
 const CocPlayerSchema = z.object({
   tag: z.string(),
   name: z.string(),
-  clan_tag: z.string(),
+  clan_tag: z.string().nullable(),
+  clan_name: z.string().nullable(),
   view_count: z.number().int().min(0),
 });
 

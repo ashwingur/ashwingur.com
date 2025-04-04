@@ -31,8 +31,8 @@ const AvailablePlayers = () => {
         className="relative rounded-lg border-2 border-black bg-[#5d6b96]"
       >
         <h3 className="coc-font-style text-center">{player.name}</h3>
-        <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2">
-          {player.view_count.toLocaleString()}
+        <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2 text-sm">
+          <span className="">{player.view_count.toLocaleString()}</span>
           <Image
             unoptimized
             alt="gem"
