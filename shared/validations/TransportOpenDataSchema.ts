@@ -4,7 +4,7 @@ export const parkingLotSchema = z.object({
   capacity: z.number().min(0),
   facility_id: z.number(),
   name: z.string(),
-  occupancy: z.number().min(0),
+  occupancy: z.number().transform((val) => Math.max(0, val)),
 });
 
 export const parkingDataSchema = z.object({

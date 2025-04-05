@@ -14,12 +14,14 @@ interface ParkingGridProps {
 
 const ParkingGrid: React.FC<ParkingGridProps> = ({ className }) => {
   const { theme } = useTheme();
-  const { isLoading, isError, data } = useLatestParkingData();
+  const { isLoading, isError, data, error } = useLatestParkingData();
 
   if (isError) {
     return (
       <div>
-        <p className="text-center text-error">Error fetching parking data.</p>
+        <p className="text-center text-error">
+          Error fetching parking data: {error instanceof Error && error.message}
+        </p>
       </div>
     );
   }
