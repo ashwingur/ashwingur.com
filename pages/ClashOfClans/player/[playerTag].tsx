@@ -60,8 +60,8 @@ const PlayerPage = () => {
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
-      <h2 className="clash-font-style mb-4 pt-20 text-center font-thin md:mb-0">
-        Player Details - {data.name}
+      <h2 className="clash-font-style mb-4 px-4 pt-20 text-center font-thin md:mb-0">
+        Player Profile - {data.name}
       </h2>
       {cocPlayer && (
         <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">

@@ -6,11 +6,80 @@ import CocButton from "../../components/clashofclans/CocButton";
 import Link from "next/link";
 import { useGetCocPlayers } from "shared/queries/clashofclans";
 import Image from "next/image";
+import {
+  CocPlayer,
+  useCocPlayerFavourites,
+} from "shared/clashofclansfavourites";
+import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 
 const title = "Progress Tracker";
 
+interface PlayerCardProps {
+  player: CocPlayer;
+  isFavourite: boolean;
+  onToggleFavourite: (player: CocPlayer) => void;
+}
+
+const PlayerCard = ({
+  player,
+  isFavourite,
+  onToggleFavourite,
+}: PlayerCardProps) => {
+  return (
+    <div className="relative rounded-lg border-2 border-black bg-[#5d6b96]">
+      <h3 className="coc-font-style text-center">{player.name}</h3>
+      <button
+        className="absolute left-4 top-1 text-white"
+        onClick={() => onToggleFavourite(player)}
+      >
+        {isFavourite ? <BsSuitHeartFill /> : <BsSuitHeart />}
+      </button>
+      <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2 text-sm">
+        <span>{player.view_count.toLocaleString()}</span>
+        <Image
+          unoptimized
+          alt="gem"
+          src="/assets/coc/gem.webp"
+          width={0}
+          height={0}
+          className="h-4 w-4"
+        />
+      </p>
+      <div className="flex text-sm">
+        <Link
+          href={`/ClashOfClans/player/${player.tag.replace("#", "")}`}
+          className="flex h-16 w-40 items-center justify-center"
+        >
+          <CocButton
+            text="Profile"
+            className="w-32 hover:w-28"
+            textClassName="text-sm hover:text-xs"
+            innerColour="bg-orange-500"
+            middleColour="bg-orange-600"
+            outerColour="bg-orange-700"
+          />
+        </Link>
+        <Link
+          href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
+          className="flex h-16 w-40 items-center justify-center"
+        >
+          <CocButton
+            text="Progress"
+            className="w-32 hover:w-28"
+            textClassName="text-sm hover:text-xs"
+            innerColour="bg-blue-500"
+            middleColour="bg-blue-600"
+            outerColour="bg-blue-700"
+          />
+        </Link>
+      </div>
+    </div>
+  );
+};
+
 const AvailablePlayers = () => {
   const { isLoading, error, data } = useGetCocPlayers();
+  const { favourites, add, remove, isFavourite } = useCocPlayerFavourites();
 
   if (error instanceof Error) {
     return (
@@ -23,63 +92,46 @@ const AvailablePlayers = () => {
     return <SpinningCircles className="mx-auto mt-8" />;
   }
 
-  const members = data
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((player, index) => (
-      <div
-        key={index}
-        className="relative rounded-lg border-2 border-black bg-[#5d6b96]"
-      >
-        <h3 className="coc-font-style text-center">{player.name}</h3>
-        <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2 text-sm">
-          <span className="">{player.view_count.toLocaleString()}</span>
-          <Image
-            unoptimized
-            alt="gem"
-            src={"/assets/coc/gem.webp"}
-            width={0}
-            height={0}
-            className="h-4 w-4"
-          />
-        </p>
-        <div className="flex text-sm">
-          <Link
-            href={`/ClashOfClans/player/${player.tag.replace("#", "")}`}
-            className="flex h-16 w-40 items-center justify-center"
-          >
-            <CocButton
-              text="Profile"
-              className="w-32 hover:w-28"
-              textClassName="text-sm hover:text-xs"
-              innerColour="bg-orange-500"
-              middleColour="bg-orange-600"
-              outerColour="bg-orange-700"
-            />
-          </Link>
-          <Link
-            href={`/ClashOfClans/Progress/${player.tag.replace("#", "")}`}
-            className="flex h-16 w-40 items-center justify-center"
-          >
-            <CocButton
-              text="Progress"
-              className="w-32 hover:w-28"
-              textClassName="text-sm hover:text-xs"
-              innerColour="bg-blue-500"
-              middleColour="bg-blue-600"
-              outerColour="bg-blue-700"
-            />
-          </Link>
-        </div>
-      </div>
-    ));
+  const handleToggleFavourite = (player: CocPlayer) => {
+    isFavourite(player.tag) ? remove(player.tag) : add(player);
+  };
+
+  const sortedPlayers = [...data].sort((a, b) => a.name.localeCompare(b.name));
+  const favouritePlayers = sortedPlayers.filter((p) => isFavourite(p.tag));
+  const otherPlayers = sortedPlayers.filter((p) => !isFavourite(p.tag));
 
   return (
     <div>
-      <h2 className="clash-font-style mb-4 mt-8 text-center text-3xl font-thin">
+      <h2 className="clash-font-style mt-8 text-center text-3xl font-thin">
         Players
       </h2>
+      {favouritePlayers.length > 0 && (
+        <h3 className="clash-font-style mb-2 mt-4 text-center text-xl font-thin">
+          Favourites
+        </h3>
+      )}
+      <div className="mb-4 grid items-center gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {favouritePlayers.map((player) => (
+          <PlayerCard
+            key={player.tag}
+            player={player}
+            isFavourite={true}
+            onToggleFavourite={handleToggleFavourite}
+          />
+        ))}
+      </div>
+      <h3 className="clash-font-style mb-2 text-center text-xl font-thin">
+        Others
+      </h3>
       <div className="grid items-center gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {members}
+        {otherPlayers.map((player) => (
+          <PlayerCard
+            key={player.tag}
+            player={player}
+            isFavourite={false}
+            onToggleFavourite={handleToggleFavourite}
+          />
+        ))}
       </div>
     </div>
   );
