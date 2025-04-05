@@ -183,7 +183,9 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     timeOptions.splice(1, 0, seasonTimeOption);
   }
   // Listbox props
-  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
+  const [selectedTimeOption, setSelectedTimeOption] = useState(
+    goldPass ? timeOptions[3] : timeOptions[2],
+  );
   const displayTimeOption = (option: TimeOption) => option.display;
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
     setSelectedTimeOption(timeOption);
