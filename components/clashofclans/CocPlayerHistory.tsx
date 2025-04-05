@@ -370,6 +370,26 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     } else if (tickDigits >= 5) {
       yLabelWidth = 100;
     }
+    const xMin = moment(chartProps.data[0].time).startOf("day").valueOf();
+    chartProps.data[0].time = xMin;
+    const xMax = chartProps.data[chartProps.data.length - 1].time;
+
+    const generateDailyTicks = (xMin: number, xMax: number): number[] => {
+      const MS_IN_DAY = 24 * 60 * 60 * 1000;
+
+      // Ensure we're working with milliseconds
+      const start = moment(xMin).startOf("day").valueOf();
+      const end = moment(xMax).endOf("day").valueOf();
+
+      const ticks = [];
+      for (let ts = start; ts <= end; ts += MS_IN_DAY) {
+        ticks.push(ts);
+      }
+      return ticks;
+    };
+
+    const dailyTicks = generateDailyTicks(xMin, xMax);
+
     return (
       <ResponsiveContainer
         width="95%"
@@ -390,10 +410,11 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           <XAxis
             dataKey="time"
             name="Time"
-            domain={["dataMin", "dataMax"]}
+            domain={[xMin, xMax]}
             stroke="white"
             scale="time"
             type="number"
+            ticks={dailyTicks}
             tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
             height={100}
             angle={40}
