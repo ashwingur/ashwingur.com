@@ -6,6 +6,7 @@ import {
 import { apiFetch, CustomQueryParam } from "./api-fetch";
 import { useQuery } from "react-query";
 import { z } from "zod";
+import { updateFavourite } from "shared/clashofclansfavourites";
 
 const COC_PLAYER_HISTORY_QUERY_KEY = "coc_player_history";
 const GOLD_PASS_QUERY_KEY = "coc_gold_pass";
@@ -75,10 +76,12 @@ export const useIncrementViewCount = (tag?: string) => {
 };
 
 const getCocPlayers = async () => {
-  return await apiFetch({
+  const res = await apiFetch({
     endpoint: "/clashofclans/players",
     responseSchema: z.array(CocPlayerSchema),
   });
+  updateFavourite(...res);
+  return res;
 };
 
 export const useGetCocPlayers = () => {
@@ -89,10 +92,12 @@ export const useGetCocPlayers = () => {
 };
 
 const getCocPlayer = async (tag: string) => {
-  return await apiFetch({
+  const res = await apiFetch({
     endpoint: `/clashofclans/players/%23${tag}`,
     responseSchema: CocPlayerSchema,
   });
+  updateFavourite(res);
+  return res;
 };
 
 export const useGetCocPlayer = (tag?: string) => {

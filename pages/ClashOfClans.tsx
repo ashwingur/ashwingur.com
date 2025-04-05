@@ -4,8 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { formatToISO8601, useGoldPass } from "shared/queries/clashofclans";
+import {
+  formatToISO8601,
+  useGetCocPlayers,
+  useGoldPass,
+} from "shared/queries/clashofclans";
 import { useEffect, useState } from "react";
+import { useCocPlayerFavourites } from "shared/clashofclansfavourites";
+import PlayerSelectorCard from "@components/clashofclans/PlayerSelectorCard";
+import clsx from "clsx";
 
 // https://coc.guide/troop for the icons
 
@@ -33,6 +40,9 @@ const ClashOfClans = () => {
     minutes: 0,
     seconds: 0,
   });
+  useGetCocPlayers(); // To update the favourites values if they've changed
+
+  const { favourites, remove } = useCocPlayerFavourites();
 
   //  Caching TheOrganisation clan since it is more frequently accessed
   useQuery({
@@ -72,7 +82,7 @@ const ClashOfClans = () => {
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
-      <div className="w- flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <h2 className="clash-font-style pt-20 text-center font-thin">
           Clash of Clans
         </h2>
@@ -96,12 +106,35 @@ const ClashOfClans = () => {
             <span className="w-52 text-2xl text-yellow-100">N/A</span>
           )}
         </p>
-        <p className="coc-font-style m-4 text-center md:w-[70%] md:text-xl lg:w-3/5 lg:text-2xl">
-          Welcome to the Clash of Clans page. Search any player or clan by their
-          tag in the navigation bar. This site uses the official Clash of Clans
-          API to provide up to date data. Below are some quick links to my
-          profile and clan:
-        </p>
+        {favourites.length > 0 && (
+          <>
+            <h3 className="clash-font-style mb-2 mt-4 text-center text-xl font-thin">
+              Favourite Players
+            </h3>
+            <div
+              className={clsx(
+                "mb-4 grid items-center justify-center gap-2",
+                favourites.length === 1 && "grid-cols-1",
+                favourites.length === 2 && "md:grid-cols-2",
+                favourites.length === 3 && "md:grid-cols-2 lg:grid-cols-3",
+                favourites.length >= 4 &&
+                  "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+              )}
+            >
+              {favourites.map((player) => (
+                <PlayerSelectorCard
+                  key={player.tag}
+                  player={player}
+                  isFavourite={true}
+                  onToggleFavourite={() => remove(player.tag)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        <h3 className="clash-font-style mb-2 mt-4 text-center text-xl font-thin">
+          Quick Links
+        </h3>
         <div className="mb-4 flex h-16 items-center">
           <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
             <CocButton
@@ -136,6 +169,12 @@ const ClashOfClans = () => {
           </Link>
         </div>
       </div>
+      <p className="coc-font-style mx-auto p-4 text-left md:w-[80%] md:text-xl lg:text-2xl 2xl:w-3/5">
+        Welcome to the Clash of Clans page. Search any player or clan by their
+        tag in the navigation bar. This site uses the official Clash of Clans
+        API to provide updated data. There is also a progress tracker for
+        players in TheOrganisation clan.
+      </p>
       <div className="relative mx-auto my-8 h-72 w-72 md:h-96 md:w-96">
         <Image
           src={`/assets/coc/CocBackground.webp`}
