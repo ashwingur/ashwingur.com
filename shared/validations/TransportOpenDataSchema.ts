@@ -16,7 +16,7 @@ export const parkingDataSchema = z.object({
   max_occupancy: z.number().min(0),
   historical_data: z.array(
     z.object({
-      occupied: z.number().min(0),
+      occupied: z.number().transform((val) => Math.max(0, val)),
       time: z.string(),
     }),
   ),

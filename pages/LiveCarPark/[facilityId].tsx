@@ -50,7 +50,7 @@ const FacilityHistory = () => {
     }
   };
 
-  const { isLoading, isError, data } = useParkingHistory(
+  const { isLoading, isError, data, error } = useParkingHistory(
     Number(facilityId),
     selectedTimeOption.startTime,
     selectedTimeOption.endTime,
@@ -60,7 +60,10 @@ const FacilityHistory = () => {
     return (
       <div className="min-h-screen">
         <Navbar fixed={true} />
-        <p className="pb-4 pt-20 text-center">Error fetching parking data.</p>
+        <p className="pb-4 pt-20 text-center">
+          {" "}
+          Error fetching parking data: {error instanceof Error && error.message}
+        </p>
       </div>
     );
   }

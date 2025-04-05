@@ -41,7 +41,6 @@ const ServiceInfoGrid: React.FC<ServiceInfoGridProps> = ({ className }) => {
       const diffInDays = diffInTime / (1000 * 3600 * 24); // Convert from milliseconds to days
 
       // Filter if more than 10 days
-      console.log(diffInDays);
       return diffInDays < 10;
     })
     .sort((a, b) => {
