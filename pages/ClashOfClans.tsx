@@ -135,14 +135,14 @@ const ClashOfClans = () => {
         <h3 className="clash-font-style mb-2 mt-4 text-center text-xl font-thin">
           Quick Links
         </h3>
-        <div className="mb-4 flex h-16 items-center">
-          <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
+        <div className="flex h-16 items-center">
+          <Link href={"/ClashOfClans/Progress"}>
             <CocButton
               className="w-80 hover:w-72"
-              text={"Unknown Virus"}
-              innerColour="bg-orange-500 dark:bg-orange-600"
-              middleColour="bg-orange-600 dark:bg-orange-700"
-              outerColour="bg-orange-700 dark:bg-orange-900"
+              text={"Progress Tracker"}
+              innerColour="bg-green-500"
+              middleColour="bg-green-600"
+              outerColour="bg-green-700"
             />
           </Link>
         </div>
@@ -157,14 +157,14 @@ const ClashOfClans = () => {
             />
           </Link>
         </div>
-        <div className="flex h-16 items-center">
-          <Link href={"/ClashOfClans/Progress"}>
+        <div className="mb-4 flex h-16 items-center">
+          <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
             <CocButton
               className="w-80 hover:w-72"
-              text={"Progress Tracker"}
-              innerColour="bg-green-500"
-              middleColour="bg-green-600"
-              outerColour="bg-green-700"
+              text={"Unknown Virus"}
+              innerColour="bg-orange-500 dark:bg-orange-600"
+              middleColour="bg-orange-600 dark:bg-orange-700"
+              outerColour="bg-orange-700 dark:bg-orange-900"
             />
           </Link>
         </div>
