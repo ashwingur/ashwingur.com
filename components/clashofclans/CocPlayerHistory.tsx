@@ -392,7 +392,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             name="Time"
             domain={["dataMin", "dataMax"]}
             stroke="white"
-            type="number"
+            scale="time"
             tickFormatter={(unixTime) => moment(unixTime).format("DD-MM-YY")}
             height={100}
             angle={40}
