@@ -60,51 +60,48 @@ const ClanPage = () => {
       <CocNavBar />
       <h2 className="clash-font-style pt-20 text-center font-thin">{title}</h2>
 
-      <div>
-        <div>
-          <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
-            <CocClanSummary clan={data} />
-            <CocClanDetails clan={data} />
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
-            <Link
-              href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
-              className="flex h-16 w-80 items-center justify-center"
-            >
-              <CocButton
-                className="mx-auto mt-4 w-80 hover:w-72"
-                text={"Current War"}
-                innerColour="bg-green-500 dark:bg-green-600"
-                middleColour="bg-green-600 dark:bg-green-700"
-                outerColour="bg-green-700 dark:bg-green-900"
-                onClick={() => {
-                  router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
-                }}
-              />
-            </Link>
-            <Link
-              href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-              className="flex h-16 w-80 items-center justify-center"
-            >
-              <CocButton
-                className="mx-auto mt-4 w-80 hover:w-72"
-                text={"Clan War League"}
-                innerColour="bg-green-500 dark:bg-green-600"
-                middleColour="bg-green-600 dark:bg-green-700"
-                outerColour="bg-green-700 dark:bg-green-900"
-                onClick={() => {}}
-              />
-            </Link>
-          </div>
-          <ClanCapitalDetails clan={data} />
-          {fullClanData.cwl_war_rounds && (
-            <ClanWarLeagueInfo className="m-4" clan={fullClanData} />
-          )}
-          <div className="mx-4 my-4">{clanMembers}</div>
+      <div className="mx-auto xl:w-4/5">
+        <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
+          <CocClanSummary clan={data} />
+          <CocClanDetails clan={data} />
         </div>
-
-        {!data && <SpinningCircles className="mx-auto mt-8" />}
+        <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+          <Link
+            href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
+            className="flex h-16 w-80 items-center justify-center"
+          >
+            <CocButton
+              className="mx-auto mt-4 w-80 hover:w-72"
+              text={"Current War"}
+              innerColour="bg-green-500 dark:bg-green-600"
+              middleColour="bg-green-600 dark:bg-green-700"
+              outerColour="bg-green-700 dark:bg-green-900"
+              onClick={() => {
+                router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
+              }}
+            />
+          </Link>
+          <Link
+            href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
+            className="flex h-16 w-80 items-center justify-center"
+          >
+            <CocButton
+              className="mx-auto mt-4 w-80 hover:w-72"
+              text={"Clan War League"}
+              innerColour="bg-green-500 dark:bg-green-600"
+              middleColour="bg-green-600 dark:bg-green-700"
+              outerColour="bg-green-700 dark:bg-green-900"
+            />
+          </Link>
+        </div>
+        <ClanCapitalDetails clan={data} />
+        {fullClanData.cwl_war_rounds && (
+          <ClanWarLeagueInfo className="m-4" clan={fullClanData} />
+        )}
+        <div className="mx-4 my-4 grid">{clanMembers}</div>
       </div>
+
+      {!data && <SpinningCircles className="mx-auto mt-8" />}
     </div>
   );
 };

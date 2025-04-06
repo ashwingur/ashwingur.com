@@ -5,7 +5,8 @@ import {
   CwlWarRoundSchema,
   FullClanSchema,
 } from "shared/validations/ClashOfClansSchemas";
-import { array, z } from "zod";
+import { z } from "zod";
+import { RiSwordFill } from "react-icons/ri";
 
 interface ClanWarLeagueInfoProps {
   className?: string;
@@ -30,7 +31,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     const matches = r.map((m, idx) => (
       <Link
         key={idx}
-        className="flex justify-between rounded-md px-4 py-1 text-sm transition-all hover:bg-black/30 lg:text-base"
+        className="flex justify-between rounded-md px-4 py-1 text-sm transition-all hover:bg-black/30"
         href={`/ClashOfClans/clanwarleague/${m.war_tag.replace("#", "")}`}
       >
         <p className="w-36">{m.clan}</p>
@@ -47,7 +48,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     return (
       <div
         className={clsx(
-          "rounded-lg border-2 border-black bg-purple-900/70 pt-4",
+          "rounded-lg border-2 border-black pt-4",
           state === "Wars Ended" && "bg-zinc-700",
           state === "Current Wars" && "bg-orange-800",
           state === "Preparation" && "bg-purple-900/70",
@@ -62,6 +63,53 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     );
   });
 
+  const performanceCards = clan.memberList
+    .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .map((p, index) => {
+      if (p.cwl_war) {
+        return (
+          <Link
+            className={clsx(
+              "relative rounded-lg border-2 border-black p-2 transition-all",
+              p.cwl_war.attack_todo
+                ? "bg-orange-900 hover:bg-orange-900/70"
+                : "bg-zinc-800 hover:bg-zinc-800/70",
+            )}
+            key={index}
+            href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
+          >
+            <h4 className="text-center">{p.name}</h4>
+            {p.cwl_war.attack_todo && (
+              <RiSwordFill className="absolute right-2 top-2" />
+            )}
+            <p className="">
+              <span className="">Attacks:</span> {p.cwl_war.attacks}/
+              {p.cwl_war.attack_limit}
+            </p>
+            <p>
+              <span className="">Stars:</span> {p.cwl_war.total_stars}/
+              {p.cwl_war.attack_limit * 3}
+            </p>
+            <p>
+              <span className="">Destruction:</span>{" "}
+              {p.cwl_war.total_destruction}%
+            </p>
+            <p>
+              <span className="">Attacks Received:</span> {p.cwl_war.defends}
+            </p>
+            {p.cwl_war.attacks > 0 && (
+              <p>
+                <span className="">Average Duration:</span>{" "}
+                {Math.round(p.cwl_war.total_duration / p.cwl_war.attacks)}s
+              </p>
+            )}
+          </Link>
+        );
+      } else {
+        return <div key={index}></div>;
+      }
+    });
+
   return (
     <div
       className={clsx(
@@ -69,9 +117,14 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         "coc-font-style rounded-lg border-2 border-black bg-gradient-to-b from-[#9f815e] to-[#7d643c]",
       )}
     >
-      <h3 className="my-4 text-center text-2xl">Clan War League</h3>
+      <h3 className="mt-4 text-center text-2xl">Clan War League</h3>
+      <h3 className="mt-2 text-center text-lg">Rounds</h3>
       <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
+      </div>
+      <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
+      <div className="grid gap-2 px-4 pb-4 lg:grid-cols-2 xl:grid-cols-4">
+        {performanceCards}
       </div>
     </div>
   );
