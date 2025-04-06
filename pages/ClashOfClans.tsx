@@ -135,7 +135,7 @@ const ClashOfClans = () => {
         <h3 className="clash-font-style mb-2 mt-4 text-center text-xl font-thin">
           Quick Links
         </h3>
-        <div className="flex h-16 items-center">
+        <div className="mb-4 flex h-16 items-center">
           <Link href={"/ClashOfClans/Progress"}>
             <CocButton
               className="w-80 hover:w-72"
