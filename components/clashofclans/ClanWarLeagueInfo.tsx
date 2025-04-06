@@ -72,7 +72,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
             className={clsx(
               "relative rounded-lg border-2 border-black p-2 transition-all",
               p.cwl_war.attack_todo
-                ? "bg-orange-900 hover:bg-orange-900/70"
+                ? "bg-orange-900 hover:bg-orange-950/70"
                 : "bg-zinc-800 hover:bg-zinc-800/70",
             )}
             key={index}
