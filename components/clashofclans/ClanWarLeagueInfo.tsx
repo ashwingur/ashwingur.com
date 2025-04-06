@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 import {
   CwlWarRoundSchema,
@@ -27,16 +28,35 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
 
   const roundCards = rounds.map((r, index) => {
     const matches = r.map((m, idx) => (
-      <div key={idx}>
-        {m.clan} VS {m.opponent}
-      </div>
+      <Link
+        key={idx}
+        className="flex justify-between rounded-md px-4 py-1 text-sm transition-all hover:bg-black/30 lg:text-base"
+        href={`/ClashOfClans/clanwarleague/${m.war_tag.replace("#", "")}`}
+      >
+        <p className="w-36">{m.clan}</p>
+        <p>VS</p>
+        <p className="w-36 text-end">{m.opponent}</p>
+      </Link>
     ));
+    let state = "Wars Ended";
+    if (r[0].state === "inWar") {
+      state = "Current Wars";
+    } else if (r[0].state === "preparation") {
+      state = "Preparation";
+    }
     return (
       <div
-        className="rounded-lg border-2 border-black bg-purple-900/70 p-4"
+        className={clsx(
+          "rounded-lg border-2 border-black bg-purple-900/70 pt-4",
+          state === "Wars Ended" && "bg-zinc-700",
+          state === "Current Wars" && "bg-orange-800",
+          state === "Preparation" && "bg-purple-900/70",
+        )}
         key={index}
       >
-        <h4 className="text-center">Round {index + 1}</h4>
+        <h4 className="text-center">
+          Round {index + 1} - {state}
+        </h4>
         <div>{matches}</div>
       </div>
     );
@@ -50,7 +70,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       )}
     >
       <h3 className="my-4 text-center text-2xl">Clan War League</h3>
-      <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:p-4 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
       </div>
     </div>
