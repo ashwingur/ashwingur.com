@@ -12,6 +12,8 @@ import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import { Clan } from "../../../shared/interfaces/coc.interface";
 import { useQuery } from "react-query";
 import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
+import { useGetFullClan } from "shared/queries/clashofclans";
+import ClanWarLeagueInfo from "@components/clashofclans/ClanWarLeagueInfo";
 
 // Example clan ID: #220qp2ggu
 
@@ -25,6 +27,8 @@ const ClanPage = () => {
   const clanTag =
     typeof router.query?.clanTag === "string" ? router.query.clanTag : "";
 
+  const { data: fullClanData } = useGetFullClan(clanTag);
+
   const { isLoading, error, data } = useQuery<Clan>({
     queryKey: ["clan", clanTag],
     queryFn: () => fetchClan(clanTag),
@@ -35,13 +39,13 @@ const ClanPage = () => {
     return CocLoadingOrError({
       heading: title,
       info: (
-        <p className="text-center coc-font-style m-8 text-2xl">
+        <p className="coc-font-style m-8 text-center text-2xl">
           Unable to fetch clan data: {error.message}
         </p>
       ),
     });
 
-  if (isLoading || data === undefined)
+  if (isLoading || data === undefined || fullClanData === undefined)
     return CocLoadingOrError({
       heading: title,
       info: <SpinningCircles className="mx-auto mt-8" />,
@@ -54,21 +58,21 @@ const ClanPage = () => {
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
-      <h2 className="text-center pt-20 clash-font-style font-thin">{title}</h2>
+      <h2 className="clash-font-style pt-20 text-center font-thin">{title}</h2>
 
       <div>
         <div>
-          <div className="flex flex-col gap-4 md:flex-row md:justify-around items-center bg-[#787b60] mx-4 p-4 mt-4 rounded-lg border-2 border-black">
+          <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
             <CocClanSummary clan={data} />
             <CocClanDetails clan={data} />
           </div>
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
             <Link
               href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
-              className="h-16 w-80 flex items-center justify-center"
+              className="flex h-16 w-80 items-center justify-center"
             >
               <CocButton
-                className="w-80 hover:w-72 mx-auto mt-4"
+                className="mx-auto mt-4 w-80 hover:w-72"
                 text={"Current War"}
                 innerColour="bg-green-500 dark:bg-green-600"
                 middleColour="bg-green-600 dark:bg-green-700"
@@ -80,10 +84,10 @@ const ClanPage = () => {
             </Link>
             <Link
               href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-              className="h-16 w-80 flex items-center justify-center"
+              className="flex h-16 w-80 items-center justify-center"
             >
               <CocButton
-                className="w-80 hover:w-72 mx-auto mt-4"
+                className="mx-auto mt-4 w-80 hover:w-72"
                 text={"Clan War League"}
                 innerColour="bg-green-500 dark:bg-green-600"
                 middleColour="bg-green-600 dark:bg-green-700"
@@ -93,6 +97,9 @@ const ClanPage = () => {
             </Link>
           </div>
           <ClanCapitalDetails clan={data} />
+          {fullClanData.cwl_war_rounds && (
+            <ClanWarLeagueInfo className="m-4" clan={fullClanData} />
+          )}
           <div className="mx-4 my-4">{clanMembers}</div>
         </div>
 

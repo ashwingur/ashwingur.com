@@ -85,7 +85,7 @@ const clanCapitalSchema = z.object({
   districts: z.array(districtSchema),
 });
 
-const cwlWarRoundSchema = z.object({
+const CwlWarRoundSchema = z.object({
   clan: z.string(),
   clan_tag: z.string(),
   opponent: z.string(),
@@ -95,9 +95,9 @@ const cwlWarRoundSchema = z.object({
 });
 
 const iconUrlsSchema = z.object({
-  medium: z.string().url(),
-  small: z.string().url(),
-  tiny: z.string().url().optional(),
+  medium: z.string().optional(),
+  small: z.string().optional(),
+  tiny: z.string().optional(),
 });
 
 const labelSchema = z.object({
@@ -166,7 +166,7 @@ const memberSchema = z.object({
   expLevel: z.number(),
   league: leagueSchema.nullable(),
   name: z.string(),
-  playerHouse: playerHouseSchema.nullable(),
+  playerHouse: playerHouseSchema.optional(),
   previousClanRank: z.number(),
   role: z.string(),
   tag: z.string(),
@@ -175,16 +175,16 @@ const memberSchema = z.object({
   war: warMemberSchema.nullable(),
 });
 
-const FullClanResponseSchema = z.object({
+const FullClanSchema = z.object({
   badgeUrls: badgeUrlsSchema,
   capitalLeague: capitalLeagueSchema,
-  chatLanguage: chatLanguageSchema,
+  chatLanguage: chatLanguageSchema.optional(),
   clanBuilderBasePoints: z.number(),
   clanCapital: clanCapitalSchema,
   clanCapitalPoints: z.number(),
   clanLevel: z.number(),
   clanPoints: z.number(),
-  cwl_war_rounds: z.array(cwlWarRoundSchema),
+  cwl_war_rounds: z.array(CwlWarRoundSchema).nullable(),
   description: z.string(),
   isFamilyFriendly: z.boolean(),
   isWarLogPublic: z.boolean(),
@@ -200,5 +200,6 @@ export {
   AchievementSchema,
   GoldPassSchema,
   CocPlayerSchema,
-  FullClanResponseSchema,
+  FullClanSchema,
+  CwlWarRoundSchema,
 };

@@ -64,6 +64,13 @@ const appsList: App[] = [
     icon: (className?: string) => <FaCar className={clsx(className)} />,
   },
   {
+    name: "Clash of Clans Tracker",
+    url: "/ClashOfClans",
+    description:
+      "Uses the Clash of Clans API to view and track the stats of any player or clan.",
+    icon: (className?: string) => <RiSwordFill className={clsx(className)} />,
+  },
+  {
     name: "Generative Art",
     url: "/GenerativeArt",
     description:
@@ -82,13 +89,6 @@ const appsList: App[] = [
     description:
       "A online code editor that supports many languages. The Piston API is used to safely execute code.",
     icon: (className?: string) => <FaCode className={clsx(className)} />,
-  },
-  {
-    name: "Clash of Clans Tracker",
-    url: "/ClashOfClans",
-    description:
-      "Uses the Clash of Clans API to view and track the stats of any player or clan.",
-    icon: (className?: string) => <RiSwordFill className={clsx(className)} />,
   },
   {
     name: "File Tools",
