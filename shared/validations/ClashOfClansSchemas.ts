@@ -56,6 +56,143 @@ const GoldPassSchema = z.object({
   endTime: z.string(),
 });
 
+// SCHEMA FOR full clan object
+const badgeUrlsSchema = z.object({
+  large: z.string(),
+  medium: z.string(),
+  small: z.string(),
+});
+
+const capitalLeagueSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+const chatLanguageSchema = z.object({
+  id: z.number(),
+  languageCode: z.string(),
+  name: z.string(),
+});
+
+const districtSchema = z.object({
+  districtHallLevel: z.number(),
+  id: z.number(),
+  name: z.string(),
+});
+
+const clanCapitalSchema = z.object({
+  capitalHallLevel: z.number(),
+  districts: z.array(districtSchema),
+});
+
+const cwlWarRoundSchema = z.object({
+  clan: z.string(),
+  clan_tag: z.string(),
+  opponent: z.string(),
+  opponent_tag: z.string(),
+  state: z.string(),
+  war_tag: z.string(),
+});
+
+const iconUrlsSchema = z.object({
+  medium: z.string().url(),
+  small: z.string().url(),
+  tiny: z.string().url().optional(),
+});
+
+const labelSchema = z.object({
+  iconUrls: iconUrlsSchema,
+  id: z.number(),
+  name: z.string(),
+});
+
+const locationSchema = z.object({
+  countryCode: z.string(),
+  id: z.number(),
+  isCountry: z.boolean(),
+  name: z.string(),
+});
+
+const builderBaseLeagueSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+const clanCapitalMemberSchema = z.object({
+  attacks: z.number(),
+  capitalResourcesLooted: z.number(),
+});
+
+const cwlWarMemberSchema = z.object({
+  attack_limit: z.number(),
+  attack_todo: z.boolean(),
+  attacks: z.number(),
+  defends: z.number(),
+  defends_stars: z.number(),
+  defends_total_destruction: z.number(),
+  defends_total_duration: z.number(),
+  total_destruction: z.number(),
+  total_duration: z.number(),
+  total_stars: z.number(),
+});
+
+const leagueSchema = z.object({
+  iconUrls: iconUrlsSchema,
+  id: z.number(),
+  name: z.string(),
+});
+
+const playerHouseElementSchema = z.object({
+  id: z.number(),
+  type: z.string(),
+});
+
+const playerHouseSchema = z.object({
+  elements: z.array(playerHouseElementSchema),
+});
+
+const warMemberSchema = z.object({
+  attacks: z.number(),
+});
+
+const memberSchema = z.object({
+  builderBaseLeague: builderBaseLeagueSchema.nullable(),
+  builderBaseTrophies: z.number(),
+  clanRank: z.number(),
+  clan_capital: clanCapitalMemberSchema.nullable(),
+  cwl_war: cwlWarMemberSchema.nullable(),
+  donations: z.number(),
+  donationsReceived: z.number(),
+  expLevel: z.number(),
+  league: leagueSchema.nullable(),
+  name: z.string(),
+  playerHouse: playerHouseSchema.nullable(),
+  previousClanRank: z.number(),
+  role: z.string(),
+  tag: z.string(),
+  townHallLevel: z.number(),
+  trophies: z.number(),
+  war: warMemberSchema.nullable(),
+});
+
+const FullClanResponseSchema = z.object({
+  badgeUrls: badgeUrlsSchema,
+  capitalLeague: capitalLeagueSchema,
+  chatLanguage: chatLanguageSchema,
+  clanBuilderBasePoints: z.number(),
+  clanCapital: clanCapitalSchema,
+  clanCapitalPoints: z.number(),
+  clanLevel: z.number(),
+  clanPoints: z.number(),
+  cwl_war_rounds: z.array(cwlWarRoundSchema),
+  description: z.string(),
+  isFamilyFriendly: z.boolean(),
+  isWarLogPublic: z.boolean(),
+  labels: z.array(labelSchema),
+  location: locationSchema,
+  memberList: z.array(memberSchema),
+});
+
 export {
   CocPlayerDataSchema,
   CocPlayerHistorySchema,
@@ -63,4 +200,5 @@ export {
   AchievementSchema,
   GoldPassSchema,
   CocPlayerSchema,
+  FullClanResponseSchema,
 };
