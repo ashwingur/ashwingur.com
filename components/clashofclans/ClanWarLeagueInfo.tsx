@@ -28,17 +28,54 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
   }
 
   const roundCards = rounds.map((r, index) => {
-    const matches = r.map((m, idx) => (
-      <Link
-        key={idx}
-        className="flex justify-between rounded-md px-4 py-1 text-sm transition-all hover:bg-black/30"
-        href={`/ClashOfClans/clanwarleague/${m.war_tag.replace("#", "")}`}
-      >
-        <p className="w-36">{m.clan}</p>
-        <p>VS</p>
-        <p className="w-36 text-end">{m.opponent}</p>
-      </Link>
-    ));
+    const matches = r.map((m, idx) => {
+      let clanBgClass = "bg-blue-900";
+      let opponentBgClass = "bg-blue-900";
+      if (m.state === "inWar") {
+        clanBgClass = "bg-orange-800";
+        opponentBgClass = "bg-orange-800";
+      } else if (m.state === "preparation") {
+      } else if (m.clan_stars > m.opponent_stars) {
+        clanBgClass = "bg-green-800";
+        opponentBgClass = "bg-red-800";
+      } else if (
+        m.clan_stars === m.opponent_stars &&
+        (m.clan_destruction_percentage ?? 0) >
+          (m.opponent_destruction_percentage ?? 0)
+      ) {
+        clanBgClass = "bg-green-800";
+        opponentBgClass = "bg-red-800";
+      } else {
+        clanBgClass = "bg-red-800";
+        opponentBgClass = "bg-green-800";
+      }
+      return (
+        <Link
+          key={idx}
+          className="group flex justify-between rounded-md px-4 py-1 text-xs transition-all md:text-sm"
+          href={`/ClashOfClans/clanwarleague/${m.war_tag.replace("#", "")}`}
+        >
+          <div
+            className={clsx(
+              "flex w-1/2 justify-between rounded-l-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
+              clanBgClass,
+            )}
+          >
+            <p>{m.clan}</p>
+            <p className="">{m.clan_stars}</p>
+          </div>
+          <div
+            className={clsx(
+              "flex w-1/2 justify-between rounded-r-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
+              opponentBgClass,
+            )}
+          >
+            <p className="">{m.opponent_stars}</p>
+            <p>{m.opponent}</p>
+          </div>
+        </Link>
+      );
+    });
     let state = "Wars Ended";
     if (r[0].state === "inWar") {
       state = "Current Wars";
@@ -48,10 +85,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     return (
       <div
         className={clsx(
-          "rounded-lg border-2 border-black pt-4",
-          state === "Wars Ended" && "bg-zinc-700",
-          state === "Current Wars" && "bg-orange-800",
-          state === "Preparation" && "bg-purple-900/70",
+          "rounded-lg border-2 border-black bg-zinc-700 pb-1 pt-4",
         )}
         key={index}
       >
@@ -123,7 +157,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         {roundCards}
       </div>
       <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
-      <div className="grid gap-2 px-4 pb-4 lg:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceCards}
       </div>
     </div>

@@ -88,8 +88,14 @@ const clanCapitalSchema = z.object({
 const CwlWarRoundSchema = z.object({
   clan: z.string(),
   clan_tag: z.string(),
+  clan_attacks: z.number(),
+  clan_stars: z.number(),
+  clan_destruction_percentage: z.number().optional(),
   opponent: z.string(),
   opponent_tag: z.string(),
+  opponent_attacks: z.number(),
+  opponent_stars: z.number(),
+  opponent_destruction_percentage: z.number().optional(),
   state: z.string(),
   war_tag: z.string(),
 });
