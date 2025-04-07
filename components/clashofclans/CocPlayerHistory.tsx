@@ -1,7 +1,7 @@
 import DateTimeRangePicker from "@components/DateTimeRangePicker";
 import GenericListbox from "@components/GenericListBox";
 import clsx from "clsx";
-import moment from "moment";
+import moment from "moment-timezone";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { SpinningCircles } from "react-loading-icons";
@@ -377,16 +377,19 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const xMax = chartProps.data[chartProps.data.length - 1].time;
 
     const generateDailyTicks = (xMin: number, xMax: number): number[] => {
-      const MS_IN_DAY = 24 * 60 * 60 * 1000;
+      const tz = "Australia/Sydney"; // or your target timezone
 
-      // Ensure we're working with milliseconds
-      const start = moment(xMin).startOf("day").valueOf();
-      const end = moment(xMax).endOf("day").valueOf();
+      const start = moment.tz(xMin, tz).startOf("day");
+      const end = moment.tz(xMax, tz).startOf("day");
 
-      const ticks = [];
-      for (let ts = start; ts <= end; ts += MS_IN_DAY) {
-        ticks.push(ts);
+      const ticks: number[] = [];
+
+      const current = start.clone();
+      while (current.isSameOrBefore(end)) {
+        ticks.push(current.valueOf());
+        current.add(1, "day");
       }
+
       return ticks;
     };
 
