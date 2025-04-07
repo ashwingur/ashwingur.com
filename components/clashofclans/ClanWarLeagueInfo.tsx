@@ -149,7 +149,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     .map((p) => ({
       name: p.name,
       remaining: (p.cwl_war?.attack_limit ?? 0) - (p.cwl_war?.attacks ?? 0),
-      used: p.cwl_war?.attack_limit ?? 0,
+      used: p.cwl_war?.attacks ?? 0,
     }))
     .sort((a, b) => b.used - a.used);
   const starChartData: WarDataItem[] = clan.memberList
