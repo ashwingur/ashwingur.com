@@ -17,10 +17,10 @@ export type WarDataItem = {
 
 type Props = {
   data: WarDataItem[];
-  xAxisTitle?: string;
+  chartTitle?: string;
 };
 
-const WarPerformanceChart: React.FC<Props> = ({ data, xAxisTitle }) => {
+const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
   // Add a derived "label" field for display (e.g. "5/7")
   const enrichedData = data.map((item) => ({
     ...item,
@@ -44,16 +44,20 @@ const WarPerformanceChart: React.FC<Props> = ({ data, xAxisTitle }) => {
 
   return (
     <div>
-      <h4 className="text-center text-2xl font-thin">{xAxisTitle}</h4>
+      <h4 className="text-center text-2xl font-thin">{chartTitle}</h4>
       <ResponsiveContainer width="100%" height={40 * data.length}>
         <BarChart
           layout="vertical"
           data={enrichedData}
-          margin={{ top: 0, right: 30, left: 50, bottom: 10 }}
+          margin={{ top: 0, right: 40, left: 40, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" tick={{ fill: "#FFFFFF" }}></XAxis>
-          <YAxis type="category" dataKey="name" tick={{ fill: "#FFFFFF" }} />
+          <YAxis
+            type="category"
+            dataKey="name"
+            tick={{ fill: "#FFFFFF", fontSize: "0.8rem" }}
+          />
           <Tooltip
             content={<CustomTooltip />}
             cursor={{ fill: "rgba(189, 189, 189, 0.34)" }}
@@ -65,9 +69,16 @@ const WarPerformanceChart: React.FC<Props> = ({ data, xAxisTitle }) => {
             fill="#46734a"
             stroke="#fff"
             strokeWidth={1}
+            style={{ zIndex: 1 }}
           >
-            <LabelList dataKey="totalLabel" position="insideLeft" fill="#fff" />
+            {/* <LabelList
+              dataKey="totalLabel"
+              position="insideLeft"
+              fill="#fff"
+              style={{ zIndex: 50 }}
+            /> */}
           </Bar>
+
           <Bar
             dataKey="remaining"
             stackId="a"
@@ -75,7 +86,8 @@ const WarPerformanceChart: React.FC<Props> = ({ data, xAxisTitle }) => {
             stroke="#fff"
             strokeWidth={1}
             radius={[0, 2, 2, 0]}
-          />
+            style={{ zIndex: 1 }}
+          ></Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

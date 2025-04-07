@@ -152,6 +152,25 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       used: p.cwl_war?.attack_limit ?? 0,
     }))
     .sort((a, b) => b.used - a.used);
+  const starChartData: WarDataItem[] = clan.memberList
+    .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .map((p) => ({
+      name: p.name,
+      remaining:
+        (p.cwl_war?.attack_limit ?? 0) * 3 - (p.cwl_war?.total_stars ?? 0),
+      used: p.cwl_war?.total_stars ?? 0,
+    }))
+    .sort((a, b) => b.used - a.used);
+  const destructionChartData: WarDataItem[] = clan.memberList
+    .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .map((p) => ({
+      name: p.name,
+      remaining:
+        (p.cwl_war?.attack_limit ?? 0) * 100 -
+        (p.cwl_war?.total_destruction ?? 0),
+      used: p.cwl_war?.total_destruction ?? 0,
+    }))
+    .sort((a, b) => b.used - a.used);
 
   return (
     <div
@@ -166,7 +185,12 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         {roundCards}
       </div>
       <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
-      <WarPerformanceChart data={attackChartData} xAxisTitle="Attacks" />
+      <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
+      <WarPerformanceChart data={starChartData} chartTitle="Stars" />
+      <WarPerformanceChart
+        data={destructionChartData}
+        chartTitle="Destruction %"
+      />
       <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceCards}
       </div>
