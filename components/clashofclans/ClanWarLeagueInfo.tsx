@@ -7,6 +7,7 @@ import {
 } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 import { RiSwordFill } from "react-icons/ri";
+import WarPerformanceChart, { WarDataItem } from "./WarPerformanceChart";
 
 interface ClanWarLeagueInfoProps {
   className?: string;
@@ -143,6 +144,15 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       }
     });
 
+  const attackChartData: WarDataItem[] = clan.memberList
+    .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .map((p) => ({
+      name: p.name,
+      remaining: (p.cwl_war?.attack_limit ?? 0) - (p.cwl_war?.attacks ?? 0),
+      used: p.cwl_war?.attack_limit ?? 0,
+    }))
+    .sort((a, b) => b.used - a.used);
+
   return (
     <div
       className={clsx(
@@ -156,6 +166,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         {roundCards}
       </div>
       <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
+      <WarPerformanceChart data={attackChartData} xAxisTitle="Attacks" />
       <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceCards}
       </div>
