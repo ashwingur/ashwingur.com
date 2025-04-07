@@ -40,8 +40,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         opponentBgClass = "bg-red-800";
       } else if (
         m.clan_stars === m.opponent_stars &&
-        (m.clan_destruction_percentage ?? 0) >
-          (m.opponent_destruction_percentage ?? 0)
+        m.clan_destruction_percentage > m.opponent_destruction_percentage
       ) {
         clanBgClass = "bg-green-800";
         opponentBgClass = "bg-red-800";
