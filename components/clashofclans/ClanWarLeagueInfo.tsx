@@ -199,16 +199,18 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         {roundCards}
       </div>
       <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
-      <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
-      <WarPerformanceChart data={starChartData} chartTitle="Stars" />
-      <WarPerformanceChart
-        data={destructionChartData}
-        chartTitle="Destruction %"
-      />
-      <WarPerformanceChart
-        data={averageDurationChartData}
-        chartTitle="Average Attack Duration"
-      />
+      <div className="grid lg:grid-cols-2">
+        <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
+        <WarPerformanceChart data={starChartData} chartTitle="Stars" />
+        <WarPerformanceChart
+          data={destructionChartData}
+          chartTitle="Destruction %"
+        />
+        <WarPerformanceChart
+          data={averageDurationChartData}
+          chartTitle="Average Attack Duration"
+        />
+      </div>
       <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceCards}
       </div>
