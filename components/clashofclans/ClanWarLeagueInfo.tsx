@@ -171,6 +171,20 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       used: p.cwl_war?.total_destruction ?? 0,
     }))
     .sort((a, b) => b.used - a.used);
+  const averageDurationChartData: WarDataItem[] = clan.memberList
+    .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .map((p) => ({
+      name: p.name,
+      remaining:
+        180 -
+        Math.round(
+          (p.cwl_war?.total_duration ?? 0) / (p.cwl_war?.attacks ?? 0),
+        ),
+      used: Math.round(
+        (p.cwl_war?.total_duration ?? 0) / (p.cwl_war?.attacks ?? 0),
+      ),
+    }))
+    .sort((a, b) => b.used - a.used);
 
   return (
     <div
@@ -190,6 +204,10 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       <WarPerformanceChart
         data={destructionChartData}
         chartTitle="Destruction %"
+      />
+      <WarPerformanceChart
+        data={averageDurationChartData}
+        chartTitle="Average Attack Duration"
       />
       <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceCards}
