@@ -76,9 +76,9 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         </Link>
       );
     });
-    let state = "Wars Ended";
+    let state = "Complete";
     if (r[0].state === "inWar") {
-      state = "Current Wars";
+      state = "In War";
     } else if (r[0].state === "preparation") {
       state = "Preparation";
     }
