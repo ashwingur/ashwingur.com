@@ -48,10 +48,6 @@ const ClanPage = () => {
       <h2 className="clash-font-style pt-20 text-center font-thin">{title}</h2>
 
       <div className="mx-auto xl:w-4/5">
-        <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
-          <CocClanSummary clan={data} />
-          <CocClanDetails clan={data} />
-        </div>
         <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
           <Link
             href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
@@ -83,6 +79,11 @@ const ClanPage = () => {
             </Link>
           }
         </div>
+        <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
+          <CocClanSummary clan={data} />
+          <CocClanDetails clan={data} />
+        </div>
+
         <ClanCapitalDetails clan={data} />
         <div className="mx-4 my-4 grid">{clanMembers}</div>
       </div>
