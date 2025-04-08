@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
@@ -14,24 +15,75 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
 }) => {
   const warAttacksTodo = clan.memberList
     .filter((p) => p.war !== null)
-    .map((p) => p.name);
+    .map((p, idx) => {
+      return (
+        <Link
+          key={idx}
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1"
+          href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
+        >
+          {p.name} - {p.war?.attacks}/2
+        </Link>
+      );
+    });
+
   const cwlWarAttacksTodo = clan.memberList
     .filter((p) => p.cwl_war?.attack_todo === true)
-    .map((p) => p.name);
+    .map((p, idx) => {
+      return (
+        <Link
+          key={idx}
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1"
+          href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
+        >
+          {p.name} - 0/1
+        </Link>
+      );
+    });
+  const capitalRaidAttacksTodo = clan.memberList
+    .filter((p) => p.clan_capital !== null)
+    .map((p, idx) => {
+      return (
+        <Link
+          key={idx}
+          className="rounded-md border border-white bg-[#494f72] p-1 px-2"
+          href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
+        >
+          {p.name} - ${p.clan_capital?.attacks}/6
+        </Link>
+      );
+    });
 
   return (
-    <div className={clsx("rounded-lg border-2 border-black", className)}>
-      <h3 className="clash-font-style my-4 text-center text-3xl font-thin">
+    <div
+      className={clsx(
+        "coc-font-style rounded-lg border-2 border-black bg-[#844f4b]",
+        className,
+      )}
+    >
+      <h3 className="clash-font-style mt-4 text-center text-3xl font-thin">
         Clan Members To-Do
       </h3>
-      <div>
-        <h4>War Attacks</h4>
-        <div>{warAttacksTodo}</div>
-      </div>
-      <div>
-        <h4>CWL War Attacks</h4>
-        <div>{cwlWarAttacksTodo}</div>
-      </div>
+      {warAttacksTodo.length > 0 && (
+        <div className="px-4 py-2">
+          <h4>War Attacks</h4>
+          <div className="my-1 flex flex-wrap gap-2">{warAttacksTodo}</div>
+        </div>
+      )}
+      {cwlWarAttacksTodo.length > 0 && (
+        <div className="px-4 py-2">
+          <h4>CWL War Attacks</h4>
+          <div className="my-1 flex flex-wrap gap-2">{cwlWarAttacksTodo}</div>
+        </div>
+      )}
+      {capitalRaidAttacksTodo.length > 0 && (
+        <div className="px-4 py-2">
+          <h4>Clan Capital Raid Attacks</h4>
+          <div className="my-1 flex flex-wrap gap-2">
+            {capitalRaidAttacksTodo}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
