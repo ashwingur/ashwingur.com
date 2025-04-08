@@ -52,12 +52,12 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       return (
         <Link
           key={idx}
-          className="group flex justify-between rounded-md px-4 py-1 text-xs transition-all md:text-sm"
+          className="group flex justify-between rounded-md px-4 py-1 text-xs transition-all"
           href={`/ClashOfClans/clanwarleague/${m.war_tag.replace("#", "")}`}
         >
           <div
             className={clsx(
-              "flex w-1/2 justify-between rounded-l-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
+              "flex w-1/2 justify-between rounded-l-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30 items-center",
               clanBgClass,
             )}
           >
@@ -66,7 +66,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
           </div>
           <div
             className={clsx(
-              "flex w-1/2 justify-between rounded-r-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
+              "flex w-1/2 justify-between rounded-r-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30 items-center",
               opponentBgClass,
             )}
           >
@@ -199,7 +199,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         {roundCards}
       </div>
       <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
-      <div className="grid lg:grid-cols-2">
+      <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
         <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
         <WarPerformanceChart data={starChartData} chartTitle="Stars" />
         <WarPerformanceChart

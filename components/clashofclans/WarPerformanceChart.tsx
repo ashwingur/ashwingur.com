@@ -45,18 +45,18 @@ const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
   return (
     <div>
       <h4 className="text-center text-2xl font-thin">{chartTitle}</h4>
-      <ResponsiveContainer width="100%" height={40 * data.length}>
+      <ResponsiveContainer width="100%" height={30 * data.length}>
         <BarChart
           layout="vertical"
           data={enrichedData}
-          margin={{ top: 0, right: 40, left: 40, bottom: 10 }}
+          margin={{ top: 0, right: 25, left: 20, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" tick={{ fill: "#FFFFFF" }}></XAxis>
           <YAxis
             type="category"
             dataKey="name"
-            tick={{ fill: "#FFFFFF", fontSize: "0.8rem" }}
+            tick={{ fill: "#FFFFFF", fontSize: "0.7rem" }}
           />
           <Tooltip
             content={<CustomTooltip />}
@@ -82,7 +82,7 @@ const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
           <Bar
             dataKey="remaining"
             stackId="a"
-            fill="#616161"
+            fill="#7b947d"
             stroke="#fff"
             strokeWidth={1}
             radius={[0, 2, 2, 0]}
