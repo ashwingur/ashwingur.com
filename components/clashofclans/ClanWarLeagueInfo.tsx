@@ -225,10 +225,10 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       remaining:
         180 -
         Math.round(
-          (p.cwl_war?.total_duration ?? 0) / (p.cwl_war?.attacks ?? 0),
+          (p.cwl_war?.total_duration ?? 0) / (Math.max(p.cwl_war?.attacks ?? 1, 1)),
         ),
       used: Math.round(
-        (p.cwl_war?.total_duration ?? 0) / (p.cwl_war?.attacks ?? 0),
+        (p.cwl_war?.total_duration ?? 0) / (Math.max(p.cwl_war?.attacks ?? 1, 1)),
       ),
     }))
     .sort((a, b) => b.used - a.used);
@@ -252,7 +252,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
       </div>
-      <h3 className="mb-2 mt-2 text-center text-lg">Player Performance</h3>
+      <h3 className="mb-2 mt-2 text-center text-lg">Player Performance - {clan.name}</h3>
       <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
         <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
         <WarPerformanceChart data={starChartData} chartTitle="Stars" />
