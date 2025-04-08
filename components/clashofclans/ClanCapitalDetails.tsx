@@ -53,7 +53,7 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
 
   return (
     <div className="m-4 rounded-lg border-2 border-black bg-green-900">
-      <div className="clash-font-style my-4 text-center text-3xl font-thin">
+      <div className="clash-font-style my-4 text-center text-2xl font-thin">
         Clan Capital
       </div>
       <div className="flex flex-col-reverse items-center justify-around px-4 md:flex-row">
