@@ -5,7 +5,7 @@ import { z } from "zod"
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 
 interface CocClanDetailsProps {
-  clan: z.infer<typeof FullClanSchema>;
+  clan: z.input<typeof FullClanSchema>;
 }
 
 const HorizontalBar = () => {

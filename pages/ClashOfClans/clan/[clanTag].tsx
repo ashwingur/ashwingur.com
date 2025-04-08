@@ -18,7 +18,7 @@ const title = "Clan";
 const ClanPage = () => {
   const router = useRouter();
   const clanTag =
-    typeof router.query?.clanTag === "string" ? router.query.clanTag : "";
+    typeof router.query?.clanTag === "string" ? router.query.clanTag : undefined;
 
   const { isLoading, error, data } = useGetFullClan(clanTag);
 
@@ -68,23 +68,22 @@ const ClanPage = () => {
               }}
             />
           </Link>
-          <Link
-            href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-            className="flex h-16 w-80 items-center justify-center"
-          >
-            <CocButton
-              className="mx-auto mt-4 w-80 hover:w-72"
-              text={"Clan War League"}
-              innerColour="bg-green-500 dark:bg-green-600"
-              middleColour="bg-green-600 dark:bg-green-700"
-              outerColour="bg-green-700 dark:bg-green-900"
-            />
-          </Link>
+          {data.cwl_war_rounds &&
+            <Link
+              href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
+              className="flex h-16 w-80 items-center justify-center"
+            >
+              <CocButton
+                className="mx-auto mt-4 w-80 hover:w-72"
+                text={"Clan War League"}
+                innerColour="bg-green-500 dark:bg-green-600"
+                middleColour="bg-green-600 dark:bg-green-700"
+                outerColour="bg-green-700 dark:bg-green-900"
+              />
+            </Link>
+          }
         </div>
         <ClanCapitalDetails clan={data} />
-        {data.cwl_war_rounds && (
-          <ClanWarLeagueInfo className="m-4" clan={data} />
-        )}
         <div className="mx-4 my-4 grid">{clanMembers}</div>
       </div>
 

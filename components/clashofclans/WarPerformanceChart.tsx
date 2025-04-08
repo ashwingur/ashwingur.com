@@ -49,7 +49,7 @@ const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
         <BarChart
           layout="vertical"
           data={enrichedData}
-          margin={{ top: 0, right: 25, left: 20, bottom: 10 }}
+          margin={{ top: 0, right: 25, left: 35, bottom: 10 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" tick={{ fill: "#FFFFFF" }}></XAxis>

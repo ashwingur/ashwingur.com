@@ -206,10 +206,10 @@ const FullClanSchema = z.object({
   type: z.string(),
   warFrequency: z.string(),
   warLeague: z.object({ id: z.number(), name: z.string() }),
-  warLosses: z.number(),
-  warTies: z.number(),
-  warWinStreak: z.number(),
-  warWins: z.number()
+  warLosses: z.number().optional().default(0),
+  warTies: z.number().optional().default(0),
+  warWinStreak: z.number().optional().default(0),
+  warWins: z.number().optional().default(0)
 });
 
 export {

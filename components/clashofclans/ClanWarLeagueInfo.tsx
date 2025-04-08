@@ -12,7 +12,7 @@ import { FaStar } from "react-icons/fa";
 
 interface ClanWarLeagueInfoProps {
   className?: string;
-  clan: z.infer<typeof FullClanSchema>;
+  clan: z.input<typeof FullClanSchema>;
 }
 
 const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
@@ -105,7 +105,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         return (
           <Link
             className={clsx(
-              "relative rounded-lg border-2 border-black p-2 transition-all",
+              "relative rounded-lg border-2 border-black px-2 py-1 transition-all text-sm",
               p.cwl_war.attack_todo
                 ? "bg-orange-900 hover:bg-orange-950/70"
                 : "bg-zinc-800 hover:bg-zinc-800/70",
@@ -113,7 +113,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
             key={index}
             href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
           >
-            <h4 className="text-center">{p.name}</h4>
+            <h4 className="text-center coc-font-style text-xl">{p.name}</h4>
             {p.cwl_war.attack_todo && (
               <RiSwordFill className="absolute right-2 top-2" />
             )}
@@ -265,7 +265,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
           chartTitle="Average Attack Duration"
         />
       </div>
-      <div className="grid gap-2 px-4 pb-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-2 px-4 pb-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         {performanceCards}
       </div>
     </div>
