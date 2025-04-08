@@ -58,7 +58,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
         >
           <div
             className={clsx(
-              "flex w-1/2 justify-between rounded-l-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30 items-center",
+              "flex w-1/2 items-center justify-between rounded-l-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
               clanBgClass,
             )}
           >
@@ -67,7 +67,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
           </div>
           <div
             className={clsx(
-              "flex w-1/2 justify-between rounded-r-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30 items-center",
+              "flex w-1/2 items-center justify-between rounded-r-lg border border-white px-2 py-1 transition-all group-hover:bg-opacity-30",
               opponentBgClass,
             )}
           >
@@ -100,12 +100,13 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
 
   const performanceCards = clan.memberList
     .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((p, index) => {
       if (p.cwl_war) {
         return (
           <Link
             className={clsx(
-              "relative rounded-lg border-2 border-black px-2 py-1 transition-all text-sm",
+              "relative rounded-lg border-2 border-black px-2 py-1 text-sm transition-all",
               p.cwl_war.attack_todo
                 ? "bg-orange-900 hover:bg-orange-950/70"
                 : "bg-zinc-800 hover:bg-zinc-800/70",
@@ -113,7 +114,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
             key={index}
             href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
           >
-            <h4 className="text-center coc-font-style text-xl">{p.name}</h4>
+            <h4 className="coc-font-style text-center text-xl">{p.name}</h4>
             {p.cwl_war.attack_todo && (
               <RiSwordFill className="absolute right-2 top-2" />
             )}
@@ -145,10 +146,20 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       }
     });
 
-  const leaderboard: { clan: string, tag: string, stars: number, destruction: number }[] = []
+  const leaderboard: {
+    clan: string;
+    tag: string;
+    stars: number;
+    destruction: number;
+  }[] = [];
 
-  const addToLeaderBoard = (clan: string, tag: string, stars: number, destruction: number) => {
-    const existing = leaderboard.find(entry => entry.tag === tag);
+  const addToLeaderBoard = (
+    clan: string,
+    tag: string,
+    stars: number,
+    destruction: number,
+  ) => {
+    const existing = leaderboard.find((entry) => entry.tag === tag);
     if (existing) {
       existing.stars += stars;
       existing.destruction += destruction;
@@ -162,13 +173,13 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       round.clan,
       round.clan_tag,
       round.clan_stars,
-      round.clan_destruction_percentage
+      round.clan_destruction_percentage,
     );
     addToLeaderBoard(
       round.opponent,
       round.opponent_tag,
       round.opponent_stars,
-      round.opponent_destruction_percentage
+      round.opponent_destruction_percentage,
     );
   });
 
@@ -180,20 +191,27 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
   });
 
   const leaderboardCards = leaderboard.map((c, idx) => {
-
-    return <Link className={clsx("rounded-lg border border-white flex justify-between py-1 px-2 transition-all",
-      idx === 0 && "bg-yellow-600 hover:bg-yellow-600/60",
-      idx === 1 && "bg-neutral-400 hover:bg-neutral-400/60",
-      idx === 2 && "bg-amber-800 hover:bg-amber-800/50",
-      idx >= 3 && "bg-zinc-800 hover:bg-zinc-800/60")}
-      key={idx} href={`/ClashOfClans/clan/${c.tag.replace("#", "")}`}>
-      <p className="flex"><span className="w-6 block">{idx + 1}.</span> {c.clan}</p>
-      <p className="flex items-center gap-1">{c.stars} <FaStar /></p>
-    </Link>
-  })
-
-
-
+    return (
+      <Link
+        className={clsx(
+          "flex justify-between rounded-lg border border-white px-2 py-1 transition-all",
+          idx === 0 && "bg-yellow-600 hover:bg-yellow-600/60",
+          idx === 1 && "bg-neutral-400 hover:bg-neutral-400/60",
+          idx === 2 && "bg-amber-800 hover:bg-amber-800/50",
+          idx >= 3 && "bg-zinc-800 hover:bg-zinc-800/60",
+        )}
+        key={idx}
+        href={`/ClashOfClans/clan/${c.tag.replace("#", "")}`}
+      >
+        <p className="flex">
+          <span className="block w-6">{idx + 1}.</span> {c.clan}
+        </p>
+        <p className="flex items-center gap-1">
+          {c.stars} <FaStar />
+        </p>
+      </Link>
+    );
+  });
 
   const attackChartData: WarDataItem[] = clan.memberList
     .filter((p) => p.cwl_war && p.cwl_war.attack_limit > 0)
@@ -229,10 +247,11 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       remaining:
         180 -
         Math.round(
-          (p.cwl_war?.total_duration ?? 0) / (Math.max(p.cwl_war?.attacks ?? 1, 1)),
+          (p.cwl_war?.total_duration ?? 0) /
+            Math.max(p.cwl_war?.attacks ?? 1, 1),
         ),
       used: Math.round(
-        (p.cwl_war?.total_duration ?? 0) / (Math.max(p.cwl_war?.attacks ?? 1, 1)),
+        (p.cwl_war?.total_duration ?? 0) / Math.max(p.cwl_war?.attacks ?? 1, 1),
       ),
     }))
     .sort((a, b) => b.used - a.used);
@@ -246,9 +265,8 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     >
       <h3 className="mt-4 text-center text-2xl">Clan War League</h3>
       <h3 className="mt-2 text-center text-lg">Leaderboard</h3>
-      <div className="px-2 mt-1">
-
-        <div className="rounded-lg border-2 border-black mx-auto flex flex-col p-2 bg-[#5e4b36] gap-1 lg:gap-2 md:max-w-96 w-full">
+      <div className="mt-1 px-2">
+        <div className="mx-auto flex w-full flex-col gap-1 rounded-lg border-2 border-black bg-[#5e4b36] p-2 md:max-w-96 lg:gap-2">
           {leaderboardCards}
         </div>
       </div>
@@ -256,7 +274,9 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
       </div>
-      <h3 className="mb-2 mt-2 text-center text-lg">Player Performance - {clan.name}</h3>
+      <h3 className="mb-2 mt-2 text-center text-lg">
+        Player Performance - {clan.name}
+      </h3>
       <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
         <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
         <WarPerformanceChart data={starChartData} chartTitle="Stars" />

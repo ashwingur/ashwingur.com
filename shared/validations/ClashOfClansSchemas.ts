@@ -181,6 +181,49 @@ const MemberSchema = z.object({
   war: warMemberSchema.nullable(),
 });
 
+const AttackSchema = z.object({
+  attackerTag: z.string(),
+  defenderTag: z.string(),
+  stars: z.number().int().min(0).max(3),
+  destructionPercentage: z.number().min(0).max(100),
+  order: z.number().int(),
+  duration: z.number().int(), // seconds
+});
+
+const WarClanMemberSchema = z.object({
+  tag: z.string(),
+  name: z.string(),
+  townhallLevel: z.number().int(),
+  mapPosition: z.number().int(),
+  attacks: z.array(AttackSchema).optional(),
+  opponentAttacks: z.number().int(),
+  bestOpponentAttack: AttackSchema.optional(),
+});
+
+const WarClanSchema = z.object({
+  badgeUrls: z.object({
+    small: z.string().url(),
+    large: z.string().url(),
+    medium: z.string().url(),
+  }),
+  clanLevel: z.number(),
+  attacks: z.number(),
+  stars: z.number(),
+  destructionPercentage: z.number(),
+  members: z.array(WarClanMemberSchema).optional(),
+});
+
+const WarSchema = z.object({
+  state: z.string(),
+  teamSize: z.number().optional().default(0),
+  preparationStartTime: z.string().optional(),
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  warStartTime: z.string().optional(),
+  clan: WarClanSchema,
+  opponent: WarClanSchema,
+});
+
 const FullClanSchema = z.object({
   badgeUrls: badgeUrlsSchema,
   capitalLeague: capitalLeagueSchema,
@@ -209,7 +252,9 @@ const FullClanSchema = z.object({
   warLosses: z.number().optional().default(0),
   warTies: z.number().optional().default(0),
   warWinStreak: z.number().optional().default(0),
-  warWins: z.number().optional().default(0)
+  warWins: z.number().optional().default(0),
+  war: WarSchema,
+  cwl_wars: z.array(WarSchema).nullable(),
 });
 
 export {
@@ -221,5 +266,5 @@ export {
   CocPlayerSchema,
   FullClanSchema,
   CwlWarRoundSchema,
-  MemberSchema
+  MemberSchema,
 };
