@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { ToggleThemeButton } from "../ToggleThemeButton";
-import { BiHash, BiSearchAlt2 } from "react-icons/bi";
-import { useRouter } from "next/router";
+import { BiSearchAlt2 } from "react-icons/bi";
 import {
   MdLogin,
   MdOutlineClose,
@@ -10,9 +9,9 @@ import {
   MdSettings,
 } from "react-icons/md";
 import CustomisableLogo from "@components/CustomisableLogo";
-import { useTheme } from "next-themes";
 import { useAuth } from "@context/AuthContext";
 import clsx from "clsx";
+import { AiFillHome } from "react-icons/ai";
 
 interface Tags {
   playerTag: string;
@@ -138,17 +137,25 @@ const CocNavBar = () => {
               </Link>
             )}
           </ul>
-          <div
-            className="cursor-pointer lg:hidden"
-            onClick={() => {
-              setMobileNavMenu(!mobileNavMenu);
-            }}
-          >
-            {mobileNavMenu ? (
-              <MdOutlineClose size={30} />
-            ) : (
-              <MdOutlineMenu size={30} />
-            )}
+          <div className="flex items-center gap-2 lg:hidden">
+            <Link
+              href={"/ClashOfClans"}
+              className="rounded-lg p-2 hover:bg-background-hover"
+            >
+              <AiFillHome className="text-xl" />
+            </Link>
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                setMobileNavMenu(!mobileNavMenu);
+              }}
+            >
+              {mobileNavMenu ? (
+                <MdOutlineClose size={30} />
+              ) : (
+                <MdOutlineMenu size={30} />
+              )}
+            </div>
           </div>
         </div>
         {/* MOBILE NAV MENU */}
