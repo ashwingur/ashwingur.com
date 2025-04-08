@@ -2,10 +2,10 @@ import React from "react";
 import { Clan, District } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
-import { z } from "zod"
+import { z } from "zod";
 
 interface ClanCapitalDetailsProps {
-  clan: z.input<typeof FullClanSchema>
+  clan: z.input<typeof FullClanSchema>;
 }
 
 const HorizontalBar = () => {
@@ -53,7 +53,7 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
 
   return (
     <div className="m-4 rounded-lg border-2 border-black bg-green-900">
-      <div className="clash-font-style my-4 text-center text-3xl">
+      <div className="clash-font-style my-4 text-center text-3xl font-thin">
         Clan Capital
       </div>
       <div className="flex flex-col-reverse items-center justify-around px-4 md:flex-row">

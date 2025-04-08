@@ -11,14 +11,16 @@ import CocNavBar from "@components/clashofclans/CocNavBar";
 import CocLoadingOrError from "@components/clashofclans/CocLoadingOrError";
 import { useGetFullClan } from "shared/queries/clashofclans";
 import ClanWarLeagueInfo from "@components/clashofclans/ClanWarLeagueInfo";
-
+import ClanMembersTodo from "@components/clashofclans/ClanMembersTodo";
 
 const title = "Clan";
 
 const ClanPage = () => {
   const router = useRouter();
   const clanTag =
-    typeof router.query?.clanTag === "string" ? router.query.clanTag : undefined;
+    typeof router.query?.clanTag === "string"
+      ? router.query.clanTag
+      : undefined;
 
   const { isLoading, error, data } = useGetFullClan(clanTag);
 
@@ -64,7 +66,7 @@ const ClanPage = () => {
               }}
             />
           </Link>
-          {data.cwl_war_rounds &&
+          {data.cwl_war_rounds && (
             <Link
               href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
               className="flex h-16 w-80 items-center justify-center"
@@ -77,12 +79,14 @@ const ClanPage = () => {
                 outerColour="bg-green-700 dark:bg-green-900"
               />
             </Link>
-          }
+          )}
         </div>
         <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
           <CocClanSummary clan={data} />
           <CocClanDetails clan={data} />
         </div>
+
+        <ClanMembersTodo clan={data} className="mx-4 mt-4" />
 
         <ClanCapitalDetails clan={data} />
         <div className="mx-4 my-4 grid">{clanMembers}</div>
