@@ -161,7 +161,7 @@ const warMemberSchema = z.object({
   attacks: z.number(),
 });
 
-const memberSchema = z.object({
+const MemberSchema = z.object({
   builderBaseLeague: builderBaseLeagueSchema.nullable(),
   builderBaseTrophies: z.number(),
   clanRank: z.number(),
@@ -196,7 +196,20 @@ const FullClanSchema = z.object({
   isWarLogPublic: z.boolean(),
   labels: z.array(labelSchema),
   location: locationSchema,
-  memberList: z.array(memberSchema),
+  memberList: z.array(MemberSchema),
+  members: z.number(),
+  name: z.string(),
+  requiredBuilderBaseTrophies: z.number(),
+  requiredTownhallLevel: z.number(),
+  requiredTrophies: z.number(),
+  tag: z.string(),
+  type: z.string(),
+  warFrequency: z.string(),
+  warLeague: z.object({ id: z.number(), name: z.string() }),
+  warLosses: z.number(),
+  warTies: z.number(),
+  warWinStreak: z.number(),
+  warWins: z.number()
 });
 
 export {
@@ -208,4 +221,5 @@ export {
   CocPlayerSchema,
   FullClanSchema,
   CwlWarRoundSchema,
+  MemberSchema
 };

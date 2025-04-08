@@ -1,9 +1,11 @@
 import React from "react";
 import { Clan } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
+import { z } from "zod"
+import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 
 interface CocClanDetailsProps {
-  clan: Clan;
+  clan: z.infer<typeof FullClanSchema>;
 }
 
 const HorizontalBar = () => {
@@ -40,7 +42,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
             />
           </div>
           <div className="mt-1 flex justify-between gap-2">
-            {clan.clanVersusPoints}
+            {clan.clanBuilderBasePoints}
             <Image
               unoptimized
               alt="trophy"

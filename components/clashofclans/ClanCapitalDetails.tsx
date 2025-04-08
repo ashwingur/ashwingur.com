@@ -1,9 +1,11 @@
 import React from "react";
 import { Clan, District } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
+import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
+import { z } from "zod"
 
 interface ClanCapitalDetailsProps {
-  clan: Clan;
+  clan: z.infer<typeof FullClanSchema>
 }
 
 const HorizontalBar = () => {
