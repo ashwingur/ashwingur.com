@@ -21,7 +21,7 @@ const LiveCarPark = () => {
         . The API does not guarantee the values to be accurate at all times.
       </p>
       <ServiceInfoGrid className="mx-4 mb-8 grid grid-cols-1 gap-4 md:mx-16 md:grid-cols-2 xl:mx-24 xl:grid-cols-3 2xl:grid-cols-4" />
-      <ParkingGrid className="mx-4 grid grid-cols-1 gap-4 md:mx-16 md:grid-cols-2 xl:mx-24 xl:grid-cols-3 2xl:grid-cols-4" />
+      <ParkingGrid className="mx-4 grid grid-cols-1 gap-4 md:mx-16 md:grid-cols-2 xl:mx-24 xl:grid-cols-3 2xl:grid-cols-4 mb-4" />
     </div>
   );
 };
