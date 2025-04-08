@@ -44,7 +44,7 @@ const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
 
   return (
     <div>
-      <h4 className="text-center text-2xl font-thin">{chartTitle}</h4>
+      <h4 className="text-center text-xl md:text-2xl font-thin px-2">{chartTitle}</h4>
       <ResponsiveContainer width="100%" height={30 * data.length}>
         <BarChart
           layout="vertical"

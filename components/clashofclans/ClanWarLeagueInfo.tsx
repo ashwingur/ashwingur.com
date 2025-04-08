@@ -181,7 +181,7 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
 
   const leaderboardCards = leaderboard.map((c, idx) => {
 
-    return <Link className="rounded-lg border border-white flex justify-between py-1 px-2 bg-zinc-800 hover:bg-zinc-800/70 transition-all"
+    return <Link className="rounded-lg border border-white flex justify-between py-1 px-2 bg-zinc-800 hover:bg-zinc-800/60 transition-all"
       key={idx} href={`/ClashOfClans/clan/${c.tag.replace("#", "")}`}>
       <p className="flex"><span className="w-6 block">{idx + 1}.</span> {c.clan}</p>
       <p className="flex items-center gap-1">{c.stars} <FaStar /></p>
@@ -242,13 +242,13 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     >
       <h3 className="mt-4 text-center text-2xl">Clan War League</h3>
       <h3 className="mt-2 text-center text-lg">Leaderboard</h3>
-      <div className="px-2">
+      <div className="px-2 mt-1">
 
         <div className="rounded-lg border-2 border-black mx-auto flex flex-col p-2 bg-[#5e4b36] gap-1 lg:gap-2 md:max-w-96 w-full">
           {leaderboardCards}
         </div>
       </div>
-      <h3 className="mt-2 text-center text-lg">Rounds</h3>
+      <h3 className="mt-4 text-center text-lg">Rounds</h3>
       <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
       </div>
