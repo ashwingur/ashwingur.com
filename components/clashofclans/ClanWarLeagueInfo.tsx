@@ -181,7 +181,11 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
 
   const leaderboardCards = leaderboard.map((c, idx) => {
 
-    return <Link className="rounded-lg border border-white flex justify-between py-1 px-2 bg-zinc-800 hover:bg-zinc-800/60 transition-all"
+    return <Link className={clsx("rounded-lg border border-white flex justify-between py-1 px-2 transition-all",
+      idx === 0 && "bg-yellow-600 hover:bg-yellow-600/60",
+      idx === 1 && "bg-neutral-400 hover:bg-neutral-400",
+      idx === 2 && "bg-amber-800 hover:bg-amber-800/60",
+      idx >= 3 && "bg-zinc-800 hover:bg-zinc-800/60")}
       key={idx} href={`/ClashOfClans/clan/${c.tag.replace("#", "")}`}>
       <p className="flex"><span className="w-6 block">{idx + 1}.</span> {c.clan}</p>
       <p className="flex items-center gap-1">{c.stars} <FaStar /></p>
