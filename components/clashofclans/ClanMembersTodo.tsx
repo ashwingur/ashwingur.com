@@ -54,16 +54,23 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       );
     });
 
+  const numTodos =
+    cwlWarAttacksTodo.length +
+    capitalRaidAttacksTodo.length +
+    warAttacksTodo.length;
+
   return (
     <div
       className={clsx(
         "coc-font-style rounded-lg border-2 border-black bg-[#844f4b]",
         className,
+        numTodos === 0 && "hidden",
       )}
     >
       <h3 className="clash-font-style mb-2 mt-4 text-center text-2xl font-thin">
         Clan Members To-Do
       </h3>
+      <p></p>
       {warAttacksTodo.length > 0 && (
         <div className="px-4 py-2">
           <h4>War Attacks</h4>

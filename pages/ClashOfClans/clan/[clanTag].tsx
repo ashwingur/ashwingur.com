@@ -44,28 +44,45 @@ const ClanPage = () => {
     <ClanMemberElement key={index} clanMember={item} />
   ));
 
+  let warUrl = null;
+  if (
+    data.war.state === "preparation" ||
+    data.war.state === "inWar" ||
+    data.war.state === "ended"
+  ) {
+    warUrl = `/ClashOfClans/clan/${clanTag}/CurrentWar`;
+  } else if (data.cwl_war_rounds) {
+    // In reverse order find the first one that matches tag
+    let latestCwlTag = data.cwl_war_rounds.find(
+      (r) =>
+        r.clan_tag === data.tag &&
+        (r.state === "inWar" || r.state === "preparation"),
+    )?.war_tag;
+    if (latestCwlTag) {
+      warUrl = `/ClashOfClans/clanwarleague/${latestCwlTag.replace("#", "")}`;
+    }
+  }
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
       <h2 className="clash-font-style pt-20 text-center font-thin">{title}</h2>
 
       <div className="mx-auto xl:w-4/5">
-        <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
-          <Link
-            href={`/ClashOfClans/clan/${clanTag}/CurrentWar`}
-            className="flex h-16 w-80 items-center justify-center"
-          >
-            <CocButton
-              className="mx-auto mt-4 w-80 hover:w-72"
-              text={"Current War"}
-              innerColour="bg-green-500 dark:bg-green-600"
-              middleColour="bg-green-600 dark:bg-green-700"
-              outerColour="bg-green-700 dark:bg-green-900"
-              onClick={() => {
-                router.push(`/ClashOfClans/clan/${clanTag}/CurrentWar`);
-              }}
-            />
-          </Link>
+        <div className="mb-6 flex flex-col items-center justify-center gap-4 md:flex-row">
+          {warUrl && (
+            <Link
+              href={warUrl}
+              className="flex h-16 w-80 items-center justify-center"
+            >
+              <CocButton
+                className="mx-auto mt-4 w-80 hover:w-72"
+                text={"Current War"}
+                innerColour="bg-green-500 dark:bg-green-600"
+                middleColour="bg-green-600 dark:bg-green-700"
+                outerColour="bg-green-700 dark:bg-green-900"
+              />
+            </Link>
+          )}
           {data.cwl_war_rounds && (
             <Link
               href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
