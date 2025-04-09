@@ -105,7 +105,7 @@ const rootCategoryKeys: NumericKeys[] = [
 const achievementsInfo = [
   { name: "Bigger Coffers", info: "Gold Storage Level" },
   { name: "Get those Goblins!", info: "Campaign Map Stars" },
-  { name: "Get even more Goblins!", info: "Campaign Map Stars" },
+  { name: "Get even more Goblins!", info: "Campaign Map Stars 2" },
   { name: "Nice and Tidy", info: "Obstacles Removed" },
   { name: "Gold Grab", info: "Gold Stolen" },
   { name: "Elixir Escapade", info: "Elixir Stolen" },
@@ -841,7 +841,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
             className="mt-4 bg-[#465172]"
           />
           <PlayerAchievementCategory
-            achievements={data.history[0].achievements}
+            achievements={data.history[data.history.length - 1].achievements}
             title="Achievements"
             className="mt-4 bg-[#465172]"
           />
