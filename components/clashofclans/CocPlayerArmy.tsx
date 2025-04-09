@@ -174,7 +174,7 @@ const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
         showLevel={true}
       />
       <ArmyItemsCategory
-        items={player.heroEquipment}
+        items={player.heroEquipment.sort((a, b) => b.level - a.level)}
         category="Hero Equipment"
         showLevel={true}
       />
