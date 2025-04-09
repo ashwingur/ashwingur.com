@@ -296,30 +296,22 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       <h3 className="mb-2 mt-2 text-center text-lg">
         Player Performance - {clan.name}
       </h3>
-      {!clan.isWarLogPublic && (
-        <p className="mb-2 text-center text-red-300">
-          This clan&lsquo;s war log is private
-        </p>
-      )}
-      {clan.isWarLogPublic && (
-        <>
-          <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
-            <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
-            <WarPerformanceChart data={starChartData} chartTitle="Stars" />
-            <WarPerformanceChart
-              data={destructionChartData}
-              chartTitle="Destruction %"
-            />
-            <WarPerformanceChart
-              data={averageDurationChartData}
-              chartTitle="Average Attack Duration"
-            />
-          </div>
-          <div className="grid gap-2 px-4 pb-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-            {performanceCards}
-          </div>
-        </>
-      )}
+
+      <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
+        <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
+        <WarPerformanceChart data={starChartData} chartTitle="Stars" />
+        <WarPerformanceChart
+          data={destructionChartData}
+          chartTitle="Destruction %"
+        />
+        <WarPerformanceChart
+          data={averageDurationChartData}
+          chartTitle="Average Attack Duration"
+        />
+      </div>
+      <div className="grid gap-2 px-4 pb-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+        {performanceCards}
+      </div>
     </div>
   );
 };
