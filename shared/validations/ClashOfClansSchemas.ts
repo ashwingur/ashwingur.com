@@ -253,7 +253,7 @@ const FullClanSchema = z.object({
   warTies: z.number().optional().default(0),
   warWinStreak: z.number().optional().default(0),
   warWins: z.number().optional().default(0),
-  war: WarSchema,
+  war: WarSchema.nullable(),
   cwl_wars: z.array(WarSchema).nullable(),
 });
 

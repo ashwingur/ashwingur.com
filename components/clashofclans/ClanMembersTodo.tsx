@@ -19,7 +19,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] px-2 py-1"
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1 transition-all hover:bg-black/50"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} - {p.war?.attacks}/2
@@ -33,7 +33,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] px-2 py-1"
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1 transition-all hover:bg-black/50"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} - 0/1
@@ -46,7 +46,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] p-1 px-2"
+          className="rounded-md border border-white bg-[#494f72] p-1 px-2 transition-all hover:bg-black/50"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} - ${p.clan_capital?.attacks}/6

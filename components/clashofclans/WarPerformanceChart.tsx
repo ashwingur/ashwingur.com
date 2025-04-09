@@ -5,7 +5,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  LabelList,
   ResponsiveContainer,
 } from "recharts";
 
@@ -44,7 +43,9 @@ const WarPerformanceChart: React.FC<Props> = ({ data, chartTitle }) => {
 
   return (
     <div>
-      <h4 className="text-center text-xl md:text-2xl font-thin px-2">{chartTitle}</h4>
+      <h4 className="px-2 text-center text-xl font-thin md:text-2xl">
+        {chartTitle}
+      </h4>
       <ResponsiveContainer width="100%" height={30 * data.length}>
         <BarChart
           layout="vertical"

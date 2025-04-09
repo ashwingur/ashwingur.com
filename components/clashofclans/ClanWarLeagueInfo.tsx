@@ -158,30 +158,49 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
     tag: string,
     stars: number,
     destruction: number,
+    win: boolean,
   ) => {
     const existing = leaderboard.find((entry) => entry.tag === tag);
     if (existing) {
       existing.stars += stars;
+      if (win) existing.stars += 10;
       existing.destruction += destruction;
     } else {
-      leaderboard.push({ clan, tag, stars, destruction });
+      leaderboard.push({
+        clan,
+        tag,
+        stars: stars + (win ? 10 : 0), // 10 bonus stars for a win
+        destruction,
+      });
     }
   };
 
-  clan.cwl_war_rounds?.forEach((round) => {
-    addToLeaderBoard(
-      round.clan,
-      round.clan_tag,
-      round.clan_stars,
-      round.clan_destruction_percentage,
-    );
-    addToLeaderBoard(
-      round.opponent,
-      round.opponent_tag,
-      round.opponent_stars,
-      round.opponent_destruction_percentage,
-    );
-  });
+  clan.cwl_war_rounds
+    ?.filter((r) => r.state === "inWar" || r.state === "warEnded")
+    .forEach((round) => {
+      addToLeaderBoard(
+        round.clan,
+        round.clan_tag,
+        round.clan_stars,
+        round.clan_destruction_percentage,
+        round.state === "warEnded" &&
+          (round.clan_stars > round.opponent_stars ||
+            (round.clan_stars === round.opponent_stars &&
+              round.clan_destruction_percentage >
+                round.opponent_destruction_percentage)),
+      );
+      addToLeaderBoard(
+        round.opponent,
+        round.opponent_tag,
+        round.opponent_stars,
+        round.opponent_destruction_percentage,
+        round.state === "warEnded" &&
+          (round.opponent_stars > round.clan_stars ||
+            (round.clan_stars === round.opponent_stars &&
+              round.clan_destruction_percentage <
+                round.opponent_destruction_percentage)),
+      );
+    });
 
   leaderboard.sort((a, b) => {
     if (b.stars !== a.stars) {

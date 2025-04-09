@@ -46,9 +46,10 @@ const ClanPage = () => {
 
   let warUrl = null;
   if (
-    data.war.state === "preparation" ||
-    data.war.state === "inWar" ||
-    data.war.state === "ended"
+    data.war &&
+    (data.war.state === "preparation" ||
+      data.war.state === "inWar" ||
+      data.war.state === "ended")
   ) {
     warUrl = `/ClashOfClans/clan/${clanTag}/CurrentWar`;
   } else if (data.cwl_war_rounds) {
