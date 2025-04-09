@@ -113,7 +113,7 @@ const labelSchema = z.object({
 });
 
 const locationSchema = z.object({
-  countryCode: z.string(),
+  countryCode: z.string().optional(),
   id: z.number(),
   isCountry: z.boolean(),
   name: z.string(),
