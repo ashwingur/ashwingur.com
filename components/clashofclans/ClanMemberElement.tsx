@@ -4,20 +4,51 @@ import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
 import { MemberSchema } from "shared/validations/ClashOfClansSchemas";
+import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
+import clsx from "clsx";
 
 interface ClanMemberElementProps {
   clanMember: z.infer<typeof MemberSchema>;
 }
 
 const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
+  const rankChange = clanMember.previousClanRank - clanMember.clanRank;
   return (
     <Link
       className="my-2 flex cursor-pointer flex-col justify-between rounded-lg border-2 border-gray-800 bg-gray-200 px-2 py-2 transition-all hover:bg-gray-300 dark:bg-gray-400 dark:hover:bg-gray-300 md:flex-row md:py-0"
       href={`/ClashOfClans/player/${clanMember.tag.substring(1)}`}
     >
       <div className="mx-auto flex md:mx-0 md:py-1">
-        <div className="self-center font-clash text-white [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black] md:w-6">
-          {clanMember.clanRank}.
+        <div className="mx-auto flex items-center justify-between gap-1 self-center text-white md:w-12">
+          <p className="font-clash [text-shadow:_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_2px_1px_black,_0_-1px_2px_black]">
+            {clanMember.clanRank}.
+          </p>
+          {rankChange !== 0 && (
+            <div
+              className={clsx(
+                "flex flex-col items-center font-coc text-sm font-thin",
+              )}
+            >
+              <div
+                className={clsx(
+                  rankChange > 0 ? "text-green-500" : "text-red-500",
+                )}
+              >
+                {clanMember.previousClanRank - clanMember.clanRank > 0 ? (
+                  <TbTriangleFilled />
+                ) : (
+                  <TbTriangleInvertedFilled />
+                )}
+              </div>
+              <p
+                className={clsx(
+                  rankChange > 0 ? "text-green-700" : "text-red-700",
+                )}
+              >
+                {Math.abs(rankChange)}
+              </p>
+            </div>
+          )}
         </div>
         <div className="mx-2 my-1 w-[1px] md:bg-gray-400" />
         <div className="relative h-12 w-12 md:h-16 md:w-16">
@@ -27,7 +58,7 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
             src={
               clanMember.league?.name === "Unranked"
                 ? "/assets/coc/Unranked_League.webp"
-                : clanMember.league?.iconUrls.medium ?? ""
+                : (clanMember.league?.iconUrls.medium ?? "")
             }
             fill
             style={{ objectFit: "cover" }}
@@ -44,21 +75,21 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-2 text-black md:flex-row md:gap-0">
-        <div className="flex flex-col items-center px-8">
-          <div className="font-coc font-thin text-slate-700">
-            Troops donated:
+      <div className="flex flex-col items-center justify-center gap-2 text-xs text-black sm:flex-row md:gap-0 lg:text-base">
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center gap-1">
+            <p className="font-coc font-thin text-slate-700">Troops donated:</p>
+            <p className="w-full rounded-md bg-white text-center font-coc font-thin dark:bg-slate-800">
+              {clanMember.donations}
+            </p>
           </div>
-          <div className="w-full rounded-md bg-white text-center font-coc font-thin dark:bg-slate-800">
-            {clanMember.donations}
-          </div>
-        </div>
-        <div className="mx-8 flex flex-col items-center">
-          <div className="font-coc font-thin text-slate-700">
-            Troops received:
-          </div>
-          <div className="w-full rounded-md bg-white text-center font-coc font-thin dark:bg-slate-800">
-            {clanMember.donationsReceived}
+          <div className="flex flex-col items-center gap-1 md:px-8">
+            <p className="font-coc font-thin text-slate-700">
+              Troops received:
+            </p>
+            <p className="w-full rounded-md bg-white text-center font-coc font-thin dark:bg-slate-800">
+              {clanMember.donationsReceived}
+            </p>
           </div>
         </div>
 
