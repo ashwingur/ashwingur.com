@@ -81,8 +81,8 @@ const districtSchema = z.object({
 });
 
 const clanCapitalSchema = z.object({
-  capitalHallLevel: z.number(),
-  districts: z.array(districtSchema),
+  capitalHallLevel: z.number().optional(),
+  districts: z.array(districtSchema).optional().default([]),
 });
 
 const CwlWarRoundSchema = z.object({
@@ -233,7 +233,11 @@ const FullClanSchema = z.object({
   clanCapitalPoints: z.number(),
   clanLevel: z.number(),
   clanPoints: z.number(),
-  cwl_war_rounds: z.array(CwlWarRoundSchema).nullable(),
+  cwl_war_rounds: z
+    .array(CwlWarRoundSchema)
+    .optional()
+    .nullable()
+    .default(null),
   description: z.string(),
   isFamilyFriendly: z.boolean(),
   isWarLogPublic: z.boolean(),
