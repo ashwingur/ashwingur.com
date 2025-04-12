@@ -15,6 +15,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
 }) => {
   const warAttacksTodo = clan.memberList
     .filter((p) => p.war !== null)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((p, idx) => {
       return (
         <Link
@@ -29,6 +30,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
 
   const cwlWarAttacksTodo = clan.memberList
     .filter((p) => p.cwl_war?.attack_todo === true)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((p, idx) => {
       return (
         <Link
@@ -41,7 +43,8 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       );
     });
   const capitalRaidAttacksTodo = clan.memberList
-    .filter((p) => p.clan_capital !== null)
+    .filter((p) => p.clan_capital !== null && p.clan_capital.attacks < 6)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((p, idx) => {
       return (
         <Link
@@ -49,7 +52,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
           className="rounded-md border border-white bg-[#494f72] p-1 px-2 transition-all hover:bg-black/50"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
-          {p.name} — ${p.clan_capital?.attacks}/6
+          {p.name} — {p.clan_capital?.attacks}/6
         </Link>
       );
     });
