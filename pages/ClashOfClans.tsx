@@ -157,7 +157,7 @@ const ClashOfClans = () => {
             />
           </Link>
         </div>
-        <div className="mb-4 flex h-16 items-center">
+        {/* <div className="mb-4 flex h-16 items-center">
           <Link href={"/ClashOfClans/player/YLPGLJ0V"}>
             <CocButton
               className="w-80 hover:w-72"
@@ -167,7 +167,7 @@ const ClashOfClans = () => {
               outerColour="bg-orange-700 dark:bg-orange-900"
             />
           </Link>
-        </div>
+        </div> */}
       </div>
       <p className="coc-font-style mx-auto p-4 text-left md:w-[80%] md:text-xl lg:text-2xl 2xl:w-3/5">
         Welcome to the Clash of Clans page. Search any player or clan by their
