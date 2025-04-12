@@ -22,10 +22,10 @@ const AirQuality: React.FC<AirQualityProps> = ({ aqi, tvoc, eco2 }) => {
   }
   return (
     <Card
-      className="flex flex-col items-center justify-center lg:w-48 lg:h-60"
+      className="flex flex-col items-center justify-center lg:h-60 lg:w-48"
       firstLayer={false}
     >
-      <h3 className="mb-4">Air Quality</h3>
+      <h3 className="mb-4 text-lg md:text-xl">Air Quality</h3>
       <GaugeChart
         hideText={true}
         percent={percent}

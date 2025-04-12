@@ -29,10 +29,10 @@ const PressureGauge: React.FC<AirPressureGaugeProps> = ({ pressure }) => {
 
   return (
     <Card
-      className="lg:w-48 flex flex-col items-center justify-center lg:h-60"
+      className="flex flex-col items-center justify-center lg:h-60 lg:w-48"
       firstLayer={false}
     >
-      <h3 className="mb-4">Air Pressure</h3>
+      <h3 className="mb-4 text-lg md:text-xl">Air Pressure</h3>
       <GaugeChart
         hideText={true}
         nrOfLevels={1}

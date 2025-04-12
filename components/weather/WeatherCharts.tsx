@@ -11,14 +11,14 @@ import GenericListbox from "@components/GenericListBox";
 
 const fetchWeatherData = async (
   start: Date,
-  end: Date
+  end: Date,
 ): Promise<WeatherData> => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather?start=${
         start.getTime() / 1000
       }&end=${end.getTime() / 1000}`,
-      { credentials: "include" }
+      { credentials: "include" },
     );
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
@@ -40,7 +40,7 @@ const WeatherCharts = () => {
     includeCustom: true,
   });
   // Listbox props
-  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[2]);
+  const [selectedTimeOption, setSelectedTimeOption] = useState(timeOptions[5]);
   const displayTimeOption = (option: TimeOption) => option.display;
   const handleSelectedTimeChange = (timeOption: TimeOption) => {
     setSelectedTimeOption(timeOption);
@@ -50,7 +50,7 @@ const WeatherCharts = () => {
   const onDateTimeChange = (
     _startLessThanEnd: boolean,
     start?: Date,
-    end?: Date
+    end?: Date,
   ) => {
     if (start && end) {
       setSelectedTimeOption((prev) => ({
@@ -71,7 +71,7 @@ const WeatherCharts = () => {
     queryFn: () =>
       fetchWeatherData(
         selectedTimeOption.startTime,
-        selectedTimeOption.endTime
+        selectedTimeOption.endTime,
       ),
     staleTime: 60 * 1000, // 1 minute
     cacheTime: 5 * 60 * 1000, // 5 minutes
@@ -82,7 +82,7 @@ const WeatherCharts = () => {
   if (isLoading) {
     return (
       <Card
-        className="flex flex-col items-center justify-center bg-background-muted mx-4"
+        className="mx-4 flex flex-col items-center justify-center bg-background-muted"
         firstLayer={true}
       >
         <h2 className="mt-2">Historical Data</h2>
@@ -94,7 +94,7 @@ const WeatherCharts = () => {
   if (isError || data === undefined || data.data.length === 0) {
     return (
       <Card
-        className="flex flex-col items-center justify-center bg-background-muted mx-4"
+        className="mx-4 flex flex-col items-center justify-center bg-background-muted"
         firstLayer={true}
       >
         <h2 className="mt-2">Historical Data</h2>
@@ -104,7 +104,7 @@ const WeatherCharts = () => {
           onSelectedValueChange={handleSelectedTimeChange}
           options={timeOptions}
           displayValue={displayTimeOption}
-          className="mt-4 mb-2 z-20"
+          className="z-20 mb-2 mt-4"
           maxHeightClass="lg:max-h-none"
         />
 
@@ -112,12 +112,12 @@ const WeatherCharts = () => {
           <div>
             <DateTimeRangePicker
               onDateTimeChange={onDateTimeChange}
-              className="mt-2 mb-4"
+              className="mb-4 mt-2"
               defaultStartTime={timeOptions[0].startTime}
               defaultEndTime={timeOptions[0].endTime}
             />
             {selectedTimeOption.startTime > selectedTimeOption.endTime && (
-              <p className="font-bold text-center">
+              <p className="text-center font-bold">
                 Start date must be less than end date
               </p>
             )}
@@ -135,7 +135,7 @@ const WeatherCharts = () => {
 
   // Now we will have 8 arrays
   const transposedData = data.data[0].map((_, colIndex) =>
-    data.data.map((row) => row[colIndex])
+    data.data.map((row) => row[colIndex]),
   );
   const timestamps = transposedData[0];
   const temperatures = transposedData[1];
@@ -148,7 +148,7 @@ const WeatherCharts = () => {
 
   return (
     <Card
-      className="card !px-2 !md:px-4 flex flex-col items-center justify-center mx-4"
+      className="card !md:px-4 mx-4 flex flex-col items-center justify-center !px-2"
       firstLayer={true}
     >
       <h2 className="mt-2">Historical Data</h2>
@@ -157,30 +157,30 @@ const WeatherCharts = () => {
         onSelectedValueChange={handleSelectedTimeChange}
         options={timeOptions}
         displayValue={displayTimeOption}
-        className="mt-4 mb-2 z-20"
+        className="z-20 mb-2 mt-4"
         maxHeightClass="lg:max-h-none"
       />
       {selectedTimeOption.id === 0 && (
         <div>
           <DateTimeRangePicker
             onDateTimeChange={onDateTimeChange}
-            className="mt-2 mb-4"
+            className="mb-4 mt-2"
             defaultStartTime={timeOptions[0].startTime}
             defaultEndTime={timeOptions[0].endTime}
           />
           {selectedTimeOption.startTime > selectedTimeOption.endTime && (
-            <p className="font-bold text-center mb-4">
+            <p className="mb-4 text-center font-bold">
               Start date must be less than end date
             </p>
           )}
         </div>
       )}
       {selectedTimeOption.startTime.getTime() / 1000 < firstDbEntryTime && (
-        <p className="text-xs mb-4 px-4">
+        <p className="mb-4 px-4 text-xs">
           Note: weather station deployed on 31/5/24 (no data exists before then)
         </p>
       )}
-      <div className="flex flex-col self-stretch gap-8 px-2 lg:px-4">
+      <div className="flex flex-col gap-8 self-stretch px-2 lg:px-4">
         <TimeSeriesChart
           timestamps={timestamps}
           values={temperatures}

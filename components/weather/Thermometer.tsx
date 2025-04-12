@@ -14,11 +14,11 @@ const Thermometer: React.FC<ThermometerProps> = ({ temperature }) => {
   return (
     <Card
       firstLayer={false}
-      className="flex flex-col items-center justify-center h-48 lg:h-60"
+      className="flex h-48 flex-col items-center justify-center lg:h-60"
     >
-      <h3>Temperature</h3>
+      <h3 className="text-lg md:text-xl">Temperature</h3>
       <svg
-        className="w-12 md:w-16 lg:w-20 h-auto"
+        className="h-auto w-12 md:w-16 lg:w-20"
         viewBox="0 0 60 175" // Adjusted width and height here
         xmlns="http://www.w3.org/2000/svg"
       >

@@ -17,18 +17,39 @@ function formatUnixTimestamp(unixTimestamp: number) {
   return `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 }
 
-function calculateMinutesAgo(unixTimestamp: number) {
-  const now = Date.now() / 1000; // Convert milliseconds to seconds
-  const differenceInSeconds = now - unixTimestamp;
-  const minutesAgo = Math.floor(differenceInSeconds / 60);
-  return minutesAgo;
+function timeAgo(unixTimestamp: number): string {
+  const now = Date.now() / 1000; // current time in seconds
+  const diffInSeconds = now - unixTimestamp;
+
+  if (diffInSeconds < 60) {
+    return "just now";
+  }
+
+  const minutes = Math.floor(diffInSeconds / 60);
+  if (minutes < 60) {
+    return `${minutes} min ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    return `${hours} hr${hours !== 1 ? "s" : ""} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  const remainingHours = hours % 24;
+
+  let result = `${days} day${days !== 1 ? "s" : ""}`;
+  if (remainingHours > 0) {
+    result += ` ${remainingHours} hr${remainingHours !== 1 ? "s" : ""}`;
+  }
+  return result + " ago";
 }
 
 const fetchLatestWeatherData = async (): Promise<WeatherData> => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_ASHWINGUR_API}/weather`,
-      { credentials: "include" }
+      { credentials: "include" },
     );
     if (!response.ok) {
       throw new Error("Failed to fetch weather data");
@@ -44,22 +65,22 @@ const fetchLatestWeatherData = async (): Promise<WeatherData> => {
 export const LatestWeather: React.FC = () => {
   const { data, isLoading, isError } = useQuery<WeatherData>(
     "latestweather",
-    fetchLatestWeatherData
+    fetchLatestWeatherData,
   );
 
   if (isLoading)
     return (
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center mx-4"
+        className="mx-4 flex flex-col items-center justify-center"
       >
         <h2 className="mt-2">Latest Weather Data</h2>
-        <p className="text-sm mt-1">loading...</p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
-          <div className="h-48 lg:h-60 w-36 lg:w-48 bg-background-muted shadow-lg rounded-lg animate-pulse" />
-          <div className="h-48 lg:h-60 w-36 lg:w-48 bg-background-muted shadow-lg rounded-lg animate-pulse" />
-          <div className="h-48 lg:h-60 w-36 lg:w-48 bg-background-muted shadow-lg rounded-lg animate-pulse" />
-          <div className="h-48 lg:h-60 w-36 lg:w-48 bg-background-muted shadow-lg rounded-lg animate-pulse" />
+        <p className="mt-1 text-sm">loading...</p>
+        <div className="grid grid-cols-2 justify-center gap-4 p-4 lg:grid-cols-4">
+          <div className="h-48 w-36 animate-pulse rounded-lg bg-background-muted shadow-lg lg:h-60 lg:w-48" />
+          <div className="h-48 w-36 animate-pulse rounded-lg bg-background-muted shadow-lg lg:h-60 lg:w-48" />
+          <div className="h-48 w-36 animate-pulse rounded-lg bg-background-muted shadow-lg lg:h-60 lg:w-48" />
+          <div className="h-48 w-36 animate-pulse rounded-lg bg-background-muted shadow-lg lg:h-60 lg:w-48" />
         </div>
       </Card>
     );
@@ -67,10 +88,10 @@ export const LatestWeather: React.FC = () => {
     return (
       <Card
         firstLayer={true}
-        className="flex flex-col items-center justify-center mx-4"
+        className="mx-4 flex flex-col items-center justify-center"
       >
         <h2 className="mt-2">Latest Weather Data</h2>
-        <p className="text-sm mt-1 mb-8">Error fetching data</p>
+        <p className="mb-8 mt-1 text-sm">Error fetching data</p>
       </Card>
     );
 
@@ -80,26 +101,29 @@ export const LatestWeather: React.FC = () => {
   return (
     <Card
       firstLayer={true}
-      className="flex flex-col items-center justify-center mx-4"
+      className="mx-4 flex flex-col items-center justify-center"
     >
       <h2 className="mt-2">Latest Weather Data</h2>
-      <p className="text-sm mt-1">
-        {formatUnixTimestamp(timestamp)} ({calculateMinutesAgo(timestamp)}min
-        ago)
+      <p className="text-error">
+        Raspberry Pi is currently broken, replacement incoming to resume data
+        collection. It almost lasted a year!
       </p>
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 py-4 justify-center items-stretch">
+      <p className="mt-1 text-sm">
+        {formatUnixTimestamp(timestamp)} ({timeAgo(timestamp)})
+      </p>
+      <div className="grid grid-cols-2 items-stretch justify-center gap-4 py-4 xl:grid-cols-4">
         <Thermometer temperature={temperature} />
         <PressureGauge pressure={pressure} />
         <Card
-          className="flex flex-col text-center justify-center gap-8 lg:h-60"
+          className="flex flex-col justify-center gap-8 text-center lg:h-60"
           firstLayer={false}
         >
           <div>
-            <h3>Humidity</h3>
+            <h3 className="text-lg md:text-xl">Humidity</h3>
             {humidity.toFixed(2)}%
           </div>
           <div>
-            <h3>Ambient Light</h3>
+            <h3 className="text-lg md:text-xl">Ambient Light</h3>
             {light.toFixed(2)} lx
           </div>
         </Card>
