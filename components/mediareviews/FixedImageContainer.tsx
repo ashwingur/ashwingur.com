@@ -57,7 +57,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
             priority={priorityLoad}
           />
           <Image
-            unoptimized
+            // unoptimized
             src={imageSrc}
             alt={imageAlt}
             className="h-full w-full object-contain"
