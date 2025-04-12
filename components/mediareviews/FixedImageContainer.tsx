@@ -1,6 +1,6 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface FixedImageContainerProps {
   imageSrc?: string;
@@ -11,6 +11,54 @@ interface FixedImageContainerProps {
   bgColour?: string;
   miniCard?: boolean;
 }
+
+interface RetryableImageProps extends Omit<ImageProps, "src" | "alt"> {
+  src: string;
+  alt: string;
+  maxRetries?: number;
+  onRetriesExhausted?: () => void;
+}
+
+export const RetryableImage: React.FC<RetryableImageProps> = ({
+  src,
+  alt,
+  maxRetries = 2,
+  onLoad,
+  onError,
+  ...props
+}) => {
+  const [retryCount, setRetryCount] = useState(0);
+  const [retrySrc, setRetrySrc] = useState<string>(src);
+
+  useEffect(() => {
+    setRetryCount(0);
+    setRetrySrc(src);
+  }, [src]);
+
+  const handleError = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>,
+  ) => {
+    if (retryCount < maxRetries) {
+      const cacheBuster = `cb=${Date.now()}`;
+      const separator = src.includes("?") ? "&" : "?";
+      setRetrySrc(`${src}${separator}${cacheBuster}`);
+      setRetryCount((prev) => prev + 1);
+    } else {
+      // Call user-defined onError if retries exhausted
+      onError?.(event);
+    }
+  };
+
+  return (
+    <Image
+      src={retrySrc}
+      alt={alt}
+      onLoad={onLoad}
+      onError={handleError}
+      {...props}
+    />
+  );
+};
 
 const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
   imageSrc,
@@ -48,24 +96,27 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
     >
       {imageSrc && imageAlt && (
         <>
-          <Image
-            // unoptimized
+          <RetryableImage
             src={imageSrc}
             alt={imageAlt}
             className="h-full w-full object-cover blur-3xl"
             fill
             priority={priorityLoad}
+            maxRetries={2}
           />
-          <Image
-            // unoptimized
+          <RetryableImage
             src={imageSrc}
             alt={imageAlt}
             className="h-full w-full object-contain"
             onLoad={(e) => {
               setIsLoading(false);
             }}
+            onError={(e) => {
+              setIsLoading(false);
+            }}
             fill
             priority={priorityLoad}
+            maxRetries={2}
           />
         </>
       )}
