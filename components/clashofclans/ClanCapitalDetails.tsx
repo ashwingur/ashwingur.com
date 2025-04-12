@@ -5,7 +5,7 @@ import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 
 interface ClanCapitalDetailsProps {
-  clan: z.input<typeof FullClanSchema>;
+  clan: z.output<typeof FullClanSchema>;
 }
 
 const HorizontalBar = () => {
