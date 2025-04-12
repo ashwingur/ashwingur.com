@@ -49,7 +49,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
       {imageSrc && imageAlt && (
         <>
           <Image
-            unoptimized
+            // unoptimized
             src={imageSrc}
             alt={imageAlt}
             className="h-full w-full object-cover blur-3xl"

@@ -21,7 +21,7 @@ const MediaReviewsV2 = () => {
     useState<FilterObject>(defaultFilterObject);
   const [filterReady, setFilterReady] = useState(false);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    usePaginatedMediaReviews(6, filterObject, filterReady);
+    usePaginatedMediaReviews(12, filterObject, filterReady);
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [statsModalVisible, setStatsModalVisible] = useState(false);
