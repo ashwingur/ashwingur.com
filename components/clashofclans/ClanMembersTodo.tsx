@@ -15,7 +15,12 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
 }) => {
   const warAttacksTodo = clan.memberList
     .filter((p) => p.war !== null)
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => {
+      if (a.war?.attacks !== b.war?.attacks) {
+        return (b.war?.attacks ?? 0) - (a.war?.attacks ?? 0);
+      }
+      return a.name.localeCompare(b.name);
+    })
     .map((p, idx) => {
       return (
         <Link
