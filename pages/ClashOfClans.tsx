@@ -2,11 +2,10 @@ import CocNavBar from "../components/clashofclans/CocNavBar";
 import CocButton from "../components/clashofclans/CocButton";
 import Image from "next/image";
 import Link from "next/link";
-import { useQuery } from "react-query";
-import axios from "axios";
 import {
   formatToISO8601,
   useGetCocPlayers,
+  useGetFullClan,
   useGoldPass,
 } from "shared/queries/clashofclans";
 import { useEffect, useState } from "react";
@@ -25,9 +24,6 @@ interface Tags {
 
 const theOrganisationTag = "220QP2GGU";
 
-const fetchTheOrganisation = () =>
-  axios.get(`/api/clashofclans/clan/220QP2GGU`).then(({ data }) => data);
-
 const ClashOfClans = () => {
   const [remainingTime, setRemainingTime] = useState<{
     days: number;
@@ -45,10 +41,7 @@ const ClashOfClans = () => {
   const { favourites, remove } = useCocPlayerFavourites();
 
   //  Caching TheOrganisation clan since it is more frequently accessed
-  useQuery({
-    queryKey: ["clan", theOrganisationTag],
-    queryFn: () => fetchTheOrganisation(),
-  });
+  useGetFullClan(theOrganisationTag);
 
   const { data: goldPass, isError } = useGoldPass();
 
