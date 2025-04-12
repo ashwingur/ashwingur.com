@@ -10,7 +10,6 @@ import CocClanSummary from "@components/clashofclans/CocClanSummary";
 import CocNavBar from "@components/clashofclans/CocNavBar";
 import CocLoadingOrError from "@components/clashofclans/CocLoadingOrError";
 import { useGetFullClan } from "shared/queries/clashofclans";
-import ClanWarLeagueInfo from "@components/clashofclans/ClanWarLeagueInfo";
 import ClanMembersTodo from "@components/clashofclans/ClanMembersTodo";
 
 const title = "Clan";

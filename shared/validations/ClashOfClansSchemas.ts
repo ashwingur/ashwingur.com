@@ -82,7 +82,7 @@ const districtSchema = z.object({
 
 const clanCapitalSchema = z.object({
   capitalHallLevel: z.number().optional(),
-  districts: z.array(districtSchema).optional().default([]),
+  districts: z.array(districtSchema).or(z.undefined()).default([]),
 });
 
 const CwlWarRoundSchema = z.object({

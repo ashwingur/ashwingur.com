@@ -5,7 +5,7 @@ import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 
 interface ClanCapitalDetailsProps {
-  clan: z.output<typeof FullClanSchema>;
+  clan: z.input<typeof FullClanSchema>;
 }
 
 const HorizontalBar = () => {
@@ -47,9 +47,11 @@ const HallLevelCard = ({ district }: DistrictHallCardProps) => {
 };
 
 const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
-  const districtHalls = clan.clanCapital.districts.map((item, index) => (
-    <HallLevelCard district={item} key={index} />
-  ));
+  const districtHalls = clan.clanCapital.districts
+    ? clan.clanCapital.districts.map((item, index) => (
+        <HallLevelCard district={item} key={index} />
+      ))
+    : [];
 
   return (
     <div className="m-4 rounded-lg border-2 border-black bg-green-900">
