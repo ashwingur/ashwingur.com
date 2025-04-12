@@ -44,7 +44,12 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
     });
   const capitalRaidAttacksTodo = clan.memberList
     .filter((p) => p.clan_capital !== null && p.clan_capital.attacks < 6)
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => {
+      if (a.clan_capital?.attacks !== b.clan_capital?.attacks) {
+        return (b.clan_capital?.attacks ?? 0) - (a.clan_capital?.attacks ?? 0);
+      }
+      return a.name.localeCompare(b.name);
+    })
     .map((p, idx) => {
       return (
         <Link
