@@ -14,7 +14,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
   className,
 }) => {
   const warAttacksTodo = clan.memberList
-    .filter((p) => p.war !== null)
+    .filter((p) => p.war !== null && p.war.attacks < 2)
     .sort((a, b) => {
       if (a.war?.attacks !== b.war?.attacks) {
         return (b.war?.attacks ?? 0) - (a.war?.attacks ?? 0);
@@ -25,7 +25,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] px-2 py-1 transition-all hover:bg-black/50"
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1 text-xs transition-all hover:bg-black/50 lg:text-sm"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} — {p.war?.attacks}/2
@@ -40,7 +40,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] px-2 py-1 transition-all hover:bg-black/50"
+          className="rounded-md border border-white bg-[#494f72] px-2 py-1 text-xs transition-all hover:bg-black/50 lg:text-sm"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} — 0/1
@@ -59,7 +59,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       return (
         <Link
           key={idx}
-          className="rounded-md border border-white bg-[#494f72] p-1 px-2 transition-all hover:bg-black/50"
+          className="rounded-md border border-white bg-[#494f72] p-1 px-2 text-xs transition-all hover:bg-black/50 lg:text-sm"
           href={`/ClashOfClans/player/${p.tag.replace("#", "")}`}
         >
           {p.name} — {p.clan_capital?.attacks}/6

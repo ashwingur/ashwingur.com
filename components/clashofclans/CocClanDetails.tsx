@@ -1,7 +1,7 @@
 import React from "react";
 import { Clan } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
-import { z } from "zod"
+import { z } from "zod";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 
 interface CocClanDetailsProps {
@@ -22,7 +22,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
   const type_case = type_space.charAt(0).toUpperCase() + type_space.slice(1);
 
   return (
-    <div className="coc-font-style w-72 text-lg md:w-96">
+    <div className="coc-font-style w-72 text-sm md:w-96 lg:text-base">
       <div className="flex justify-between">
         <div>Clan War League:</div>
         <div>{clan.warLeague.name}</div>

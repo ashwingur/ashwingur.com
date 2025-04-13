@@ -16,7 +16,7 @@ const Gap = () => {
 
 const Stat = ({ name, value }: { name: string; value: string }) => {
   return (
-    <div className="coc-font-style flex w-72 flex-col text-sm md:w-96 md:text-lg lg:w-[30rem]">
+    <div className="coc-font-style flex w-72 flex-col text-sm md:w-96 md:text-base lg:w-[30rem]">
       <div className="flex justify-between">
         <div className="flex flex-wrap">{name}</div>
         <div className="w-28 text-right lg:w-36">{value}</div>

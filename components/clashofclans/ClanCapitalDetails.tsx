@@ -39,8 +39,8 @@ const HallLevelCard = ({ district }: DistrictHallCardProps) => {
         />
       </div>
       <div className="coc-font-style">
-        <div className="text-xl">{district.name}</div>
-        <div>Level {district.districtHallLevel}</div>
+        <p className="text-lg">{district.name}</p>
+        <p className="text-sm">Level {district.districtHallLevel}</p>
       </div>
     </div>
   );
@@ -62,7 +62,7 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {districtHalls}
         </div>
-        <div className="coc-font-style w-72 text-lg md:w-96">
+        <div className="coc-font-style w-72 text-sm md:w-96 lg:text-base">
           <div className="flex justify-between">
             <div>Capital League:</div>
             <div>{clan.capitalLeague.name}</div>
