@@ -34,15 +34,6 @@ const CocPlayerHistorySchema = z.object({
   troops: z.array(PlayerItemLevelSchema),
 });
 
-const CocPlayerDataSchema = z.object({
-  tag: z.string(),
-  name: z.string(),
-  history: z.array(CocPlayerHistorySchema),
-  clan_tag: z.string().nullable(),
-  clan_name: z.string().nullable(),
-  view_count: z.number().int().min(0),
-});
-
 const CocPlayerSchema = z.object({
   tag: z.string(),
   name: z.string(),
@@ -50,6 +41,10 @@ const CocPlayerSchema = z.object({
   clan_name: z.string().nullable(),
   view_count: z.number().int().min(0),
   activity_change_date: z.string().nullable(),
+});
+
+const CocPlayerDataSchema = CocPlayerSchema.extend({
+  history: z.array(CocPlayerHistorySchema),
 });
 
 const GoldPassSchema = z.object({

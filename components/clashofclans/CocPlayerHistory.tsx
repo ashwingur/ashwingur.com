@@ -35,6 +35,7 @@ import { ArmyItemIcon, super_troop_names } from "./CocPlayerArmy";
 import { IoCaretUp, IoCaretDown } from "react-icons/io5";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { formatLastOnline } from "./PlayerSelectorCard";
 
 interface CocPlayerHistoryProps {
   tag: string;
@@ -458,7 +459,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const items = keys.map((item, index) => {
       return (
         <button
-          className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-xs transition-all hover:bg-black/40 md:text-base"
+          className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-xs transition-all hover:bg-black/40 md:text-sm"
           key={index}
           onClick={() => {
             scrollToTitle();
@@ -539,7 +540,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       .map((item, index) => {
         return (
           <button
-            className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-xs transition-all hover:bg-black/40 md:text-base"
+            className="coc-font-style rounded-md border-2 border-black bg-[#7e72a7] p-2 text-xs transition-all hover:bg-black/40 md:text-sm"
             key={index}
             onClick={() => {
               scrollToTitle();
@@ -745,7 +746,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
 
   return (
     <div className="font-clash font-thin">
-      <h2 className="clash-font-style pt-20 text-center font-thin md:mb-0">
+      <h2 className="clash-font-style mb-4 px-4 pt-20 text-center text-2xl font-thin md:mb-0 lg:text-3xl">
         Player Progress - {data.name}
       </h2>
       <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">
@@ -759,19 +760,12 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
           className="h-6 w-6"
         />
       </p>
+      {data.activity_change_date && (
+        <p className="mt-1 text-center font-coc text-sm font-thin text-gray-100">
+          Last online: {formatLastOnline(data.activity_change_date)}
+        </p>
+      )}
       <div className="mx-auto mb-4 flex items-center justify-center gap-2 pt-4 md:gap-4">
-        <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
-          <Link href={`/ClashOfClans/player/${tag}`} className="">
-            <CocButton
-              className="w-40 hover:w-36 md:w-60 md:hover:w-56"
-              text="Profile"
-              innerColour="bg-orange-500"
-              middleColour="bg-orange-600"
-              outerColour="bg-orange-700"
-              textClassName="text-xs md:text-base md:hover:text-sm"
-            />
-          </Link>
-        </div>
         <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
           <Link href={"/ClashOfClans/Progress"}>
             <CocButton
@@ -780,6 +774,18 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
               innerColour="bg-green-500"
               middleColour="bg-green-600"
               outerColour="bg-green-700"
+              textClassName="text-xs md:text-base md:hover:text-sm"
+            />
+          </Link>
+        </div>
+        <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+          <Link href={`/ClashOfClans/player/${tag}`} className="">
+            <CocButton
+              className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+              text="Profile"
+              innerColour="bg-orange-500"
+              middleColour="bg-orange-600"
+              outerColour="bg-orange-700"
               textClassName="text-xs md:text-base md:hover:text-sm"
             />
           </Link>

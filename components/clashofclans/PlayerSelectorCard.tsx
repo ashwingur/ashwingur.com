@@ -10,7 +10,7 @@ interface PlayerCardProps {
   onToggleFavourite: (player: CocPlayer) => void;
 }
 
-const formatLastOnline = (isoDate: string): string => {
+export const formatLastOnline = (isoDate: string): string => {
   const now = new Date();
   const then = new Date(isoDate);
   const diffMs = now.getTime() - then.getTime();

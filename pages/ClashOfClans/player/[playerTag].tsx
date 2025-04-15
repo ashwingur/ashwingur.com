@@ -20,6 +20,7 @@ import {
   useIncrementViewCount,
 } from "shared/queries/clashofclans";
 import Image from "next/image";
+import { formatLastOnline } from "@components/clashofclans/PlayerSelectorCard";
 
 const title = "Player Details";
 
@@ -60,45 +61,54 @@ const PlayerPage = () => {
   return (
     <div className="bg-clash min-h-screen pb-8">
       <CocNavBar />
-      <h2 className="clash-font-style mb-4 px-4 pt-20 text-center font-thin md:mb-0">
+      <h2 className="clash-font-style mb-4 px-4 pt-20 text-center text-2xl font-thin md:mb-0 lg:text-3xl">
         Player Profile - {data.name}
       </h2>
       {cocPlayer && (
-        <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">
-          <span className="">{cocPlayer.view_count.toLocaleString()}</span>
-          <Image
-            unoptimized
-            alt="gem"
-            src={"/assets/coc/gem.webp"}
-            width={0}
-            height={0}
-            className="h-6 w-6"
-          />
-        </p>
+        <>
+          <p className="coc-font-style right-4 top-[2px] mt-2 flex items-center justify-center gap-2 text-lg">
+            <span className="">{cocPlayer.view_count.toLocaleString()}</span>
+            <Image
+              unoptimized
+              alt="gem"
+              src={"/assets/coc/gem.webp"}
+              width={0}
+              height={0}
+              className="h-6 w-6"
+            />
+          </p>
+          {cocPlayer.activity_change_date && (
+            <p className="mt-1 text-center font-coc text-sm font-thin text-gray-100">
+              Last online: {formatLastOnline(cocPlayer.activity_change_date)}
+            </p>
+          )}
+        </>
       )}
 
       <div className="flex flex-col lg:mx-auto lg:w-5/6">
         {data.clan.name === "TheOrganisation" && (
-          <div className="mx-auto mb-4 flex flex-col items-center justify-center gap-4 pt-4 md:flex-row">
-            <div className="flex w-80 justify-center">
-              <Link href={`/ClashOfClans/Progress/${playerTag}`}>
+          <div className="mx-auto mb-4 flex items-center justify-center gap-2 pt-4 md:gap-4">
+            <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+              <Link href={"/ClashOfClans/Progress"}>
                 <CocButton
-                  className="w-80 hover:w-72"
-                  text={"Progress"}
-                  innerColour="bg-blue-500"
-                  middleColour="bg-blue-600"
-                  outerColour="bg-blue-700"
-                />
-              </Link>
-            </div>
-            <div className="flex w-80 justify-center">
-              <Link href={`/ClashOfClans/Progress`} className="">
-                <CocButton
-                  className="w-80 hover:w-72"
-                  text="Clan Members"
+                  className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                  text={"Clan Members"}
                   innerColour="bg-green-500"
                   middleColour="bg-green-600"
                   outerColour="bg-green-700"
+                  textClassName="text-xs md:text-base md:hover:text-sm"
+                />
+              </Link>
+            </div>
+            <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+              <Link href={`/ClashOfClans/Progress/${playerTag}`} className="">
+                <CocButton
+                  className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                  text="Progress"
+                  innerColour="bg-blue-500"
+                  middleColour="bg-blue-600"
+                  outerColour="bg-blue-700"
+                  textClassName="text-xs md:text-base md:hover:text-sm"
                 />
               </Link>
             </div>
