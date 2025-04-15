@@ -40,7 +40,11 @@ const PlayerSelectorCard = ({
         className="absolute left-4 top-1 text-white"
         onClick={() => onToggleFavourite(player)}
       >
-        {isFavourite ? <BsSuitHeartFill /> : <BsSuitHeart />}
+        {isFavourite ? (
+          <BsSuitHeartFill className="transition-all hover:text-white/30" />
+        ) : (
+          <BsSuitHeart className="transition-all hover:text-red-400" />
+        )}
       </button>
       <p className="coc-font-style absolute right-4 top-[2px] flex items-center gap-2 text-sm">
         <span>{player.view_count.toLocaleString()}</span>
