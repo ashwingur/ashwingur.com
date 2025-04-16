@@ -104,10 +104,10 @@ export const LatestWeather: React.FC = () => {
       className="mx-4 flex flex-col items-center justify-center"
     >
       <h2 className="mt-2">Latest Weather Data</h2>
-      <p className="text-error">
+      {/* <p className="text-error">
         Raspberry Pi is currently broken, replacement incoming to resume data
         collection. It almost lasted a year!
-      </p>
+      </p> */}
       <p className="mt-1 text-sm">
         {formatUnixTimestamp(timestamp)} ({timeAgo(timestamp)})
       </p>
