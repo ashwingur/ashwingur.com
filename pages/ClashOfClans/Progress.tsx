@@ -107,7 +107,7 @@ const AvailablePlayers: React.FC<AvailablePlayersProps> = ({
 const Progress = () => {
   const [playerFilter, setPlayerFilter] = useState({
     inTheOrganisation: true,
-    recentlyActive: false,
+    recentlyActive: true,
   });
   return (
     <div className="bg-clash">
