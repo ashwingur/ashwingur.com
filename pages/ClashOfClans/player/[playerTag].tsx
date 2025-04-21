@@ -86,7 +86,7 @@ const PlayerPage = () => {
       )}
 
       <div className="flex flex-col lg:mx-auto lg:w-5/6">
-        {data.clan.name === "TheOrganisation" && (
+        {data.clan && data.clan.name === "TheOrganisation" && (
           <div className="mx-auto mb-4 flex items-center justify-center gap-2 pt-4 md:gap-4">
             <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
               <Link href={"/ClashOfClans/Progress"}>
