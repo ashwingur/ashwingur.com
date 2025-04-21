@@ -144,7 +144,7 @@ const Progress = () => {
                 })
               }
             />
-            <p className="coc-font-style w-40">In TheOrganisation</p>
+            <p className="coc-font-style w-44 text-base">In TheOrganisation</p>
           </div>
           <div className="flex h-16 items-center justify-center gap-2">
             <CocButton
@@ -167,7 +167,7 @@ const Progress = () => {
                 })
               }
             />
-            <p className="coc-font-style w-40">Recently Active</p>
+            <p className="coc-font-style w-44 text-base">Recently Active</p>
           </div>
         </div>
 
