@@ -60,7 +60,6 @@ export const PreviousRouteProvider = ({
 
       // Set the current path as previous before changing
       setPreviousRoute(currentPathRef.current);
-      console.log(`Previous route is ${currentPathRef.current}`);
 
       // Track next route
       postCurrentRoute(nextPathname);
