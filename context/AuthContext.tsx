@@ -67,7 +67,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = async () => {
     try {
-      console.log("logging out");
       await api.post("/logout");
       setUser(null);
       router.push(previousRoute ?? "/");
