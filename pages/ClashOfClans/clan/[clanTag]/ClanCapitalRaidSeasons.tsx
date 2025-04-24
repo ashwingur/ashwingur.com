@@ -123,7 +123,7 @@ const ClanCapitalRaidSeasons = () => {
           <RaidStat
             name="Enemy Districts Destroyed"
             icon="/assets/coc/clancapital/DistrictHall.webp"
-            value={r.capitalTotalLoot}
+            value={r.enemyDistrictsDestroyed}
           />
           <RaidStat
             name="Offensive Reward"
