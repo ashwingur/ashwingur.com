@@ -138,7 +138,7 @@ const ClanCapitalRaidSeasons = () => {
         </div>
         {r.attackLog.length > 0 && (
           <>
-            <h3 className="mb-2 mt-4 text-center text-base">Clans Attacked</h3>
+            <h3 className="mb-2 mt-4 text-center text-sm">Clans Attacked</h3>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {r.attackLog.map((item, index) => {
                 return (
@@ -180,7 +180,7 @@ const ClanCapitalRaidSeasons = () => {
         )}
         {r.defenseLog.length > 0 && (
           <>
-            <h3 className="mb-2 mt-4 text-center text-base">Clans Defended</h3>
+            <h3 className="mb-2 mt-4 text-center text-sm">Clans Defended</h3>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {r.defenseLog.map((item, index) => {
                 return (
