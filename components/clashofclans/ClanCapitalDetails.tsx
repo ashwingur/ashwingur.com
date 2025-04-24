@@ -3,6 +3,8 @@ import { Clan, District } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
+import Link from "next/link";
+import CocButton from "./CocButton";
 
 interface ClanCapitalDetailsProps {
   clan: z.input<typeof FullClanSchema>;
@@ -55,8 +57,22 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
 
   return (
     <div className="m-4 rounded-lg border-2 border-black bg-green-900">
-      <div className="clash-font-style my-4 text-center text-2xl font-thin">
+      <div className="clash-font-style mt-4 text-center text-2xl font-thin">
         Clan Capital
+      </div>
+      <div className="mx-auto flex w-40 items-center justify-center py-2 md:h-16 md:w-60">
+        <Link
+          href={`/ClashOfClans/clan/${clan.tag.replace("#", "")}/ClanCapitalRaidSeasons`}
+        >
+          <CocButton
+            className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+            text={"Raid History"}
+            innerColour="bg-green-500"
+            middleColour="bg-green-600"
+            outerColour="bg-green-700"
+            textClassName="text-xs md:text-base md:hover:text-sm"
+          />
+        </Link>
       </div>
       <div className="flex flex-col-reverse items-center justify-around px-4 md:flex-row">
         <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

@@ -1,5 +1,7 @@
+import CocButton from "@components/clashofclans/CocButton";
 import CocNavBar from "@components/clashofclans/CocNavBar";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import { SpinningCircles } from "react-loading-icons";
@@ -16,7 +18,7 @@ const ClanCapitalRaidSeasons = () => {
       : undefined;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    usePaginatedClanCapitalRaidSeasons(10, clanTag);
+    usePaginatedClanCapitalRaidSeasons(5, clanTag);
 
   // Create refs to persist latest values between renders
   const isFetchingNextPageRef = useRef(isFetchingNextPage);
@@ -74,7 +76,7 @@ const ClanCapitalRaidSeasons = () => {
     }) => {
       return (
         <div className="rounded-lg border-2 border-black bg-[#a8a197] p-2">
-          <p className="text-xl">{name}:</p>
+          <p className="text-sm md:text-xl">{name}:</p>
           <div className="flex items-center gap-1">
             <div className="relative h-8 w-8">
               <Image src={icon} alt={name} className="object-contain" fill />
@@ -91,7 +93,7 @@ const ClanCapitalRaidSeasons = () => {
         key={idx}
       >
         <h3 className="mb-2 text-center text-lg">{formattedStartDate}</h3>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           <RaidStat
             name="Capital Total Loot"
             icon="/assets/coc/clancapital/CapitalGold.webp"
@@ -105,12 +107,22 @@ const ClanCapitalRaidSeasons = () => {
           <RaidStat
             name="Total Attacks"
             icon="/assets/coc/clancapital/RaidSwords.webp"
-            value={r.capitalTotalLoot}
+            value={r.totalAttacks}
           />
           <RaidStat
             name="Enemy Districts Destroyed"
             icon="/assets/coc/clancapital/DistrictHall.webp"
             value={r.capitalTotalLoot}
+          />
+          <RaidStat
+            name="Offensive Reward"
+            icon="/assets/coc/clancapital/RaidMedal.webp"
+            value={r.offensiveReward}
+          />
+          <RaidStat
+            name="Defensive Reward"
+            icon="/assets/coc/clancapital/RaidMedal.webp"
+            value={r.defensiveReward}
           />
         </div>
       </div>
@@ -122,7 +134,22 @@ const ClanCapitalRaidSeasons = () => {
       <CocNavBar />
       <div className="coc-font-style mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#389350] to-[#256336] xl:mx-auto xl:w-4/5">
         <h2 className="mt-4 text-center text-2xl">Clan Capital Raids</h2>
-        <div className="flex flex-col gap-2 p-4">{raidCards}</div>
+        <div className="mx-auto mt-2 flex w-40 items-center justify-center md:h-16 md:w-60">
+          <Link href={`/ClashOfClans/clan/${(clanTag ?? "").replace("#", "")}`}>
+            <CocButton
+              className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+              text={"Clan"}
+              innerColour="bg-purple-500"
+              middleColour="bg-purple-600"
+              outerColour="bg-purple-700"
+              textClassName="text-xs md:text-base md:hover:text-sm"
+            />
+          </Link>
+        </div>
+        {raids.length === 0 && !isFetchingNextPage && !isLoading && (
+          <p className="p-4 text-center text-xl">No raid data available</p>
+        )}
+        <div className="flex flex-col gap-2 p-4 lg:gap-4">{raidCards}</div>
         {(isFetchingNextPage || isLoading) && (
           <SpinningCircles className="mx-auto my-4" />
         )}
