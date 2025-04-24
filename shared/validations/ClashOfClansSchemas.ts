@@ -248,6 +248,18 @@ const ClanCapitalRaidSeasonSchema = z.object({
   defensiveReward: z.number(),
   attackLog: z.array(ClanCapitalAttackLogSchema),
   defenseLog: z.array(ClanCapitalDefenseLogSchema),
+  members: z
+    .array(
+      z.object({
+        attackLimit: z.number(),
+        attacks: z.number(),
+        bonusAttackLimit: z.number(),
+        capitalResourcesLooted: z.number(),
+        name: z.string(),
+        tag: z.string(),
+      }),
+    )
+    .optional(),
 });
 
 const ClanCapitalSeasonsSchema = z.object({

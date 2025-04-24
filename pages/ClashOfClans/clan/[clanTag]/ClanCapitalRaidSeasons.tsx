@@ -99,6 +99,11 @@ const ClanCapitalRaidSeasons = () => {
         key={idx}
       >
         <h3 className="mb-2 text-center text-lg">{formattedStartDate}</h3>
+        {r.members && (
+          <h3 className="mb-2 text-center text-sm">
+            Participants: {r.members.length}
+          </h3>
+        )}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           <RaidStat
             name="Capital Total Loot"
