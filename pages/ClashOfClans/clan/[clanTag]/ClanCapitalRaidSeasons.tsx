@@ -131,6 +131,90 @@ const ClanCapitalRaidSeasons = () => {
             value={r.defensiveReward}
           />
         </div>
+        {r.attackLog.length > 0 && (
+          <>
+            <h3 className="mb-2 mt-4 text-center text-base">Clans Attacked</h3>
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {r.attackLog.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    href={`/ClashOfClans/clan/${item.defender.tag.replace("#", "")}`}
+                    className="flex justify-between rounded-lg border-2 border-black bg-[#a4a4a4] p-2 transition-all hover:bg-black/40"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-8 w-8">
+                        <Image
+                          unoptimized
+                          src={item.defender.badgeUrls.small}
+                          alt={"Clan Badge"}
+                          className="object-contain"
+                          fill
+                        />
+                      </div>
+                      <p>{item.defender.name}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-8 w-8">
+                        <Image
+                          unoptimized
+                          src="/assets/coc/clancapital/RaidSwords.webp"
+                          alt={"Clan Badge"}
+                          className="object-contain"
+                          fill
+                        />
+                      </div>
+
+                      <p className="mr-2 w-4 text-end">{item.attackCount}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
+        )}
+        {r.defenseLog.length > 0 && (
+          <>
+            <h3 className="mb-2 mt-4 text-center text-base">Clans Defended</h3>
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {r.defenseLog.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    href={`/ClashOfClans/clan/${item.attacker.tag.replace("#", "")}`}
+                    className="flex justify-between rounded-lg border-2 border-black bg-[#a4a4a4] p-2 transition-all hover:bg-black/40"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-8 w-8">
+                        <Image
+                          unoptimized
+                          src={item.attacker.badgeUrls.small}
+                          alt={"Clan Badge"}
+                          className="object-contain"
+                          fill
+                        />
+                      </div>
+                      <p>{item.attacker.name}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-8 w-8">
+                        <Image
+                          unoptimized
+                          src="/assets/coc/clancapital/RaidSwords.webp"
+                          alt={"Clan Badge"}
+                          className="object-contain"
+                          fill
+                        />
+                      </div>
+
+                      <p className="mr-2 w-4 text-end">{item.attackCount}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     );
   });

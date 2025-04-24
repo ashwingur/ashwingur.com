@@ -220,6 +220,22 @@ const WarSchema = z.object({
   opponent: WarClanSchema,
 });
 
+const ClanCapitalClan = z.object({
+  badgeUrls: badgeUrlsSchema,
+  level: z.number(),
+  name: z.string(),
+  tag: z.string(),
+});
+
+const ClanCapitalAttackLogSchema = z.object({
+  attackCount: z.number(),
+  defender: ClanCapitalClan,
+});
+const ClanCapitalDefenseLogSchema = z.object({
+  attackCount: z.number(),
+  attacker: ClanCapitalClan,
+});
+
 const ClanCapitalRaidSeasonSchema = z.object({
   state: z.string(),
   startTime: z.string(),
@@ -230,6 +246,8 @@ const ClanCapitalRaidSeasonSchema = z.object({
   enemyDistrictsDestroyed: z.number(),
   offensiveReward: z.number(),
   defensiveReward: z.number(),
+  attackLog: z.array(ClanCapitalAttackLogSchema),
+  defenseLog: z.array(ClanCapitalDefenseLogSchema),
 });
 
 const ClanCapitalSeasonsSchema = z.object({
