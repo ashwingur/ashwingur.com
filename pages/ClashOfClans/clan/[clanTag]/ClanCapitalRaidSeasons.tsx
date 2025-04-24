@@ -1,4 +1,5 @@
 import CocNavBar from "@components/clashofclans/CocNavBar";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import { SpinningCircles } from "react-loading-icons";
@@ -72,22 +73,43 @@ const ClanCapitalRaidSeasons = () => {
       value,
     }) => {
       return (
-        <div>
-          <p>{name}</p>
+        <div className="rounded-lg border-2 border-black bg-[#a8a197] p-2">
+          <p className="text-xl">{name}:</p>
+          <div className="flex items-center gap-1">
+            <div className="relative h-8 w-8">
+              <Image src={icon} alt={name} className="object-contain" fill />
+            </div>
+            <p>{value.toLocaleString()}</p>
+          </div>
         </div>
       );
     };
 
     return (
       <div
-        className="rounded-lg border-2 border-black bg-gradient-to-b from-[#c6c6c6] to-[#7b7b7b] p-2"
+        className="rounded-lg border-2 border-black bg-[#bebeb6] p-2"
         key={idx}
       >
-        <h3 className="text-center text-lg">{formattedStartDate}</h3>
-        <div>
+        <h3 className="mb-2 text-center text-lg">{formattedStartDate}</h3>
+        <div className="grid grid-cols-2 gap-2">
           <RaidStat
-            name="Capital Gold Looted"
+            name="Capital Total Loot"
             icon="/assets/coc/clancapital/CapitalGold.webp"
+            value={r.capitalTotalLoot}
+          />
+          <RaidStat
+            name="Raids Completed"
+            icon="/assets/coc/clancapital/RaidSwords.webp"
+            value={r.raidsCompleted}
+          />
+          <RaidStat
+            name="Total Attacks"
+            icon="/assets/coc/clancapital/RaidSwords.webp"
+            value={r.capitalTotalLoot}
+          />
+          <RaidStat
+            name="Enemy Districts Destroyed"
+            icon="/assets/coc/clancapital/DistrictHall.webp"
             value={r.capitalTotalLoot}
           />
         </div>
