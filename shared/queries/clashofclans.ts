@@ -161,6 +161,8 @@ export const usePaginatedClanCapitalRaidSeasons = (
     },
     enabled: !!tag,
     staleTime: 300 * 1000,
+    refetchOnWindowFocus: false,
+    retry: 1,
   });
 };
 

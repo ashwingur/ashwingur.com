@@ -17,8 +17,14 @@ const ClanCapitalRaidSeasons = () => {
       ? router.query.clanTag
       : undefined;
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    usePaginatedClanCapitalRaidSeasons(5, clanTag);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    error,
+  } = usePaginatedClanCapitalRaidSeasons(5, clanTag);
 
   // Create refs to persist latest values between renders
   const isFetchingNextPageRef = useRef(isFetchingNextPage);
@@ -148,6 +154,9 @@ const ClanCapitalRaidSeasons = () => {
         </div>
         {raids.length === 0 && !isFetchingNextPage && !isLoading && (
           <p className="p-4 text-center text-xl">No raid data available</p>
+        )}
+        {error instanceof Error && (
+          <p className="text-center text-xl text-red-300">{error.message}</p>
         )}
         <div className="flex flex-col gap-2 p-4 lg:gap-4">{raidCards}</div>
         {(isFetchingNextPage || isLoading) && (
