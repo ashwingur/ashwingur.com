@@ -220,6 +220,23 @@ const WarSchema = z.object({
   opponent: WarClanSchema,
 });
 
+const ClanCapitalRaidSeasonSchema = z.object({
+  state: z.string(),
+  startTime: z.string(),
+  endTime: z.string(),
+  capitalTotalLoot: z.number(),
+  raidsCompleted: z.number(),
+  totalAttacks: z.number(),
+  enemyDistrictsDestroyed: z.number(),
+  offensiveReward: z.number(),
+  defensiveReward: z.number(),
+});
+
+const ClanCapitalSeasonsSchema = z.object({
+  items: z.array(ClanCapitalRaidSeasonSchema),
+  paging: z.object({ cursors: z.object({ after: z.string().optional() }) }),
+});
+
 const FullClanSchema = z.object({
   badgeUrls: badgeUrlsSchema,
   capitalLeague: capitalLeagueSchema,
@@ -267,4 +284,5 @@ export {
   FullClanSchema,
   CwlWarRoundSchema,
   MemberSchema,
+  ClanCapitalSeasonsSchema,
 };

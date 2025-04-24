@@ -1,11 +1,12 @@
 import {
+  ClanCapitalSeasonsSchema,
   CocPlayerDataSchema,
   CocPlayerSchema,
   FullClanSchema,
   GoldPassSchema,
 } from "shared/validations/ClashOfClansSchemas";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { z } from "zod";
 import { updateFavourite } from "shared/clashofclansfavourites";
 
@@ -14,6 +15,7 @@ const GOLD_PASS_QUERY_KEY = "coc_gold_pass";
 const INCREMENT_VIEW_COUNT_KEY = "coc_increment_view_count";
 const COC_PLAYERS_KEY = "coc_players";
 const COC_FULL_CLAN_KEY = "coc_full_clan";
+const CAPITAL_RAID_SEASONS_KEY = "capital_raid_seasons";
 
 const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
   const queryParams: CustomQueryParam[] = [];
@@ -126,6 +128,39 @@ export const useGetFullClan = (tag?: string) => {
     staleTime: 60 * 1000,
     cacheTime: 60 * 1000,
     refetchOnWindowFocus: false,
+  });
+};
+
+const getClanCapitalRaidSeasons = async (
+  tag: string,
+  limit: number,
+  after?: string,
+) => {
+  const queryParams: CustomQueryParam[] = [];
+  queryParams.push({ key: "limit", val: limit.toString() });
+  if (after) {
+    queryParams.push({ key: "after", val: after });
+  }
+  return await apiFetch({
+    endpoint: `/clashofclans/clan/%23${tag}/capitalraidseasons`,
+    responseSchema: ClanCapitalSeasonsSchema,
+    customParams: queryParams,
+  });
+};
+
+export const usePaginatedClanCapitalRaidSeasons = (
+  limit: number,
+  tag?: string,
+) => {
+  return useInfiniteQuery({
+    queryKey: [CAPITAL_RAID_SEASONS_KEY, tag, limit],
+    queryFn: ({ pageParam = undefined }) =>
+      getClanCapitalRaidSeasons(tag!, limit, pageParam),
+    getNextPageParam: (lastPage) => {
+      return lastPage.paging.cursors.after;
+    },
+    enabled: !!tag,
+    staleTime: 300 * 1000,
   });
 };
 
