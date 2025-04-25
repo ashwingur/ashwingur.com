@@ -117,7 +117,7 @@ const ClanCapitalRaidSeasons = () => {
           />
           <RaidStat
             name="Total Attacks"
-            icon="/assets/coc/clancapital/RaidSwords.webp"
+            icon="/assets/coc/clancapital/RaidSwordSingle.webp"
             value={r.totalAttacks}
           />
           <RaidStat
@@ -163,7 +163,7 @@ const ClanCapitalRaidSeasons = () => {
                       <div className="relative h-8 w-8">
                         <Image
                           unoptimized
-                          src="/assets/coc/clancapital/RaidSwords.webp"
+                          src="/assets/coc/clancapital/RaidSwordSingle.webp"
                           alt={"Clan Badge"}
                           className="object-contain"
                           fill
@@ -205,7 +205,7 @@ const ClanCapitalRaidSeasons = () => {
                       <div className="relative h-8 w-8">
                         <Image
                           unoptimized
-                          src="/assets/coc/clancapital/RaidSwords.webp"
+                          src="/assets/coc/clancapital/RaidSwordSingle.webp"
                           alt={"Clan Badge"}
                           className="object-contain"
                           fill

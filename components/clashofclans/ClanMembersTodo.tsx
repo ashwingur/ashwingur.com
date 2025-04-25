@@ -48,7 +48,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
       );
     });
   const capitalRaidAttacksTodo = clan.memberList
-    .filter((p) => p.clan_capital !== null && p.clan_capital.attacks < 6)
+    .filter((p) => p.clan_capital !== null)
     .sort((a, b) => {
       if (a.clan_capital?.attacks !== b.clan_capital?.attacks) {
         return (b.clan_capital?.attacks ?? 0) - (a.clan_capital?.attacks ?? 0);
@@ -66,6 +66,8 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
         </Link>
       );
     });
+
+  console.log(clan.memberList);
 
   const numTodos =
     cwlWarAttacksTodo.length +
