@@ -54,6 +54,7 @@ export const useGoldPass = () => {
     queryFn: getGoldPass,
     staleTime: 10 * 60 * 1000,
     keepPreviousData: true,
+    retry: 1,
   });
 };
 
