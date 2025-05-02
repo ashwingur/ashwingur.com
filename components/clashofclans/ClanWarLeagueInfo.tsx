@@ -283,12 +283,16 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       )}
     >
       <h3 className="mt-4 text-center text-2xl">Clan War League</h3>
-      <h3 className="mt-2 text-center text-lg">Leaderboard</h3>
-      <div className="mt-1 px-2">
-        <div className="mx-auto flex w-full flex-col gap-1 rounded-lg border-2 border-black bg-[#5e4b36] p-2 md:max-w-96 lg:gap-2">
-          {leaderboardCards}
-        </div>
-      </div>
+      {leaderboard.length > 0 && (
+        <>
+          <h3 className="mt-2 text-center text-lg">Leaderboard</h3>
+          <div className="mt-1 px-2">
+            <div className="mx-auto flex w-full flex-col gap-1 rounded-lg border-2 border-black bg-[#5e4b36] p-2 md:max-w-96 lg:gap-2">
+              {leaderboardCards}
+            </div>
+          </div>
+        </>
+      )}
       <h3 className="mt-4 text-center text-lg">Rounds</h3>
       <div className="grid grid-cols-1 gap-2 p-2 md:grid-cols-2 md:px-4 2xl:grid-cols-4">
         {roundCards}
@@ -296,22 +300,27 @@ const ClanWarLeagueInfo: React.FC<ClanWarLeagueInfoProps> = ({
       <h3 className="mb-2 mt-2 text-center text-lg">
         Player Performance - {clan.name}
       </h3>
-
-      <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
-        <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
-        <WarPerformanceChart data={starChartData} chartTitle="Stars" />
-        <WarPerformanceChart
-          data={destructionChartData}
-          chartTitle="Destruction %"
-        />
-        <WarPerformanceChart
-          data={averageDurationChartData}
-          chartTitle="Average Attack Duration"
-        />
-      </div>
-      <div className="grid gap-2 px-4 pb-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-        {performanceCards}
-      </div>
+      {performanceCards.length > 0 ? (
+        <>
+          <div className="grid lg:grid-cols-2 2xl:grid-cols-4">
+            <WarPerformanceChart data={attackChartData} chartTitle="Attacks" />
+            <WarPerformanceChart data={starChartData} chartTitle="Stars" />
+            <WarPerformanceChart
+              data={destructionChartData}
+              chartTitle="Destruction %"
+            />
+            <WarPerformanceChart
+              data={averageDurationChartData}
+              chartTitle="Average Attack Duration"
+            />
+          </div>
+          <div className="grid gap-2 px-4 pb-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+            {performanceCards}
+          </div>
+        </>
+      ) : (
+        <p className="pb-2 text-center">No war data</p>
+      )}
     </div>
   );
 };
