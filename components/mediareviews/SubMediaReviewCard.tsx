@@ -61,14 +61,16 @@ const SubMediaReviewCard: React.FC<SubMediaReviewCardProps> = ({
         <div className="overflow-hidden rounded-t-2xl">
           <FixedImageContainer
             imageSrc={
-              showImages && review.signed_cover_image
-                ? review.signed_cover_image
+              showImages && review.local_signed_cover_image
+                ? review.local_signed_cover_image
                 : undefined
             }
             imageAlt={`Main review cover image of ${review.name}`}
             priorityLoad={parentIndex < 5}
             heightClassName={
-              showImages && review.signed_cover_image ? "h-48 lg:h-52" : "h-28"
+              showImages && review.local_signed_cover_image
+                ? "h-48 lg:h-52"
+                : "h-28"
             }
             bgColour={review.cover_image_bg_colour ?? undefined}
             miniCard={review.cover_image_bg_colour !== undefined}

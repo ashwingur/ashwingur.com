@@ -170,11 +170,11 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
 
         <div className="overflow-hidden rounded-2xl">
           <FixedImageContainer
-            imageSrc={baseValues.signed_cover_image ?? undefined}
+            imageSrc={baseValues.local_signed_cover_image ?? undefined}
             imageAlt="Sub review cover image"
             priorityLoad={false}
             heightClassName={
-              baseValues.signed_cover_image ? "h-48 lg:h-52" : "h-28"
+              baseValues.local_signed_cover_image ? "h-48 lg:h-52" : "h-28"
             }
             bgColour={baseValues.cover_image_bg_colour ?? undefined}
             miniCard={baseValues.cover_image_bg_colour !== undefined}
