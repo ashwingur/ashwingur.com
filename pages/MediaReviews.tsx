@@ -175,7 +175,7 @@ const MediaReviewsV2 = () => {
           }));
         }}
         displayKey={"label"}
-        placeholder={!(metaDataLoading || isError) ? "Review Names" : ""}
+        placeholder={!(metaDataLoading && isError) ? "Review Names" : ""}
       />
 
       <MediaReviewFilter
