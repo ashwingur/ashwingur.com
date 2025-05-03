@@ -51,6 +51,7 @@ export const RetryableImage: React.FC<RetryableImageProps> = ({
 
   return (
     <Image
+      unoptimized
       src={retrySrc}
       alt={alt}
       onLoad={onLoad}
