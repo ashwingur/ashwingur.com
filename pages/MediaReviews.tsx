@@ -1,3 +1,4 @@
+import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import LoadingIcon from "@components/LoadingIcon";
 import InfoModal from "@components/mediareviews/InfoModal";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
@@ -9,11 +10,16 @@ import MediaReviewModal from "@components/mediareviews/MediaReviewModal";
 import StatisticsModal from "@components/mediareviews/StatisticsModal";
 import Navbar from "@components/navbars/Navbar";
 import { useAuth } from "@context/AuthContext";
+import { isError } from "lodash";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaChartColumn, FaInfo } from "react-icons/fa6";
 import { MdOutlineHideImage, MdOutlineImage } from "react-icons/md";
-import { usePaginatedMediaReviews } from "shared/queries/mediareviews";
+import { OptionType } from "shared/mediareview-genres";
+import {
+  usePaginatedMediaReviews,
+  useReviewsMetadata,
+} from "shared/queries/mediareviews";
 
 const MediaReviewsV2 = () => {
   const { user, role } = useAuth();
@@ -22,6 +28,11 @@ const MediaReviewsV2 = () => {
   const [filterReady, setFilterReady] = useState(false);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     usePaginatedMediaReviews(12, filterObject, filterReady);
+  const {
+    data: reviewMetaData,
+    isLoading: metaDataLoading,
+    isError: metaDataError,
+  } = useReviewsMetadata();
   const [reviewModalVisible, setReviewModalVisible] = useState(false);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [statsModalVisible, setStatsModalVisible] = useState(false);
@@ -97,6 +108,15 @@ const MediaReviewsV2 = () => {
     />
   ));
 
+  const nameOptions: OptionType[] = reviewMetaData
+    ? reviewMetaData.review_names.map((c) => ({ label: c, value: c }))
+    : [];
+
+  const filteredNameOptions = nameOptions.filter(
+    (option) =>
+      !filterObject.names.some((selected) => selected === option.value),
+  );
+
   return (
     <div className="min-h-screen pb-16 pt-20 md:pt-24">
       <Navbar fixed={true} />
@@ -141,6 +161,22 @@ const MediaReviewsV2 = () => {
           )}
         </button>
       </div>
+
+      <GenericMultiSelectGroup
+        className="z-[50] mx-auto mt-4 px-4 sm:w-[30rem] lg:w-[36rem]"
+        options={filteredNameOptions}
+        value={nameOptions.filter((n) => filterObject.names.includes(n.value))}
+        onChange={(selectedOptions) => {
+          setFilterObject((prev) => ({
+            ...prev,
+            names: [...selectedOptions]
+              .sort((a, b) => a.value.localeCompare(b.value)) // Sorting to reduce query key combinations
+              .map((m) => m.value),
+          }));
+        }}
+        displayKey={"label"}
+        placeholder={!(metaDataLoading || isError) ? "Review Names" : ""}
+      />
 
       <MediaReviewFilter
         filterObject={filterObject}
