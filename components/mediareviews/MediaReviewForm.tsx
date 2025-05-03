@@ -255,7 +255,7 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
 
         <div className="overflow-hidden rounded-2xl">
           <FixedImageContainer
-            imageSrc={baseValues.signed_cover_image ?? undefined}
+            imageSrc={baseValues.local_signed_cover_image ?? undefined}
             imageAlt="Main review cover image"
             priorityLoad={true}
             bgColour={baseValues.cover_image_bg_colour ?? undefined}

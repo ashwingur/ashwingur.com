@@ -30,6 +30,7 @@ export const subMediaReviewSchema = z.object({
       return /^#[0-9A-Fa-f]{6}$/.test(colour);
     }, "Invalid HEX colour"),
   signed_cover_image: z.string().nullable(),
+  // local_signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
     .min(0, "Rating cannot be less than 0")
@@ -82,6 +83,7 @@ export const mediaReviewSchema = z.object({
       return /^#[0-9A-Fa-f]{6}$/.test(colour);
     }, "Invalid HEX colour"),
   signed_cover_image: z.string().nullable(),
+  local_signed_cover_image: z.string().nullable(),
   rating: z.coerce
     .number()
     .min(0, "Rating cannot be less than 0")
@@ -159,12 +161,14 @@ export const mediaReviewWriteSchema = mediaReviewSchema.omit({
   review_last_update_date: true,
   sub_media_reviews: true,
   signed_cover_image: true,
+  local_signed_cover_image: true,
 });
 export const subMediaReviewWriteSchema = subMediaReviewSchema.omit({
   id: true,
   review_creation_date: true,
   review_last_update_date: true,
   signed_cover_image: true,
+  // local_signed_cover_image: true
 });
 
 export type MediaReview = z.infer<typeof mediaReviewSchema>;
@@ -181,6 +185,7 @@ export const defaultMediaReview = (): MediaReview => ({
   cover_image: null,
   cover_image_bg_colour: null,
   signed_cover_image: null,
+  local_signed_cover_image: null,
   rating: null,
   review_content: null,
   word_count: null,
@@ -208,6 +213,7 @@ export const defaultSubMediaReview = (
   cover_image: null,
   cover_image_bg_colour: null,
   signed_cover_image: null,
+  // local_signed_cover_image: null,
   rating: null,
   review_content: null,
   word_count: null,

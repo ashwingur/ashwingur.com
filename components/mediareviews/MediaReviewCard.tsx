@@ -144,8 +144,8 @@ const MediaReviewCard: React.FC<MediaReviewCardProps> = ({
         >
           <FixedImageContainer
             imageSrc={
-              showImages && review.signed_cover_image
-                ? review.signed_cover_image
+              showImages && review.local_signed_cover_image
+                ? review.local_signed_cover_image
                 : undefined
             }
             imageAlt={`Main review cover image of ${review.name}`}
