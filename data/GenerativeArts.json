@@ -85,7 +85,7 @@
   {
     "name": "Bouncing Particles",
     "url": "/GenerativeArt/BouncingParticles",
-    "image": "/assets/generativeart/bouncing_particles.gif",
+    "image": "/assets/generativeart/bouncing_particles.avif",
     "description": [
       "Simulating a simple gas particle with inelastic collisions against the walls. Particle size, count and speed can be adjusted."
     ]
