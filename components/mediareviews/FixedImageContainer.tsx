@@ -87,7 +87,7 @@ const FixedImageContainer: React.FC<FixedImageContainerProps> = ({
         miniCard
           ? "before:h-full before:from-black/0 before:to-black/80"
           : "before:md-2/5 before:h-3/5 before:from-black/0 before:to-black/80",
-        isLoading ? "animate-pulse" : "",
+        isLoading ? "" : "",
       )}
       style={
         isLoading || imageSrc === undefined
