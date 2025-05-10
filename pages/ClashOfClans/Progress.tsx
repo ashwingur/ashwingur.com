@@ -52,6 +52,8 @@ const AvailablePlayers: React.FC<AvailablePlayersProps> = ({
     // Apply playerFilters if they are set to true
     if (inTheOrganisation && p.clan_tag !== "#220QP2GGU") {
       return false;
+    } else if (!inTheOrganisation && p.clan_tag === "#220QP2GGU") {
+      return false;
     } else if (
       recentlyActive &&
       !(
