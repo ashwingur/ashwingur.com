@@ -117,7 +117,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   const minTimestamp = new Date(timestamps[0]).getTime();
   const maxTimestamp = new Date(timestamps[timestamps.length - 1]).getTime();
 
-  const timeRange = maxTimestamp - minTimestamp;
+  const timeRange = (maxTimestamp - minTimestamp) / 1000;
 
   let adjustedTickCount = 50; // Default
 
@@ -134,7 +134,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   }
 
   const formatTimestamp = (timestamp: number): string => {
-    const date = new Date(timestamp * 1000);
+    const date = new Date(timestamp);
     const day = ("0" + date.getDate()).slice(-2);
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear().toString().slice(-2);
