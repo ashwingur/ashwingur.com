@@ -62,7 +62,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   xLabel,
   yLabel,
   domain,
-  tickCount = 5, // Default tick count
+  tickCount = 50, // Default tick count
   metricStats,
 }) => {
   const { systemTheme, theme } = useTheme();
@@ -96,6 +96,20 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   const timeRange = timestamps[timestamps.length - 1] - timestamps[0];
 
+  let adjustedTickCount = 50; // Default
+
+  if (timeRange <= 3600 * 6) {
+    adjustedTickCount = 12; // Very short range (e.g., 6 hours)
+  } else if (timeRange <= 3600 * 24) {
+    adjustedTickCount = 18; // 1 day
+  } else if (timeRange <= 3600 * 24 * 3) {
+    adjustedTickCount = 12; // 3 days
+  } else if (timeRange <= 3600 * 24 * 7) {
+    adjustedTickCount = 8; // 1 week
+  } else {
+    adjustedTickCount = 50; // longer range
+  }
+
   const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     const day = ("0" + date.getDate()).slice(-2);
@@ -110,12 +124,15 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
     hours = hours ? hours : 12;
     const formattedHours = ("0" + hours).slice(-2);
 
+    const timeStr = `${formattedHours}:${minutes} ${ampm}`;
+    const dateStr = `${day}/${month}/${year}`;
+
     if (timeRange < 3600 * 25) {
-      return `${formattedHours}:${minutes} ${ampm}`;
-    } else if (timeRange < 3600 * 24 * 30) {
-      return `${day}/${month}/${year} ${formattedHours}:${minutes} ${ampm}`;
+      return timeStr;
+    } else if (timeRange <= 3600 * 24 * 3) {
+      return `${dateStr} ${timeStr}`;
     } else {
-      return `${day}/${month}/${year}`;
+      return dateStr;
     }
   };
 
@@ -143,7 +160,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 
   const minTimestamp = Math.min(...timestamps);
   const maxTimestamp = Math.max(...timestamps);
-  const ticks = generateTicks(minTimestamp, maxTimestamp, tickCount);
+  const ticks = generateTicks(minTimestamp, maxTimestamp, adjustedTickCount);
 
   return (
     <Card className="w-full" firstLayer={false}>
