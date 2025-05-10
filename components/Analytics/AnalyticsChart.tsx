@@ -23,7 +23,6 @@ interface AnalyticsChartProps {
   title: string;
   xLabel?: string;
   yLabel?: string;
-  tickCount?: number;
   total?: number;
 }
 
@@ -61,7 +60,6 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   title,
   xLabel,
   yLabel,
-  tickCount = 5,
   total,
 }) => {
   const { systemTheme, theme } = useTheme();
@@ -119,7 +117,49 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
   const minTimestamp = new Date(timestamps[0]).getTime();
   const maxTimestamp = new Date(timestamps[timestamps.length - 1]).getTime();
 
-  const ticks = generateTicks(minTimestamp, maxTimestamp, tickCount);
+  const timeRange = maxTimestamp - minTimestamp;
+
+  let adjustedTickCount = 50; // Default
+
+  if (timeRange <= 3600 * 6) {
+    adjustedTickCount = 12; // Very short range (e.g., 6 hours)
+  } else if (timeRange <= 3600 * 24) {
+    adjustedTickCount = 18; // 1 day
+  } else if (timeRange <= 3600 * 24 * 3) {
+    adjustedTickCount = 12; // 3 days
+  } else if (timeRange <= 3600 * 24 * 7) {
+    adjustedTickCount = 8; // 1 week
+  } else {
+    adjustedTickCount = 50; // longer range
+  }
+
+  const formatTimestamp = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear().toString().slice(-2);
+
+    let hours = date.getHours();
+    const minutes = ("0" + date.getMinutes()).slice(-2);
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const formattedHours = ("0" + hours).slice(-2);
+
+    const timeStr = `${formattedHours}:${minutes} ${ampm}`;
+    const dateStr = `${day}/${month}/${year}`;
+
+    if (timeRange < 3600 * 25) {
+      return timeStr;
+    } else if (timeRange <= 3600 * 24 * 3) {
+      return `${dateStr} ${timeStr}`;
+    } else {
+      return dateStr;
+    }
+  };
+
+  const ticks = generateTicks(minTimestamp, maxTimestamp, adjustedTickCount);
 
   const grandTotal =
     total ??
@@ -156,14 +196,7 @@ const AnalyticsChart: React.FC<AnalyticsChartProps> = ({
                 textAnchor: "middle",
                 width: "70",
               }}
-              tickFormatter={(tick) =>
-                `${new Date(tick).toLocaleDateString()} ${new Date(tick)
-                  .toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })
-                  .toUpperCase()} `
-              }
+              tickFormatter={formatTimestamp}
               angle={-40}
             />
             <YAxis

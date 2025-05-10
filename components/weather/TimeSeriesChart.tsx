@@ -23,7 +23,6 @@ interface TimeSeriesChartProps {
   xLabel?: string;
   yLabel: string;
   domain?: (number | string)[];
-  tickCount?: number; // Add tickCount prop
   metricStats?: MetricStats;
 }
 
@@ -62,7 +61,6 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
   xLabel,
   yLabel,
   domain,
-  tickCount = 50, // Default tick count
   metricStats,
 }) => {
   const { systemTheme, theme } = useTheme();
