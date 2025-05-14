@@ -2,6 +2,7 @@ import React from "react";
 import { ClanWar } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import Link from "next/link";
+import { formatToISO8601 } from "shared/queries/clashofclans";
 
 interface CocWarStatusProps {
   clanWar: ClanWar;
@@ -53,9 +54,7 @@ const ClanStatus = (
 };
 
 const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
-  const warState = clanWar.state
-    .replace(/([A-Z]+)/g, " $1")
-    .replace(/([A-Z][a-z])/g, " $1");
+  const warState = clanWar.state.replace(/([A-Z]+)/g, " $1");
 
   const myClanStatus = ClanStatus(
     clanWar.clan.name,
@@ -63,7 +62,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.clan.stars,
     clanWar.clan.attacks,
-    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1,
+    clanWar.attacksPerMember,
   );
 
   const otherClanStatus = ClanStatus(
@@ -72,8 +71,27 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
     clanWar.teamSize,
     clanWar.opponent.stars,
     clanWar.opponent.attacks,
-    clanWar.hasOwnProperty("attacksPerMember") ? clanWar.attacksPerMember : 1,
+    clanWar.attacksPerMember,
   );
+
+  function formatDurationFromNow(toDate: Date | string | number): string {
+    const now = new Date();
+    const target = new Date(toDate);
+
+    const durationMs = target.getTime() - now.getTime();
+    const totalMinutes = Math.max(0, Math.floor(durationMs / (1000 * 60))); // Prevent negative values
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    return `${hours}H ${minutes}M`;
+  }
+
+  const startTimeString = formatDurationFromNow(
+    formatToISO8601(clanWar.startTime),
+  );
+  const endTimeString = formatDurationFromNow(formatToISO8601(clanWar.endTime));
+  console.log(warState);
 
   return (
     <div>
@@ -82,8 +100,21 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
           {myClanStatus}
           {otherClanStatus}
         </div>
-        <div className="coc-font-style capitalize">
-          <span className="text-red-500">{warState}</span>
+        <div>
+          {warState !== "in War" && (
+            <p className="coc-font-style">
+              <span className="text-red-500">{startTimeString}</span>
+            </p>
+          )}
+          {warState === "in War" && (
+            <p className="coc-font-style">
+              <span className="text-red-500">{endTimeString}</span>
+            </p>
+          )}
+
+          <p className="coc-font-style capitalize">
+            <span className="text-red-500">{warState}</span>
+          </p>
         </div>
       </div>
     </div>
