@@ -27,7 +27,7 @@ const ProjectCard = ({
   const stack_items = stack.map((item, index) => (
     <div
       key={index}
-      className="tag rounded-md bg-secondary p-2 text-text-secondary"
+      className="tag rounded-md bg-secondary p-2 text-sm text-text-secondary"
     >
       {item}
     </div>
@@ -36,7 +36,7 @@ const ProjectCard = ({
   const link_items = links?.map((item, index) => (
     <Link
       key={index}
-      className="btn-accent"
+      className="btn-accent text-sm"
       href={item.url}
       target="_blank"
       rel="noreferrer"
@@ -58,7 +58,7 @@ const ProjectCard = ({
 
       <div className="px-4 pt-2 md:py-4">
         <h2 className="mb-2 text-2xl">{title}</h2>
-        <p className="text-sm md:text-base">{description}</p>
+        <p className="text-sm">{description}</p>
         <h3 className="mt-4 text-xl">Tech Stack</h3>
         <div className="my-2 flex flex-wrap gap-4">{stack_items}</div>
 
