@@ -181,6 +181,11 @@ const MediaReviewForm: React.FC<MediaReviewFormProps> = ({
           </h3>
         </div>
       )}
+      {!getValues().visible && (
+        <p className="text-center text-lg font-bold text-error">
+          REVIEW IS INVISIBLE
+        </p>
+      )}
 
       <form
         className="flex flex-col gap-2"

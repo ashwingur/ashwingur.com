@@ -114,6 +114,11 @@ const SubMediaReviewForm: React.FC<SubMediaReviewFormProps> = ({
           <h3 className="text-center">(ID: {baseValues.id})</h3>
         </div>
       )}
+      {!getValues().visible && (
+        <p className="text-center text-lg font-bold text-error">
+          REVIEW IS INVISIBLE
+        </p>
+      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2"
