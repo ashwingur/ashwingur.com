@@ -100,7 +100,7 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
           {myClanStatus}
           {otherClanStatus}
         </div>
-        <div>
+        <div className="text-center">
           {warState !== "in War" && (
             <p className="coc-font-style">
               <span className="text-red-500">{startTimeString}</span>
