@@ -285,7 +285,7 @@ const FullClanSchema = z.object({
   isFamilyFriendly: z.boolean(),
   isWarLogPublic: z.boolean(),
   labels: z.array(labelSchema),
-  location: locationSchema,
+  location: locationSchema.optional(),
   memberList: z.array(MemberSchema),
   members: z.number(),
   name: z.string(),

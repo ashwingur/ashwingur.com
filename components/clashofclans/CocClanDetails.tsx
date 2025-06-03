@@ -53,7 +53,7 @@ const CocClanDetails = ({ clan }: CocClanDetailsProps) => {
           </div>
         </div>
       </div>
-      {clan.hasOwnProperty("location") && (
+      {clan.location && (
         <div>
           <HorizontalBar />
           <div className="flex justify-between">
