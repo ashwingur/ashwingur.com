@@ -5,28 +5,15 @@ import { SpinningCircles } from "react-loading-icons";
 import CocNavBar from "../../../components/clashofclans/CocNavBar";
 import CocWarMembers from "../../../components/clashofclans/CocWarMembers";
 import CocWarStatus from "../../../components/clashofclans/CocWarStatus";
-import { ClanWar } from "../../../shared/interfaces/coc.interface";
-import { useQuery } from "react-query";
 import CocLoadingOrError from "../../../components/clashofclans/CocLoadingOrError";
 import { useGetCWLClanWar } from "shared/queries/clashofclans";
 
 const title = "Clan League War";
 
-const fetchWar = (warTag: string) =>
-  axios
-    .get(`/api/clashofclans/clanwarleague/${warTag}`)
-    .then(({ data }) => data);
-
 const ClanWarComponent = () => {
   const router = useRouter();
   const warTag =
     typeof router.query?.warTag === "string" ? router.query.warTag : "";
-
-  // const { isLoading, error, data } = useQuery<ClanWar>({
-  //   queryKey: ["player", warTag],
-  //   queryFn: () => fetchWar(warTag),
-  //   enabled: router.isReady,
-  // });
 
   const { isLoading, error, data } = useGetCWLClanWar(warTag);
 
