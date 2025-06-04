@@ -1,16 +1,23 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { ClanWar, ClanWarMember } from "../../shared/interfaces/coc.interface";
+import { ClanWar } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { NextRouter, useRouter } from "next/router";
 import CocSmallButton from "./CocSmallButton";
 import Link from "next/link";
+import {
+  WarClanMemberSchema,
+  WarSchema,
+} from "shared/validations/ClashOfClansSchemas";
+import { z } from "zod";
 
 const blackStar = "/assets/coc/stars/war_black_star.png";
 const silverStar = "/assets/coc/stars/war_silver_star.png";
 const miniBarb = "/assets/coc/miniBarb.png";
 
+type ClanWarMember = z.infer<typeof WarClanMemberSchema>;
+
 interface CocWarMembersProps {
-  clanWar: ClanWar;
+  clanWar: z.input<typeof WarSchema>;
   clanWarLeague: boolean;
 }
 
@@ -33,7 +40,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
 
   const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
     const attacksRemaining = member.hasOwnProperty("attacks")
-      ? totalAttacks - member.attacks.length
+      ? totalAttacks - (member.attacks?.length ?? 0)
       : totalAttacks;
 
     return (
@@ -41,7 +48,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         className="coc-font-style flex flex-col items-center rounded-md px-2 pb-8 pt-2 transition-all hover:cursor-pointer hover:bg-black/20"
         onClick={() => setSelectedMember(member)}
       >
-        {member.opponentAttacks > 0 ? (
+        {member.bestOpponentAttack ? (
           <div className="flex h-8 items-center">
             <div className="relative h-6 w-6">
               <Image
@@ -142,13 +149,13 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
     setSelectedMember,
   }: MemberPopupProps) => {
     const attacksRemaining = member.hasOwnProperty("attacks")
-      ? totalAttacks - member.attacks.length
+      ? totalAttacks - (member.attacks?.length ?? 0)
       : totalAttacks;
 
     const bestAttackMember = allyList.find(
       (ally) =>
         member.opponentAttacks > 0 &&
-        ally.tag === member.bestOpponentAttack.attackerTag,
+        ally.tag === member.bestOpponentAttack?.attackerTag,
     );
 
     return (
@@ -245,9 +252,12 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
     );
   };
 
-  const alliesList = WarMembersList(clanWar.clan.members, setSelectedMember);
+  const alliesList = WarMembersList(
+    clanWar.clan.members || [],
+    setSelectedMember,
+  );
   const opponentList = WarMembersList(
-    clanWar.opponent.members,
+    clanWar.opponent.members || [],
     setSelectedMember,
   );
   return (
@@ -258,7 +268,9 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         {selectedMember && (
           <MemberPopup
             member={selectedMember}
-            memberList={clanWar.clan.members.concat(clanWar.opponent.members)}
+            memberList={(clanWar.clan.members || []).concat(
+              clanWar.opponent.members || [],
+            )}
             setSelectedMember={setSelectedMember}
             router={router}
           />

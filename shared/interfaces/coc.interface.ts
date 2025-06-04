@@ -1,3 +1,5 @@
+// PLANNING TO DEPRECATE THIS, new file is ClashOfClansSchema.ts
+
 export interface Player {
   tag: string;
   name: string;

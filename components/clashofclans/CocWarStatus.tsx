@@ -3,9 +3,11 @@ import { ClanWar } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import Link from "next/link";
 import { formatToISO8601 } from "shared/queries/clashofclans";
+import { z } from "zod";
+import { WarSchema } from "shared/validations/ClashOfClansSchemas";
 
 interface CocWarStatusProps {
-  clanWar: ClanWar;
+  clanWar: z.input<typeof WarSchema>;
 }
 
 const ClanStatus = (
@@ -56,22 +58,24 @@ const ClanStatus = (
 const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
   const warState = clanWar.state.replace(/([A-Z]+)/g, " $1");
 
+  console.log(clanWar.attacksPerMember, clanWar.teamSize);
+
   const myClanStatus = ClanStatus(
-    clanWar.clan.name,
-    clanWar.clan.tag,
-    clanWar.teamSize,
+    clanWar.clan.name ?? "",
+    clanWar.clan.tag ?? "",
+    clanWar.teamSize ?? clanWar.clan.members?.length ?? 0,
     clanWar.clan.stars,
     clanWar.clan.attacks,
-    clanWar.attacksPerMember,
+    clanWar.attacksPerMember ?? 1,
   );
 
   const otherClanStatus = ClanStatus(
-    clanWar.opponent.name,
-    clanWar.opponent.tag,
-    clanWar.teamSize,
+    clanWar.opponent.name ?? "",
+    clanWar.opponent.tag ?? "",
+    clanWar.teamSize ?? clanWar.opponent.members?.length ?? 0,
     clanWar.opponent.stars,
     clanWar.opponent.attacks,
-    clanWar.attacksPerMember,
+    clanWar.attacksPerMember ?? 1,
   );
 
   function formatDurationFromNow(toDate: Date | string | number): string {
@@ -88,9 +92,11 @@ const CocWarStatus = ({ clanWar }: CocWarStatusProps) => {
   }
 
   const startTimeString = formatDurationFromNow(
-    formatToISO8601(clanWar.startTime),
+    formatToISO8601(clanWar.startTime ?? clanWar.warStartTime ?? ""),
   );
-  const endTimeString = formatDurationFromNow(formatToISO8601(clanWar.endTime));
+  const endTimeString = formatDurationFromNow(
+    formatToISO8601(clanWar.endTime ?? ""),
+  );
   console.log(warState);
 
   return (

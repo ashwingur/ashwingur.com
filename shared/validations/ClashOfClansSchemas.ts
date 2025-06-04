@@ -207,17 +207,20 @@ const WarClanSchema = z.object({
   stars: z.number(),
   destructionPercentage: z.number(),
   members: z.array(WarClanMemberSchema).optional(),
+  name: z.string().optional(),
+  tag: z.string().optional(),
 });
 
 const WarSchema = z.object({
   state: z.string(),
-  teamSize: z.number().optional().default(0),
+  teamSize: z.number().optional(),
   preparationStartTime: z.string().optional(),
   startTime: z.string().optional(),
   endTime: z.string().optional(),
   warStartTime: z.string().optional(),
   clan: WarClanSchema,
   opponent: WarClanSchema,
+  attacksPerMember: z.number().optional().default(1),
 });
 
 const ClanCapitalClan = z.object({
@@ -315,4 +318,6 @@ export {
   CwlWarRoundSchema,
   MemberSchema,
   ClanCapitalSeasonsSchema,
+  WarSchema,
+  WarClanMemberSchema,
 };

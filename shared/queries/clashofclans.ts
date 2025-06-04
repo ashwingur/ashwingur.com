@@ -4,6 +4,7 @@ import {
   CocPlayerSchema,
   FullClanSchema,
   GoldPassSchema,
+  WarSchema,
 } from "shared/validations/ClashOfClansSchemas";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
 import { useInfiniteQuery, useQuery } from "react-query";
@@ -16,21 +17,28 @@ const INCREMENT_VIEW_COUNT_KEY = "coc_increment_view_count";
 const COC_PLAYERS_KEY = "coc_players";
 const COC_FULL_CLAN_KEY = "coc_full_clan";
 const CAPITAL_RAID_SEASONS_KEY = "capital_raid_seasons";
+const REGULAR_WAR_KEY = "clan_war";
+const CWL_WAR_KEY = "cwl_war";
 
-const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
-  const queryParams: CustomQueryParam[] = [];
-  queryParams.push(
-    { key: "start", val: start.toISOString() },
-    { key: "end", val: end.toISOString() },
-  );
-  return await apiFetch({
-    endpoint: `/clashofclans/player_data/%23${tag}`,
-    responseSchema: CocPlayerDataSchema,
-    customParams: queryParams,
-  });
-};
+// Helper function to convert the custom date format into ISO 8601 format
+export function formatToISO8601(endTime: string): string {
+  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00Z"
+  return `${endTime.substring(0, 4)}-${endTime.substring(4, 6)}-${endTime.substring(6, 8)}T${endTime.substring(9, 11)}:${endTime.substring(11, 13)}:${endTime.substring(13, 15)}Z`;
+}
 
 export const usePlayerHistory = (tag: string, start: Date, end: Date) => {
+  const getPlayerHistory = async (tag: string, start: Date, end: Date) => {
+    const queryParams: CustomQueryParam[] = [];
+    queryParams.push(
+      { key: "start", val: start.toISOString() },
+      { key: "end", val: end.toISOString() },
+    );
+    return await apiFetch({
+      endpoint: `/clashofclans/player_data/%23${tag}`,
+      responseSchema: CocPlayerDataSchema,
+      customParams: queryParams,
+    });
+  };
   return useQuery({
     queryKey: [COC_PLAYER_HISTORY_QUERY_KEY, tag, start, end],
     queryFn: () => getPlayerHistory(tag, start, end),
@@ -41,14 +49,13 @@ export const usePlayerHistory = (tag: string, start: Date, end: Date) => {
   });
 };
 
-const getGoldPass = async () => {
-  return await apiFetch({
-    endpoint: "/clashofclans/goldpass",
-    responseSchema: GoldPassSchema,
-  });
-};
-
 export const useGoldPass = () => {
+  const getGoldPass = async () => {
+    return await apiFetch({
+      endpoint: "/clashofclans/goldpass",
+      responseSchema: GoldPassSchema,
+    });
+  };
   return useQuery({
     queryKey: [GOLD_PASS_QUERY_KEY],
     queryFn: getGoldPass,
@@ -58,17 +65,16 @@ export const useGoldPass = () => {
   });
 };
 
-const incrementViewCount = async (tag: string) => {
-  return await apiFetch({
-    endpoint: `/clashofclans/player_data/increment_view_count/%23${tag}`,
-    responseSchema: z.object({ success: z.boolean() }),
-    options: {
-      method: "PATCH",
-    },
-  });
-};
-
 export const useIncrementViewCount = (tag?: string) => {
+  const incrementViewCount = async (tag: string) => {
+    return await apiFetch({
+      endpoint: `/clashofclans/player_data/increment_view_count/%23${tag}`,
+      responseSchema: z.object({ success: z.boolean() }),
+      options: {
+        method: "PATCH",
+      },
+    });
+  };
   return useQuery({
     queryKey: [INCREMENT_VIEW_COUNT_KEY, tag],
     queryFn: () => incrementViewCount(tag!),
@@ -80,32 +86,30 @@ export const useIncrementViewCount = (tag?: string) => {
   });
 };
 
-const getCocPlayers = async () => {
-  const res = await apiFetch({
-    endpoint: "/clashofclans/players",
-    responseSchema: z.array(CocPlayerSchema),
-  });
-  updateFavourite(...res);
-  return res;
-};
-
 export const useGetCocPlayers = () => {
+  const getCocPlayers = async () => {
+    const res = await apiFetch({
+      endpoint: "/clashofclans/players",
+      responseSchema: z.array(CocPlayerSchema),
+    });
+    updateFavourite(...res);
+    return res;
+  };
   return useQuery({
     queryKey: [COC_PLAYERS_KEY],
     queryFn: getCocPlayers,
   });
 };
 
-const getCocPlayer = async (tag: string) => {
-  const res = await apiFetch({
-    endpoint: `/clashofclans/players/%23${tag}`,
-    responseSchema: CocPlayerSchema,
-  });
-  updateFavourite(res);
-  return res;
-};
-
 export const useGetCocPlayer = (tag?: string) => {
+  const getCocPlayer = async (tag: string) => {
+    const res = await apiFetch({
+      endpoint: `/clashofclans/players/%23${tag}`,
+      responseSchema: CocPlayerSchema,
+    });
+    updateFavourite(res);
+    return res;
+  };
   return useQuery({
     queryKey: [COC_PLAYERS_KEY, tag],
     queryFn: () => getCocPlayer(tag!),
@@ -113,14 +117,13 @@ export const useGetCocPlayer = (tag?: string) => {
   });
 };
 
-const getFullClan = async (tag: string) => {
-  return await apiFetch({
-    endpoint: `/clashofclans/fullclan/%23${tag}`,
-    responseSchema: FullClanSchema,
-  });
-};
-
 export const useGetFullClan = (tag?: string) => {
+  const getFullClan = async (tag: string) => {
+    return await apiFetch({
+      endpoint: `/clashofclans/fullclan/%23${tag}`,
+      responseSchema: FullClanSchema,
+    });
+  };
   return useQuery({
     queryKey: [COC_FULL_CLAN_KEY, tag],
     queryFn: () => getFullClan(tag!),
@@ -128,6 +131,42 @@ export const useGetFullClan = (tag?: string) => {
     retry: 1,
     staleTime: 60 * 1000,
     cacheTime: 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetRegularClanWar = (tag?: string) => {
+  const getRegularClanWar = async (tag: string) => {
+    return await apiFetch({
+      endpoint: `/clashofclans/clan/%23${tag}/currentwar`,
+      responseSchema: WarSchema,
+    });
+  };
+  return useQuery({
+    queryKey: [REGULAR_WAR_KEY, tag],
+    queryFn: () => getRegularClanWar(tag!),
+    enabled: !!tag,
+    retry: 1,
+    staleTime: 120 * 1000,
+    cacheTime: 120 * 1000,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetCWLClanWar = (warTag?: string) => {
+  const getCWLClanWar = async (warTag: string) => {
+    return await apiFetch({
+      endpoint: `/clashofclans/clanwarleagues/wars/%23${warTag}`,
+      responseSchema: WarSchema,
+    });
+  };
+  return useQuery({
+    queryKey: [CWL_WAR_KEY, warTag],
+    queryFn: () => getCWLClanWar(warTag!),
+    enabled: !!warTag,
+    retry: 1,
+    staleTime: 120 * 1000,
+    cacheTime: 120 * 1000,
     refetchOnWindowFocus: false,
   });
 };
@@ -166,9 +205,3 @@ export const usePaginatedClanCapitalRaidSeasons = (
     retry: 1,
   });
 };
-
-// Helper function to convert the custom date format into ISO 8601 format
-export function formatToISO8601(endTime: string): string {
-  // Convert "20250401T080000.000Z" to "2025-04-01T08:00:00Z"
-  return `${endTime.substring(0, 4)}-${endTime.substring(4, 6)}-${endTime.substring(6, 8)}T${endTime.substring(9, 11)}:${endTime.substring(11, 13)}:${endTime.substring(13, 15)}Z`;
-}
