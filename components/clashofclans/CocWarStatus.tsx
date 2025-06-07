@@ -28,7 +28,7 @@ const ClanStatus = (
           <Image
             unoptimized
             src={`/assets/coc/stars/silver_star.png`}
-            alt={`Sword`}
+            alt={`Star`}
             fill
             style={{ objectFit: "contain" }}
           />

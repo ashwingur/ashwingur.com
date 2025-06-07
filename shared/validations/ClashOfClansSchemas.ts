@@ -53,32 +53,32 @@ const GoldPassSchema = z.object({
 });
 
 // SCHEMA FOR full clan object
-const badgeUrlsSchema = z.object({
+const BadgeUrlsSchema = z.object({
   large: z.string(),
   medium: z.string(),
   small: z.string(),
 });
 
-const capitalLeagueSchema = z.object({
+const CapitalLeagueSchema = z.object({
   id: z.number(),
   name: z.string(),
 });
 
-const chatLanguageSchema = z.object({
+const ChatLanguageSchema = z.object({
   id: z.number(),
   languageCode: z.string(),
   name: z.string(),
 });
 
-const districtSchema = z.object({
+const DistrictSchema = z.object({
   districtHallLevel: z.number(),
   id: z.number(),
   name: z.string(),
 });
 
-const clanCapitalSchema = z.object({
+const ClanCapitalSchema = z.object({
   capitalHallLevel: z.number().optional(),
-  districts: z.array(districtSchema).or(z.undefined()).default([]),
+  districts: z.array(DistrictSchema).or(z.undefined()).default([]),
 });
 
 const CwlWarRoundSchema = z.object({
@@ -96,36 +96,36 @@ const CwlWarRoundSchema = z.object({
   war_tag: z.string(),
 });
 
-const iconUrlsSchema = z.object({
+const IconUrlsSchema = z.object({
   medium: z.string().optional(),
   small: z.string().optional(),
   tiny: z.string().optional(),
 });
 
-const labelSchema = z.object({
-  iconUrls: iconUrlsSchema,
+const LabelSchema = z.object({
+  iconUrls: IconUrlsSchema,
   id: z.number(),
   name: z.string(),
 });
 
-const locationSchema = z.object({
+const LocationSchema = z.object({
   countryCode: z.string().optional(),
   id: z.number(),
   isCountry: z.boolean(),
   name: z.string(),
 });
 
-const builderBaseLeagueSchema = z.object({
+const BuilderBaseLeagueSchema = z.object({
   id: z.number(),
   name: z.string(),
 });
 
-const clanCapitalMemberSchema = z.object({
+const ClanCapitalMemberSchema = z.object({
   attacks: z.number(),
   capitalResourcesLooted: z.number(),
 });
 
-const cwlWarMemberSchema = z.object({
+const CwlWarMemberSchema = z.object({
   attack_limit: z.number(),
   attack_todo: z.boolean(),
   attacks: z.number(),
@@ -138,43 +138,43 @@ const cwlWarMemberSchema = z.object({
   total_stars: z.number(),
 });
 
-const leagueSchema = z.object({
-  iconUrls: iconUrlsSchema,
+const LeagueSchema = z.object({
+  iconUrls: IconUrlsSchema,
   id: z.number(),
   name: z.string(),
 });
 
-const playerHouseElementSchema = z.object({
+const PlayerHouseElementSchema = z.object({
   id: z.number(),
   type: z.string(),
 });
 
-const playerHouseSchema = z.object({
-  elements: z.array(playerHouseElementSchema),
+const PlayerHouseSchema = z.object({
+  elements: z.array(PlayerHouseElementSchema),
 });
 
-const warMemberSchema = z.object({
+const WarMemberSchema = z.object({
   attacks: z.number(),
 });
 
 const MemberSchema = z.object({
-  builderBaseLeague: builderBaseLeagueSchema.nullable(),
+  builderBaseLeague: BuilderBaseLeagueSchema.nullable(),
   builderBaseTrophies: z.number(),
   clanRank: z.number(),
-  clan_capital: clanCapitalMemberSchema.nullable(),
-  cwl_war: cwlWarMemberSchema.nullable(),
+  clan_capital: ClanCapitalMemberSchema.nullable(),
+  cwl_war: CwlWarMemberSchema.nullable(),
   donations: z.number(),
   donationsReceived: z.number(),
   expLevel: z.number(),
-  league: leagueSchema.nullable(),
+  league: LeagueSchema.nullable(),
   name: z.string(),
-  playerHouse: playerHouseSchema.optional(),
+  playerHouse: PlayerHouseSchema.optional(),
   previousClanRank: z.number(),
   role: z.string(),
   tag: z.string(),
   townHallLevel: z.number(),
   trophies: z.number(),
-  war: warMemberSchema.nullable(),
+  war: WarMemberSchema.nullable(),
 });
 
 const AttackSchema = z.object({
@@ -197,11 +197,7 @@ const WarClanMemberSchema = z.object({
 });
 
 const WarClanSchema = z.object({
-  badgeUrls: z.object({
-    small: z.string().url(),
-    large: z.string().url(),
-    medium: z.string().url(),
-  }),
+  badgeUrls: BadgeUrlsSchema,
   clanLevel: z.number(),
   attacks: z.number(),
   stars: z.number(),
@@ -224,7 +220,7 @@ const WarSchema = z.object({
 });
 
 const ClanCapitalClan = z.object({
-  badgeUrls: badgeUrlsSchema,
+  badgeUrls: BadgeUrlsSchema,
   level: z.number(),
   name: z.string(),
   tag: z.string(),
@@ -271,11 +267,11 @@ const ClanCapitalSeasonsSchema = z.object({
 });
 
 const FullClanSchema = z.object({
-  badgeUrls: badgeUrlsSchema,
-  capitalLeague: capitalLeagueSchema,
-  chatLanguage: chatLanguageSchema.optional(),
+  badgeUrls: BadgeUrlsSchema,
+  capitalLeague: CapitalLeagueSchema,
+  chatLanguage: ChatLanguageSchema.optional(),
   clanBuilderBasePoints: z.number(),
-  clanCapital: clanCapitalSchema,
+  clanCapital: ClanCapitalSchema,
   clanCapitalPoints: z.number(),
   clanLevel: z.number(),
   clanPoints: z.number(),
@@ -287,8 +283,8 @@ const FullClanSchema = z.object({
   description: z.string(),
   isFamilyFriendly: z.boolean(),
   isWarLogPublic: z.boolean(),
-  labels: z.array(labelSchema),
-  location: locationSchema.optional(),
+  labels: z.array(LabelSchema),
+  location: LocationSchema.optional(),
   memberList: z.array(MemberSchema),
   members: z.number(),
   name: z.string(),
@@ -307,6 +303,42 @@ const FullClanSchema = z.object({
   cwl_wars: z.array(WarSchema).nullable(),
 });
 
+// --- WAR LOG ---
+const WarLogEntryClanSchema = z.object({
+  tag: z.string(),
+  name: z.string(),
+  badgeUrls: BadgeUrlsSchema,
+  clanLevel: z.number(),
+  attacks: z.number().optional(), // Optional as it might not always be present for the opponent
+  stars: z.number(),
+  destructionPercentage: z.number(),
+  expEarned: z.number().optional(), // Optional as it might not always be present for the opponent
+});
+
+const WarLogEntrySchema = z.object({
+  result: z.union([
+    z.literal("win"),
+    z.literal("lose"),
+    z.literal("tie"),
+    z.null(),
+  ]),
+  endTime: z.string(),
+  teamSize: z.number(),
+  attacksPerMember: z.number(),
+  battleModifier: z.string(),
+  clan: WarLogEntryClanSchema,
+  opponent: WarLogEntryClanSchema.partial(), // Opponent can have missing fields like 'tag' or 'name' and others
+});
+
+const WarLogSchema = z.object({
+  items: z.array(WarLogEntrySchema),
+  paging: z
+    .object({
+      cursors: z.object({}).passthrough(), // Cursors can be an empty object or have other properties
+    })
+    .passthrough(),
+});
+
 export {
   CocPlayerDataSchema,
   CocPlayerHistorySchema,
@@ -320,4 +352,5 @@ export {
   ClanCapitalSeasonsSchema,
   WarSchema,
   WarClanMemberSchema,
+  WarLogSchema,
 };

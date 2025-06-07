@@ -32,7 +32,7 @@ export async function apiFetch<T, E>({
 
   if (options?.queryParams) {
     Object.keys(options.queryParams).forEach((key) =>
-      url.searchParams.append(key, options.queryParams![key])
+      url.searchParams.append(key, options.queryParams![key]),
     );
   }
 
@@ -63,7 +63,7 @@ export async function apiFetch<T, E>({
     const errorResult = schema.safeParse(responseData);
     if (errorResult.success && errorResult.data) {
       throw new Error(
-        `Error ${response.status}: ${JSON.stringify(errorResult.data)}`
+        `Error ${response.status}: ${JSON.stringify(errorResult.data)}`,
       );
     } else {
       throw new Error(`Error ${response.status}: Unknown error`);

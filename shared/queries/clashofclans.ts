@@ -4,6 +4,7 @@ import {
   CocPlayerSchema,
   FullClanSchema,
   GoldPassSchema,
+  WarLogSchema,
   WarSchema,
 } from "shared/validations/ClashOfClansSchemas";
 import { apiFetch, CustomQueryParam } from "./api-fetch";
@@ -19,6 +20,7 @@ const COC_FULL_CLAN_KEY = "coc_full_clan";
 const CAPITAL_RAID_SEASONS_KEY = "capital_raid_seasons";
 const REGULAR_WAR_KEY = "clan_war";
 const CWL_WAR_KEY = "cwl_war";
+const WAR_LOG_KEY = "war_log";
 
 // Helper function to convert the custom date format into ISO 8601 format
 export function formatToISO8601(endTime: string): string {
@@ -132,6 +134,26 @@ export const useGetFullClan = (tag?: string) => {
     staleTime: 60 * 1000,
     cacheTime: 60 * 1000,
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
+  });
+};
+
+export const useGetClanWarLog = (tag?: string) => {
+  const getClanWarLog = async (tag: string) => {
+    return await apiFetch({
+      endpoint: `/clashofclans/clan/%23${tag}/warlog`,
+      responseSchema: WarLogSchema,
+    });
+  };
+  return useQuery({
+    queryKey: [REGULAR_WAR_KEY, tag],
+    queryFn: () => getClanWarLog(tag!),
+    enabled: !!tag,
+    retry: 1,
+    staleTime: 120 * 1000,
+    cacheTime: 120 * 1000,
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });
 };
 
