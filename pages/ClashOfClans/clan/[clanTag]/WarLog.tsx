@@ -19,16 +19,65 @@ const WarLog = () => {
   const { data, isLoading, error } = useGetClanWarLog(clanTag);
 
   const warLogCards = data?.items.map((log, index) => {
+    const isCwl = log.opponent.name === undefined;
     let bgColourClass = "bg-[#b5ce8a]";
     if (log.result == "tie") {
       bgColourClass = "bg-[#c2c2b8]";
     } else if (log.result == "lose") {
       bgColourClass = "bg-[#be8180]";
     }
+    if (isCwl) {
+      bgColourClass = "bg-[#c2c2b8]";
+      if (log.result == "win") {
+        bgColourClass = "bg-[#46c27e]";
+      } else if (log.result == "tie") {
+        bgColourClass = "bg-[#c24646]";
+      }
+    }
     const endDate = new Date(formatToISO8601(log.endTime));
     const daysAgo = Math.round(
       (Date.now() - endDate.getTime()) / (1000 * 60 * 60 * 24),
     );
+    if (isCwl) {
+      return (
+        <div
+          key={index}
+          className={clsx(
+            "flex flex-col rounded-lg border-2 border-black px-2 py-4 md:relative md:flex-none",
+            bgColourClass,
+          )}
+        >
+          <h3 className="text-center text-lg">
+            {endDate.toLocaleDateString("en-US", {
+              month: "short",
+              year: "numeric",
+            })}{" "}
+            Season
+          </h3>
+          <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center gap-1">
+              <div className="relative size-6">
+                <Image
+                  src="/assets/coc/stars/silver_star.png"
+                  alt="Sword"
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
+              </div>
+              <p>{log.clan.stars}</p>
+            </div>
+            <p
+              style={{ textShadow: "none" }}
+              className="font-coc font-thin text-slate-700 shadow-none"
+            >
+              {(log.clan.destructionPercentage * log.teamSize).toFixed(0)}%
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div
         key={index}
@@ -54,10 +103,10 @@ const WarLog = () => {
                 {log.clan.destructionPercentage.toFixed(2)}%
               </p>
               <div className="flex items-center gap-1">
-                <div className="relative size-6 md:size-8">
+                <div className="relative size-6">
                   <Image
                     src="/assets/coc/stars/silver_star.png"
-                    alt="Sword"
+                    alt="Star"
                     fill
                     unoptimized
                     className="object-contain"
@@ -67,6 +116,7 @@ const WarLog = () => {
               </div>
             </div>
           </div>
+
           <div className="flex flex-col items-center">
             <div className="flex">
               <div className="relative size-8 md:size-8">
@@ -79,7 +129,7 @@ const WarLog = () => {
                 />
               </div>
               {log.opponent.badgeUrls && (
-                <div className="relative size-8 md:size-8">
+                <div className="relative size-8">
                   <Image
                     src={log.opponent.badgeUrls.medium}
                     alt="Opponent Badge"
@@ -94,6 +144,7 @@ const WarLog = () => {
               {log.teamSize} VS {log.teamSize}
             </p>
           </div>
+
           <div className="flex items-center justify-between gap-2 md:flex-col">
             <p className="max-w-36 text-lg md:max-w-none">
               {log.opponent.name}
@@ -106,7 +157,7 @@ const WarLog = () => {
                 {log.opponent.destructionPercentage?.toFixed(2)}%
               </p>
               <div className="flex items-center gap-1">
-                <div className="relative size-6 md:size-8">
+                <div className="relative size-6">
                   <Image
                     src="/assets/coc/stars/silver_star.png"
                     alt="Sword"
@@ -127,7 +178,7 @@ const WarLog = () => {
   return (
     <div className="bg-clash min-h-screen pb-4 pt-20">
       <CocNavBar />
-      <div className="coc-font-style mx-4 rounded-lg border-2 border-black bg-gradient-to-b from-[#389350] to-[#256336] xl:mx-auto xl:w-4/5">
+      <div className="coc-font-style mx-4 rounded-lg border-2 border-black bg-[#5e5351] xl:mx-auto xl:w-4/5">
         <h2 className="mt-4 text-center text-2xl">War Log</h2>
         <div className="mx-auto mt-2 flex w-40 items-center justify-center md:h-16 md:w-60">
           <Link href={`/ClashOfClans/clan/${(clanTag ?? "").replace("#", "")}`}>
