@@ -67,9 +67,9 @@ const ClanCapitalDetails = ({ clan }: ClanCapitalDetailsProps) => {
           <CocButton
             className="w-40 hover:w-36 md:w-60 md:hover:w-56"
             text={"Raid History"}
-            innerColour="bg-green-500"
-            middleColour="bg-green-600"
-            outerColour="bg-green-700"
+            innerColour="bg-emerald-500"
+            middleColour="bg-emerald-600"
+            outerColour="bg-emerald-700"
             textClassName="text-xs md:text-base md:hover:text-sm"
           />
         </Link>

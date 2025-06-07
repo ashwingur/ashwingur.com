@@ -76,9 +76,9 @@ const ClanPage = () => {
                   <CocButton
                     className="w-40 hover:w-36 md:w-60 md:hover:w-56"
                     text={"Current War"}
-                    innerColour="bg-green-500"
-                    middleColour="bg-green-600"
-                    outerColour="bg-green-700"
+                    innerColour="bg-red-500"
+                    middleColour="bg-red-600"
+                    outerColour="bg-red-700"
                     textClassName="text-xs md:text-base md:hover:text-sm"
                   />
                 </Link>
@@ -92,9 +92,9 @@ const ClanPage = () => {
                 <CocButton
                   className="w-40 hover:w-36 md:w-60 md:hover:w-56"
                   text="Clan War League"
-                  innerColour="bg-green-500"
-                  middleColour="bg-green-600"
-                  outerColour="bg-green-700"
+                  innerColour="bg-amber-500"
+                  middleColour="bg-amber-600"
+                  outerColour="bg-amber-700"
                   textClassName="text-xs md:text-base md:hover:text-sm"
                 />
               </Link>

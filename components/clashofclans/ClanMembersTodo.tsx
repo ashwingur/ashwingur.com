@@ -77,7 +77,7 @@ const ClanMembersTodo: React.FC<ClanMembersTodoProps> = ({
   return (
     <div
       className={clsx(
-        "coc-font-style rounded-lg border-2 border-black bg-[#844f4b]",
+        "coc-font-style rounded-lg border-2 border-black bg-[#694b84]",
         className,
         numTodos === 0 && "hidden",
       )}
