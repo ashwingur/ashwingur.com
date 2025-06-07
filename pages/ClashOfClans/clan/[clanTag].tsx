@@ -68,36 +68,40 @@ const ClanPage = () => {
       <h2 className="clash-font-style pt-20 text-center font-thin">{title}</h2>
 
       <div className="mx-auto xl:w-4/5">
-        <div className="mb-6 flex flex-col items-center justify-center gap-4 md:flex-row">
-          {warUrl && (
-            <Link
-              href={warUrl}
-              className="flex h-16 w-80 items-center justify-center"
-            >
-              <CocButton
-                className="mx-auto mt-4 w-80 hover:w-72"
-                text={"Current War"}
-                innerColour="bg-green-500 dark:bg-green-600"
-                middleColour="bg-green-600 dark:bg-green-700"
-                outerColour="bg-green-700 dark:bg-green-900"
-              />
-            </Link>
-          )}
-          {data.cwl_war_rounds && (
-            <Link
-              href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-              className="flex h-16 w-80 items-center justify-center"
-            >
-              <CocButton
-                className="mx-auto mt-4 w-80 hover:w-72"
-                text={"Clan War League"}
-                innerColour="bg-green-500 dark:bg-green-600"
-                middleColour="bg-green-600 dark:bg-green-700"
-                outerColour="bg-green-700 dark:bg-green-900"
-              />
-            </Link>
-          )}
+        <div className="flex flex-col lg:mx-auto lg:w-5/6">
+          <div className="mx-auto flex items-center justify-center gap-2 pt-4 md:gap-4">
+            {warUrl && (
+              <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+                <Link href={warUrl}>
+                  <CocButton
+                    className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                    text={"Current War"}
+                    innerColour="bg-green-500"
+                    middleColour="bg-green-600"
+                    outerColour="bg-green-700"
+                    textClassName="text-xs md:text-base md:hover:text-sm"
+                  />
+                </Link>
+              </div>
+            )}
+            <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+              <Link
+                href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
+                className=""
+              >
+                <CocButton
+                  className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                  text="Clan War League"
+                  innerColour="bg-green-500"
+                  middleColour="bg-green-600"
+                  outerColour="bg-green-700"
+                  textClassName="text-xs md:text-base md:hover:text-sm"
+                />
+              </Link>
+            </div>
+          </div>
         </div>
+
         <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
           <CocClanSummary clan={data} />
           <CocClanDetails clan={data} />
