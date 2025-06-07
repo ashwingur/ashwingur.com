@@ -94,7 +94,12 @@ const WarLog = () => {
         </p>
         <div className="flex flex-col justify-center md:flex-row">
           <div className="flex items-center justify-between md:flex-col">
-            <p className="max-w-36 text-lg md:max-w-none">{log.clan.name}</p>
+            <Link
+              className="max-w-36 md:max-w-none"
+              href={`/ClashOfClans/clan/${log.clan.tag.replace("#", "")}`}
+            >
+              {log.clan.name}
+            </Link>
             <div className="flex items-center gap-2">
               <p
                 style={{ textShadow: "none" }}
@@ -146,9 +151,12 @@ const WarLog = () => {
           </div>
 
           <div className="flex items-center justify-between gap-2 md:flex-col">
-            <p className="max-w-36 text-lg md:max-w-none">
+            <Link
+              className="max-w-36 md:max-w-none"
+              href={`/ClashOfClans/clan/${log.opponent.tag!.replace("#", "")}`}
+            >
               {log.opponent.name}
-            </p>
+            </Link>
             <div className="flex items-center gap-2 md:flex-row-reverse">
               <p
                 style={{ textShadow: "none" }}
