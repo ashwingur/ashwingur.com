@@ -102,9 +102,27 @@ const ClanPage = () => {
           </div>
         </div>
 
-        <div className="mx-4 mt-4 flex flex-col items-center gap-4 rounded-lg border-2 border-black bg-[#787b60] p-4 md:flex-row md:justify-around">
-          <CocClanSummary clan={data} />
-          <CocClanDetails clan={data} />
+        <div className="mx-4 mt-4 rounded-lg border-2 border-black bg-[#787b60] p-4">
+          <div className="flex flex-col items-center gap-4 md:flex-row md:justify-around">
+            <CocClanSummary clan={data} />
+            <CocClanDetails clan={data} />
+          </div>
+          {data.isWarLogPublic && (
+            <div className="mx-auto mt-2 flex w-40 items-center justify-center md:h-16 md:w-60">
+              <Link
+                href={`/ClashOfClans/clan/${data.tag.replace("#", "")}/WarLog`}
+              >
+                <CocButton
+                  className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                  text="War Log"
+                  innerColour="bg-emerald-500"
+                  middleColour="bg-emerald-600"
+                  outerColour="bg-emerald-700"
+                  textClassName="text-xs md:text-base md:hover:text-sm"
+                />
+              </Link>
+            </div>
+          )}
         </div>
 
         <ClanMembersTodo clan={data} className="mx-4 mt-4" />
