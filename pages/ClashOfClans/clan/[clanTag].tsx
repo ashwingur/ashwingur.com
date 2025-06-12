@@ -84,21 +84,23 @@ const ClanPage = () => {
                 </Link>
               </div>
             )}
-            <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
-              <Link
-                href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
-                className=""
-              >
-                <CocButton
-                  className="w-40 hover:w-36 md:w-60 md:hover:w-56"
-                  text="Clan War League"
-                  innerColour="bg-amber-500"
-                  middleColour="bg-amber-600"
-                  outerColour="bg-amber-700"
-                  textClassName="text-xs md:text-base md:hover:text-sm"
-                />
-              </Link>
-            </div>
+            {data.cwl_war_rounds && (
+              <div className="flex w-40 items-center justify-center md:h-16 md:w-60">
+                <Link
+                  href={`/ClashOfClans/clan/${clanTag}/ClanWarLeague`}
+                  className=""
+                >
+                  <CocButton
+                    className="w-40 hover:w-36 md:w-60 md:hover:w-56"
+                    text="Clan War League"
+                    innerColour="bg-amber-500"
+                    middleColour="bg-amber-600"
+                    outerColour="bg-amber-700"
+                    textClassName="text-xs md:text-base md:hover:text-sm"
+                  />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
