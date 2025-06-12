@@ -23,9 +23,12 @@ test.describe("Login Functionality", () => {
       await hamburgerButton.click();
     }
 
+    console.log(`Ismobile = ${isMobile}`);
+
     const loginLinkLocator = page.locator('a[href="/Login"]:visible');
 
     await expect(loginLinkLocator).toBeVisible();
+    // await page.pause();
     loginLinkLocator.click();
 
     await expect(page).toHaveURL("/Login");
@@ -80,6 +83,6 @@ test.describe("Login Functionality", () => {
     loginLinkLocator.click();
     await expect(page).toHaveURL("/Login");
     await page.getByRole("button", { name: "Logout" }).click();
-    // await expect(page).toHaveURL("/");
+    await expect(page).toHaveURL("/");
   });
 });
