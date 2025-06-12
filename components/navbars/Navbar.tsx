@@ -22,35 +22,35 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
   return (
     <div
       className={clsx(
-        "flex flex-col z-50",
+        "z-50 flex flex-col",
         fixed ? "fixed top-0" : "",
-        mobileNavMenu ? "h-screen" : ""
+        mobileNavMenu ? "h-screen" : "",
       )}
     >
       <div
         className={clsx(
-          "flex flex-col w-screen shadow-lg backdrop-blur-lg border-b border-background-muted"
+          "flex w-screen flex-col border-b border-background-muted shadow-lg backdrop-blur-lg",
         )}
       >
         <div
           className={clsx(
-            "flex w-full justify-between items-center px-6 md:px-8 lg:px-16 py-2"
+            "flex w-full items-center justify-between px-6 py-2 md:px-8 lg:px-16",
           )}
         >
           <Link href="/">
             <CustomisableLogo />
           </Link>
-          <ul className="hidden lg:flex lg:gap-4 lg:items-center">
+          <ul className="hidden lg:flex lg:items-center lg:gap-4">
             <Link
               href="/#home"
-              className="hover:bg-background-hover px-2 py-1 transition rounded-md"
+              className="rounded-md px-2 py-1 transition hover:bg-background-hover"
               scroll={false}
             >
               <li>Home</li>
             </Link>
             <Link
               href="/#projects"
-              className="hover:bg-background-hover px-2 py-1 transition rounded-md"
+              className="rounded-md px-2 py-1 transition hover:bg-background-hover"
               scroll={false}
             >
               <li>Projects</li>
@@ -58,7 +58,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && role === "admin" && (
               <Link
                 href="/Admin"
-                className="hover:bg-background-hover px-2 py-1 transition rounded-md"
+                className="rounded-md px-2 py-1 transition hover:bg-background-hover"
                 scroll={false}
               >
                 <li>Admin</li>
@@ -71,7 +71,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {!user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover px-2 py-2 transition rounded-md"
+                className="rounded-md px-2 py-2 transition hover:bg-background-hover"
               >
                 <MdLogin />
               </Link>
@@ -79,38 +79,39 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover px-2 py-2 transition rounded-md"
+                className="rounded-md px-2 py-2 transition hover:bg-background-hover"
               >
                 <MdSettings />
               </Link>
             )}
           </ul>
-          <div
-            className="cursor-pointer lg:hidden"
+          <button
+            className="lg:hidden"
             onClick={() => {
               setMobileNavMenu(!mobileNavMenu);
             }}
+            aria-label="Toggle navigation menu"
           >
             {mobileNavMenu ? (
               <MdOutlineClose size={30} />
             ) : (
               <MdOutlineMenu size={30} />
             )}
-          </div>
+          </button>
         </div>
 
         <div
           className={clsx(
-            "lg:hidden duration-300 mx-4 md:mx-6 flex justify-between z-50 relative",
+            "relative z-50 mx-4 flex justify-between duration-300 md:mx-6 lg:hidden",
             mobileNavMenu
-              ? "min-h-full border-t border-background-muted box-border"
-              : "hidden"
+              ? "box-border min-h-full border-t border-background-muted"
+              : "hidden",
           )}
         >
-          <ul className="flex flex-col gap-2 my-4 w-24">
+          <ul className="my-4 flex w-24 flex-col gap-2">
             <Link
               href="/#home"
-              className="hover:bg-background-hover px-2 py-2 rounded-md"
+              className="rounded-md px-2 py-2 hover:bg-background-hover"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -121,7 +122,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
 
             <Link
               href="/#projects"
-              className="hover:bg-background-hover px-2 py-2 rounded-md"
+              className="rounded-md px-2 py-2 hover:bg-background-hover"
               scroll={false}
               onClick={() => {
                 setMobileNavMenu(false);
@@ -132,7 +133,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && role === "admin" && (
               <Link
                 href="/Admin"
-                className="hover:bg-background-hover px-2 py-2 rounded-md"
+                className="rounded-md px-2 py-2 hover:bg-background-hover"
                 scroll={false}
                 onClick={() => {
                   setMobileNavMenu(false);
@@ -142,11 +143,11 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
               </Link>
             )}
           </ul>
-          <ul className="flex flex-col gap-2 items-center my-4">
+          <ul className="my-4 flex flex-col items-center gap-2">
             {!user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover rounded-md py-4 px-4"
+                className="rounded-md px-4 py-4 hover:bg-background-hover"
               >
                 <MdLogin />
               </Link>
@@ -154,7 +155,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
             {user && (
               <Link
                 href="/Login"
-                className="hover:bg-background-hover px-4 py-4 rounded-md my-2"
+                className="my-2 rounded-md px-4 py-4 hover:bg-background-hover"
               >
                 <MdSettings />
               </Link>
@@ -168,7 +169,7 @@ const Navbar = ({ fixed }: { fixed: boolean }) => {
         <div
           className={clsx(
             "h-full",
-            isDark(theme ?? "") ? "bg-black/70" : "bg-black/50"
+            isDark(theme ?? "") ? "bg-black/70" : "bg-black/50",
           )}
           onClick={() => setMobileNavMenu(false)}
         ></div>

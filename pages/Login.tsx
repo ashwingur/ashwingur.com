@@ -34,15 +34,17 @@ const Login = () => {
                 onSubmit={handleSubmit}
               >
                 <input
+                  id="username"
                   className={`input-hover ${
                     !isCorrectLogin ? "!border-2 !border-red-500" : ""
                   }`}
-                  type="text"
+                  type="user"
                   placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
+                  id="password"
                   className={`input-hover ${
                     !isCorrectLogin ? "!border-2 !border-red-500" : ""
                   }`}
@@ -52,9 +54,9 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {!isCorrectLogin && (
-                  <div className="text-center text-red-500">
+                  <p className="text-center text-red-500">
                     Incorrect username or password
-                  </div>
+                  </p>
                 )}
                 <button className="btn mt-4 w-32" type="submit">
                   Login

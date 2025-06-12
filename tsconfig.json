@@ -23,7 +23,8 @@
     "paths": {
       "@interfaces/*": ["shared/interfaces/*"],
       "@components/*": ["components/*"],
-      "@context/*": ["context/*"]
+      "@context/*": ["context/*"],
+      "@playwright-tests/*": ["playwright-tests/*"]
     }
   },
   "include": [
