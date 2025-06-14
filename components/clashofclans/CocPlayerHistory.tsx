@@ -148,6 +148,45 @@ const achievementsInfo = [
   { name: "Multi-Gear Tower Trampler", info: "Multi-Gear Towers Destroyed" },
 ];
 
+// List of hero equipment items classified as 'epic'.
+const epicEquipmentNames: string[] = [
+  "Vampstache",
+  "Giant Gauntlet",
+  "Spiky Ball",
+  "Snake Bracelet",
+  "Magic Mirror",
+  "Action Figure",
+  "Dark Crown",
+  "Fireball",
+  "Lavaloon Puppet",
+  "Rocket Spear",
+  "Electro Boots",
+];
+
+// List of hero equipment items classified as 'common'.
+const commonEquipmentNames: string[] = [
+  "Barbarian Puppet",
+  "Rage Vial",
+  "Earthquake Boots",
+  "Archer Puppet",
+  "Invisibility Vial",
+  "Giant Arrow",
+  "Healer Puppet",
+  "Frozen Arrow",
+  "Henchmen Puppet",
+  "Dark Orb",
+  "Metal Pants",
+  "Noble Iron",
+  "Eternal Tome",
+  "Life Gem",
+  "Rage Gem",
+  "Healing Tome",
+  "Royal Gem",
+  "Seeking Shield",
+  "Hog Rider Puppet",
+  "Haste Vial",
+];
+
 function achievementMapper(achievement: string): string | null {
   return achievementsInfo.find((i) => i.name === achievement)?.info ?? null;
 }
@@ -494,7 +533,22 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const history = data.history;
     const items = history[history.length - 1][nameKey]
       .filter((item) => !super_troop_names.includes(item.name))
+      .sort((a, b) => {
+        if (nameKey == "heroEquipment") {
+          return b.level - a.level;
+        }
+        return 0;
+      })
       .map((item, index) => {
+        let rarity: "common" | "epic" | undefined;
+
+        if (epicEquipmentNames.includes(item.name)) {
+          rarity = "epic";
+        } else if (commonEquipmentNames.includes(item.name)) {
+          rarity = "common";
+        } else {
+          rarity = undefined; // Default if not found in either list
+        }
         return (
           <button
             className="flex transition-all hover:bg-black/50"
@@ -512,7 +566,8 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
                 maxLevel: 0,
                 village: "",
               }}
-              showLevel={false}
+              showLevel={true}
+              rarity={rarity}
             />
           </button>
         );

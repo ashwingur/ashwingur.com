@@ -16,15 +16,29 @@ interface ArmyItemsCategoryProps {
 interface ArmyItemIconProps {
   playerItemLevel: PlayerItemLevel;
   showLevel: boolean;
+  rarity?: "common" | "epic";
 }
 
 export const ArmyItemIcon = ({
   playerItemLevel,
   showLevel,
+  rarity,
 }: ArmyItemIconProps) => {
   const icon_name: string = playerItemLevel.name.replaceAll(" ", "_");
+  let iconBgClass = "bg-black/20";
+  if (rarity == "common") {
+    iconBgClass = "bg-blue-400/50";
+  } else if (rarity == "epic") {
+    iconBgClass = "bg-purple-700/70";
+  }
+  console.log(iconBgClass);
   return (
-    <div className="relative flex w-12 items-center rounded-md border-2 border-black bg-black/20 font-clash font-thin md:w-14 lg:w-16">
+    <div
+      className={clsx(
+        "relative flex w-12 items-center rounded-md border-2 border-black font-clash font-thin md:w-14 lg:w-16",
+        iconBgClass,
+      )}
+    >
       <Image
         unoptimized
         src={`/assets/coc/troops/icons/${icon_name}.webp`}
@@ -59,9 +73,24 @@ const ArmyItemsCategory = ({
   if (items.length == 0) {
     return <></>;
   }
-  const items_elements = items.map((item, index) => (
-    <ArmyItemIcon key={index} playerItemLevel={item} showLevel={showLevel} />
-  ));
+  const items_elements = items.map((item, index) => {
+    let rarity: "common" | "epic" | undefined = undefined;
+    if (category == "Hero Equipment") {
+      if (item.maxLevel == 27) {
+        rarity = "epic";
+      } else {
+        rarity = "common";
+      }
+    }
+    return (
+      <ArmyItemIcon
+        key={index}
+        playerItemLevel={item}
+        showLevel={showLevel}
+        rarity={rarity}
+      />
+    );
+  });
 
   return (
     <div className="mx-4 my-4 rounded-lg border-2 border-black bg-[#5d6b96] p-4 dark:bg-[#384672]">
