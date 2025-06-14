@@ -150,7 +150,6 @@ const achievementsInfo = [
 
 // List of hero equipment items classified as 'epic'.
 const epicEquipmentNames: string[] = [
-  "Vampstache",
   "Giant Gauntlet",
   "Spiky Ball",
   "Snake Bracelet",
@@ -168,6 +167,7 @@ const commonEquipmentNames: string[] = [
   "Barbarian Puppet",
   "Rage Vial",
   "Earthquake Boots",
+  "Vampstache",
   "Archer Puppet",
   "Invisibility Vial",
   "Giant Arrow",
