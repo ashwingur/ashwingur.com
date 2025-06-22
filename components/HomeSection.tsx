@@ -64,7 +64,7 @@ const appsList: App[] = [
     icon: (className?: string) => <FaCar className={clsx(className)} />,
   },
   {
-    name: "Clash of Clans Tracker",
+    name: "Clash of Clans",
     url: "/ClashOfClans",
     description:
       "Uses the Clash of Clans API to view and track the stats of any player or clan.",
