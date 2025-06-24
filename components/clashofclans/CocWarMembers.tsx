@@ -43,7 +43,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
 
     return (
       <div
-        className="coc-font-style flex flex-col items-center rounded-md px-2 pb-8 pt-2 transition-all hover:cursor-pointer hover:bg-black/20"
+        className="coc-font-style flex flex-col items-center rounded-md px-2 pb-6 transition-all hover:cursor-pointer hover:bg-black/20"
         onClick={() => setSelectedMember(member)}
       >
         {member.bestOpponentAttack ? (
@@ -85,37 +85,40 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         ) : (
           <div className="h-8" />
         )}
-        <div className="text-stone-300">
+        <div className="text-xs text-stone-300 md:text-sm lg:text-base">
           {member.mapPosition}. {member.name}
         </div>
-        <div className="relative h-16 w-16 md:h-24 md:w-24">
+        <div className="relative h-12 w-12 md:h-20 md:w-20">
           <Image
             unoptimized
             src={`/assets/coc/townhalls/${member.townhallLevel}.webp`}
             alt={`Townhall level ${member.townhallLevel}`}
-            fill
-            style={{ objectFit: "contain" }}
+            width={0}
+            height={0}
+            className="h-auto w-full"
           />
         </div>
-        <div className="mt-1 flex h-8 md:h-12">
+        <div className="mt-1 flex h-8 gap-2 md:h-12">
           {attacksRemaining > 0 && (
-            <div className="relative bottom-0 h-8 w-8 md:h-12 md:w-12">
+            <div className="relative bottom-0 h-4 w-4 md:h-6 md:w-6">
               <Image
                 unoptimized
                 src={miniBarb}
-                style={{ objectFit: "contain" }}
-                fill
+                width={0}
+                height={0}
+                className="h-auto w-full"
                 alt={"attacks remaining"}
               />
             </div>
           )}
           {attacksRemaining > 1 && (
-            <div className="relative bottom-0 h-8 w-8 md:h-12 md:w-12">
+            <div className="relative bottom-0 h-4 w-4 md:h-6 md:w-6">
               <Image
                 unoptimized
                 src={miniBarb}
-                style={{ objectFit: "contain" }}
-                fill
+                width={0}
+                height={0}
+                className="h-auto w-full"
                 alt={"attacks remaining"}
               />
             </div>
@@ -138,7 +141,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           setSelectedMember={setSelectedMember}
         />
       ));
-    return <div className="flex flex-col gap-4">{memberElements}</div>;
+    return <div className="flex flex-col md:gap-2">{memberElements}</div>;
   };
 
   const MemberPopup = ({
