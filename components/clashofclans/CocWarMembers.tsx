@@ -28,7 +28,7 @@ interface WarMemberProps {
 
 interface MemberPopupProps {
   member: ClanWarMember;
-  memberList: ClanWarMember[];
+  allMemberList: ClanWarMember[];
   setSelectedMember: Dispatch<SetStateAction<ClanWarMember | undefined>>;
   router: NextRouter;
 }
@@ -39,9 +39,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
   const totalAttacks = clanWarLeague ? 1 : 2;
 
   const WarMemberElement = ({ member, setSelectedMember }: WarMemberProps) => {
-    const attacksRemaining = member.hasOwnProperty("attacks")
-      ? totalAttacks - (member.attacks?.length ?? 0)
-      : totalAttacks;
+    const attacksRemaining = totalAttacks - (member.attacks?.length ?? 0);
 
     return (
       <div
@@ -145,18 +143,62 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
 
   const MemberPopup = ({
     member,
-    memberList: allyList,
+    allMemberList,
     setSelectedMember,
   }: MemberPopupProps) => {
-    const attacksRemaining = member.hasOwnProperty("attacks")
-      ? totalAttacks - (member.attacks?.length ?? 0)
-      : totalAttacks;
+    const attacksRemaining = totalAttacks - (member.attacks?.length ?? 0);
 
-    const bestAttackMember = allyList.find(
+    const bestAttackMember = allMemberList.find(
       (ally) =>
         member.opponentAttacks > 0 &&
         ally.tag === member.bestOpponentAttack?.attackerTag,
     );
+
+    const attacksDone = (member.attacks ?? []).map((attack, idx) => {
+      const target = allMemberList.find(
+        (opponent) => opponent.tag == attack.defenderTag,
+      );
+      return (
+        <div key={idx} className="flex flex-col items-center">
+          <div className="coc-font-style flex gap-8">
+            <p>
+              <span>{target?.mapPosition}. </span>
+              <span>{target?.name}</span>
+            </p>
+            <div>{attack.destructionPercentage}%</div>
+          </div>
+          <div className="flex h-8 items-center">
+            <div className="relative h-6 w-6">
+              <Image
+                unoptimized
+                src={attack.stars > 0 ? silverStar : blackStar}
+                alt={`Member stars`}
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+            <div className="relative h-6 w-6">
+              <Image
+                unoptimized
+                src={attack.stars > 1 ? silverStar : blackStar}
+                alt={`Member stars`}
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+            <div className="relative h-6 w-6">
+              <Image
+                unoptimized
+                src={attack.stars > 2 ? silverStar : blackStar}
+                alt={`Member stars`}
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    });
 
     return (
       <div className="clash-font-style flex flex-col items-center rounded-lg border-2 border-white bg-black/60 p-2">
@@ -180,16 +222,22 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
           <span className="mr-1 text-red-700">Attacks remaining</span>{" "}
           <span className="text-yellow-600">{attacksRemaining}</span>
         </div>
-        <div className="my-1 h-[2px] min-w-full bg-white" />
+        {attacksDone.length > 0 && (
+          <div>
+            <p className="text-blue-400">Outgoing attacks:</p>
+            {attacksDone}
+          </div>
+        )}
+        <div className="my-2 h-[2px] min-w-full bg-white" />
         {member.bestOpponentAttack && (
           <div>
-            <div className="text-blue-400">Clan best attack:</div>
+            <p className="text-blue-400">Best incoming attack:</p>
             <div className="flex flex-col items-center">
               <div className="coc-font-style flex gap-8">
-                <div>
+                <p>
                   <span>{bestAttackMember?.mapPosition}. </span>
                   <span>{bestAttackMember?.name}</span>
-                </div>
+                </p>
                 <div>{member.bestOpponentAttack.destructionPercentage}%</div>
               </div>
               <div className="flex h-8 items-center">
@@ -268,7 +316,7 @@ const CocWarMembers = ({ clanWar, clanWarLeague }: CocWarMembersProps) => {
         {selectedMember && (
           <MemberPopup
             member={selectedMember}
-            memberList={(clanWar.clan.members || []).concat(
+            allMemberList={(clanWar.clan.members || []).concat(
               clanWar.opponent.members || [],
             )}
             setSelectedMember={setSelectedMember}
