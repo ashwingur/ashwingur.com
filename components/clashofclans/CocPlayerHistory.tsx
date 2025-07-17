@@ -361,7 +361,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
       queryParams.set("name", selectedStat.name);
     }
 
-    router.push(
+    router.replace(
       {
         pathname: `/ClashOfClans/Progress/${tag}`,
         query: queryParams.toString(),

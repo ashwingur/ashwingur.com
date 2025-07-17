@@ -31,7 +31,6 @@ export const ArmyItemIcon = ({
   } else if (rarity == "epic") {
     iconBgClass = "bg-purple-700/70";
   }
-  console.log(iconBgClass);
   return (
     <div
       className={clsx(
