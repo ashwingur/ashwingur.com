@@ -52,7 +52,6 @@
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.48",
     "monaco-editor": "^0.49.0",
-    "mongoose": "^7.3.3",
     "next": "^14.2.3",
     "next-themes": "^0.2.1",
     "nextjs-cors": "^2.1.2",
