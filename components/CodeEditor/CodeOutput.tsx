@@ -41,7 +41,7 @@ interface RunResult {
 }
 
 const fetchCodeExecute = async (
-  body: PistonExecuteBody
+  body: PistonExecuteBody,
 ): Promise<PistonExecuteResponse> => {
   try {
     const response = await fetch(`https://emkc.org/api/v2/piston/execute`, {
@@ -82,7 +82,7 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
         Error
         <button
           onClick={handleRunClick}
-          className="bg-sky-200 dark:bg-[#2e1065] hover:bg-blue-400 dark:hover:bg-violet-800 rounded-lg py-3 px-4 font-bold mx-auto transition-all w-24 text-center"
+          className="mx-auto w-24 rounded-lg bg-sky-200 px-4 py-3 text-center font-bold transition-all hover:bg-blue-400 dark:bg-[#2e1065] dark:hover:bg-violet-800"
         >
           Run
         </button>
@@ -92,13 +92,13 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
 
   return (
     <div className={clsx(className)}>
-      <div className="h-16 mt-4">
+      <div className="mt-4 h-16">
         <button
           onClick={handleRunClick}
           disabled={isLoading}
           className={clsx(
             isLoading ? "" : "hover:bg-primary-hover",
-            "btn bg-primary text-text-primary rounded-lg py-3 px-4 font-bold transition-all w-24 h-12 flex items-center justify-center ml-4"
+            "btn ml-4 flex h-12 w-24 items-center justify-center rounded-lg bg-primary px-4 py-3 font-bold text-text-primary transition-all",
           )}
         >
           {isLoading ? (
@@ -109,7 +109,7 @@ const CodeOutput = ({ className, value, language }: CodeOutputProps) => {
         </button>
       </div>
 
-      <div className="bg-background-muted dark:bg-[#151515] h-[80vh] py-3 px-4 overflow-y-scroll overflow-x-hidden">
+      <div className="h-[80vh] overflow-x-hidden overflow-y-scroll bg-background-muted px-4 py-3 dark:bg-[#151515]">
         <pre className="mb-2 text-wrap">{data?.run.stdout}</pre>
         <pre className="text-red-700 dark:text-red-500">{data?.run.stderr}</pre>
       </div>
