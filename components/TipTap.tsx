@@ -1,9 +1,8 @@
-import CodeBlock from "@tiptap/extension-code-block";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextAlign from "@tiptap/extension-text-align";
-import TextStyle from "@tiptap/extension-text-style";
+import { TextStyle, TextStyleKit } from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -57,7 +56,6 @@ interface MenuBarProps {
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle,
   TextAlign.configure({
     types: ["heading", "paragraph"],
   }),
@@ -303,7 +301,7 @@ const TipTap: React.FC<TipTapProps> = ({
     <div
       className={clsx(
         className,
-        "border border-text-muted rounded-md px-3 md:px-4 flex flex-col"
+        "flex flex-col rounded-md border border-text-muted px-3 md:px-4",
       )}
     >
       <MenuBar
@@ -312,7 +310,7 @@ const TipTap: React.FC<TipTapProps> = ({
       />
       <EditorContent
         editor={editor}
-        className={clsx("editor py-4 cursor-text min-h-24", editorClassName)}
+        className={clsx("editor min-h-24 cursor-text py-4", editorClassName)}
         autoComplete="new-password"
         onClick={() => {
           editor && !editor.isFocused && editor.commands.focus();
