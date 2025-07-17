@@ -289,10 +289,14 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     setSelectedStatisticDisplay(`${itemName} (${achievementMapper(itemName)})`);
     if (data)
       setChartData(
-        data.history.map((entry) => {
+        data.history.map((entry, index) => {
           const i = entry.achievements.find((i) => i.name === itemName);
+          let timeValue = new Date(entry.timestamp).getTime();
+          if (index === 0) {
+            timeValue = moment(timeValue).startOf("day").valueOf();
+          }
           return {
-            time: new Date(entry.timestamp).getTime(),
+            time: timeValue,
             y: i ? i.value : 0,
           };
         }),
@@ -307,10 +311,14 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     );
     if (data)
       setChartData(
-        data.history.map((entry) => {
+        data.history.map((entry, index) => {
+          let timeValue = new Date(entry.timestamp).getTime();
+          if (index === 0) {
+            timeValue = moment(timeValue).startOf("day").valueOf();
+          }
           return {
             y: entry[item],
-            time: new Date(entry.timestamp).getTime(),
+            time: timeValue,
           };
         }),
       );
@@ -323,10 +331,14 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     setSelectedStatisticDisplay(`${itemName} Level`);
     if (data)
       setChartData(
-        data.history.map((entry) => {
+        data.history.map((entry, index) => {
           const i = entry[nameKey].find((i) => i.name === itemName);
+          let timeValue = new Date(entry.timestamp).getTime();
+          if (index === 0) {
+            timeValue = moment(timeValue).startOf("day").valueOf();
+          }
           return {
-            time: new Date(entry.timestamp).getTime(),
+            time: timeValue,
             y: i ? i.level : 0,
           };
         }),
@@ -405,15 +417,14 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     const max = Math.max(...chartProps.data.map((o) => o.y));
     const min = Math.min(...chartProps.data.map((o) => o.y));
     const tickDigits = max.toString().length;
-    const delta = max - min + 1;
     let yLabelWidth = 80;
     if (tickDigits >= 8) {
       yLabelWidth = 140;
     } else if (tickDigits >= 5) {
       yLabelWidth = 100;
     }
-    const xMin = moment(chartProps.data[0].time).startOf("day").valueOf();
-    chartProps.data[0].time = xMin;
+
+    const xMin = chartProps.data[0].time;
     const xMax = chartProps.data[chartProps.data.length - 1].time;
 
     const generateDailyTicks = (xMin: number, xMax: number): number[] => {
