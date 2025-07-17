@@ -193,7 +193,7 @@ const MediaReviews = () => {
     return (
       <button
         className={
-          "md:text-2xl px-4 pb-1 relative before:content-[''] before:absolute before:mt-2 before:block before:w-full before:h-[3px] before:bottom-0 before:-translate-x-1/2 before:left-1/2 before:bg-accent before:transition before:ease-in-out before:duration-300" +
+          "relative px-4 pb-1 before:absolute before:bottom-0 before:left-1/2 before:mt-2 before:block before:h-[3px] before:w-full before:-translate-x-1/2 before:bg-accent before:transition before:duration-300 before:ease-in-out before:content-[''] md:text-2xl" +
           (selectedTab == index ? " before:scale-x-100" : " before:scale-x-0")
         }
         key={index}
@@ -207,7 +207,7 @@ const MediaReviews = () => {
   });
 
   const categoryFilteredReviews = Reviews.filter(
-    (item) => item.type == filterType
+    (item) => item.type == filterType,
   ); // All the reviews for the selected tab. We can use this to calculate the average rating of the selected category etc.
 
   const reviews = Reviews.filter(
@@ -216,10 +216,10 @@ const MediaReviews = () => {
       (selectedSearch === ""
         ? true
         : item.name === selectedSearch ||
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.reviewSubItems?.some((subReview) =>
-          subReview.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )) // If user searches for subReviewItem then also return that parent review
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.reviewSubItems?.some((subReview) =>
+            subReview.name.toLowerCase().includes(searchQuery.toLowerCase()),
+          )), // If user searches for subReviewItem then also return that parent review
   ).sort((r1, r2) => {
     if (sortRatingDescending !== null) {
       if (r1.rating === undefined && r2.rating === undefined) {
@@ -265,8 +265,8 @@ const MediaReviews = () => {
       });
       return (
         <Card key={index} firstLayer={false}>
-          <div className="flex justify-between items-center mb-4">
-            <div className="text-xl md:text-2xl w-4/5">
+          <div className="mb-4 flex items-center justify-between">
+            <div className="w-4/5 text-xl md:text-2xl">
               <div className="font-bold">{subItem.name}</div>
               <div className="text-sm">
                 {monthNumberToString(subItem.date?.month ?? -1)}{" "}
@@ -275,18 +275,18 @@ const MediaReviews = () => {
             </div>
             {subItem.rating && (
               <div
-                className={`rounded-full w-10 h-10 flex ${ratingColour(
-                  subItem.rating
+                className={`flex h-10 w-10 rounded-full ${ratingColour(
+                  subItem.rating,
                 )}`}
               >
-                <p className="m-auto font-bold text-xl text-slate-800">
+                <p className="m-auto text-xl font-bold text-slate-800">
                   {subItem.rating}
                 </p>
               </div>
             )}
           </div>
           {subItem.image !== undefined && showImages && (
-            <div className={"w-full h-36 md:h-72 relative my-4 "}>
+            <div className={"relative my-4 h-36 w-full md:h-72"}>
               <Image
                 unoptimized
                 alt="Cover Image"
@@ -304,20 +304,20 @@ const MediaReviews = () => {
     return (
       <Card
         key={index}
-        className="card w-full md:w-5/6 lg:w-2/3 2xl:w-1/2 animate-fade"
+        className="card w-full animate-fade md:w-5/6 lg:w-2/3 2xl:w-1/2"
         firstLayer={true}
       >
-        <div className="flex justify-between items-center mb-2">
-          <div className=" w-4/5">
-            <div className="font-bold text-2xl md:text-3xl">{item.name}</div>
+        <div className="mb-2 flex items-center justify-between">
+          <div className="w-4/5">
+            <div className="text-2xl font-bold md:text-3xl">{item.name}</div>
             <div className="text-md">
               {monthNumberToString(item.date?.month ?? -1)} {item.date?.year}
             </div>
           </div>
           {item.rating && (
             <div
-              className={`rounded-full text-2xl w-14 h-14 flex ${ratingColour(
-                item.rating
+              className={`flex h-14 w-14 rounded-full text-2xl ${ratingColour(
+                item.rating,
               )}`}
             >
               <p className="m-auto font-bold text-slate-800">{item.rating}</p>
@@ -325,7 +325,7 @@ const MediaReviews = () => {
           )}
         </div>
         {item.image !== undefined && showImages && (
-          <div className="w-full h-36 md:h-72 relative my-4">
+          <div className="relative my-4 h-36 w-full md:h-72">
             <Image
               unoptimized
               alt="Cover Image"
@@ -336,7 +336,7 @@ const MediaReviews = () => {
           </div>
         )}
         <div className="flex flex-col gap-6">{reviewParagraphs}</div>
-        <div className="flex flex-col py-4 md:p-4 gap-6 md:gap-8">
+        <div className="flex flex-col gap-6 py-4 md:gap-8 md:p-4">
           {subReviews}
         </div>
       </Card>
@@ -347,31 +347,31 @@ const MediaReviews = () => {
     searchQuery === ""
       ? reviews
       : reviews.filter((review) => {
-        let nameInSubReview = review.reviewSubItems?.some((subReview) =>
-          subReview.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        let nameInReview = review.name
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
-        return nameInReview || nameInSubReview;
-      });
+          let nameInSubReview = review.reviewSubItems?.some((subReview) =>
+            subReview.name.toLowerCase().includes(searchQuery.toLowerCase()),
+          );
+          let nameInReview = review.name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+          return nameInReview || nameInSubReview;
+        });
 
   return (
     <div className="min-h-screen">
       <Navbar fixed={true} />
-      <h1 className="text-center pt-20">Media Reviews (OLD)</h1>
-      <div className="flex justify-center my-4">
-        <Link className="text-text-hover text-3xl" href={"/MediaReviews"}>
+      <h1 className="pt-20 text-center">Media Reviews (OLD)</h1>
+      <div className="my-4 flex justify-center">
+        <Link className="text-3xl text-text-hover" href={"/MediaReviews"}>
           Click here for my new media review site
         </Link>
       </div>
-      <p className="text-center mx-4">
+      <p className="mx-4 text-center">
         A nonexhaustive list of all the media I have consumed over the years and
         my (highly subjective) reviews of them. May contain spoilers.
       </p>
-      <div className="flex justify-center gap-2 items-center mt-4">
+      <div className="mt-4 flex items-center justify-center gap-2">
         <button
-          className="btn flex items-center justify-center w-20 md:w-32"
+          className="btn flex w-20 items-center justify-center md:w-32"
           onClick={() => {
             if (sortAtoZ === null) {
               setSortAtoZ(true);
@@ -388,7 +388,7 @@ const MediaReviews = () => {
             (sortAtoZ ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />)}
         </button>
         <button
-          className="btn flex items-center justify-center w-20 md:w-32"
+          className="btn flex w-20 items-center justify-center md:w-32"
           onClick={() => {
             if (sortRatingDescending === null) {
               setSortRatingDescending(true);
@@ -409,7 +409,7 @@ const MediaReviews = () => {
             ))}
         </button>
         <button
-          className="btn flex items-center justify-center w-36 md:w-40"
+          className="btn flex w-36 items-center justify-center md:w-40"
           onClick={() => {
             localStorage.setItem("showImages", showImages ? "false" : "true");
             setShowImages(!showImages);
@@ -418,15 +418,15 @@ const MediaReviews = () => {
           {preferencesLoaded && (showImages ? "Hide Images" : "Show Images")}
         </button>
       </div>
-      <div className="flex gap-2 md:gap-6 justify-center my-4 flex-wrap">
+      <div className="my-4 flex flex-wrap justify-center gap-2 md:gap-6">
         {tabs}
       </div>
-      <div className="w-72 md:w-96 lg:w-[30rem] mx-auto my-4">
+      <div className="mx-auto my-4 w-72 md:w-96 lg:w-[30rem]">
         <Combobox
           value={selectedSearch}
           onChange={(val) => {
-            setSearchQuery(val);
-            setSelectedSearch(val);
+            setSearchQuery(val ?? "");
+            setSelectedSearch(val ?? "");
           }}
         >
           <div className="relative cursor-default overflow-hidden rounded-lg text-left focus:outline-none">
@@ -440,7 +440,7 @@ const MediaReviews = () => {
                 }
               }}
               displayValue={(review: string) => review}
-              className="bg-background-hover w-full pl-3 py-2 pr-14 rounded-lg focus:outline-none placeholder:text-text-muted"
+              className="w-full rounded-lg bg-background-hover py-2 pl-3 pr-14 placeholder:text-text-muted focus:outline-none"
             />
             {(searchQuery !== "" || selectedSearch !== "") && (
               <button
@@ -450,20 +450,21 @@ const MediaReviews = () => {
                   setSelectedSearch("");
                 }}
               >
-                <AiOutlineClose className="hover:text-xl transition-all" />
+                <AiOutlineClose className="transition-all hover:text-xl" />
               </button>
             )}
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <AiOutlineDown className="h-5 w-5" aria-hidden="true" />
             </Combobox.Button>
           </div>
-          <Combobox.Options className="absolute mx-auto bg-background-hover w-72 md:w-96 lg:w-[30rem] rounded-lg max-h-60 md:max-h-80 overflow-auto mt-1 shadow-lg z-50">
+          <Combobox.Options className="absolute z-50 mx-auto mt-1 max-h-60 w-72 overflow-auto rounded-lg bg-background-hover shadow-lg md:max-h-80 md:w-96 lg:w-[30rem]">
             {filteredReviewSearches.map((review) => (
               <Combobox.Option
                 key={review.name}
                 value={review.name}
                 className={({ active }) =>
-                  `px-4 cursor-pointer py-2 ${active ? "bg-accent text-text-accent" : ""
+                  `cursor-pointer px-4 py-2 ${
+                    active ? "bg-accent text-text-accent" : ""
                   }`
                 }
               >
@@ -473,16 +474,16 @@ const MediaReviews = () => {
           </Combobox.Options>
         </Combobox>
       </div>
-      <div className="text-center text-lg my-2">
+      <div className="my-2 text-center text-lg">
         Average Rating:{" "}
         {calculateAverageRating(categoryFilteredReviews).toFixed(1)}
       </div>
-      <div className="flex flex-col gap-8 items-center px-4 pb-12">
+      <div className="flex flex-col items-center gap-8 px-4 pb-12">
         {reviewCards}
       </div>
       <button
         className={
-          "fixed bottom-0 right-0 mr-2 mb-2 md:mb-4 md:mr-4 transition-all rounded-full bg-accent text-text-accent dark:text-slate-200 hover:text-6xl" +
+          "fixed bottom-0 right-0 mb-2 mr-2 rounded-full bg-accent text-text-accent transition-all hover:text-6xl dark:text-slate-200 md:mb-4 md:mr-4" +
           (scrollPosition === 0
             ? " scale-0"
             : " scale-100 hover:scale-110 md:hover:scale-125")
