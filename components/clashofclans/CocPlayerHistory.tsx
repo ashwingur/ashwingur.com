@@ -11,7 +11,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
-  TooltipProps,
+  TooltipContentProps,
   XAxis,
   YAxis,
 } from "recharts";
@@ -385,7 +385,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
     active,
     payload,
     label,
-  }: TooltipProps<ValueType, NameType>) => {
+  }: TooltipContentProps<ValueType, NameType>) => {
     if (active) {
       return (
         <div className="flex flex-col items-center rounded-md bg-gradient-to-b from-[#293968] to-[#637ac6] p-2 text-white">
