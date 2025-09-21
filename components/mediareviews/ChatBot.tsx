@@ -76,7 +76,7 @@ const ChatBot = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          placeholder="Type your question..."
+          placeholder="Ask me something..."
         />
         <button
           className="btn flex h-10 w-20 items-center justify-center"
@@ -95,7 +95,7 @@ const ChatBot = () => {
         <p className="mt-2 text-error">Error getting response</p>
       )}
 
-      <div className="mt-4 flex max-h-[40vh] w-full flex-col gap-3 overflow-y-auto px-2">
+      <div className="mt-4 flex max-h-[40vh] w-full flex-col gap-3 overflow-y-auto px-2 text-sm lg:text-base">
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -108,7 +108,7 @@ const ChatBot = () => {
                 msg.type === "user"
                   ? "bg-secondary text-white"
                   : "bg-background-hover"
-              } max-w-[80%]`}
+              } max-w-[90%] md:max-w-[80%]`}
             >
               <Markdown
                 components={{
