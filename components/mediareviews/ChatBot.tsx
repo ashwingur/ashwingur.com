@@ -1,7 +1,7 @@
 import Card from "@components/Card";
 import LoadingIcon from "@components/LoadingIcon";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Markdown from "react-markdown";
 import { useMutation } from "react-query";
 import { apiFetch } from "shared/queries/api-fetch";
@@ -10,10 +10,16 @@ import {
   sendChatSchema,
 } from "shared/validations/MediaReviewSchemas";
 
+type ChatMessage = {
+  type: "user" | "bot";
+  text: string;
+  link?: string;
+};
+
 const ChatBot = () => {
   const [query, setQuery] = useState("");
-  const [reply, setReply] = useState("");
-  const [link, setLink] = useState<string>();
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   const sendChatMutation = useMutation(
     async (userQuery: string) => {
@@ -23,44 +29,58 @@ const ChatBot = () => {
         responseSchema: chatResponseSchema,
         options: {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         },
       });
     },
     {
-      onSuccess: (data) => {
-        setReply(data.reply); // assumes API returns { reply: string }
-        setQuery("");
+      onSuccess: (data, userQuery) => {
+        // add bot reply
         const urlParams = new URLSearchParams();
         urlParams.set("order-by", "rating_desc");
         urlParams.set("names", data.review_names.join(","));
-        setLink(urlParams.toString());
+        const link = `MediaReviews?${urlParams.toString()}`;
+
+        setMessages((prev) => [
+          ...prev,
+          { type: "bot", text: data.reply, link },
+        ]);
       },
     },
   );
 
+  const handleSend = () => {
+    if (!query.trim()) return;
+
+    // add user message
+    setMessages((prev) => [...prev, { type: "user", text: query }]);
+    sendChatMutation.mutate(query);
+    setQuery("");
+  };
+
+  // scroll to bottom when a new message appears
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <Card
-      className="mx-4 mb-8 flex flex-col items-center md:mx-auto md:w-4/5"
+      className="mx-4 mb-8 flex flex-col items-center md:mx-auto md:w-4/5 lg:w-3/5 2xl:w-1/2"
       firstLayer={true}
     >
       <h3>Ask AshGPT</h3>
-      <div className="flex w-full items-center justify-center gap-4">
+      <div className="mt-2 flex w-full items-center justify-center gap-4">
         <input
           className="input w-72 md:w-4/5"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          placeholder="Type your question..."
         />
         <button
           className="btn flex h-10 w-20 items-center justify-center"
-          onClick={() => {
-            if (query.trim()) {
-              sendChatMutation.mutate(query);
-            }
-          }}
+          onClick={handleSend}
           disabled={sendChatMutation.isLoading}
         >
           {sendChatMutation.isLoading ? (
@@ -70,31 +90,50 @@ const ChatBot = () => {
           )}
         </button>
       </div>
+
       {sendChatMutation.isError && (
-        <p className="text-error">Error getting response</p>
+        <p className="mt-2 text-error">Error getting response</p>
       )}
 
-      {reply && (
-        <div className="mt-2 flex flex-col p-2">
-          <Markdown
-            components={{
-              ul: ({ node, ...props }) => (
-                <ul className="list-disc pl-6" {...props} />
-              ),
-              li: ({ node, ...props }) => <li className="marker" {...props} />,
-            }}
+      <div className="mt-4 flex max-h-[40vh] w-full flex-col gap-3 overflow-y-auto px-2">
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={`flex ${
+              msg.type === "user" ? "justify-end" : "justify-start"
+            }`}
           >
-            {reply}
-          </Markdown>
-          {link && (
-            <div className="mt-2 self-center">
-              <Link href={`MediaReviews?${link}`} className="btn">
-                Go To Reviews
-              </Link>
+            <div
+              className={`flex flex-col rounded-lg p-2 ${
+                msg.type === "user"
+                  ? "bg-secondary text-white"
+                  : "bg-background-hover"
+              } max-w-[80%]`}
+            >
+              <Markdown
+                components={{
+                  ul: ({ node, ...props }) => (
+                    <ul className="list-disc pl-6" {...props} />
+                  ),
+                  li: ({ node, ...props }) => (
+                    <li className="marker" {...props} />
+                  ),
+                }}
+              >
+                {msg.text}
+              </Markdown>
+              {msg.link && (
+                <div className="my-4 self-center">
+                  <Link href={msg.link} className="btn btn-sm">
+                    Go To Reviews
+                  </Link>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
     </Card>
   );
 };
