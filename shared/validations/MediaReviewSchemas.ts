@@ -173,6 +173,7 @@ export const subMediaReviewWriteSchema = subMediaReviewSchema.omit({
 
 export const chatResponseSchema = z.object({
   reply: z.string(),
+  review_names: z.array(z.string()),
 });
 
 export const sendChatSchema = z.object({

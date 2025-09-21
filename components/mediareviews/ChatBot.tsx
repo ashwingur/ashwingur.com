@@ -1,6 +1,8 @@
 import Card from "@components/Card";
 import LoadingIcon from "@components/LoadingIcon";
+import Link from "next/link";
 import React, { useState } from "react";
+import Markdown from "react-markdown";
 import { useMutation } from "react-query";
 import { apiFetch } from "shared/queries/api-fetch";
 import {
@@ -11,6 +13,7 @@ import {
 const ChatBot = () => {
   const [query, setQuery] = useState("");
   const [reply, setReply] = useState("");
+  const [link, setLink] = useState<string>();
 
   const sendChatMutation = useMutation(
     async (userQuery: string) => {
@@ -30,6 +33,11 @@ const ChatBot = () => {
     {
       onSuccess: (data) => {
         setReply(data.reply); // assumes API returns { reply: string }
+        setQuery("");
+        const urlParams = new URLSearchParams();
+        urlParams.set("order-by", "rating_desc");
+        urlParams.set("names", data.review_names.join(","));
+        setLink(urlParams.toString());
       },
     },
   );
@@ -40,9 +48,9 @@ const ChatBot = () => {
       firstLayer={true}
     >
       <h3>Ask AshGPT</h3>
-      <div className="flex items-center gap-4">
+      <div className="flex w-full items-center justify-center gap-4">
         <input
-          className="input"
+          className="input w-72 md:w-4/5"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -67,9 +75,24 @@ const ChatBot = () => {
       )}
 
       {reply && (
-        <div className="mt-4 rounded border bg-gray-100 p-2">
-          <strong>Response:</strong>{" "}
-          <p className="whitespace-pre-wrap">{reply}</p>
+        <div className="mt-2 flex flex-col p-2">
+          <Markdown
+            components={{
+              ul: ({ node, ...props }) => (
+                <ul className="list-disc pl-6" {...props} />
+              ),
+              li: ({ node, ...props }) => <li className="marker" {...props} />,
+            }}
+          >
+            {reply}
+          </Markdown>
+          {link && (
+            <div className="mt-2 self-center">
+              <Link href={`MediaReviews?${link}`} className="btn">
+                Go To Reviews
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </Card>

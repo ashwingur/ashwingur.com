@@ -114,7 +114,7 @@ module.exports = {
               "polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)",
           },
         },
-        ["responsive", "hover"]
+        ["responsive", "hover"],
       );
     },
   ],
