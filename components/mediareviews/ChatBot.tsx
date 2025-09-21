@@ -20,6 +20,7 @@ const ChatBot = () => {
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const latestMessageRef = useRef<HTMLDivElement>(null);
+  const loadingRef = useRef<HTMLDivElement>(null);
 
   const sendChatMutation = useMutation(
     async (userQuery: string) => {
@@ -49,20 +50,27 @@ const ChatBot = () => {
     },
   );
 
+  useEffect(() => {
+    if (sendChatMutation.isLoading) {
+      loadingRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    } else {
+      // scroll to latest message when loading finishes
+      latestMessageRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [sendChatMutation.isLoading]);
+
   const handleSend = () => {
     if (!query.trim()) return;
     setMessages((prev) => [...prev, { type: "user", text: query }]);
     sendChatMutation.mutate(query);
     setQuery("");
   };
-
-  // scroll to top of latest message
-  useEffect(() => {
-    latestMessageRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
-  }, [messages]);
 
   return (
     <Card
@@ -135,7 +143,10 @@ const ChatBot = () => {
           );
         })}
         {sendChatMutation.isLoading && (
-          <div className="flex max-w-[90%] flex-col rounded-lg bg-background-hover p-2 md:max-w-[80%]">
+          <div
+            ref={loadingRef}
+            className="flex max-w-[90%] flex-col rounded-lg bg-background-hover p-2 md:max-w-[80%]"
+          >
             <LoadingIcon className="mx-auto text-3xl" />
           </div>
         )}
