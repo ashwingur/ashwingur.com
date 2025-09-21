@@ -37,10 +37,14 @@ const ChatBot = () => {
     },
     {
       onSuccess: (data, userQuery) => {
-        const urlParams = new URLSearchParams();
-        urlParams.set("order-by", "rating_desc");
-        urlParams.set("names", data.review_names.join(","));
-        const link = `MediaReviews?${urlParams.toString()}`;
+        let link: string | undefined;
+
+        if (data.review_names && data.review_names.length > 0) {
+          const urlParams = new URLSearchParams();
+          urlParams.set("order-by", "rating_desc");
+          urlParams.set("names", data.review_names.join(","));
+          link = `MediaReviews?${urlParams.toString()}`;
+        }
 
         setMessages((prev) => [
           ...prev,
