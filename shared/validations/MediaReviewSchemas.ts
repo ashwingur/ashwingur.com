@@ -171,6 +171,14 @@ export const subMediaReviewWriteSchema = subMediaReviewSchema.omit({
   local_signed_cover_image: true,
 });
 
+export const chatResponseSchema = z.object({
+  reply: z.string(),
+});
+
+export const sendChatSchema = z.object({
+  query: z.string(),
+});
+
 export type MediaReview = z.infer<typeof mediaReviewSchema>;
 export type SubMediaReview = z.infer<typeof subMediaReviewSchema>;
 export type Genre = z.infer<typeof genreSchema>;

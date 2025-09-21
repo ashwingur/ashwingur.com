@@ -1,5 +1,6 @@
 import GenericMultiSelectGroup from "@components/GenericMultiSelectGroup";
 import LoadingIcon from "@components/LoadingIcon";
+import ChatBot from "@components/mediareviews/ChatBot";
 import InfoModal from "@components/mediareviews/InfoModal";
 import MediaReviewCard from "@components/mediareviews/MediaReviewCard";
 import MediaReviewFilter, {
@@ -121,7 +122,6 @@ const MediaReviewsV2 = () => {
     <div className="min-h-screen pb-16 pt-20 md:pt-24">
       <Navbar fixed={true} />
       <h1 className="text-center">Media Reviews</h1>
-
       {user && role === "admin" && (
         <div className="mt-4 flex justify-center">
           <Link className="btn w-48" href={"/MediaReviews/Edit"}>
@@ -129,7 +129,6 @@ const MediaReviewsV2 = () => {
           </Link>
         </div>
       )}
-
       <div className="mt-4 flex justify-center gap-4">
         <button
           className="btn text-xl lg:text-2xl"
@@ -161,7 +160,6 @@ const MediaReviewsV2 = () => {
           )}
         </button>
       </div>
-
       <GenericMultiSelectGroup
         className="z-[50] mx-auto mt-4 px-4 sm:w-[30rem] lg:w-[36rem]"
         options={filteredNameOptions}
@@ -177,7 +175,6 @@ const MediaReviewsV2 = () => {
         displayKey={"label"}
         placeholder={!(metaDataLoading && isError) ? "Review Names" : ""}
       />
-
       <MediaReviewFilter
         filterObject={filterObject}
         setFilterObject={setFilterObject}
@@ -190,10 +187,10 @@ const MediaReviewsV2 = () => {
           {numResults} result{numResults !== 1 && "s"}
         </p>
       )}
+      <ChatBot />
       <div className="mx-auto grid grid-cols-1 place-items-stretch gap-8 px-4 md:px-8 lg:grid-cols-2 lg:px-12 xl:gap-16 2xl:w-5/6 2xl:grid-cols-3">
         {reviewCards}
       </div>
-
       {(isFetchingNextPage || isLoading) && (
         <LoadingIcon className="mx-auto mb-16 mt-4 text-5xl" />
       )}

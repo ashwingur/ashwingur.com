@@ -296,6 +296,7 @@ const TipTap: React.FC<TipTapProps> = ({
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
+    immediatelyRender: false,
   });
   return (
     <div
