@@ -19,7 +19,7 @@ type ChatMessage = {
 const ChatBot = () => {
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const latestMessageRef = useRef<HTMLDivElement>(null);
 
   const sendChatMutation = useMutation(
     async (userQuery: string) => {
@@ -36,7 +36,6 @@ const ChatBot = () => {
     },
     {
       onSuccess: (data, userQuery) => {
-        // add bot reply
         const urlParams = new URLSearchParams();
         urlParams.set("order-by", "rating_desc");
         urlParams.set("names", data.review_names.join(","));
@@ -52,22 +51,23 @@ const ChatBot = () => {
 
   const handleSend = () => {
     if (!query.trim()) return;
-
-    // add user message
     setMessages((prev) => [...prev, { type: "user", text: query }]);
     sendChatMutation.mutate(query);
     setQuery("");
   };
 
-  // scroll to bottom when a new message appears
+  // scroll to top of latest message
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    latestMessageRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
   }, [messages]);
 
   return (
     <Card
       className="mx-4 mb-8 flex flex-col items-center md:mx-auto md:w-4/5 lg:w-3/5 2xl:w-1/2"
-      firstLayer={true}
+      firstLayer
     >
       <h3>Ask AshGPT</h3>
       <div className="mt-2 flex w-full items-center justify-center gap-4">
@@ -76,7 +76,7 @@ const ChatBot = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          placeholder="Ask me something..."
+          placeholder="Type your question..."
         />
         <button
           className="btn flex h-10 w-20 items-center justify-center"
@@ -96,43 +96,49 @@ const ChatBot = () => {
       )}
 
       <div className="mt-4 flex max-h-[40vh] w-full flex-col gap-3 overflow-y-auto px-2 text-sm lg:text-base">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex ${
-              msg.type === "user" ? "justify-end" : "justify-start"
-            }`}
-          >
+        {messages.map((msg, i) => {
+          const isLatest = i === messages.length - 1;
+          return (
             <div
-              className={`flex flex-col rounded-lg p-2 ${
-                msg.type === "user"
-                  ? "bg-secondary text-white"
-                  : "bg-background-hover"
-              } max-w-[90%] md:max-w-[80%]`}
+              key={i}
+              ref={isLatest ? latestMessageRef : null}
+              className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
             >
-              <Markdown
-                components={{
-                  ul: ({ node, ...props }) => (
-                    <ul className="list-disc pl-6" {...props} />
-                  ),
-                  li: ({ node, ...props }) => (
-                    <li className="marker" {...props} />
-                  ),
-                }}
+              <div
+                className={`flex flex-col rounded-lg p-2 ${
+                  msg.type === "user"
+                    ? "bg-secondary text-white"
+                    : "bg-background-hover"
+                } max-w-[90%] md:max-w-[80%]`}
               >
-                {msg.text}
-              </Markdown>
-              {msg.link && (
-                <div className="my-4 self-center">
-                  <Link href={msg.link} className="btn btn-sm">
-                    Go To Reviews
-                  </Link>
-                </div>
-              )}
+                <Markdown
+                  components={{
+                    ul: ({ node, ...props }) => (
+                      <ul className="list-disc pl-6" {...props} />
+                    ),
+                    li: ({ node, ...props }) => (
+                      <li className="marker" {...props} />
+                    ),
+                  }}
+                >
+                  {msg.text}
+                </Markdown>
+                {msg.link && (
+                  <div className="my-4 self-center">
+                    <Link href={msg.link} className="btn btn-sm">
+                      Go To Reviews
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
+          );
+        })}
+        {sendChatMutation.isLoading && (
+          <div className="flex max-w-[90%] flex-col rounded-lg bg-background-hover p-2 md:max-w-[80%]">
+            <LoadingIcon className="mx-auto text-3xl" />
           </div>
-        ))}
-        <div ref={bottomRef} />
+        )}
       </div>
     </Card>
   );
