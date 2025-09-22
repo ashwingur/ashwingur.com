@@ -149,9 +149,10 @@ const ChatBot = () => {
         {sendChatMutation.isLoading && (
           <div
             ref={loadingRef}
-            className="flex max-w-[90%] flex-col rounded-lg bg-background-hover p-2 md:max-w-[80%]"
+            className="flex max-w-[90%] animate-pulse items-center justify-center rounded-lg bg-background-hover p-2 md:max-w-[80%]"
           >
-            <LoadingIcon className="mx-auto text-3xl" />
+            <p className="mr-4">thinking...</p>{" "}
+            <LoadingIcon className="text-3xl" />
           </div>
         )}
       </div>
