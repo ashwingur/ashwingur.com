@@ -104,7 +104,9 @@ const ChatBot = () => {
       </div>
 
       {sendChatMutation.isError && (
-        <p className="mt-2 text-error">Error getting response</p>
+        <p className="mt-2 text-error">
+          Error getting response: {(sendChatMutation.error as Error).message}
+        </p>
       )}
 
       <div className="mt-4 flex max-h-[40vh] w-full flex-col gap-3 overflow-y-auto px-2 text-sm lg:text-base">
