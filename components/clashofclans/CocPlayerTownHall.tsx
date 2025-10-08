@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { Player } from "../../shared/interfaces/coc.interface";
+import { CocPlayerProfile } from "shared/validations/CocPlayerProfileSchema";
 
 interface CocPlayerTownHallProps {
-  player: Player;
+  player: CocPlayerProfile;
 }
 
 const CocPlayerTownHall = ({ player }: CocPlayerTownHallProps) => {

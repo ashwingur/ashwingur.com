@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { Clan } from "../../shared/interfaces/coc.interface";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 
@@ -39,7 +38,7 @@ const CocClanSummary = ({ clan }: CocClanSummaryProps) => {
         <div>
           <div className="text-xl text-yellow-100">{clan.name}</div>
           <div className="font-coc text-lg font-thin">{clan.tag}</div>
-          <div className="w-48 font-coc text-sm md:text-base lg:text-lg font-thin lg:w-96">
+          <div className="w-48 font-coc text-sm font-thin md:text-base lg:w-96 lg:text-lg">
             {clan.description}
           </div>
         </div>

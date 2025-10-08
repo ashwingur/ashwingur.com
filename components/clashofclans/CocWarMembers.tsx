@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { ClanWar } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { NextRouter, useRouter } from "next/router";
 import CocSmallButton from "./CocSmallButton";

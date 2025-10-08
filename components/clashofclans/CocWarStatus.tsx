@@ -1,5 +1,4 @@
 import React from "react";
-import { ClanWar } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import Link from "next/link";
 import { formatToISO8601 } from "shared/queries/clashofclans";

@@ -1,5 +1,4 @@
 import React from "react";
-import { ClanMember } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
@@ -54,11 +53,11 @@ const ClanMemberElement = ({ clanMember }: ClanMemberElementProps) => {
         <div className="relative h-12 w-12 md:h-16 md:w-16">
           <Image
             unoptimized
-            alt={clanMember.league?.name ?? "Unranked"}
+            alt={clanMember.leagueTier?.name ?? "Unranked"}
             src={
-              clanMember.league?.name === "Unranked"
+              clanMember.leagueTier?.name === "Unranked"
                 ? "/assets/coc/Unranked_League.webp"
-                : (clanMember.league?.iconUrls.medium ?? "")
+                : (clanMember.leagueTier?.iconUrls.large ?? "")
             }
             fill
             style={{ objectFit: "cover" }}

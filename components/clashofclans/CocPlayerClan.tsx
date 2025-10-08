@@ -1,14 +1,14 @@
 import React from "react";
-import { Player } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { CocPlayerProfile } from "shared/validations/CocPlayerProfileSchema";
 
 interface CocPlayerClanProps {
-  player: Player;
+  player: CocPlayerProfile;
 }
 
 const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
+  if (!player.clan) return null;
   return (
     <div className="flex justify-center">
       <Link
@@ -19,7 +19,7 @@ const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
         <Image
           unoptimized
           alt={player.clan.name}
-          src={player.clan.badgeUrls.large}
+          src={player.clan.badgeUrls.large ?? player.clan.badgeUrls.medium}
           width={0}
           height={0}
           className="h-auto w-32"

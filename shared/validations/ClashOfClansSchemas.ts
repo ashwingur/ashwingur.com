@@ -100,6 +100,7 @@ const IconUrlsSchema = z.object({
   medium: z.string().optional(),
   small: z.string().optional(),
   tiny: z.string().optional(),
+  large: z.string().optional(),
 });
 
 const LabelSchema = z.object({
@@ -138,7 +139,7 @@ const CwlWarMemberSchema = z.object({
   total_stars: z.number(),
 });
 
-const LeagueSchema = z.object({
+const LeagueTierSchema = z.object({
   iconUrls: IconUrlsSchema,
   id: z.number(),
   name: z.string(),
@@ -166,7 +167,7 @@ const MemberSchema = z.object({
   donations: z.number(),
   donationsReceived: z.number(),
   expLevel: z.number(),
-  league: LeagueSchema.nullable(),
+  leagueTier: LeagueTierSchema.nullable(),
   name: z.string(),
   playerHouse: PlayerHouseSchema.optional(),
   previousClanRank: z.number(),
@@ -354,3 +355,5 @@ export {
   WarClanMemberSchema,
   WarLogSchema,
 };
+
+export type District = z.infer<typeof DistrictSchema>;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "../../shared/interfaces/coc.interface";
+import { CocPlayerProfile } from "shared/validations/CocPlayerProfileSchema";
 
 const HorizontalBar = () => {
   return (
@@ -26,7 +26,7 @@ const Stat = ({ name, value }: { name: string; value: string }) => {
   );
 };
 
-const CocPlayerStats = ({ player }: { player: Player }) => {
+const CocPlayerStats = ({ player }: { player: CocPlayerProfile }) => {
   return (
     <div className="m-4 flex flex-col items-center rounded-lg border-2 border-black bg-[#695d96] py-4 dark:bg-[#473e63]">
       <h2 className="clash-font-style text-center text-3xl font-thin">Stats</h2>

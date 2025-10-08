@@ -1,5 +1,4 @@
 import React from "react";
-import { Clan } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
 import { z } from "zod";
 import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";

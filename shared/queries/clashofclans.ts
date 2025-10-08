@@ -11,11 +11,13 @@ import { apiFetch, CustomQueryParam } from "./api-fetch";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { z } from "zod";
 import { updateFavourite } from "shared/clashofclansfavourites";
+import { CocPlayerProfileSchema } from "shared/validations/CocPlayerProfileSchema";
 
 const COC_PLAYER_HISTORY_QUERY_KEY = "coc_player_history";
 const GOLD_PASS_QUERY_KEY = "coc_gold_pass";
 const INCREMENT_VIEW_COUNT_KEY = "coc_increment_view_count";
 const COC_PLAYERS_KEY = "coc_players";
+const COC_PLAYER_PROFILE_KEY = "coc_player_profile";
 const COC_FULL_CLAN_KEY = "coc_full_clan";
 const CAPITAL_RAID_SEASONS_KEY = "capital_raid_seasons";
 const REGULAR_WAR_KEY = "clan_war";
@@ -115,6 +117,22 @@ export const useGetCocPlayer = (tag?: string) => {
   return useQuery({
     queryKey: [COC_PLAYERS_KEY, tag],
     queryFn: () => getCocPlayer(tag!),
+    enabled: !!tag,
+  });
+};
+
+export const useGetCocPlayerProfile = (tag?: string) => {
+  const getCocPlayerProfile = async (tag: string) => {
+    const res = await apiFetch({
+      endpoint: `/clashofclans/players/%23${tag}/profile`,
+      responseSchema: CocPlayerProfileSchema,
+    });
+
+    return res;
+  };
+  return useQuery({
+    queryKey: [COC_PLAYER_PROFILE_KEY, tag],
+    queryFn: () => getCocPlayerProfile(tag!),
     enabled: !!tag,
   });
 };

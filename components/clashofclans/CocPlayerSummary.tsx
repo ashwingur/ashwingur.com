@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { Player } from "../../shared/interfaces/coc.interface";
+import { CocPlayerProfile } from "shared/validations/CocPlayerProfileSchema";
 
 interface CocPlayerSummaryProps {
-  player: Player;
+  player: CocPlayerProfile;
 }
 
 const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
@@ -13,7 +13,7 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
         unoptimized
         key={index}
         alt={label.name}
-        src={label.iconUrls.medium}
+        src={label.iconUrls.medium ?? label.iconUrls.small}
         width={30}
         height={30}
         priority={true}
@@ -38,7 +38,7 @@ const CocPlayerSummary = ({ player }: CocPlayerSummaryProps) => {
   );
 };
 
-const mapPlayerRole = (role: string) => {
+const mapPlayerRole = (role?: string) => {
   switch (role) {
     case "leader":
       return "Leader";

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
 import { SpinningCircles } from "react-loading-icons";
@@ -9,23 +8,19 @@ import CocPlayerClan from "@components/clashofclans/CocPlayerClan";
 import CocPlayerSummary from "@components/clashofclans/CocPlayerSummary";
 import CocPlayerTownHall from "@components/clashofclans/CocPlayerTownHall";
 import CocTrophyDetails from "@components/clashofclans/CocTrophyDetails";
-import { Player } from "shared/interfaces/coc.interface";
-import { useQuery } from "react-query";
 import CocLoadingOrError from "@components/clashofclans/CocLoadingOrError";
 import Link from "next/link";
 import CocButton from "@components/clashofclans/CocButton";
 import CocPlayerStats from "@components/clashofclans/CocPlayerStats";
 import {
   useGetCocPlayer,
+  useGetCocPlayerProfile,
   useIncrementViewCount,
 } from "shared/queries/clashofclans";
 import Image from "next/image";
 import { formatLastOnline } from "@components/clashofclans/PlayerSelectorCard";
 
 const title = "Player Details";
-
-const fetchPlayer = (playerTag: string) =>
-  axios.get(`/api/clashofclans/player/${playerTag}`).then(({ data }) => data);
 
 const PlayerPage = () => {
   const router = useRouter();
@@ -34,11 +29,7 @@ const PlayerPage = () => {
       ? router.query.playerTag
       : undefined;
 
-  const { isLoading, error, data } = useQuery<Player>({
-    queryKey: ["player", playerTag],
-    queryFn: () => fetchPlayer(playerTag!),
-    enabled: !!playerTag,
-  });
+  const { isLoading, error, data } = useGetCocPlayerProfile(playerTag);
 
   useIncrementViewCount(playerTag);
   const { data: cocPlayer } = useGetCocPlayer(playerTag);
@@ -119,7 +110,7 @@ const PlayerPage = () => {
             <div className="m-4 grid grid-cols-1 items-center justify-center rounded-lg border-2 border-black bg-[#695d96] pt-2 dark:bg-[#473e63] md:grid-cols-2 md:pt-0 lg:flex-row xl:grid-cols-2">
               <CocPlayerSummary player={data} />
               <CocPlayerTownHall player={data} />
-              {data.hasOwnProperty("clan") && <CocPlayerClan player={data} />}
+              {data.clan && <CocPlayerClan player={data} />}
 
               <CocTrophyDetails player={data} />
             </div>

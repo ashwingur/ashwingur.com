@@ -1,20 +1,23 @@
 import Image from "next/image";
 import React from "react";
-import { Player, PlayerItemLevel } from "../../shared/interfaces/coc.interface";
 import clsx from "clsx";
+import {
+  CocPlayerProfile,
+  ItemLevel,
+} from "shared/validations/CocPlayerProfileSchema";
 
 interface CocPlayerArmyProps {
-  player: Player;
+  player: CocPlayerProfile;
 }
 
 interface ArmyItemsCategoryProps {
-  items: PlayerItemLevel[];
+  items: ItemLevel[];
   category: string;
   showLevel: boolean;
 }
 
 interface ArmyItemIconProps {
-  playerItemLevel: PlayerItemLevel;
+  playerItemLevel: ItemLevel;
   showLevel: boolean;
   rarity?: "common" | "epic";
 }
@@ -196,11 +199,13 @@ const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
         category="Spells"
         showLevel={true}
       />
-      <ArmyItemsCategory
-        items={player.heroes}
-        category="Heroes"
-        showLevel={true}
-      />
+      {player.heroes && (
+        <ArmyItemsCategory
+          items={player.heroes}
+          category="Heroes"
+          showLevel={true}
+        />
+      )}
       <ArmyItemsCategory
         items={player.heroEquipment.sort((a, b) => b.level - a.level)}
         category="Hero Equipment"

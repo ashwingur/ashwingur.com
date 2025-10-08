@@ -1,19 +1,19 @@
 import React from "react";
-import {
-  Player,
-  PlayerAchievement,
-} from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
+import {
+  CocPlayerProfile,
+  CocPlayerProfileAchievement,
+} from "shared/validations/CocPlayerProfileSchema";
 
 const emptyStar = "/assets/coc/stars/empty.png";
 const goldenStar = "/assets/coc/stars/golden_star.png";
 
 interface CocPlayerAchievementProps {
-  player: Player;
+  player: CocPlayerProfile;
 }
 
 interface AchievementProps {
-  achievement: PlayerAchievement;
+  achievement: CocPlayerProfileAchievement;
 }
 
 const Achievement = ({ achievement }: AchievementProps) => {

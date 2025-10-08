@@ -1,7 +1,9 @@
 import React from "react";
-import { Clan, District } from "../../shared/interfaces/coc.interface";
 import Image from "next/image";
-import { FullClanSchema } from "shared/validations/ClashOfClansSchemas";
+import {
+  FullClanSchema,
+  District,
+} from "shared/validations/ClashOfClansSchemas";
 import { z } from "zod";
 import Link from "next/link";
 import CocButton from "./CocButton";
