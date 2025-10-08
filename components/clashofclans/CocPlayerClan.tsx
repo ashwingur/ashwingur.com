@@ -19,7 +19,9 @@ const CocPlayerClan = ({ player }: CocPlayerClanProps) => {
         <Image
           unoptimized
           alt={player.clan.name}
-          src={player.clan.badgeUrls.large ?? player.clan.badgeUrls.medium}
+          src={
+            player.clan.badgeUrls.large ?? player.clan.badgeUrls.medium ?? ""
+          }
           width={0}
           height={0}
           className="h-auto w-32"

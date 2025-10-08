@@ -65,7 +65,9 @@ const CocPlayerStats = ({ player }: { player: CocPlayerProfile }) => {
         <Gap />
         <Stat
           name={"League"}
-          value={player.league === undefined ? "N/A" : player.league?.name}
+          value={
+            player.leagueTier === undefined ? "N/A" : player.leagueTier.name
+          }
         />
         <Stat
           name={"Builder Base League"}
