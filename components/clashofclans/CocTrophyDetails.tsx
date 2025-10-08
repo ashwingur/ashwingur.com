@@ -11,7 +11,7 @@ const CocTrophyDetails = ({ player }: CocTrophyDetailsProps) => {
     <div className="clash-font-style flex justify-center pb-10 font-clash md:ml-0 md:pb-0">
       {player.leagueTier !== undefined ? (
         <div className="relative flex items-center">
-          <div className="absolute bottom-[-16px] left-[-45px] h-24 w-24 md:bottom-[-20px] md:left-[-36px]">
+          <div className="absolute bottom-[-16px] left-[-45px] h-24 w-24 md:bottom-[-16px] md:left-[-36px]">
             <Image
               unoptimized
               alt={player.leagueTier.name}
