@@ -160,6 +160,8 @@ const epicEquipmentNames: string[] = [
   "Lavaloon Puppet",
   "Rocket Spear",
   "Electro Boots",
+  "Meteor Staff",
+  "Heroic Torch",
 ];
 
 // List of hero equipment items classified as 'common'.
