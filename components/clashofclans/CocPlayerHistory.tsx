@@ -203,7 +203,7 @@ const CocPlayerHistory: React.FC<CocPlayerHistoryProps> = ({ tag }) => {
   const timeOptions = createTimeOptions({
     hoursOptions: [],
     daysOptions: [7, 31, 90, 180],
-    yearsOptions: [1],
+    yearsOptions: [1, 3],
     includeCustom: true,
     customStartTime: new Date(new Date().getTime() - 7 * 24 * 3600 * 1000),
   });
