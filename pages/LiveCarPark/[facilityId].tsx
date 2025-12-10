@@ -25,7 +25,7 @@ const FacilityHistory = () => {
   const timeOptions = createTimeOptions({
     hoursOptions: [1, 24],
     daysOptions: [3, 7, 31, 90, 180],
-    yearsOptions: [1],
+    yearsOptions: [1, 3],
     includeCustom: true,
   });
   // Listbox props

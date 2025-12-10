@@ -146,6 +146,7 @@ const achievementsInfo = [
   { name: "Ricochet Cannon Crusher", info: "Ricochet Cannons Destroyed" },
   { name: "Firespitter Finisher", info: "Firespitters Destroyed" },
   { name: "Multi-Gear Tower Trampler", info: "Multi-Gear Towers Destroyed" },
+  { name: "League Follower", info: "Ranked League" },
 ];
 
 // List of hero equipment items classified as 'epic'.
@@ -162,6 +163,7 @@ const epicEquipmentNames: string[] = [
   "Electro Boots",
   "Meteor Staff",
   "Heroic Torch",
+  "Frost Flake",
 ];
 
 // List of hero equipment items classified as 'common'.

@@ -10,7 +10,7 @@ const Analytics = () => {
   const timeOptions = createTimeOptions({
     hoursOptions: [1, 24],
     daysOptions: [3, 7, 31, 90, 180],
-    yearsOptions: [1],
+    yearsOptions: [1, 3],
     includeCustom: true,
   });
   // Listbox props
@@ -24,7 +24,7 @@ const Analytics = () => {
   const onDateTimeChange = (
     startLessThanEnd: boolean,
     start?: Date,
-    end?: Date
+    end?: Date,
   ) => {
     if (start && end) {
       setSelectedTimeOption((prev) => ({
@@ -38,7 +38,7 @@ const Analytics = () => {
   return (
     <div className="min-h-screen">
       <Navbar fixed={true} />
-      <div className="flex flex-col mx-auto pt-24 pb-8 md:w-4/5 gap-8 px-4 items-center max-h">
+      <div className="max-h mx-auto flex flex-col items-center gap-8 px-4 pb-8 pt-24 md:w-4/5">
         <div className="flex flex-col items-center">
           <h3 className="mb-2 text-xl">Time Filter</h3>
           <GenericListbox<TimeOption>
@@ -52,12 +52,12 @@ const Analytics = () => {
             <div>
               <DateTimeRangePicker
                 onDateTimeChange={onDateTimeChange}
-                className="mt-2 mb-4"
+                className="mb-4 mt-2"
                 defaultStartTime={timeOptions[0].startTime}
                 defaultEndTime={timeOptions[0].endTime}
               />
               {selectedTimeOption.startTime > selectedTimeOption.endTime && (
-                <p className="font-bold text-center">
+                <p className="text-center font-bold">
                   Start date must be less than end date
                 </p>
               )}
