@@ -164,6 +164,7 @@ const epicEquipmentNames: string[] = [
   "Meteor Staff",
   "Heroic Torch",
   "Frost Flake",
+  "Stick Horse",
 ];
 
 // List of hero equipment items classified as 'common'.

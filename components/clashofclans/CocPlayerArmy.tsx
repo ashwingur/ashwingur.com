@@ -145,6 +145,7 @@ const pet_names = [
   "Spirit Fox",
   "Angry Jelly",
   "Sneezy",
+  "Greedy Raven",
 ];
 
 const CocPlayerArmy = ({ player }: CocPlayerArmyProps) => {
